@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexController {
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/")
     public String index(){
         return "/base/login_final";
     }
