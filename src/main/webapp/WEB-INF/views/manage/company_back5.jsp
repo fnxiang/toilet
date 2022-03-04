@@ -63,7 +63,7 @@
             <div class="top-left">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/company/index"><img src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="${pageContext.request.contextPath}/static/manage/images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -73,7 +73,7 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="./res/logo.png" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -141,8 +141,8 @@
                                             <td>审核结果</td>
                                             <td>
 												<!--<a href="./company_back3.jsp" class="btn btn-link">返回修改</a>-->
-												<button type="button" class="btn btn-link" onclick="javascript:window.location.href='company_back3.jsp'">返回修改</button>
-												<button type="button" class="btn btn-link" onclick="javascript:window.location.href='company_back1.jsp'">舍弃该申请</button>
+												<button type="button" class="btn btn-link" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back3'">返回修改</button>
+												<button type="button" class="btn btn-link" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back1'">舍弃该申请</button>
 											</td>
                                         </tr>
                                     </tbody>

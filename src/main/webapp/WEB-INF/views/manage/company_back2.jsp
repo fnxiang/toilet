@@ -79,9 +79,9 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=company_back3"><i class="fa fa-user"></i>企业信息管理</a>
+                            <a class="nav-link" href="#"><i class="fa fa-user"></i>企业信息管理</a>
 
-                            <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=company_back3"><i class="fa fa-cog"></i>设置</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=company_back4"><i class="fa fa-cog"></i>设置</a>
 
                             <a class="nav-link" href="#"><i class="fa fa-power-off"></i>注销</a>
                         </div>
