@@ -165,8 +165,8 @@
 											<td>三格化粪池</td>
 											<td>待分配</td>
 											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 分配专家</a>
+												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back8'"> 查看详情</a>
+												<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back9'"> 分配专家</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 											</td>
 										</tr>
