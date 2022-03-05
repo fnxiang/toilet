@@ -19,19 +19,19 @@
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="res/logo.ico">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/manage/res/logo.ico">
 
-    <link rel="stylesheet" href="assets/css/normalize.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
-    <link rel="stylesheet" href="assets/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/normalize.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/pe-icon-7-filled.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/flag-icon.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/lib/datatable/dataTables.bootstrap.min.css">
 
-    <link href="res/css/stylenew.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="${pageContext.request.contextPath}/static/manage/res/css/stylenew.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -46,19 +46,19 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="./admin_back1.html" style="padding-top: 20px; padding-bottom: 20px;"><i
+                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
                 <li>
-                    <a href="./admin_back2.html" style="padding-top: 20px; padding-bottom: 20px;"><i
+                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
                 <li>
-                    <a href="./admin_back3.html" style="padding-top: 20px; padding-bottom: 20px;"><i
+                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-tasks"></i>产品管理</a>
                 </li>
                 <li>
-                    <a href="./admin_back4.html" style="padding-top: 20px; padding-bottom: 20px;"><i
+                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-cogs"></i>模式管理</a>
                 </li>
             </ul>
@@ -78,8 +78,8 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#"><img src="res/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/index"><img src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="./"><img src="${pageContext.request.contextPath}/static/manage/images/logo2.png" alt="Logo"></a>
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
             </div>
         </div>
@@ -90,11 +90,11 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="./res/logo.png" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="./admin_back5.html"><i class="fa fa-cog"></i>设置</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=admin_back5"><i class="fa fa-cog"></i>设置</a>
 
                         <a class="nav-link" href="#"><i class="fa fa-power-off"></i>注销</a>
                     </div>
@@ -119,7 +119,7 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">后台</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/index">后台</a></li>
                                 <li class="active">用户管理</li>
                             </ol>
                         </div>
@@ -156,7 +156,7 @@
                                     <div class="col col-md-3"><label for="text-input"
                                                                      class=" form-control-label">营业执照</label></div>
                                     <div class="col-12 col-md-9">
-                                        <iframe src="./res/PR_final.pdf" width="100%" height="100%"
+                                        <iframe src="${pageContext.request.contextPath}/static/manage/res/PR_final.pdf" width="100%" height="100%"
                                                 style="height: 500px;"></iframe>
                                     </div>
                                 </div>
@@ -231,8 +231,8 @@
 
                             <hr>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="">保存</button>
-                                <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="">取消
+                                <button type="button" class="btn btn-outline-secondary" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back1'">保存</button>
+                                <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back1'">取消
                                 </button>
                             </div>
                         </div>
@@ -287,29 +287,29 @@
 <script src="assets/js/init/datatables-init.js"></script>
 -->
 <!-- All Jquery -->
-<script src="res/js/lib/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/jquery/jquery.min.js"></script>
 <!-- Bootstrap tether Core JavaScript -->
-<script src="res/js/lib/bootstrap/js/popper.min.js"></script>
-<script src="res/js/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/bootstrap/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/bootstrap/js/bootstrap.min.js"></script>
 <!-- slimscrollbar scrollbar JavaScript -->
-<script src="res/js/jquery.slimscroll.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/jquery.slimscroll.js"></script>
 <!--Menu sidebar -->
-<script src="res/js/sidebarmenu.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/sidebarmenu.js"></script>
 <!--stickey kit -->
-<script src="res/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
 <!--Custom JavaScript -->
-<script src="res/js/custom.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/custom.min.js"></script>
 
 
-<script src="res/js/lib/datatables/datatables.min.js"></script>
-<script src="res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-<script src="res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-<script src="res/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script src="res/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-<script src="res/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-<script src="res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-<script src="res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-<script src="res/js/lib/datatables/datatables-init.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/datatables.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/datatables-init.js"></script>
 
 <script type="text/javascript">
 

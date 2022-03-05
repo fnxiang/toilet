@@ -74,7 +74,7 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="${pageContext.request.contextPath}/static/manage/./res/logo.png" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -137,7 +137,7 @@
 											<td>张三</td>
 											<td>企业用户</td>
 											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
+												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6'"> 查看详情</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 											</td>
 										</tr>
@@ -155,7 +155,7 @@
 											<td>王五</td>
 											<td>专家用户</td>
 											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
+												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back7'"> 查看详情</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 											</td>
 										</tr>
