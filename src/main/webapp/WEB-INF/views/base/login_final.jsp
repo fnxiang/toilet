@@ -11,17 +11,17 @@
     <meta name="robots" content="all,follow">
 
     <title>用户登录</title>
-    <link rel="shortcut icon" href="static/base/res/logo.ico">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/base/res/logo.ico">
     
     <!-- global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-    <link rel="stylesheet" href="static/base/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/base/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="static/base/css/font-icon-style.css">
-    <link rel="stylesheet" href="static/base/css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/font-icon-style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/style.default.css" id="theme-stylesheet">
 
     <!-- Core stylesheets -->
-    <link rel="stylesheet" href="static/base/css/pages/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/pages/login.css">
 </head>
 
 <body> 
@@ -35,26 +35,26 @@
           <div class="row">
             <div class="col-md-12 ">
                 <div class="contact-h-cont">
-                  <h3 class="text-center"><a href="" target="_blank"><img src="static/base/res/logo.png" class="img-fluid" alt=""></a></h3><br>
-                  <form>
+                  <h3 class="text-center"><a href="" target="_blank"><img src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a></h3><br>
+                  <form id="login_form">
                     <div class="form-group">
-                      <label for="accountid">账号</label>
-                      <input type="text" class="form-control" id="accountid" placeholder="统一社会信用代码登录/邮箱"> 
+                      <label for="accountId">账号</label>
+                      <input type="text" class="form-control" id="accountId" value="" placeholder="统一社会信用代码登录/邮箱">
                     </div>  
                     <div class="form-group">
-                      <label for="accpassword">密码</label>
+                      <label for="accPassword">密码</label>
                       <input class="form-control" type="password" value="" id="accpassword"> 
                     </div> 
 					<div class="form-group text-right">
 					  <a href="" target="_blank">忘记密码</a>
                     </div>
 					<div class="form-group text-right">
-					  <a href="register_final.html" target="_blank">没有账号？点击注册</a>
+					  <a href="${pageContext.request.contextPath}/toBasePage?url=register_final" target="_blank">没有账号？点击注册</a>
                     </div>
-					<div class="form-group text-center">
-					  <button class="btn btn-general btn-blue" role="button"><i fa fa-right-arrow></i>登录</button>
-					</div>
                   </form>
+                    <div class="form-group text-center">
+                        <button id="login_btn" onclick="login()" class="btn btn-general btn-blue" role="button">登录</button>
+                    </div>
                 </div>
             </div>
           </div>  
@@ -62,11 +62,47 @@
       </section>
       
     <!--Global Javascript -->
-    <script src="static/base/js/jquery.min.js"></script>
-    <script src="static/base/js/tether.min.js"></script>
-    <script src="static/base/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/tether.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/popper/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/bootstrap.min.js"></script>
+
     <script>
-        console.log("..");
+        var accountId = document.getElementById('accountId');
+        console.log(accountId.textContent);
+        function preCheck() {
+            if(accountId.length < 3 || accountId.length > 20){
+                alert("account error")
+            }
+        }
+    </script>
+
+    <script>
+       function login(){
+            preCheck();
+
+            var data = new FormData();
+           data.append("accountId", $('#accountId').val());
+           data.append("accountPwd", $('#accpassword').val());
+
+            $.ajax({
+                url:"/toilet/login",
+                type:"POST",
+                dataType: "json",
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function(result){
+                    if (result) {
+                        location.href = "/toilet/admin/index";
+                    } else {
+                        alert("error");
+                    }
+                }
+            });
+        }
     </script>
 </body>
 
