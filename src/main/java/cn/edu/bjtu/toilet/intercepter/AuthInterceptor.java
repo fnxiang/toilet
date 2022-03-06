@@ -17,7 +17,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("[Interceptor-auth]：进入preHandle");
 
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null) {
@@ -26,7 +25,6 @@ public class AuthInterceptor implements HandlerInterceptor {
             int pos = up.indexOf(':');
             return true;
         }
-        System.out.println("[Interceptor-auth]：结束preHandle");
 
         return true;
     }

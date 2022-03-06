@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.dao.impl;
 
+import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.dao.UserDao;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDOSelective;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -27,7 +29,7 @@ public class UserDaoImpl implements UserDao {
         UserDOSelective.Criteria criteria = userDOSelective.createCriteria();
 
         criteria.andEmailEqualTo(email);
-        criteria.andDeletedNotEqualTo(false);
+        criteria.andDeletedNotEqualTo(true);
 
         List<UserDO> userDOList = mapper.selectByExample(userDOSelective);
 
@@ -37,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 
         if (userDOList.size() != 1) {
             LOG.error("too many user returned!");
-            return null;
+            throw new ToiletSystemException("too many user returned!", "");
         }
 
         return userDOList.get(0);
@@ -45,12 +47,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public String insertUserDO(UserDO userDO) {
-
-        if (StringUtils.isEmpty(userDO.getEmail())&&StringUtils.isEmpty(userDO.getCreditCode())) {
-            //TODO throw exception
-            LOG.error("required params email and credit code can not be null");
-            return "";
+        if (StringUtils.isEmpty(userDO.getEmail())&&StringUtils.isEmpty(userDO.getCreditCode()) && StringUtils.isEmpty(userDO.getSource())) {
+            //TODO throw exception code
+            LOG.error("required params email, credit and source code can not be null");
+            throw new ToiletSystemException("required params email, credit and source code can not be null", "");
         }
+
+        userDO.setGmtCreate(new Date());
+        userDO.setGmtModified(new Date());
+        userDO.setVersion(0);
+        userDO.setDeleted(false);
 
         UserDO userDOFromDb = getUserByEmail(userDO.getEmail());
 
@@ -63,7 +69,7 @@ public class UserDaoImpl implements UserDao {
 
         if (count != 1) {
             LOG.error("insert user failed! userDO: {}", userDO);
-            return "";
+            throw new ToiletSystemException("insert user failed!", "");
         }
 
         return getUserByEmail(userDO.getEmail()).getEmail();

@@ -1,11 +1,8 @@
 package cn.edu.bjtu.toilet.dao.domain;
 
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
 public class UserDO implements Serializable {
     private Integer id;
 
