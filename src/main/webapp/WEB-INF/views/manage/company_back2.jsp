@@ -64,7 +64,7 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#"><img src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/company/index"><img src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
                     <a class="navbar-brand hidden" href="./"><img src="${pageContext.request.contextPath}/static/manage/images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -79,9 +79,9 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=company_back3"><i class="fa fa-user"></i>企业信息管理</a>
+                            <a class="nav-link" href="#"><i class="fa fa-user"></i>企业信息管理</a>
 
-                            <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=company_back3"><i class="fa fa-cog"></i>设置</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=company_back4"><i class="fa fa-cog"></i>设置</a>
 
                             <a class="nav-link" href="#"><i class="fa fa-power-off"></i>注销</a>
                         </div>
@@ -105,7 +105,7 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">后台</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/company/index">后台</a></li>
                                     <li class="active">企业基本信息</li>
                                 </ol>
                             </div>
@@ -190,12 +190,15 @@
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">手机号</label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="1234567890" disabled="" class="form-control"></div>
                                     </div>
+
+                                    <hr>
+                                    <div class="card-text text-lg-center">
+                                        <button type="button" class="btn btn-outline-secondary" onclick="">确认分配</button>
+                                        <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="">返回</button>
+                                    </div>
+
                                 </form>
-                            </div>
-							<div class="card-footer">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-dot-circle-o"></i> 申请修改
-                                </button>
+
                             </div>
                         </div>
                     </div>

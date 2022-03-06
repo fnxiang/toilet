@@ -70,7 +70,7 @@
 
       <div class="grid_7">
         <div class="welcome">
-          欢迎来访，你可以 <a href="login.html">登录</a> 或者 <a href="login.html">创建账户</a>.
+          欢迎来访，你可以 <a href="javascript:window.location.href='${pageContext.request.contextPath}/login'">登录</a> 或者 <a href="javascript:window.location.href='${pageContext.request.contextPath}/register_company'">创建账户</a>.
         </div><!-- .welcome -->
       </div><!-- .grid_6 -->
 
@@ -82,7 +82,7 @@
     <header id="branding">
       <div class="grid_3">
         <hgroup>
-          <h1 id="site_logo" ><a href="index_formal.index_formal.jsp" title=""><img src="${pageContext.request.contextPath}/static/product/res/logo.png" width="75%" alt="Online Store Theme Logo"/></a></h1>
+          <h1 id="site_logo" ><a href="#" title=""><img src="${pageContext.request.contextPath}/static/product/res/logo.png" width="75%" alt="Online Store Theme Logo"/></a></h1>
           <h2 id="site_description">这是放标语的地方</h2>
         </hgroup>
       </div><!-- .grid_3 -->
@@ -102,11 +102,11 @@
 				<li class="separator">|</li>
 				<li><a href="javascript:void(0)" onclick="model_search_action()">模式高级搜索</a></li>
 				<li class="separator">|</li>
-				<li><a href="#">我的账户</a></li>
+				<li><a href="${pageContext.request.contextPath}/company/index">我的账户</a></li>
 				<li class="separator">|</li>
-				<li><a href="login.html">登录</a></li>
+				<li><a href="${pageContext.request.contextPath}/login">登录</a></li>
 				<li class="separator">|</li>
-				<li><a href="login.html">注册</a></li>
+				<li><a href="${pageContext.request.contextPath}/register_company">注册</a></li>
 			</ul>
         </nav><!-- .private -->
       </div><!-- .grid_6 -->
@@ -524,14 +524,24 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 	<script>
 		function product_search_action() {
-			console.log("show product search")
-			document.getElementById('product_search').style.display = "";
+			console.log("show product search");
 			document.getElementById('model_search').style.display = "none";
+			if (document.getElementById('product_search').style.display == "none"){
+				document.getElementById('product_search').style.display = "";
+			} else {
+				document.getElementById('product_search').style.display = "none";
+			}
+
+
 		}
 
 		function model_search_action() {
 			document.getElementById('product_search').style.display = "none";
-			document.getElementById('model_search').style.display = "";
+			if (document.getElementById('model_search').style.display == "none"){
+				document.getElementById('model_search').style.display = "";
+			} else {
+				document.getElementById('model_search').style.display = "none";
+			}
 		}
 	</script>
 </html>

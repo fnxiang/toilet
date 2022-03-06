@@ -62,8 +62,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#"><img src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="${pageContext.request.contextPath}/static/manage/images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/professor/index"><img src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="#"><img src="${pageContext.request.contextPath}/static/manage/images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="${pageContext.request.contextPath}/toPage?url=professor_back2">后台</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/professor/index">后台</a></li>
                                     <li class="active">模式审核</li>
                                 </ol>
                             </div>

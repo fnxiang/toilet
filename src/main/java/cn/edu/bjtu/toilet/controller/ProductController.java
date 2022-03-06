@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ProductController {
 
+    @RequestMapping("/")
+    public String index(){
+        return "/product/index_formal";
+    }
+
     @RequestMapping("/product/index")
     public String product(){
         return "/product/index_formal";

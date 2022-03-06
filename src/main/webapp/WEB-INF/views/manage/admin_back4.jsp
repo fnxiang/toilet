@@ -64,7 +64,7 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#"><img src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/index"><img src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
                     <a class="navbar-brand hidden" href="./"><img src="${pageContext.request.contextPath}/static/manage/images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -103,7 +103,7 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">后台</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/index">后台</a></li>
                                     <li class="active">模式管理</li>
                                 </ol>
                             </div>
@@ -138,7 +138,7 @@
 											<td>三格化粪池+XXXXXXX</td>
 											<td>审核通过</td>
 											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
+												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back10'"> 查看详情</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 											</td>
 										</tr>
@@ -166,7 +166,7 @@
 											<td>待分配</td>
 											<td class="text-center">
 												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 分配专家</a>
+												<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back11'"> 分配专家</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 											</td>
 										</tr>

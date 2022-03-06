@@ -22,7 +22,7 @@ public class IndexController {
     @Resource
     private UserDao userDao;
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/login_final")
     public String index(){
         return "/base/login_final";
     }
@@ -35,13 +35,18 @@ public class IndexController {
         return userService.checkUser(id, pwd);
     }
 
-    @RequestMapping(value = "/register")
-    public String register(){
+    @RequestMapping(value = "/register_company")
+    public String register_company(){
         return "/base/register_final";
     }
 
 
-    @RequestMapping("/toBasePage")
+    @RequestMapping(value = "/register_professor")
+    public String register_professor(){
+        return "base/register_professor";
+    }
+
+    @RequestMapping(value = "/toBasePage")
     public String toPage(HttpServletRequest request){
         String url = request.getParameter("url");
         url = "/base/" + url;
