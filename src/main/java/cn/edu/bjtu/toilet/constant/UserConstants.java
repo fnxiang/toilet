@@ -1,4 +1,4 @@
-package cn.edu.bjtu.toilet.constants;
+package cn.edu.bjtu.toilet.constant;
 
 
 public enum UserConstants {

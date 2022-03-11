@@ -13,6 +13,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
+
 @Controller
 public class IndexController {
 
@@ -22,10 +24,36 @@ public class IndexController {
     @Resource
     private UserDao userDao;
 
+    /**
+     * page handle
+     * */
+
     @RequestMapping(value = "/login_final")
     public String index(){
-        return "/base/login_final";
+        return LOGIN_INDEX;
     }
+
+    @RequestMapping(value = "/register_company")
+    public String register_company(){
+        return REGISTER_INDEX;
+    }
+
+
+    @RequestMapping(value = "/register_professor")
+    public String register_professor(){
+        return PROF_REGISTER_INDEX;
+    }
+
+    @RequestMapping(value = "/toBasePage")
+    public String toPage(HttpServletRequest request){
+        String url = request.getParameter("url");
+        url = BASE + url;
+        return url;
+    }
+
+    /**
+     * request handle
+     * */
 
     @RequestMapping(value = "/login")
     @ResponseBody
@@ -33,24 +61,6 @@ public class IndexController {
         String id = request.getParameter("accountId");
         String pwd = request.getParameter("accountPwd");
         return userService.checkUser(id, pwd);
-    }
-
-    @RequestMapping(value = "/register_company")
-    public String register_company(){
-        return "/base/register_final";
-    }
-
-
-    @RequestMapping(value = "/register_professor")
-    public String register_professor(){
-        return "base/register_professor";
-    }
-
-    @RequestMapping(value = "/toBasePage")
-    public String toPage(HttpServletRequest request){
-        String url = request.getParameter("url");
-        url = "/base/" + url;
-        return url;
     }
 
     @RequestMapping(value = "/registerUser")
