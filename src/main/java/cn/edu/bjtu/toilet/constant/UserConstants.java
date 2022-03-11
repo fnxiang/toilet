@@ -1,18 +1,39 @@
 package cn.edu.bjtu.toilet.constant;
 
 
+import lombok.Getter;
+
+import java.util.Objects;
+
 public enum UserConstants {
 
-    ADMIN("admin", 999),
-    COMPANY_USER("company user", 100),
-    PROFESSOR("professor", 200);
+    ADMIN(999, "admin" ),
+    COMPANY_USER(100, "company"),
+    PROFESSOR(200, "professor");
 
-    private String name;
+    @Getter
+    private String role;
 
+    @Getter
     private Integer code;
 
-    UserConstants(String name, Integer code) {
-        this.name = name;
+    UserConstants(Integer code, String role) {
+        this.role = role;
         this.code = code;
+    }
+
+    public static UserConstants codeOf(Integer code) {
+
+        if (!Objects.nonNull(code)) {
+            return null;
+        }
+
+        for (UserConstants userConstants : UserConstants.values()) {
+            if (Objects.equals(userConstants.code, code)) {
+                return userConstants;
+            }
+        }
+
+        return null;
     }
 }

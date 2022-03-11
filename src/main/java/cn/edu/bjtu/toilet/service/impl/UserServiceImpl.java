@@ -15,11 +15,11 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public Boolean checkUser(String account, String pwd) {
+    public Integer checkUser(String account, String pwd) {
         UserDO userDO = userDao.getUserByEmail(account);
-        if (!Optional.ofNullable(userDO).isPresent()) {
-            return false;
+        if (!Optional.ofNullable(userDO).isPresent()||!userDO.getPassword().equals(pwd)) {
+            return -1;
         }
-        return userDO.getPassword().equals(pwd);
+        return userDO.getRole();
     }
 }

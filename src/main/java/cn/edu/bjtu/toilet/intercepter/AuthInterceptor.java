@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
@@ -21,24 +22,22 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("AuthInterceptor received request: {}", request);
-
-        String authHeader = request.getHeader("Authorization");
-
-        if (authHeader != null) {
-            logger.info("try authenticate by authorization header...");
-            String up = new String(Base64.getDecoder().decode(authHeader), StandardCharsets.UTF_8);
-
-            List<String> headerDetail = Lists.newArrayList(up.split(";"));
-
-            if (CollectionUtils.isEmpty(headerDetail)) {
-                return false;
-            }
-
-            return request.getPathInfo().contains(headerDetail.get(0));
+        logger.info("AuthInterceptor received request, URI:{}, session: {}", request.getRequestURI(), request.getSession().toString());
+        if (Objects.isNull(request.getSession())) {
+            return false;
         }
 
-        return true;
+        String uId = (String) request.getSession().getAttribute("uId");
+        String role = (String) request.getSession().getAttribute("role");
+
+
+        if (!StringUtils.isEmpty(uId)&&!StringUtils.isEmpty(role)) {
+            logger.info("try authenticate by role");
+
+            return request.getRequestURI().contains(role);
+        }
+
+        return false;
     }
 
     @Override

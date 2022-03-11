@@ -13,6 +13,8 @@ import org.springframework.web.servlet.config.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
+
 @Component
 public class GlobalWebMvcConfigurer implements WebMvcConfigurer {
 
@@ -46,7 +48,15 @@ public class GlobalWebMvcConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry) {
-        interceptorRegistry.addInterceptor(authInterceptor).addPathPatterns("/**");
+        interceptorRegistry.addInterceptor(authInterceptor).addPathPatterns("/**")
+                .excludePathPatterns("/")
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/login/**")
+                .excludePathPatterns("/register_company")
+                .excludePathPatterns("/register_professor")
+                .excludePathPatterns("/toBasePage/**")
+                .excludePathPatterns("/toProductPage/**")
+                .excludePathPatterns("/static/**");
     }
 
     @Override
