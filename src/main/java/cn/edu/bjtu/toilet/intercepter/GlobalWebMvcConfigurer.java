@@ -48,9 +48,10 @@ public class GlobalWebMvcConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry) {
-        interceptorRegistry.addInterceptor(authInterceptor).addPathPatterns("/**")
+        interceptorRegistry.addInterceptor(authInterceptor).excludePathPatterns("/**")
                 .excludePathPatterns("/")
                 .excludePathPatterns("/login")
+                .excludePathPatterns("/register")
                 .excludePathPatterns("/login/**")
                 .excludePathPatterns("/register_company")
                 .excludePathPatterns("/register_professor")

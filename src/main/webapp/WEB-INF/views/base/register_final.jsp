@@ -11,18 +11,18 @@
     <meta name="robots" content="all,follow">
 
     <title>用户注册</title>
-    <link rel="shortcut icon" href="static/base/res/logo.ico">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/base/res/logo.ico">
     
     <!-- global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-    <link rel="stylesheet" href="static/base/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/base/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="static/base/css/font-icon-style.css">
-    <link rel="stylesheet" href="static/base/css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/font-icon-style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/style.default.css" id="theme-stylesheet">
 
     <!-- Core stylesheets -->
-    <link rel="stylesheet" href="static/base/css/pages/register.css">
-	<link rel="stylesheet" href="static/base/css/pages/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/pages/register.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/pages/login.css">
 	
 	<style>
 		label.xrequired:before {
@@ -42,68 +42,68 @@
                 <div class="col-md-12">
                     <div class="card form" id="form1">
                         <div class="card-header">
-                            <h3><a href="" target="_blank"><img src="static/base/res/logo.png" class="img-fluid" alt=""></a> 企业用户注册</h3>
+                            <h3><a href="" target="_blank"><img src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a> 企业用户注册</h3>
                         </div>
                         <br>
                         <form>
                             <div class="row">
 								<div class="col-md-12">
 									<div class="form-group row">
-                                        <label for="companyname" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">公司名称：</label>
-                                        <input type="text" class="form-control col-sm-9" id="companyname" placeholder="请输入正确的公司名称">
+                                        <label for="companyName" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">公司名称：</label>
+                                        <input type="text" id="companyName" class="form-control col-sm-9" placeholder="请输入正确的公司名称">
                                     </div>
 									<div class="form-group row">
-                                        <label for="shehuixinyongcode" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">统一社会信用代码：</label>
-                                        <input type="text" class="form-control col-sm-9" id="shehuixinyongcode" placeholder="统一社会信用代码">
+                                        <label for="creditCode" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">统一社会信用代码：</label>
+                                        <input type="text" id="creditCode" class="form-control col-sm-9" placeholder="统一社会信用代码">
                                     </div>
 									<div class="form-group row">
-										<label for="zhizhaoupload" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">上传营业执照附件：</label>
-                                        <input type="file" class="form-control-file" id="zhizhaoupload" aria-describedby="fileHelp">
+										<label for="file" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">上传营业执照附件：</label>
+                                        <input type="file" class="form-control-file" id="file" aria-describedby="fileHelp">
 									</div>
 									<div class="form-group row">
-										<label for="qiyeaddress" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">企业地址：</label>
+										<label class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">企业地址：</label>
 											<div class="form-group col-sm-9 row" style="margin-bottom: 0px;padding-left: 0px;">
 												<div class="form-group col-sm-4" style="margin-bottom: 0px;">
-													<div><label for="provinceselect" class="" style="margin-bottom: 0px;">请选择省份：</label></div>
-													<div><select class="form-control" id="provinceselect"></select></div>
+													<div><label for="provinceSelect" class="" style="margin-bottom: 0px;">请选择省份：</label></div>
+													<div><select class="form-control" id="provinceSelect"></select></div>
 												</div>
 												<div class="form-group col-sm-4" style="margin-bottom: 0px;">
-													<div><label for="cityselect" class="" style="margin-bottom: 0px;">请选择城市：</label></div>
-													<select class="form-control" id="cityselect"></select>
+													<div><label for="citySelect" class="" style="margin-bottom: 0px;">请选择城市：</label></div>
+													<select class="form-control" id="citySelect"></select>
 												</div>
 												<div class="form-group col-sm-4" style="margin-bottom: 0px;">
-													<div><label for="countyselect" class="" style="margin-bottom: 0px;">请选择县/区：</label></div>
-													<select class="form-control" id="countyselect"></select>
+													<div><label for="countrySelect" class="" style="margin-bottom: 0px;">请选择县/区：</label></div>
+													<select class="form-control" id="countrySelect"></select>
 												</div>
 											</div>
 									</div>
 									<div class="form-group row">
-                                        <label for="fulladdress" class="col-sm-3 align-self-center" style="margin-bottom: 0px;"></label>
-                                        <input type="text" class="form-control col-sm-9" id="fulladdress" placeholder="请输入企业详细地址">
+                                        <label for="fullAddress" class="col-sm-3 align-self-center" style="margin-bottom: 0px;"></label>
+                                        <input type="text" class="form-control col-sm-9" id="fullAddress" placeholder="请输入企业详细地址">
                                     </div>
 									<div class="form-group row">
-										<label for="emailaddress" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">注册邮箱：</label>
-										<input type="email" required class="form-control col-sm-9" id="emailaddress" aria-describedby="emailHelp" placeholder="注册邮箱">
+										<label for="emailAddress" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">注册邮箱：</label>
+										<input type="email" required class="form-control col-sm-9" id="emailAddress" aria-describedby="emailHelp" placeholder="注册邮箱">
 									</div>
 									<div class="form-group row">
-										<label for="webaddress" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">企业官网：</label>
-										<input type="url" required class="form-control col-sm-9" id="webaddress" aria-describedby="emailHelp" placeholder="企业官网">
+										<label for="webAddress" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">企业官网：</label>
+										<input type="url" class="form-control col-sm-9" id="webAddress" placeholder="企业官网">
 									</div>
 									<div class="form-group row">
-										<label for="faren" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">联系人：</label>
-										<input type="text" class="form-control col-sm-9" id="faren" aria-describedby="emailHelp" placeholder="联系人">
+										<label for="contactName" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">联系人：</label>
+										<input type="text" class="form-control col-sm-9" id="contactName"  placeholder="联系人">
 									</div>
 									<div class="form-group row">
-										<label for="phonenum" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">手机号：</label>
-										<input type="text" class="form-control col-sm-9" id="phonenum" aria-describedby="emailHelp" placeholder="手机号">
+										<label for="phoneNum" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">手机号：</label>
+										<input type="text" class="form-control col-sm-9" id="phoneNum" placeholder="手机号">
 									</div>
 									<div class="form-group row">
-										<label for="registerpasswd" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">密码：</label>
-										<input type="password" class="form-control col-sm-9" id="registerpasswd" aria-describedby="emailHelp" placeholder="密码">
+										<label for="registerPasswd" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">密码：</label>
+										<input type="password" class="form-control col-sm-9" id="registerPasswd" aria-describedby="emailHelp" placeholder="密码">
 									</div>
 									<div class="form-group row">
-										<label for="conformpasswd" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">确认密码：</label>
-										<input type="password" class="form-control col-sm-9" id="conformpasswd" aria-describedby="emailHelp" placeholder="确认密码">
+										<label for="confirmPasswd" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">确认密码：</label>
+										<input type="password" class="form-control col-sm-9" id="confirmPasswd" aria-describedby="emailHelp" placeholder="确认密码">
 									</div>
 								</div>
 								
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="form-group text-center">
-								<button type="submit" class="btn btn-general btn-blue mr-2">提交注册</button>  
+								<button type="submit" onclick="register()" class="btn btn-general btn-blue mr-2">提交注册</button>
 							</div>
                         </form>
                     </div>
@@ -135,16 +135,76 @@
         </div>
 	</section>
     <!--Global Javascript -->
-    <script src="static/base/js/jquery.min.js"></script>
-    <script src="static/base/js/popper/popper.min.js"></script>
-    <script src="static/base/js/tether.min.js"></script>
-    <script src="static/base/js/bootstrap.min.js"></script>
-    <script src="static/base/js/jquery.cookie.js"></script>
-    <script src="static/base/js/jquery.validate.min.js"></script>
-    <script src="static/base/js/chart.min.js"></script>
-    <script src="static/base/js/front.js"></script>
-	
-	<script src="static/base/./js/final/cityinfo.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/popper/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/tether.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/jquery.cookie.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/chart.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/front.js"></script>
+
+	<script src="${pageContext.request.contextPath}/static/base/./js/final/cityinfo.js"></script>
+
+    <script>
+        function register(){
+            var data = new FormData();
+            var file = $('#file')[0].files[0];
+            data.append("file", file)
+            data.append("companyName", encodeURI($('#companyName').val()));
+            data.append("creditCode", $('#creditCode').val());
+            data.append("companyAddress",getSelectorContent());
+            data.append("detailAddress", encodeURI($('#fullAddress').val()));
+            data.append("email", $('#emailAddress').val());
+            data.append("webAddress", $('#webAddress').val());
+            data.append("contactName", encodeURI($('#contactName').val()));
+            data.append("phoneNum", $('#phoneNum').val());
+            data.append("password", $('#registerPasswd').val());
+            data.append("confirmPassword", $('#confirmPasswd').val());
+
+            $.ajax({
+                url:"/toilet/register",
+                type:"POST",
+                dataType: "json",
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function(result){
+                    if (result) {
+                        location.href = "/";
+                    } else {
+                        alert("error");
+                    }
+                }
+            });
+        }
+
+        function getSelectorContent() {
+            const provinceName = $('#provinceSelect').find("option:selected").text();
+            const cityName = $('#citySelect').find("option:selected").text();
+            const countryName = $('#countrySelect').find("option:selected").text();
+
+            const address = provinceName+","+cityName+","+countryName;
+            return encodeURIComponent(address);
+        }
+
+        function encodeUtf8(text) {
+            const code = encodeURIComponent(text);
+            const bytes = [];
+            for (var i = 0; i < code.length; i++) {
+                const c = code.charAt(i);
+                if (c === '%') {
+                    const hex = code.charAt(i + 1) + code.charAt(i + 2);
+                    const hexVal = parseInt(hex, 16);
+                    bytes.push(hexVal);
+                    i += 2;
+                } else bytes.push(c.charCodeAt(0));
+            }
+            return bytes;
+        }
+    </script>
     
     <!--Core Javascript -->	
 	<script>
@@ -152,9 +212,9 @@
 		window.onload = setProvince;
 		 
 		// 获取省市县/区的select选择框对象
-		var province = document.getElementById("provinceselect");
-		var city = document.getElementById("cityselect");
-		var county = document.getElementById("countyselect");
+		var province = document.getElementById("provinceSelect");
+		var city = document.getElementById("citySelect");
+		var county = document.getElementById("countrySelect");
 		//var province = document.getElementsByTagName("select")[0];
 		//var city = document.getElementsByTagName("select")[1];
 		//var county = document.getElementsByTagName("select")[2];
