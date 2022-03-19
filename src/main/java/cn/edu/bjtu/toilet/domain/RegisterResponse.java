@@ -3,20 +3,20 @@ package cn.edu.bjtu.toilet.domain;
 import lombok.Data;
 
 @Data
-public class UploadFileResponse {
+public class RegisterResponse {
 
     private Boolean success;
 
     private String errorMessage;
 
-    public static UploadFileResponse success(){
-        UploadFileResponse response = new UploadFileResponse();
+    public static RegisterResponse success(){
+        RegisterResponse response = new RegisterResponse();
         response.setSuccess(true);
         return response;
     }
 
-    public static UploadFileResponse failed(String message){
-        UploadFileResponse response = new UploadFileResponse();
+    public static RegisterResponse failed(String message){
+        RegisterResponse response = new RegisterResponse();
         response.setSuccess(false);
         response.setErrorMessage(message);
         return response;

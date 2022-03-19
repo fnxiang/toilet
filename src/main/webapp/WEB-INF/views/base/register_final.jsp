@@ -172,10 +172,11 @@
                 contentType: false,
                 processData: false,
                 success:function(result){
-                    if (result) {
-                        location.href = "/";
+                    alert(result.errorMessage);
+                    if (result.success) {
+                        location.href = "/toilet/login/index";
                     } else {
-                        alert("error");
+                        alert(result.errorMessage);
                     }
                 }
             });

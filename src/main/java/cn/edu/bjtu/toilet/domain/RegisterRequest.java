@@ -1,6 +1,7 @@
 package cn.edu.bjtu.toilet.domain;
 
 import cn.edu.bjtu.toilet.constant.UserConstants;
+import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import lombok.Data;
 
 @Data
@@ -12,7 +13,7 @@ public class RegisterRequest {
 
     private String filePath;
 
-    private EnterpriseAddress enterpriseAddress;
+    private EnterpriseAddressDTO enterpriseAddress;
 
     private String email;
 

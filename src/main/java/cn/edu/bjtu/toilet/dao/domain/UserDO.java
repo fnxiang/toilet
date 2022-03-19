@@ -26,7 +26,7 @@ public class UserDO implements Serializable {
 
     private String country;
 
-    private Integer contactPhone;
+    private String contactPhone;
 
     private String password;
 
@@ -128,12 +128,12 @@ public class UserDO implements Serializable {
         this.country = country == null ? null : country.trim();
     }
 
-    public Integer getContactPhone() {
+    public String getContactPhone() {
         return contactPhone;
     }
 
-    public void setContactPhone(Integer contactPhone) {
-        this.contactPhone = contactPhone;
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone == null ? null : contactPhone.trim();
     }
 
     public String getPassword() {

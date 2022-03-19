@@ -17,7 +17,7 @@ public class UserConverter {
         userDO.setEmail(registerRequest.getEmail());
         userDO.setOfficalSite(registerRequest.getWebAddress());
         userDO.setContactName(registerRequest.getContactName());
-        userDO.setContactPhone(Integer.valueOf(registerRequest.getPhoneNumber()));
+        userDO.setContactPhone(registerRequest.getPhoneNumber());
         userDO.setPassword(Base64.getEncoder().encodeToString(registerRequest.getPassword().getBytes()));
         userDO.setRole(registerRequest.getUserConstants().getCode());
         return userDO;

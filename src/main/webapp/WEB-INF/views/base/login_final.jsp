@@ -79,9 +79,8 @@
 
     <script>
        function login(){
-            preCheck();
-
-            var data = new FormData();
+           preCheck();
+           var data = new FormData();
            data.append("accountId", $('#accountId').val());
            data.append("accountPwd", $('#accpassword').val());
 
@@ -95,10 +94,11 @@
                 contentType: false,
                 processData: false,
                 success:function(result){
-                    if (result) {
-                        location.href = "/toilet/admin/index";
+                    if (result.success) {
+                        alert(result.forwardUrl);
+                        location.href = result.forwardUrl;
                     } else {
-                        alert("error");
+                        alert(result.errorMessage);
                     }
                 }
             });

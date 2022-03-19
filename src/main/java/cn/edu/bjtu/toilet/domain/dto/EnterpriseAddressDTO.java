@@ -1,9 +1,9 @@
-package cn.edu.bjtu.toilet.domain;
+package cn.edu.bjtu.toilet.domain.dto;
 
 import lombok.Data;
 
 @Data
-public class EnterpriseAddress {
+public class EnterpriseAddressDTO {
 
     private String province;
 

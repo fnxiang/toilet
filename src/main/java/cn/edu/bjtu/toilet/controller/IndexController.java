@@ -3,9 +3,10 @@ package cn.edu.bjtu.toilet.controller;
 import cn.edu.bjtu.toilet.constant.UserConstants;
 import cn.edu.bjtu.toilet.dao.UserDao;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.EnterpriseAddress;
+import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
+import cn.edu.bjtu.toilet.domain.LoginResponse;
 import cn.edu.bjtu.toilet.domain.RegisterRequest;
-import cn.edu.bjtu.toilet.domain.UploadFileResponse;
+import cn.edu.bjtu.toilet.domain.RegisterResponse;
 import cn.edu.bjtu.toilet.service.UserService;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -22,18 +23,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
 
 @Controller
+@MultipartConfig
 public class IndexController {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
@@ -80,25 +82,27 @@ public class IndexController {
 
     @RequestMapping(value = "/login")
     @ResponseBody
-    public Boolean login(HttpServletRequest request, HttpServletResponse response){
+    public LoginResponse login(HttpServletRequest request, HttpServletResponse response){
 
         try {
-            String id = request.getParameter("accountId");
-            String pwd = request.getParameter("accountPwd");
-
-            Integer roleCode = userService.checkUser(id, pwd);
+            Map<String, String> params = resolveParams(request);
+            Integer roleCode = userService.checkUser(params.get("accountId"), params.get("accountPwd"));
             UserConstants userConstants = UserConstants.codeOf(roleCode);
             if (Objects.isNull(userConstants)) {
-                return false;
+                return LoginResponse.failed("user role error");
             }
 
-            request.getSession().setAttribute("uId", id);
+            request.getSession().setAttribute("uId", params.get("accountId"));
             request.getSession().setAttribute("role", userConstants.getRole());
-            return true;
+
+            String forwardPath ="/toilet/"+userConstants.getRole() + "/index";
+
+            return LoginResponse.success(forwardPath);
         }catch (Exception exception) {
-            LOG.error("IndexController login error! request: {}", request);
+            LOG.error("IndexController login error! request: {}", exception.getMessage());
+            return LoginResponse.failed("exception happened");
         }
-        return false;
+
     }
 
     @RequestMapping(value = "/register/test")
@@ -112,22 +116,36 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/register")
-    public UploadFileResponse upload(HttpServletRequest request, HttpServletResponse response) {
+    @ResponseBody
+    public RegisterResponse upload(HttpServletRequest request, HttpServletResponse response) {
 
         try {
             RegisterRequest registerRequest =  resolveRequestParams(request);;
-            if (Objects.isNull(registerRequest)) {
-                return UploadFileResponse.failed("params error!");
+            if (Objects.isNull(registerRequest)
+                    || StringUtils.isEmpty(registerRequest.getEmail())
+                    || StringUtils.isEmpty(registerRequest.getPassword())) {
+                return RegisterResponse.failed("params error!");
             }
 
-            userService.registerUser(registerRequest);
+            UserDO userDO = userService.registerUser(registerRequest);
+            if (Objects.isNull(userDO)) {
+                return RegisterResponse.failed("register db error");
+            }
+
+            UserConstants userConstants = UserConstants.codeOf(userDO.getRole());
+
+            if(Objects.isNull(userConstants)) {
+                return RegisterResponse.failed("Error Role with user!");
+            }
+            request.getSession().setAttribute("uId", userDO.getEmail());
+            request.getSession().setAttribute("role",userConstants.getRole());
         }catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("message", "文件上传失败");
-            return UploadFileResponse.failed(e.getMessage());
+            return RegisterResponse.failed(e.getMessage());
         }
 
-        return UploadFileResponse.success();
+        return RegisterResponse.success();
     }
 
     private RegisterRequest resolveRegisterParams(Map<String, String> params) throws UnsupportedEncodingException {
@@ -143,7 +161,7 @@ public class IndexController {
         registerRequest.setConfirmPassword(params.get("confirmPassword"));
         registerRequest.setFilePath(params.get("filePath"));
 
-        EnterpriseAddress enterpriseAddress = new EnterpriseAddress();
+        EnterpriseAddressDTO enterpriseAddress = new EnterpriseAddressDTO();
         String companyAddress = params.get("companyAddress");
         String detailAddress = params.get("detailAddress");
 
@@ -182,7 +200,9 @@ public class IndexController {
         File uploadDir = new File(uploadPath);
         System.out.println(uploadPath);
         if (!uploadDir.exists()) {
-            uploadDir.mkdir();
+            if (!uploadDir.mkdirs()) {
+                return null;
+            }
         }
         for (FileItem item : items) {
             if (item.isFormField()) {
@@ -208,5 +228,19 @@ public class IndexController {
         return resolveRegisterParams(params);
     }
 
+    private Map<String, String> resolveParams(HttpServletRequest request) throws FileUploadException, UnsupportedEncodingException {
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+
+        List<FileItem> items = upload.parseRequest(request);
+        Map<String, String> params = new HashMap<>();
+
+        for (FileItem item : items) {
+            if(item.isFormField()) {
+                params.put(item.getFieldName(), decodeJsString(item.getString()));
+            }
+        }
+        return params;
+    }
 
 }

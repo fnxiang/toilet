@@ -13,7 +13,7 @@
     <result column="offical_site" jdbcType="VARCHAR" property="officalSite" />
     <result column="contact_name" jdbcType="VARCHAR" property="contactName" />
     <result column="country" jdbcType="VARCHAR" property="country" />
-    <result column="contact_phone" jdbcType="INTEGER" property="contactPhone" />
+    <result column="contact_phone" jdbcType="VARCHAR" property="contactPhone" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
@@ -123,7 +123,7 @@
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{comanyName,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR}, #{businessLicenseFilePath,jdbcType=VARCHAR}, 
       #{enterpriseAddress,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{officalSite,jdbcType=VARCHAR}, 
-      #{contactName,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{contactPhone,jdbcType=INTEGER}, 
+      #{contactName,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, 
       #{source,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER})
   </insert>
@@ -217,7 +217,7 @@
         #{country,jdbcType=VARCHAR},
       </if>
       <if test="contactPhone != null">
-        #{contactPhone,jdbcType=INTEGER},
+        #{contactPhone,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -279,7 +279,7 @@
         country = #{record.country,jdbcType=VARCHAR},
       </if>
       <if test="record.contactPhone != null">
-        contact_phone = #{record.contactPhone,jdbcType=INTEGER},
+        contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
@@ -314,7 +314,7 @@
       offical_site = #{record.officalSite,jdbcType=VARCHAR},
       contact_name = #{record.contactName,jdbcType=VARCHAR},
       country = #{record.country,jdbcType=VARCHAR},
-      contact_phone = #{record.contactPhone,jdbcType=INTEGER},
+      contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT},
@@ -358,7 +358,7 @@
         country = #{country,jdbcType=VARCHAR},
       </if>
       <if test="contactPhone != null">
-        contact_phone = #{contactPhone,jdbcType=INTEGER},
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
@@ -390,7 +390,7 @@
       offical_site = #{officalSite,jdbcType=VARCHAR},
       contact_name = #{contactName,jdbcType=VARCHAR},
       country = #{country,jdbcType=VARCHAR},
-      contact_phone = #{contactPhone,jdbcType=INTEGER},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},

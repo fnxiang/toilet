@@ -63,7 +63,8 @@
         <!-- 指定数据库表 -->
         <!-- <table schema="" tableName="WECHAT_MESSAGE"/> -->
 
-        <table schema="" tableName="user" domainObjectName="UserDO"/>
+        <table schema="" tableName="toilet_pattern" domainObjectName="ToiletPatternDO"/>
+        <table schema="" tableName="toilet_product" domainObjectName="ToiletProductDO"/>
         <!-- 指定数据库所有表  -->
         <!-- <table schema="" tableName="%"/> -->
         <!-- 有些表的字段需要指定java类型

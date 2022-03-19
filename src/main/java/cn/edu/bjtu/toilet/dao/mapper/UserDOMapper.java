@@ -3,11 +3,8 @@ package cn.edu.bjtu.toilet.dao.mapper;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDOSelective;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface UserDOMapper {
     long countByExample(UserDOSelective example);
 
