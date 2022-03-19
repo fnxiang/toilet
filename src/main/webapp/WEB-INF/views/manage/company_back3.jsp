@@ -572,11 +572,11 @@
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="yongtu"
+                                                <div class="col col-md-3"><label for="cesuoyongtu"
                                                                                  class=" form-control-label">用途：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="yongtu" id="yongtu" class="form-control">
+                                                    <select name="cesuoyongtu" id="cesuoyongtu" class="form-control">
                                                         <option value="0">A.户厕</option>
                                                         <option value="1">B.公厕</option>
                                                         <option value="2">C.均可</option>
@@ -816,7 +816,7 @@
         data.append("yanse", $('#yanse').val()); //颜色
         data.append("shouming", $('#shouming').val()); //使用寿命
         data.append("jiage", $('#jiage').val()); //价格（万元）
-        data.append("yongtu", $('#yongtu').val()); //用途
+        data.append("cesuoyongtu", $('#cesuoyongtu').val()); //用途:公厕户厕
         data.append("qinglizhouqi", $('#qinglizhouqi').val()); //清理周期
         data.append("zhiliangbaozhang", $('#zhiliangbaozhang').val()); //质量保障材料
         data.append("shiyongshuoming", $('#shiyongshuoming').val()); //使用说明
