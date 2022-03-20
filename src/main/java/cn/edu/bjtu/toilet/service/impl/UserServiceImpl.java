@@ -18,6 +18,11 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
+    public UserDO queryUserByEmail(String email) {
+        return userDao.getUserByEmail(email);
+    }
+
+    @Override
     public Integer checkUser(String account, String pwd) {
         UserDO userDO = userDao.getUserByEmail(account);
         if (!Optional.ofNullable(userDO).isPresent()||!userDO.getPassword().equals(Base64.getEncoder().encodeToString(pwd.getBytes()))) {

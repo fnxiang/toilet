@@ -40,7 +40,7 @@ public class IndexController {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-    private static final String UPLOAD_DIRECTORY = "upload/company/";
+    private static final String UPLOAD_DIRECTORY = "/upload/company/";
 
 
     @Resource
@@ -115,9 +115,9 @@ public class IndexController {
         return userDao.insertUserDO(userDO);
     }
 
-    @RequestMapping(value = "/register")
+    @RequestMapping(value = "/register/company")
     @ResponseBody
-    public RegisterResponse upload(HttpServletRequest request, HttpServletResponse response) {
+    public RegisterResponse registerCompany(HttpServletRequest request, HttpServletResponse response) {
 
         try {
             RegisterRequest registerRequest =  resolveRequestParams(request);;
@@ -219,9 +219,10 @@ public class IndexController {
                     int start = name.lastIndexOf("\\");
                     String filename = name.substring(start + 1);
                     String filePath = uploadPath + "/" + filename;
+                    String relativePath = UPLOAD_DIRECTORY + File.separator + filename;
                     File file = new File(filePath);
                     item.write(file);
-                    params.put("filePath", filePath);
+                    params.put("filePath", relativePath);
                 }
             }
         }

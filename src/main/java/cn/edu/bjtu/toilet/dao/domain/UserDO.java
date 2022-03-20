@@ -10,7 +10,7 @@ public class UserDO implements Serializable {
 
     private Date gmtModified;
 
-    private String comanyName;
+    private String companyName;
 
     private String creditCode;
 
@@ -64,12 +64,12 @@ public class UserDO implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-    public String getComanyName() {
-        return comanyName;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setComanyName(String comanyName) {
-        this.comanyName = comanyName == null ? null : comanyName.trim();
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName == null ? null : companyName.trim();
     }
 
     public String getCreditCode() {
@@ -185,7 +185,7 @@ public class UserDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
-        sb.append(", comanyName=").append(comanyName);
+        sb.append(", companyName=").append(companyName);
         sb.append(", creditCode=").append(creditCode);
         sb.append(", businessLicenseFilePath=").append(businessLicenseFilePath);
         sb.append(", enterpriseAddress=").append(enterpriseAddress);

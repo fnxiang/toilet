@@ -8,4 +8,6 @@ public interface UserService {
     Integer checkUser(String account, String pwd);
 
     UserDO registerUser(RegisterRequest registerRequest);
+
+    UserDO queryUserByEmail(String email);
 }

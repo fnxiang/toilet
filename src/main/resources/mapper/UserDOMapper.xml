@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-    <result column="comany_name" jdbcType="VARCHAR" property="comanyName" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
     <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
     <result column="business_license_file_path" jdbcType="VARCHAR" property="businessLicenseFilePath" />
     <result column="enterprise_address" jdbcType="VARCHAR" property="enterpriseAddress" />
@@ -79,7 +79,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, comany_name, credit_code, business_license_file_path, 
+    id, gmt_create, gmt_modified, company_name, credit_code, business_license_file_path, 
     enterprise_address, email, offical_site, contact_name, country, contact_phone, password, 
     version, deleted, source, role
   </sql>
@@ -115,13 +115,13 @@
   </delete>
   <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
     insert into user (id, gmt_create, gmt_modified, 
-      comany_name, credit_code, business_license_file_path, 
+      company_name, credit_code, business_license_file_path, 
       enterprise_address, email, offical_site, 
       contact_name, country, contact_phone, 
       password, version, deleted, 
       source, role)
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{comanyName,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR}, #{businessLicenseFilePath,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR}, #{businessLicenseFilePath,jdbcType=VARCHAR}, 
       #{enterpriseAddress,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{officalSite,jdbcType=VARCHAR}, 
       #{contactName,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, 
@@ -139,8 +139,8 @@
       <if test="gmtModified != null">
         gmt_modified,
       </if>
-      <if test="comanyName != null">
-        comany_name,
+      <if test="companyName != null">
+        company_name,
       </if>
       <if test="creditCode != null">
         credit_code,
@@ -192,8 +192,8 @@
       <if test="gmtModified != null">
         #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="comanyName != null">
-        #{comanyName,jdbcType=VARCHAR},
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
       </if>
       <if test="creditCode != null">
         #{creditCode,jdbcType=VARCHAR},
@@ -254,8 +254,8 @@
       <if test="record.gmtModified != null">
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.comanyName != null">
-        comany_name = #{record.comanyName,jdbcType=VARCHAR},
+      <if test="record.companyName != null">
+        company_name = #{record.companyName,jdbcType=VARCHAR},
       </if>
       <if test="record.creditCode != null">
         credit_code = #{record.creditCode,jdbcType=VARCHAR},
@@ -306,7 +306,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
-      comany_name = #{record.comanyName,jdbcType=VARCHAR},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
       credit_code = #{record.creditCode,jdbcType=VARCHAR},
       business_license_file_path = #{record.businessLicenseFilePath,jdbcType=VARCHAR},
       enterprise_address = #{record.enterpriseAddress,jdbcType=VARCHAR},
@@ -333,8 +333,8 @@
       <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="comanyName != null">
-        comany_name = #{comanyName,jdbcType=VARCHAR},
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
       </if>
       <if test="creditCode != null">
         credit_code = #{creditCode,jdbcType=VARCHAR},
@@ -382,7 +382,7 @@
     update user
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      comany_name = #{comanyName,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
       credit_code = #{creditCode,jdbcType=VARCHAR},
       business_license_file_path = #{businessLicenseFilePath,jdbcType=VARCHAR},
       enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
