@@ -43,6 +43,10 @@ public class ProductController {
     @RequestMapping("/")
     public String index(HttpServletRequest request){
         List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
+
+        if (Objects.isNull(productDTOS)) {
+            productDTOS = Lists.newArrayList();
+        }
         request.setAttribute("productList", productDTOS);
         return INDEX;
     }
