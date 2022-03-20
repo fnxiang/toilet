@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE HTML>
 <html>
 <!-- Added by HTTrack -->
@@ -64,6 +66,13 @@
 
 </head>
 <body>
+<%--获取 List --%>
+<% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>
+<%--获取路径用于显示图片和文件--%>
+<%  String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";%>
 <div class="container_12">
     <div id="top">
         <div class="grid_5">

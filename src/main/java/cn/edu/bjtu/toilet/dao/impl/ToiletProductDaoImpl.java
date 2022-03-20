@@ -3,6 +3,7 @@ package cn.edu.bjtu.toilet.dao.impl;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
 import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
+import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDOSelective;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDOSelective;
 import cn.edu.bjtu.toilet.dao.mapper.ToiletPatternDOMapper;
@@ -35,7 +36,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
 
         if (toiletProductDO == null) {
             transactionTemplate.execute(status -> {
-                int patternId = insertPattern(patternDO);
+                int patternId = insertPattern(patternDO, buildSourceKey(productDO));
                 productDO.setPatternId(patternId);
                 insertProduct(productDO);
                 return null;
@@ -49,6 +50,10 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         }
 
         return queryProductByName(productDO.getProductName());
+    }
+
+    private String buildSourceKey(ToiletProductDO productDO) {
+        return String.format("%s-%s", productDO.getCompanyEmail(), productDO.getProductName());
     }
 
     public String insertProduct(ToiletProductDO productDO){
@@ -71,7 +76,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     }
 
 
-    public Integer insertPattern(ToiletPatternDO patternDO) {
+    public Integer insertPattern(ToiletPatternDO patternDO, String sourceKey) {
         if (Objects.isNull(patternDO)
                 || StringUtils.isEmpty(patternDO.getEnvConditions())
                 || StringUtils.isEmpty(patternDO.getHumanFactors())
@@ -83,6 +88,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         patternDO.setGmtCreate(new Date());
         patternDO.setGmtModified(new Date());
         patternDO.setDeleted(false);
+        patternDO.setSource(sourceKey);
         patternDO.setVersion(0);
 
         int c = patternDOMapper.insert(patternDO);
@@ -91,7 +97,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
             throw new ToiletSystemException("insert error", "-1");
         }
 
-        return patternDO.getId();
+        return queryPatternBySource(sourceKey).getId();
 
     }
 
@@ -128,7 +134,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         if (c != 1) {
             throw new ToiletSystemException("update error", "-1");
         }
-        return queryPatternById(patternDO.getId());
+        return queryPatternBySource(patternDO.getSource());
     }
 
     private ToiletProductDO queryProductByName(String productName) {
@@ -154,6 +160,32 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         }
 
         return productDOList.get(0);
+    }
+
+    @Override
+    public ToiletPatternDO queryPatternBySource(String source) {
+
+        if (StringUtils.isEmpty(source)) {
+            throw new ToiletSystemException("query pattern Id error", "-1");
+        }
+
+        ToiletPatternDOSelective patternDOSelective = new ToiletPatternDOSelective();
+        ToiletPatternDOSelective.Criteria criteria = patternDOSelective.createCriteria();
+
+        criteria.andDeletedNotEqualTo(true);
+        criteria.andSourceEqualTo(source);
+
+        List<ToiletPatternDO> toiletPatternDOS = patternDOMapper.selectByExample(patternDOSelective);
+
+        if (CollectionUtils.isEmpty(toiletPatternDOS)) {
+            return null;
+        }
+
+        if (toiletPatternDOS.size() != 1) {
+            throw new ToiletSystemException("too many result returned ", "-1");
+        }
+
+        return toiletPatternDOS.get(0);
     }
 
     @Override

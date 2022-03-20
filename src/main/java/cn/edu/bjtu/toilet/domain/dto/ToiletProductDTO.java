@@ -42,6 +42,6 @@ public class ToiletProductDTO {
 
     private String picsPath;
 
-
+    private String companyEmail;
 
 }

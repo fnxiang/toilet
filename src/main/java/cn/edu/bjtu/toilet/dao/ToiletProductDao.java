@@ -7,5 +7,7 @@ public interface ToiletProductDao {
 
     ToiletProductDO saveProductWithPattern(ToiletProductDO productDO, ToiletPatternDO patternDO);
 
+    ToiletPatternDO queryPatternBySource(String source);
+
     ToiletPatternDO queryPatternById(Integer Id);
 }

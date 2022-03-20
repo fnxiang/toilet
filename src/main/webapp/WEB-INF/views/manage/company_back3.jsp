@@ -648,7 +648,7 @@
                             <hr>
                             <div class="card-text text-lg-center">
                                 <button type="button" class="btn btn-outline-secondary">保存草稿</button>
-                                <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="submit()">确认提交</button>
+                                <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="entry()">确认提交</button>
                             </div>
 
                         </div>
@@ -788,85 +788,85 @@
         }
     }
 
-    function submit(){
+    function entry(){
 
         var data = new FormData();
-        data.append("productName", $('#product_name').val()); //产品名称
-        data.append("factoryName", $('#producer_name').val()); //厂家
+        data.append("productName", encodeURI($('#product_name').val())); //产品名称
+        data.append("factoryName", encodeURI($('#producer_name').val())); //厂家
         data.append("factoryNum", $('#phonenum').val()); //联系方式
 
         var myselect=document.getElementById("productselect"); //产品类型
         var index=myselect.selectedIndex;
-        data.append("productType", myselect.options[index].text);
+        data.append("productType", encodeURI(myselect.options[index].text));
 
         myselect=document.getElementById("multiple-select"); //模式类型
         index=myselect.selectedIndex;
-        data.append("patternType", myselect.options[index].text);
+        data.append("patternType", encodeURI(myselect.options[index].text));
 
-        var radio = document.getElementsByName("DoorCt"); //是否添加新模式
+        data.append("patternName", encodeURI($('#newmodename').val())); //新模式名称
+
+        var radio = document.getElementsByName("newmoderadios"); //是否添加新模式
         data.append("newmoderadios1", radio[0].checked); //True 为添加
         data.append("newmoderadios2", radio[1].checked); //True 为不添加
-
-        data.append("patternName", $('#newmodename').val()); //新模式名称
 
         //新模式参数
         myselect=document.getElementById("temperaturecondition"); //温度条件
         index=myselect.selectedIndex;
-        data.append("natureTemp", myselect.options[index].text);
+        data.append("natureTemp", encodeURI(myselect.options[index].text));
         myselect=document.getElementById("watercondition"); //水资源条件
         index=myselect.selectedIndex;
-        data.append("water", myselect.options[index].text);
+        data.append("water", encodeURI(myselect.options[index].text));
 
-        mycheckbox=document.getElementsByName("dixing"); //地形条件
-        check_val = null;
-        for (k in mycheckbox) {
+        const mycheckbox=document.getElementsByName("dixing_check"); //地形条件
+        let check_val = "";
+        for (let k=0; k<mycheckbox.length;k++) {
             if (mycheckbox[k].checked)
                 check_val = check_val + "," + mycheckbox[k].value;
         }
-        data.append("terrain", check_val);
+        data.append("terrain", encodeURI(check_val));
 
-        mycheckbox=document.getElementsByName("position"); //地理位置条件
-        check_val = null;
-        for (k in mycheckbox) {
-            if (mycheckbox[k].checked)
-                check_val = check_val + "," + mycheckbox[k].value;
+        const positioncheckbox=document.getElementsByName("diliweizhi_check"); //地理位置条件
+        let position_check_val = "";
+        for (let k=0; k<positioncheckbox.length;k++) {
+            if (positioncheckbox[k].checked)
+                position_check_val = position_check_val + "," + positioncheckbox[k].value;
         }
-        data.append("geolocation", check_val);
+        data.append("geolocation", encodeURI(position_check_val));
 
-        mycheckbox=document.getElementsByName("shengtai"); //地形条件
-        check_val = null;
-        for (k in mycheckbox) {
-            if (mycheckbox[k].checked)
-                check_val = check_val + "," + mycheckbox[k].value;
+        const shengtaicheckbox=document.getElementsByName("shengtai_check"); //地形条件
+        let shengtai_check_val = "";
+        for (let k=0; k<shengtaicheckbox.length;k++) {
+            if (shengtaicheckbox[k].checked)
+                shengtai_check_val = shengtai_check_val + "," + shengtaicheckbox[k].value;
         }
-        data.append("ecotope", check_val);
+        data.append("ecotope", encodeURI(shengtai_check_val));
 
         myselect=document.getElementById("renkou"); //人口密集程度
         index=myselect.selectedIndex;
-        data.append("density", myselect.options[index].text);
+        data.append("density", encodeURI(myselect.options[index].text));
         myselect=document.getElementById("yetaifei"); //液态肥使用习惯
         index=myselect.selectedIndex;
-        data.append("usageHabits", myselect.options[index].text);
+        data.append("usageHabits", encodeURI(myselect.options[index].text));
         myselect=document.getElementById("wushuiguandao"); //具有污水管道
         index=myselect.selectedIndex;
-        data.append("sewerLines", myselect.options[index].text);
+        data.append("sewerLines",encodeURI( myselect.options[index].text));
         myselect=document.getElementById("wushuichuli"); //具有完整城镇污水处理系统
         index=myselect.selectedIndex;
-        data.append("sewageTreatment", myselect.options[index].text);
+        data.append("sewageTreatment", encodeURI(myselect.options[index].text));
         myselect=document.getElementById("zhaoqi"); //具有沼气利用工程
         index=myselect.selectedIndex;
-        data.append("biogasUtilization", myselect.options[index].text);
+        data.append("biogasUtilization", encodeURI(myselect.options[index].text));
         myselect=document.getElementById("wushuihunhe"); //计划与其他生活污水混合处理
         index=myselect.selectedIndex;
-        data.append("mixedTreatment", myselect.options[index].text);
+        data.append("mixedTreatment", encodeURI(myselect.options[index].text));
         myselect=document.getElementById("yibingchuli"); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
         index=myselect.selectedIndex;
-        data.append("otherTreatment", myselect.options[index].text);
+        data.append("otherTreatment", encodeURI(myselect.options[index].text));
 
-        data.append("province", $('#province').val()); //适用省份
-        data.append("temperature", $('#wendufanwei').val()); //适用温度范围
-        data.append("purpose", $('#yongtu').val()); //用途
-        data.append("features", $('#chanpingtedian').val()); //产品特点
+        data.append("province", encodeURI($('#province').val())); //适用省份
+        data.append("temperature", encodeURI($('#wendufanwei').val())); //适用温度范围
+        data.append("purpose", encodeURI($('#yongtu').val())); //用途
+        data.append("features", encodeURI($('#chanpingtedian').val())); //产品特点
 
         // 文件上传
         var quality = $('#zhiliangbaozhang')[0].files[0];
@@ -877,24 +877,24 @@
         data.append("pics", pic1); //使用图片
 
         // 产品参数
-        data.append("standard", $('#guige').val()); //规格（平方米）
-        data.append("applicableNum", $('#renshu').val()); //适用人数（人）
+        data.append("standard", encodeURI($('#guige').val())); //规格（平方米）
+        data.append("applicableNum", encodeURI($('#renshu').val())); //适用人数（人）
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
         data.append("high", $('#chicun_gao').val());
         myselect=document.getElementById("caizhi"); //材质
         index=myselect.selectedIndex;
-        data.append("texture", myselect.options[index].text);
-        data.append("color", $('#yanse').val()); //颜色
-        data.append("serviceLife", $('#shouming').val()); //使用寿命
+        data.append("texture", encodeURI(myselect.options[index].text));
+        data.append("color", encodeURI($('#yanse').val())); //颜色
+        data.append("serviceLife", encodeURI($('#shouming').val())); //使用寿命
         data.append("price", $('#jiage').val()); //价格（万元）
         myselect=document.getElementById("cesuoyongtu"); //材质
         index=myselect.selectedIndex;
-        data.append("paramPurpose", myselect.options[index].text);
-        data.append("cleanupCycle", $('#qinglizhouqi').val()); //清理周期
+        data.append("paramPurpose", encodeURI(myselect.options[index].text));
+        data.append("cleanupCycle", encodeURI($('#qinglizhouqi').val())); //清理周期
 
         $.ajax({
-            url:"/toilet/product/entry",
+            url:"/toilet/company/product/entry",
             type:"POST",
             dataType: "json",
             data: data,
@@ -903,10 +903,10 @@
             contentType: false,
             processData: false,
             success:function(result){
-                if (result) {
-                    location.href = "/toilet/admin/index";
+                if (result.success) {
+                    alert("save product success!");
                 } else {
-                    alert("error");
+                    alert(result.errorMessage);
                 }
             }
         });
