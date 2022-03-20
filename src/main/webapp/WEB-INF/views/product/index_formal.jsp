@@ -156,7 +156,7 @@
                         <option value="1">B.50年及以上</option>
                     </select></label>
             </div>
-            <div class="grid_12">
+            <div class="grid_12" style="margin-top: 10px;">
                 <label class="search_grid_4">价格（万元）:
                     <select name="price_select" id="price_select" class="form-control">
                         <option value="0">A.0.5以内</option>
@@ -174,7 +174,7 @@
                         <option value="3">D.12个月及以上</option>
                     </select></label>
             </div>
-            <div class="grid_12" align="center">
+            <div class="grid_12" align="center" style="margin-top: 10px;">
                 <button type="button" style="width: 300px; margin-bottom: 5px" onclick="productSearch()">搜索</button>
             </div>
         </form>
@@ -188,16 +188,16 @@
             </div>
 
 
-            <div class="grid_12">
+            <div class="grid_12" style="margin-top: 10px;">
                 <label class="grid_4">温度条件:
-                    <select name="clean_select" id="clean_select" class="form-control">
+                    <select name="wendu_select" id="wendu_select" class="form-control">
                         <option value="0">高寒</option>
                         <option value="1">普通</option>
                         <option value="2">无限制</option>
                     </select></label>
 
                 <label class="grid_4">水资源条件:
-                    <select name="clean_select" id="clean_select" class="form-control">
+                    <select name="water_select" id="water_select" class="form-control">
                         <option value="0">缺水</option>
                         <option value="1">良好</option>
                         <option value="2">无限制</option>
@@ -206,29 +206,32 @@
 
 
             <div class="grid_12">
-                <div class="grid_12" style="float:left;height:100%;">
+                <div class="grid_12"
+                     style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
                     <div style="float:left;padding:0 5px;"><label>地形条件:</label></div>
-                    <div style="float:left;padding:0 5px;"><input type="checkbox" style="margin-bottom:5px;"/>山区</div>
-                    <div style="float:left;padding:0 5px;"><input type="checkbox" style="margin-bottom:5px;"/>丘陵</div>
-                    <div style="float:left;padding:0 5px;"><input type="checkbox" style="margin-bottom:5px;"/>一般地区</div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="dixing_check" value="山区" style="margin-bottom:5px;"/>山区</div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="dixing_check" value="丘陵" style="margin-bottom:5px;"/>丘陵</div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="dixing_check" value="一般地区" style="margin-bottom:5px;"/>一般地区</div>
                 </div>
 
-                <div class="grid_12" style="float:left;height:100%;">
+                <div class="grid_12"
+                     style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
                     <div style="float:left;padding:0 5px;"><label>地理位置条件:</label></div>
-                    <div style="float:left;padding:0 5px;"><input type="checkbox" style="margin-bottom:5px;"/>城市近郊</div>
-                    <div style="float:left;padding:0 5px;"><input type="checkbox" style="margin-bottom:5px;"/>城中村</div>
-                    <div style="float:left;padding:0 5px;"><input type="checkbox" style="margin-bottom:5px;"/>中心城镇地区
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="diliweizhi_check" value="城市近郊" style="margin-bottom:5px;"/>城市近郊</div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="diliweizhi_check" value="城中村" style="margin-bottom:5px;"/>城中村</div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="diliweizhi_check" value="中心城镇地区" style="margin-bottom:5px;"/>中心城镇地区
                     </div>
-                    <div style="float:left;padding:0 5px;"><input type="checkbox" style="margin-bottom:5px;"/>一般地区</div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="diliweizhi_check" value="一般地区" style="margin-bottom:5px;"/>一般地区</div>
                 </div>
 
-                <div class="grid_12" style="float:left;height:100%;">
+                <div class="grid_12"
+                     style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
                     <div style="float:left;padding:0 5px;"><label>生态限制条件:</label></div>
-                    <div style="float:left;padding:0 5px;"><input type="checkbox" style="margin-bottom:5px;"/>生态保护区
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="shengtai_check" value="生态保护区" style="margin-bottom:5px;"/>生态保护区
                     </div>
-                    <div style="float:left;padding:0 5px;"><input type="checkbox" style="margin-bottom:5px;"/>水源保护区
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="shengtai_check" value="水源保护区" style="margin-bottom:5px;"/>水源保护区
                     </div>
-                    <div style="float:left;padding:0 5px;"><input type="checkbox" style="margin-bottom:5px;"/>一般地区</div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="shengtai_check" value="一般地区" style="margin-bottom:5px;"/>一般地区</div>
                 </div>
             </div>
 
@@ -237,9 +240,9 @@
                 <label class="grid_11" style="border-bottom-style:solid; border-width:1px;">人文因素:</label>
             </div>
 
-            <div class="grid_12">
+            <div class="grid_12" style="margin-top: 10px;">
                 <label class="grid_4">人口密集程度:
-                    <select name="clean_select" id="clean_select" class="form-control">
+                    <select name="renkou_select" id="renkou_select" class="form-control">
                         <option value="0">聚集</option>
                         <option value="1">分散</option>
                         <option value="2">一般</option>
@@ -247,62 +250,62 @@
                     </select></label>
 
                 <label class="grid_4">可形成液态肥:
-                    <select name="clean_select" id="clean_select" class="form-control">
+                    <select name="yetaifei_select" id="yetaifei_select" class="form-control">
                         <option value="0">是</option>
                         <option value="1">否</option>
                         <option value="2">均可</option>
                     </select></label>
             </div>
 
-            <div class="grid_12">
+            <div class="grid_12" style="margin-top: 10px;">
                 <label class="grid_11" style="border-bottom-style:solid; border-width:1px;">管网条件:</label>
             </div>
 
 
-            <div class="grid_12">
+            <div class="grid_12" style="margin-top: 10px;">
                 <label class="grid_4">需要具有完整城镇污水处理系统:
-                    <select name="clean_select" id="clean_select" class="form-control">
+                    <select name="wushuichuli_select" id="wushuichuli_select" class="form-control">
                         <option value="0">是</option>
                         <option value="1">否</option>
                         <option value="2">无限制</option>
                     </select></label>
 
                 <label class="grid_4">需要具有污水管道:
-                    <select name="clean_select" id="clean_select" class="form-control">
+                    <select name="wushuiguandao_select" id="wushuiguandao_select" class="form-control">
                         <option value="0">是</option>
                         <option value="1">否</option>
                         <option value="2">均可</option>
                     </select></label>
             </div>
 
-            <div class="grid_12">
+            <div class="grid_12" style="margin-top: 10px;">
                 <label class="grid_11" style="border-bottom-style:solid; border-width:1px;">资源化利用:</label>
             </div>
 
-            <div class="grid_12">
+            <div class="grid_12" style="margin-top: 10px;">
                 <label class="grid_3">需要具有沼气利用工程:
-                    <select name="clean_select" id="clean_select" class="form-control">
+                    <select name="zhaoqi_select" id="zhaoqi_select" class="form-control">
                         <option value="0">是</option>
                         <option value="1">否</option>
                         <option value="2">无限制</option>
                     </select></label>
 
                 <label class="grid_4">可以与其他生活污水混合处理:
-                    <select name="clean_select" id="clean_select" class="form-control">
+                    <select name="wushuihunhe_select" id="wushuihunhe_select" class="form-control">
                         <option value="0">是</option>
                         <option value="1">否</option>
                         <option value="2">均可</option>
                     </select></label>
 
                 <label>可以与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理:
-                    <select name="clean_select" id="clean_select" class="form-control">
+                    <select name="yibingchuli_select" id="yibingchuli_select" class="form-control">
                         <option value="0">是</option>
                         <option value="1">否</option>
                         <option value="2">均可</option>
                     </select></label>
             </div>
 
-            <div class="grid_12" align="center">
+            <div class="grid_12" align="center" style="margin-top: 10px;">
                 <button type="button" style="width: 300px; margin-bottom: 5px" onclick="modeSearch()">搜索</button>
             </div>
         </form>
@@ -741,24 +744,43 @@
     }
 
 
-    function productSearch(){
+    function productSearch() {
 
         var data = new FormData();
-        data.append("accountId", $('#accountId').val());
-        data.append("accountPwd", $('#accpassword').val());
+
+        var myselect=document.getElementById("guige_select"); //规格
+        var index=myselect.selectedIndex;
+        data.append("guige_select", myselect.options[index].text);
+
+        //myselect.options[index].value;
+        myselect=document.getElementById("caizhi_select"); //材质
+        index=myselect.selectedIndex;
+        data.append("caizhi_select", myselect.options[index].text);
+
+        myselect=document.getElementById("life_select"); //使用寿命
+        index=myselect.selectedIndex;
+        data.append("life_select", myselect.options[index].text);
+
+        myselect=document.getElementById("price_select"); //价格（万元）
+        index=myselect.selectedIndex;
+        data.append("price_select", myselect.options[index].text);
+
+        myselect=document.getElementById("clean_select"); //清理周期
+        index=myselect.selectedIndex;
+        data.append("clean_select", myselect.options[index].text);
 
         $.ajax({
-            url:"/toilet/login",
-            type:"POST",
+            url: "",
+            type: "POST",
             dataType: "json",
             data: data,
             async: false,
             cache: false,
             contentType: false,
             processData: false,
-            success:function(result){
+            success: function (result) {
                 if (result) {
-                    location.href = "/toilet/admin/index";
+                    location.href = "";
                 } else {
                     alert("error");
                 }
@@ -767,22 +789,82 @@
 
     }
 
-    function modeSearch(){
+    function modeSearch() {
 
         var data = new FormData();
-        data.append("accountId", $('#accountId').val());
-        data.append("accountPwd", $('#accpassword').val());
+
+        var myselect=document.getElementById("wendu_select"); //温度条件
+        var index=myselect.selectedIndex;
+        data.append("wendu_select", myselect.options[index].text);
+
+        myselect=document.getElementById("water_select"); //水资源条件
+        index=myselect.selectedIndex;
+        data.append("water_select", myselect.options[index].text);
+
+        var mycheckbox=document.getElementsByName("dixing_check"); //地形条件
+        var check_val = [];
+        for (k in mycheckbox) {
+            if (mycheckbox[k].checked)
+                check_val.push(mycheckbox[k].value);
+        }
+        data.append("dixing_check", check_val);
+
+        mycheckbox=document.getElementsByName("diliweizhi_check"); //地理位置条件
+        check_val = [];
+        for (k in mycheckbox) {
+            if (mycheckbox[k].checked)
+                check_val.push(mycheckbox[k].value);
+        }
+        data.append("diliweizhi_check", check_val);
+
+        mycheckbox=document.getElementsByName("shengtai_check"); //生态限制条件
+        check_val = [];
+        for (k in mycheckbox) {
+            if (mycheckbox[k].checked)
+                check_val.push(mycheckbox[k].value);
+        }
+        data.append("shengtai_check", check_val);
+
+        myselect=document.getElementById("renkou_select"); //人口密集程度
+        index=myselect.selectedIndex;
+        data.append("renkou_select", myselect.options[index].text);
+
+        myselect=document.getElementById("yetaifei_select"); //可形成液态肥
+        index=myselect.selectedIndex;
+        data.append("yetaifei_select", myselect.options[index].text);
+
+        myselect=document.getElementById("wushuichuli_select"); //需要具有完整城镇污水处理系统
+        index=myselect.selectedIndex;
+        data.append("wushuichuli_select", myselect.options[index].text);
+
+        myselect=document.getElementById("wushuiguandao_select"); //需要具有污水管道
+        index=myselect.selectedIndex;
+        data.append("wushuiguandao_select", myselect.options[index].text);
+
+        myselect=document.getElementById("zhaoqi_select"); //需要具有沼气利用工程
+        index=myselect.selectedIndex;
+        data.append("zhaoqi_select", myselect.options[index].text);
+
+        myselect=document.getElementById("wushuihunhe_select"); //可以与其他生活污水混合处理
+        index=myselect.selectedIndex;
+        data.append("wushuihunhe_select", myselect.options[index].text);
+
+        myselect=document.getElementById("yibingchuli_select"); //可以与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
+        index=myselect.selectedIndex;
+        data.append("yibingchuli_select", myselect.options[index].text);
+
+
 
         $.ajax({
-            url:"/toilet/login",
-            type:"POST",
+            url: "/toilet/login",
+            type: "POST",
             dataType: "json",
             data: data,
             async: false,
             cache: false,
             contentType: false,
             processData: false,
-            success:function(result){
+            success: function (result) {
                 if (result) {
                     location.href = "/toilet/admin/index";
                 } else {
