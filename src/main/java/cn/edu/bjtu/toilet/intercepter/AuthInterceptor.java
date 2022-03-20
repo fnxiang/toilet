@@ -1,7 +1,5 @@
 package cn.edu.bjtu.toilet.intercepter;
 
-import com.google.common.collect.Lists;
-import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -11,12 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.List;
 import java.util.Objects;
-
-import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.LOGIN_INDEX;
 
 @Component
 public class AuthInterceptor implements HandlerInterceptor {

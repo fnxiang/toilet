@@ -41,7 +41,9 @@ public class ProductController {
 
 
     @RequestMapping("/")
-    public String index(){
+    public String index(HttpServletRequest request){
+        List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
+        request.setAttribute("productList", productDTOS);
         return INDEX;
     }
 

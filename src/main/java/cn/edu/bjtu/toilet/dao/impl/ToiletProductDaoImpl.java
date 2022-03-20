@@ -8,6 +8,7 @@ import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDOSelective;
 import cn.edu.bjtu.toilet.dao.mapper.ToiletPatternDOMapper;
 import cn.edu.bjtu.toilet.dao.mapper.ToiletProductDOMapper;
+import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.CollectionUtils;
@@ -29,6 +30,21 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
 
     @Resource
     private TransactionTemplate transactionTemplate;
+
+    @Override
+    public List<ToiletProductDO> queryAllProducts(String email) {
+
+        ToiletProductDOSelective toiletProductDOSelective = new ToiletProductDOSelective();
+        ToiletProductDOSelective.Criteria criteria = toiletProductDOSelective.createCriteria();
+        if (!StringUtils.isEmpty(email)) {
+            criteria.andCompanyEmailEqualTo(email);
+        }
+        criteria.andDeletedNotEqualTo(true);
+
+        List<ToiletProductDO> productDOList = productDOMapper.selectByExample(toiletProductDOSelective);
+
+        return productDOList;
+    }
 
     @Override
     public ToiletProductDO saveProductWithPattern(ToiletProductDO productDO, ToiletPatternDO patternDO) {
