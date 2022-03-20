@@ -272,44 +272,51 @@
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="dixing"
-                                                                                     class=" form-control-label">地形条件：
+                                                    <div class="col col-md-3"><label class="form-control-label">地形条件：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
-                                                        <select name="dixing" id="dixing" class="form-control">
-                                                            <option value="0">平坦</option>
-                                                            <option value="1">山区</option>
-                                                            <option value="2">丘陵</option>
-                                                            <option value="3">无特殊</option>
-                                                        </select>
+                                                        <input class="col-md-1" type="checkbox" name="dixing_check" value="山区"/>山区
+                                                        <input class="col-md-1" type="checkbox" name="dixing_check" value="丘陵"/>丘陵
+                                                        <input class="col-md-1" type="checkbox" name="dixing_check" value="一般地区"/>一般地区
+                                                        <%--<select name="dixing" id="dixing" class="form-control">--%>
+                                                            <%--<option value="0">平坦</option>--%>
+                                                            <%--<option value="1">山区</option>--%>
+                                                            <%--<option value="2">丘陵</option>--%>
+                                                            <%--<option value="3">无特殊</option>--%>
+                                                        <%--</select>--%>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="position"
-                                                                                     class="form-control-label">地理位置条件：
+                                                    <div class="col col-md-3"><label class="form-control-label">地理位置条件：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
-                                                        <select name="position" id="position" class="form-control">
-                                                            <option value="0">城市近郊</option>
-                                                            <option value="1">城中村</option>
-                                                            <option value="2">中心城镇地区</option>
-                                                            <option value="3">其他</option>
-                                                        </select>
+                                                        <input class="col-md-1" type="checkbox" name="diliweizhi_check" value="城市近郊"/>城市近郊
+                                                        <input class="col-md-1" type="checkbox" name="diliweizhi_check" value="城中村"/>城中村
+                                                        <input class="col-md-1" type="checkbox" name="diliweizhi_check" value="中心城镇地区"/>中心城镇地区
+                                                        <input class="col-md-1" type="checkbox" name="diliweizhi_check" value="一般地区"/>一般地区
+                                                        <%--<select name="position" id="position" class="form-control">--%>
+                                                            <%--<option value="0">城市近郊</option>--%>
+                                                            <%--<option value="1">城中村</option>--%>
+                                                            <%--<option value="2">中心城镇地区</option>--%>
+                                                            <%--<option value="3">其他</option>--%>
+                                                        <%--</select>--%>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="shengtai"
-                                                                                     class="form-control-label">生态限制条件：
+                                                    <div class="col col-md-3"><label class="form-control-label">生态限制条件：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
-                                                        <select name="shengtai" id="shengtai" class="form-control">
-                                                            <option value="0">生态保护区</option>
-                                                            <option value="1">水源保护区</option>
-                                                            <option value="2">一般地区</option>
-                                                        </select>
+                                                        <input class="col-md-1" type="checkbox" name="shengtai_check" value="生态保护区"/>生态保护区
+                                                        <input class="col-md-1" type="checkbox" name="shengtai_check" value="水源保护区"/>水源保护区
+                                                        <input class="col-md-1" type="checkbox" name="shengtai_check" value="一般地区"/>一般地区
+                                                        <%--<select name="shengtai" id="shengtai" class="form-control">--%>
+                                                            <%--<option value="0">生态保护区</option>--%>
+                                                            <%--<option value="1">水源保护区</option>--%>
+                                                            <%--<option value="2">一般地区</option>--%>
+                                                        <%--</select>--%>
                                                     </div>
                                                 </div>
                                             </div>
@@ -787,24 +794,74 @@
         data.append("productName", $('#product_name').val()); //产品名称
         data.append("factoryName", $('#producer_name').val()); //厂家
         data.append("factoryNum", $('#phonenum').val()); //联系方式
-        data.append("productType", $('#productselect').val()); //产品类型
-        data.append("patternType", $('#multiple-select').val()); //模式类型
-        data.append("newmoderadios1", $('#newmoderadios1').val()); //是否添加新模式
-        data.append("newmoderadios2", $('#newmoderadios2').val());
+
+        var myselect=document.getElementById("productselect"); //产品类型
+        var index=myselect.selectedIndex;
+        data.append("productType", myselect.options[index].text);
+
+        myselect=document.getElementById("multiple-select"); //模式类型
+        index=myselect.selectedIndex;
+        data.append("patternType", myselect.options[index].text);
+
+        var radio = document.getElementsByName("DoorCt"); //是否添加新模式
+        data.append("newmoderadios1", radio[0].checked); //True 为添加
+        data.append("newmoderadios2", radio[1].checked); //True 为不添加
+
         data.append("patternName", $('#newmodename').val()); //新模式名称
 
-        data.append("natureTemp", $('#temperaturecondition').val()); //温度条件
-        data.append("water", $('#watercondition').val()); //水资源条件
-        data.append("terrain", $('#dixing').val()); //地形条件
-        data.append("geolocation", $('#position').val()); //地理位置条件
-        data.append("ecotope", $('#shengtai').val()); //生态限制条件
-        data.append("density", $('#renkou').val()); //人口密集程度
-        data.append("usageHabits", $('#yetaifei').val()); //液态肥使用习惯
-        data.append("sewerLines", $('#wushuiguandao').val()); //具有污水管道
-        data.append("sewageTreatment", $('#wushuichuli').val()); //具有完整城镇污水处理系统
-        data.append("biogasUtilization", $('#zhaoqi').val()); //具有沼气利用工程
-        data.append("mixedTreatment", $('#wushuihunhe').val()); //计划与其他生活污水混合处理
-        data.append("otherTreatment", $('#yibingchuli').val()); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
+        //新模式参数
+        myselect=document.getElementById("temperaturecondition"); //温度条件
+        index=myselect.selectedIndex;
+        data.append("natureTemp", myselect.options[index].text);
+        myselect=document.getElementById("watercondition"); //水资源条件
+        index=myselect.selectedIndex;
+        data.append("water", myselect.options[index].text);
+
+        mycheckbox=document.getElementsByName("dixing"); //地形条件
+        check_val = null;
+        for (k in mycheckbox) {
+            if (mycheckbox[k].checked)
+                check_val = check_val + "," + mycheckbox[k].value;
+        }
+        data.append("terrain", check_val);
+
+        mycheckbox=document.getElementsByName("position"); //地理位置条件
+        check_val = null;
+        for (k in mycheckbox) {
+            if (mycheckbox[k].checked)
+                check_val = check_val + "," + mycheckbox[k].value;
+        }
+        data.append("geolocation", check_val);
+
+        mycheckbox=document.getElementsByName("shengtai"); //地形条件
+        check_val = null;
+        for (k in mycheckbox) {
+            if (mycheckbox[k].checked)
+                check_val = check_val + "," + mycheckbox[k].value;
+        }
+        data.append("ecotope", check_val);
+
+        myselect=document.getElementById("renkou"); //人口密集程度
+        index=myselect.selectedIndex;
+        data.append("density", myselect.options[index].text);
+        myselect=document.getElementById("yetaifei"); //液态肥使用习惯
+        index=myselect.selectedIndex;
+        data.append("usageHabits", myselect.options[index].text);
+        myselect=document.getElementById("wushuiguandao"); //具有污水管道
+        index=myselect.selectedIndex;
+        data.append("sewerLines", myselect.options[index].text);
+        myselect=document.getElementById("wushuichuli"); //具有完整城镇污水处理系统
+        index=myselect.selectedIndex;
+        data.append("sewageTreatment", myselect.options[index].text);
+        myselect=document.getElementById("zhaoqi"); //具有沼气利用工程
+        index=myselect.selectedIndex;
+        data.append("biogasUtilization", myselect.options[index].text);
+        myselect=document.getElementById("wushuihunhe"); //计划与其他生活污水混合处理
+        index=myselect.selectedIndex;
+        data.append("mixedTreatment", myselect.options[index].text);
+        myselect=document.getElementById("yibingchuli"); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
+        index=myselect.selectedIndex;
+        data.append("otherTreatment", myselect.options[index].text);
 
         data.append("province", $('#province').val()); //适用省份
         data.append("temperature", $('#wendufanwei').val()); //适用温度范围
@@ -825,11 +882,15 @@
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
         data.append("high", $('#chicun_gao').val());
-        data.append("texture", $('#caizhi').val()); //材质
+        myselect=document.getElementById("caizhi"); //材质
+        index=myselect.selectedIndex;
+        data.append("texture", myselect.options[index].text);
         data.append("color", $('#yanse').val()); //颜色
         data.append("serviceLife", $('#shouming').val()); //使用寿命
         data.append("price", $('#jiage').val()); //价格（万元）
-        data.append("paramPurpose", $('#cesuoyongtu').val()); //用途:公厕户厕
+        myselect=document.getElementById("cesuoyongtu"); //材质
+        index=myselect.selectedIndex;
+        data.append("paramPurpose", myselect.options[index].text);
         data.append("cleanupCycle", $('#qinglizhouqi').val()); //清理周期
 
         $.ajax({
