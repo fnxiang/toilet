@@ -426,8 +426,8 @@
                 <div class="product_li">
 
                     <div class="grid_10">
-                        <div class="entry_content">
-                            <a href="product_page.html"><h3 class="title">Beanpod Candles Orange Vanilla, Tea Light</h3>
+                        <div class="entry_content" style="border-right-width: 0px; height: 80px;">
+                            <a href="product_page.html"><h3 class="title">洁具便器+化粪池+分散处理</h3>
                             </a>
                             <a class="more" href="product_page.html">查看产品列表</a>
                         </div>
@@ -442,8 +442,8 @@
                 <div class="product_li">
 
                     <div class="grid_10">
-                        <div class="entry_content">
-                            <a href="product_page.html"><h3 class="title">Beanpod Candles Orange Vanilla, Tea Light</h3>
+                        <div class="entry_content" style="border-right-width: 0px; height: 80px;">
+                            <a href="product_page.html"><h3 class="title">洁具便器+化粪池+污水管网输送+污水集中处理系统</h3>
                             </a>
                             <a class="more" href="product_page.html">查看产品列表</a>
                         </div>
@@ -458,8 +458,8 @@
                 <div class="product_li">
 
                     <div class="grid_10">
-                        <div class="entry_content">
-                            <a href="product_page.html"><h3 class="title">Beanpod Candles Orange Vanilla, Tea Light</h3>
+                        <div class="entry_content" style="border-right-width: 0px; height: 80px;">
+                            <a href="product_page.html"><h3 class="title">洁具便器+化粪池+抽排设备转运+污水集中处理系统</h3>
                             </a>
                             <a class="more" href="product_page.html">查看产品列表</a>
                         </div>
@@ -474,8 +474,8 @@
                 <div class="product_li">
 
                     <div class="grid_10">
-                        <div class="entry_content">
-                            <a href="product_page.html"><h3 class="title">Beanpod Candles Orange Vanilla, Tea Light</h3>
+                        <div class="entry_content" style="border-right-width: 0px; height: 80px;">
+                            <a href="product_page.html"><h3 class="title">洁具便器+化粪池+抽排设备转运+发酵池或已有沼气工程</h3>
                             </a>
                             <a class="more" href="product_page.html">查看产品列表</a>
                         </div>
@@ -490,8 +490,8 @@
                 <div class="product_li">
 
                     <div class="grid_10">
-                        <div class="entry_content">
-                            <a href="product_page.html"><h3 class="title">Beanpod Candles Orange Vanilla, Tea Light</h3>
+                        <div class="entry_content" style="border-right-width: 0px; height: 80px;">
+                            <a href="product_page.html"><h3 class="title">洁具便器+双瓮漏斗式厕所+后瓮粪液利用、前瓮粪渣无害化处理利用</h3>
                             </a>
                             <a class="more" href="product_page.html">查看产品列表</a>
                         </div>

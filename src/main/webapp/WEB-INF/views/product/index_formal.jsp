@@ -68,6 +68,7 @@
 <body>
 <%--获取 List --%>
 <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>
+
 <%--获取路径用于显示图片和文件--%>
 <%  String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -315,7 +316,9 @@
             </div>
 
             <div class="grid_12" align="center" style="margin-top: 10px;">
-                <button type="button" style="width: 300px; margin-bottom: 5px" onclick="modeSearch()">搜索</button>
+                <button type="button" style="width: 300px; margin-bottom: 5px"
+                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=mode_list'">搜索</button>
+                <%--modeSearch()--%>
             </div>
         </form>
     </div>
