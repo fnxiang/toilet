@@ -289,15 +289,15 @@
 
 
         <div id="content" class="grid_12">
-            <h1 class="page_title">三格化粪池</h1>
+            <h1 class="page_title">双瓮漏斗式化粪池</h1>
 
             <div class="product_page grid_12">
                 <div class="grid_4 img_slid" id="products">
                     <div class="preview slides_container">
                         <div class="prev_bg">
-                            <a href="${pageContext.request.contextPath}/static/product/res/1.png" class="jqzoom"
+                            <a href="${pageContext.request.contextPath}/static/product/res/1.jpeg" class="jqzoom"
                                rel='gal1' title="">
-                                <img src="${pageContext.request.contextPath}/static/product/res/1.png" height="500px"
+                                <img src="${pageContext.request.contextPath}/static/product/res/1.jpeg" height="500px"
                                      width="500px" title="" alt=""/>
                             </a>
                         </div>
@@ -306,17 +306,17 @@
 
                     <ul class="pagination clearfix" id="thumblist">
                         <li><a class="zoomThumbActive" href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/1.png',largeimage: '${pageContext.request.contextPath}/static/product/res/1.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/1.png' alt=""></a></li>
+                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/1.jpeg',largeimage: '${pageContext.request.contextPath}/static/product/res/1.jpeg'}"><img
+                                src='${pageContext.request.contextPath}/static/product/res/1.jpeg' alt=""></a></li>
                         <li><a href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/2.png',largeimage: '${pageContext.request.contextPath}/static/product/res/2.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/2.png' alt=""></a></li>
+                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/2.jpeg',largeimage: '${pageContext.request.contextPath}/static/product/res/2.jpeg'}"><img
+                                src='${pageContext.request.contextPath}/static/product/res/2.jpeg' alt=""></a></li>
                         <li><a href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/3.png',largeimage: '${pageContext.request.contextPath}/static/product/res/3.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/3.png' alt=""></a></li>
+                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/1.jpeg',largeimage: '${pageContext.request.contextPath}/static/product/res/1.jpeg'}"><img
+                                src='${pageContext.request.contextPath}/static/product/res/1.jpeg' alt=""></a></li>
                         <li><a href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/2.png',largeimage: '${pageContext.request.contextPath}/static/product/res/2.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/2.png' alt=""></a></li>
+                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/2.jpeg',largeimage: '${pageContext.request.contextPath}/static/product/res/2.jpeg'}"><img
+                                src='${pageContext.request.contextPath}/static/product/res/2.jpeg' alt=""></a></li>
                     </ul>
 
                 </div>
@@ -325,9 +325,9 @@
                 <div class="grid_7">
                     <div class="entry_content">
                         <div class="review">
-                            <h5>三格化粪池</h5>
+                            <h5>双瓮漏斗式化粪池</h5>
                         </div>
-                        <p>三格式化粪池是由三个相互连通的密封粪池组成，粪便由进粪管进入第一池依次顺流到第三池。</p>
+                        <p>农村旱厕改造化粪池产品。</p>
 
                         <div class="ava_price">
                             <div class="availability_sku">
@@ -338,7 +338,7 @@
                             <!-- .availability_sku -->
 
                             <div class="price">
-                                <div class="price_new">1.8万元</div>
+                                <div class="price_new">2万元</div>
                             </div>
                             <!-- .price -->
                         </div>
@@ -360,76 +360,59 @@
                 <div class="grid_12">
                     <div id="wrapper_tab" class="tab1">
                         <a href="#" class="tab1 tab_link">产品描述</a>
-                        <a href="#" class="tab2 tab_link">Reviews</a>
-                        <a href="#" class="tab3 tab_link">Custom Tab</a>
+                        <a href="#" class="tab2 tab_link">使用说明</a>
+                        <a href="#" class="tab3 tab_link">质保证书</a>
 
                         <div class="clear"></div>
 
                         <div class="tab1 tab_body">
-                            <h4>这个部分未来要填充对产品的描述</h4>
-
-                            <p>Suspendisse at placerat turpis. Duis luctus erat vel magna pharetra aliquet. Maecenas
-                                tincidunt feugiat ultricies. Phasellus et dui risus. Vestibulum adipiscing, eros quis
-                                lobortis dictum. Etiam mollis volutpat odio, id euismod justo gravida a. Aliquam erat
-                                volutpat. Phasellus faucibus venenatis lorem, vitae commodo elit pretium et. Duis
-                                rhoncus lobortis congue. Vestibulum et purus dui, vel porta lectus. Sed vulputate
-                                pulvinar adipiscing.</p>
+                            <h4>山东海辰环保双翁漏斗式化粪池主要特点：</h4>
                             <ul>
-                                <li>She was walking to the mall.</li>
-                                <li>Ted might eat the cake.</li>
-                                <li>You must go right now.</li>
-                                <li>Words were spoken.</li>
-                                <li>The teacher is writing a report.</li>
+                                <li>容积1.0-1.5m3，符合《Q/HHKJ02-2016三格式化粪池》标准。</li>
+                                <li>设计理念先进，隔舱板上下错层设计污水环流式流动，污水处理能力比同等容积的传统化粪池至少提高二倍以上。</li>
+                                <li>优化结构设计，工艺技术成熟，产品强度高，耐酸碱，防腐蚀。</li>
+                                <li>节约用水，每次冲厕所用水量为0.3升左右。</li>
+                                <li>无异味，无苍蛆，不渗漏，不污染地下水。</li>
+                                <li>产品的密封性和牢固性好，确保厌氧化粪的功能。</li>
+                                <li>对粪便进行无害化处理，避免粪便传播各种疾病，可防止对空气、土壤、水的污染，保护环境。</li>
+                                <li>轻便，便于运输，安装方便快捷。</li>
+                                <li>省工，省时，使用寿命可达50年以上。</li>
                             </ul>
 
-                            <p>Here are some verb phrase examples where the verb phrase is the predicate of a sentence.
-                                In this case, the verb phrase consists of the main verb plus any auxiliary, or helping,
-                                verbs. Nulla nec velit. Mauris pulvinar erat non massa. Suspendisse tortor turpis, porta
-                                nec, tempus vitae, iaculis semper, pede.</p>
+                            <p>双翁式化粪池安装说明：</p>
                             <ol>
-                                <li>Shipping & Delivery.</li>
-                                <li>Privacy & Security.</li>
-                                <li>Returns & Replacements.</li>
-                                <li>Payment, Pricing & Promotions.</li>
-                                <li>Viewing Orders.</li>
+                                <li>在厕所外与室内放置便器相对应的位置挖一个长2.3米，宽1米，深1.4米长方体的坑，把坑底加入三基土夯实。</li>
+                                <li>在对接处粘上封闭胶带后，先把瓮体对接，再用螺钉加固(且不要把胶带上的塑料布揭掉) </li>
+                                <li>将装的好瓮体放入厕室挖好的坑里，瓮体高出地面5-10厘米，以防往瓮内渗水。 </li>
+                                <li>调整好过粪管口的位置，瓮与瓮之间用过粪管连接，在过粪管与瓮体连接处用专用的管件连接，起到防渗固定作用。 </li>
+                                <li>在厕室放好一瓮，第2瓮放在室外挖好的坑里，同样高出地面5-10cm，在室内用砖修筑一个放置便器的口，将便器放平后粉刷，但便器不要封死，以便清除粪渣时使用，在1.2瓮之间，垒厕所墙时，要防止压坏过粪管。 </li>
+                                <li>瓮体周围用土填好夯实，防止瓮体塌陷，倾斜。根据厕所地形情况，1瓮放厕室内，2瓮放厕室外，也可以将两个瓮体全部埋在室内。</li>
                             </ol>
-
-                            <p>Next are some verb phrase examples of verb phrases where the phrase has a single function
-                                which means it can act like an adverb or an adjective. The phrase would include the verb
-                                and any modifiers, complements, or objects. Lorem ipsum dolor sit amet, consectetuer
-                                adipiscing elit. Morbi luctus. Duis lobortis. Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Curabitur nec posuere odio. Proin vel ultrices erat. </p>
 
                             <table>
                                 <tr>
-                                    <th class="bg">First Column</th>
-                                    <th>Second Column</th>
-                                    <th class="bg">Third Column</th>
-                                    <th>Fourth Column</th>
+                                    <th class="bg">规格</th>
+                                    <th>55</th>
+                                    <th class="bg">适用人数（人）</th>
+                                    <th>5</th>
                                 </tr>
                                 <tr>
-                                    <td class="bg">One</td>
-                                    <td>no</td>
-                                    <td class="bg">yes</td>
-                                    <td>yes, all</td>
+                                    <td class="bg">尺寸（长*宽*高 mm）</td>
+                                    <td>500*500*500</td>
+                                    <td class="bg">材质</td>
+                                    <td>玻璃钢</td>
                                 </tr>
                                 <tr>
-                                    <td class="bg">Two</td>
-                                    <td>0</td>
-                                    <td class="bg">1</td>
-                                    <td>all</td>
+                                    <td class="bg">颜色</td>
+                                    <td>白色</td>
+                                    <td class="bg">使用寿命</td>
+                                    <td>50年</td>
                                 </tr>
                                 <tr>
-                                    <td class="bg">Three</td>
-                                    <td>$399</td>
-                                    <td class="bg">$599</td>
-                                    <td>$799</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg">Four</td>
-                                    <td><a href="#">Call action</a></td>
-                                    <td class="bg"><a href="#">Call action</a></td>
-                                    <td><a href="#">Call action</a></td>
+                                    <td class="bg">用途</td>
+                                    <td>公厕</td>
+                                    <td class="bg">清理周期</td>
+                                    <td>5个月</td>
                                 </tr>
                             </table>
                             <div class="clear"></div>
@@ -437,7 +420,7 @@
                         <!-- .tab1 .tab_body -->
 
                         <div class="tab2 tab_body">
-                            <h4>Customer reviews</h4>
+                            <h4>使用说明</h4>
                             <ul class="comments">
 
 
@@ -450,7 +433,7 @@
                         <!-- .tab2 .tab_body -->
 
                         <div class="tab3 tab_body">
-                            <h4>Custom Tab</h4>
+                            <h4>质保证书</h4>
 
                             <div class="clear"></div>
                         </div>

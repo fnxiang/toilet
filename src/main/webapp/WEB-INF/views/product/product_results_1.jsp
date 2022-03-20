@@ -450,7 +450,7 @@
                         <div class="grid_3 product">
                             <div class="prev">
                                 <a href="${pageContext.request.contextPath}/toProductPage?url=product_info_2"><img
-                                        src="${pageContext.request.contextPath}/static/product/res/2.png"
+                                        src="${pageContext.request.contextPath}/static/product/res/2.jpeg"
                                         alt="" title=""/></a>
                             </div>
                             <!-- .prev -->

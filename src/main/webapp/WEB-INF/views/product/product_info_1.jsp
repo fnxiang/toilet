@@ -409,9 +409,9 @@
                                 </tr>
                                 <tr>
                                     <td class="bg">用途</td>
-                                    <td><a href="#">公厕</a></td>
-                                    <td class="bg"><a href="#">清理周期</a></td>
-                                    <td><a href="#">5个月</a></td>
+                                    <td>公厕</td>
+                                    <td class="bg">清理周期</td>
+                                    <td>5个月</td>
                                 </tr>
                             </table>
                             <div class="clear"></div>
