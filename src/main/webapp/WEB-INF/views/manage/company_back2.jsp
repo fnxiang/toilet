@@ -1,4 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="cn.edu.bjtu.toilet.dao.domain.UserDO" %>
+<%@ page import="org.apache.catalina.User" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -30,6 +33,11 @@
 
 </head>
 <body>
+<%  String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";%>
+
     <!-- Left Panel -->
 
     <aside id="left-panel" class="left-panel">
@@ -77,7 +85,7 @@
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="user-avatar rounded-circle" src="${pageContext.request.contextPath}/static/manage/./res/logo.png" alt="User Avatar">
                         </a>
-
+                        <% UserDO userDO = (UserDO)request.getAttribute("user");%>
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="#"><i class="fa fa-user"></i>企业信息管理</a>
 
@@ -128,16 +136,16 @@
                                 <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="companyName" class=" form-control-label">公司名称</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="companyName" name="disabled-input" placeholder="公司名称" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="companyName" name="disabled-input" placeholder="公司名称" value="<%=userDO.getCompanyName()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="creditCode" class=" form-control-label">统一社会信用代码</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="creditCode" name="disabled-input" placeholder="112233456" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="creditCode" name="disabled-input" placeholder="112233456" value="<%=userDO.getCreditCode()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label  class=" form-control-label">营业执照</label></div>
                                         <div class="col-12 col-md-9">
-											<iframe src="${pageContext.request.contextPath}/static/manage/res/PR_final.pdf" width="100%" height="100%" style="height: 500px;"></iframe>
+											<iframe src="<%=basePath%><%=userDO.getBusinessLicenseFilePath()%>" width="100%" height="100%" style="height: 500px;"></iframe>
 										</div>
                                     </div>
 									
@@ -176,19 +184,19 @@
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">注册邮箱</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input2" name="disabled-input" placeholder="123@456.com" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input2" name="disabled-input" placeholder="123@456.com" value="<%=userDO.getEmail()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">公司官网</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input3" name="disabled-input" placeholder="https://123.456.789.com" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input3" name="disabled-input" placeholder="https://123.456.789.com"  value="<%=userDO.getOfficalSite()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">联系人</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input4" name="disabled-input" placeholder="张三" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input4" name="disabled-input" placeholder="张三" value="<%=userDO.getContactName()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">手机号</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input5" name="disabled-input" placeholder="1234567890" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input5" name="disabled-input" placeholder="1234567890" value="<%=userDO.getContactPhone()%>" disabled="" class="form-control"></div>
                                     </div>
 
                                     <hr>
@@ -251,10 +259,6 @@
         $(document).ready(function() {
           $('#bootstrap-data-table-export').DataTable();
       } );
-    </script>
-
-    <script>
-
     </script>
 
 

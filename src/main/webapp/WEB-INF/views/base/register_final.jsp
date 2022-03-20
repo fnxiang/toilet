@@ -163,7 +163,7 @@
             data.append("confirmPassword", $('#confirmPasswd').val());
 
             $.ajax({
-                url:"/toilet/register",
+                url:"/toilet/register/company",
                 type:"POST",
                 dataType: "json",
                 data: data,

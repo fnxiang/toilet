@@ -156,7 +156,8 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         return productDOList.get(0);
     }
 
-    private ToiletPatternDO queryPatternById(Integer id) {
+    @Override
+    public ToiletPatternDO queryPatternById(Integer id) {
 
         if (Objects.isNull(id) || id < 1) {
             throw new ToiletSystemException("query pattern Id error", "-1");

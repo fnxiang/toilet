@@ -10,7 +10,7 @@ public class UserConverter {
 
     public static UserDO toUserDO(RegisterRequest registerRequest) {
         UserDO userDO = new UserDO();
-        userDO.setComanyName(registerRequest.getCompanyName());
+        userDO.setCompanyName(registerRequest.getCompanyName());
         userDO.setCreditCode(registerRequest.getCreditCode());
         userDO.setBusinessLicenseFilePath(registerRequest.getFilePath());
         userDO.setEnterpriseAddress(JSON.toJSONString(registerRequest.getEnterpriseAddress()));
