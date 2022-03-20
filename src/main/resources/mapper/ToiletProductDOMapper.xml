@@ -12,11 +12,13 @@
     <result column="pattern_type" jdbcType="VARCHAR" property="patternType" />
     <result column="pattern_id" jdbcType="INTEGER" property="patternId" />
     <result column="pattern_name" jdbcType="VARCHAR" property="patternName" />
+    <result column="company_email" jdbcType="VARCHAR" property="companyEmail" />
     <result column="applicable_province" jdbcType="VARCHAR" property="applicableProvince" />
     <result column="applicable _temperature" jdbcType="VARCHAR" property="applicableTemperature" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="attributes" jdbcType="VARCHAR" property="attributes" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.bjtu.toilet.dao.domain.ToiletProductDO">
     <result column="purpose" jdbcType="LONGVARCHAR" property="purpose" />
@@ -86,8 +88,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, product_name, manufacturer_name, manufacturer_cell, 
-    product_type, pattern_type, pattern_id, pattern_name, applicable_province, `applicable _temperature`, 
-    version, deleted, source
+    product_type, pattern_type, pattern_id, pattern_name, company_email, applicable_province, 
+    `applicable _temperature`, version, deleted, source, attributes
   </sql>
   <sql id="Blob_Column_List">
     purpose, product_parameters, quality_assurance_materials_file_path, instruction_file_path, 
@@ -145,17 +147,19 @@
     insert into toilet_product (id, gmt_create, gmt_modified, 
       product_name, manufacturer_name, manufacturer_cell, 
       product_type, pattern_type, pattern_id, 
-      pattern_name, applicable_province, `applicable _temperature`, 
-      version, deleted, source, 
-      purpose, product_parameters, quality_assurance_materials_file_path, 
+      pattern_name, company_email, applicable_province, 
+      `applicable _temperature`, version, deleted, 
+      source, attributes, purpose, 
+      product_parameters, quality_assurance_materials_file_path, 
       instruction_file_path, product_features, 
       pics_path)
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{productName,jdbcType=VARCHAR}, #{manufacturerName,jdbcType=VARCHAR}, #{manufacturerCell,jdbcType=VARCHAR}, 
       #{productType,jdbcType=INTEGER}, #{patternType,jdbcType=VARCHAR}, #{patternId,jdbcType=INTEGER}, 
-      #{patternName,jdbcType=VARCHAR}, #{applicableProvince,jdbcType=VARCHAR}, #{applicableTemperature,jdbcType=VARCHAR}, 
-      #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, #{source,jdbcType=VARCHAR}, 
-      #{purpose,jdbcType=LONGVARCHAR}, #{productParameters,jdbcType=LONGVARCHAR}, #{qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR}, 
+      #{patternName,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, #{applicableProvince,jdbcType=VARCHAR}, 
+      #{applicableTemperature,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, 
+      #{source,jdbcType=VARCHAR}, #{attributes,jdbcType=VARCHAR}, #{purpose,jdbcType=LONGVARCHAR}, 
+      #{productParameters,jdbcType=LONGVARCHAR}, #{qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR}, 
       #{instructionFilePath,jdbcType=LONGVARCHAR}, #{productFeatures,jdbcType=LONGVARCHAR}, 
       #{picsPath,jdbcType=LONGVARCHAR})
   </insert>
@@ -192,6 +196,9 @@
       <if test="patternName != null">
         pattern_name,
       </if>
+      <if test="companyEmail != null">
+        company_email,
+      </if>
       <if test="applicableProvince != null">
         applicable_province,
       </if>
@@ -206,6 +213,9 @@
       </if>
       <if test="source != null">
         source,
+      </if>
+      <if test="attributes != null">
+        attributes,
       </if>
       <if test="purpose != null">
         purpose,
@@ -257,6 +267,9 @@
       <if test="patternName != null">
         #{patternName,jdbcType=VARCHAR},
       </if>
+      <if test="companyEmail != null">
+        #{companyEmail,jdbcType=VARCHAR},
+      </if>
       <if test="applicableProvince != null">
         #{applicableProvince,jdbcType=VARCHAR},
       </if>
@@ -271,6 +284,9 @@
       </if>
       <if test="source != null">
         #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="attributes != null">
+        #{attributes,jdbcType=VARCHAR},
       </if>
       <if test="purpose != null">
         #{purpose,jdbcType=LONGVARCHAR},
@@ -331,6 +347,9 @@
       <if test="record.patternName != null">
         pattern_name = #{record.patternName,jdbcType=VARCHAR},
       </if>
+      <if test="record.companyEmail != null">
+        company_email = #{record.companyEmail,jdbcType=VARCHAR},
+      </if>
       <if test="record.applicableProvince != null">
         applicable_province = #{record.applicableProvince,jdbcType=VARCHAR},
       </if>
@@ -345,6 +364,9 @@
       </if>
       <if test="record.source != null">
         source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attributes != null">
+        attributes = #{record.attributes,jdbcType=VARCHAR},
       </if>
       <if test="record.purpose != null">
         purpose = #{record.purpose,jdbcType=LONGVARCHAR},
@@ -381,11 +403,13 @@
       pattern_type = #{record.patternType,jdbcType=VARCHAR},
       pattern_id = #{record.patternId,jdbcType=INTEGER},
       pattern_name = #{record.patternName,jdbcType=VARCHAR},
+      company_email = #{record.companyEmail,jdbcType=VARCHAR},
       applicable_province = #{record.applicableProvince,jdbcType=VARCHAR},
       `applicable _temperature` = #{record.applicableTemperature,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT},
       source = #{record.source,jdbcType=VARCHAR},
+      attributes = #{record.attributes,jdbcType=VARCHAR},
       purpose = #{record.purpose,jdbcType=LONGVARCHAR},
       product_parameters = #{record.productParameters,jdbcType=LONGVARCHAR},
       quality_assurance_materials_file_path = #{record.qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR},
@@ -408,11 +432,13 @@
       pattern_type = #{record.patternType,jdbcType=VARCHAR},
       pattern_id = #{record.patternId,jdbcType=INTEGER},
       pattern_name = #{record.patternName,jdbcType=VARCHAR},
+      company_email = #{record.companyEmail,jdbcType=VARCHAR},
       applicable_province = #{record.applicableProvince,jdbcType=VARCHAR},
       `applicable _temperature` = #{record.applicableTemperature,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT},
-      source = #{record.source,jdbcType=VARCHAR}
+      source = #{record.source,jdbcType=VARCHAR},
+      attributes = #{record.attributes,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -447,6 +473,9 @@
       <if test="patternName != null">
         pattern_name = #{patternName,jdbcType=VARCHAR},
       </if>
+      <if test="companyEmail != null">
+        company_email = #{companyEmail,jdbcType=VARCHAR},
+      </if>
       <if test="applicableProvince != null">
         applicable_province = #{applicableProvince,jdbcType=VARCHAR},
       </if>
@@ -461,6 +490,9 @@
       </if>
       <if test="source != null">
         source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="attributes != null">
+        attributes = #{attributes,jdbcType=VARCHAR},
       </if>
       <if test="purpose != null">
         purpose = #{purpose,jdbcType=LONGVARCHAR},
@@ -494,11 +526,13 @@
       pattern_type = #{patternType,jdbcType=VARCHAR},
       pattern_id = #{patternId,jdbcType=INTEGER},
       pattern_name = #{patternName,jdbcType=VARCHAR},
+      company_email = #{companyEmail,jdbcType=VARCHAR},
       applicable_province = #{applicableProvince,jdbcType=VARCHAR},
       `applicable _temperature` = #{applicableTemperature,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
       source = #{source,jdbcType=VARCHAR},
+      attributes = #{attributes,jdbcType=VARCHAR},
       purpose = #{purpose,jdbcType=LONGVARCHAR},
       product_parameters = #{productParameters,jdbcType=LONGVARCHAR},
       quality_assurance_materials_file_path = #{qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR},
@@ -518,11 +552,13 @@
       pattern_type = #{patternType,jdbcType=VARCHAR},
       pattern_id = #{patternId,jdbcType=INTEGER},
       pattern_name = #{patternName,jdbcType=VARCHAR},
+      company_email = #{companyEmail,jdbcType=VARCHAR},
       applicable_province = #{applicableProvince,jdbcType=VARCHAR},
       `applicable _temperature` = #{applicableTemperature,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
-      source = #{source,jdbcType=VARCHAR}
+      source = #{source,jdbcType=VARCHAR},
+      attributes = #{attributes,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

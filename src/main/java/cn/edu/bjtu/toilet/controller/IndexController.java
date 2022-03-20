@@ -40,7 +40,7 @@ public class IndexController {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-    public static final String UPLOAD_DIRECTORY = "upload/company/";
+    private static final String UPLOAD_DIRECTORY = "upload/company/";
 
 
     @Resource

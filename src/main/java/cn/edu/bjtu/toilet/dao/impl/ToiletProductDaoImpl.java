@@ -41,7 +41,11 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
                 return null;
             });
         } else {
-
+            transactionTemplate.execute(status -> {
+                updatePatternByName(patternDO);
+                updateProductByName(productDO);
+                return null;
+            });
         }
 
         return queryProductByName(productDO.getProductName());
@@ -91,12 +95,40 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
 
     }
 
-    public ToiletProductDO updateProductByName() {
-        return null;
+    public ToiletProductDO updateProductByName(ToiletProductDO productDO) {
+        productDO.setGmtModified(new Date());
+        productDO.setVersion(productDO.getVersion() + 1);
+
+        ToiletProductDOSelective productDOSelective = new ToiletProductDOSelective();
+        ToiletProductDOSelective.Criteria criteria = productDOSelective.createCriteria();
+
+        criteria.andProductNameEqualTo(productDO.getProductName());
+        criteria.andCompanyEmailEqualTo(productDO.getCompanyEmail());
+        criteria.andDeletedNotEqualTo(true);
+
+        int c = productDOMapper.updateByExampleSelective(productDO, productDOSelective);
+
+        if (c != 1) {
+            throw new ToiletSystemException("update error", "-1");
+        }
+        return queryProductByName(productDO.getProductName());
     }
 
-    public ToiletProductDO updatePatternByName() {
-        return null;
+    public ToiletPatternDO updatePatternByName(ToiletPatternDO patternDO) {
+
+        if (Objects.isNull(patternDO.getId())) {
+            throw new ToiletSystemException("update pattern Id can not be null", "-1");
+        }
+
+        patternDO.setGmtModified(new Date());
+        patternDO.setVersion(patternDO.getVersion() + 1);
+
+        int c = patternDOMapper.updateByPrimaryKey(patternDO);
+
+        if (c != 1) {
+            throw new ToiletSystemException("update error", "-1");
+        }
+        return queryPatternById(patternDO.getId());
     }
 
     private ToiletProductDO queryProductByName(String productName) {
@@ -122,5 +154,14 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         }
 
         return productDOList.get(0);
+    }
+
+    private ToiletPatternDO queryPatternById(Integer id) {
+
+        if (Objects.isNull(id) || id < 1) {
+            throw new ToiletSystemException("query pattern Id error", "-1");
+        }
+
+        return patternDOMapper.selectByPrimaryKey(id);
     }
 }

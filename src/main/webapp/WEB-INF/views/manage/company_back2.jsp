@@ -127,15 +127,15 @@
 							<div class="card-body card-block">
                                 <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
 									<div class="row form-group">
-                                        <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">公司名称</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="公司名称" disabled="" class="form-control"></div>
+                                        <div class="col col-md-3"><label for="companyName" class=" form-control-label">公司名称</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="companyName" name="disabled-input" placeholder="公司名称" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
-                                        <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">统一社会信用代码</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="112233456" disabled="" class="form-control"></div>
+                                        <div class="col col-md-3"><label for="creditCode" class=" form-control-label">统一社会信用代码</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="creditCode" name="disabled-input" placeholder="112233456" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
-                                        <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">营业执照</label></div>
+                                        <div class="col col-md-3"><label  class=" form-control-label">营业执照</label></div>
                                         <div class="col-12 col-md-9">
 											<iframe src="${pageContext.request.contextPath}/static/manage/res/PR_final.pdf" width="100%" height="100%" style="height: 500px;"></iframe>
 										</div>
@@ -143,9 +143,9 @@
 									
 									
 									<div class="row form-group">
-										<div class="col col-md-3"><label for="disabledSelect" class=" form-control-label">企业地址</label></div>
+										<div class="col col-md-3"><label for="disabledSelect1" class=" form-control-label">企业地址</label></div>
 										<div class="col-md-3">
-                                            <select name="disabledSelect" id="disabledSelect" disabled="" class="form-control">
+                                            <select name="disabledSelect" id="disabledSelect1" disabled="" class="form-control">
                                                 <option value="0">北京市</option>
                                                 <option value="1">山西省</option>
                                                 <option value="2">江苏省</option>
@@ -154,7 +154,7 @@
                                         </div>
 										
 										<div class="col-md-3">
-                                            <select name="disabledSelect" id="disabledSelect" disabled="" class="form-control">
+                                            <select name="disabledSelect" id="disabledSelect2" disabled="" class="form-control">
                                                 <option value="0">北京市</option>
                                                 <option value="1">朔州市</option>
                                                 <option value="2">南京市</option>
@@ -163,7 +163,7 @@
                                         </div>
 										
 										<div class="col-md-3">
-                                            <select name="disabledSelect" id="disabledSelect" disabled="" class="form-control">
+                                            <select name="disabledSelect" id="disabledSelect3" disabled="" class="form-control">
                                                 <option value="0">海淀区</option>
                                                 <option value="1">朔城区</option>
                                                 <option value="2">建邺区</option>
@@ -172,23 +172,23 @@
                                         </div>
 									</div>
 									<div class="row form-group">
-                                        <div class="col-md-9 offset-md-3"><input type="text" id="disabled-input" name="disabled-input" placeholder="" value="北京市海淀区上园村3号" disabled="" class="form-control"></div>
+                                        <div class="col-md-9 offset-md-3"><input type="text" id="disabled-input1" name="disabled-input" placeholder="" value="北京市海淀区上园村3号" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">注册邮箱</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="123@456.com" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input2" name="disabled-input" placeholder="123@456.com" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">公司官网</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="https://123.456.789.com" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input3" name="disabled-input" placeholder="https://123.456.789.com" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">联系人</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="张三" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input4" name="disabled-input" placeholder="张三" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">手机号</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="1234567890" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input5" name="disabled-input" placeholder="1234567890" disabled="" class="form-control"></div>
                                     </div>
 
                                     <hr>
@@ -251,7 +251,11 @@
         $(document).ready(function() {
           $('#bootstrap-data-table-export').DataTable();
       } );
-  </script>
+    </script>
+
+    <script>
+
+    </script>
 
 
 </body>

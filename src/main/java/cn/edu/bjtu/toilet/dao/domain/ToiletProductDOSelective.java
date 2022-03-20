@@ -755,6 +755,76 @@ public class ToiletProductDOSelective {
             return (Criteria) this;
         }
 
+        public Criteria andCompanyEmailIsNull() {
+            addCriterion("company_email is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailIsNotNull() {
+            addCriterion("company_email is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailEqualTo(String value) {
+            addCriterion("company_email =", value, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailNotEqualTo(String value) {
+            addCriterion("company_email <>", value, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailGreaterThan(String value) {
+            addCriterion("company_email >", value, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("company_email >=", value, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailLessThan(String value) {
+            addCriterion("company_email <", value, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailLessThanOrEqualTo(String value) {
+            addCriterion("company_email <=", value, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailLike(String value) {
+            addCriterion("company_email like", value, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailNotLike(String value) {
+            addCriterion("company_email not like", value, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailIn(List<String> values) {
+            addCriterion("company_email in", values, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailNotIn(List<String> values) {
+            addCriterion("company_email not in", values, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailBetween(String value1, String value2) {
+            addCriterion("company_email between", value1, value2, "companyEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEmailNotBetween(String value1, String value2) {
+            addCriterion("company_email not between", value1, value2, "companyEmail");
+            return (Criteria) this;
+        }
+
         public Criteria andApplicableProvinceIsNull() {
             addCriterion("applicable_province is null");
             return (Criteria) this;
@@ -1082,6 +1152,76 @@ public class ToiletProductDOSelective {
 
         public Criteria andSourceNotBetween(String value1, String value2) {
             addCriterion("source not between", value1, value2, "source");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesIsNull() {
+            addCriterion("attributes is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesIsNotNull() {
+            addCriterion("attributes is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesEqualTo(String value) {
+            addCriterion("attributes =", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesNotEqualTo(String value) {
+            addCriterion("attributes <>", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesGreaterThan(String value) {
+            addCriterion("attributes >", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesGreaterThanOrEqualTo(String value) {
+            addCriterion("attributes >=", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesLessThan(String value) {
+            addCriterion("attributes <", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesLessThanOrEqualTo(String value) {
+            addCriterion("attributes <=", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesLike(String value) {
+            addCriterion("attributes like", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesNotLike(String value) {
+            addCriterion("attributes not like", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesIn(List<String> values) {
+            addCriterion("attributes in", values, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesNotIn(List<String> values) {
+            addCriterion("attributes not in", values, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesBetween(String value1, String value2) {
+            addCriterion("attributes between", value1, value2, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesNotBetween(String value1, String value2) {
+            addCriterion("attributes not between", value1, value2, "attributes");
             return (Criteria) this;
         }
     }

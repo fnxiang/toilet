@@ -36,7 +36,14 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (!StringUtils.isEmpty(uId)&&!StringUtils.isEmpty(role)) {
             logger.info("try authenticate by role");
 
-            return request.getRequestURI().contains(role);
+            String uri = request.getRequestURI();
+            String param = request.getQueryString();
+
+            if (!Objects.isNull(param) && param.contains(role)) {
+                return true;
+            }
+
+            return uri.contains(role);
         }
         response.sendRedirect("/toilet/login/index");
         return false;

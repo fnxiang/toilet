@@ -16,6 +16,8 @@ public class ToiletPatternDO implements Serializable {
 
     private String source;
 
+    private String attributes;
+
     private String envConditions;
 
     private String humanFactors;
@@ -74,6 +76,14 @@ public class ToiletPatternDO implements Serializable {
         this.source = source == null ? null : source.trim();
     }
 
+    public String getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(String attributes) {
+        this.attributes = attributes == null ? null : attributes.trim();
+    }
+
     public String getEnvConditions() {
         return envConditions;
     }
@@ -118,6 +128,7 @@ public class ToiletPatternDO implements Serializable {
         sb.append(", version=").append(version);
         sb.append(", deleted=").append(deleted);
         sb.append(", source=").append(source);
+        sb.append(", attributes=").append(attributes);
         sb.append(", envConditions=").append(envConditions);
         sb.append(", humanFactors=").append(humanFactors);
         sb.append(", pipNetworkConditions=").append(pipNetworkConditions);
