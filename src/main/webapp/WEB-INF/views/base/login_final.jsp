@@ -95,7 +95,6 @@
                 processData: false,
                 success:function(result){
                     if (result.success) {
-                        alert(result.forwardUrl);
                         location.href = result.forwardUrl;
                     } else {
                         alert(result.errorMessage);

@@ -16,6 +16,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
+import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.LOGIN_INDEX;
+
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -36,7 +38,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
             return request.getRequestURI().contains(role);
         }
-
+        response.sendRedirect("/toilet/login/index");
         return false;
     }
 
