@@ -784,49 +784,56 @@
     function submit(){
 
         var data = new FormData();
-        data.append("product_name", $('#product_name').val()); //产品名称
-        data.append("producer_name", $('#producer_name').val()); //厂家
-        data.append("phonenum", $('#phonenum').val()); //联系方式
-        data.append("productselect", $('#productselect').val()); //产品类型
-        data.append("multiple-select", $('#multiple-select').val()); //模式类型
+        data.append("productName", $('#product_name').val()); //产品名称
+        data.append("factoryName", $('#producer_name').val()); //厂家
+        data.append("factoryNum", $('#phonenum').val()); //联系方式
+        data.append("productType", $('#productselect').val()); //产品类型
+        data.append("patternType", $('#multiple-select').val()); //模式类型
         data.append("newmoderadios1", $('#newmoderadios1').val()); //是否添加新模式
         data.append("newmoderadios2", $('#newmoderadios2').val());
-        data.append("newmodename", $('#newmodename').val()); //新模式名称
-        data.append("temperaturecondition", $('#temperaturecondition').val()); //温度条件
-        data.append("watercondition", $('#watercondition').val()); //水资源条件
-        data.append("dixing", $('#dixing').val()); //地形条件
-        data.append("position", $('#position').val()); //地理位置条件
-        data.append("shengtai", $('#shengtai').val()); //生态限制条件
-        data.append("renkou", $('#renkou').val()); //人口密集程度
-        data.append("yetaifei", $('#yetaifei').val()); //液态肥使用习惯
-        data.append("wushuiguandao", $('#wushuiguandao').val()); //具有污水管道
-        data.append("wushuichuli", $('#wushuichuli').val()); //具有完整城镇污水处理系统
-        data.append("zhaoqi", $('#zhaoqi').val()); //具有沼气利用工程
-        data.append("wushuihunhe", $('#wushuihunhe').val()); //计划与其他生活污水混合处理
-        data.append("yibingchuli", $('#yibingchuli').val()); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
+        data.append("patternName", $('#newmodename').val()); //新模式名称
+
+        data.append("natureTemp", $('#temperaturecondition').val()); //温度条件
+        data.append("water", $('#watercondition').val()); //水资源条件
+        data.append("terrain", $('#dixing').val()); //地形条件
+        data.append("geolocation", $('#position').val()); //地理位置条件
+        data.append("ecotope", $('#shengtai').val()); //生态限制条件
+        data.append("density", $('#renkou').val()); //人口密集程度
+        data.append("usageHabits", $('#yetaifei').val()); //液态肥使用习惯
+        data.append("sewerLines", $('#wushuiguandao').val()); //具有污水管道
+        data.append("sewageTreatment", $('#wushuichuli').val()); //具有完整城镇污水处理系统
+        data.append("biogasUtilization", $('#zhaoqi').val()); //具有沼气利用工程
+        data.append("mixedTreatment", $('#wushuihunhe').val()); //计划与其他生活污水混合处理
+        data.append("otherTreatment", $('#yibingchuli').val()); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
+
         data.append("province", $('#province').val()); //适用省份
-        data.append("wendufanwei", $('#wendufanwei').val()); //适用温度范围
-        data.append("yongtu", $('#yongtu').val()); //用途
-        data.append("guige", $('#guige').val()); //规格（平方米）
-        data.append("renshu", $('#renshu').val()); //适用人数（人）
-        data.append("chicun_chang", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
-        data.append("chicun_kuan", $('#chicun_kuan').val());
-        data.append("chicun_gao", $('#chicun_gao').val());
-        data.append("caizhi", $('#caizhi').val()); //材质
-        data.append("yanse", $('#yanse').val()); //颜色
-        data.append("shouming", $('#shouming').val()); //使用寿命
-        data.append("jiage", $('#jiage').val()); //价格（万元）
-        data.append("cesuoyongtu", $('#cesuoyongtu').val()); //用途:公厕户厕
-        data.append("qinglizhouqi", $('#qinglizhouqi').val()); //清理周期
-        data.append("zhiliangbaozhang", $('#zhiliangbaozhang').val()); //质量保障材料
-        data.append("shiyongshuoming", $('#shiyongshuoming').val()); //使用说明
-        data.append("producer_name", $('#chanpingtedian').val()); //产品特点
-        data.append("picturefile", $('#picturefile').val()); //使用图片
+        data.append("temperature", $('#wendufanwei').val()); //适用温度范围
+        data.append("purpose", $('#yongtu').val()); //用途
+        data.append("features", $('#chanpingtedian').val()); //产品特点
 
+        // 文件上传
+        var quality = $('#zhiliangbaozhang')[0].files[0];
+        var introduction = $('#shiyongshuoming')[0].files[0];
+        var pic1 = $('#picturefile')[0].files[0];
+        data.append("qualityMaterial", quality); //质量保障材料
+        data.append("introductions", introduction); //使用说明
+        data.append("pics", pic1); //使用图片
 
+        // 产品参数
+        data.append("standard", $('#guige').val()); //规格（平方米）
+        data.append("applicableNum", $('#renshu').val()); //适用人数（人）
+        data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
+        data.append("wide", $('#chicun_kuan').val());
+        data.append("high", $('#chicun_gao').val());
+        data.append("texture", $('#caizhi').val()); //材质
+        data.append("color", $('#yanse').val()); //颜色
+        data.append("serviceLife", $('#shouming').val()); //使用寿命
+        data.append("price", $('#jiage').val()); //价格（万元）
+        data.append("paramPurpose", $('#cesuoyongtu').val()); //用途:公厕户厕
+        data.append("cleanupCycle", $('#qinglizhouqi').val()); //清理周期
 
         $.ajax({
-            url:"/toilet/login",
+            url:"/toilet/product/entry",
             type:"POST",
             dataType: "json",
             data: data,

@@ -1,5 +1,8 @@
 package cn.edu.bjtu.toilet.domain.dto;
 
+import lombok.Data;
+
+@Data
 public class ResourceUtilizationDTO {
 
     /**

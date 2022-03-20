@@ -1,8 +1,9 @@
 package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.constant.ProductType;
+import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
-import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
+import cn.edu.bjtu.toilet.domain.dto.*;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.fileupload.FileItem;
@@ -30,7 +31,7 @@ public class ProductController {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-    public static final String UPLOAD_DIRECTORY = "/upload/product/";
+    private static final String UPLOAD_DIRECTORY = "/upload/product/";
 
 
     @RequestMapping("/")
@@ -54,11 +55,48 @@ public class ProductController {
             }
 
             ToiletProductDTO toiletProductDTO = buildProductDTO(params);
+            ToiletPatternDTO toiletPatternDTO = buildPatternDTO(params);
 
         } catch (Exception e) {
             LOG.error("upload products failed");
         }
         return ProductResponse.success();
+    }
+
+    private ToiletPatternDTO buildPatternDTO(Map<String, String> params) {
+        ToiletPatternDTO toiletPatternDTO = new ToiletPatternDTO();
+        // 自然环境条件
+        EnvConditionsDTO envConditionsDTO = new EnvConditionsDTO();
+        envConditionsDTO.setTemperature(params.get("natureTemp"));
+        envConditionsDTO.setTerrain(params.get("terrain"));
+        envConditionsDTO.setWaterResource(params.get("water"));
+        envConditionsDTO.setGeolocation(params.get("geolocation"));
+        envConditionsDTO.setEcotope(params.get("ecotope"));
+
+        toiletPatternDTO.setEnvConditions(envConditionsDTO);
+
+        //人文因素
+        HumanFactorsDTO humanFactorsDTO = new HumanFactorsDTO();
+        humanFactorsDTO.setDensity(params.get("density"));
+        humanFactorsDTO.setUsageHabits(params.get("usageHabits").equals("true"));
+
+        toiletPatternDTO.setHumanFactors(humanFactorsDTO);
+
+        //管网
+        PipNetworkConditionsDTO pipNetworkConditionsDTO = new PipNetworkConditionsDTO();
+        pipNetworkConditionsDTO.setHasSewageTreatment(params.get("sewageTreatment").equals("true"));
+        pipNetworkConditionsDTO.setHasSewerLines(params.get("sewerLines").equals("true"));
+
+        toiletPatternDTO.setPipNetworkConditions(pipNetworkConditionsDTO);
+
+        //资源
+        ResourceUtilizationDTO resourceUtilizationDTO = new ResourceUtilizationDTO();
+        resourceUtilizationDTO.setIsBiogasUtilization(params.get("biogasUtilization").equals("true"));
+        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment").equals("true"));
+        resourceUtilizationDTO.setOtherTreatment(params.get("otherTreatment").equals("true"));
+        toiletPatternDTO.setResourceUtilization(resourceUtilizationDTO);
+
+        return toiletPatternDTO;
     }
 
     private ToiletProductDTO buildProductDTO(Map<String, String> params) {
@@ -71,6 +109,25 @@ public class ProductController {
         productDTO.setPatternName(params.get("patternName"));
         productDTO.setApplicableProvince(params.get("provinces"));
         productDTO.setApplicableTemperature(params.get("temperature"));
+        productDTO.setPurpose(params.get("purpose"));
+        productDTO.setProductFeatures(params.get("features"));
+
+        productDTO.setQualityAssuranceMaterialsFilePath(params.get("qualityMaterial"));
+        productDTO.setInstructionFilePath(params.get("introductions"));
+        productDTO.setPicsPath(params.get("pics"));
+
+        //  产品参数
+        ProductParamsDTO paramsDTO = new ProductParamsDTO();
+        paramsDTO.setStandard(Double.valueOf(params.get("standard")));
+        paramsDTO.setApplicableNum(Integer.valueOf(params.get("applicableNum")));
+        paramsDTO.setTexture(params.get("texture"));
+        paramsDTO.setColor(params.get("color"));
+        paramsDTO.setParamPurpose(params.get("paramPurpose"));
+        paramsDTO.setCleanupCycle(params.get("cleanupCycle"));
+        paramsDTO.setPrice(Double.valueOf(params.get("price")));
+        paramsDTO.setServiceLife(params.get("serviceLife"));
+
+        productDTO.setProductParameters(paramsDTO);
 
         return productDTO;
     }
@@ -109,7 +166,7 @@ public class ProductController {
                         String filePath = uploadPath + "/" + filename;
                         File file = new File(filePath);
                         item.write(file);
-                        params.put("filePath", filePath);
+                        params.put(item.getFieldName(), filePath);
                     }
                 }
             }

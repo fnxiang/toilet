@@ -32,7 +32,7 @@ public class ToiletProductDTO {
 
     private String purpose;
 
-    private String productParameters;
+    private ProductParamsDTO productParameters;
 
     private String qualityAssuranceMaterialsFilePath;
 
