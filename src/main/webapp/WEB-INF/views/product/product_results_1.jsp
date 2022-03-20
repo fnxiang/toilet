@@ -450,16 +450,16 @@
                         <div class="grid_3 product">
                             <div class="prev">
                                 <a href="${pageContext.request.contextPath}/toProductPage?url=product_page_formal"><img
-                                        src="${pageContext.request.contextPath}/static/product/images/product_1.png"
+                                        src="${pageContext.request.contextPath}/static/product/res/2.png"
                                         alt="" title=""/></a>
                             </div>
                             <!-- .prev -->
-                            <h3 class="title">三格化粪池</h3>
+                            <h3 class="title">双瓮漏斗式厕所</h3>
 
                             <div class="cart">
                                 <div class="price">
                                     <div class="vert">
-                                        <div class="price_new">价格：1.8万元</div>
+                                        <div class="price_new">价格：2万元</div>
                                     </div>
                                 </div>
                             </div>
