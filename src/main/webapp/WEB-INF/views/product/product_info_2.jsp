@@ -160,85 +160,202 @@
     <div id="product_search" class="grid_12" style="margin-bottom: 20px;  border:1px solid #59b7c2; display: none">
         <form class="search">
             <div class="grid_12">
-                <label class="search_grid_4"> 产品名称: <input type="text" name="search" class="search_btn" value=""
-                                                           placeholder=""/></label>
-                <label class="search_grid_4"> 产品类型:
-                    <select name="product_select" id="product_select" class="form-control">
-                        <option value="0">完整下水道式厕所</option>
-                        <option value="1">三格化粪池式厕所</option>
-                        <option value="2">双瓮漏斗式厕所</option>
-                        <option value="3">三联沼气池式厕所</option>
-                        <option value="4">复合生物反应微水冲厕所</option>
-                        <option value="5">真空负压厕所</option>
-                        <option value="6">多级生化组合电催化氧化厕所</option>
-                        <option value="7">膜生物反应器（MBR）厕所</option>
-                        <option value="8">堆肥式生态厕所</option>
-                        <option value="9">双坑交替式厕所</option>
-                        <option value="10">粪尿分集式生态旱厕</option>
-                        <option value="11">粪污生态菌发酵</option>
-                        <option value="12">可生物降解泡沫冲洗厕所</option>
-                        <option value="13">其他类型</option>
-                    </select> </label>
-                <label class="search_grid_4"> 模式类型: <select name="model_select" id="model_select" class="form-control">
-                    <option value="1">收集：集中收集</option>
-                    <option value="2">转运：抽排设备</option>
-                    <option value="3">处理：无害化处理</option>
-                    <option value="4">资源化利用：发酵池</option>
-                </select></label>
+                <label class="search_grid_4"> 规格:
+                    <select name="guige_select" id="guige_select" class="form-control">
+                        <option value="0">A.≤0.5</option>
+                        <option value="1">B.0.6~10</option>
+                        <option value="2">C.11~25</option>
+                        <option value="3">D.26~50</option>
+                        <option value="4">E.51~100</option>
+                        <option value="5">F.100以上</option>
+                    </select>
+                </label>
+                <label class="search_grid_4">材质:
+                    <select name="caizhi_select" id="caizhi_select" class="form-control">
+                        <option value="0">A.玻璃钢</option>
+                        <option value="1">B.PP</option>
+                        <option value="2">C.PE</option>
+                        <option value="3">D.预制钢筋混凝土</option>
+                        <option value="4">E.其他</option>
+                    </select></label>
+                <label class="search_grid_4">使用寿命:
+                    <select name="life_select" id="life_select" class="form-control">
+                        <option value="0">A.50年以内</option>
+                        <option value="1">B.50年及以上</option>
+                    </select></label>
             </div>
-            <div class="grid_12">
-                <label class="search_grid_4"> 适用省份:
-                    <input type="text" name="search" class="search_btn" value="" placeholder=""/></label>
-                <label class="search_grid_4"> 温度范围:
-                    <input type="text" name="search" class="search_btn" value="" placeholder=""/></label>
+            <div class="grid_12" style="margin-top: 10px;">
+                <label class="search_grid_4">价格（万元）:
+                    <select name="price_select" id="price_select" class="form-control">
+                        <option value="0">A.0.5以内</option>
+                        <option value="1">B.0.5~1</option>
+                        <option value="2">C.1~1.5</option>
+                        <option value="3">D.1.5~2</option>
+                        <option value="4">E.2以上</option>
+                    </select>
+                </label>
+                <label class="search_grid_4">清理周期:
+                    <select name="clean_select" id="clean_select" class="form-control">
+                        <option value="0">A.≤3个月</option>
+                        <option value="1">B.4~6个月</option>
+                        <option value="2">C.7~12个月</option>
+                        <option value="3">D.12个月及以上</option>
+                    </select></label>
             </div>
-            <div class="grid_12" align="center">
-                <button type="submit" style="width: 300px; margin-bottom: 5px">搜索</button>
+            <div class="grid_12" align="center" style="margin-top: 10px;">
+                <button type="button" style="width: 300px; margin-bottom: 5px" onclick="productSearch()">搜索</button>
             </div>
         </form>
     </div>
 
     <div class="grid_12" id="model_search" style="margin-bottom: 20px; border:1px solid #59b7c2; display: none">
         <form class="search">
-            <label class="grid_12"> 适用省份:
-                <input type="text" name="search" class="search_btn" value="" placeholder=""/></label>
 
             <div class="grid_12">
-                <label class="search_grid_4"> 温度条件:
-                    <select name="select" id="temp_select" style="width: 160px" class="form-control">
+                <label class="grid_11" style="border-bottom-style:solid; border-width:1px;">自然环境条件:</label>
+            </div>
+
+
+            <div class="grid_12" style="margin-top: 10px;">
+                <label class="grid_4">温度条件:
+                    <select name="wendu_select" id="wendu_select" class="form-control">
                         <option value="0">高寒</option>
-                        <option value="1">无特殊</option>
+                        <option value="1">普通</option>
+                        <option value="2">无限制</option>
                     </select></label>
-                <label class="search_grid_4"> 水资源条件:
-                    <select name="select" id="water_select" style="width: 160px" class="form-control">
+
+                <label class="grid_4">水资源条件:
+                    <select name="water_select" id="water_select" class="form-control">
                         <option value="0">缺水</option>
                         <option value="1">良好</option>
-                    </select></label>
-                <label class="search_grid_4"> 地形条件:
-                    <select name="select" id="shape_select" style="width: 160px" class="form-control">
-                        <option value="0">平坦</option>
-                        <option value="1">山区</option>
-                        <option value="2">丘陵</option>
-                        <option value="3">无特殊</option>
+                        <option value="2">无限制</option>
                     </select></label>
             </div>
+
+
             <div class="grid_12">
-                <label class="search_grid_4"> 地理位置条件:
-                    <select name="select" style="width: 160px" id="locate_select" class="form-control">
-                        <option value="0">城市近郊</option>
-                        <option value="1">城中村</option>
-                        <option value="2">中心城镇地区</option>
-                        <option value="3">其他</option>
+                <div class="grid_12"
+                     style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                    <div style="float:left;padding:0 5px;"><label>地形条件:</label></div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="dixing_check" value="山区"
+                                                                  style="margin-bottom:5px;"/>山区
+                    </div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="dixing_check" value="丘陵"
+                                                                  style="margin-bottom:5px;"/>丘陵
+                    </div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="dixing_check" value="一般地区"
+                                                                  style="margin-bottom:5px;"/>一般地区
+                    </div>
+                </div>
+
+                <div class="grid_12"
+                     style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                    <div style="float:left;padding:0 5px;"><label>地理位置条件:</label></div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="diliweizhi_check" value="城市近郊"
+                                                                  style="margin-bottom:5px;"/>城市近郊
+                    </div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="diliweizhi_check" value="城中村"
+                                                                  style="margin-bottom:5px;"/>城中村
+                    </div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="diliweizhi_check" value="中心城镇地区"
+                                                                  style="margin-bottom:5px;"/>中心城镇地区
+                    </div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="diliweizhi_check" value="一般地区"
+                                                                  style="margin-bottom:5px;"/>一般地区
+                    </div>
+                </div>
+
+                <div class="grid_12"
+                     style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                    <div style="float:left;padding:0 5px;"><label>生态限制条件:</label></div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="shengtai_check" value="生态保护区"
+                                                                  style="margin-bottom:5px;"/>生态保护区
+                    </div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="shengtai_check" value="水源保护区"
+                                                                  style="margin-bottom:5px;"/>水源保护区
+                    </div>
+                    <div style="float:left;padding:0 5px;"><input type="checkbox" name="shengtai_check" value="一般地区"
+                                                                  style="margin-bottom:5px;"/>一般地区
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="grid_12">
+                <label class="grid_11" style="border-bottom-style:solid; border-width:1px;">人文因素:</label>
+            </div>
+
+            <div class="grid_12" style="margin-top: 10px;">
+                <label class="grid_4">人口密集程度:
+                    <select name="renkou_select" id="renkou_select" class="form-control">
+                        <option value="0">聚集</option>
+                        <option value="1">分散</option>
+                        <option value="2">一般</option>
+                        <option value="3">无限制</option>
                     </select></label>
-                <label class="search_grid_4"> 生态限制条件:
-                    <select name="select" id="eco_select" style="width: 160px" class="form-control">
-                        <option value="0">生态保护区</option>
-                        <option value="1">水源保护区</option>
-                        <option value="2">一般地区</option>
+
+                <label class="grid_4">可形成液态肥:
+                    <select name="yetaifei_select" id="yetaifei_select" class="form-control">
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                        <option value="2">均可</option>
                     </select></label>
             </div>
-            <div class="grid_12" align="center">
-                <button type="submit" style="width: 300px; margin-bottom: 5px">搜索</button>
+
+            <div class="grid_12" style="margin-top: 10px;">
+                <label class="grid_11" style="border-bottom-style:solid; border-width:1px;">管网条件:</label>
+            </div>
+
+
+            <div class="grid_12" style="margin-top: 10px;">
+                <label class="grid_4">需要具有完整城镇污水处理系统:
+                    <select name="wushuichuli_select" id="wushuichuli_select" class="form-control">
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                        <option value="2">无限制</option>
+                    </select></label>
+
+                <label class="grid_4">需要具有污水管道:
+                    <select name="wushuiguandao_select" id="wushuiguandao_select" class="form-control">
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                        <option value="2">均可</option>
+                    </select></label>
+            </div>
+
+            <div class="grid_12" style="margin-top: 10px;">
+                <label class="grid_11" style="border-bottom-style:solid; border-width:1px;">资源化利用:</label>
+            </div>
+
+            <div class="grid_12" style="margin-top: 10px;">
+                <label class="grid_3">需要具有沼气利用工程:
+                    <select name="zhaoqi_select" id="zhaoqi_select" class="form-control">
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                        <option value="2">无限制</option>
+                    </select></label>
+
+                <label class="grid_4">可以与其他生活污水混合处理:
+                    <select name="wushuihunhe_select" id="wushuihunhe_select" class="form-control">
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                        <option value="2">均可</option>
+                    </select></label>
+
+                <label>可以与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理:
+                    <select name="yibingchuli_select" id="yibingchuli_select" class="form-control">
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                        <option value="2">均可</option>
+                    </select></label>
+            </div>
+
+            <div class="grid_12" align="center" style="margin-top: 10px;">
+                <button type="button" style="width: 300px; margin-bottom: 5px"
+                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=mode_list'">
+                    搜索
+                </button>
+                <%--modeSearch()--%>
             </div>
         </form>
     </div>
