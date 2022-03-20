@@ -449,7 +449,7 @@
                     <li class="">
                         <div class="grid_3 product">
                             <div class="prev">
-                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_page_formal"><img
+                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_info_1"><img
                                         src="${pageContext.request.contextPath}/static/product/res/1.png"
                                         alt="" title=""/></a>
                             </div>

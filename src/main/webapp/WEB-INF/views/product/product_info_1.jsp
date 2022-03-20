@@ -360,76 +360,58 @@
                 <div class="grid_12">
                     <div id="wrapper_tab" class="tab1">
                         <a href="#" class="tab1 tab_link">产品描述</a>
-                        <a href="#" class="tab2 tab_link">Reviews</a>
-                        <a href="#" class="tab3 tab_link">Custom Tab</a>
+                        <a href="#" class="tab2 tab_link">使用说明</a>
+                        <a href="#" class="tab3 tab_link">质保证书</a>
 
                         <div class="clear"></div>
 
                         <div class="tab1 tab_body">
                             <h4>这个部分未来要填充对产品的描述</h4>
 
-                            <p>Suspendisse at placerat turpis. Duis luctus erat vel magna pharetra aliquet. Maecenas
-                                tincidunt feugiat ultricies. Phasellus et dui risus. Vestibulum adipiscing, eros quis
-                                lobortis dictum. Etiam mollis volutpat odio, id euismod justo gravida a. Aliquam erat
-                                volutpat. Phasellus faucibus venenatis lorem, vitae commodo elit pretium et. Duis
-                                rhoncus lobortis congue. Vestibulum et purus dui, vel porta lectus. Sed vulputate
-                                pulvinar adipiscing.</p>
+                            <p>
+                                三格化粪池由相联的三个池子组成，中间由过粪管联通，主要是利用厌氧发酵、中层过粪和寄生虫卵比重大于一般混合液比重而易于沉淀的原理，粪便在池内经过30天以上的发酵分解，中层粪液依次由1池流至3池，以达到沉淀或杀灭粪便中寄生虫卵和肠道致病菌的目的，第3池粪液成为优质化肥。</p>
                             <ul>
-                                <li>She was walking to the mall.</li>
-                                <li>Ted might eat the cake.</li>
-                                <li>You must go right now.</li>
-                                <li>Words were spoken.</li>
-                                <li>The teacher is writing a report.</li>
+                                <li>新鲜粪便由进粪口进入第一池，池内粪便开始发酵分解、因比重不同粪液可自然分为三层</li>
+                                <li>上层为糊状粪皮</li>
+                                <li>下层为块状或颗状粪渣</li>
+                                <li>中层为比较澄清的粪液</li>
                             </ul>
 
-                            <p>Here are some verb phrase examples where the verb phrase is the predicate of a sentence.
-                                In this case, the verb phrase consists of the main verb plus any auxiliary, or helping,
-                                verbs. Nulla nec velit. Mauris pulvinar erat non massa. Suspendisse tortor turpis, porta
-                                nec, tempus vitae, iaculis semper, pede.</p>
+                            <p>三格化粪池厕所的地下部分结构由便器、进粪管、过粪管、三格化粪池、盖板五部分组成。</p>
                             <ol>
-                                <li>Shipping & Delivery.</li>
-                                <li>Privacy & Security.</li>
-                                <li>Returns & Replacements.</li>
-                                <li>Payment, Pricing & Promotions.</li>
-                                <li>Viewing Orders.</li>
+                                <li>便器：由工厂加工生产或白行预制，便器采用直通式，与进粪管联接，也可使用水封式便器，不再安装近粪管。</li>
+                                <li>进粪管：塑料、铸铁、水泥管均可，内壁光滑、防止结粪、内径为10cm，长度为30-50cm。</li>
+                                <li>过粪管：以塑料管为好，直径为10-15cm，1-2池间的过粪管长约70-75cm，2-3池间的过粪管长约50一55Cm。</li>
+                                <li>三格池：用砖砌水泥粉壁面或水泥现浇，预制均可，以"目"字形为主要类型，若受地形限制，"品"字形、"丁"个型摆都也可。</li>
+                                <li>盖板：可自行预制，要做到既密闭，又便于清渣和取粪。</li>
                             </ol>
 
-                            <p>Next are some verb phrase examples of verb phrases where the phrase has a single function
-                                which means it can act like an adverb or an adjective. The phrase would include the verb
-                                and any modifiers, complements, or objects. Lorem ipsum dolor sit amet, consectetuer
-                                adipiscing elit. Morbi luctus. Duis lobortis. Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Curabitur nec posuere odio. Proin vel ultrices erat. </p>
+                            <p>三格化粪池容积应根据使用人数、粪便发酵腐熟的时间以及沉卵灭菌的要求来决定。一般我国通用计算参数是每人每天的粪尿排泄量，包括少量冲洗厕所用水在内，按3．5公斤(最低量)计算，粪便发酵腐熟时间及病原体残废时间按30天计算，其中在第一池需停留20天，第二池停留10天，第一池和第二他的容积分别按此停留时间计算，第三池容积一般为一、二池之和。 </p>
 
                             <table>
                                 <tr>
-                                    <th class="bg">First Column</th>
-                                    <th>Second Column</th>
-                                    <th class="bg">Third Column</th>
-                                    <th>Fourth Column</th>
+                                    <th class="bg">规格</th>
+                                    <th>55</th>
+                                    <th class="bg">适用人数（人）</th>
+                                    <th>5</th>
                                 </tr>
                                 <tr>
-                                    <td class="bg">One</td>
-                                    <td>no</td>
-                                    <td class="bg">yes</td>
-                                    <td>yes, all</td>
+                                    <td class="bg">尺寸（长*宽*高 mm）</td>
+                                    <td>500*500*500</td>
+                                    <td class="bg">材质</td>
+                                    <td>玻璃钢</td>
                                 </tr>
                                 <tr>
-                                    <td class="bg">Two</td>
-                                    <td>0</td>
-                                    <td class="bg">1</td>
-                                    <td>all</td>
+                                    <td class="bg">颜色</td>
+                                    <td>白色</td>
+                                    <td class="bg">使用寿命</td>
+                                    <td>50年</td>
                                 </tr>
                                 <tr>
-                                    <td class="bg">Three</td>
-                                    <td>$399</td>
-                                    <td class="bg">$599</td>
-                                    <td>$799</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg">Four</td>
-                                    <td><a href="#">Call action</a></td>
-                                    <td class="bg"><a href="#">Call action</a></td>
-                                    <td><a href="#">Call action</a></td>
+                                    <td class="bg">用途</td>
+                                    <td><a href="#">公厕</a></td>
+                                    <td class="bg"><a href="#">清理周期</a></td>
+                                    <td><a href="#">5个月</a></td>
                                 </tr>
                             </table>
                             <div class="clear"></div>
@@ -437,7 +419,7 @@
                         <!-- .tab1 .tab_body -->
 
                         <div class="tab2 tab_body">
-                            <h4>Customer reviews</h4>
+                            <h4>使用说明</h4>
                             <ul class="comments">
 
 
@@ -450,7 +432,7 @@
                         <!-- .tab2 .tab_body -->
 
                         <div class="tab3 tab_body">
-                            <h4>Custom Tab</h4>
+                            <h4>质保证书</h4>
 
                             <div class="clear"></div>
                         </div>
