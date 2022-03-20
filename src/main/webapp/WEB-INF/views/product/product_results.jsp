@@ -490,49 +490,9 @@
                         <!-- .grid_3 -->
                     </li>
 
-                    <li class="">
-                        <div class="grid_3 product">
-                            <div class="prev">
-                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_page_formal"><img
-                                        src="${pageContext.request.contextPath}/static/product/images/product_3.png"
-                                        alt="" title=""/></a>
-                            </div>
-                            <!-- .prev -->
-                            <h3 class="title">三格化粪池</h3>
 
-                            <div class="cart">
-                                <div class="price">
-                                    <div class="vert">
-                                        <div class="price_new">价格：1.8万元</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .cart -->
-                        </div>
-                        <!-- .grid_3 -->
-                    </li>
 
-                    <li class="">
-                        <div class="grid_3 product">
-                            <div class="prev">
-                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_page_formal"><img
-                                        src="${pageContext.request.contextPath}/static/product/images/product_4.png"
-                                        alt="" title=""/></a>
-                            </div>
-                            <!-- .prev -->
-                            <h3 class="title">三格化粪池</h3>
 
-                            <div class="cart">
-                                <div class="price">
-                                    <div class="vert">
-                                        <div class="price_new">价格：1.8万元</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .cart -->
-                        </div>
-                        <!-- .grid_3 -->
-                    </li>
 
                 </ul>
                 <!-- #list_product -->
@@ -543,109 +503,6 @@
         </div>
         <!-- .carousel -->
 
-
-        <div class="carousel">
-
-
-            <div class="list_carousel">
-                <div class="caroufredsel_wrapper"
-                     style="float: none; position: relative; inset: auto; width: 1008px; height: 320px; margin: 0px; overflow: hidden;">
-                    <ul id="list_product2" class="list_product"
-                        style="float: none; position: absolute; top: 0px; left: 0px; margin: 0px; width: 3528px; height: 320px;">
-                        <li class="">
-                            <div class="grid_3 product">
-                                <div class="prev">
-                                    <a href="${pageContext.request.contextPath}/toProductPage?url=product_page_formal"><img
-                                            src="${pageContext.request.contextPath}/static/product/images/product_1.png"
-                                            alt="" title=""/></a>
-                                </div>
-                                <!-- .prev -->
-                                <h3 class="title">三格化粪池</h3>
-
-                                <div class="cart">
-                                    <div class="price">
-                                        <div class="vert">
-                                            <div class="price_new">价格：1.8万元</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .cart -->
-                            </div>
-                            <!-- .grid_3 -->
-                        </li>
-
-                        <li class="">
-                            <div class="grid_3 product">
-                                <div class="prev">
-                                    <a href="${pageContext.request.contextPath}/toProductPage?url=product_page_formal"><img
-                                            src="${pageContext.request.contextPath}/static/product/images/product_2.png"
-                                            alt="" title=""/></a>
-                                </div>
-                                <!-- .prev -->
-                                <h3 class="title">三格化粪池</h3>
-
-                                <div class="cart">
-                                    <div class="price">
-                                        <div class="vert">
-                                            <div class="price_new">价格：1.8万元</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .cart -->
-                            </div>
-                            <!-- .grid_3 -->
-                        </li>
-
-                        <li class="">
-                            <div class="grid_3 product">
-                                <div class="prev">
-                                    <a href="${pageContext.request.contextPath}/toProductPage?url=product_page_formal"><img
-                                            src="${pageContext.request.contextPath}/static/product/images/product_3.png"
-                                            alt="" title=""/></a>
-                                </div>
-                                <!-- .prev -->
-                                <h3 class="title">三格化粪池</h3>
-
-                                <div class="cart">
-                                    <div class="price">
-                                        <div class="vert">
-                                            <div class="price_new">价格：1.8万元</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .cart -->
-                            </div>
-                            <!-- .grid_3 -->
-                        </li>
-
-                        <li class="">
-                            <div class="grid_3 product">
-                                <div class="prev">
-                                    <a href="${pageContext.request.contextPath}/toProductPage?url=product_page_formal"><img
-                                            src="${pageContext.request.contextPath}/static/product/images/product_4.png"
-                                            alt="" title=""/></a>
-                                </div>
-                                <!-- .prev -->
-                                <h3 class="title">三格化粪池</h3>
-
-                                <div class="cart">
-                                    <div class="price">
-                                        <div class="vert">
-                                            <div class="price_new">价格：1.8万元</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .cart -->
-                            </div>
-                            <!-- .grid_3 -->
-                        </li>
-
-                    </ul>
-                </div>
-                <!-- #list_product2 -->
-            </div>
-            <!-- .list_carousel -->
-        </div>
 
 
         <div id="content_bottom">

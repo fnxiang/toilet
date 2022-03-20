@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE HTML>
 <html>
 <!-- Added by HTTrack -->
@@ -64,6 +66,14 @@
 
 </head>
 <body>
+<%--获取 List --%>
+<% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>
+
+<%--获取路径用于显示图片和文件--%>
+<% String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";%>
 <div class="container_12">
     <div id="top">
         <div class="grid_5">
@@ -323,7 +333,11 @@
             </div>
 
             <div class="grid_12" align="center" style="margin-top: 10px;">
-                <button type="button" style="width: 300px; margin-bottom: 5px" onclick="modeSearch()">搜索</button>
+                <button type="button" style="width: 300px; margin-bottom: 5px"
+                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=mode_list'">
+                    搜索
+                </button>
+                <%--modeSearch()--%>
             </div>
         </form>
     </div>
@@ -418,130 +432,77 @@
     <div class="container_12">
         <div class="clear"></div>
 
-        <div id="content" class="grid_12">
-            <h1 class="page_title">模式搜索结果</h1>
-
-
-            <div class="listing_product grid_12">
-                <div class="product_li">
-
-                    <div class="grid_10">
-                        <div class="entry_content" style="border-right-width: 0px; height: 80px;">
-                            <a href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">
-                                <h3 class="title">洁具便器+化粪池+分散处理</h3>
-                            </a>
-                            <a class="more"
-                               href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">查看产品列表</a>
-                        </div>
-                        <!-- .my_entry_content -->
-                    </div>
-                    <!-- .grid_4 -->
-
-                    <div class="clear"></div>
+        <div class="carousel">
+            <div class="c_header">
+                <div class="grid_10">
+                    <h2>产品展示</h2>
                 </div>
-                <!-- .article -->
-
-                <div class="product_li">
-
-                    <div class="grid_10">
-                        <div class="entry_content" style="border-right-width: 0px; height: 80px;">
-                            <a href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">
-                                <h3 class="title">洁具便器+化粪池+污水管网输送+污水集中处理系统</h3>
-                            </a>
-                            <a class="more"
-                               href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">查看产品列表</a>
-                        </div>
-                        <!-- .my_entry_content -->
-                    </div>
-                    <!-- .grid_4 -->
-
-                    <div class="clear"></div>
-                </div>
-                <!-- .article -->
-
-                <div class="product_li">
-
-                    <div class="grid_10">
-                        <div class="entry_content" style="border-right-width: 0px; height: 80px;">
-                            <a href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">
-                                <h3 class="title">洁具便器+化粪池+抽排设备转运+污水集中处理系统</h3>
-                            </a>
-                            <a class="more"
-                               href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">查看产品列表</a>
-                        </div>
-                        <!-- .my_entry_content -->
-                    </div>
-                    <!-- .grid_4 -->
-
-                    <div class="clear"></div>
-                </div>
-                <!-- .article -->
-
-                <div class="product_li">
-
-                    <div class="grid_10">
-                        <div class="entry_content" style="border-right-width: 0px; height: 80px;">
-                            <a href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">
-                                <h3 class="title">洁具便器+化粪池+抽排设备转运+发酵池或已有沼气工程</h3>
-                            </a>
-                            <a class="more"
-                               href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">查看产品列表</a>
-                        </div>
-                        <!-- .my_entry_content -->
-                    </div>
-                    <!-- .grid_4 -->
-
-                    <div class="clear"></div>
-                </div>
-                <!-- .article -->
-
-                <div class="product_li">
-
-                    <div class="grid_10">
-                        <div class="entry_content" style="border-right-width: 0px; height: 80px;">
-                            <a href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">
-                                <h3 class="title">洁具便器+双瓮漏斗式厕所+后瓮粪液利用、前瓮粪渣无害化处理利用</h3>
-                            </a>
-                            <a class="more"
-                               href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results_1'">查看产品列表</a>
-                        </div>
-                        <!-- .my_entry_content -->
-                    </div>
-                    <!-- .grid_4 -->
-
-                    <div class="clear"></div>
-                </div>
-                <!-- .article -->
+                <!-- .grid_10 -->
 
 
-                <div class="clear"></div>
             </div>
-            <!-- .listing_product -->
+            <!-- .c_header -->
+
+            <div class="list_carousel">
+
+                <ul id="list_product" class="list_product">
+                    <li class="">
+                        <div class="grid_3 product">
+                            <div class="prev">
+                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_page_formal"><img
+                                        src="${pageContext.request.contextPath}/static/product/images/product_1.png"
+                                        alt="" title=""/></a>
+                            </div>
+                            <!-- .prev -->
+                            <h3 class="title">三格化粪池</h3>
+
+                            <div class="cart">
+                                <div class="price">
+                                    <div class="vert">
+                                        <div class="price_new">价格：1.8万元</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .cart -->
+                        </div>
+                        <!-- .grid_3 -->
+                    </li>
+
+                </ul>
+                <!-- #list_product -->
+            </div>
+            <!-- .list_carousel -->
+
+
+        </div>
+        <!-- .carousel -->
+
+
+        <div id="content_bottom">
+            <div class="grid_12">
+                <div class="bottom_block about_as">
+                    <h3>关于我们</h3>
+
+                    <p>
+                        2003年3月，中国建筑设计研究院（集团）为促进国有资产增值保值，实现集团业务板块发展布局，决定出资人民币500万元在原科技信息研究所基础上，注册成立国有独资的信息研究院，开展建设领域信息服务等业务。同年7月，经国家工商总局核准，亚太建设科技信息研究院正式挂牌成立。2014年6月9日，“亚太建设科技信息研究院”出于发展需要，正式更名为“亚太建设科技信息研究院有限公司”。</p>
+
+                    <p>
+                        公司的发展战略是：以巩固、培育、发展品牌信息产品和优势业务为目标，逐步形成拥有包括专业技术期刊、信息咨询、软课题研究、网站媒体等众多品牌产品和优势业务.目前，该公司设有建筑技术分院、施工技术信息研究所、给水排水信息研究所、暖通空调信息研究所、《建筑经济》杂志社、科技发展研究所和公司职能管理部门以及全国给水排水技术信息网管理办公室、全国建筑智能技术情报网管理办公室、中国勘察设计协会建筑环境与设备专业委员会、中国建筑业协会建筑防水专业分会、中国建筑学会建筑经济分会、中国建筑学会工程建设学术委员会、建设部科技查新部等机构。公司主办并公开发行的《暖通空调》、《建筑结构》、《给水排水》、《施工技术》、《建筑经济》、《建筑技艺》（原《建筑技术及设计》）、《城市住宅》、《智能建筑电气技术》八种专业期刊，在建筑领域都具有较高的品牌影响力和权威性。</p>
+
+                    <p>然后写点儿系统介绍……………………</p>
+                </div>
+                <!-- .about_as -->
+            </div>
+            <!-- .grid_4 -->
 
             <div class="clear"></div>
-
-            <div class="pagination">
-                <ul>
-                    <li class="prev"><span>←</span></li>
-                    <li class="curent"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><span>...</span></li>
-                    <li><a href="#">100</a></li>
-                    <li class="next"><a href="#">→</a></li>
-                </ul>
-            </div>
-            <!-- .pagination -->
         </div>
-
+        <!-- #content_bottom -->
         <div class="clear"></div>
 
     </div>
     <!-- .container_12 -->
 </section>
-<!-- #main -->
 <!-- #main -->
 
 <div class="clear"></div>
