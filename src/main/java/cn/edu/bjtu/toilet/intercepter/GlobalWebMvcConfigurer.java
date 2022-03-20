@@ -13,8 +13,6 @@ import org.springframework.web.servlet.config.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
-
 @Component
 public class GlobalWebMvcConfigurer implements WebMvcConfigurer {
 
