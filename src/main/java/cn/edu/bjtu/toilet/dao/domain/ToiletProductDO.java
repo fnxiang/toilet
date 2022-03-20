@@ -24,6 +24,8 @@ public class ToiletProductDO implements Serializable {
 
     private String patternName;
 
+    private String companyEmail;
+
     private String applicableProvince;
 
     private String applicableTemperature;
@@ -33,6 +35,8 @@ public class ToiletProductDO implements Serializable {
     private Boolean deleted;
 
     private String source;
+
+    private String attributes;
 
     private String purpose;
 
@@ -128,6 +132,14 @@ public class ToiletProductDO implements Serializable {
         this.patternName = patternName == null ? null : patternName.trim();
     }
 
+    public String getCompanyEmail() {
+        return companyEmail;
+    }
+
+    public void setCompanyEmail(String companyEmail) {
+        this.companyEmail = companyEmail == null ? null : companyEmail.trim();
+    }
+
     public String getApplicableProvince() {
         return applicableProvince;
     }
@@ -166,6 +178,14 @@ public class ToiletProductDO implements Serializable {
 
     public void setSource(String source) {
         this.source = source == null ? null : source.trim();
+    }
+
+    public String getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(String attributes) {
+        this.attributes = attributes == null ? null : attributes.trim();
     }
 
     public String getPurpose() {
@@ -232,11 +252,13 @@ public class ToiletProductDO implements Serializable {
         sb.append(", patternType=").append(patternType);
         sb.append(", patternId=").append(patternId);
         sb.append(", patternName=").append(patternName);
+        sb.append(", companyEmail=").append(companyEmail);
         sb.append(", applicableProvince=").append(applicableProvince);
         sb.append(", applicableTemperature=").append(applicableTemperature);
         sb.append(", version=").append(version);
         sb.append(", deleted=").append(deleted);
         sb.append(", source=").append(source);
+        sb.append(", attributes=").append(attributes);
         sb.append(", purpose=").append(purpose);
         sb.append(", productParameters=").append(productParameters);
         sb.append(", qualityAssuranceMaterialsFilePath=").append(qualityAssuranceMaterialsFilePath);

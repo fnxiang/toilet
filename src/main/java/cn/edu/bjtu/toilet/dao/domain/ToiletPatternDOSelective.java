@@ -474,6 +474,76 @@ public class ToiletPatternDOSelective {
             addCriterion("source not between", value1, value2, "source");
             return (Criteria) this;
         }
+
+        public Criteria andAttributesIsNull() {
+            addCriterion("attributes is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesIsNotNull() {
+            addCriterion("attributes is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesEqualTo(String value) {
+            addCriterion("attributes =", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesNotEqualTo(String value) {
+            addCriterion("attributes <>", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesGreaterThan(String value) {
+            addCriterion("attributes >", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesGreaterThanOrEqualTo(String value) {
+            addCriterion("attributes >=", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesLessThan(String value) {
+            addCriterion("attributes <", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesLessThanOrEqualTo(String value) {
+            addCriterion("attributes <=", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesLike(String value) {
+            addCriterion("attributes like", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesNotLike(String value) {
+            addCriterion("attributes not like", value, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesIn(List<String> values) {
+            addCriterion("attributes in", values, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesNotIn(List<String> values) {
+            addCriterion("attributes not in", values, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesBetween(String value1, String value2) {
+            addCriterion("attributes between", value1, value2, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributesNotBetween(String value1, String value2) {
+            addCriterion("attributes not between", value1, value2, "attributes");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

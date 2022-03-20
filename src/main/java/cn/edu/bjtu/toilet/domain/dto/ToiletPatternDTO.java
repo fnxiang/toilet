@@ -13,11 +13,11 @@ public class ToiletPatternDTO {
 
     private Date gmtModified;
 
-    private String envConditions;
+    private EnvConditionsDTO envConditions;
 
-    private String humanFactors;
+    private HumanFactorsDTO humanFactors;
 
-    private String pipNetworkConditions;
+    private PipNetworkConditionsDTO pipNetworkConditions;
 
-    private String resourceUtilization;
+    private ResourceUtilizationDTO resourceUtilization;
 }
