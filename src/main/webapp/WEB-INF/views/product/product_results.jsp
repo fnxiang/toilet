@@ -446,6 +446,29 @@
             <div class="list_carousel">
 
                 <ul id="list_product" class="list_product">
+
+                    <li class="">
+                        <div class="grid_3 product">
+                            <div class="prev">
+                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_info"><img
+                                        src="${pageContext.request.contextPath}/static/product/res/1.png"
+                                        alt="" title=""/></a>
+                            </div>
+                            <!-- .prev -->
+                            <h3 class="title">三格式PE化粪池</h3>
+
+                            <div class="cart">
+                                <div class="price">
+                                    <div class="vert">
+                                        <div class="price_new">价格：0.45万元</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .cart -->
+                        </div>
+                        <!-- .grid_3 -->
+                    </li>
+
                     <li class="">
                         <div class="grid_3 product">
                             <div class="prev">
@@ -454,7 +477,7 @@
                                         alt="" title=""/></a>
                             </div>
                             <!-- .prev -->
-                            <h3 class="title">化粪池A</h3>
+                            <h3 class="title">三格化粪池</h3>
 
                             <div class="cart">
                                 <div class="price">
