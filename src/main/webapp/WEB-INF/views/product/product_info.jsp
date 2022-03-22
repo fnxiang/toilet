@@ -119,8 +119,7 @@
         <div class="grid_3">
             <hgroup>
                 <h1 id="site_logo"><a
-                        href="javascript:window.location.href='${pageContext.request.contextPath}/product/index'"
-                        title=""><img
+                        href="javascript:window.location.href='${pageContext.request.contextPath}/'" title=""><img
                         src="${pageContext.request.contextPath}/static/product/res/logo.png" width="75%"
                         alt="Online Store Theme Logo"/></a></h1>
 
@@ -406,15 +405,15 @@
 
 
         <div id="content" class="grid_12">
-            <h1 class="page_title">三格化粪池</h1>
+            <h1 class="page_title">三格式PE化粪池</h1>
 
             <div class="product_page grid_12">
                 <div class="grid_4 img_slid" id="products">
                     <div class="preview slides_container">
                         <div class="prev_bg">
-                            <a href="${pageContext.request.contextPath}/static/product/res/1.png" class="jqzoom"
+                            <a href="${pageContext.request.contextPath}/static/product/res/temp/1.png" class="jqzoom"
                                rel='gal1' title="">
-                                <img src="${pageContext.request.contextPath}/static/product/res/1.png" height="500px"
+                                <img src="${pageContext.request.contextPath}/static/product/res/temp/1.png" height="500px"
                                      width="500px" title="" alt=""/>
                             </a>
                         </div>
@@ -423,17 +422,17 @@
 
                     <ul class="pagination clearfix" id="thumblist">
                         <li><a class="zoomThumbActive" href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/1.png',largeimage: '${pageContext.request.contextPath}/static/product/res/1.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/1.png' alt=""></a></li>
+                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/temp/1.png',largeimage: '${pageContext.request.contextPath}/static/product/res/temp/1.png'}"><img
+                                src='${pageContext.request.contextPath}/static/product/res/temp/1.png' alt=""></a></li>
                         <li><a href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/2.png',largeimage: '${pageContext.request.contextPath}/static/product/res/2.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/2.png' alt=""></a></li>
+                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/temp/2.png',largeimage: '${pageContext.request.contextPath}/static/product/res/temp/2.png'}"><img
+                                src='${pageContext.request.contextPath}/static/product/res/temp/2.png' alt=""></a></li>
                         <li><a href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/3.png',largeimage: '${pageContext.request.contextPath}/static/product/res/3.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/3.png' alt=""></a></li>
+                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/temp/3.png',largeimage: '${pageContext.request.contextPath}/static/product/res/temp/3.png'}"><img
+                                src='${pageContext.request.contextPath}/static/product/res/temp/3.png' alt=""></a></li>
                         <li><a href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/2.png',largeimage: '${pageContext.request.contextPath}/static/product/res/2.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/2.png' alt=""></a></li>
+                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/temp/4.png',largeimage: '${pageContext.request.contextPath}/static/product/res/temp/4.png'}"><img
+                                src='${pageContext.request.contextPath}/static/product/res/temp/4.png' alt=""></a></li>
                     </ul>
 
                 </div>
@@ -442,9 +441,10 @@
                 <div class="grid_7">
                     <div class="entry_content">
                         <div class="review">
-                            <h5>三格化粪池</h5>
+                            <h5>三格式PE化粪池</h5>
                         </div>
-                        <p>三格式化粪池是由三个相互连通的密封粪池组成，粪便由进粪管进入第一池依次顺流到第三池。</p>
+                        <p>永东塑料制品</p>
+                        <p>15154500359</p>
 
                         <div class="ava_price">
                             <div class="availability_sku">
@@ -455,7 +455,7 @@
                             <!-- .availability_sku -->
 
                             <div class="price">
-                                <div class="price_new">1.8万元</div>
+                                <div class="price_new">450元</div>
                             </div>
                             <!-- .price -->
                         </div>
@@ -483,53 +483,39 @@
                         <div class="clear"></div>
 
                         <div class="tab1 tab_body">
-                            <h4>这个部分未来要填充对产品的描述</h4>
+                            <h4>三格式PE化粪池</h4>
 
-                            <p>
-                                三格化粪池由相联的三个池子组成，中间由过粪管联通，主要是利用厌氧发酵、中层过粪和寄生虫卵比重大于一般混合液比重而易于沉淀的原理，粪便在池内经过30天以上的发酵分解，中层粪液依次由1池流至3池，以达到沉淀或杀灭粪便中寄生虫卵和肠道致病菌的目的，第3池粪液成为优质化肥。</p>
+                            <p>永东塑料制品</p>
                             <ul>
-                                <li>新鲜粪便由进粪口进入第一池，池内粪便开始发酵分解、因比重不同粪液可自然分为三层</li>
-                                <li>上层为糊状粪皮</li>
-                                <li>下层为块状或颗状粪渣</li>
-                                <li>中层为比较澄清的粪液</li>
+                                <li>联系方式：15154500359</li>
+                                <li>适用省份：山东省</li>
+                                <li>用途：适用于新农村改造、家用、小区等各大建设的排水和排污工程。</li>
                             </ul>
-
-                            <p>三格化粪池厕所的地下部分结构由便器、进粪管、过粪管、三格化粪池、盖板五部分组成。</p>
-                            <ol>
-                                <li>便器：由工厂加工生产或白行预制，便器采用直通式，与进粪管联接，也可使用水封式便器，不再安装近粪管。</li>
-                                <li>进粪管：塑料、铸铁、水泥管均可，内壁光滑、防止结粪、内径为10cm，长度为30-50cm。</li>
-                                <li>过粪管：以塑料管为好，直径为10-15cm，1-2池间的过粪管长约70-75cm，2-3池间的过粪管长约50一55Cm。</li>
-                                <li>三格池：用砖砌水泥粉壁面或水泥现浇，预制均可，以"目"字形为主要类型，若受地形限制，"品"字形、"丁"个型摆都也可。</li>
-                                <li>盖板：可自行预制，要做到既密闭，又便于清渣和取粪。</li>
-                            </ol>
-
-                            <p>
-                                三格化粪池容积应根据使用人数、粪便发酵腐熟的时间以及沉卵灭菌的要求来决定。一般我国通用计算参数是每人每天的粪尿排泄量，包括少量冲洗厕所用水在内，按3．5公斤(最低量)计算，粪便发酵腐熟时间及病原体残废时间按30天计算，其中在第一池需停留20天，第二池停留10天，第一池和第二他的容积分别按此停留时间计算，第三池容积一般为一、二池之和。 </p>
 
                             <table>
                                 <tr>
                                     <th class="bg">规格</th>
-                                    <th>55</th>
+                                    <th>1.5</th>
                                     <th class="bg">适用人数（人）</th>
                                     <th>5</th>
                                 </tr>
                                 <tr>
                                     <td class="bg">尺寸（长*宽*高 mm）</td>
-                                    <td>500*500*500</td>
+                                    <td>200*116*120</td>
                                     <td class="bg">材质</td>
-                                    <td>玻璃钢</td>
+                                    <td>PE</td>
                                 </tr>
                                 <tr>
                                     <td class="bg">颜色</td>
-                                    <td>白色</td>
+                                    <td>黑色</td>
                                     <td class="bg">使用寿命</td>
-                                    <td>50年</td>
+                                    <td>55年</td>
                                 </tr>
                                 <tr>
                                     <td class="bg">用途</td>
-                                    <td>公厕</td>
+                                    <td>均可</td>
                                     <td class="bg">清理周期</td>
-                                    <td>5个月</td>
+                                    <td>25个月</td>
                                 </tr>
                             </table>
                             <div class="clear"></div>
@@ -538,11 +524,11 @@
 
                         <div class="tab2 tab_body">
                             <h4>使用说明</h4>
-                            <ul class="comments">
-
-
-                            </ul>
-                            <!-- .comments -->
+                            <div class="preview slides_container">
+                                <div class="prev_bg">
+                                    <img src="${pageContext.request.contextPath}/static/product/res/temp/shiyongshuoming.png" title="" alt=""/>
+                                </div>
+                            </div><!-- .prev -->
 
 
                             <div class="clear"></div>
@@ -551,6 +537,11 @@
 
                         <div class="tab3 tab_body">
                             <h4>质保证书</h4>
+                            <div class="preview slides_container">
+                                <div class="prev_bg">
+                                    <img src="${pageContext.request.contextPath}/static/product/res/temp/zhiliangbaozheng.png" title="" alt=""/>
+                                </div>
+                            </div><!-- .prev -->
 
                             <div class="clear"></div>
                         </div>

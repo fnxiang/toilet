@@ -92,7 +92,7 @@
     <header id="branding">
         <div class="grid_3">
             <hgroup>
-                <h1 id="site_logo"><a href="#" title=""><img
+                <h1 id="site_logo"><a href="javascript:window.location.href='${pageContext.request.contextPath}/'" title=""><img
                         src="${pageContext.request.contextPath}/static/product/res/logo.png" width="75%"
                         alt="Online Store Theme Logo"/></a></h1>
 

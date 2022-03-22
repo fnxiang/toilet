@@ -102,7 +102,7 @@
     <header id="branding">
         <div class="grid_3">
             <hgroup>
-                <h1 id="site_logo"><a href="#" title=""><img
+                <h1 id="site_logo"><a href="javascript:window.location.href='${pageContext.request.contextPath}/'" title=""><img
                         src="${pageContext.request.contextPath}/static/product/res/logo.png" width="75%"
                         alt="Online Store Theme Logo"/></a></h1>
 
@@ -459,7 +459,7 @@
                             <div class="cart">
                                 <div class="price">
                                     <div class="vert">
-                                        <div class="price_new">价格：2万元</div>
+                                        <div class="price_new">价格：1000元</div>
                                     </div>
                                 </div>
                             </div>

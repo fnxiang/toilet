@@ -119,7 +119,7 @@
         <div class="grid_3">
             <hgroup>
                 <h1 id="site_logo"><a
-                        href="javascript:window.location.href='${pageContext.request.contextPath}/product/index'"
+                        href="javascript:window.location.href='${pageContext.request.contextPath}/'"
                         title=""><img
                         src="${pageContext.request.contextPath}/static/product/res/logo.png" width="75%"
                         alt="Online Store Theme Logo"/></a></h1>
@@ -455,7 +455,7 @@
                             <!-- .availability_sku -->
 
                             <div class="price">
-                                <div class="price_new">2万元</div>
+                                <div class="price_new">1000元</div>
                             </div>
                             <!-- .price -->
                         </div>
