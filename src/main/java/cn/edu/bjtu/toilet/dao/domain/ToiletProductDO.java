@@ -12,6 +12,8 @@ public class ToiletProductDO implements Serializable {
 
     private String productName;
 
+    private Integer status;
+
     private String manufacturerName;
 
     private String manufacturerCell;
@@ -82,6 +84,14 @@ public class ToiletProductDO implements Serializable {
 
     public void setProductName(String productName) {
         this.productName = productName == null ? null : productName.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getManufacturerName() {
@@ -246,6 +256,7 @@ public class ToiletProductDO implements Serializable {
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", productName=").append(productName);
+        sb.append(", status=").append(status);
         sb.append(", manufacturerName=").append(manufacturerName);
         sb.append(", manufacturerCell=").append(manufacturerCell);
         sb.append(", productType=").append(productType);

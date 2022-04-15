@@ -6,6 +6,7 @@
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="manufacturer_name" jdbcType="VARCHAR" property="manufacturerName" />
     <result column="manufacturer_cell" jdbcType="VARCHAR" property="manufacturerCell" />
     <result column="product_type" jdbcType="INTEGER" property="productType" />
@@ -87,7 +88,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, product_name, manufacturer_name, manufacturer_cell, 
+    id, gmt_create, gmt_modified, product_name, status, manufacturer_name, manufacturer_cell, 
     product_type, pattern_type, pattern_id, pattern_name, company_email, applicable_province, 
     `applicable _temperature`, version, deleted, source, attributes
   </sql>
@@ -145,23 +146,23 @@
   </delete>
   <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.ToiletProductDO">
     insert into toilet_product (id, gmt_create, gmt_modified, 
-      product_name, manufacturer_name, manufacturer_cell, 
-      product_type, pattern_type, pattern_id, 
-      pattern_name, company_email, applicable_province, 
-      `applicable _temperature`, version, deleted, 
-      source, attributes, purpose, 
-      product_parameters, quality_assurance_materials_file_path, 
-      instruction_file_path, product_features, 
-      pics_path)
+      product_name, status, manufacturer_name, 
+      manufacturer_cell, product_type, pattern_type, 
+      pattern_id, pattern_name, company_email, 
+      applicable_province, `applicable _temperature`, 
+      version, deleted, source, 
+      attributes, purpose, product_parameters, 
+      quality_assurance_materials_file_path, instruction_file_path, 
+      product_features, pics_path)
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{productName,jdbcType=VARCHAR}, #{manufacturerName,jdbcType=VARCHAR}, #{manufacturerCell,jdbcType=VARCHAR}, 
-      #{productType,jdbcType=INTEGER}, #{patternType,jdbcType=VARCHAR}, #{patternId,jdbcType=INTEGER}, 
-      #{patternName,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, #{applicableProvince,jdbcType=VARCHAR}, 
-      #{applicableTemperature,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, 
-      #{source,jdbcType=VARCHAR}, #{attributes,jdbcType=VARCHAR}, #{purpose,jdbcType=LONGVARCHAR}, 
-      #{productParameters,jdbcType=LONGVARCHAR}, #{qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR}, 
-      #{instructionFilePath,jdbcType=LONGVARCHAR}, #{productFeatures,jdbcType=LONGVARCHAR}, 
-      #{picsPath,jdbcType=LONGVARCHAR})
+      #{productName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{manufacturerName,jdbcType=VARCHAR}, 
+      #{manufacturerCell,jdbcType=VARCHAR}, #{productType,jdbcType=INTEGER}, #{patternType,jdbcType=VARCHAR}, 
+      #{patternId,jdbcType=INTEGER}, #{patternName,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, 
+      #{applicableProvince,jdbcType=VARCHAR}, #{applicableTemperature,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, #{source,jdbcType=VARCHAR}, 
+      #{attributes,jdbcType=VARCHAR}, #{purpose,jdbcType=LONGVARCHAR}, #{productParameters,jdbcType=LONGVARCHAR}, 
+      #{qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR}, #{instructionFilePath,jdbcType=LONGVARCHAR}, 
+      #{productFeatures,jdbcType=LONGVARCHAR}, #{picsPath,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.bjtu.toilet.dao.domain.ToiletProductDO">
     insert into toilet_product
@@ -177,6 +178,9 @@
       </if>
       <if test="productName != null">
         product_name,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="manufacturerName != null">
         manufacturer_name,
@@ -248,6 +252,9 @@
       </if>
       <if test="productName != null">
         #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="manufacturerName != null">
         #{manufacturerName,jdbcType=VARCHAR},
@@ -329,6 +336,9 @@
       <if test="record.productName != null">
         product_name = #{record.productName,jdbcType=VARCHAR},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.manufacturerName != null">
         manufacturer_name = #{record.manufacturerName,jdbcType=VARCHAR},
       </if>
@@ -397,6 +407,7 @@
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       product_name = #{record.productName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
       manufacturer_name = #{record.manufacturerName,jdbcType=VARCHAR},
       manufacturer_cell = #{record.manufacturerCell,jdbcType=VARCHAR},
       product_type = #{record.productType,jdbcType=INTEGER},
@@ -426,6 +437,7 @@
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       product_name = #{record.productName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
       manufacturer_name = #{record.manufacturerName,jdbcType=VARCHAR},
       manufacturer_cell = #{record.manufacturerCell,jdbcType=VARCHAR},
       product_type = #{record.productType,jdbcType=INTEGER},
@@ -454,6 +466,9 @@
       </if>
       <if test="productName != null">
         product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="manufacturerName != null">
         manufacturer_name = #{manufacturerName,jdbcType=VARCHAR},
@@ -520,6 +535,7 @@
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       product_name = #{productName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       manufacturer_name = #{manufacturerName,jdbcType=VARCHAR},
       manufacturer_cell = #{manufacturerCell,jdbcType=VARCHAR},
       product_type = #{productType,jdbcType=INTEGER},
@@ -546,6 +562,7 @@
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       product_name = #{productName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       manufacturer_name = #{manufacturerName,jdbcType=VARCHAR},
       manufacturer_cell = #{manufacturerCell,jdbcType=VARCHAR},
       product_type = #{productType,jdbcType=INTEGER},

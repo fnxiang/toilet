@@ -84,7 +84,6 @@ public class ProductController {
             if (Objects.isNull(toiletProductDTO)) {
                 return ProductResponse.failed("save product failed");
             }
-
         } catch (Exception e) {
             LOG.error("upload products failed");
         }
@@ -135,6 +134,7 @@ public class ProductController {
         productDTO.setProductType(ProductType.ofName(params.get("productType")).getCode());
         productDTO.setPatternType(params.get("patternType"));
         productDTO.setPatternName(params.get("patternName"));
+        productDTO.setIsNewPattern(params.get("newmoderadios1").equals("true"));
         productDTO.setApplicableProvince(params.get("provinces"));
         productDTO.setApplicableTemperature(params.get("temperature"));
         productDTO.setPurpose(params.get("purpose"));

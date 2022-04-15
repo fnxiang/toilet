@@ -204,7 +204,7 @@
                                         <div class="form-check-inline form-check">
                                             <label for="newmoderadios1" class="form-check-label">
                                                 <input type="radio" id="newmoderadios1" name="newmoderadios"
-                                                       value="showNewMode" class="form-check-input">是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                       value="showNewMode" class="form-check-input" checked>是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             </label>
                                             <label for="newmoderadios2" class="form-check-label">
                                                 <input type="radio" id="newmoderadios2" name="newmoderadios"
@@ -806,6 +806,7 @@
         data.append("patternName", encodeURI($('#newmodename').val())); //新模式名称
 
         var radio = document.getElementsByName("newmoderadios"); //是否添加新模式
+        alert(radio[0].checked);
         data.append("newmoderadios1", radio[0].checked); //True 为添加
         data.append("newmoderadios2", radio[1].checked); //True 为不添加
 

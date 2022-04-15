@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.domain.dto;
 
+import cn.edu.bjtu.toilet.constant.ProductStatus;
 import lombok.Data;
 
 import java.util.Date;
@@ -22,6 +23,8 @@ public class ToiletProductDTO {
 
     private String patternType;
 
+    private Boolean isNewPattern;
+
     private ToiletPatternDTO toiletPatternDTO;
 
     private String patternName;
@@ -43,5 +46,7 @@ public class ToiletProductDTO {
     private String picsPath;
 
     private String companyEmail;
+
+    private ProductStatus status;
 
 }

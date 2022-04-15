@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
+<%@page import="java.util.List" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -131,7 +133,20 @@
 											<th class="text-center">操作</th>
 										</tr>
 									</thead>
+									<% List<ToiletProductDTO> list = (List<ToiletProductDTO>)request.getAttribute("productList");%>
 									<tbody>
+									<% for (int i=0;i<list.size();i++) {%>
+									<tr>
+										<td><%=i+1%></td>
+										<td>张三</td>
+										<td>企业用户</td>
+										<td class="text-center">
+											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6'"> 查看详情</a>
+											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
+										</td>
+									</tr>
+									<%}%>
+
 										<tr>
 											<td>1</td>
 											<td>张三</td>
