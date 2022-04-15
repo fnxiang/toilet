@@ -41,7 +41,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         }
         criteria.andDeletedNotEqualTo(true);
 
-        List<ToiletProductDO> productDOList = productDOMapper.selectByExample(toiletProductDOSelective);
+        List<ToiletProductDO> productDOList = productDOMapper.selectByExampleWithBLOBs(toiletProductDOSelective);
 
         return productDOList;
     }
@@ -212,5 +212,14 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         }
 
         return patternDOMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public ToiletProductDO queryProductById(Integer id) {
+        if (Objects.isNull(id) || id < 1) {
+            throw new ToiletSystemException("query pattern Id error", "-1");
+        }
+
+        return productDOMapper.selectByPrimaryKey(id);
     }
 }

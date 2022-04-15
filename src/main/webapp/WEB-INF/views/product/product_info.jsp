@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <!DOCTYPE HTML>
 <html>
 <!-- Added by HTTrack -->
@@ -90,6 +91,12 @@
 
 </head>
 <body>
+<%ToiletProductDTO productDTO = (ToiletProductDTO)request.getAttribute("product");%>
+<%--获取路径用于显示图片和文件--%>
+<%  String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";%>
 <div class="container_12">
     <div id="top">
         <div class="grid_5">
@@ -405,7 +412,7 @@
 
 
         <div id="content" class="grid_12">
-            <h1 class="page_title">三格式PE化粪池</h1>
+            <h1 class="page_title"><%=productDTO.getProductName()%></h1>
 
             <div class="product_page grid_12">
                 <div class="grid_4 img_slid" id="products">
@@ -422,17 +429,8 @@
 
                     <ul class="pagination clearfix" id="thumblist">
                         <li><a class="zoomThumbActive" href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/temp/1.png',largeimage: '${pageContext.request.contextPath}/static/product/res/temp/1.png'}"><img
+                               rel="{gallery: 'gal1', smallimage: '<%=basePath + productDTO.getInstructionFilePath()%>',largeimage: '<%=basePath + productDTO.getInstructionFilePath()%>'}"><img
                                 src='${pageContext.request.contextPath}/static/product/res/temp/1.png' alt=""></a></li>
-                        <li><a href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/temp/2.png',largeimage: '${pageContext.request.contextPath}/static/product/res/temp/2.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/temp/2.png' alt=""></a></li>
-                        <li><a href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/temp/3.png',largeimage: '${pageContext.request.contextPath}/static/product/res/temp/3.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/temp/3.png' alt=""></a></li>
-                        <li><a href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '${pageContext.request.contextPath}/static/product/res/temp/4.png',largeimage: '${pageContext.request.contextPath}/static/product/res/temp/4.png'}"><img
-                                src='${pageContext.request.contextPath}/static/product/res/temp/4.png' alt=""></a></li>
                     </ul>
 
                 </div>
@@ -441,10 +439,10 @@
                 <div class="grid_7">
                     <div class="entry_content">
                         <div class="review">
-                            <h5>三格式PE化粪池</h5>
+                            <h5><%=productDTO.getProductName()%></h5>
                         </div>
-                        <p>永东塑料制品</p>
-                        <p>15154500359</p>
+                        <p><%=productDTO.getManufacturerName()%></p>
+                        <p><%=productDTO.getManufacturerCell()%></p>
 
                         <div class="ava_price">
                             <div class="availability_sku">
@@ -455,7 +453,7 @@
                             <!-- .availability_sku -->
 
                             <div class="price">
-                                <div class="price_new">450元</div>
+                                <div class="price_new"><%=productDTO.getProductParameters().getPrice()%>元</div>
                             </div>
                             <!-- .price -->
                         </div>
@@ -483,50 +481,50 @@
                         <div class="clear"></div>
 
                         <div class="tab1 tab_body">
-                            <h4>三格式PE化粪池</h4>
+                            <h4><%=productDTO.getProductName()%></h4>
 
-                            <p>永东塑料制品</p>
+                            <p><%=productDTO.getManufacturerName()%></p>
                             <ul>
-                                <li>联系方式：15154500359</li>
-                                <li>适用省份：山东省</li>
-                                <li>用途：适用于新农村改造、家用、小区等各大建设的排水和排污工程。</li>
+                                <li>联系方式：<%=productDTO.getManufacturerCell()%></li>
+                                <li>适用省份：<%=productDTO.getProductName()%></li>
+                                <li>用途：<%=productDTO.getPurpose()%></li>
                             </ul>
 
                             <table>
                                 <tr>
                                     <th class="bg">规格</th>
-                                    <th>1.5</th>
+                                    <th><%=productDTO.getProductParameters().getStandard()%></th>
                                     <th class="bg">适用人数（人）</th>
-                                    <th>5</th>
+                                    <th><%=productDTO.getProductParameters().getApplicableNum()%></th>
                                 </tr>
                                 <tr>
                                     <td class="bg">尺寸（长*宽*高 mm）</td>
-                                    <td>200*116*120</td>
+                                    <td><%=productDTO.getProductParameters().getLength()%>*<%=productDTO.getProductParameters().getWide()%>*<%=productDTO.getProductParameters().getHigh()%></td>
                                     <td class="bg">材质</td>
-                                    <td>PE</td>
+                                    <td><%=productDTO.getProductParameters().getTexture()%></td>
                                 </tr>
                                 <tr>
                                     <td class="bg">颜色</td>
-                                    <td>黑色</td>
+                                    <td><%=productDTO.getProductParameters().getColor()%></td>
                                     <td class="bg">使用寿命</td>
-                                    <td>55年</td>
+                                    <td><%=productDTO.getProductParameters().getServiceLife()%></td>
                                 </tr>
                                 <tr>
                                     <td class="bg">用途</td>
-                                    <td>均可</td>
+                                    <td><%=productDTO.getProductParameters().getParamPurpose()%></td>
                                     <td class="bg">清理周期</td>
-                                    <td>25个月</td>
+                                    <td><%=productDTO.getProductParameters().getCleanupCycle()%></td>
                                 </tr>
                             </table>
                             <div class="clear"></div>
                         </div>
                         <!-- .tab1 .tab_body -->
-
+<%--                        //TODO 限制大小--%>
                         <div class="tab2 tab_body">
                             <h4>使用说明</h4>
                             <div class="preview slides_container">
                                 <div class="prev_bg">
-                                    <img src="${pageContext.request.contextPath}/static/product/res/temp/shiyongshuoming.png" title="" alt=""/>
+                                    <img src="<%=basePath + productDTO.getInstructionFilePath()%>" title="" alt=""/>
                                 </div>
                             </div><!-- .prev -->
 
@@ -534,12 +532,12 @@
                             <div class="clear"></div>
                         </div>
                         <!-- .tab2 .tab_body -->
-
+<%--                        //TODO 限制大小--%>
                         <div class="tab3 tab_body">
                             <h4>质保证书</h4>
                             <div class="preview slides_container">
                                 <div class="prev_bg">
-                                    <img src="${pageContext.request.contextPath}/static/product/res/temp/zhiliangbaozheng.png" title="" alt=""/>
+                                    <img src="<%=basePath + productDTO.getQualityAssuranceMaterialsFilePath()%>" title="" alt=""/>
                                 </div>
                             </div><!-- .prev -->
 

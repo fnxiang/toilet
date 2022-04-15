@@ -20,6 +20,8 @@ public class PageIndexPathConstants {
 
     public static final String PROF_REGISTER_INDEX = "/base/register_professor";
 
+    public static final String SEARCH_INDEX = "/product/model_list";
+
     /**
      * page to page base url
      * */

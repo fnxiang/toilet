@@ -361,54 +361,6 @@
 </div>
 <!-- .block_nav_primary -->
 
-<div class="clear"></div>
-
-<!--  <div class="container_12">-->
-<!--    <div class="grid_12">-->
-<!--        <div class="slidprev"><span>Prev</span></div>-->
-<!--        <div class="slidnext"><span>Next</span></div>-->
-<!--        <div id="slider">-->
-<!--          <div id="slide1">-->
-<!--            <img src="${pageContext.request.contextPath}/static/product/res/placeholder.jpg" alt="" title="" />-->
-<!--            <div class="slid_text">-->
-<!--              <h3 class="slid_title"><span>首页图片需要单独制作</span></h3>-->
-<!--              <p><span>首页轮播图片需要单独制作</span></p>-->
-<!--              <p><span>这里放几张占位图</span></p>-->
-<!--              <p><span>图片尺寸为984×480像素</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          <div id="slide2">-->
-<!--            <img src="${pageContext.request.contextPath}/static/product/res/placeholder.jpg" alt="" title="" />-->
-<!--            <div class="slid_text">-->
-<!--              <h3 class="slid_title"><span>首页图片需要单独制作</span></h3>-->
-<!--              <p><span>首页轮播图片需要单独制作</span></p>-->
-<!--              <p><span>这里放几张占位图</span></p>-->
-<!--              <p><span>图片尺寸为984×480像素</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          <div id="slide3">-->
-<!--            <img src="${pageContext.request.contextPath}/static/product/res/placeholder.jpg" alt="" title="" />-->
-<!--            <div class="slid_text">-->
-<!--              <h3 class="slid_title"><span>首页图片需要单独制作</span></h3>-->
-<!--              <p><span>首页轮播图片需要单独制作</span></p>-->
-<!--              <p><span>这里放几张占位图</span></p>-->
-<!--              <p><span>图片尺寸为984×480像素</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>&lt;!&ndash; .slider &ndash;&gt;-->
-<!--        <div id="myController">-->
-<!--          <div class="control"><span>1</span></div>-->
-<!--          <div class="control"><span>2</span></div>-->
-<!--          <div class="control"><span>3</span></div>-->
-<!--        </div>-->
-
-
-<!--    </div>&lt;!&ndash; .grid_12 &ndash;&gt;-->
-<!--  </div>&lt;!&ndash; .container_12 &ndash;&gt;-->
-<div class="clear"></div>
-
 <section id="main" class="home">
     <div class="container_12">
         <div class="clear"></div>
@@ -427,20 +379,21 @@
             <div class="list_carousel">
 
                 <ul id="list_product" class="list_product">
+                    <% for (ToiletProductDTO productDTO : productList) {%>
                     <li class="">
                         <div class="grid_3 product">
                             <div class="prev">
-                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_info"><img
-                                        src="${pageContext.request.contextPath}/static/product/res/temp/4.png"
+                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_info&product_id=<%=productDTO.getId()%>"><img
+                                        src="<%=basePath+productDTO.getPicsPath()%>"
                                         alt="" title=""/></a>
                             </div>
                             <!-- .prev -->
-                            <h3 class="title">三格式PE化粪池</h3>
+                            <h3 class="title"><%=productDTO.getProductName()%></h3>
 
                             <div class="cart">
                                 <div class="price">
                                     <div class="vert">
-                                        <div class="price_new">价格：450元</div>
+                                        <div class="price_new">价格：<%=productDTO.getProductParameters().getPrice()%></div>
                                     </div>
                                 </div>
                             </div>
@@ -448,7 +401,7 @@
                         </div>
                         <!-- .grid_3 -->
                     </li>
-
+                    <%}%>
                     <li class="">
                         <div class="grid_3 product">
                             <div class="prev">

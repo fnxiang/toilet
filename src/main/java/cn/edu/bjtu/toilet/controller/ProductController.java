@@ -5,6 +5,7 @@ import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.service.ProductService;
+import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.fileupload.FileItem;
@@ -54,6 +55,15 @@ public class ProductController {
     @RequestMapping("/toProductPage")
     public String toPage(HttpServletRequest request){
         String url = request.getParameter("url");
+        String productId = request.getParameter("product_id");
+        switch (url) {
+            case "product_info":
+                ToiletProductDTO toiletProductDTO = productService.queryToiletById(productId);
+                request.setAttribute("product", toiletProductDTO);
+                break;
+            default:
+                break;
+        }
         url = PRODUCT_BASE + url;
         return url;
     }
@@ -62,7 +72,7 @@ public class ProductController {
     @ResponseBody
     public ProductResponse productEntry(HttpServletRequest request) {
         try {
-            Map<String, String> params = resolveParams(request);
+            Map<String, String> params = ParameterUtil.resolveParams(request, UPLOAD_DIRECTORY);
             if (Objects.isNull(params)) {
                 return ProductResponse.failed("resolve params error");
             }
@@ -96,22 +106,22 @@ public class ProductController {
         //人文因素
         HumanFactorsDTO humanFactorsDTO = new HumanFactorsDTO();
         humanFactorsDTO.setDensity(params.get("density"));
-        humanFactorsDTO.setUsageHabits(params.get("usageHabits").equals("true"));
+        humanFactorsDTO.setUsageHabits(params.get("usageHabits").equals("是"));
 
         toiletPatternDTO.setHumanFactors(humanFactorsDTO);
 
         //管网
         PipNetworkConditionsDTO pipNetworkConditionsDTO = new PipNetworkConditionsDTO();
-        pipNetworkConditionsDTO.setHasSewageTreatment(params.get("sewageTreatment").equals("true"));
-        pipNetworkConditionsDTO.setHasSewerLines(params.get("sewerLines").equals("true"));
+        pipNetworkConditionsDTO.setHasSewageTreatment(params.get("sewageTreatment").equals("是"));
+        pipNetworkConditionsDTO.setHasSewerLines(params.get("sewerLines").equals("是"));
 
         toiletPatternDTO.setPipNetworkConditions(pipNetworkConditionsDTO);
 
         //资源
         ResourceUtilizationDTO resourceUtilizationDTO = new ResourceUtilizationDTO();
-        resourceUtilizationDTO.setIsBiogasUtilization(params.get("biogasUtilization").equals("true"));
-        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment").equals("true"));
-        resourceUtilizationDTO.setOtherTreatment(params.get("otherTreatment").equals("true"));
+        resourceUtilizationDTO.setIsBiogasUtilization(params.get("biogasUtilization").equals("是"));
+        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment").equals("是"));
+        resourceUtilizationDTO.setOtherTreatment(params.get("otherTreatment").equals("是"));
         toiletPatternDTO.setResourceUtilization(resourceUtilizationDTO);
 
         return toiletPatternDTO;
@@ -144,57 +154,14 @@ public class ProductController {
         paramsDTO.setCleanupCycle(params.get("cleanupCycle"));
         paramsDTO.setPrice(Double.valueOf(params.get("price")));
         paramsDTO.setServiceLife(params.get("serviceLife"));
+        paramsDTO.setLength(params.get("length"));
+        paramsDTO.setWide(params.get("wide"));
+        paramsDTO.setHigh(params.get("high"));
+
 
         productDTO.setProductParameters(paramsDTO);
 
         return productDTO;
-    }
-
-
-    private Map<String, String> resolveParams(HttpServletRequest request) throws Exception {
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        List<String> fileNames = Lists.newArrayList("qualityMaterial", "introductions", "pics");
-        Set<String> allowTypes = Sets.newHashSet("doc", "docx", "pdf", "jpg", "jpeg", "png", "PNG");
-
-        List<FileItem> items = upload.parseRequest(request);
-        Map<String, String> params = new HashMap<>();
-        String uploadPath = request.getServletContext().getRealPath(".")+File.separator+UPLOAD_DIRECTORY+request.getSession().getAttribute("uId").toString()+File.separator;
-
-        File uploadDir = new File(uploadPath);
-        System.out.println(uploadPath);
-        if (!uploadDir.exists()) {
-            if (!uploadDir.mkdirs()) {
-                return null;
-            }
-        }
-        for (FileItem item : items) {
-            if(item.isFormField()) {
-                params.put(item.getFieldName(), decodeJsString(item.getString()));
-            } else {
-                if (item.getName() != null && fileNames.contains(item.getFieldName())) {
-                    String name = item.getName();
-                    String type = name.substring(name.lastIndexOf('.') + 1);
-
-                    if (!allowTypes.contains(type)) {
-                        LOG.error("文件格式不支持");
-                    } else {
-                        int start = name.lastIndexOf("\\");
-                        String filename = name.substring(start + 1);
-                        String filePath = uploadPath + "/" + filename;
-                        String relativePath = UPLOAD_DIRECTORY + File.separator + request.getSession().getAttribute("uId").toString() + File.separator + filename;
-                        File file = new File(filePath);
-                        item.write(file);
-                        params.put(item.getFieldName(), relativePath);
-                    }
-                }
-            }
-        }
-        return params;
-    }
-
-    private String decodeJsString(String value) throws UnsupportedEncodingException {
-        return URLDecoder.decode(value, "UTF-8");
     }
 
 }

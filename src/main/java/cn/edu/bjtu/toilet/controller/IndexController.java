@@ -76,6 +76,13 @@ public class IndexController {
         return url;
     }
 
+    @RequestMapping(value = "/logout")
+    public String logout(HttpServletRequest request){
+       request.getSession().setAttribute("uId", "");
+       request.getSession().setAttribute("role", "");
+        return "/";
+    }
+
     /**
      * request handle
      * */

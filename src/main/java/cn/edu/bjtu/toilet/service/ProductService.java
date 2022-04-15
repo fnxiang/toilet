@@ -10,4 +10,6 @@ public interface ProductService {
     ToiletProductDTO saveProduct(ToiletProductDTO productDTO, ToiletPatternDTO patternDTO);
 
     List<ToiletProductDTO> queryAllProductList(String email);
+
+    ToiletProductDTO queryToiletById(String id);
 }

@@ -7,7 +7,6 @@ import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.ProductService;
-import com.google.common.collect.Lists;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -30,6 +29,16 @@ public class ProductServiceImpl implements ProductService {
             return toiletProductDTO;
         }).collect(Collectors.toList());
         return productDTOS;
+    }
+
+    @Override
+    public ToiletProductDTO queryToiletById(String id) {
+        ToiletProductDO productDO = toiletProductDao.queryProductById(Integer.valueOf(id));
+        ToiletPatternDO patternDO = toiletProductDao.queryPatternById(productDO.getPatternId());
+        ToiletProductDTO productDTO = ProductConverter.toDTO(productDO);
+        productDTO.setToiletPatternDTO(ProductConverter.toDTO(patternDO));
+
+        return productDTO;
     }
 
     @Override

@@ -20,4 +20,10 @@ public class ProductParamsDTO {
     private String paramPurpose;
 
     private String cleanupCycle;
+
+    private String length;
+
+    private String wide;
+
+    private String high;
 }
