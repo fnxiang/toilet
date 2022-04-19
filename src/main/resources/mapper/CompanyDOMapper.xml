@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.edu.bjtu.toilet.dao.mapper.UserDOMapper">
-  <resultMap id="BaseResultMap" type="cn.edu.bjtu.toilet.dao.domain.UserDO">
+<mapper namespace="cn.edu.bjtu.toilet.dao.mapper.CompanyDOMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.bjtu.toilet.dao.domain.CompanyDO">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="work_company" jdbcType="VARCHAR" property="workCompany" />
-    <result column="position" jdbcType="VARCHAR" property="position" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
     <result column="role" jdbcType="INTEGER" property="role" />
+    <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
+    <result column="business_license_file_path" jdbcType="VARCHAR" property="businessLicenseFilePath" />
+    <result column="enterprise_address" jdbcType="VARCHAR" property="enterpriseAddress" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="official_site" jdbcType="VARCHAR" property="officialSite" />
+    <result column="contact_name" jdbcType="VARCHAR" property="contactName" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="contact_phone" jdbcType="VARCHAR" property="contactPhone" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.bjtu.toilet.dao.domain.UserDO">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.bjtu.toilet.dao.domain.CompanyDO">
     <result column="attributes" jdbcType="LONGVARCHAR" property="attributes" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -78,13 +82,14 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, name, work_company, position, title, email, role, password, 
-    source, version, deleted
+    id, gmt_create, gmt_modified, company_name, role, credit_code, business_license_file_path, 
+    enterprise_address, email, official_site, contact_name, country, contact_phone, password, 
+    version, deleted, source
   </sql>
   <sql id="Blob_Column_List">
     attributes
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDOSelective" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="cn.edu.bjtu.toilet.dao.domain.CompanyDOSelective" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -92,7 +97,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from user
+    from company
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -100,13 +105,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDOSelective" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.CompanyDOSelective" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from company
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -119,33 +124,37 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from user
+    from company
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete from company
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDOSelective">
-    delete from user
+  <delete id="deleteByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.CompanyDOSelective">
+    delete from company
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    insert into user (id, gmt_create, gmt_modified, 
-      name, work_company, position, 
-      title, email, role, 
-      password, source, version, 
-      deleted, attributes)
+  <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.CompanyDO">
+    insert into company (id, gmt_create, gmt_modified, 
+      company_name, role, credit_code, 
+      business_license_file_path, enterprise_address, 
+      email, official_site, contact_name, 
+      country, contact_phone, password, 
+      version, deleted, source, 
+      attributes)
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{name,jdbcType=VARCHAR}, #{workCompany,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, 
-      #{password,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
-      #{deleted,jdbcType=BIT}, #{attributes,jdbcType=LONGVARCHAR})
+      #{companyName,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{creditCode,jdbcType=VARCHAR}, 
+      #{businessLicenseFilePath,jdbcType=VARCHAR}, #{enterpriseAddress,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{officialSite,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, #{source,jdbcType=VARCHAR}, 
+      #{attributes,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    insert into user
+  <insert id="insertSelective" parameterType="cn.edu.bjtu.toilet.dao.domain.CompanyDO">
+    insert into company
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -156,35 +165,47 @@
       <if test="gmtModified != null">
         gmt_modified,
       </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="workCompany != null">
-        work_company,
-      </if>
-      <if test="position != null">
-        position,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="email != null">
-        email,
+      <if test="companyName != null">
+        company_name,
       </if>
       <if test="role != null">
         role,
       </if>
+      <if test="creditCode != null">
+        credit_code,
+      </if>
+      <if test="businessLicenseFilePath != null">
+        business_license_file_path,
+      </if>
+      <if test="enterpriseAddress != null">
+        enterprise_address,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="officialSite != null">
+        official_site,
+      </if>
+      <if test="contactName != null">
+        contact_name,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="contactPhone != null">
+        contact_phone,
+      </if>
       <if test="password != null">
         password,
-      </if>
-      <if test="source != null">
-        source,
       </if>
       <if test="version != null">
         version,
       </if>
       <if test="deleted != null">
         deleted,
+      </if>
+      <if test="source != null">
+        source,
       </if>
       <if test="attributes != null">
         attributes,
@@ -200,29 +221,38 @@
       <if test="gmtModified != null">
         #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="workCompany != null">
-        #{workCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-        #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
       </if>
       <if test="role != null">
         #{role,jdbcType=INTEGER},
       </if>
+      <if test="creditCode != null">
+        #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenseFilePath != null">
+        #{businessLicenseFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null">
+        #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="officialSite != null">
+        #{officialSite,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null">
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null">
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="source != null">
-        #{source,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -230,19 +260,22 @@
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
       </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
       <if test="attributes != null">
         #{attributes,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDOSelective" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.CompanyDOSelective" resultType="java.lang.Long">
+    select count(*) from company
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update company
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -253,35 +286,47 @@
       <if test="record.gmtModified != null">
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.workCompany != null">
-        work_company = #{record.workCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="record.position != null">
-        position = #{record.position,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.email != null">
-        email = #{record.email,jdbcType=VARCHAR},
+      <if test="record.companyName != null">
+        company_name = #{record.companyName,jdbcType=VARCHAR},
       </if>
       <if test="record.role != null">
         role = #{record.role,jdbcType=INTEGER},
       </if>
+      <if test="record.creditCode != null">
+        credit_code = #{record.creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessLicenseFilePath != null">
+        business_license_file_path = #{record.businessLicenseFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseAddress != null">
+        enterprise_address = #{record.enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officialSite != null">
+        official_site = #{record.officialSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactName != null">
+        contact_name = #{record.contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null">
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactPhone != null">
+        contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
+      </if>
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.source != null">
-        source = #{record.source,jdbcType=VARCHAR},
       </if>
       <if test="record.version != null">
         version = #{record.version,jdbcType=INTEGER},
       </if>
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
+      </if>
+      <if test="record.source != null">
+        source = #{record.source,jdbcType=VARCHAR},
       </if>
       <if test="record.attributes != null">
         attributes = #{record.attributes,jdbcType=LONGVARCHAR},
@@ -292,46 +337,54 @@
     </if>
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
-    update user
+    update company
     set id = #{record.id,jdbcType=INTEGER},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
-      name = #{record.name,jdbcType=VARCHAR},
-      work_company = #{record.workCompany,jdbcType=VARCHAR},
-      position = #{record.position,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
       role = #{record.role,jdbcType=INTEGER},
+      credit_code = #{record.creditCode,jdbcType=VARCHAR},
+      business_license_file_path = #{record.businessLicenseFilePath,jdbcType=VARCHAR},
+      enterprise_address = #{record.enterpriseAddress,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      official_site = #{record.officialSite,jdbcType=VARCHAR},
+      contact_name = #{record.contactName,jdbcType=VARCHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      source = #{record.source,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT},
+      source = #{record.source,jdbcType=VARCHAR},
       attributes = #{record.attributes,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update company
     set id = #{record.id,jdbcType=INTEGER},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
-      name = #{record.name,jdbcType=VARCHAR},
-      work_company = #{record.workCompany,jdbcType=VARCHAR},
-      position = #{record.position,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
       role = #{record.role,jdbcType=INTEGER},
+      credit_code = #{record.creditCode,jdbcType=VARCHAR},
+      business_license_file_path = #{record.businessLicenseFilePath,jdbcType=VARCHAR},
+      enterprise_address = #{record.enterpriseAddress,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      official_site = #{record.officialSite,jdbcType=VARCHAR},
+      contact_name = #{record.contactName,jdbcType=VARCHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      source = #{record.source,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
-      deleted = #{record.deleted,jdbcType=BIT}
+      deleted = #{record.deleted,jdbcType=BIT},
+      source = #{record.source,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.bjtu.toilet.dao.domain.CompanyDO">
+    update company
     <set>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -339,29 +392,38 @@
       <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="workCompany != null">
-        work_company = #{workCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-        position = #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
       </if>
       <if test="role != null">
         role = #{role,jdbcType=INTEGER},
       </if>
+      <if test="creditCode != null">
+        credit_code = #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenseFilePath != null">
+        business_license_file_path = #{businessLicenseFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null">
+        enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="officialSite != null">
+        official_site = #{officialSite,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null">
+        contact_name = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null">
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="source != null">
-        source = #{source,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -369,43 +431,54 @@
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
       <if test="attributes != null">
         attributes = #{attributes,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    update user
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.bjtu.toilet.dao.domain.CompanyDO">
+    update company
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      name = #{name,jdbcType=VARCHAR},
-      work_company = #{workCompany,jdbcType=VARCHAR},
-      position = #{position,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
+      credit_code = #{creditCode,jdbcType=VARCHAR},
+      business_license_file_path = #{businessLicenseFilePath,jdbcType=VARCHAR},
+      enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      official_site = #{officialSite,jdbcType=VARCHAR},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      source = #{source,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
+      source = #{source,jdbcType=VARCHAR},
       attributes = #{attributes,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    update user
+  <update id="updateByPrimaryKey" parameterType="cn.edu.bjtu.toilet.dao.domain.CompanyDO">
+    update company
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      name = #{name,jdbcType=VARCHAR},
-      work_company = #{workCompany,jdbcType=VARCHAR},
-      position = #{position,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
+      credit_code = #{creditCode,jdbcType=VARCHAR},
+      business_license_file_path = #{businessLicenseFilePath,jdbcType=VARCHAR},
+      enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      official_site = #{officialSite,jdbcType=VARCHAR},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      source = #{source,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
-      deleted = #{deleted,jdbcType=BIT}
+      deleted = #{deleted,jdbcType=BIT},
+      source = #{source,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

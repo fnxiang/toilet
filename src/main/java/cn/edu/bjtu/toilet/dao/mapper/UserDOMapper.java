@@ -16,15 +16,21 @@ public interface UserDOMapper {
 
     int insertSelective(UserDO record);
 
+    List<UserDO> selectByExampleWithBLOBs(UserDOSelective example);
+
     List<UserDO> selectByExample(UserDOSelective example);
 
     UserDO selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") UserDO record, @Param("example") UserDOSelective example);
 
+    int updateByExampleWithBLOBs(@Param("record") UserDO record, @Param("example") UserDOSelective example);
+
     int updateByExample(@Param("record") UserDO record, @Param("example") UserDOSelective example);
 
     int updateByPrimaryKeySelective(UserDO record);
+
+    int updateByPrimaryKeyWithBLOBs(UserDO record);
 
     int updateByPrimaryKey(UserDO record);
 }

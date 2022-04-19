@@ -1,3 +1,4 @@
+<%@ page import="cn.edu.bjtu.toilet.dao.domain.UserDO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -122,31 +123,32 @@
                             <div class="card-header">
                                 <strong class="card-title">专家个人基本信息</strong>
                             </div>
+                            <%UserDO userDO = (UserDO)request.getAttribute("user");%>
 							<div class="card-body card-block">
                                 <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">姓名</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="" value="张三" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="张三" value="<%=userDO.getName()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">单位</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="" value="某单位" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="某单位" value="<%=userDO.getWorkCompany()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
 										<div class="col col-md-3"><label for="disabled-input" class=" form-control-label">职务</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="" value="人工智能研究组组长" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="人工智能研究组组长" value="<%=userDO.getPosition()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">职称</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="" value="副教授" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="副教授" value="<%=userDO.getTitle()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">手机号</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="" value="1234567890" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="1234567890" value="<%=userDO.getEmail()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">邮箱</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="" value="123@456.com" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="123@456.com" value="<%=userDO.getEmail()%>" disabled="" class="form-control"></div>
                                     </div>
                                 </form>
                             </div>

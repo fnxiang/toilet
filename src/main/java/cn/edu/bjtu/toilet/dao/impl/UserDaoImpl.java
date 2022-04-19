@@ -47,9 +47,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public String insertUserDO(UserDO userDO) {
-        if (StringUtils.isEmpty(userDO.getEmail())&&StringUtils.isEmpty(userDO.getCreditCode()) && StringUtils.isEmpty(userDO.getSource())) {
+        if (StringUtils.isEmpty(userDO.getEmail())&&StringUtils.isEmpty(userDO.getPassword()) && StringUtils.isEmpty(userDO.getSource())) {
             //TODO throw exception code
-            LOG.error("required params email, credit and source code can not be null");
+            LOG.error("required params email, password and source code can not be null");
             throw new ToiletSystemException("required params email, credit and source code can not be null", "");
         }
 
@@ -73,27 +73,5 @@ public class UserDaoImpl implements UserDao {
         }
 
         return getUserByEmail(userDO.getEmail()).getEmail();
-    }
-
-    @Override
-    public UserDO getUserByLicense(String license) {
-        UserDOSelective userDOSelective = new UserDOSelective();
-        UserDOSelective.Criteria criteria = userDOSelective.createCriteria();
-
-        criteria.andBusinessLicenseFilePathEqualTo(license);
-        criteria.andDeletedNotEqualTo(false);
-
-        List<UserDO> userDOList = mapper.selectByExample(userDOSelective);
-
-        if (CollectionUtils.isEmpty(userDOList)) {
-            return null;
-        }
-
-        if (userDOList.size() != 1) {
-            LOG.error("too many user returned!");
-            return null;
-        }
-
-        return userDOList.get(0);
     }
 }

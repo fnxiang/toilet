@@ -1,25 +1,23 @@
 package cn.edu.bjtu.toilet.converter;
 
+import cn.edu.bjtu.toilet.constant.UserConstants;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
-import com.alibaba.fastjson.JSON;
+import cn.edu.bjtu.toilet.domain.ProfessorRegisterRequest;
 
 import java.util.Base64;
 
 public class UserConverter {
 
-    public static UserDO toUserDO(CompanyRegisterRequest companyRegisterRequest) {
+    public static UserDO toUserDO(ProfessorRegisterRequest request) {
         UserDO userDO = new UserDO();
-        userDO.setCompanyName(companyRegisterRequest.getCompanyName());
-        userDO.setCreditCode(companyRegisterRequest.getCreditCode());
-        userDO.setBusinessLicenseFilePath(companyRegisterRequest.getFilePath());
-        userDO.setEnterpriseAddress(JSON.toJSONString(companyRegisterRequest.getEnterpriseAddress()));
-        userDO.setEmail(companyRegisterRequest.getEmail());
-        userDO.setOfficalSite(companyRegisterRequest.getWebAddress());
-        userDO.setContactName(companyRegisterRequest.getContactName());
-        userDO.setContactPhone(companyRegisterRequest.getPhoneNumber());
-        userDO.setPassword(Base64.getEncoder().encodeToString(companyRegisterRequest.getPassword().getBytes()));
-        userDO.setRole(companyRegisterRequest.getUserConstants().getCode());
+        userDO.setName(request.getUserName());
+        userDO.setWorkCompany(request.getCompany());
+        userDO.setPosition(request.getPosition());
+        userDO.setTitle(request.getTitle());
+        userDO.setEmail(request.getEmail());
+        userDO.setPassword(Base64.getEncoder().encodeToString(request.getPassword().getBytes()));
+        userDO.setRole(UserConstants.PROFESSOR.getCode());
+        userDO.setSource(UserConstants.PROFESSOR.getRole());
         return userDO;
     }
 }

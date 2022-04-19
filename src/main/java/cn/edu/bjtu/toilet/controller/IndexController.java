@@ -1,12 +1,17 @@
 package cn.edu.bjtu.toilet.controller;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.UserConstants;
 import cn.edu.bjtu.toilet.dao.UserDao;
+import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
+import cn.edu.bjtu.toilet.domain.ProfessorRegisterRequest;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.domain.LoginResponse;
 import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.domain.RegisterResponse;
+import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.UserService;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.google.common.collect.Lists;
@@ -22,6 +27,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
 import javax.servlet.annotation.MultipartConfig;
@@ -45,10 +51,10 @@ public class IndexController {
 
 
     @Resource
-    private UserService userService;
+    private CompanyService companyService;
 
     @Resource
-    private UserDao userDao;
+    private UserService userService;
 
     /**
      * page handle
@@ -94,8 +100,9 @@ public class IndexController {
 
         try {
             Map<String, String> params = resolveParams(request);
-            Integer roleCode = userService.checkUser(params.get("accountId"), params.get("accountPwd"));
-            UserConstants userConstants = UserConstants.codeOf(roleCode);
+            Integer companyRoleCode = companyService.checkCompany(params.get("accountId"), params.get("accountPwd"));
+            Integer userRoleCode = userService.checkUser(params.get("accountId"), params.get("accountPwd"));
+            UserConstants userConstants = companyRoleCode==-1?UserConstants.codeOf(userRoleCode):null;
             if (Objects.isNull(userConstants)) {
                 return LoginResponse.failed("user role error");
             }
@@ -113,14 +120,10 @@ public class IndexController {
 
     }
 
-    @RequestMapping(value = "/register/test")
+    @RequestMapping(value = "/health")
     @ResponseBody
     public String registerUser(HttpServletRequest request, HttpServletResponse response){
-
-        UserDO userDO = new UserDO();
-        userDO.setEmail("1243@gmail.com");
-        userDO.setPassword("1234");
-        return userDao.insertUserDO(userDO);
+        return "success";
     }
 
     @RequestMapping(value = "/register/company")
@@ -135,17 +138,17 @@ public class IndexController {
                 return RegisterResponse.failed("params error!");
             }
 
-            UserDO userDO = userService.registerUser(companyRegisterRequest);
-            if (Objects.isNull(userDO)) {
+            CompanyDO companyDO = companyService.registerCompany(companyRegisterRequest);
+            if (Objects.isNull(companyDO)) {
                 return RegisterResponse.failed("register db error");
             }
 
-            UserConstants userConstants = UserConstants.codeOf(userDO.getRole());
+            UserConstants userConstants = UserConstants.codeOf(companyDO.getRole());
 
             if(Objects.isNull(userConstants)) {
                 return RegisterResponse.failed("Error Role with user!");
             }
-            request.getSession().setAttribute("uId", userDO.getEmail());
+            request.getSession().setAttribute("uId", companyDO.getEmail());
             request.getSession().setAttribute("role",userConstants.getRole());
         }catch (Exception e) {
             e.printStackTrace();
@@ -161,6 +164,30 @@ public class IndexController {
     public RegisterResponse registerProfessor(HttpServletRequest request) {
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            if (Objects.isNull(params)) {
+                LOG.error("params is empty!");
+                return RegisterResponse.failed("参数不能为空");
+            }
+
+            ProfessorRegisterRequest registerRequest = buildProfRequest(params);
+            UserDO userDO = userService.saveProfessorUser(registerRequest);
+
+            if (userDO == null) {
+                return RegisterResponse.failed("register error");
+            }
+
+            UserConstants userConstants = UserConstants.codeOf(userDO.getRole());
+
+            if (userConstants == null) {
+                return RegisterResponse.failed(String.format("role code error, code: %s", userDO.getRole()));
+            }
+
+            request.getSession().setAttribute("uId", userDO.getEmail());
+            request.getSession().setAttribute("role",userConstants.getRole());
+
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("register failed! error: {}", e.getMessage());
+            return RegisterResponse.failed(String.format("register failed! error: %s", e.getMessage()));
         } catch (Exception e) {
             LOG.error("register failed!");
             return RegisterResponse.failed("register failed!");
@@ -169,7 +196,20 @@ public class IndexController {
         return RegisterResponse.success();
     }
 
-    private CompanyRegisterRequest resolveRegisterParams(Map<String, String> params) throws UnsupportedEncodingException {
+    private ProfessorRegisterRequest buildProfRequest(Map<String, String> params) {
+        ProfessorRegisterRequest registerRequest = new ProfessorRegisterRequest();
+        registerRequest.setUserName(params.get("userName"));
+        registerRequest.setCompany(params.get("company"));
+        registerRequest.setPosition(params.get("position"));
+        registerRequest.setTitle(params.get("title"));
+        registerRequest.setPhoneNum(params.get("phoneNum"));
+        registerRequest.setPassword(params.get("password"));
+        registerRequest.setConfirmPassword(params.get("confirmPassword"));
+        registerRequest.setEmail(params.get("emailAddress"));
+        return registerRequest;
+    }
+
+    private CompanyRegisterRequest resolveRegisterParams(Map<String, String> params) {
 
         CompanyRegisterRequest companyRegisterRequest = new CompanyRegisterRequest();
         companyRegisterRequest.setCompanyName(params.get("companyName"));

@@ -1,21 +1,25 @@
 package cn.edu.bjtu.toilet.service.impl;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.converter.UserConverter;
+import cn.edu.bjtu.toilet.dao.CompanyDao;
 import cn.edu.bjtu.toilet.dao.UserDao;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
+import cn.edu.bjtu.toilet.domain.ProfessorRegisterRequest;
 import cn.edu.bjtu.toilet.service.UserService;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Base64;
-import java.util.Optional;
 
-@Service
+@Component
 public class UserServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;
+
+    @Resource
+    private CompanyDao companyDao;
 
     @Override
     public UserDO queryUserByEmail(String email) {
@@ -23,23 +27,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer checkUser(String account, String pwd) {
-        UserDO userDO = userDao.getUserByEmail(account);
-        if (!Optional.ofNullable(userDO).isPresent()||!userDO.getPassword().equals(Base64.getEncoder().encodeToString(pwd.getBytes()))) {
-            return -1;
+    public Integer checkUser(String email, String password) {
+        UserDO userDO = userDao.getUserByEmail(email);
+        if (userDO != null && userDO.getPassword().equals(generatePassword(password))) {
+            return userDO.getRole();
         }
-        return userDO.getRole();
+        return -1;
     }
 
     @Override
-    public UserDO registerUser(CompanyRegisterRequest companyRegisterRequest) {
+    public UserDO saveProfessorUser(ProfessorRegisterRequest professorRegisterRequest) {
+        validate(professorRegisterRequest);
 
-        validate(companyRegisterRequest);
-        String email = userDao.insertUserDO(UserConverter.toUserDO(companyRegisterRequest));
+        if (companyDao.getCompanyByEmail(professorRegisterRequest.getEmail()) != null) {
+            throw new ToiletBizException("email has been register by company!", "");
+        }
+
+        String email = userDao.insertUserDO(UserConverter.toUserDO(professorRegisterRequest));
 
         return userDao.getUserByEmail(email);
     }
 
-    private void validate(CompanyRegisterRequest companyRegisterRequest) {
+    private void validate(ProfessorRegisterRequest professorRegisterRequest) {
+    }
+
+    private String generatePassword(String password) {
+        return Base64.getEncoder().encodeToString(password.getBytes());
     }
 }

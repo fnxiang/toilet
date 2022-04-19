@@ -10,33 +10,27 @@ public class UserDO implements Serializable {
 
     private Date gmtModified;
 
-    private String companyName;
+    private String name;
 
-    private String creditCode;
+    private String workCompany;
 
-    private String businessLicenseFilePath;
+    private String position;
 
-    private String enterpriseAddress;
+    private String title;
 
     private String email;
 
-    private String officalSite;
-
-    private String contactName;
-
-    private String country;
-
-    private String contactPhone;
+    private Integer role;
 
     private String password;
+
+    private String source;
 
     private Integer version;
 
     private Boolean deleted;
 
-    private String source;
-
-    private Integer role;
+    private String attributes;
 
     private static final long serialVersionUID = 1L;
 
@@ -64,36 +58,36 @@ public class UserDO implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getName() {
+        return name;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName == null ? null : companyName.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getCreditCode() {
-        return creditCode;
+    public String getWorkCompany() {
+        return workCompany;
     }
 
-    public void setCreditCode(String creditCode) {
-        this.creditCode = creditCode == null ? null : creditCode.trim();
+    public void setWorkCompany(String workCompany) {
+        this.workCompany = workCompany == null ? null : workCompany.trim();
     }
 
-    public String getBusinessLicenseFilePath() {
-        return businessLicenseFilePath;
+    public String getPosition() {
+        return position;
     }
 
-    public void setBusinessLicenseFilePath(String businessLicenseFilePath) {
-        this.businessLicenseFilePath = businessLicenseFilePath == null ? null : businessLicenseFilePath.trim();
+    public void setPosition(String position) {
+        this.position = position == null ? null : position.trim();
     }
 
-    public String getEnterpriseAddress() {
-        return enterpriseAddress;
+    public String getTitle() {
+        return title;
     }
 
-    public void setEnterpriseAddress(String enterpriseAddress) {
-        this.enterpriseAddress = enterpriseAddress == null ? null : enterpriseAddress.trim();
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
     public String getEmail() {
@@ -104,36 +98,12 @@ public class UserDO implements Serializable {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getOfficalSite() {
-        return officalSite;
+    public Integer getRole() {
+        return role;
     }
 
-    public void setOfficalSite(String officalSite) {
-        this.officalSite = officalSite == null ? null : officalSite.trim();
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName == null ? null : contactName.trim();
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country == null ? null : country.trim();
-    }
-
-    public String getContactPhone() {
-        return contactPhone;
-    }
-
-    public void setContactPhone(String contactPhone) {
-        this.contactPhone = contactPhone == null ? null : contactPhone.trim();
+    public void setRole(Integer role) {
+        this.role = role;
     }
 
     public String getPassword() {
@@ -142,6 +112,14 @@ public class UserDO implements Serializable {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source == null ? null : source.trim();
     }
 
     public Integer getVersion() {
@@ -160,20 +138,12 @@ public class UserDO implements Serializable {
         this.deleted = deleted;
     }
 
-    public String getSource() {
-        return source;
+    public String getAttributes() {
+        return attributes;
     }
 
-    public void setSource(String source) {
-        this.source = source == null ? null : source.trim();
-    }
-
-    public Integer getRole() {
-        return role;
-    }
-
-    public void setRole(Integer role) {
-        this.role = role;
+    public void setAttributes(String attributes) {
+        this.attributes = attributes == null ? null : attributes.trim();
     }
 
     @Override
@@ -185,20 +155,17 @@ public class UserDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
-        sb.append(", companyName=").append(companyName);
-        sb.append(", creditCode=").append(creditCode);
-        sb.append(", businessLicenseFilePath=").append(businessLicenseFilePath);
-        sb.append(", enterpriseAddress=").append(enterpriseAddress);
+        sb.append(", name=").append(name);
+        sb.append(", workCompany=").append(workCompany);
+        sb.append(", position=").append(position);
+        sb.append(", title=").append(title);
         sb.append(", email=").append(email);
-        sb.append(", officalSite=").append(officalSite);
-        sb.append(", contactName=").append(contactName);
-        sb.append(", country=").append(country);
-        sb.append(", contactPhone=").append(contactPhone);
+        sb.append(", role=").append(role);
         sb.append(", password=").append(password);
+        sb.append(", source=").append(source);
         sb.append(", version=").append(version);
         sb.append(", deleted=").append(deleted);
-        sb.append(", source=").append(source);
-        sb.append(", role=").append(role);
+        sb.append(", attributes=").append(attributes);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,15 +1,14 @@
 package cn.edu.bjtu.toilet.controller;
 
-import cn.edu.bjtu.toilet.dao.domain.UserDO;
+import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
+import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.ProductService;
-import cn.edu.bjtu.toilet.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.List;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
@@ -18,7 +17,7 @@ import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
 public class ManagementController {
 
     @Resource
-    private UserService userService;
+    private CompanyService companyService;
 
     @Resource
     private ProductService productService;
@@ -51,9 +50,9 @@ public class ManagementController {
                 request.setAttribute("productList", productDTOList);
                 break;
             case "company_back2":
-                UserDO userDO = userService.queryUserByEmail(email);
-                userDO.setPassword("");
-                request.setAttribute("user", userDO);
+                CompanyDO companyDO = companyService.queryCompanyByEmail(email);
+                companyDO.setPassword("");
+                request.setAttribute("user", companyDO);
                 break;
             case "company_back3":
                 //TODO

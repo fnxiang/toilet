@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                             <div class="form-group text-center">
-								<button type="submit" class="btn btn-general btn-blue mr-2">提交注册</button>  
+								<button type="button" onclick="register()" class="btn btn-general btn-blue mr-2">提交注册</button>
 							</div>
                         </form>
                     </div>
@@ -144,9 +144,9 @@
                 contentType: false,
                 processData: false,
                 success:function(result){
-                    alert(result.errorMessage);
+                    alert(result.success);
                     if (result.success) {
-                        location.href = "/toilet/login/index";
+                        window.location.href = "/toilet/login/index";
                     } else {
                         alert(result.errorMessage);
                     }

@@ -7,6 +7,4 @@ public interface UserDao {
     String insertUserDO(UserDO userDO);
 
     UserDO getUserByEmail(String email);
-
-    UserDO getUserByLicense(String license);
 }
