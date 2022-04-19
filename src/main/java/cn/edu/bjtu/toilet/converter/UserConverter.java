@@ -1,25 +1,25 @@
 package cn.edu.bjtu.toilet.converter;
 
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.RegisterRequest;
+import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
 import com.alibaba.fastjson.JSON;
 
 import java.util.Base64;
 
 public class UserConverter {
 
-    public static UserDO toUserDO(RegisterRequest registerRequest) {
+    public static UserDO toUserDO(CompanyRegisterRequest companyRegisterRequest) {
         UserDO userDO = new UserDO();
-        userDO.setCompanyName(registerRequest.getCompanyName());
-        userDO.setCreditCode(registerRequest.getCreditCode());
-        userDO.setBusinessLicenseFilePath(registerRequest.getFilePath());
-        userDO.setEnterpriseAddress(JSON.toJSONString(registerRequest.getEnterpriseAddress()));
-        userDO.setEmail(registerRequest.getEmail());
-        userDO.setOfficalSite(registerRequest.getWebAddress());
-        userDO.setContactName(registerRequest.getContactName());
-        userDO.setContactPhone(registerRequest.getPhoneNumber());
-        userDO.setPassword(Base64.getEncoder().encodeToString(registerRequest.getPassword().getBytes()));
-        userDO.setRole(registerRequest.getUserConstants().getCode());
+        userDO.setCompanyName(companyRegisterRequest.getCompanyName());
+        userDO.setCreditCode(companyRegisterRequest.getCreditCode());
+        userDO.setBusinessLicenseFilePath(companyRegisterRequest.getFilePath());
+        userDO.setEnterpriseAddress(JSON.toJSONString(companyRegisterRequest.getEnterpriseAddress()));
+        userDO.setEmail(companyRegisterRequest.getEmail());
+        userDO.setOfficalSite(companyRegisterRequest.getWebAddress());
+        userDO.setContactName(companyRegisterRequest.getContactName());
+        userDO.setContactPhone(companyRegisterRequest.getPhoneNumber());
+        userDO.setPassword(Base64.getEncoder().encodeToString(companyRegisterRequest.getPassword().getBytes()));
+        userDO.setRole(companyRegisterRequest.getUserConstants().getCode());
         return userDO;
     }
 }

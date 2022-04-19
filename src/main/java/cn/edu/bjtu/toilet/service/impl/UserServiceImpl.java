@@ -3,7 +3,7 @@ package cn.edu.bjtu.toilet.service.impl;
 import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.UserDao;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.RegisterRequest;
+import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -32,14 +32,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDO registerUser(RegisterRequest registerRequest) {
+    public UserDO registerUser(CompanyRegisterRequest companyRegisterRequest) {
 
-        validate(registerRequest);
-        String email = userDao.insertUserDO(UserConverter.toUserDO(registerRequest));
+        validate(companyRegisterRequest);
+        String email = userDao.insertUserDO(UserConverter.toUserDO(companyRegisterRequest));
 
         return userDao.getUserByEmail(email);
     }
 
-    private void validate(RegisterRequest registerRequest) {
+    private void validate(CompanyRegisterRequest companyRegisterRequest) {
     }
 }

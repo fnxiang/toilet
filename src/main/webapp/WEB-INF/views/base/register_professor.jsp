@@ -11,18 +11,18 @@
     <meta name="robots" content="all,follow">
 
     <title>用户注册</title>
-    <link rel="shortcut icon" href="res/logo.ico">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/base/res/logo.ico">
     
     <!-- global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/font-icon-style.css">
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/font-icon-style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/style.default.css" id="theme-stylesheet">
 
     <!-- Core stylesheets -->
-    <link rel="stylesheet" href="css/pages/register.css">
-	<link rel="stylesheet" href="css/pages/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/pages/register.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/pages/login.css">
 	
 	<style>
 		label.xrequired:before {
@@ -42,15 +42,15 @@
                 <div class="col-md-12">
                     <div class="card form" id="form1">
                         <div class="card-header">
-                            <h3><a href="" target="_blank"><img src="res/logo.png" class="img-fluid" alt=""></a> 专家用户注册</h3>
+                            <h3><a href="" target="_blank"><img src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a> 专家用户注册</h3>
                         </div>
                         <br>
                         <form>
                             <div class="row">
 								<div class="col-md-12">
 									<div class="form-group row">
-                                        <label for="username" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">姓名：</label>
-                                        <input type="text" class="form-control col-sm-9" id="username" placeholder="姓名">
+                                        <label for="userName" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">姓名：</label>
+                                        <input type="text" class="form-control col-sm-9" id="userName" placeholder="姓名">
                                     </div>
 									<div class="form-group row">
                                         <label for="company" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">单位：</label>
@@ -65,20 +65,20 @@
 										<input type="text" required class="form-control col-sm-9" id="title" placeholder="职称">
 									</div>
 									<div class="form-group row">
-										<label for="phonenum" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">手机号：</label>
-										<input type="text" class="form-control col-sm-9" id="phonenum" placeholder="手机号">
+										<label for="phoneNum" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">手机号：</label>
+										<input type="text" class="form-control col-sm-9" id="phoneNum" placeholder="手机号">
 									</div>
 									<div class="form-group row">
-										<label for="emailaddress" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">邮箱：</label>
-										<input type="email" class="form-control col-sm-9" id="emailaddress" aria-describedby="emailHelp" placeholder="邮箱">
+										<label for="emailAddress" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">邮箱：</label>
+										<input type="email" class="form-control col-sm-9" id="emailAddress" aria-describedby="emailHelp" placeholder="邮箱">
 									</div>
 									<div class="form-group row">
-										<label for="registerpasswd" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">密码：</label>
-										<input type="password" class="form-control col-sm-9" id="registerpasswd" placeholder="密码">
+										<label for="registerPasswd" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">密码：</label>
+										<input type="password" class="form-control col-sm-9" id="registerPasswd" placeholder="密码">
 									</div>
 									<div class="form-group row">
-										<label for="conformpasswd" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">确认密码：</label>
-										<input type="password" class="form-control col-sm-9" id="conformpasswd" placeholder="确认密码">
+										<label for="confirmPasswd" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">确认密码：</label>
+										<input type="password" class="form-control col-sm-9" id="confirmPasswd" placeholder="确认密码">
 									</div>
 								</div>
 								
@@ -110,16 +110,50 @@
         </div>
 	</section>
     <!--Global Javascript -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper/popper.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.cookie.js"></script>
-    <script src="js/jquery.validate.min.js"></script> 
-    <script src="js/chart.min.js"></script> 
-    <script src="js/front.js"></script> 
+    <script src="${pageContext.request.contextPath}/static/base/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/popper/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/tether.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/jquery.cookie.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/chart.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/base/js/front.js"></script>
 	
-	<script src="./js/final/cityinfo.js"></script>
+	<script src="./${pageContext.request.contextPath}/static/base/js/final/cityinfo.js"></script>
+
+    <%--register script--%>
+    <script>
+        function register(){
+            const data = new FormData();
+            data.append("userName", encodeURI($('#userName').val()));
+            data.append("company", encodeURI($('#company').val()));
+            data.append("position",encodeURI($('#position').val()));
+            data.append("title", encodeURI($('#title').val()));
+            data.append("phoneNum", $('#phoneNum').val());
+            data.append("emailAddress", $('#emailAddress').val());
+            data.append("password", encodeURI($('#registerPasswd').val()));
+            data.append("confirmPassword", $('#confirmPasswd').val());
+
+            $.ajax({
+                url:"/toilet/register/professor",
+                type:"POST",
+                dataType: "json",
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function(result){
+                    alert(result.errorMessage);
+                    if (result.success) {
+                        location.href = "/toilet/login/index";
+                    } else {
+                        alert(result.errorMessage);
+                    }
+                }
+            });
+        }
+    </script>
     
     <!--Core Javascript -->	
 	<script>

@@ -5,9 +5,10 @@ import cn.edu.bjtu.toilet.dao.UserDao;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.domain.LoginResponse;
-import cn.edu.bjtu.toilet.domain.RegisterRequest;
+import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.domain.RegisterResponse;
 import cn.edu.bjtu.toilet.service.UserService;
+import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.fileupload.FileItem;
@@ -127,14 +128,14 @@ public class IndexController {
     public RegisterResponse registerCompany(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            RegisterRequest registerRequest =  resolveRequestParams(request);;
-            if (Objects.isNull(registerRequest)
-                    || StringUtils.isEmpty(registerRequest.getEmail())
-                    || StringUtils.isEmpty(registerRequest.getPassword())) {
+            CompanyRegisterRequest companyRegisterRequest =  resolveRequestParams(request);;
+            if (Objects.isNull(companyRegisterRequest)
+                    || StringUtils.isEmpty(companyRegisterRequest.getEmail())
+                    || StringUtils.isEmpty(companyRegisterRequest.getPassword())) {
                 return RegisterResponse.failed("params error!");
             }
 
-            UserDO userDO = userService.registerUser(registerRequest);
+            UserDO userDO = userService.registerUser(companyRegisterRequest);
             if (Objects.isNull(userDO)) {
                 return RegisterResponse.failed("register db error");
             }
@@ -155,18 +156,31 @@ public class IndexController {
         return RegisterResponse.success();
     }
 
-    private RegisterRequest resolveRegisterParams(Map<String, String> params) throws UnsupportedEncodingException {
+    @RequestMapping(value = "/register/professor")
+    @ResponseBody
+    public RegisterResponse registerProfessor(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+        } catch (Exception e) {
+            LOG.error("register failed!");
+            return RegisterResponse.failed("register failed!");
+        }
 
-        RegisterRequest registerRequest = new RegisterRequest();
-        registerRequest.setCompanyName(params.get("companyName"));
-        registerRequest.setCreditCode(params.get("creditCode"));
-        registerRequest.setEmail(params.get("email"));
-        registerRequest.setWebAddress(params.get("webAddress"));
-        registerRequest.setContactName(params.get("contactName"));
-        registerRequest.setPhoneNumber(params.get("phoneNum"));
-        registerRequest.setPassword(params.get("password"));
-        registerRequest.setConfirmPassword(params.get("confirmPassword"));
-        registerRequest.setFilePath(params.get("filePath"));
+        return RegisterResponse.success();
+    }
+
+    private CompanyRegisterRequest resolveRegisterParams(Map<String, String> params) throws UnsupportedEncodingException {
+
+        CompanyRegisterRequest companyRegisterRequest = new CompanyRegisterRequest();
+        companyRegisterRequest.setCompanyName(params.get("companyName"));
+        companyRegisterRequest.setCreditCode(params.get("creditCode"));
+        companyRegisterRequest.setEmail(params.get("email"));
+        companyRegisterRequest.setWebAddress(params.get("webAddress"));
+        companyRegisterRequest.setContactName(params.get("contactName"));
+        companyRegisterRequest.setPhoneNumber(params.get("phoneNum"));
+        companyRegisterRequest.setPassword(params.get("password"));
+        companyRegisterRequest.setConfirmPassword(params.get("confirmPassword"));
+        companyRegisterRequest.setFilePath(params.get("filePath"));
 
         EnterpriseAddressDTO enterpriseAddress = new EnterpriseAddressDTO();
         String companyAddress = params.get("companyAddress");
@@ -184,17 +198,17 @@ public class IndexController {
 
         enterpriseAddress.setDetailAddress(detailAddress);
 
-        registerRequest.setEnterpriseAddress(enterpriseAddress);
-        registerRequest.setUserConstants(UserConstants.COMPANY_USER);
+        companyRegisterRequest.setEnterpriseAddress(enterpriseAddress);
+        companyRegisterRequest.setUserConstants(UserConstants.COMPANY_USER);
 
-        return registerRequest;
+        return companyRegisterRequest;
     }
 
     private String decodeJsString(String value) throws UnsupportedEncodingException {
         return URLDecoder.decode(value, "UTF-8");
     }
 
-    private RegisterRequest resolveRequestParams(HttpServletRequest request) throws Exception {
+    private CompanyRegisterRequest resolveRequestParams(HttpServletRequest request) throws Exception {
         Map<String, String> params = new HashMap<>();
         request.setCharacterEncoding("utf-8");
         Set<String> allowTypes = Sets.newHashSet("doc", "docx", "pdf", "jpg", "jpeg", "png");

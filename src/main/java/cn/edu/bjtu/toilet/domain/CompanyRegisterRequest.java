@@ -5,7 +5,7 @@ import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import lombok.Data;
 
 @Data
-public class RegisterRequest {
+public class CompanyRegisterRequest {
 
     private String companyName;
 
