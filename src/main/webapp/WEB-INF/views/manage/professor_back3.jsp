@@ -144,7 +144,7 @@
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">手机号</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="1234567890" value="<%=userDO.getEmail()%>" disabled="" class="form-control"></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="1234567890" value="<%=userDO.getPhone()%>" disabled="" class="form-control"></div>
                                     </div>
 									<div class="row form-group">
                                         <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">邮箱</label></div>

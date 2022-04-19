@@ -9,6 +9,7 @@
     <result column="work_company" jdbcType="VARCHAR" property="workCompany" />
     <result column="position" jdbcType="VARCHAR" property="position" />
     <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="role" jdbcType="INTEGER" property="role" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -78,8 +79,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, name, work_company, position, title, email, role, password, 
-    source, version, deleted
+    id, gmt_create, gmt_modified, name, work_company, position, title, phone, email, 
+    role, password, source, version, deleted
   </sql>
   <sql id="Blob_Column_List">
     attributes
@@ -135,14 +136,16 @@
   <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
     insert into user (id, gmt_create, gmt_modified, 
       name, work_company, position, 
-      title, email, role, 
-      password, source, version, 
-      deleted, attributes)
+      title, phone, email, 
+      role, password, source, 
+      version, deleted, attributes
+      )
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{name,jdbcType=VARCHAR}, #{workCompany,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, 
-      #{password,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
-      #{deleted,jdbcType=BIT}, #{attributes,jdbcType=LONGVARCHAR})
+      #{title,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{role,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, #{attributes,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
     insert into user
@@ -167,6 +170,9 @@
       </if>
       <if test="title != null">
         title,
+      </if>
+      <if test="phone != null">
+        phone,
       </if>
       <if test="email != null">
         email,
@@ -211,6 +217,9 @@
       </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
@@ -265,6 +274,9 @@
       <if test="record.title != null">
         title = #{record.title,jdbcType=VARCHAR},
       </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
@@ -300,6 +312,7 @@
       work_company = #{record.workCompany,jdbcType=VARCHAR},
       position = #{record.position,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       role = #{record.role,jdbcType=INTEGER},
       password = #{record.password,jdbcType=VARCHAR},
@@ -320,6 +333,7 @@
       work_company = #{record.workCompany,jdbcType=VARCHAR},
       position = #{record.position,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       role = #{record.role,jdbcType=INTEGER},
       password = #{record.password,jdbcType=VARCHAR},
@@ -350,6 +364,9 @@
       </if>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
@@ -383,6 +400,7 @@
       work_company = #{workCompany,jdbcType=VARCHAR},
       position = #{position,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
       password = #{password,jdbcType=VARCHAR},
@@ -400,6 +418,7 @@
       work_company = #{workCompany,jdbcType=VARCHAR},
       position = #{position,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
       password = #{password,jdbcType=VARCHAR},

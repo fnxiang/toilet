@@ -18,6 +18,8 @@ public class UserDO implements Serializable {
 
     private String title;
 
+    private String phone;
+
     private String email;
 
     private Integer role;
@@ -90,6 +92,14 @@ public class UserDO implements Serializable {
         this.title = title == null ? null : title.trim();
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
     public String getEmail() {
         return email;
     }
@@ -159,6 +169,7 @@ public class UserDO implements Serializable {
         sb.append(", workCompany=").append(workCompany);
         sb.append(", position=").append(position);
         sb.append(", title=").append(title);
+        sb.append(", phone=").append(phone);
         sb.append(", email=").append(email);
         sb.append(", role=").append(role);
         sb.append(", password=").append(password);

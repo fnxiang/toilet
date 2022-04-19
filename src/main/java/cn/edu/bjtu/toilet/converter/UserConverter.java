@@ -16,6 +16,7 @@ public class UserConverter {
         userDO.setTitle(request.getTitle());
         userDO.setEmail(request.getEmail());
         userDO.setPassword(Base64.getEncoder().encodeToString(request.getPassword().getBytes()));
+        userDO.setPhone(request.getPhoneNum());
         userDO.setRole(UserConstants.PROFESSOR.getCode());
         userDO.setSource(UserConstants.PROFESSOR.getRole());
         return userDO;
