@@ -123,7 +123,7 @@
 
             <nav class="private">
                 <ul>
-                    <li><a href="javascript:void(0)" onclick="product_search_action()">产品高级搜索</a></li>
+                    <li><a href="${pageContext.request.contextPath}/toProductPage?url=mode_list" >产品高级搜索</a></li>
                     <li class="separator">|</li>
                     <li><a href="javascript:void(0)" onclick="model_search_action()">模式高级搜索</a></li>
                     <li class="separator">|</li>

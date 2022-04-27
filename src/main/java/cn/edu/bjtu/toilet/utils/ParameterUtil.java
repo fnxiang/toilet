@@ -6,11 +6,13 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +41,12 @@ public class ParameterUtil {
 
         for (FileItem item : items) {
             if(item.isFormField()) {
-                params.put(item.getFieldName(), decodeJsString(item.getString()));
+                String fieldName = item.getFieldName();
+                if (!StringUtils.isEmpty(params.get(fieldName))) {
+                    params.put(fieldName, buildMulti(params.get(fieldName), decodeJsString(item.getString())));
+                }else {
+                    params.put(fieldName, decodeJsString(item.getString()));
+                }
             } else {
                 if (item.getName() != null) {
                     String name = item.getName();
@@ -62,8 +69,12 @@ public class ParameterUtil {
         return params;
     }
 
+    private static String buildMulti(String origin, String append) {
+        return origin + "," + append;
+    }
+
     private static String decodeJsString(String value) throws UnsupportedEncodingException {
-        return URLDecoder.decode(value, "UTF-8");
+        return URLDecoder.decode(new String(value.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8), "UTF-8");
     }
 
     private static String buildUploadPath(HttpServletRequest request) {

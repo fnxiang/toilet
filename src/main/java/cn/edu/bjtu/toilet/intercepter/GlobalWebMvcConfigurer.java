@@ -54,7 +54,12 @@ public class GlobalWebMvcConfigurer implements WebMvcConfigurer {
                 .excludePathPatterns("/login/**")
                 .excludePathPatterns("/register_company")
                 .excludePathPatterns("/register_professor")
+                .excludePathPatterns("/toProductPage/**")
+                .excludePathPatterns("/toProductPage")
+                .excludePathPatterns("/search/**")
+                .excludePathPatterns("/error")
                 .excludePathPatterns("/toBasePage/**")
+                .excludePathPatterns("/upload/**")
                 .excludePathPatterns("/toProductPage/**")
                 .excludePathPatterns("/static/**");
 //        interceptorRegistry.addInterceptor(authInterceptor).addPathPatterns("/**")

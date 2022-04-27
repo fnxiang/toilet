@@ -32,4 +32,9 @@ public class PageIndexPathConstants {
 
     public static final String PRODUCT_BASE = "/product/";
 
+    /**
+     * error page
+     * */
+    public static final String ERROR_PAGE = "/error";
+
 }

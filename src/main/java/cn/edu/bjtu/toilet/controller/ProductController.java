@@ -55,11 +55,14 @@ public class ProductController {
     @RequestMapping("/toProductPage")
     public String toPage(HttpServletRequest request){
         String url = request.getParameter("url");
-        String productId = request.getParameter("product_id");
         switch (url) {
             case "product_info":
+                String productId = request.getParameter("product_id");
                 ToiletProductDTO toiletProductDTO = productService.queryToiletById(productId);
                 request.setAttribute("product", toiletProductDTO);
+                break;
+            case "product_results":
+                String ids = request.getParameter("ids");
                 break;
             default:
                 break;

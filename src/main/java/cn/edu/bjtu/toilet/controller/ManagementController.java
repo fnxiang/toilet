@@ -1,9 +1,11 @@
 package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
+import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.ProductService;
+import cn.edu.bjtu.toilet.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,6 +20,9 @@ public class ManagementController {
 
     @Resource
     private CompanyService companyService;
+
+    @Resource
+    private UserService userService;
 
     @Resource
     private ProductService productService;
@@ -56,6 +61,11 @@ public class ManagementController {
                 break;
             case "company_back3":
                 //TODO
+                break;
+            case "professor_back3":
+                UserDO userDO = userService.queryUserByEmail(email);
+                userDO.setPassword("");
+                request.setAttribute("user", userDO);
                 break;
             default:
                 break;

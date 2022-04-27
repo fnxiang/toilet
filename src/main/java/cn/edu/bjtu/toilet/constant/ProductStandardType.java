@@ -1,10 +1,11 @@
 package cn.edu.bjtu.toilet.constant;
 
 import lombok.Getter;
+import org.springframework.util.StringUtils;
 
 public enum ProductStandardType {
 
-    LEVEL1("<=0.5"),
+    LEVEL1("≤0.5"),
     LEVEL2("0.6~10"),
     LEVEL3("11~25"),
     LEVEL4("26~50"),
@@ -16,6 +17,20 @@ public enum ProductStandardType {
 
     ProductStandardType(String type) {
         this.type = type;
+    }
+
+    public static ProductStandardType typeOf(String type) {
+        if (StringUtils.isEmpty(type)) {
+            return null;
+        }
+
+        for (ProductStandardType standardType : ProductStandardType.values()) {
+            if (standardType.type.equals(type)) {
+                return standardType;
+            }
+        }
+
+        return null;
     }
 
     public static ProductStandardType of(Double standard) {

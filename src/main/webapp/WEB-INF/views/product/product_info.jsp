@@ -106,7 +106,7 @@
             <!-- .phone_top -->
         </div>
         <!-- .grid_3 -->
-
+        <%if (request.getSession().getAttribute("uId") == null) {%>
         <div class="grid_7">
             <div class="welcome">
                 欢迎来访，你可以 <a href="javascript:window.location.href='${pageContext.request.contextPath}/login'">登录</a> 或者
@@ -114,6 +114,7 @@
             </div>
             <!-- .welcome -->
         </div>
+        <%}%>
         <!-- .grid_6 -->
 
 
@@ -524,7 +525,7 @@
                             <h4>使用说明</h4>
                             <div class="preview slides_container">
                                 <div class="prev_bg">
-                                    <img src="<%=basePath + productDTO.getInstructionFilePath()%>" title="" alt=""/>
+                                    <img src="<%=basePath + productDTO.getInstructionFilePath()%>" height="600px" title="" alt=""/>
                                 </div>
                             </div><!-- .prev -->
 
@@ -537,7 +538,7 @@
                             <h4>质保证书</h4>
                             <div class="preview slides_container">
                                 <div class="prev_bg">
-                                    <img src="<%=basePath + productDTO.getQualityAssuranceMaterialsFilePath()%>" title="" alt=""/>
+                                    <img src="<%=basePath + productDTO.getQualityAssuranceMaterialsFilePath()%>" height="600px" title="" alt=""/>
                                 </div>
                             </div><!-- .prev -->
 

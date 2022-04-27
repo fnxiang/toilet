@@ -1,6 +1,7 @@
 package cn.edu.bjtu.toilet.constant;
 
 import lombok.Getter;
+import org.springframework.util.StringUtils;
 
 public enum ProductLifeCycleType {
 
@@ -12,6 +13,20 @@ public enum ProductLifeCycleType {
 
     ProductLifeCycleType(String type) {
         this.type = type;
+    }
+
+    public static ProductLifeCycleType typeOf(String type) {
+        if (StringUtils.isEmpty(type)) {
+            return null;
+        }
+
+        for (ProductLifeCycleType standardType : ProductLifeCycleType.values()) {
+            if (standardType.type.equals(type)) {
+                return standardType;
+            }
+        }
+
+        return null;
     }
 
     public static ProductLifeCycleType of(Integer num) {

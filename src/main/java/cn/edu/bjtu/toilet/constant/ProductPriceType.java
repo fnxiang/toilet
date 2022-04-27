@@ -1,6 +1,7 @@
 package cn.edu.bjtu.toilet.constant;
 
 import lombok.Getter;
+import org.springframework.util.StringUtils;
 
 public enum ProductPriceType {
 
@@ -15,6 +16,20 @@ public enum ProductPriceType {
 
     ProductPriceType(String type) {
         this.type = type;
+    }
+
+    public static ProductPriceType typeOf(String type) {
+        if (StringUtils.isEmpty(type)) {
+            return null;
+        }
+
+        for (ProductPriceType standardType : ProductPriceType.values()) {
+            if (standardType.type.equals(type)) {
+                return standardType;
+            }
+        }
+
+        return null;
     }
 
     public static ProductPriceType of(Double standard) {

@@ -66,14 +66,6 @@
 
 </head>
 <body>
-<%--获取 List --%>
-<% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>
-
-<%--获取路径用于显示图片和文件--%>
-<% String path = request.getContextPath();
-    String basePath = request.getScheme() + "://"
-            + request.getServerName() + ":" + request.getServerPort()
-            + path + "/";%>
 <div class="container_12">
     <div id="top">
         <div class="grid_5">
@@ -444,9 +436,37 @@
             <!-- .c_header -->
 
             <div class="list_carousel">
+                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>
 
+                <%--获取路径用于显示图片和文件--%>
+                <%  String path = request.getContextPath();
+                    String basePath = request.getScheme() + "://"
+                            + request.getServerName() + ":" + request.getServerPort()
+                            + path + "/";%>
                 <ul id="list_product" class="list_product">
+                    <% for (ToiletProductDTO productDTO : productList) {%>
+                    <li class="">
+                        <div class="grid_3 product">
+                            <div class="prev">
+                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_info&product_id=<%=productDTO.getId()%>"><img
+                                        src="<%=basePath+productDTO.getPicsPath()%>"
+                                        alt="" title=""/></a>
+                            </div>
+                            <!-- .prev -->
+                            <h3 class="title"><%=productDTO.getProductName()%></h3>
 
+                            <div class="cart">
+                                <div class="price">
+                                    <div class="vert">
+                                        <div class="price_new">价格：<%=productDTO.getProductParameters().getPrice()%></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .cart -->
+                        </div>
+                        <!-- .grid_3 -->
+                    </li>
+                    <%}%>
                     <li class="">
                         <div class="grid_3 product">
                             <div class="prev">

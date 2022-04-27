@@ -17,6 +17,20 @@ public enum ProductTextureType {
         this.type = type;
     }
 
+    public static ProductTextureType typeOf(String type) {
+        if (StringUtils.isEmpty(type)) {
+            return null;
+        }
+
+        for (ProductTextureType standardType : ProductTextureType.values()) {
+            if (standardType.type.equals(type)) {
+                return standardType;
+            }
+        }
+
+        return null;
+    }
+
     public static ProductTextureType ofTypeName(String name) {
         if (StringUtils.isEmpty(name)) {
             return OTHER;

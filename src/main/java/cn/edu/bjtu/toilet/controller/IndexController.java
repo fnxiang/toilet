@@ -102,7 +102,7 @@ public class IndexController {
             Map<String, String> params = resolveParams(request);
             Integer companyRoleCode = companyService.checkCompany(params.get("accountId"), params.get("accountPwd"));
             Integer userRoleCode = userService.checkUser(params.get("accountId"), params.get("accountPwd"));
-            UserConstants userConstants = companyRoleCode==-1?UserConstants.codeOf(userRoleCode):null;
+            UserConstants userConstants = companyRoleCode==-1?UserConstants.codeOf(userRoleCode):UserConstants.codeOf(companyRoleCode);
             if (Objects.isNull(userConstants)) {
                 return LoginResponse.failed("user role error");
             }
