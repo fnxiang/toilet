@@ -543,11 +543,11 @@
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="caizhi" id="caizhi" class="form-control">
-                                                        <option value="0">A.玻璃钢</option>
-                                                        <option value="1">B.PP</option>
-                                                        <option value="2">C.PE</option>
-                                                        <option value="3">D.预制钢筋混凝土</option>
-                                                        <option value="4">E.其他</option>
+                                                        <option value="0">玻璃钢</option>
+                                                        <option value="1">PP</option>
+                                                        <option value="2">PE</option>
+                                                        <option value="3">预制钢筋混凝土</option>
+                                                        <option value="4">其他</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -566,7 +566,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="shouming" name="shouming"
-                                                           placeholder="请填写使用寿命" class="form-control">
+                                                           placeholder="请填写使用寿命(年)" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -584,9 +584,9 @@
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="cesuoyongtu" id="cesuoyongtu" class="form-control">
-                                                        <option value="0">A.户厕</option>
-                                                        <option value="1">B.公厕</option>
-                                                        <option value="2">C.均可</option>
+                                                        <option value="0">户厕</option>
+                                                        <option value="1">公厕</option>
+                                                        <option value="2">均可</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -596,7 +596,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="qinglizhouqi" name="qinglizhouqi"
-                                                           placeholder="请提供具体清理周期" class="form-control">
+                                                           placeholder="请提供具体清理周期(月)" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -806,7 +806,6 @@
         data.append("patternName", encodeURI($('#newmodename').val())); //新模式名称
 
         var radio = document.getElementsByName("newmoderadios"); //是否添加新模式
-        alert(radio[0].checked);
         data.append("newmoderadios1", radio[0].checked); //True 为添加
         data.append("newmoderadios2", radio[1].checked); //True 为不添加
 
@@ -905,7 +904,7 @@
             processData: false,
             success:function(result){
                 if (result.success) {
-                    alert("save product success!");
+                    alert("保存成功！");
                 } else {
                     alert(result.errorMessage);
                 }

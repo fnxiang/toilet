@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@page import="java.util.List" %>
+<%@ page import="cn.edu.bjtu.toilet.dao.domain.UserDO" %>
+<%@ page import="cn.edu.bjtu.toilet.dao.domain.CompanyDO" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -133,129 +135,37 @@
 											<th class="text-center">操作</th>
 										</tr>
 									</thead>
-									<% List<ToiletProductDTO> list = (List<ToiletProductDTO>)request.getAttribute("productList");%>
+									<%
+										List<UserDO> list = (List<UserDO>)request.getAttribute("profList");%>
 									<tbody>
-									<% for (int i=0;i<list.size();i++) {%>
+									<% if (list != null) {
+										for (int i=0;i<list.size();i++) {%>
 									<tr>
 										<td><%=i+1%></td>
-										<td>张三</td>
+										<td><%=list.get(i).getName()%></td>
+										<td>专家用户</td>
+										<td class="text-center">
+											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back7'"> 查看详情</a>
+											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
+										</td>
+									</tr>
+										<%}}%>
+										<% List<CompanyDO> companyDOS = (List<CompanyDO>)request.getAttribute("companyList");%>
+									<tbody>
+									<%if (companyDOS != null) {
+										for (int i=0;i<companyDOS.size();i++) {%>
+									<tr>
+										<td><%=i+1%></td>
+										<td><%=companyDOS.get(i).getCompanyName()%></td>
 										<td>企业用户</td>
 										<td class="text-center">
 											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6'"> 查看详情</a>
 											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 										</td>
 									</tr>
-									<%}%>
+									<%}
+									}%>
 
-										<tr>
-											<td>1</td>
-											<td>张三</td>
-											<td>企业用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6'"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>李四</td>
-											<td>企业用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>王五</td>
-											<td>专家用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back7'"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td>钱六</td>
-											<td>企业用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										
-										<tr>
-											<td>5</td>
-											<td>孙七</td>
-											<td>专家用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>6</td>
-											<td>周八</td>
-											<td>企业用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>7</td>
-											<td>吴九</td>
-											<td>专家用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>8</td>
-											<td>郑十</td>
-											<td>专家用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>9</td>
-											<td>赵四</td>
-											<td>专家用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>10</td>
-											<td>李二</td>
-											<td>企业用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>11</td>
-											<td>程一</td>
-											<td>专家用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>12</td>
-											<td>楚六</td>
-											<td>企业用户</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
 									</tbody>
 								</table>
                             </div>

@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.service.impl;
 
+import cn.edu.bjtu.toilet.constant.UserConstants;
 import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +24,11 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDO queryCompanyByEmail(String email) {
         return companyDao.getCompanyByEmail(email);
+    }
+
+    @Override
+    public List<CompanyDO> queryAllCompany() {
+        return companyDao.getCompanyListByRole(UserConstants.COMPANY_USER.getCode());
     }
 
     @Override

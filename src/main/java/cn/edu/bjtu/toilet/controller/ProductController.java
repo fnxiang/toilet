@@ -6,6 +6,7 @@ import cn.edu.bjtu.toilet.domain.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.fileupload.FileItem;
@@ -26,6 +27,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.INDEX;
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.PRODUCT_BASE;
@@ -62,7 +64,10 @@ public class ProductController {
                 request.setAttribute("product", toiletProductDTO);
                 break;
             case "product_results":
-                String ids = request.getParameter("ids");
+                String idString = request.getParameter("ids");
+                List<String> ids = Lists.newArrayList(idString.split(","));
+                List<ToiletProductDTO> productDTOS = ids.stream().map(id -> productService.queryToiletById(id)).collect(Collectors.toList());
+                request.setAttribute("productList", productDTOS);
                 break;
             default:
                 break;
@@ -98,10 +103,10 @@ public class ProductController {
         // 自然环境条件
         EnvConditionsDTO envConditionsDTO = new EnvConditionsDTO();
         envConditionsDTO.setTemperature(params.get("natureTemp"));
-        envConditionsDTO.setTerrain(params.get("terrain"));
+        envConditionsDTO.setTerrain(params.get("terrain").substring(1));
         envConditionsDTO.setWaterResource(params.get("water"));
-        envConditionsDTO.setGeolocation(params.get("geolocation"));
-        envConditionsDTO.setEcotope(params.get("ecotope"));
+        envConditionsDTO.setGeolocation(params.get("geolocation").substring(1));
+        envConditionsDTO.setEcotope(params.get("ecotope").substring(1));
 
         toiletPatternDTO.setEnvConditions(envConditionsDTO);
 

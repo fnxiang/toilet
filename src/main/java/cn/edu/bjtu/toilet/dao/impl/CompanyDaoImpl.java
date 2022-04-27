@@ -81,7 +81,7 @@ public class CompanyDaoImpl implements CompanyDao {
         CompanyDOSelective.Criteria criteria = companyDOSelective.createCriteria();
 
         criteria.andBusinessLicenseFilePathEqualTo(license);
-        criteria.andDeletedNotEqualTo(false);
+        criteria.andDeletedNotEqualTo(true);
 
         List<CompanyDO> companyDOList = mapper.selectByExample(companyDOSelective);
 
@@ -95,5 +95,22 @@ public class CompanyDaoImpl implements CompanyDao {
         }
 
         return companyDOList.get(0);
+    }
+
+    @Override
+    public List<CompanyDO> getCompanyListByRole(Integer code) {
+        CompanyDOSelective companyDOSelective = new CompanyDOSelective();
+        CompanyDOSelective.Criteria criteria = companyDOSelective.createCriteria();
+
+        criteria.andRoleEqualTo(code);
+        criteria.andDeletedNotEqualTo(true);
+
+        List<CompanyDO> companyDOList = mapper.selectByExample(companyDOSelective);
+
+        if (CollectionUtils.isEmpty(companyDOList)) {
+            return null;
+        }
+
+        return companyDOList;
     }
 }

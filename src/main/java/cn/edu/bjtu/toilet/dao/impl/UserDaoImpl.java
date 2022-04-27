@@ -46,6 +46,24 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List<UserDO> getUserByCode(Integer code) {
+
+        UserDOSelective userDOSelective = new UserDOSelective();
+        UserDOSelective.Criteria criteria = userDOSelective.createCriteria();
+
+        criteria.andRoleEqualTo(code);
+        criteria.andDeletedNotEqualTo(true);
+
+        List<UserDO> userDOList = mapper.selectByExample(userDOSelective);
+
+        if (CollectionUtils.isEmpty(userDOList)) {
+            return null;
+        }
+
+        return userDOList;
+    }
+
+    @Override
     public String insertUserDO(UserDO userDO) {
         if (StringUtils.isEmpty(userDO.getEmail())&&StringUtils.isEmpty(userDO.getPassword()) && StringUtils.isEmpty(userDO.getSource())) {
             //TODO throw exception code

@@ -27,7 +27,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
 import javax.servlet.annotation.MultipartConfig;
@@ -87,7 +86,7 @@ public class IndexController {
     public String logout(HttpServletRequest request){
        request.getSession().setAttribute("uId", "");
        request.getSession().setAttribute("role", "");
-        return "/";
+        return LOGIN_INDEX;
     }
 
     /**

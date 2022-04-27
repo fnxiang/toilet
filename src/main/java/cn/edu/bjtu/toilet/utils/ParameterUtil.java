@@ -1,6 +1,5 @@
 package cn.edu.bjtu.toilet.utils;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -58,7 +57,7 @@ public class ParameterUtil {
                         int start = name.lastIndexOf("\\");
                         String filename = name.substring(start + 1);
                         String filePath = uploadPath + "/" + filename;
-                        String relativePath = outputPath + filename;
+                        String relativePath = filePath.replace(request.getServletContext().getRealPath("."), "");
                         File file = new File(filePath);
                         item.write(file);
                         params.put(item.getFieldName(), relativePath);
@@ -79,7 +78,7 @@ public class ParameterUtil {
 
     private static String buildUploadPath(HttpServletRequest request) {
         if (request.getSession().getAttribute("uId") != null) {
-            return request.getServletContext().getRealPath(".")+ File.separator + request.getSession().getAttribute("uId").toString()+File.separator;
+            return request.getServletContext().getRealPath(".")+ File.separator +"upload/"+request.getSession().getAttribute("uId").toString()+File.separator;
         } else {
             return request.getServletContext().getRealPath(".") + File.separator + UPLOAD_DIRECTORY;
         }

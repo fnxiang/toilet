@@ -90,13 +90,13 @@ public class SearchController {
 
             productDTOS = matchPatternConditions(productDTOS, searchDTO);
 
-            Map<String, List<String>> results = new HashMap<>();
+            Map<String, String> results = new HashMap<>();
 
             productDTOS.forEach(item -> {
                 if (results.get(item.getPatternName()) == null) {
-                    results.put(item.getPatternName(), Lists.newArrayList(item.getId().toString()));
+                    results.put(item.getPatternName(), item.getId().toString());
                 } else {
-                    results.get(item.getPatternName()).add(item.getId().toString());
+                    results.put(results.get(item.getPatternName()), buildIds(results.get(item.getPatternName()), item.getId().toString()));
                 }
             });
 
@@ -107,6 +107,10 @@ public class SearchController {
         }
 
         return "/product/mode_list";
+    }
+
+    private String buildIds(String s, String v) {
+        return s + "," + v;
     }
 
     private List<ToiletProductDTO> matchPatternConditions(List<ToiletProductDTO> productDTOS, ToiletPatternDTO searchDTO) {

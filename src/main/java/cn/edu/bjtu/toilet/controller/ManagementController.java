@@ -1,11 +1,13 @@
 package cn.edu.bjtu.toilet.controller;
 
+import cn.edu.bjtu.toilet.constant.UserConstants;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.service.UserService;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,7 +38,14 @@ public class ManagementController {
     }
 
     @RequestMapping("/admin/index")
-    public String adminIndex(){
+    public String adminIndex(HttpServletRequest request){
+
+        List<UserDO> users = userService.queryAllUser(UserConstants.PROFESSOR);
+        List<CompanyDO> companyDOS = companyService.queryAllCompany();
+
+        request.setAttribute("profList", users);
+        request.setAttribute("companyList", companyDOS);
+
         return ADMIN_INDEX;
     }
 
@@ -67,6 +76,12 @@ public class ManagementController {
                 userDO.setPassword("");
                 request.setAttribute("user", userDO);
                 break;
+            case "admin_back1":
+                List<UserDO> users = userService.queryAllUser(UserConstants.PROFESSOR);
+                List<CompanyDO> companyDOS = companyService.queryAllCompany();
+
+                request.setAttribute("profList", users);
+                request.setAttribute("companyList", companyDOS);
             default:
                 break;
         }

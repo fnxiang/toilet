@@ -1,6 +1,7 @@
 package cn.edu.bjtu.toilet.service.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.constant.UserConstants;
 import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
 import cn.edu.bjtu.toilet.dao.UserDao;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Base64;
+import java.util.List;
 
 @Component
 public class UserServiceImpl implements UserService {
@@ -24,6 +26,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDO queryUserByEmail(String email) {
         return userDao.getUserByEmail(email);
+    }
+
+    @Override
+    public List<UserDO> queryAllUser(UserConstants user) {
+         return userDao.getUserByCode(user.getCode());
     }
 
     @Override

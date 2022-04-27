@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="com.alibaba.fastjson.JSON" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html>
@@ -370,50 +371,6 @@
 
 <div class="clear"></div>
 
-<!--  <div class="container_12">-->
-<!--    <div class="grid_12">-->
-<!--        <div class="slidprev"><span>Prev</span></div>-->
-<!--        <div class="slidnext"><span>Next</span></div>-->
-<!--        <div id="slider">-->
-<!--          <div id="slide1">-->
-<!--            <img src="${pageContext.request.contextPath}/static/product/res/placeholder.jpg" alt="" title="" />-->
-<!--            <div class="slid_text">-->
-<!--              <h3 class="slid_title"><span>首页图片需要单独制作</span></h3>-->
-<!--              <p><span>首页轮播图片需要单独制作</span></p>-->
-<!--              <p><span>这里放几张占位图</span></p>-->
-<!--              <p><span>图片尺寸为984×480像素</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          <div id="slide2">-->
-<!--            <img src="${pageContext.request.contextPath}/static/product/res/placeholder.jpg" alt="" title="" />-->
-<!--            <div class="slid_text">-->
-<!--              <h3 class="slid_title"><span>首页图片需要单独制作</span></h3>-->
-<!--              <p><span>首页轮播图片需要单独制作</span></p>-->
-<!--              <p><span>这里放几张占位图</span></p>-->
-<!--              <p><span>图片尺寸为984×480像素</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          <div id="slide3">-->
-<!--            <img src="${pageContext.request.contextPath}/static/product/res/placeholder.jpg" alt="" title="" />-->
-<!--            <div class="slid_text">-->
-<!--              <h3 class="slid_title"><span>首页图片需要单独制作</span></h3>-->
-<!--              <p><span>首页轮播图片需要单独制作</span></p>-->
-<!--              <p><span>这里放几张占位图</span></p>-->
-<!--              <p><span>图片尺寸为984×480像素</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>&lt;!&ndash; .slider &ndash;&gt;-->
-<!--        <div id="myController">-->
-<!--          <div class="control"><span>1</span></div>-->
-<!--          <div class="control"><span>2</span></div>-->
-<!--          <div class="control"><span>3</span></div>-->
-<!--        </div>-->
-
-
-<!--    </div>&lt;!&ndash; .grid_12 &ndash;&gt;-->
-<!--  </div>&lt;!&ndash; .container_12 &ndash;&gt;-->
 <div class="clear"></div>
 
 <section id="main" class="home">
@@ -424,7 +381,7 @@
             <h1 class="page_title">模式搜索结果</h1>
 
 
-            <% Map<String, List<String>> results = (Map<String, List<String>>) request.getAttribute("productMap");%>
+            <% Map<String, String> results = (Map<String, String>) request.getAttribute("productMap");%>
             <div class="listing_product grid_12">
                 <%  if (results != null) {
                     for (String key : results.keySet()) {%>
