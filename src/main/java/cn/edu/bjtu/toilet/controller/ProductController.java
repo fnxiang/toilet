@@ -179,9 +179,9 @@ public class ProductController {
 
         // 自然环境条件
         EnvConditionsDTO envConditionsDTO = new EnvConditionsDTO();
-        envConditionsDTO.setTemperature(params.get("natureTemp"));
+        envConditionsDTO.setTemperature(params.get("natureTemp").substring(1));
         envConditionsDTO.setTerrain(params.get("terrain").substring(1));
-        envConditionsDTO.setWaterResource(params.get("water"));
+        envConditionsDTO.setWaterResource(params.get("water").substring(1));
         envConditionsDTO.setGeolocation(params.get("geolocation").substring(1));
         envConditionsDTO.setEcotope(params.get("ecotope").substring(1));
 
