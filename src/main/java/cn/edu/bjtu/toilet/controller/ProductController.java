@@ -179,6 +179,9 @@ public class ProductController {
                 Collections.reverse(productDTOS);
             }
 
+            request.setAttribute("sort_condition", params.get("sortBy"));
+            request.setAttribute("sort_way", params.get("desc"));
+
             productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getPrice()))).collect(Collectors.toList());
             request.setAttribute("productList", productDTOS);
         } catch (Exception e) {

@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.alibaba.fastjson.JSON" %>
+
 <!DOCTYPE HTML>
 <html>
 <!-- Added by HTTrack -->
@@ -26,6 +24,15 @@
 <body>
 <header id="branding">
     <jsp:include page="product_banner.jsp"/>
+    <c:set var="sort_condition" value="price"/>
+    <c:set var="sort_way" value="false"/>
+    <% if (request.getAttribute("sortBy")!=null) {%>
+        <c:set var="sort_condition" value='${requestScope.sortBy}'/>
+    <%}%>
+
+    <% if (request.getAttribute("desc")!=null) {%>
+    <c:set var="sort_way" value='${requestScope.desc}'/>
+    <%}%>
     <!-- .grid_6 -->
 </header>
 <!-- .container_12 -->
@@ -72,24 +79,24 @@
 
         <div class="carousel">
             <div class="c_header">
-                <div class="grid_10">
+                <div class="grid_6">
                     <h2>产品展示</h2>
                 </div>
                 <div class="grid_2">
                     <select class="grid_2" name="sortCondition" id="sortCondition">
-                        <option value="0">价格</option>
-                        <option value="1">使用寿命</option>
-                        <option value="2">清理周期</option>
+                        <option value="price">价格</option>
+                        <option value="life">使用寿命</option>
+                        <option value="cleanCycle">清理周期</option>
                     </select>
                 </div>
                 <div class="grid_2">
                     <select class="grid_2" name="sortWay" id="sortWay">
-                        <option value="0">升序</option>
-                        <option value="1">降序</option>
+                        <option value="false">升序</option>
+                        <option value="true">降序</option>
                     </select>
                 </div>
                 <div class="grid_2">
-                    <button class="grid_2" onclick="sortByName()">应用</button>
+                    <button class="grid_2" onclick="sort()">应用</button>
                 </div>
                 <!-- .grid_10 -->
 
@@ -181,6 +188,9 @@
 <%--排序--%>
 <script>
 
+    $('#sortCondition').val('${sort_condition}');
+    $('#sortWay').val('${sort_way}');
+
     function Post(url, params) {
         var temp = document.createElement("form");
         temp.action = url;
@@ -198,11 +208,11 @@
         return temp;
     }
 
-    function sort(sortBy, desc) {
+    function sort() {
 
         let data = {};
-        data["sortBy"] = sortBy;
-        data["desc"] = desc;
+        data["sortBy"] = $('#sortCondition').val();
+        data["desc"] = $('#sortWay').val();
         data["list"] = '${list}';
 
         Post("${pageContext.request.contextPath}/product/sort", data);
