@@ -386,6 +386,7 @@
                                                                 class="form-control">
                                                             <option value="0">是</option>
                                                             <option value="1">否</option>
+                                                            <option value="2">均可</option>
                                                         </select>
                                                     </div>
                                                 </div>
