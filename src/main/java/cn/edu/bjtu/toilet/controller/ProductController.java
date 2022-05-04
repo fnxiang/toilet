@@ -169,7 +169,7 @@ public class ProductController {
                     productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getCleanupCycle()))).collect(Collectors.toList());
                     break;
                 case "life":
-                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getServiceLife()))).collect(Collectors.toList());
+                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> Integer.valueOf(o.getProductParameters().getServiceLife())))).collect(Collectors.toList());
                     break;
                 default:
                     break;
@@ -182,7 +182,6 @@ public class ProductController {
             request.setAttribute("sort_condition", params.get("sortBy"));
             request.setAttribute("sort_way", params.get("desc"));
 
-            productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getPrice()))).collect(Collectors.toList());
             request.setAttribute("productList", productDTOS);
         } catch (Exception e) {
             LOG.error("upload products failed");

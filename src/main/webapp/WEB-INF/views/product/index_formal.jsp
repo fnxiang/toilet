@@ -24,15 +24,16 @@
 <body>
 <header id="branding">
     <jsp:include page="product_banner.jsp"/>
-    <c:set var="sort_condition" value="price"/>
-    <c:set var="sort_way" value="false"/>
-    <% if (request.getAttribute("sortBy")!=null) {%>
-        <c:set var="sort_condition" value='${requestScope.sortBy}'/>
-    <%}%>
-
-    <% if (request.getAttribute("desc")!=null) {%>
-    <c:set var="sort_way" value='${requestScope.desc}'/>
-    <%}%>
+    <%
+        String sort_condition = "price";
+        String sort_way = "false";
+        if (request.getAttribute("sort_condition")!=null) {
+            sort_condition = request.getAttribute("sort_condition").toString();
+        }
+        if (request.getAttribute("sort_way")!=null) {
+            sort_way = request.getAttribute("sort_way").toString();
+        }
+    %>
     <!-- .grid_6 -->
 </header>
 <!-- .container_12 -->
@@ -179,6 +180,8 @@
 </script>
 <script>
     $(document).ready(function () {
+        $('#sortCondition').val('<%=sort_condition%>');
+        $('#sortWay').val('<%=sort_way%>');
         $("button").click(function () {
             $(this).addClass('click')
         });
@@ -187,9 +190,6 @@
 
 <%--排序--%>
 <script>
-
-    $('#sortCondition').val('${sort_condition}');
-    $('#sortWay').val('${sort_way}');
 
     function Post(url, params) {
         var temp = document.createElement("form");
