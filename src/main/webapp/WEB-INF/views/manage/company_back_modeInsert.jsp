@@ -279,18 +279,20 @@
                                                  role="tabpanel" aria-labelledby="custom-nav-people-tab">
 
                                                 <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="renkou"
-                                                                                     class="form-control-label">人口密集程度：
+                                                    <div class="col col-md-3"><label class="form-control-label">人口密集程度：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
-                                                        <select name="renkou" id="renkou" class="form-control">
-                                                            <option value="0">聚集</option>
-                                                            <option value="1">分散</option>
-                                                            <option value="2">一般</option>
-                                                        </select>
+                                                        <input class="col-md-1" type="checkbox" name="renkou_check"
+                                                               value="聚集"/>聚集
+                                                        <input class="col-md-1" type="checkbox" name="renkou_check"
+                                                               value="分散"/>分散
+                                                        <input class="col-md-1" type="checkbox" name="renkou_check"
+                                                               value="一般"/>一般
                                                     </div>
                                                 </div>
+
+
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label for="yetaifei"
                                                                                      class="form-control-label">液态肥使用习惯：
@@ -529,9 +531,13 @@
         }
         data.append("ecotope", encodeURI(shengtai_check_val));
 
-        myselect = document.getElementById("renkou"); //人口密集程度
-        index = myselect.selectedIndex;
-        data.append("density", encodeURI(myselect.options[index].text));
+        const renkoucheckbox = document.getElementsByName("renkou_check"); //人口密集程度
+        let renkou_check_val = "";
+        for (let k = 0; k < renkoucheckbox.length; k++) {
+            if (renkoucheckbox[k].checked)
+                renkou_check_val = renkou_check_val + "," + renkoucheckbox[k].value;
+        }
+        data.append("density", encodeURI(renkou_check_val));
 
         myselect = document.getElementById("yetaifei"); //液态肥使用习惯
         index = myselect.selectedIndex;
