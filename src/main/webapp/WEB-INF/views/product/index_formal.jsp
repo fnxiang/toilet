@@ -75,6 +75,22 @@
                 <div class="grid_10">
                     <h2>产品展示</h2>
                 </div>
+                <div class="grid_2">
+                    <select class="grid_2" name="sortCondition" id="sortCondition">
+                        <option value="0">价格</option>
+                        <option value="1">使用寿命</option>
+                        <option value="2">清理周期</option>
+                    </select>
+                </div>
+                <div class="grid_2">
+                    <select class="grid_2" name="sortWay" id="sortWay">
+                        <option value="0">升序</option>
+                        <option value="1">降序</option>
+                    </select>
+                </div>
+                <div class="grid_2">
+                    <button class="grid_2" onclick="sortByName()">应用</button>
+                </div>
                 <!-- .grid_10 -->
 
 
