@@ -81,21 +81,37 @@
 
         <div class="carousel">
             <div class="c_header">
-                <div class="grid_10">
+                <div class="grid_6">
                     <h2 onclick="sortByName()">产品展示</h2>
+                </div>
+                <div class="grid_2">
+                    <select class="grid_2" name="sortCondition" id="sortCondition">
+                        <option value="0">价格</option>
+                        <option value="1">使用寿命</option>
+                        <option value="2">清理周期</option>
+                    </select>
+                </div>
+                <div class="grid_2">
+                    <select class="grid_2" name="sortWay" id="sortWay">
+                        <option value="0">升序</option>
+                        <option value="1">降序</option>
+                    </select>
+                </div>
+                <div class="grid_2">
+                    <button class="grid_2" onclick="sortByName()">应用</button>
                 </div>
                 <!-- .grid_10 -->
 
 
             </div>
             <!-- .c_header -->
-            <div class="list_carousel">
-                <ul id="list_product" class="list_product">
+            <div class="list_carousel" style="height: 334px;">
+                <ul id="list_product" class="list_product" style="height: 330px;">
                     <% for (ToiletProductDTO productDTO : productList) {
                         String firstPicPath = productDTO.getPicsPath().split(";")[0];
                     %>
                     <li value="">
-                        <div class="grid_3 product">
+                        <div class="grid_3 product" style="height: 330px;">
                             <div class="prev">
                                 <a href="${pageContext.request.contextPath}/toProductPage?url=product_info&product_id=<%=productDTO.getId()%>"><img
                                         src="<%=basePath+productDTO.getPicsPath()%>"
@@ -109,6 +125,10 @@
                                 <div class="price">
                                     <div class="vert">
                                         <div class="price_new">价格：<%=productDTO.getProductParameters().getPrice()%>万元
+                                        </div>
+                                        <div class="price_new">使用寿命：<%=productDTO.getProductParameters().getServiceLife()%>
+                                        </div>
+                                        <div class="price_new">清理周期：<%=productDTO.getProductParameters().getCleanupCycle()%>
                                         </div>
                                     </div>
                                 </div>
