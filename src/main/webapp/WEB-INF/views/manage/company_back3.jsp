@@ -168,18 +168,7 @@
                                     <div class="col-12 col-md-9">
                                         <select name="productselect" id="productselect" class="form-control"
                                                 onChange="productchange()">
-                                            <option value="0">完整的下水道水冲厕所</option>
-                                            <option value="1">化粪池式厕所</option>
-                                            <option value="2">双瓮漏斗式厕所</option>
-                                            <option value="3">三联沼气式池厕所</option>
-                                            <option value="4">复合生物反应微水冲厕所</option>
-                                            <option value="5">真空负压厕所</option>
-                                            <option value="6">多级生化组合电催化氧化厕所</option>
-                                            <option value="7">膜生物反应器（MBR）厕所</option>
-                                            <option value="8">堆肥式生态旱厕</option>
-                                            <option value="9">双坑交替式厕所</option>
-                                            <option value="10">粪尿分集式厕所</option>
-                                            <option value="11">泡沫封堵厕所</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -595,6 +584,17 @@
                                                     </select>
                                                 </div>
                                             </div>
+
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="yunxingchengben"
+                                                                                 class=" form-control-label">运行成本：</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="qinglizhouqi" name="yunxingchengben"
+                                                           placeholder="请运行成本" class="form-control">
+                                                </div>
+                                            </div>
+
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="qinglizhouqi"
                                                                                  class=" form-control-label">清理周期：</label>
@@ -741,6 +741,9 @@
 
 <script type="text/javascript">
 
+    var mode_content_selectMap = '';
+    var mode_content_patternDTOMap = '';
+
     <%--	文字提示	--%>
     $('use_for').tooltip({boundary: 'window'});
 
@@ -773,10 +776,19 @@
             processData: false,
             success:function(result){
                 if (result.success) {
+
+                    mode_content_selectMap = result['selectMap'];
+                    mode_content_patternDTOMap = result['patternDTOMap'];
                     console.log(result);
-                    //动态赋值给控件
+                    //动态赋值给控件  productselect   multiple-select
+                    var productSelect = document.getElementById("productselect");
+                    var productTpyes = result['selectMap'];
 
-
+                    var i = 0;
+                    for(key in productTpyes){
+                        productSelect.options.add(new Option(key, i));
+                        i++;
+                    }
 
                 } else {
                     alert(result.errorMessage);
@@ -790,62 +802,15 @@
         var x = document.getElementById("productselect");
         var y = document.getElementById("multiple-select");
 
+
+
         y.options.length = 0; // 清除second下拉框的所有内容
 
         if (x.selectedIndex == 0) { //完整的下水道水冲厕所
             y.options.add(new Option("洁具便器+完整下水道水冲式厕所+市政污水处理系统", "0"));
         }
 
-        if (x.selectedIndex == 1) { //化粪池式厕所
-            y.options.add(new Option("洁具便器+化粪池+分散处理", "0"));
-            y.options.add(new Option("洁具便器+化粪池+污水管网输送+污水集中处理系统", "1"));
-            y.options.add(new Option("洁具便器+化粪池+抽排设备转运+污水集中处理系统", "2"));
-            y.options.add(new Option("洁具便器+化粪池+抽排设备转运+发酵池或已有沼气工程", "3"));
-        }
 
-        if (x.selectedIndex == 2) { //双瓮漏斗式厕所
-            y.options.add(new Option("洁具便器+双瓮漏斗式厕所+后瓮粪液利用、前瓮粪渣无害化处理利用", "0"));
-        }
-
-        if (x.selectedIndex == 3) { //三联沼气式池厕所
-            y.options.add(new Option("洁具便器+三联沼气池式厕所+沼液沼渣利用（施肥、堆肥）", "0"));
-        }
-
-        if (x.selectedIndex == 4) { //复合生物反应微水冲厕所
-            y.options.add(new Option("无", "0"));
-        }
-
-        if (x.selectedIndex == 5) { //真空负压厕所
-            y.options.add(new Option("真空便器+真空管网+真空泵站+污水管道+污水集中处理系统（与生活污水等混合处理）", "0"));
-            y.options.add(new Option("真空便器+真空管网+真空泵站+抽排设备转运+污水集中处理系统（与生活污水等混合处理）", "1"));
-            y.options.add(new Option("真空便器+真空管网+真空泵站+抽排设备转运+发酵池或已有沼气工程", "2"));
-            y.options.add(new Option("洁具便器+真空污水箱+真空管网+真空泵站+污水管道（或抽排设备转运）+污水集中处理系统（与生活污水等混合处理）", "3"));
-        }
-
-        if (x.selectedIndex == 6) { //多级生化组合电催化氧化厕所
-            y.options.add(new Option("灰水收集处理系统+洁具便器+污水管网+市政污水处理系统", "0"));
-        }
-
-        if (x.selectedIndex == 7) { //膜生物反应器（MBR）厕所
-            y.options.add(new Option("无", "0"));
-        }
-
-        if (x.selectedIndex == 8) { //堆肥式生态旱厕
-            y.options.add(new Option("堆肥式生态旱厕+原位资源化利用", "0"));
-            y.options.add(new Option("堆肥式生态旱厕+抽排设备转运+资源化利用", "1"));
-        }
-
-        if (x.selectedIndex == 9) { //双坑交替式厕所
-            y.options.add(new Option("洁具便器+双坑交替式厕所+抽排设备+粪污利用", "0"));
-        }
-
-        if (x.selectedIndex == 10) { //粪尿分集式厕所
-            y.options.add(new Option("洁具便器+粪尿分集式厕所+资源化利用（堆肥肥田或焚烧）", "0"));
-        }
-
-        if (x.selectedIndex == 11) { //泡沫封堵厕所
-            y.options.add(new Option("无", "0"));
-        }
     }
 
     function entry(){
@@ -962,6 +927,7 @@
         myselect=document.getElementById("cesuoyongtu"); //材质
         index=myselect.selectedIndex;
         data.append("paramPurpose", encodeURI(myselect.options[index].text));
+        data.append("runningCost", encodeURI($('#yunxingchengben').val())); //运行成本
         data.append("cleanupCycle", encodeURI($('#qinglizhouqi').val())); //清理周期
 
         $.ajax({
