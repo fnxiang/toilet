@@ -15,7 +15,9 @@ public class ToiletPatternDTO {
 
     private String productType;
 
-    private String modeType;
+    private String patternType;
+
+    private String patternInfo;
 
     private EnvConditionsDTO envConditions;
 

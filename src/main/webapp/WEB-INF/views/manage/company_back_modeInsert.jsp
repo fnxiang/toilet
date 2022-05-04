@@ -483,8 +483,8 @@
         var data = new FormData();
 
         data.append("productType", encodeURI($('#product_type').val())); //产品类型
-        data.append("productModeType", encodeURI($('#producer_mode_type').val())); //模式类型
-        data.append("productModeInfo", encodeURI($('#producer_mode_info').val())); //模式介绍
+        data.append("patternType", encodeURI($('#producer_mode_type').val())); //模式类型
+        data.append("patternInfo", encodeURI($('#producer_mode_info').val())); //模式介绍
 
 
         //新模式参数
@@ -559,7 +559,7 @@
         console.log(data);
 
         $.ajax({
-            url: "/toilet/company/product/entry",
+            url: "/toilet/company/pattern/entry",
             type: "POST",
             dataType: "json",
             data: data,

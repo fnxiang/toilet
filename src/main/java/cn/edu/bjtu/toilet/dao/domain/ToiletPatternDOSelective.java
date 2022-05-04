@@ -355,73 +355,73 @@ public class ToiletPatternDOSelective {
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeIsNull() {
-            addCriterion("mode_type is null");
+        public Criteria andPatternTypeIsNull() {
+            addCriterion("pattern_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeIsNotNull() {
-            addCriterion("mode_type is not null");
+        public Criteria andPatternTypeIsNotNull() {
+            addCriterion("pattern_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeEqualTo(String value) {
-            addCriterion("mode_type =", value, "modeType");
+        public Criteria andPatternTypeEqualTo(String value) {
+            addCriterion("pattern_type =", value, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeNotEqualTo(String value) {
-            addCriterion("mode_type <>", value, "modeType");
+        public Criteria andPatternTypeNotEqualTo(String value) {
+            addCriterion("pattern_type <>", value, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeGreaterThan(String value) {
-            addCriterion("mode_type >", value, "modeType");
+        public Criteria andPatternTypeGreaterThan(String value) {
+            addCriterion("pattern_type >", value, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("mode_type >=", value, "modeType");
+        public Criteria andPatternTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("pattern_type >=", value, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeLessThan(String value) {
-            addCriterion("mode_type <", value, "modeType");
+        public Criteria andPatternTypeLessThan(String value) {
+            addCriterion("pattern_type <", value, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeLessThanOrEqualTo(String value) {
-            addCriterion("mode_type <=", value, "modeType");
+        public Criteria andPatternTypeLessThanOrEqualTo(String value) {
+            addCriterion("pattern_type <=", value, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeLike(String value) {
-            addCriterion("mode_type like", value, "modeType");
+        public Criteria andPatternTypeLike(String value) {
+            addCriterion("pattern_type like", value, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeNotLike(String value) {
-            addCriterion("mode_type not like", value, "modeType");
+        public Criteria andPatternTypeNotLike(String value) {
+            addCriterion("pattern_type not like", value, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeIn(List<String> values) {
-            addCriterion("mode_type in", values, "modeType");
+        public Criteria andPatternTypeIn(List<String> values) {
+            addCriterion("pattern_type in", values, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeNotIn(List<String> values) {
-            addCriterion("mode_type not in", values, "modeType");
+        public Criteria andPatternTypeNotIn(List<String> values) {
+            addCriterion("pattern_type not in", values, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeBetween(String value1, String value2) {
-            addCriterion("mode_type between", value1, value2, "modeType");
+        public Criteria andPatternTypeBetween(String value1, String value2) {
+            addCriterion("pattern_type between", value1, value2, "patternType");
             return (Criteria) this;
         }
 
-        public Criteria andModeTypeNotBetween(String value1, String value2) {
-            addCriterion("mode_type not between", value1, value2, "modeType");
+        public Criteria andPatternTypeNotBetween(String value1, String value2) {
+            addCriterion("pattern_type not between", value1, value2, "patternType");
             return (Criteria) this;
         }
 
@@ -682,6 +682,76 @@ public class ToiletPatternDOSelective {
 
         public Criteria andAttributesNotBetween(String value1, String value2) {
             addCriterion("attributes not between", value1, value2, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoIsNull() {
+            addCriterion("pattern_info is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoIsNotNull() {
+            addCriterion("pattern_info is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoEqualTo(String value) {
+            addCriterion("pattern_info =", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotEqualTo(String value) {
+            addCriterion("pattern_info <>", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoGreaterThan(String value) {
+            addCriterion("pattern_info >", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoGreaterThanOrEqualTo(String value) {
+            addCriterion("pattern_info >=", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoLessThan(String value) {
+            addCriterion("pattern_info <", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoLessThanOrEqualTo(String value) {
+            addCriterion("pattern_info <=", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoLike(String value) {
+            addCriterion("pattern_info like", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotLike(String value) {
+            addCriterion("pattern_info not like", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoIn(List<String> values) {
+            addCriterion("pattern_info in", values, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotIn(List<String> values) {
+            addCriterion("pattern_info not in", values, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoBetween(String value1, String value2) {
+            addCriterion("pattern_info between", value1, value2, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotBetween(String value1, String value2) {
+            addCriterion("pattern_info not between", value1, value2, "patternInfo");
             return (Criteria) this;
         }
     }

@@ -12,7 +12,7 @@ public class ToiletPatternDO implements Serializable {
 
     private String productType;
 
-    private String modeType;
+    private String patternType;
 
     private Integer version;
 
@@ -21,6 +21,8 @@ public class ToiletPatternDO implements Serializable {
     private String source;
 
     private String attributes;
+
+    private String patternInfo;
 
     private String envConditions;
 
@@ -64,12 +66,12 @@ public class ToiletPatternDO implements Serializable {
         this.productType = productType == null ? null : productType.trim();
     }
 
-    public String getModeType() {
-        return modeType;
+    public String getPatternType() {
+        return patternType;
     }
 
-    public void setModeType(String modeType) {
-        this.modeType = modeType == null ? null : modeType.trim();
+    public void setPatternType(String patternType) {
+        this.patternType = patternType == null ? null : patternType.trim();
     }
 
     public Integer getVersion() {
@@ -102,6 +104,14 @@ public class ToiletPatternDO implements Serializable {
 
     public void setAttributes(String attributes) {
         this.attributes = attributes == null ? null : attributes.trim();
+    }
+
+    public String getPatternInfo() {
+        return patternInfo;
+    }
+
+    public void setPatternInfo(String patternInfo) {
+        this.patternInfo = patternInfo == null ? null : patternInfo.trim();
     }
 
     public String getEnvConditions() {
@@ -146,11 +156,12 @@ public class ToiletPatternDO implements Serializable {
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", productType=").append(productType);
-        sb.append(", modeType=").append(modeType);
+        sb.append(", patternType=").append(patternType);
         sb.append(", version=").append(version);
         sb.append(", deleted=").append(deleted);
         sb.append(", source=").append(source);
         sb.append(", attributes=").append(attributes);
+        sb.append(", patternInfo=").append(patternInfo);
         sb.append(", envConditions=").append(envConditions);
         sb.append(", humanFactors=").append(humanFactors);
         sb.append(", pipNetworkConditions=").append(pipNetworkConditions);

@@ -3,7 +3,6 @@ package cn.edu.bjtu.toilet.controller;
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.ProductType;
-import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
 import cn.edu.bjtu.toilet.domain.ModeResponse;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
@@ -11,27 +10,17 @@ import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
@@ -117,8 +106,12 @@ public class ProductController {
             if (Objects.isNull(toiletPatternDTO)) {
                 return ModeResponse.failed("save pattern failed");
             }
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("save pattern error with {}", e.getMessage());
+            return ModeResponse.failed(e.getMessage());
         } catch (Exception e) {
             LOG.error("upload products failed");
+            return ModeResponse.failed("保存失败！");
         }
         return ModeResponse.success();
     }
@@ -134,8 +127,8 @@ public class ProductController {
                 return ModeResponse.failed("pattern is empty!");
             }
 
-            Map<String, String> selectMap = patternDTOS.stream().collect(Collectors.toMap(ToiletPatternDTO::getProductType, ToiletPatternDTO::getModeType));
-            Map<String, ToiletPatternDTO> patternDTOMap = patternDTOS.stream().collect(Collectors.toMap(ToiletPatternDTO::getModeType, e -> e));
+            Map<String, String> selectMap = patternDTOS.stream().collect(Collectors.toMap(ToiletPatternDTO::getProductType, ToiletPatternDTO::getPatternType));
+            Map<String, ToiletPatternDTO> patternDTOMap = patternDTOS.stream().collect(Collectors.toMap(ToiletPatternDTO::getPatternType, e -> e));
             response.setSuccess(true);
             response.setSelectMap(selectMap);
             response.setPatternDTOMap(patternDTOMap);
@@ -171,9 +164,9 @@ public class ProductController {
     private ToiletPatternDTO buildPatternDTO(Map<String, String> params) {
         ToiletPatternDTO toiletPatternDTO = new ToiletPatternDTO();
 
-        //TODO modeType 和 productType录入
-        toiletPatternDTO.setModeType(params.get("modeType"));
         toiletPatternDTO.setProductType(params.get("productType"));
+        toiletPatternDTO.setPatternType(params.get("patternType"));
+        toiletPatternDTO.setPatternInfo(params.get("patternInfo"));
 
         // 自然环境条件
         EnvConditionsDTO envConditionsDTO = new EnvConditionsDTO();

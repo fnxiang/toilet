@@ -6,11 +6,12 @@
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="product_type" jdbcType="VARCHAR" property="productType" />
-    <result column="mode_type" jdbcType="VARCHAR" property="modeType" />
+    <result column="pattern_type" jdbcType="VARCHAR" property="patternType" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="attributes" jdbcType="VARCHAR" property="attributes" />
+    <result column="pattern_info" jdbcType="VARCHAR" property="patternInfo" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO">
     <result column="env_conditions" jdbcType="LONGVARCHAR" property="envConditions" />
@@ -77,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, product_type, mode_type, version, deleted, source, 
-    attributes
+    id, gmt_create, gmt_modified, product_type, pattern_type, version, deleted, source, 
+    attributes, pattern_info
   </sql>
   <sql id="Blob_Column_List">
     env_conditions, human_factors, pip_network_conditions, resource_utilization
@@ -133,15 +134,17 @@
   </delete>
   <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO">
     insert into toilet_pattern (id, gmt_create, gmt_modified, 
-      product_type, mode_type, version, 
+      product_type, pattern_type, version, 
       deleted, source, attributes, 
-      env_conditions, human_factors, pip_network_conditions, 
-      resource_utilization)
+      pattern_info, env_conditions, human_factors, 
+      pip_network_conditions, resource_utilization
+      )
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{productType,jdbcType=VARCHAR}, #{modeType,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
+      #{productType,jdbcType=VARCHAR}, #{patternType,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
       #{deleted,jdbcType=BIT}, #{source,jdbcType=VARCHAR}, #{attributes,jdbcType=VARCHAR}, 
-      #{envConditions,jdbcType=LONGVARCHAR}, #{humanFactors,jdbcType=LONGVARCHAR}, #{pipNetworkConditions,jdbcType=LONGVARCHAR}, 
-      #{resourceUtilization,jdbcType=LONGVARCHAR})
+      #{patternInfo,jdbcType=VARCHAR}, #{envConditions,jdbcType=LONGVARCHAR}, #{humanFactors,jdbcType=LONGVARCHAR}, 
+      #{pipNetworkConditions,jdbcType=LONGVARCHAR}, #{resourceUtilization,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO">
     insert into toilet_pattern
@@ -158,8 +161,8 @@
       <if test="productType != null">
         product_type,
       </if>
-      <if test="modeType != null">
-        mode_type,
+      <if test="patternType != null">
+        pattern_type,
       </if>
       <if test="version != null">
         version,
@@ -172,6 +175,9 @@
       </if>
       <if test="attributes != null">
         attributes,
+      </if>
+      <if test="patternInfo != null">
+        pattern_info,
       </if>
       <if test="envConditions != null">
         env_conditions,
@@ -199,8 +205,8 @@
       <if test="productType != null">
         #{productType,jdbcType=VARCHAR},
       </if>
-      <if test="modeType != null">
-        #{modeType,jdbcType=VARCHAR},
+      <if test="patternType != null">
+        #{patternType,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -213,6 +219,9 @@
       </if>
       <if test="attributes != null">
         #{attributes,jdbcType=VARCHAR},
+      </if>
+      <if test="patternInfo != null">
+        #{patternInfo,jdbcType=VARCHAR},
       </if>
       <if test="envConditions != null">
         #{envConditions,jdbcType=LONGVARCHAR},
@@ -249,8 +258,8 @@
       <if test="record.productType != null">
         product_type = #{record.productType,jdbcType=VARCHAR},
       </if>
-      <if test="record.modeType != null">
-        mode_type = #{record.modeType,jdbcType=VARCHAR},
+      <if test="record.patternType != null">
+        pattern_type = #{record.patternType,jdbcType=VARCHAR},
       </if>
       <if test="record.version != null">
         version = #{record.version,jdbcType=INTEGER},
@@ -263,6 +272,9 @@
       </if>
       <if test="record.attributes != null">
         attributes = #{record.attributes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patternInfo != null">
+        pattern_info = #{record.patternInfo,jdbcType=VARCHAR},
       </if>
       <if test="record.envConditions != null">
         env_conditions = #{record.envConditions,jdbcType=LONGVARCHAR},
@@ -287,11 +299,12 @@
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       product_type = #{record.productType,jdbcType=VARCHAR},
-      mode_type = #{record.modeType,jdbcType=VARCHAR},
+      pattern_type = #{record.patternType,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT},
       source = #{record.source,jdbcType=VARCHAR},
       attributes = #{record.attributes,jdbcType=VARCHAR},
+      pattern_info = #{record.patternInfo,jdbcType=VARCHAR},
       env_conditions = #{record.envConditions,jdbcType=LONGVARCHAR},
       human_factors = #{record.humanFactors,jdbcType=LONGVARCHAR},
       pip_network_conditions = #{record.pipNetworkConditions,jdbcType=LONGVARCHAR},
@@ -306,11 +319,12 @@
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       product_type = #{record.productType,jdbcType=VARCHAR},
-      mode_type = #{record.modeType,jdbcType=VARCHAR},
+      pattern_type = #{record.patternType,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT},
       source = #{record.source,jdbcType=VARCHAR},
-      attributes = #{record.attributes,jdbcType=VARCHAR}
+      attributes = #{record.attributes,jdbcType=VARCHAR},
+      pattern_info = #{record.patternInfo,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -327,8 +341,8 @@
       <if test="productType != null">
         product_type = #{productType,jdbcType=VARCHAR},
       </if>
-      <if test="modeType != null">
-        mode_type = #{modeType,jdbcType=VARCHAR},
+      <if test="patternType != null">
+        pattern_type = #{patternType,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -341,6 +355,9 @@
       </if>
       <if test="attributes != null">
         attributes = #{attributes,jdbcType=VARCHAR},
+      </if>
+      <if test="patternInfo != null">
+        pattern_info = #{patternInfo,jdbcType=VARCHAR},
       </if>
       <if test="envConditions != null">
         env_conditions = #{envConditions,jdbcType=LONGVARCHAR},
@@ -362,11 +379,12 @@
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       product_type = #{productType,jdbcType=VARCHAR},
-      mode_type = #{modeType,jdbcType=VARCHAR},
+      pattern_type = #{patternType,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
       source = #{source,jdbcType=VARCHAR},
       attributes = #{attributes,jdbcType=VARCHAR},
+      pattern_info = #{patternInfo,jdbcType=VARCHAR},
       env_conditions = #{envConditions,jdbcType=LONGVARCHAR},
       human_factors = #{humanFactors,jdbcType=LONGVARCHAR},
       pip_network_conditions = #{pipNetworkConditions,jdbcType=LONGVARCHAR},
@@ -378,11 +396,12 @@
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       product_type = #{productType,jdbcType=VARCHAR},
-      mode_type = #{modeType,jdbcType=VARCHAR},
+      pattern_type = #{patternType,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
       source = #{source,jdbcType=VARCHAR},
-      attributes = #{attributes,jdbcType=VARCHAR}
+      attributes = #{attributes,jdbcType=VARCHAR},
+      pattern_info = #{patternInfo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

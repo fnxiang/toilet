@@ -18,6 +18,7 @@ public class ProductConverter {
 
     public static ToiletPatternDO toDO(ToiletPatternDTO patternDTO) {
         ToiletPatternDO patternDO = new ToiletPatternDO();
+        BeanUtils.copyProperties(patternDTO, patternDO);
         patternDO.setEnvConditions(JSON.toJSONString(patternDTO.getEnvConditions()));
         patternDO.setHumanFactors(JSON.toJSONString(patternDTO.getHumanFactors()));
         patternDO.setPipNetworkConditions(JSON.toJSONString(patternDTO.getPipNetworkConditions()));
@@ -35,6 +36,7 @@ public class ProductConverter {
 
     public static ToiletPatternDTO toDTO(ToiletPatternDO patternDO) {
         ToiletPatternDTO patternDTO = new ToiletPatternDTO();
+        BeanUtils.copyProperties(patternDO, patternDTO);
         patternDTO.setEnvConditions(JSON.parseObject(patternDO.getEnvConditions(), EnvConditionsDTO.class));
         patternDTO.setHumanFactors(JSON.parseObject(patternDO.getHumanFactors(), HumanFactorsDTO.class));
         patternDTO.setPipNetworkConditions(JSON.parseObject(patternDO.getPipNetworkConditions(), PipNetworkConditionsDTO.class));
