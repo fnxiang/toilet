@@ -24,15 +24,6 @@
 
 </head>
 <body>
-<%--获取 List --%>
-<% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>
-<c:set var="list" value="<%=JSON.toJSONString(productList)%>" scope="application"/>
-
-<%--获取路径用于显示图片和文件--%>
-<% String path = request.getContextPath();
-    String basePath = request.getScheme() + "://"
-            + request.getServerName() + ":" + request.getServerPort()
-            + path + "/";%>
 <header id="branding">
     <jsp:include page="product_banner.jsp"/>
     <!-- .grid_6 -->
@@ -82,43 +73,15 @@
         <div class="carousel">
             <div class="c_header">
                 <div class="grid_10">
-                    <h2 onclick="sortByName()">产品展示</h2>
+                    <h2>产品展示</h2>
                 </div>
                 <!-- .grid_10 -->
 
 
             </div>
             <!-- .c_header -->
-            <div class="list_carousel">
-                <ul id="list_product" class="list_product">
-                    <% for (ToiletProductDTO productDTO : productList) {
-                        String firstPicPath = productDTO.getPicsPath().split(";")[0];
-                    %>
-                    <li value="">
-                        <div class="grid_3 product">
-                            <div class="prev">
-                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_info&product_id=<%=productDTO.getId()%>"><img
-                                        src="<%=basePath+productDTO.getPicsPath()%>"
-                                        alt="" title=""/></a>
-                            </div>
-                            <!-- .prev -->
-                            <h3 class="title"><%=productDTO.getProductName()%>
-                            </h3>
-
-                            <div class="cart">
-                                <div class="price">
-                                    <div class="vert">
-                                        <div class="price_new">价格：<%=productDTO.getProductParameters().getPrice()%>万元
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .cart -->
-                        </div>
-                        <!-- .grid_3 -->
-                    </li>
-                    <%}%>
-                </ul>
+            <div id="list_carousel" class="list_carousel">
+                <jsp:include page="product_list_content.jsp"/>
 
                 <div class="clear"></div>
                 <div id="content_bottom">
@@ -219,10 +182,11 @@
         return temp;
     }
 
-    function sortByName() {
+    function sort(sortBy, desc) {
 
         let data = {};
-        data["sortBy"] = "name";
+        data["sortBy"] = sortBy;
+        data["desc"] = desc;
         data["list"] = '${list}';
 
         Post("${pageContext.request.contextPath}/product/sort", data);

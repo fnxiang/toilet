@@ -155,10 +155,28 @@ public class ProductController {
             if (Objects.isNull(params)) {
                 return ERROR_PAGE;
             }
-
             List<ToiletProductDTO> productDTOS = JSON.parseArray(params.get("list"), ToiletProductDTO.class);
+
             if (CollectionUtils.isEmpty(productDTOS)) {
                 return ERROR_PAGE;
+            }
+
+            switch (params.get("sortBy")) {
+                case "price":
+                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getPrice()))).collect(Collectors.toList());
+                    break;
+                case "cleanCycle":
+                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getCleanupCycle()))).collect(Collectors.toList());
+                    break;
+                case "life":
+                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getServiceLife()))).collect(Collectors.toList());
+                    break;
+                default:
+                    break;
+            }
+
+            if (params.get("desc").equals("true")) {
+                Collections.reverse(productDTOS);
             }
 
             productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getPrice()))).collect(Collectors.toList());
@@ -238,6 +256,7 @@ public class ProductController {
         paramsDTO.setColor(params.get("color"));
         paramsDTO.setParamPurpose(params.get("paramPurpose"));
         paramsDTO.setCleanupCycle(params.get("cleanupCycle"));
+        paramsDTO.setRunCost(params.get("runningCost"));
         paramsDTO.setPrice(Double.valueOf(params.get("price")));
         paramsDTO.setServiceLife(params.get("serviceLife"));
         paramsDTO.setLength(params.get("length"));

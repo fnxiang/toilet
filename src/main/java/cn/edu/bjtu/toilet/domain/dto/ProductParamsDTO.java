@@ -21,6 +21,8 @@ public class ProductParamsDTO {
 
     private String cleanupCycle;
 
+    private String runCost;
+
     private String length;
 
     private String wide;
