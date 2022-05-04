@@ -1,7 +1,10 @@
 package cn.edu.bjtu.toilet.controller;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.ProductType;
 import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
+import cn.edu.bjtu.toilet.domain.ModeResponse;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.service.ProductService;
@@ -28,6 +31,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
@@ -98,6 +102,51 @@ public class ProductController {
         return ProductResponse.success();
     }
 
+    @RequestMapping("/company/pattern/entry")
+    @ResponseBody
+    public ModeResponse patternEntry(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request, UPLOAD_DIRECTORY);
+            if (Objects.isNull(params)) {
+                return ModeResponse.failed("resolve params error");
+            }
+
+            ToiletPatternDTO toiletPatternDTO = buildPatternDTO(params);
+            toiletPatternDTO.setSource(request.getSession().getAttribute("uId").toString());
+            toiletPatternDTO = productService.savePattern(toiletPatternDTO);
+            if (Objects.isNull(toiletPatternDTO)) {
+                return ModeResponse.failed("save pattern failed");
+            }
+        } catch (Exception e) {
+            LOG.error("upload products failed");
+        }
+        return ModeResponse.success();
+    }
+
+    @RequestMapping(value = "/product/modes/get")
+    @ResponseBody
+    public ModeResponse getModes(HttpServletRequest request) {
+        ModeResponse response = new ModeResponse();
+        try {
+            List<ToiletPatternDTO> patternDTOS = productService.queryAllPattern();
+
+            if (CollectionUtils.isEmpty(patternDTOS)) {
+                return ModeResponse.failed("pattern is empty!");
+            }
+
+            Map<String, String> selectMap = patternDTOS.stream().collect(Collectors.toMap(ToiletPatternDTO::getProductType, ToiletPatternDTO::getModeType));
+            Map<String, ToiletPatternDTO> patternDTOMap = patternDTOS.stream().collect(Collectors.toMap(ToiletPatternDTO::getModeType, e -> e));
+            response.setSuccess(true);
+            response.setSelectMap(selectMap);
+            response.setPatternDTOMap(patternDTOMap);
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("get modes error with {}", e.getMessage());
+            return ModeResponse.failed(e.getMessage());
+        }
+
+        return response;
+    }
+
     @RequestMapping("/product/sort")
     public String sortProduct(HttpServletRequest request) {
         try {
@@ -121,6 +170,11 @@ public class ProductController {
 
     private ToiletPatternDTO buildPatternDTO(Map<String, String> params) {
         ToiletPatternDTO toiletPatternDTO = new ToiletPatternDTO();
+
+        //TODO modeType 和 productType录入
+        toiletPatternDTO.setModeType(params.get("modeType"));
+        toiletPatternDTO.setProductType(params.get("productType"));
+
         // 自然环境条件
         EnvConditionsDTO envConditionsDTO = new EnvConditionsDTO();
         envConditionsDTO.setTemperature(params.get("natureTemp"));
@@ -134,7 +188,7 @@ public class ProductController {
         //人文因素
         HumanFactorsDTO humanFactorsDTO = new HumanFactorsDTO();
         humanFactorsDTO.setDensity(params.get("density"));
-        humanFactorsDTO.setUsageHabits(params.get("usageHabits").equals("是"));
+        humanFactorsDTO.setUsageHabits(params.get("usageHabits"));
 
         toiletPatternDTO.setHumanFactors(humanFactorsDTO);
 

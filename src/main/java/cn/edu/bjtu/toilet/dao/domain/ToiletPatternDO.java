@@ -10,6 +10,10 @@ public class ToiletPatternDO implements Serializable {
 
     private Date gmtModified;
 
+    private String productType;
+
+    private String modeType;
+
     private Integer version;
 
     private Boolean deleted;
@@ -50,6 +54,22 @@ public class ToiletPatternDO implements Serializable {
 
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType == null ? null : productType.trim();
+    }
+
+    public String getModeType() {
+        return modeType;
+    }
+
+    public void setModeType(String modeType) {
+        this.modeType = modeType == null ? null : modeType.trim();
     }
 
     public Integer getVersion() {
@@ -125,6 +145,8 @@ public class ToiletPatternDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
+        sb.append(", productType=").append(productType);
+        sb.append(", modeType=").append(modeType);
         sb.append(", version=").append(version);
         sb.append(", deleted=").append(deleted);
         sb.append(", source=").append(source);

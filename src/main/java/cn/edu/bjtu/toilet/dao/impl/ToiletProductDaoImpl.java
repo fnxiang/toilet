@@ -50,6 +50,29 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     }
 
     @Override
+    public List<ToiletPatternDO> queryAllPattern() {
+
+        ToiletPatternDOSelective toiletPatternDOSelective = new ToiletPatternDOSelective();
+        ToiletPatternDOSelective.Criteria criteria = toiletPatternDOSelective.createCriteria();
+
+        criteria.andDeletedNotEqualTo(true);
+
+        return patternDOMapper.selectByExample(toiletPatternDOSelective);
+    }
+
+    @Override
+    public ToiletPatternDO savePattern(ToiletPatternDO patternDO) {
+        ToiletPatternDO patternDOFromDb = queryPatternByName(patternDO.getModeType());
+        if (patternDOFromDb != null) {
+            throw new ToiletBizException("改模式名称已存在！", BIZ_ERROR);
+        }
+
+        int patternId = insertPattern(patternDO, buildSourceKey(patternDO));
+
+        return queryPatternById(patternId);
+    }
+
+    @Override
     public ToiletProductDO saveProductWithPattern(ToiletProductDO productDO, ToiletPatternDO patternDO) {
         ToiletProductDO toiletProductDO = queryProductByName(productDO.getProductName());
 
@@ -73,6 +96,10 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
 
     private String buildSourceKey(ToiletProductDO productDO) {
         return String.format("%s-%s", productDO.getCompanyEmail(), productDO.getProductName());
+    }
+
+    private String buildSourceKey(ToiletPatternDO patternDO) {
+        return String.format("%s-%s", patternDO.getSource(), patternDO.getModeType());
     }
 
     public String insertProduct(ToiletProductDO productDO){
@@ -193,6 +220,31 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
 
         criteria.andDeletedNotEqualTo(true);
         criteria.andSourceEqualTo(source);
+
+        List<ToiletPatternDO> toiletPatternDOS = patternDOMapper.selectByExample(patternDOSelective);
+
+        if (CollectionUtils.isEmpty(toiletPatternDOS)) {
+            return null;
+        }
+
+        if (toiletPatternDOS.size() != 1) {
+            throw new ToiletBizException("too many result returned ", BIZ_ERROR);
+        }
+
+        return toiletPatternDOS.get(0);
+    }
+
+    public ToiletPatternDO queryPatternByName(String name) {
+
+        if (StringUtils.isEmpty(name)) {
+            throw new ToiletBizException("query pattern Id error", BIZ_ERROR);
+        }
+
+        ToiletPatternDOSelective patternDOSelective = new ToiletPatternDOSelective();
+        ToiletPatternDOSelective.Criteria criteria = patternDOSelective.createCriteria();
+
+        criteria.andDeletedNotEqualTo(true);
+        criteria.andModeTypeEqualTo(name);
 
         List<ToiletPatternDO> toiletPatternDOS = patternDOMapper.selectByExample(patternDOSelective);
 

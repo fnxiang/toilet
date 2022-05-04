@@ -5,6 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="product_type" jdbcType="VARCHAR" property="productType" />
+    <result column="mode_type" jdbcType="VARCHAR" property="modeType" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="source" jdbcType="VARCHAR" property="source" />
@@ -75,7 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, version, deleted, source, attributes
+    id, gmt_create, gmt_modified, product_type, mode_type, version, deleted, source, 
+    attributes
   </sql>
   <sql id="Blob_Column_List">
     env_conditions, human_factors, pip_network_conditions, resource_utilization
@@ -130,15 +133,15 @@
   </delete>
   <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO">
     insert into toilet_pattern (id, gmt_create, gmt_modified, 
-      version, deleted, source, 
-      attributes, env_conditions, human_factors, 
-      pip_network_conditions, resource_utilization
-      )
+      product_type, mode_type, version, 
+      deleted, source, attributes, 
+      env_conditions, human_factors, pip_network_conditions, 
+      resource_utilization)
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, #{source,jdbcType=VARCHAR}, 
-      #{attributes,jdbcType=VARCHAR}, #{envConditions,jdbcType=LONGVARCHAR}, #{humanFactors,jdbcType=LONGVARCHAR}, 
-      #{pipNetworkConditions,jdbcType=LONGVARCHAR}, #{resourceUtilization,jdbcType=LONGVARCHAR}
-      )
+      #{productType,jdbcType=VARCHAR}, #{modeType,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
+      #{deleted,jdbcType=BIT}, #{source,jdbcType=VARCHAR}, #{attributes,jdbcType=VARCHAR}, 
+      #{envConditions,jdbcType=LONGVARCHAR}, #{humanFactors,jdbcType=LONGVARCHAR}, #{pipNetworkConditions,jdbcType=LONGVARCHAR}, 
+      #{resourceUtilization,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO">
     insert into toilet_pattern
@@ -151,6 +154,12 @@
       </if>
       <if test="gmtModified != null">
         gmt_modified,
+      </if>
+      <if test="productType != null">
+        product_type,
+      </if>
+      <if test="modeType != null">
+        mode_type,
       </if>
       <if test="version != null">
         version,
@@ -186,6 +195,12 @@
       </if>
       <if test="gmtModified != null">
         #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productType != null">
+        #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="modeType != null">
+        #{modeType,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -231,6 +246,12 @@
       <if test="record.gmtModified != null">
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.productType != null">
+        product_type = #{record.productType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modeType != null">
+        mode_type = #{record.modeType,jdbcType=VARCHAR},
+      </if>
       <if test="record.version != null">
         version = #{record.version,jdbcType=INTEGER},
       </if>
@@ -265,6 +286,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      product_type = #{record.productType,jdbcType=VARCHAR},
+      mode_type = #{record.modeType,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT},
       source = #{record.source,jdbcType=VARCHAR},
@@ -282,6 +305,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      product_type = #{record.productType,jdbcType=VARCHAR},
+      mode_type = #{record.modeType,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT},
       source = #{record.source,jdbcType=VARCHAR},
@@ -298,6 +323,12 @@
       </if>
       <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productType != null">
+        product_type = #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="modeType != null">
+        mode_type = #{modeType,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -330,6 +361,8 @@
     update toilet_pattern
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      product_type = #{productType,jdbcType=VARCHAR},
+      mode_type = #{modeType,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
       source = #{source,jdbcType=VARCHAR},
@@ -344,6 +377,8 @@
     update toilet_pattern
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      product_type = #{productType,jdbcType=VARCHAR},
+      mode_type = #{modeType,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
       source = #{source,jdbcType=VARCHAR},

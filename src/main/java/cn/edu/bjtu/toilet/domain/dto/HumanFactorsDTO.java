@@ -10,5 +10,5 @@ public class HumanFactorsDTO {
     /**
      * 液态肥使用习惯
      * */
-    private Boolean usageHabits;
+    private String usageHabits;
 }

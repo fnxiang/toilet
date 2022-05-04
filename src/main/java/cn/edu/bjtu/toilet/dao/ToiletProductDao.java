@@ -9,6 +9,8 @@ public interface ToiletProductDao {
 
     ToiletProductDO saveProductWithPattern(ToiletProductDO productDO, ToiletPatternDO patternDO);
 
+    ToiletPatternDO savePattern(ToiletPatternDO patternDO);
+
     ToiletPatternDO queryPatternBySource(String source);
 
     ToiletPatternDO queryPatternById(Integer Id);
@@ -16,4 +18,6 @@ public interface ToiletProductDao {
     ToiletProductDO queryProductById(Integer Id);
 
     List<ToiletProductDO> queryAllProducts(String email);
+
+    List<ToiletPatternDO> queryAllPattern();
 }

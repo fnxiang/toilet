@@ -42,6 +42,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ToiletPatternDTO> queryAllPattern() {
+        return toiletProductDao.queryAllPattern().stream().map(ProductConverter::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
     public ToiletProductDTO saveProduct(ToiletProductDTO productDTO, ToiletPatternDTO patternDTO) {
         ToiletProductDO productDO = toiletProductDao.saveProductWithPattern(ProductConverter.toDO(productDTO), ProductConverter.toDO(patternDTO));
         ToiletPatternDO patternDO = toiletProductDao.queryPatternById(productDO.getPatternId());
@@ -51,5 +56,13 @@ public class ProductServiceImpl implements ProductService {
 
         productDTOFromDb.setToiletPatternDTO(patternDTOFromDb);
         return productDTOFromDb;
+    }
+
+    @Override
+    public ToiletPatternDTO savePattern(ToiletPatternDTO patternDTO) {
+        ToiletPatternDO patternDO = toiletProductDao.savePattern(ProductConverter.toDO(patternDTO));
+
+        patternDTO = ProductConverter.toDTO(patternDO);
+        return patternDTO;
     }
 }

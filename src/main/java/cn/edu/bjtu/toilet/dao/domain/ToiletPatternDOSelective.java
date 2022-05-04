@@ -285,6 +285,146 @@ public class ToiletPatternDOSelective {
             return (Criteria) this;
         }
 
+        public Criteria andProductTypeIsNull() {
+            addCriterion("product_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeIsNotNull() {
+            addCriterion("product_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeEqualTo(String value) {
+            addCriterion("product_type =", value, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeNotEqualTo(String value) {
+            addCriterion("product_type <>", value, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeGreaterThan(String value) {
+            addCriterion("product_type >", value, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("product_type >=", value, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeLessThan(String value) {
+            addCriterion("product_type <", value, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeLessThanOrEqualTo(String value) {
+            addCriterion("product_type <=", value, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeLike(String value) {
+            addCriterion("product_type like", value, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeNotLike(String value) {
+            addCriterion("product_type not like", value, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeIn(List<String> values) {
+            addCriterion("product_type in", values, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeNotIn(List<String> values) {
+            addCriterion("product_type not in", values, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeBetween(String value1, String value2) {
+            addCriterion("product_type between", value1, value2, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductTypeNotBetween(String value1, String value2) {
+            addCriterion("product_type not between", value1, value2, "productType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeIsNull() {
+            addCriterion("mode_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeIsNotNull() {
+            addCriterion("mode_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeEqualTo(String value) {
+            addCriterion("mode_type =", value, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeNotEqualTo(String value) {
+            addCriterion("mode_type <>", value, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeGreaterThan(String value) {
+            addCriterion("mode_type >", value, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("mode_type >=", value, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeLessThan(String value) {
+            addCriterion("mode_type <", value, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeLessThanOrEqualTo(String value) {
+            addCriterion("mode_type <=", value, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeLike(String value) {
+            addCriterion("mode_type like", value, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeNotLike(String value) {
+            addCriterion("mode_type not like", value, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeIn(List<String> values) {
+            addCriterion("mode_type in", values, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeNotIn(List<String> values) {
+            addCriterion("mode_type not in", values, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeBetween(String value1, String value2) {
+            addCriterion("mode_type between", value1, value2, "modeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andModeTypeNotBetween(String value1, String value2) {
+            addCriterion("mode_type not between", value1, value2, "modeType");
+            return (Criteria) this;
+        }
+
         public Criteria andVersionIsNull() {
             addCriterion("version is null");
             return (Criteria) this;

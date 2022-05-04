@@ -174,7 +174,7 @@ public class SearchController {
         //人文因素
         HumanFactorsDTO humanFactorsDTO = new HumanFactorsDTO();
         humanFactorsDTO.setDensity(params.get("density"));
-        humanFactorsDTO.setUsageHabits(buildBooleanCondition(params.get("usageHabits")));
+        humanFactorsDTO.setUsageHabits(params.get("usageHabits"));
 
         toiletPatternDTO.setHumanFactors(humanFactorsDTO);
 
