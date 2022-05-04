@@ -633,11 +633,42 @@
                                                                            rows="9" placeholder="产品特点..."
                                                                            class="form-control"></textarea></div>
                                 </div>
+
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="picturefile" class=" form-control-label">使用图片
+                                    <div class="col col-md-3"><label for="picturefile1" class=" form-control-label">使用图片1
                                         <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
-                                    <div class="col-12 col-md-9"><input type="file" id="picturefile" name="picturefile"
+                                    <div class="col-12 col-md-9"><input type="file" id="picturefile1" name="picturefile1"
+                                                                        class="form-control-file">
+                                        <small class="form-text text-muted">请选择PNG文件作为主要展示图片</small>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="picturefile2" class=" form-control-label">使用图片2
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                           title="输入注意事项"></i></label></div>
+                                    <div class="col-12 col-md-9"><input type="file" id="picturefile2" name="picturefile2"
+                                                                        class="form-control-file">
+                                        <small class="form-text text-muted">请选择PNG文件作为主要展示图片</small>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="picturefile3" class=" form-control-label">使用图片3
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                           title="输入注意事项"></i></label></div>
+                                    <div class="col-12 col-md-9"><input type="file" id="picturefile3" name="picturefile3"
+                                                                        class="form-control-file">
+                                        <small class="form-text text-muted">请选择PNG文件作为主要展示图片</small>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="picturefile4" class=" form-control-label">使用图片4
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                           title="输入注意事项"></i></label></div>
+                                    <div class="col-12 col-md-9"><input type="file" id="picturefile4" name="picturefile4"
                                                                         class="form-control-file">
                                         <small class="form-text text-muted">请选择PNG文件作为主要展示图片</small>
                                     </div>
@@ -726,6 +757,30 @@
             else if (this.value == 'hideNewMode') {
                 var modediv = document.getElementById("newModeAdding");
                 modediv.style.cssText = "display:none;"
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            url:"/toilet/company/product/modes/get",
+            type:"POST",
+            dataType: "json",
+            data: '',
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(result){
+                if (result.success) {
+                    console.log(result);
+                    //动态赋值给控件
+
+
+
+                } else {
+                    alert(result.errorMessage);
+                }
             }
         });
     });
@@ -845,7 +900,7 @@
                 shengtai_check_val = shengtai_check_val + "," + shengtaicheckbox[k].value;
         }
         data.append("ecotope", encodeURI(shengtai_check_val));
-        
+
         const renkoucheckbox=document.getElementsByName("renkou_check"); //人口密集程度
         let renkou_check_val = "";
         for (let k=0; k<renkoucheckbox.length;k++) {
@@ -881,10 +936,16 @@
         // 文件上传
         var quality = $('#zhiliangbaozhang')[0].files[0];
         var introduction = $('#shiyongshuoming')[0].files[0];
-        var pic1 = $('#picturefile')[0].files[0];
+        var pic1 = $('#picturefile1')[0].files[0];
+        var pic2 = $('#picturefile2')[0].files[0];
+        var pic3 = $('#picturefile3')[0].files[0];
+        var pic4 = $('#picturefile4')[0].files[0];
         data.append("qualityMaterial", quality); //质量保障材料
         data.append("introductions", introduction); //使用说明
-        data.append("pics", pic1); //使用图片
+        data.append("pics1", pic1); //使用图片
+        data.append("pics2", pic2); //使用图片
+        data.append("pics3", pic3); //使用图片
+        data.append("pics4", pic4); //使用图片
 
         // 产品参数
         data.append("standard", encodeURI($('#guige').val())); //规格（平方米）
