@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.google.common.collect.Lists" %>
 <!DOCTYPE HTML>
 <html>
 <!-- Added by HTTrack -->
@@ -93,11 +95,16 @@
                         </div>
                     </div>
                     <!-- .prev -->
-
+                    <%List<String> pathList = Lists.newArrayList(productDTO.getPicsPath());%>
                     <ul class="pagination clearfix" id="thumblist">
                         <li><a class="zoomThumbActive" href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '<%=basePath+productDTO.getPicsPath()%>',largeimage: '<%=basePath+productDTO.getPicsPath()%>'}"><img
-                                src='<%=basePath+productDTO.getPicsPath()%>' alt="" style="opacity: 1;"></a></li>
+                               rel="{gallery: 'gal1', smallimage: '<%=basePath+pathList.get(0)%>',largeimage: '<%=basePath+pathList.get(0)%>'}"><img
+                                src='<%=basePath+pathList.get(0)%>' alt="" style="opacity: 1;"></a></li>
+                        <%for (int i=1;i<pathList.size();i++) {%>
+                        <li><a href='javascript:void(0);'
+                               rel="{gallery: 'gal1', smallimage: '<%=basePath+pathList.get(i)%>',largeimage: '<%=basePath+pathList.get(i)%>'}"><img
+                                src='<%=basePath+pathList.get(i)%>' alt=""></a></li>
+                        <%}%>
                     </ul>
 
                 </div>

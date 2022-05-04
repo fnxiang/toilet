@@ -91,7 +91,9 @@
             <!-- .c_header -->
             <div class="list_carousel">
                 <ul id="list_product" class="list_product">
-                    <% for (ToiletProductDTO productDTO : productList) {%>
+                    <% for (ToiletProductDTO productDTO : productList) {
+                        String firstPicPath = productDTO.getPicsPath().split(";")[0];
+                    %>
                     <li value="">
                         <div class="grid_3 product">
                             <div class="prev">
@@ -201,20 +203,20 @@
 <script>
 
     function Post(url, params) {
-       var temp = document.createElement("form");
-       temp.action = url;
-       temp.method = "post";
-       temp.enctype = "multipart/form-data";
-       temp.style.display = "none";
-       for (var key in params) {
-           var opt = document.createElement("textarea");
-           opt.name = key;
-           opt.value = params[key];
-           temp.appendChild(opt);
-       }
-       document.body.appendChild(temp);
-       temp.submit();
-       return temp;
+        var temp = document.createElement("form");
+        temp.action = url;
+        temp.method = "post";
+        temp.enctype = "multipart/form-data";
+        temp.style.display = "none";
+        for (var key in params) {
+            var opt = document.createElement("textarea");
+            opt.name = key;
+            opt.value = params[key];
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
     }
 
     function sortByName() {
