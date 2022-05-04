@@ -57,7 +57,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
 
         criteria.andDeletedNotEqualTo(true);
 
-        return patternDOMapper.selectByExample(toiletPatternDOSelective);
+        return patternDOMapper.selectByExampleWithBLOBs(toiletPatternDOSelective);
     }
 
     @Override

@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ToiletPatternDTO> queryAllPattern() {
-        return toiletProductDao.queryAllPattern().stream().map(ProductConverter::toDTO).collect(Collectors.toList());
+        return toiletProductDao.queryAllPattern().stream().map(ProductConverter::toDTO).filter(item -> item.getPatternType()!=null).collect(Collectors.toList());
     }
 
     @Override

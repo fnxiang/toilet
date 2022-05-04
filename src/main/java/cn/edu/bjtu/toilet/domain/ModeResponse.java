@@ -3,6 +3,7 @@ package cn.edu.bjtu.toilet.domain;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -10,7 +11,7 @@ public class ModeResponse {
 
     private Boolean success;
 
-    private Map<String, String> selectMap;
+    private Map<String, List<String>> selectMap;
 
     private Map<String, ToiletPatternDTO> patternDTOMap;
 

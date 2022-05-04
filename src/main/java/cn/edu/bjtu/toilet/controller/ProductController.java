@@ -10,6 +10,7 @@ import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,7 +117,7 @@ public class ProductController {
         return ModeResponse.success();
     }
 
-    @RequestMapping(value = "/product/modes/get")
+    @RequestMapping(value = "/company/product/modes/get")
     @ResponseBody
     public ModeResponse getModes(HttpServletRequest request) {
         ModeResponse response = new ModeResponse();
@@ -127,7 +128,15 @@ public class ProductController {
                 return ModeResponse.failed("pattern is empty!");
             }
 
-            Map<String, String> selectMap = patternDTOS.stream().collect(Collectors.toMap(ToiletPatternDTO::getProductType, ToiletPatternDTO::getPatternType));
+            Map<String, List<String>> selectMap = new HashMap<>();
+
+            patternDTOS.forEach(item -> {
+                if (selectMap.get(item.getProductType()) == null) {
+                    selectMap.put(item.getProductType(), Lists.newArrayList(item.getPatternType()));
+                } else {
+                    selectMap.get(item.getProductType()).add(item.getPatternType());
+                }
+            });
             Map<String, ToiletPatternDTO> patternDTOMap = patternDTOS.stream().collect(Collectors.toMap(ToiletPatternDTO::getPatternType, e -> e));
             response.setSuccess(true);
             response.setSelectMap(selectMap);
