@@ -1,3 +1,6 @@
+<%@ page import="cn.edu.bjtu.toilet.dao.domain.UserDO" %>
+<%@ page import="cn.edu.bjtu.toilet.dao.domain.CompanyDO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -81,7 +84,7 @@
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=admin_back5"><i class="fa fa-cog"></i>设置</a>
 
-                            <a class="nav-link" href="${pageContext.request.contextPath}"><i class="fa fa-power-off"></i>注销</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/logout"><i class="fa fa-power-off"></i>注销</a>
                         </div>
                     </div>
                 </div>
@@ -133,127 +136,39 @@
 										</tr>
 									</thead>
 									<tbody>
+										<% Integer index = 1;
+										List<UserDO> list = (List<UserDO>)request.getAttribute("profList");%>
+
+										<% if (list != null) {
+										for (int i=0;i<list.size();i++, index++) {%>
 										<tr>
-											<td>1</td>
-											<td>张三</td>
-											<td>2011/04/25</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6'"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>李四</td>
-											<td>2011/07/25</td>
+											<td><%=index%></td>
+											<td><%=list.get(i).getName()%></td>
+											<td><%=list.get(i).getGmtCreate()%></td>
 											<td class="text-center">
 												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back7'"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
+												<a type="button" id="<%=list.get(i).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=list.get(i).getEmail()%>', '<%=list.get(i).getRole()%>')"> 审核通过</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 											</td>
 										</tr>
+										<%}}%>
+										<% List<CompanyDO> companyDOS = (List<CompanyDO>)request.getAttribute("companyList");%>
+
+										<%if (companyDOS != null) {
+											for (int i=0;i<companyDOS.size();i++, index++) {%>
 										<tr>
-											<td>3</td>
-											<td>王五</td>
-											<td>2009/01/12</td>
+											<td><%=index%></td>
+											<td><%=companyDOS.get(i).getCompanyName()%></td>
+											<td><%=companyDOS.get(i).getGmtCreate()%></td>
 											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
+												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6'"> 查看详情</a>
+												<a type="button" id="<%=list.get(i).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=companyDOS.get(i).getEmail()%>','<%=companyDOS.get(i).getRole()%>')"> 审核通过</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 											</td>
 										</tr>
-										<tr>
-											<td>4</td>
-											<td>钱六</td>
-											<td>2012/03/29</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										
-										<tr>
-											<td>5</td>
-											<td>孙七</td>
-											<td>2013/03/21</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>6</td>
-											<td>周八</td>
-											<td>2014/05/29</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>7</td>
-											<td>吴九</td>
-											<td>2015/02/29</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>8</td>
-											<td>郑十</td>
-											<td>2016/03/22</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>9</td>
-											<td>赵四</td>
-											<td>2011/02/29</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>10</td>
-											<td>李二</td>
-											<td>2014/10/19</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>11</td>
-											<td>程一</td>
-											<td>2017/11/22</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>12</td>
-											<td>楚六</td>
-											<td>2018/12/29</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
+									<%}
+									}%>
+
 									</tbody>
 								</table>
                             </div>
@@ -331,12 +246,30 @@
 	<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/datatables-init.js"></script>
 	
     <script type="text/javascript">
-       
-	  
-	  
-	
-	  
-	  
+		function approveUser(email, roleCode) {
+			const data = new FormData();
+			data.append("userEmail", email);
+			data.append("roleCode", roleCode);
+
+			$.ajax({
+				url:"/toilet/admin/approve",
+				type:"POST",
+				dataType: "json",
+				data: data,
+				async: false,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success:function(result){
+					if (result.success) {
+					    alert("审核通过！");
+						document.getElementById(email).hidden = true;
+					} else {
+						alert(result.errorMessage);
+					}
+				}
+			});
+		}
   </script>
 
 

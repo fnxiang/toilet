@@ -9,6 +9,7 @@ import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -29,8 +30,7 @@ import java.net.URLDecoder;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.INDEX;
-import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.PRODUCT_BASE;
+import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
 
 @Controller
 public class ProductController {
@@ -96,6 +96,27 @@ public class ProductController {
             LOG.error("upload products failed");
         }
         return ProductResponse.success();
+    }
+
+    @RequestMapping("/product/sort")
+    public String sortProduct(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            if (Objects.isNull(params)) {
+                return ERROR_PAGE;
+            }
+
+            List<ToiletProductDTO> productDTOS = JSON.parseArray(params.get("list"), ToiletProductDTO.class);
+            if (CollectionUtils.isEmpty(productDTOS)) {
+                return ERROR_PAGE;
+            }
+
+            productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getPrice()))).collect(Collectors.toList());
+            request.setAttribute("productList", productDTOS);
+        } catch (Exception e) {
+            LOG.error("upload products failed");
+        }
+        return INDEX;
     }
 
     private ToiletPatternDTO buildPatternDTO(Map<String, String> params) {

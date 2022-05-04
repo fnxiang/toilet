@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.service;
 
-import cn.edu.bjtu.toilet.constant.UserConstants;
+import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.ProfessorRegisterRequest;
 
@@ -12,7 +12,9 @@ public interface UserService {
 
     UserDO saveProfessorUser(ProfessorRegisterRequest professorRegisterRequest);
 
-    Integer checkUser(String email, String password);
+    UserDO saveProfessorUser(UserDO user);
 
-    List<UserDO> queryAllUser(UserConstants userCode);
+    UserDO checkUser(String email, String password);
+
+    List<UserDO> queryAllUser(UserRole userCode);
 }

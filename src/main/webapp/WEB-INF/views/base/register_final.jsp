@@ -172,7 +172,6 @@
                 contentType: false,
                 processData: false,
                 success:function(result){
-                    alert(result.errorMessage);
                     if (result.success) {
                         location.href = "/toilet/login/index";
                     } else {

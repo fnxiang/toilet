@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.edu.bjtu.toilet.dao.mapper.UserDOMapper">
-  <resultMap id="BaseResultMap" type="cn.edu.bjtu.toilet.dao.domain.UserDO">
+<mapper namespace="cn.edu.bjtu.toilet.dao.mapper.ApprovalDOMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="work_company" jdbcType="VARCHAR" property="workCompany" />
-    <result column="position" jdbcType="VARCHAR" property="position" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="role" jdbcType="INTEGER" property="role" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="approver_id" jdbcType="INTEGER" property="approverId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="pattern_id" jdbcType="INTEGER" property="patternId" />
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    <result column="attributes" jdbcType="LONGVARCHAR" property="attributes" />
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="attribute" jdbcType="LONGVARCHAR" property="attribute" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -80,13 +77,13 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, name, work_company, position, title, phone, email, 
-    role, status, password, source, version, deleted
+    id, gmt_create, gmt_modified, type, status, approver_id, product_id, pattern_id, 
+    source, version, deleted
   </sql>
   <sql id="Blob_Column_List">
-    attributes
+    content, attribute
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDOSelective" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDOSelective" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -94,7 +91,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from user
+    from approval
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -102,13 +99,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDOSelective" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDOSelective" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from approval
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -121,35 +118,33 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from user
+    from approval
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete from approval
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDOSelective">
-    delete from user
+  <delete id="deleteByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDOSelective">
+    delete from approval
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    insert into user (id, gmt_create, gmt_modified, 
-      name, work_company, position, 
-      title, phone, email, 
-      role, status, password, 
-      source, version, deleted, 
-      attributes)
+  <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
+    insert into approval (id, gmt_create, gmt_modified, 
+      type, status, approver_id, 
+      product_id, pattern_id, source, 
+      version, deleted, content, 
+      attribute)
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{name,jdbcType=VARCHAR}, #{workCompany,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{role,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, 
-      #{source,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, 
-      #{attributes,jdbcType=LONGVARCHAR})
+      #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{approverId,jdbcType=INTEGER}, 
+      #{productId,jdbcType=INTEGER}, #{patternId,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}, 
+      #{attribute,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    insert into user
+  <insert id="insertSelective" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
+    insert into approval
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -160,32 +155,20 @@
       <if test="gmtModified != null">
         gmt_modified,
       </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="workCompany != null">
-        work_company,
-      </if>
-      <if test="position != null">
-        position,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="email != null">
-        email,
-      </if>
-      <if test="role != null">
-        role,
+      <if test="type != null">
+        type,
       </if>
       <if test="status != null">
         status,
       </if>
-      <if test="password != null">
-        password,
+      <if test="approverId != null">
+        approver_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="patternId != null">
+        pattern_id,
       </if>
       <if test="source != null">
         source,
@@ -196,8 +179,11 @@
       <if test="deleted != null">
         deleted,
       </if>
-      <if test="attributes != null">
-        attributes,
+      <if test="content != null">
+        content,
+      </if>
+      <if test="attribute != null">
+        attribute,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -210,32 +196,20 @@
       <if test="gmtModified != null">
         #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="workCompany != null">
-        #{workCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-        #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="role != null">
-        #{role,jdbcType=INTEGER},
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="approverId != null">
+        #{approverId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="patternId != null">
+        #{patternId,jdbcType=INTEGER},
       </if>
       <if test="source != null">
         #{source,jdbcType=VARCHAR},
@@ -246,19 +220,22 @@
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
       </if>
-      <if test="attributes != null">
-        #{attributes,jdbcType=LONGVARCHAR},
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attribute != null">
+        #{attribute,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDOSelective" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDOSelective" resultType="java.lang.Long">
+    select count(*) from approval
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update approval
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -269,32 +246,20 @@
       <if test="record.gmtModified != null">
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.workCompany != null">
-        work_company = #{record.workCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="record.position != null">
-        position = #{record.position,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.email != null">
-        email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.role != null">
-        role = #{record.role,jdbcType=INTEGER},
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.approverId != null">
+        approver_id = #{record.approverId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patternId != null">
+        pattern_id = #{record.patternId,jdbcType=INTEGER},
       </if>
       <if test="record.source != null">
         source = #{record.source,jdbcType=VARCHAR},
@@ -305,8 +270,11 @@
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
       </if>
-      <if test="record.attributes != null">
-        attributes = #{record.attributes,jdbcType=LONGVARCHAR},
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.attribute != null">
+        attribute = #{record.attribute,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -314,41 +282,34 @@
     </if>
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
-    update user
+    update approval
     set id = #{record.id,jdbcType=INTEGER},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
-      name = #{record.name,jdbcType=VARCHAR},
-      work_company = #{record.workCompany,jdbcType=VARCHAR},
-      position = #{record.position,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
-      role = #{record.role,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
-      password = #{record.password,jdbcType=VARCHAR},
+      approver_id = #{record.approverId,jdbcType=INTEGER},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      pattern_id = #{record.patternId,jdbcType=INTEGER},
       source = #{record.source,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT},
-      attributes = #{record.attributes,jdbcType=LONGVARCHAR}
+      content = #{record.content,jdbcType=LONGVARCHAR},
+      attribute = #{record.attribute,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update approval
     set id = #{record.id,jdbcType=INTEGER},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
-      name = #{record.name,jdbcType=VARCHAR},
-      work_company = #{record.workCompany,jdbcType=VARCHAR},
-      position = #{record.position,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
-      role = #{record.role,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
-      password = #{record.password,jdbcType=VARCHAR},
+      approver_id = #{record.approverId,jdbcType=INTEGER},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      pattern_id = #{record.patternId,jdbcType=INTEGER},
       source = #{record.source,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT}
@@ -356,8 +317,8 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
+    update approval
     <set>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -365,32 +326,20 @@
       <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="workCompany != null">
-        work_company = #{workCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-        position = #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="role != null">
-        role = #{role,jdbcType=INTEGER},
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="approverId != null">
+        approver_id = #{approverId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="patternId != null">
+        pattern_id = #{patternId,jdbcType=INTEGER},
       </if>
       <if test="source != null">
         source = #{source,jdbcType=VARCHAR},
@@ -401,44 +350,40 @@
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
-      <if test="attributes != null">
-        attributes = #{attributes,jdbcType=LONGVARCHAR},
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attribute != null">
+        attribute = #{attribute,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    update user
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
+    update approval
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      name = #{name,jdbcType=VARCHAR},
-      work_company = #{workCompany,jdbcType=VARCHAR},
-      position = #{position,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      role = #{role,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      password = #{password,jdbcType=VARCHAR},
+      approver_id = #{approverId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      pattern_id = #{patternId,jdbcType=INTEGER},
       source = #{source,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
-      attributes = #{attributes,jdbcType=LONGVARCHAR}
+      content = #{content,jdbcType=LONGVARCHAR},
+      attribute = #{attribute,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.bjtu.toilet.dao.domain.UserDO">
-    update user
+  <update id="updateByPrimaryKey" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
+    update approval
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      name = #{name,jdbcType=VARCHAR},
-      work_company = #{workCompany,jdbcType=VARCHAR},
-      position = #{position,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      role = #{role,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      password = #{password,jdbcType=VARCHAR},
+      approver_id = #{approverId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      pattern_id = #{patternId,jdbcType=INTEGER},
       source = #{source,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT}

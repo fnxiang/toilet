@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.dao.impl;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
 import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
@@ -18,6 +19,8 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
+import static cn.edu.bjtu.toilet.constant.ToiletErrorCode.BIZ_ERROR;
 
 @Component
 public class ToiletProductDaoImpl implements ToiletProductDao {
@@ -75,7 +78,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     public String insertProduct(ToiletProductDO productDO){
 
         if (StringUtils.isEmpty(productDO.getProductName())) {
-            throw new ToiletSystemException("product name can not be null", "");
+            throw new ToiletBizException("product name can not be null", BIZ_ERROR);
         }
         productDO.setGmtCreate(new Date());
         productDO.setGmtModified(new Date());
@@ -85,7 +88,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         int c = productDOMapper.insert(productDO);
 
         if (c != 1) {
-            throw new ToiletSystemException("insert error", "-1");
+            throw new ToiletBizException("insert error", BIZ_ERROR);
         }
 
         return productDO.getProductName();
@@ -98,7 +101,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
                 || StringUtils.isEmpty(patternDO.getHumanFactors())
                 || StringUtils.isEmpty(patternDO.getPipNetworkConditions())
                 || StringUtils.isEmpty(patternDO.getResourceUtilization())) {
-            throw new ToiletSystemException("content can not be null", "");
+            throw new ToiletBizException("content can not be null", BIZ_ERROR);
         }
 
         patternDO.setGmtCreate(new Date());
@@ -110,7 +113,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         int c = patternDOMapper.insert(patternDO);
 
         if (c != 1) {
-            throw new ToiletSystemException("insert error", "-1");
+            throw new ToiletBizException("insert error", BIZ_ERROR);
         }
 
         return queryPatternBySource(sourceKey).getId();
@@ -131,7 +134,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         int c = productDOMapper.updateByExampleSelective(productDO, productDOSelective);
 
         if (c != 1) {
-            throw new ToiletSystemException("update error", "-1");
+            throw new ToiletBizException("update error", BIZ_ERROR);
         }
         return queryProductByName(productDO.getProductName());
     }
@@ -139,7 +142,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     public ToiletPatternDO updatePatternByName(ToiletPatternDO patternDO) {
 
         if (Objects.isNull(patternDO.getId())) {
-            throw new ToiletSystemException("update pattern Id can not be null", "-1");
+            throw new ToiletBizException("update pattern Id can not be null", BIZ_ERROR);
         }
 
         patternDO.setGmtModified(new Date());
@@ -148,7 +151,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         int c = patternDOMapper.updateByPrimaryKey(patternDO);
 
         if (c != 1) {
-            throw new ToiletSystemException("update error", "-1");
+            throw new ToiletBizException("update error", BIZ_ERROR);
         }
         return queryPatternBySource(patternDO.getSource());
     }
@@ -156,7 +159,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     private ToiletProductDO queryProductByName(String productName) {
 
         if (StringUtils.isEmpty(productName)) {
-            throw new ToiletSystemException("product name can not be null", "");
+            throw new ToiletBizException("product name can not be null", BIZ_ERROR);
         }
 
         ToiletProductDOSelective toiletProductDOSelective = new ToiletProductDOSelective();
@@ -172,7 +175,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         }
 
         if (productDOList.size() != 1) {
-            throw new ToiletSystemException("too many results returned", "-1");
+            throw new ToiletBizException("too many results returned", BIZ_ERROR);
         }
 
         return productDOList.get(0);
@@ -182,7 +185,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     public ToiletPatternDO queryPatternBySource(String source) {
 
         if (StringUtils.isEmpty(source)) {
-            throw new ToiletSystemException("query pattern Id error", "-1");
+            throw new ToiletBizException("query pattern Id error", BIZ_ERROR);
         }
 
         ToiletPatternDOSelective patternDOSelective = new ToiletPatternDOSelective();
@@ -198,7 +201,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         }
 
         if (toiletPatternDOS.size() != 1) {
-            throw new ToiletSystemException("too many result returned ", "-1");
+            throw new ToiletBizException("too many result returned ", BIZ_ERROR);
         }
 
         return toiletPatternDOS.get(0);
@@ -208,7 +211,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     public ToiletPatternDO queryPatternById(Integer id) {
 
         if (Objects.isNull(id) || id < 1) {
-            throw new ToiletSystemException("query pattern Id error", "-1");
+            throw new ToiletBizException("query pattern Id error", BIZ_ERROR);
         }
 
         return patternDOMapper.selectByPrimaryKey(id);
@@ -217,7 +220,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     @Override
     public ToiletProductDO queryProductById(Integer id) {
         if (Objects.isNull(id) || id < 1) {
-            throw new ToiletSystemException("query pattern Id error", "-1");
+            throw new ToiletBizException("query pattern Id error", BIZ_ERROR);
         }
 
         return productDOMapper.selectByPrimaryKey(id);

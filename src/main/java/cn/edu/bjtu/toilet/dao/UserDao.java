@@ -8,6 +8,10 @@ public interface UserDao {
 
     String insertUserDO(UserDO userDO);
 
+    String updateUserDO(UserDO userDO);
+
+    UserDO getUserByEmailWithStatus(String email, Integer statusCode);
+
     UserDO getUserByEmail(String email);
 
     List<UserDO> getUserByCode(Integer code);

@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.domain;
 
-import cn.edu.bjtu.toilet.constant.UserConstants;
+import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import lombok.Data;
 
@@ -27,6 +27,6 @@ public class CompanyRegisterRequest {
 
     private String confirmPassword;
 
-    private UserConstants userConstants;
+    private UserRole userRole;
 
 }

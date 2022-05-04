@@ -1,6 +1,7 @@
 package cn.edu.bjtu.toilet.converter;
 
-import cn.edu.bjtu.toilet.constant.UserConstants;
+import cn.edu.bjtu.toilet.constant.UserRole;
+import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.ProfessorRegisterRequest;
 
@@ -17,8 +18,9 @@ public class UserConverter {
         userDO.setEmail(request.getEmail());
         userDO.setPassword(Base64.getEncoder().encodeToString(request.getPassword().getBytes()));
         userDO.setPhone(request.getPhoneNum());
-        userDO.setRole(UserConstants.PROFESSOR.getCode());
-        userDO.setSource(UserConstants.PROFESSOR.getRole());
+        userDO.setRole(UserRole.PROFESSOR.getCode());
+        userDO.setSource(UserRole.PROFESSOR.getRole());
+        userDO.setStatus(UserStatus.WAIT_APPROVE.getCode());
         return userDO;
     }
 }

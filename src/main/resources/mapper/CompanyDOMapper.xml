@@ -7,6 +7,7 @@
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="company_name" jdbcType="VARCHAR" property="companyName" />
     <result column="role" jdbcType="INTEGER" property="role" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
     <result column="business_license_file_path" jdbcType="VARCHAR" property="businessLicenseFilePath" />
     <result column="enterprise_address" jdbcType="VARCHAR" property="enterpriseAddress" />
@@ -82,7 +83,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, company_name, role, credit_code, business_license_file_path, 
+    id, gmt_create, gmt_modified, company_name, role, status, credit_code, business_license_file_path, 
     enterprise_address, email, official_site, contact_name, country, contact_phone, password, 
     version, deleted, source
   </sql>
@@ -139,15 +140,15 @@
   </delete>
   <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.CompanyDO">
     insert into company (id, gmt_create, gmt_modified, 
-      company_name, role, credit_code, 
-      business_license_file_path, enterprise_address, 
+      company_name, role, status, 
+      credit_code, business_license_file_path, enterprise_address, 
       email, official_site, contact_name, 
       country, contact_phone, password, 
       version, deleted, source, 
       attributes)
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{companyName,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{creditCode,jdbcType=VARCHAR}, 
-      #{businessLicenseFilePath,jdbcType=VARCHAR}, #{enterpriseAddress,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{creditCode,jdbcType=VARCHAR}, #{businessLicenseFilePath,jdbcType=VARCHAR}, #{enterpriseAddress,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{officialSite,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR}, 
       #{country,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, #{source,jdbcType=VARCHAR}, 
@@ -170,6 +171,9 @@
       </if>
       <if test="role != null">
         role,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="creditCode != null">
         credit_code,
@@ -226,6 +230,9 @@
       </if>
       <if test="role != null">
         #{role,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="creditCode != null">
         #{creditCode,jdbcType=VARCHAR},
@@ -292,6 +299,9 @@
       <if test="record.role != null">
         role = #{record.role,jdbcType=INTEGER},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.creditCode != null">
         credit_code = #{record.creditCode,jdbcType=VARCHAR},
       </if>
@@ -343,6 +353,7 @@
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       company_name = #{record.companyName,jdbcType=VARCHAR},
       role = #{record.role,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
       credit_code = #{record.creditCode,jdbcType=VARCHAR},
       business_license_file_path = #{record.businessLicenseFilePath,jdbcType=VARCHAR},
       enterprise_address = #{record.enterpriseAddress,jdbcType=VARCHAR},
@@ -367,6 +378,7 @@
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       company_name = #{record.companyName,jdbcType=VARCHAR},
       role = #{record.role,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
       credit_code = #{record.creditCode,jdbcType=VARCHAR},
       business_license_file_path = #{record.businessLicenseFilePath,jdbcType=VARCHAR},
       enterprise_address = #{record.enterpriseAddress,jdbcType=VARCHAR},
@@ -397,6 +409,9 @@
       </if>
       <if test="role != null">
         role = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="creditCode != null">
         credit_code = #{creditCode,jdbcType=VARCHAR},
@@ -446,6 +461,7 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       company_name = #{companyName,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
       credit_code = #{creditCode,jdbcType=VARCHAR},
       business_license_file_path = #{businessLicenseFilePath,jdbcType=VARCHAR},
       enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
@@ -467,6 +483,7 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       company_name = #{companyName,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
       credit_code = #{creditCode,jdbcType=VARCHAR},
       business_license_file_path = #{businessLicenseFilePath,jdbcType=VARCHAR},
       enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},

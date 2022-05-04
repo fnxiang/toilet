@@ -1,10 +1,8 @@
 package cn.edu.bjtu.toilet.service.impl;
 
-import cn.edu.bjtu.toilet.constant.UserConstants;
+import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
-import cn.edu.bjtu.toilet.dao.CompanyDao;
-import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.service.CompanyService;
@@ -28,16 +26,22 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<CompanyDO> queryAllCompany() {
-        return companyDao.getCompanyListByRole(UserConstants.COMPANY_USER.getCode());
+        return companyDao.getCompanyListByRole(UserRole.COMPANY_USER.getCode());
     }
 
     @Override
-    public Integer checkCompany(String account, String pwd) {
+    public CompanyDO checkCompany(String account, String pwd) {
         CompanyDO userDO = companyDao.getCompanyByEmail(account);
         if (!Optional.ofNullable(userDO).isPresent()||!userDO.getPassword().equals(Base64.getEncoder().encodeToString(pwd.getBytes()))) {
-            return -1;
+            return null;
         }
-        return userDO.getRole();
+        return userDO;
+    }
+
+    @Override
+    public CompanyDO saveCompany(CompanyDO companyDO) {
+        String email = companyDao.updateCompanyDO(companyDO);
+        return companyDao.getCompanyByEmail(email);
     }
 
     @Override

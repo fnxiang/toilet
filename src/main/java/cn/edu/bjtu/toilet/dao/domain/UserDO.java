@@ -24,6 +24,8 @@ public class UserDO implements Serializable {
 
     private Integer role;
 
+    private Integer status;
+
     private String password;
 
     private String source;
@@ -116,6 +118,14 @@ public class UserDO implements Serializable {
         this.role = role;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -172,6 +182,7 @@ public class UserDO implements Serializable {
         sb.append(", phone=").append(phone);
         sb.append(", email=").append(email);
         sb.append(", role=").append(role);
+        sb.append(", status=").append(status);
         sb.append(", password=").append(password);
         sb.append(", source=").append(source);
         sb.append(", version=").append(version);

@@ -1,19 +1,20 @@
 package cn.edu.bjtu.toilet.controller;
 
-import cn.edu.bjtu.toilet.constant.UserConstants;
+import cn.edu.bjtu.toilet.constant.UserRole;
+import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.service.UserService;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
 
@@ -40,7 +41,7 @@ public class ManagementController {
     @RequestMapping("/admin/index")
     public String adminIndex(HttpServletRequest request){
 
-        List<UserDO> users = userService.queryAllUser(UserConstants.PROFESSOR);
+        List<UserDO> users = userService.queryAllUser(UserRole.PROFESSOR);
         List<CompanyDO> companyDOS = companyService.queryAllCompany();
 
         request.setAttribute("profList", users);
@@ -77,11 +78,23 @@ public class ManagementController {
                 request.setAttribute("user", userDO);
                 break;
             case "admin_back1":
-                List<UserDO> users = userService.queryAllUser(UserConstants.PROFESSOR);
+                // fixme 审核完后刷新无数据
+                List<UserDO> users = userService.queryAllUser(UserRole.PROFESSOR);
                 List<CompanyDO> companyDOS = companyService.queryAllCompany();
 
                 request.setAttribute("profList", users);
                 request.setAttribute("companyList", companyDOS);
+            case "admin_back2":
+                users = userService.queryAllUser(UserRole.PROFESSOR).stream().filter(user -> user.getStatus().equals(UserStatus.WAIT_APPROVE.getCode())).collect(Collectors.toList());
+                companyDOS = companyService.queryAllCompany().stream().filter(user -> user.getStatus().equals(UserStatus.WAIT_APPROVE.getCode())).collect(Collectors.toList());
+
+                request.setAttribute("profList", users);
+                request.setAttribute("companyList", companyDOS);
+                break;
+            case "admin_back3":
+                List<ToiletProductDTO> allList = productService.queryAllProductList("");
+                request.setAttribute("productList", allList);
+                break;
             default:
                 break;
         }

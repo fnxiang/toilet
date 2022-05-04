@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface CompanyService {
 
-    Integer checkCompany(String account, String pwd);
+    CompanyDO checkCompany(String account, String pwd);
+
+    CompanyDO saveCompany(CompanyDO companyDO);
 
     CompanyDO registerCompany(CompanyRegisterRequest companyRegisterRequest);
 

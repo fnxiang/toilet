@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.dao.impl;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
@@ -14,6 +15,8 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+
+import static cn.edu.bjtu.toilet.constant.ToiletErrorCode.BIZ_ERROR;
 
 @Component
 public class CompanyDaoImpl implements CompanyDao {
@@ -39,7 +42,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
         if (companyDOList.size() != 1) {
             LOG.error("too many user returned!");
-            throw new ToiletSystemException("too many user returned!", "");
+            throw new ToiletBizException("too many user returned!", BIZ_ERROR);
         }
 
         return companyDOList.get(0);
@@ -47,10 +50,10 @@ public class CompanyDaoImpl implements CompanyDao {
 
     @Override
     public String insertCompanyDO(CompanyDO companyDO) {
-        if (StringUtils.isEmpty(companyDO.getEmail())&&StringUtils.isEmpty(companyDO.getCreditCode()) && StringUtils.isEmpty(companyDO.getSource())) {
+        if (StringUtils.isEmpty(companyDO.getEmail()) || StringUtils.isEmpty(companyDO.getCreditCode()) || StringUtils.isEmpty(companyDO.getSource())) {
             //TODO throw exception code
             LOG.error("required params email, credit and source code can not be null");
-            throw new ToiletSystemException("required params email, credit and source code can not be null", "");
+            throw new ToiletBizException("required params email, credit and source code can not be null", BIZ_ERROR);
         }
 
         companyDO.setGmtCreate(new Date());
@@ -69,7 +72,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
         if (count != 1) {
             LOG.error("insert user failed! companyDO: {}", companyDO);
-            throw new ToiletSystemException("insert user failed!", "");
+            throw new ToiletBizException("insert user failed!", BIZ_ERROR);
         }
 
         return getCompanyByEmail(companyDO.getEmail()).getEmail();
@@ -112,5 +115,27 @@ public class CompanyDaoImpl implements CompanyDao {
         }
 
         return companyDOList;
+    }
+
+    @Override
+    public String updateCompanyDO(CompanyDO companyDO) {
+        if (companyDO.getId() == null ||
+                StringUtils.isEmpty(companyDO.getEmail()) ||
+                StringUtils.isEmpty(companyDO.getCreditCode()) ||
+                StringUtils.isEmpty(companyDO.getSource())) {
+            LOG.error("required params email, credit and source code can not be null");
+            throw new ToiletBizException("required params email, credit and source code can not be null", BIZ_ERROR);
+        }
+        companyDO.setGmtModified(new Date());
+        companyDO.setVersion(companyDO.getVersion() + 1);
+
+        int count = mapper.updateByPrimaryKey(companyDO);
+
+        if (count != 1) {
+            LOG.error("update user failed! count: {}", count);
+            throw new ToiletBizException("update user failed!", BIZ_ERROR);
+        }
+
+        return getCompanyByEmail(companyDO.getEmail()).getEmail();
     }
 }

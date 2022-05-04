@@ -14,6 +14,8 @@ public class CompanyDO implements Serializable {
 
     private Integer role;
 
+    private Integer status;
+
     private String creditCode;
 
     private String businessLicenseFilePath;
@@ -80,6 +82,14 @@ public class CompanyDO implements Serializable {
 
     public void setRole(Integer role) {
         this.role = role;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getCreditCode() {
@@ -197,6 +207,7 @@ public class CompanyDO implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", companyName=").append(companyName);
         sb.append(", role=").append(role);
+        sb.append(", status=").append(status);
         sb.append(", creditCode=").append(creditCode);
         sb.append(", businessLicenseFilePath=").append(businessLicenseFilePath);
         sb.append(", enterpriseAddress=").append(enterpriseAddress);

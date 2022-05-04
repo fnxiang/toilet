@@ -13,4 +13,6 @@ public interface CompanyDao {
     CompanyDO getCompanyByLicense(String license);
 
     List<CompanyDO> getCompanyListByRole(Integer code);
+
+    String updateCompanyDO(CompanyDO companyDO);
 }

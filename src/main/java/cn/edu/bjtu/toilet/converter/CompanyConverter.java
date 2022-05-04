@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.converter;
 
+import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
 import com.alibaba.fastjson.JSON;
@@ -19,8 +20,9 @@ public class CompanyConverter {
         companyDO.setContactName(companyRegisterRequest.getContactName());
         companyDO.setContactPhone(companyRegisterRequest.getPhoneNumber());
         companyDO.setPassword(Base64.getEncoder().encodeToString(companyRegisterRequest.getPassword().getBytes()));
-        companyDO.setRole(companyRegisterRequest.getUserConstants().getCode());
-        companyDO.setSource(companyRegisterRequest.getUserConstants().getRole());
+        companyDO.setRole(companyRegisterRequest.getUserRole().getCode());
+        companyDO.setSource(companyRegisterRequest.getUserRole().getRole());
+        companyDO.setStatus(UserStatus.WAIT_APPROVE.getCode());
         return companyDO;
     }
 }

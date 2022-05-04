@@ -2,15 +2,15 @@ package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
-import cn.edu.bjtu.toilet.constant.UserConstants;
-import cn.edu.bjtu.toilet.dao.UserDao;
+import cn.edu.bjtu.toilet.constant.UserRole;
+import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.ProfessorRegisterRequest;
-import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
-import cn.edu.bjtu.toilet.domain.LoginResponse;
 import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
+import cn.edu.bjtu.toilet.domain.LoginResponse;
+import cn.edu.bjtu.toilet.domain.ProfessorRegisterRequest;
 import cn.edu.bjtu.toilet.domain.RegisterResponse;
+import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.UserService;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
@@ -32,13 +32,13 @@ import javax.annotation.Resource;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.*;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
+import static cn.edu.bjtu.toilet.constant.ToiletErrorCode.BIZ_ERROR;
 
 @Controller
 @MultipartConfig
@@ -99,20 +99,40 @@ public class IndexController {
 
         try {
             Map<String, String> params = resolveParams(request);
-            Integer companyRoleCode = companyService.checkCompany(params.get("accountId"), params.get("accountPwd"));
-            Integer userRoleCode = userService.checkUser(params.get("accountId"), params.get("accountPwd"));
-            UserConstants userConstants = companyRoleCode==-1?UserConstants.codeOf(userRoleCode):UserConstants.codeOf(companyRoleCode);
-            if (Objects.isNull(userConstants)) {
-                return LoginResponse.failed("user role error");
+            CompanyDO company = companyService.checkCompany(params.get("accountId"), params.get("accountPwd"));
+            UserDO userDO = userService.checkUser(params.get("accountId"), params.get("accountPwd"));
+            UserRole userRole;
+            Integer userStatusCode;
+            if (company != null) {
+                userRole = UserRole.codeOf(company.getRole());
+                userStatusCode = company.getStatus();
+            } else if (userDO != null) {
+                userRole = UserRole.codeOf(userDO.getRole());
+                userStatusCode = userDO.getStatus();
+            } else {
+                throw new ToiletBizException("用户不存在！", BIZ_ERROR);
+            }
+
+            UserStatus status = UserStatus.codeOf(userStatusCode);
+
+            if (status == null || status.equals(UserStatus.FORBIDDEN)){
+                throw new ToiletBizException("用户状态错误或禁止登录！", BIZ_ERROR);
+            }
+
+            if (status.equals(UserStatus.WAIT_APPROVE)){
+                throw new ToiletBizException("该账号正在审核中！", BIZ_ERROR);
             }
 
             request.getSession().setAttribute("uId", params.get("accountId"));
-            request.getSession().setAttribute("role", userConstants.getRole());
+            request.getSession().setAttribute("role", userRole.getRole());
 
-            String forwardPath ="/toilet/"+userConstants.getRole() + "/index";
+            String forwardPath ="/toilet/"+ userRole.getRole() + "/index";
 
             return LoginResponse.success(forwardPath);
-        }catch (Exception exception) {
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("IndexController login error! request: {}", e.getMessage());
+            return LoginResponse.failed(e.getMessage());
+        } catch (Exception exception) {
             LOG.error("IndexController login error! request: {}", exception.getMessage());
             return LoginResponse.failed("exception happened");
         }
@@ -142,13 +162,13 @@ public class IndexController {
                 return RegisterResponse.failed("register db error");
             }
 
-            UserConstants userConstants = UserConstants.codeOf(companyDO.getRole());
+            UserRole userRole = UserRole.codeOf(companyDO.getRole());
 
-            if(Objects.isNull(userConstants)) {
+            if(Objects.isNull(userRole)) {
                 return RegisterResponse.failed("Error Role with user!");
             }
             request.getSession().setAttribute("uId", companyDO.getEmail());
-            request.getSession().setAttribute("role",userConstants.getRole());
+            request.getSession().setAttribute("role", userRole.getRole());
         }catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("message", "文件上传失败");
@@ -175,14 +195,14 @@ public class IndexController {
                 return RegisterResponse.failed("register error");
             }
 
-            UserConstants userConstants = UserConstants.codeOf(userDO.getRole());
+            UserRole userRole = UserRole.codeOf(userDO.getRole());
 
-            if (userConstants == null) {
+            if (userRole == null) {
                 return RegisterResponse.failed(String.format("role code error, code: %s", userDO.getRole()));
             }
 
             request.getSession().setAttribute("uId", userDO.getEmail());
-            request.getSession().setAttribute("role",userConstants.getRole());
+            request.getSession().setAttribute("role", userRole.getRole());
 
         } catch (ToiletBizException | ToiletSystemException e) {
             LOG.error("register failed! error: {}", e.getMessage());
@@ -238,7 +258,7 @@ public class IndexController {
         enterpriseAddress.setDetailAddress(detailAddress);
 
         companyRegisterRequest.setEnterpriseAddress(enterpriseAddress);
-        companyRegisterRequest.setUserConstants(UserConstants.COMPANY_USER);
+        companyRegisterRequest.setUserRole(UserRole.COMPANY_USER);
 
         return companyRegisterRequest;
     }

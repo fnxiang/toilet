@@ -1,7 +1,8 @@
 package cn.edu.bjtu.toilet.service.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
-import cn.edu.bjtu.toilet.constant.UserConstants;
+import cn.edu.bjtu.toilet.constant.UserRole;
+import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
 import cn.edu.bjtu.toilet.dao.UserDao;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Base64;
 import java.util.List;
+
+import static cn.edu.bjtu.toilet.constant.ToiletErrorCode.BIZ_ERROR;
 
 @Component
 public class UserServiceImpl implements UserService {
@@ -29,17 +32,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDO> queryAllUser(UserConstants user) {
+    public List<UserDO> queryAllUser(UserRole user) {
          return userDao.getUserByCode(user.getCode());
     }
 
     @Override
-    public Integer checkUser(String email, String password) {
+    public UserDO checkUser(String email, String password) {
         UserDO userDO = userDao.getUserByEmail(email);
-        if (userDO != null && userDO.getPassword().equals(generatePassword(password))) {
-            return userDO.getRole();
+
+        if (userDO == null) {
+            return null;
         }
-        return -1;
+
+        if (userDO.getPassword().equals(generatePassword(password))) {
+            return userDO;
+        }
+        return null;
     }
 
     @Override
@@ -47,10 +55,18 @@ public class UserServiceImpl implements UserService {
         validate(professorRegisterRequest);
 
         if (companyDao.getCompanyByEmail(professorRegisterRequest.getEmail()) != null) {
-            throw new ToiletBizException("email has been register by company!", "");
+            throw new ToiletBizException("email has been register by company!", BIZ_ERROR);
         }
 
         String email = userDao.insertUserDO(UserConverter.toUserDO(professorRegisterRequest));
+
+        return userDao.getUserByEmail(email);
+    }
+
+    @Override
+    public UserDO saveProfessorUser(UserDO user) {
+
+        String email = userDao.updateUserDO(user);
 
         return userDao.getUserByEmail(email);
     }
