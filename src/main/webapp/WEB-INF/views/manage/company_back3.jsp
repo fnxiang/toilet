@@ -179,10 +179,7 @@
                                     <div class="col col-md-9">
                                         <select name="multiple-select" id="multiple-select" multiple=""
                                                 class="form-control">
-                                            <option value="1">收集：集中收集</option>
-                                            <option value="2">转运：抽排设备</option>
-                                            <option value="3">处理：无害化处理</option>
-                                            <option value="4">资源化利用：发酵池</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -327,8 +324,7 @@
                                                  role="tabpanel" aria-labelledby="custom-nav-people-tab">
 
                                                 <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="renkou"
-                                                                                     class="form-control-label">人口密集程度：
+                                                    <div class="col col-md-3"><label class="form-control-label">人口密集程度：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
 
@@ -590,7 +586,7 @@
                                                                                  class=" form-control-label">运行成本：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="qinglizhouqi" name="yunxingchengben"
+                                                    <input type="text" id="yunxingchengben" name="yunxingchengben"
                                                            placeholder="请运行成本" class="form-control">
                                                 </div>
                                             </div>
@@ -789,6 +785,12 @@
                         productSelect.options.add(new Option(key, i));
                         i++;
                     }
+                    var mode_select = document.getElementById("multiple-select");
+                    var product_value = productSelect.options[0].text;
+                    var mode_list = mode_content_selectMap[product_value];
+                    for(let i=0;i<mode_list.length;i++){
+                        mode_select.options.add(new Option(mode_list[i], i));
+                    }
 
                 } else {
                     alert(result.errorMessage);
@@ -798,17 +800,29 @@
     });
 
 
-    function productchange() {
-        var x = document.getElementById("productselect");
-        var y = document.getElementById("multiple-select");
+    function productchange() { // mode_content_selectMap   mode_content_patternDTOMap
 
+        var product_select = document.getElementById("productselect");
+        var mode_select = document.getElementById("multiple-select");
 
+        mode_select.options.length = 0; // 清除second下拉框的所有内容
 
-        y.options.length = 0; // 清除second下拉框的所有内容
+        var product_index = product_select.selectedIndex;
+        var product_value = product_select.options[product_index].text;
 
-        if (x.selectedIndex == 0) { //完整的下水道水冲厕所
-            y.options.add(new Option("洁具便器+完整下水道水冲式厕所+市政污水处理系统", "0"));
+        var mode_list = mode_content_selectMap[product_value];
+        for(let i=0;i<mode_list.length;i++){
+            mode_select.options.add(new Option(mode_list[i], i));
         }
+
+        console.log(product_value);
+        console.log(mode_content_selectMap);
+
+//        y.options.length = 0; // 清除second下拉框的所有内容
+//
+//        if (x.selectedIndex == 0) { //完整的下水道水冲厕所
+//            y.options.add(new Option("洁具便器+完整下水道水冲式厕所+市政污水处理系统", "0"));
+//        }
 
 
     }
