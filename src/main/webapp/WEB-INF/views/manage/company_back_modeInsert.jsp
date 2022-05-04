@@ -570,6 +570,7 @@
             success: function (result) {
                 if (result.success) {
                     alert("保存成功！");
+                    location.reload();
                 } else {
                     alert(result.errorMessage);
                 }
