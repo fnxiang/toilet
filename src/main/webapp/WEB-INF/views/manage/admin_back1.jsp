@@ -135,13 +135,13 @@
 											<th class="text-center">操作</th>
 										</tr>
 									</thead>
-									<%
+									<%  int index = 1;
 										List<UserDO> list = (List<UserDO>)request.getAttribute("profList");%>
 									<tbody>
 									<% if (list != null) {
-										for (int i=0;i<list.size();i++) {%>
+										for (int i=0;i<list.size();i++, index++) {%>
 									<tr>
-										<td><%=i+1%></td>
+										<td><%=index%></td>
 										<td><%=list.get(i).getName()%></td>
 										<td>专家用户</td>
 										<td class="text-center">
@@ -153,9 +153,9 @@
 										<% List<CompanyDO> companyDOS = (List<CompanyDO>)request.getAttribute("companyList");%>
 									<tbody>
 									<%if (companyDOS != null) {
-										for (int i=0;i<companyDOS.size();i++) {%>
+										for (int i=0;i<companyDOS.size();i++, index++) {%>
 									<tr>
-										<td><%=i+1%></td>
+										<td><%=index%></td>
 										<td><%=companyDOS.get(i).getCompanyName()%></td>
 										<td>企业用户</td>
 										<td class="text-center">

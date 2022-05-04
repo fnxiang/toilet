@@ -84,12 +84,13 @@ public class ManagementController {
 
                 request.setAttribute("profList", users);
                 request.setAttribute("companyList", companyDOS);
+                break;
             case "admin_back2":
-                users = userService.queryAllUser(UserRole.PROFESSOR).stream().filter(user -> user.getStatus().equals(UserStatus.WAIT_APPROVE.getCode())).collect(Collectors.toList());
-                companyDOS = companyService.queryAllCompany().stream().filter(user -> user.getStatus().equals(UserStatus.WAIT_APPROVE.getCode())).collect(Collectors.toList());
+                List<UserDO> check_users = userService.queryAllUser(UserRole.PROFESSOR).stream().filter(user -> user.getStatus().equals(UserStatus.WAIT_APPROVE.getCode())).collect(Collectors.toList());
+                List<CompanyDO> checkCompanyDOS = companyService.queryAllCompany().stream().filter(user -> user.getStatus().equals(UserStatus.WAIT_APPROVE.getCode())).collect(Collectors.toList());
 
-                request.setAttribute("profList", users);
-                request.setAttribute("companyList", companyDOS);
+                request.setAttribute("profList", check_users);
+                request.setAttribute("companyList", checkCompanyDOS);
                 break;
             case "admin_back3":
                 List<ToiletProductDTO> allList = productService.queryAllProductList("");

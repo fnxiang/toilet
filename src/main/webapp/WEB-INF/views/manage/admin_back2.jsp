@@ -155,14 +155,14 @@
 										<% List<CompanyDO> companyDOS = (List<CompanyDO>)request.getAttribute("companyList");%>
 
 										<%if (companyDOS != null) {
-											for (int i=0;i<companyDOS.size();i++, index++) {%>
+											for (int j=0;j<companyDOS.size();j++, index++) {%>
 										<tr>
 											<td><%=index%></td>
-											<td><%=companyDOS.get(i).getCompanyName()%></td>
-											<td><%=companyDOS.get(i).getGmtCreate()%></td>
+											<td><%=companyDOS.get(j).getCompanyName()%></td>
+											<td><%=companyDOS.get(j).getGmtCreate()%></td>
 											<td class="text-center">
 												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6'"> 查看详情</a>
-												<a type="button" id="<%=list.get(i).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=companyDOS.get(i).getEmail()%>','<%=companyDOS.get(i).getRole()%>')"> 审核通过</a>
+												<a type="button" id="<%=companyDOS.get(j).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=companyDOS.get(j).getEmail()%>','<%=companyDOS.get(j).getRole()%>')"> 审核通过</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 											</td>
 										</tr>
