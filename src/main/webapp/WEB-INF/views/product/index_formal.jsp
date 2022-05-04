@@ -105,20 +105,20 @@
 
             </div>
             <!-- .c_header -->
-            <div class="list_carousel" style="height: 334px;">
-                <ul id="list_product" class="list_product" style="height: 330px;">
+            <div class="list_carousel">
+                <ul id="list_product" class="list_product">
                     <% for (ToiletProductDTO productDTO : productList) {
                         String firstPicPath = productDTO.getPicsPath().split(";")[0];
                     %>
                     <li value="">
-                        <div class="grid_3 product" style="height: 330px;">
+                        <div class="grid_3 product">
                             <div class="prev">
                                 <a href="${pageContext.request.contextPath}/toProductPage?url=product_info&product_id=<%=productDTO.getId()%>"><img
                                         src="<%=basePath+productDTO.getPicsPath()%>"
                                         alt="" title=""/></a>
                             </div>
                             <!-- .prev -->
-                            <h3 class="title"><%=productDTO.getProductName()%>
+                            <h3 class="title" style="height: 25px;"><%=productDTO.getProductName()%>
                             </h3>
 
                             <div class="cart">
@@ -126,9 +126,9 @@
                                     <div class="vert">
                                         <div class="price_new">价格：<%=productDTO.getProductParameters().getPrice()%>万元
                                         </div>
-                                        <div class="price_new">使用寿命：<%=productDTO.getProductParameters().getServiceLife()%>
+                                        <div class="price_new">使用寿命：<%=productDTO.getProductParameters().getServiceLife()%>年
                                         </div>
-                                        <div class="price_new">清理周期：<%=productDTO.getProductParameters().getCleanupCycle()%>
+                                        <div class="price_new">清理周期：<%=productDTO.getProductParameters().getCleanupCycle()%>个月
                                         </div>
                                     </div>
                                 </div>
