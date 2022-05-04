@@ -378,7 +378,40 @@
         <div class="clear"></div>
 
         <div id="content" class="grid_12">
-            <h1 class="page_title">模式搜索结果</h1>
+
+
+
+            <div class="c_header">
+                <div class="grid_5">
+                    <h2 onclick="">模式搜索结果</h2>
+                </div>
+                <div class="grid_2">
+                    <select class="grid_2" name="sortCondition" id="sortCondition">
+                        <option value="0">节水节能性</option>
+                        <option value="1">技术适用性</option>
+                        <option value="2">技术成本</option>
+                        <option value="3">资源化利用</option>
+                        <option value="4">环境卫生性</option>
+                        <option value="5">便利舒适性</option>
+                        <option value="6">综合</option>
+                    </select>
+                </div>
+                <div class="grid_2">
+                    <select class="grid_2" name="sortWay" id="sortWay">
+                        <option value="0">升序</option>
+                        <option value="1">降序</option>
+                    </select>
+                </div>
+                <div class="grid_2">
+                    <button class="grid_2" onclick="sortByName()">应用</button>
+                </div>
+                <!-- .grid_10 -->
+
+
+            </div>
+
+
+
 
 
             <% Map<String, String> results = (Map<String, String>) request.getAttribute("productMap");%>
