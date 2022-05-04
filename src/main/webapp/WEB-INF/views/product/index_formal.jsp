@@ -122,7 +122,7 @@
                             </h3>
 
                             <div class="cart">
-                                <div class="price">
+                                <div class="price" style="width: 120px;">
                                     <div class="vert">
                                         <div class="price_new">价格：<%=productDTO.getProductParameters().getPrice()%>万元
                                         </div>
