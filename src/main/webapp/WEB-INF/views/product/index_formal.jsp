@@ -22,20 +22,17 @@
 
 </head>
 <body>
-<header id="branding">
-    <jsp:include page="product_banner.jsp"/>
-    <%
-        String sort_condition = "price";
-        String sort_way = "false";
-        if (request.getAttribute("sort_condition")!=null) {
-            sort_condition = request.getAttribute("sort_condition").toString();
-        }
-        if (request.getAttribute("sort_way")!=null) {
-            sort_way = request.getAttribute("sort_way").toString();
-        }
-    %>
-    <!-- .grid_6 -->
-</header>
+<jsp:include page="product_banner.jsp"/>
+<%
+    String sort_condition = "price";
+    String sort_way = "false";
+    if (request.getAttribute("sort_condition")!=null) {
+        sort_condition = request.getAttribute("sort_condition").toString();
+    }
+    if (request.getAttribute("sort_way")!=null) {
+        sort_way = request.getAttribute("sort_way").toString();
+    }
+%>
 <!-- .container_12 -->
 
 <div class="clear"></div>
@@ -190,26 +187,7 @@
 
 <%--排序--%>
 <script>
-
-    function Post(url, params) {
-        var temp = document.createElement("form");
-        temp.action = url;
-        temp.method = "post";
-        temp.enctype = "multipart/form-data";
-        temp.style.display = "none";
-        for (var key in params) {
-            var opt = document.createElement("textarea");
-            opt.name = key;
-            opt.value = params[key];
-            temp.appendChild(opt);
-        }
-        document.body.appendChild(temp);
-        temp.submit();
-        return temp;
-    }
-
     function sort() {
-
         let data = {};
         data["sortBy"] = $('#sortCondition').val();
         data["desc"] = $('#sortWay').val();

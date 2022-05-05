@@ -1,7 +1,7 @@
 package cn.edu.bjtu.toilet.dao;
 
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
-import cn.edu.bjtu.toilet.dao.request.ProductPageQueryRequest;
+import cn.edu.bjtu.toilet.dao.request.ProductQueryRequest;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface ToiletProductDao {
 
     List<ToiletProductDO> queryAllProducts(String email);
 
-    List<ToiletProductDO> queryAllProductsByPage(ProductPageQueryRequest request);
+    List<ToiletProductDO> queryAllProductsByPage(ProductQueryRequest request);
 
     ToiletProductDO updateProductBySource(ToiletProductDO productDO);
 }

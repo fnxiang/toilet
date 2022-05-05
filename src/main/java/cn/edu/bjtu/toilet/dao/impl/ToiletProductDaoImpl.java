@@ -1,18 +1,12 @@
 package cn.edu.bjtu.toilet.dao.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
-import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
-import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
-import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDOSelective;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDOSelective;
-import cn.edu.bjtu.toilet.dao.mapper.ToiletPatternDOMapper;
 import cn.edu.bjtu.toilet.dao.mapper.ToiletProductDOMapper;
-import cn.edu.bjtu.toilet.dao.request.ProductPageQueryRequest;
-import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
+import cn.edu.bjtu.toilet.dao.request.ProductQueryRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -43,7 +37,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     }
 
     @Override
-    public List<ToiletProductDO> queryAllProductsByPage(ProductPageQueryRequest request) {
+    public List<ToiletProductDO> queryAllProductsByPage(ProductQueryRequest request) {
 
         ToiletProductDOSelective toiletProductDOSelective = new ToiletProductDOSelective();
         ToiletProductDOSelective.Criteria criteria = toiletProductDOSelective.createCriteria();

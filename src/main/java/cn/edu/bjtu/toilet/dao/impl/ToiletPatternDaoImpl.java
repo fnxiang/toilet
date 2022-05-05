@@ -8,6 +8,7 @@ import cn.edu.bjtu.toilet.dao.domain.ToiletPatternSortDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletPatternSortDOSelective;
 import cn.edu.bjtu.toilet.dao.mapper.ToiletPatternDOMapper;
 import cn.edu.bjtu.toilet.dao.mapper.ToiletPatternSortDOMapper;
+import cn.edu.bjtu.toilet.dao.request.PatternQueryRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static cn.edu.bjtu.toilet.constant.ToiletErrorCode.BIZ_ERROR;
 
@@ -98,6 +100,32 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
         criteria.andDeletedNotEqualTo(true);
 
         return patternDOMapper.selectByExampleWithBLOBs(toiletPatternDOSelective);
+    }
+
+    @Override
+    public List<ToiletPatternDO> queryAllPatternByPage(PatternQueryRequest request) {
+
+        ToiletPatternSortDOSelective toiletPatternDOSelective = new ToiletPatternSortDOSelective();
+        ToiletPatternSortDOSelective.Criteria criteria = toiletPatternDOSelective.createCriteria();
+        toiletPatternDOSelective.setOrderByClause(request.getSortBy() + " limit " + request.getOffset() + ", " + request.getLimit() + " " + request.getSortDirection());
+
+        if (!CollectionUtils.isEmpty(request.getTargetPatternIds())) {
+            criteria.andPatternIdIn(request.getTargetPatternIds());
+        }
+        criteria.andUsageEqualTo(request.getUsage());
+        criteria.andDeletedNotEqualTo(true);
+
+        List<ToiletPatternSortDO> patternSortDOS = patternSortDOMapper.selectByExample(toiletPatternDOSelective);
+
+        if (CollectionUtils.isEmpty(patternSortDOS)) {
+            throw new ToiletBizException("not pattern score in db!", -1);
+        }
+
+        List<Integer> patternIds = patternSortDOS.stream()
+                .map(ToiletPatternSortDO::getPatternId)
+                .collect(Collectors.toList());
+
+        return patternIds.stream().map(id -> patternDOMapper.selectByPrimaryKey(id)).collect(Collectors.toList());
     }
 
     @Override
