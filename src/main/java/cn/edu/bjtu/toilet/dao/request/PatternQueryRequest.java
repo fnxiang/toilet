@@ -9,7 +9,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class PatternQueryRequest extends PageRequest {
-    private String usage;
+    private String usage = "公厕";
 
     private List<Integer> targetPatternIds;
 }

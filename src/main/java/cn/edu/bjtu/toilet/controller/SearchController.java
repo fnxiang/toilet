@@ -3,7 +3,9 @@ package cn.edu.bjtu.toilet.controller;
 import cn.edu.bjtu.toilet.constant.*;
 import cn.edu.bjtu.toilet.domain.SearchResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
+import cn.edu.bjtu.toilet.service.PatternService;
 import cn.edu.bjtu.toilet.service.ProductService;
+import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -31,6 +33,9 @@ public class SearchController {
 
     @Resource
     private ProductService productService;
+
+    @Resource
+    private PatternService patternService;
 
 
     /**
@@ -86,24 +91,20 @@ public class SearchController {
 
             ToiletPatternDTO searchDTO = buildModeSearchCondition(params);
 
-            List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
+//            List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
+            PatternSortRequest sortRequest = new PatternSortRequest();
+            sortRequest.setSortBy("water_save_score");
+            sortRequest.setIsDesc(false);
 
-            productDTOS = matchPatternConditions(productDTOS, searchDTO);
+            List<ToiletPatternDTO> patternDTOS = patternService.sortPattern(sortRequest);
 
-            Map<String, String> results = new HashMap<>();
+            patternDTOS = matchPatternConditions(patternDTOS, searchDTO);
 
-            productDTOS.forEach(item -> {
-                if (results.get(item.getPatternName()) == null) {
-                    results.put(item.getPatternName(), item.getId().toString());
-                } else {
-                    results.put(results.get(item.getPatternName()), buildIds(results.get(item.getPatternName()), item.getId().toString()));
-                }
-            });
-
-            request.setAttribute("productMap", results);
+            request.setAttribute("patternList", patternDTOS);
 
         } catch (Exception e) {
             LOG.error("search mode error with : {}", e.getMessage());
+            return ERROR_PAGE;
         }
 
         return "/product/mode_list";
@@ -113,7 +114,7 @@ public class SearchController {
         return s + "," + v;
     }
 
-    private List<ToiletProductDTO> matchPatternConditions(List<ToiletProductDTO> productDTOS, ToiletPatternDTO searchDTO) {
+    private List<ToiletProductDTO> matchProductConditions(List<ToiletProductDTO> productDTOS, ToiletPatternDTO searchDTO) {
 
         return productDTOS.stream().map(productDTO -> {
             ToiletPatternDTO patternDTO = productDTO.getToiletPatternDTO();
@@ -126,7 +127,22 @@ public class SearchController {
                 .collect(Collectors.toList());
     }
 
+    private List<ToiletPatternDTO> matchPatternConditions(List<ToiletPatternDTO> patternDTOS, ToiletPatternDTO searchDTO) {
+
+        return patternDTOS.stream().map(item -> {
+            if (patternCompare(item, searchDTO)) {
+                return item;
+            }
+            return null;
+        }).filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
     private Boolean patternCompare(ToiletPatternDTO patternDTODb, ToiletPatternDTO condition) {
+        Boolean f1 = compareEnvConditions(patternDTODb.getEnvConditions(), condition.getEnvConditions());
+        Boolean f2 = compareHumanFactors(patternDTODb.getHumanFactors(), condition.getHumanFactors());
+        Boolean f3 = comparePipNetworkConditions(patternDTODb.getPipNetworkConditions(), condition.getPipNetworkConditions());
+        Boolean f4 = compareResourceUtilization(patternDTODb.getResourceUtilization(), condition.getResourceUtilization());
         return compareEnvConditions(patternDTODb.getEnvConditions(), condition.getEnvConditions())
             && compareHumanFactors(patternDTODb.getHumanFactors(), condition.getHumanFactors())
             && comparePipNetworkConditions(patternDTODb.getPipNetworkConditions(), condition.getPipNetworkConditions())
@@ -134,16 +150,20 @@ public class SearchController {
     }
 
     private Boolean compareEnvConditions(EnvConditionsDTO envDb, EnvConditionsDTO conditions) {
-        return (envDb.getEcotope().equals(conditions.getEcotope()) || conditions.getEcotope().equals("无限制"))
-            && (envDb.getGeolocation().equals(conditions.getGeolocation()) || conditions.getGeolocation().equals("无限制"))
-            && (envDb.getTemperature().equals(conditions.getTemperature()) || conditions.getTemperature().equals("无限制"))
-            && (envDb.getTerrain().equals(conditions.getTerrain()) || conditions.getTerrain().equals("无限制"))
-            && (envDb.getWaterResource().equals(conditions.getWaterResource()) || conditions.getWaterResource().equals("无限制"));
+        return (envDb.getEcotope().contains(conditions.getEcotope()) || conditions.getEcotope().equals("无限制"))
+            && (envDb.getGeolocation().contains(conditions.getGeolocation()) || conditions.getGeolocation().equals("无限制"))
+            && (envDb.getTemperature().contains(conditions.getTemperature()) || conditions.getTemperature().equals("无限制"))
+            && (envDb.getTerrain().contains(conditions.getTerrain()) || conditions.getTerrain().equals("无限制"))
+            && (envDb.getWaterResource().contains(conditions.getWaterResource()) || conditions.getWaterResource().equals("无限制"));
     }
 
     private Boolean compareHumanFactors(HumanFactorsDTO humanFactorsDTO, HumanFactorsDTO conditions) {
-        return (conditions.getUsageHabits() == null || conditions.getUsageHabits().equals(humanFactorsDTO.getUsageHabits()))
-            && (conditions.getDensity().equals(humanFactorsDTO.getDensity()) || conditions.getDensity().equals("无限制"));
+        Boolean ff1 = humanFactorsDTO.getUsageHabits().contains(conditions.getUsageHabits());
+        Boolean ff2 = conditions.getUsageHabits().equals("均可");
+        Boolean f1 = (ff1 || ff2);
+        Boolean f2 = (humanFactorsDTO.getDensity().contains(conditions.getDensity()) || conditions.getDensity().equals("无限制"));
+        return (humanFactorsDTO.getUsageHabits().contains(conditions.getUsageHabits()) || conditions.getUsageHabits().equals("均可"))
+            && (humanFactorsDTO.getDensity().contains(conditions.getDensity()) || conditions.getDensity().equals("无限制"));
     }
 
     private Boolean comparePipNetworkConditions(PipNetworkConditionsDTO db, PipNetworkConditionsDTO conditions) {
@@ -153,7 +173,7 @@ public class SearchController {
 
     private Boolean compareResourceUtilization(ResourceUtilizationDTO db, ResourceUtilizationDTO conditions) {
         return (conditions.getIsBiogasUtilization() == null || conditions.getIsBiogasUtilization().equals(db.getIsBiogasUtilization()))
-            && (conditions.getMixedSewageTreatment() == null || conditions.getMixedSewageTreatment().equals(db.getMixedSewageTreatment()))
+            && (db.getMixedSewageTreatment().contains(conditions.getMixedSewageTreatment()) || conditions.getMixedSewageTreatment().equals("均可"))
             && (conditions.getOtherTreatment() == null || conditions.getOtherTreatment().equals(db.getOtherTreatment()));
     }
 
@@ -163,9 +183,9 @@ public class SearchController {
         ToiletPatternDTO toiletPatternDTO = new ToiletPatternDTO();
         // 自然环境条件
         EnvConditionsDTO envConditionsDTO = new EnvConditionsDTO();
-        envConditionsDTO.setTemperature(params.get("natureTemp"));
+        envConditionsDTO.setTemperature(params.get("natureTemp[]"));
         envConditionsDTO.setTerrain(params.get("terrain[]"));
-        envConditionsDTO.setWaterResource(params.get("water"));
+        envConditionsDTO.setWaterResource(params.get("water[]"));
         envConditionsDTO.setGeolocation(params.get("geolocation[]"));
         envConditionsDTO.setEcotope(params.get("ecotope[]"));
 
@@ -173,23 +193,23 @@ public class SearchController {
 
         //人文因素
         HumanFactorsDTO humanFactorsDTO = new HumanFactorsDTO();
-        humanFactorsDTO.setDensity(params.get("density"));
-        humanFactorsDTO.setUsageHabits(params.get("usageHabits"));
+        humanFactorsDTO.setDensity(params.get("density[]"));
+        humanFactorsDTO.setUsageHabits(params.get("usageHabits[]"));
 
         toiletPatternDTO.setHumanFactors(humanFactorsDTO);
 
         //管网
         PipNetworkConditionsDTO pipNetworkConditionsDTO = new PipNetworkConditionsDTO();
-        pipNetworkConditionsDTO.setHasSewageTreatment(buildBooleanCondition(params.get("sewageTreatment")));
-        pipNetworkConditionsDTO.setHasSewerLines(buildBooleanCondition(params.get("sewerLines")));
+        pipNetworkConditionsDTO.setHasSewageTreatment(buildBooleanCondition(params.get("sewageTreatment[]")));
+        pipNetworkConditionsDTO.setHasSewerLines(buildBooleanCondition(params.get("sewerLines[]")));
 
         toiletPatternDTO.setPipNetworkConditions(pipNetworkConditionsDTO);
 
         //资源
         ResourceUtilizationDTO resourceUtilizationDTO = new ResourceUtilizationDTO();
-        resourceUtilizationDTO.setIsBiogasUtilization(buildBooleanCondition(params.get("biogasUtilization")));
-        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment"));
-        resourceUtilizationDTO.setOtherTreatment(buildBooleanCondition(params.get("otherTreatment")));
+        resourceUtilizationDTO.setIsBiogasUtilization(buildBooleanCondition(params.get("biogasUtilization[]")));
+        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment[]"));
+        resourceUtilizationDTO.setOtherTreatment(buildBooleanCondition(params.get("otherTreatment[]")));
         toiletPatternDTO.setResourceUtilization(resourceUtilizationDTO);
 
         return toiletPatternDTO;

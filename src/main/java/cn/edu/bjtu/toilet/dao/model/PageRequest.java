@@ -6,6 +6,7 @@ import lombok.Data;
 public class PageRequest {
     private Integer pageSize;
     private Integer pageIndex;
+//    设置默认值
     private Boolean isDesc;
     private String sortBy;
 

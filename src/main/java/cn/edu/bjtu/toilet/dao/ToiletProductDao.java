@@ -11,6 +11,8 @@ public interface ToiletProductDao {
 
     ToiletProductDO queryProductById(Integer Id);
 
+    List<ToiletProductDO> queryProductByPatternId(Integer patternId);
+
     ToiletProductDO queryProductBySource(String source);
 
     List<ToiletProductDO> queryAllProducts(String email);

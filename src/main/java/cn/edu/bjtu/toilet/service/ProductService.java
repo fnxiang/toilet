@@ -13,6 +13,8 @@ public interface ProductService {
 
     List<ToiletProductDTO> queryAllProductList(String email);
 
+    List<ToiletProductDTO> queryProductListByPattern(Integer patternId);
+
     ToiletProductDTO queryToiletById(String id);
 
     List<ToiletPatternDTO> queryAllPattern();

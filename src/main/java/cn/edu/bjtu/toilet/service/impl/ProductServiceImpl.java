@@ -48,6 +48,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ToiletProductDTO> queryProductListByPattern(Integer patternId) {
+
+        if (patternId == null || patternId <= 0) {
+            return null;
+        }
+        return toiletProductDao.queryProductByPatternId(patternId).stream()
+                .map(ProductConverter::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public ToiletProductDTO queryToiletById(String id) {
         ToiletProductDO productDO = toiletProductDao.queryProductById(Integer.valueOf(id));
         ToiletPatternDO patternDO = toiletPatternDao.queryPatternById(productDO.getPatternId());

@@ -39,7 +39,7 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
         ToiletPatternSortDOSelective toiletPatternSortDOSelective = new ToiletPatternSortDOSelective();
         ToiletPatternSortDOSelective.Criteria criteria = toiletPatternSortDOSelective.createCriteria();
 
-        criteria.andUsageEqualTo(usage);
+        criteria.andPurposeEqualTo(usage);
         criteria.andPatternIdEqualTo(patternId);
         criteria.andDeletedNotEqualTo(true);
 
@@ -107,13 +107,15 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
 
         ToiletPatternSortDOSelective toiletPatternDOSelective = new ToiletPatternSortDOSelective();
         ToiletPatternSortDOSelective.Criteria criteria = toiletPatternDOSelective.createCriteria();
-        toiletPatternDOSelective.setOrderByClause(request.getSortBy() + " limit " + request.getOffset() + ", " + request.getLimit() + " " + request.getSortDirection());
+
+        criteria.andPurposeEqualTo(request.getUsage());
+        criteria.andDeletedNotEqualTo(true);
+
+        toiletPatternDOSelective.setOrderByClause(request.getSortBy() + " " + request.getSortDirection() + " limit " + request.getOffset() + ", " + request.getLimit());
 
         if (!CollectionUtils.isEmpty(request.getTargetPatternIds())) {
             criteria.andPatternIdIn(request.getTargetPatternIds());
         }
-        criteria.andUsageEqualTo(request.getUsage());
-        criteria.andDeletedNotEqualTo(true);
 
         List<ToiletPatternSortDO> patternSortDOS = patternSortDOMapper.selectByExample(toiletPatternDOSelective);
 

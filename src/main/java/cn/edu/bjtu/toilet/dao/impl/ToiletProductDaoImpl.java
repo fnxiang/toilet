@@ -150,4 +150,19 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
 
         return productDOMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public List<ToiletProductDO> queryProductByPatternId(Integer patternId) {
+        if (Objects.isNull(patternId) || patternId < 1) {
+            throw new ToiletBizException("query pattern Id error", BIZ_ERROR);
+        }
+
+        ToiletProductDOSelective toiletProductDOSelective = new ToiletProductDOSelective();
+        ToiletProductDOSelective.Criteria criteria = toiletProductDOSelective.createCriteria();
+
+        criteria.andPatternIdEqualTo(patternId);
+        criteria.andDeletedNotEqualTo(true);
+
+        return productDOMapper.selectByExampleWithBLOBs(toiletProductDOSelective);
+    }
 }

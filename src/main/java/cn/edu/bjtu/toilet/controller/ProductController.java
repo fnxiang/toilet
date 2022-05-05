@@ -57,11 +57,11 @@ public class ProductController {
                 request.setAttribute("product", toiletProductDTO);
                 break;
             case "product_results":
-                String idString = request.getParameter("ids");
-                List<String> ids = Lists.newArrayList(idString.split(","));
-                List<ToiletProductDTO> productDTOS = ids.stream().map(id -> productService.queryToiletById(id)).collect(Collectors.toList());
+                String patternId = request.getParameter("patternId");
+
+                List<ToiletProductDTO> productDTOS = productService.queryProductListByPattern(Integer.valueOf(patternId));
                 request.setAttribute("productList", productDTOS);
-                break;
+                return INDEX;
             default:
                 break;
         }

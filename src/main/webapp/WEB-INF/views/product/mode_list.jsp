@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="com.alibaba.fastjson.JSON" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html>
@@ -119,19 +120,19 @@
 
 
 
-            <% Map<String, String> results = (Map<String, String>) request.getAttribute("productMap");%>
+            <%List<ToiletPatternDTO> results = (List<ToiletPatternDTO>) request.getAttribute("patternList");%>
             <div class="listing_product grid_12">
                 <%  if (results != null) {
-                    for (String key : results.keySet()) {%>
+                    for (ToiletPatternDTO patternDTO : results) {%>
                 <div class="product_li">
 
                     <div class="grid_10">
                         <div class="entry_content" style="border-right-width: 0px; height: 80px;">
                             <a href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">
-                                <h3 class="title"><%=key%></h3>
+                                <h3 class="title"><%=patternDTO.getPatternType()%></h3>
                             </a>
                             <a class="more"
-                               href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results&ids=<%=results.get(key)%>'">查看产品列表</a>
+                               href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results&patternId=<%=patternDTO.getId()%>'">查看产品列表</a>
                         </div>
                         <!-- .my_entry_content -->
                     </div>
