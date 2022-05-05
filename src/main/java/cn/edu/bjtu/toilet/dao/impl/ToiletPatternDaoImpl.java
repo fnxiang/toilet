@@ -8,6 +8,7 @@ import cn.edu.bjtu.toilet.dao.domain.ToiletPatternSortDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletPatternSortDOSelective;
 import cn.edu.bjtu.toilet.dao.mapper.ToiletPatternDOMapper;
 import cn.edu.bjtu.toilet.dao.mapper.ToiletPatternSortDOMapper;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -18,6 +19,7 @@ import java.util.Objects;
 
 import static cn.edu.bjtu.toilet.constant.ToiletErrorCode.BIZ_ERROR;
 
+@Component
 public class ToiletPatternDaoImpl implements ToiletPatternDao {
 
     @Resource
