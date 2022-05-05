@@ -14,6 +14,8 @@ public class ToiletPatternDO implements Serializable {
 
     private String patternType;
 
+    private String patternInfo;
+
     private Integer version;
 
     private Boolean deleted;
@@ -21,8 +23,6 @@ public class ToiletPatternDO implements Serializable {
     private String source;
 
     private String attributes;
-
-    private String patternInfo;
 
     private String envConditions;
 
@@ -74,6 +74,14 @@ public class ToiletPatternDO implements Serializable {
         this.patternType = patternType == null ? null : patternType.trim();
     }
 
+    public String getPatternInfo() {
+        return patternInfo;
+    }
+
+    public void setPatternInfo(String patternInfo) {
+        this.patternInfo = patternInfo == null ? null : patternInfo.trim();
+    }
+
     public Integer getVersion() {
         return version;
     }
@@ -104,14 +112,6 @@ public class ToiletPatternDO implements Serializable {
 
     public void setAttributes(String attributes) {
         this.attributes = attributes == null ? null : attributes.trim();
-    }
-
-    public String getPatternInfo() {
-        return patternInfo;
-    }
-
-    public void setPatternInfo(String patternInfo) {
-        this.patternInfo = patternInfo == null ? null : patternInfo.trim();
     }
 
     public String getEnvConditions() {
@@ -157,11 +157,11 @@ public class ToiletPatternDO implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", productType=").append(productType);
         sb.append(", patternType=").append(patternType);
+        sb.append(", patternInfo=").append(patternInfo);
         sb.append(", version=").append(version);
         sb.append(", deleted=").append(deleted);
         sb.append(", source=").append(source);
         sb.append(", attributes=").append(attributes);
-        sb.append(", patternInfo=").append(patternInfo);
         sb.append(", envConditions=").append(envConditions);
         sb.append(", humanFactors=").append(humanFactors);
         sb.append(", pipNetworkConditions=").append(pipNetworkConditions);

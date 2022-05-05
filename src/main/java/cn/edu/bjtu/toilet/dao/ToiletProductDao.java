@@ -1,23 +1,21 @@
 package cn.edu.bjtu.toilet.dao;
 
-import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
+import cn.edu.bjtu.toilet.dao.request.ProductPageQueryRequest;
 
 import java.util.List;
 
 public interface ToiletProductDao {
 
-    ToiletProductDO saveProductWithPattern(ToiletProductDO productDO, ToiletPatternDO patternDO);
-
-    ToiletPatternDO savePattern(ToiletPatternDO patternDO);
-
-    ToiletPatternDO queryPatternBySource(String source);
-
-    ToiletPatternDO queryPatternById(Integer Id);
+    ToiletProductDO insertProduct(ToiletProductDO productDO);
 
     ToiletProductDO queryProductById(Integer Id);
 
+    ToiletProductDO queryProductBySource(String source);
+
     List<ToiletProductDO> queryAllProducts(String email);
 
-    List<ToiletPatternDO> queryAllPattern();
+    List<ToiletProductDO> queryAllProductsByPage(ProductPageQueryRequest request);
+
+    ToiletProductDO updateProductBySource(ToiletProductDO productDO);
 }

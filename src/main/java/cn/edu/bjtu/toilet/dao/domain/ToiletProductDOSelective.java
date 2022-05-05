@@ -1025,6 +1025,66 @@ public class ToiletProductDOSelective {
             return (Criteria) this;
         }
 
+        public Criteria andProfessorIdIsNull() {
+            addCriterion("professor_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdIsNotNull() {
+            addCriterion("professor_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdEqualTo(Integer value) {
+            addCriterion("professor_id =", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdNotEqualTo(Integer value) {
+            addCriterion("professor_id <>", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdGreaterThan(Integer value) {
+            addCriterion("professor_id >", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("professor_id >=", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdLessThan(Integer value) {
+            addCriterion("professor_id <", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("professor_id <=", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdIn(List<Integer> values) {
+            addCriterion("professor_id in", values, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdNotIn(List<Integer> values) {
+            addCriterion("professor_id not in", values, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdBetween(Integer value1, Integer value2) {
+            addCriterion("professor_id between", value1, value2, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("professor_id not between", value1, value2, "professorId");
+            return (Criteria) this;
+        }
+
         public Criteria andVersionIsNull() {
             addCriterion("version is null");
             return (Criteria) this;
@@ -1282,6 +1342,66 @@ public class ToiletProductDOSelective {
 
         public Criteria andAttributesNotBetween(String value1, String value2) {
             addCriterion("attributes not between", value1, value2, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdIsNull() {
+            addCriterion("pattern_sort_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdIsNotNull() {
+            addCriterion("pattern_sort_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdEqualTo(Integer value) {
+            addCriterion("pattern_sort_id =", value, "patternSortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdNotEqualTo(Integer value) {
+            addCriterion("pattern_sort_id <>", value, "patternSortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdGreaterThan(Integer value) {
+            addCriterion("pattern_sort_id >", value, "patternSortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pattern_sort_id >=", value, "patternSortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdLessThan(Integer value) {
+            addCriterion("pattern_sort_id <", value, "patternSortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdLessThanOrEqualTo(Integer value) {
+            addCriterion("pattern_sort_id <=", value, "patternSortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdIn(List<Integer> values) {
+            addCriterion("pattern_sort_id in", values, "patternSortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdNotIn(List<Integer> values) {
+            addCriterion("pattern_sort_id not in", values, "patternSortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdBetween(Integer value1, Integer value2) {
+            addCriterion("pattern_sort_id between", value1, value2, "patternSortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternSortIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("pattern_sort_id not between", value1, value2, "patternSortId");
             return (Criteria) this;
         }
     }

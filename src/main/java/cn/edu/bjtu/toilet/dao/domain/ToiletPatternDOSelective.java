@@ -425,6 +425,76 @@ public class ToiletPatternDOSelective {
             return (Criteria) this;
         }
 
+        public Criteria andPatternInfoIsNull() {
+            addCriterion("pattern_info is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoIsNotNull() {
+            addCriterion("pattern_info is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoEqualTo(String value) {
+            addCriterion("pattern_info =", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotEqualTo(String value) {
+            addCriterion("pattern_info <>", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoGreaterThan(String value) {
+            addCriterion("pattern_info >", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoGreaterThanOrEqualTo(String value) {
+            addCriterion("pattern_info >=", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoLessThan(String value) {
+            addCriterion("pattern_info <", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoLessThanOrEqualTo(String value) {
+            addCriterion("pattern_info <=", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoLike(String value) {
+            addCriterion("pattern_info like", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotLike(String value) {
+            addCriterion("pattern_info not like", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoIn(List<String> values) {
+            addCriterion("pattern_info in", values, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotIn(List<String> values) {
+            addCriterion("pattern_info not in", values, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoBetween(String value1, String value2) {
+            addCriterion("pattern_info between", value1, value2, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotBetween(String value1, String value2) {
+            addCriterion("pattern_info not between", value1, value2, "patternInfo");
+            return (Criteria) this;
+        }
+
         public Criteria andVersionIsNull() {
             addCriterion("version is null");
             return (Criteria) this;
@@ -682,76 +752,6 @@ public class ToiletPatternDOSelective {
 
         public Criteria andAttributesNotBetween(String value1, String value2) {
             addCriterion("attributes not between", value1, value2, "attributes");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoIsNull() {
-            addCriterion("pattern_info is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoIsNotNull() {
-            addCriterion("pattern_info is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoEqualTo(String value) {
-            addCriterion("pattern_info =", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoNotEqualTo(String value) {
-            addCriterion("pattern_info <>", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoGreaterThan(String value) {
-            addCriterion("pattern_info >", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoGreaterThanOrEqualTo(String value) {
-            addCriterion("pattern_info >=", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoLessThan(String value) {
-            addCriterion("pattern_info <", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoLessThanOrEqualTo(String value) {
-            addCriterion("pattern_info <=", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoLike(String value) {
-            addCriterion("pattern_info like", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoNotLike(String value) {
-            addCriterion("pattern_info not like", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoIn(List<String> values) {
-            addCriterion("pattern_info in", values, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoNotIn(List<String> values) {
-            addCriterion("pattern_info not in", values, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoBetween(String value1, String value2) {
-            addCriterion("pattern_info between", value1, value2, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoNotBetween(String value1, String value2) {
-            addCriterion("pattern_info not between", value1, value2, "patternInfo");
             return (Criteria) this;
         }
     }

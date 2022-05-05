@@ -32,6 +32,8 @@ public class ToiletProductDO implements Serializable {
 
     private String applicableTemperature;
 
+    private Integer professorId;
+
     private Integer version;
 
     private Boolean deleted;
@@ -39,6 +41,8 @@ public class ToiletProductDO implements Serializable {
     private String source;
 
     private String attributes;
+
+    private Integer patternSortId;
 
     private String purpose;
 
@@ -166,6 +170,14 @@ public class ToiletProductDO implements Serializable {
         this.applicableTemperature = applicableTemperature == null ? null : applicableTemperature.trim();
     }
 
+    public Integer getProfessorId() {
+        return professorId;
+    }
+
+    public void setProfessorId(Integer professorId) {
+        this.professorId = professorId;
+    }
+
     public Integer getVersion() {
         return version;
     }
@@ -196,6 +208,14 @@ public class ToiletProductDO implements Serializable {
 
     public void setAttributes(String attributes) {
         this.attributes = attributes == null ? null : attributes.trim();
+    }
+
+    public Integer getPatternSortId() {
+        return patternSortId;
+    }
+
+    public void setPatternSortId(Integer patternSortId) {
+        this.patternSortId = patternSortId;
     }
 
     public String getPurpose() {
@@ -266,10 +286,12 @@ public class ToiletProductDO implements Serializable {
         sb.append(", companyEmail=").append(companyEmail);
         sb.append(", applicableProvince=").append(applicableProvince);
         sb.append(", applicableTemperature=").append(applicableTemperature);
+        sb.append(", professorId=").append(professorId);
         sb.append(", version=").append(version);
         sb.append(", deleted=").append(deleted);
         sb.append(", source=").append(source);
         sb.append(", attributes=").append(attributes);
+        sb.append(", patternSortId=").append(patternSortId);
         sb.append(", purpose=").append(purpose);
         sb.append(", productParameters=").append(productParameters);
         sb.append(", qualityAssuranceMaterialsFilePath=").append(qualityAssuranceMaterialsFilePath);
