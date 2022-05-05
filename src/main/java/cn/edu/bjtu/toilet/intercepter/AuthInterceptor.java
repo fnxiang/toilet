@@ -17,7 +17,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("AuthInterceptor received request, URI:{}, session: {}", request.getRequestURI(), request.getSession().toString());
+        logger.info("AuthInterceptor received request, URI:{}", request.getRequestURI());
         if (Objects.isNull(request.getSession())) {
             return false;
         }
@@ -27,8 +27,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 
         if (!StringUtils.isEmpty(uId)&&!StringUtils.isEmpty(role)) {
-            logger.info("try authenticate by role");
-
             String uri = request.getRequestURI();
             String param = request.getQueryString();
 
