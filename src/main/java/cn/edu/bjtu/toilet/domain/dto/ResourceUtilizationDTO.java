@@ -13,7 +13,7 @@ public class ResourceUtilizationDTO {
     /**
      * 计划与其他生活污水混合处理
      * */
-    private Boolean mixedSewageTreatment;
+    private String mixedSewageTreatment;
 
     /**
      * 计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理

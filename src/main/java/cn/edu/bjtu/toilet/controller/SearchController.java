@@ -188,7 +188,7 @@ public class SearchController {
         //资源
         ResourceUtilizationDTO resourceUtilizationDTO = new ResourceUtilizationDTO();
         resourceUtilizationDTO.setIsBiogasUtilization(buildBooleanCondition(params.get("biogasUtilization")));
-        resourceUtilizationDTO.setMixedSewageTreatment(buildBooleanCondition(params.get("mixedTreatment")));
+        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment"));
         resourceUtilizationDTO.setOtherTreatment(buildBooleanCondition(params.get("otherTreatment")));
         toiletPatternDTO.setResourceUtilization(resourceUtilizationDTO);
 
