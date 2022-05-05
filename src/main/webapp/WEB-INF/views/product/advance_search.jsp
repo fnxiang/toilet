@@ -61,25 +61,72 @@
 <div class="grid_12" id="model_search" style="margin-bottom: 20px; border:1px solid #59b7c2; display: none">
     <form action="${pageContext.request.contextPath}/search/mode/results" enctype="multipart/form-data" method="post" accept-charset="UTF-8" class="search">
 
+        <div class="grid_12" style="margin-top: 5px;">
+            <style>
+                h1 {font-size:20px;}
+            </style>
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><label><b><h1>厕所用途:</h1></b></label></div>
+                <div style="float:left;padding:0 100px;"><b><h1><input type="radio" name="wc_type[]" value="公厕"
+                                                                      style="margin-bottom:5px;"/>公厕</h1></b>
+                </div>
+                <div style="float:left;padding:0 50px;"><b><h1><input type="radio" name="wc_type[]" value="户厕"
+                                                                      style="margin-bottom:5px;"/>户厕</h1></b>
+                </div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
+
+        </div>
+
         <div class="grid_12">
             <label class="grid_11" style="border-bottom-style:solid; border-width:1px;">自然环境条件:</label>
         </div>
 
 
         <div class="grid_12" style="margin-top: 10px;">
-            <label class="grid_4">温度条件:
-                <select name="natureTemp" id="wendu_select" class="form-control">
-                    <option value="高寒">高寒</option>
-                    <option value="普通">普通</option>
-                    <option value="无限制">无限制</option>
-                </select></label>
 
-            <label class="grid_4">水资源条件:
-                <select name="water" id="water_select" class="form-control">
-                    <option value="缺水">缺水</option>
-                    <option value="良好">良好</option>
-                    <option value="无限制">无限制</option>
-                </select></label>
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><label>温度条件:</label></div>
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="natureTemp[]" value="高寒"
+                                                              style="margin-bottom:5px;"/>高寒
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="natureTemp[]" value="普通"
+                                                              style="margin-bottom:5px;"/>普通
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="natureTemp[]" value="无限制"
+                                                              style="margin-bottom:5px;"/>无限制
+                </div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><label>水资源条件:</label></div>
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="water[]" value="缺水"
+                                                              style="margin-bottom:5px;"/>缺水
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="water[]" value="良好"
+                                                              style="margin-bottom:5px;"/>良好
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="water[]" value="无限制"
+                                                              style="margin-bottom:5px;"/>无限制
+                </div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
         </div>
 
 
@@ -87,47 +134,63 @@
             <div class="grid_12"
                  style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
                 <div style="float:left;padding:0 5px;"><label>地形条件:</label></div>
-                <div style="float:left;padding:0 5px;"><input type="checkbox" name="terrain[]" value="山区"
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="terrain[]" value="山区"
                                                               style="margin-bottom:5px;"/>山区
                 </div>
-                <div style="float:left;padding:0 5px;"><input type="checkbox" name="terrain[]" value="丘陵"
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="terrain[]" value="丘陵"
                                                               style="margin-bottom:5px;"/>丘陵
                 </div>
-                <div style="float:left;padding:0 5px;"><input type="checkbox" name="terrain[]" value="一般地区"
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="terrain[]" value="一般地区"
                                                               style="margin-bottom:5px;"/>一般地区
                 </div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
             </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
                 <div style="float:left;padding:0 5px;"><label>地理位置条件:</label></div>
-                <div style="float:left;padding:0 5px;"><input type="checkbox" name="geolocation[]" value="城市近郊"
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="geolocation[]" value="城市近郊"
                                                               style="margin-bottom:5px;"/>城市近郊
                 </div>
-                <div style="float:left;padding:0 5px;"><input type="checkbox" name="geolocation[]" value="城中村"
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="geolocation[]" value="城中村"
                                                               style="margin-bottom:5px;"/>城中村
                 </div>
-                <div style="float:left;padding:0 5px;"><input type="checkbox" name="geolocation[]" value="中心城镇地区"
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="geolocation[]" value="中心城镇地区"
                                                               style="margin-bottom:5px;"/>中心城镇地区
                 </div>
-                <div style="float:left;padding:0 5px;"><input type="checkbox" name="geolocation[]" value="一般地区"
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="geolocation[]" value="一般地区"
                                                               style="margin-bottom:5px;"/>一般地区
                 </div>
             </div>
 
             <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
+
+            <div class="grid_12"
                  style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
                 <div style="float:left;padding:0 5px;"><label>生态限制条件:</label></div>
-                <div style="float:left;padding:0 5px;"><input type="checkbox" name="ecotope[]" value="生态保护区"
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="ecotope[]" value="生态保护区"
                                                               style="margin-bottom:5px;"/>生态保护区
                 </div>
-                <div style="float:left;padding:0 5px;"><input type="checkbox" name="ecotope[]" value="水源保护区"
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="ecotope[]" value="水源保护区"
                                                               style="margin-bottom:5px;"/>水源保护区
                 </div>
-                <div style="float:left;padding:0 5px;"><input type="checkbox" name="ecotope[]" value="一般地区"
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="ecotope[]" value="一般地区"
                                                               style="margin-bottom:5px;"/>一般地区
                 </div>
             </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
+
         </div>
 
 
@@ -136,20 +199,47 @@
         </div>
 
         <div class="grid_12" style="margin-top: 10px;">
-            <label class="grid_4">人口密集程度:
-                <select name="density" id="renkou_select" class="form-control">
-                    <option value="聚集">聚集</option>
-                    <option value="分散">分散</option>
-                    <option value="一般">一般</option>
-                    <option value="无限制">无限制</option>
-                </select></label>
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><label>人口密集程度:</label></div>
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="density[]" value="聚集"
+                                                              style="margin-bottom:5px;"/>聚集
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="density[]" value="分散"
+                                                              style="margin-bottom:5px;"/>分散
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="density[]" value="一般"
+                                                              style="margin-bottom:5px;"/>一般
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="density[]" value="无限制"
+                                                              style="margin-bottom:5px;"/>无限制
+                </div>
+            </div>
 
-            <label class="grid_4">可形成液态肥:
-                <select name="usageHabits" id="yetaifei_select" class="form-control">
-                    <option value="是">是</option>
-                    <option value="否">否</option>
-                    <option value="均可">均可</option>
-                </select></label>
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><label>可形成液态肥:</label></div>
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="usageHabits[]" value="是"
+                                                              style="margin-bottom:5px;"/>是
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="usageHabits[]" value="否"
+                                                              style="margin-bottom:5px;"/>否
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="usageHabits[]" value="均可"
+                                                              style="margin-bottom:5px;"/>均可
+                </div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
+
         </div>
 
         <div class="grid_12" style="margin-top: 10px;">
@@ -158,19 +248,44 @@
 
 
         <div class="grid_12" style="margin-top: 10px;">
-            <label class="grid_4">需要具有完整城镇污水处理系统:
-                <select name="sewageTreatment" id="wushuichuli_select" class="form-control">
-                    <option value="是">是</option>
-                    <option value="否">否</option>
-                    <option value="无限制">无限制</option>
-                </select></label>
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><label>需要具有完整城镇污水处理系统:</label></div>
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="sewageTreatment[]" value="是"
+                                                              style="margin-bottom:5px;"/>是
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="sewageTreatment[]" value="否"
+                                                              style="margin-bottom:5px;"/>否
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="sewageTreatment[]" value="无限制"
+                                                              style="margin-bottom:5px;"/>无限制
+                </div>
+            </div>
 
-            <label class="grid_4">需要具有污水管道:
-                <select name="sewerLines" id="wushuiguandao_select" class="form-control">
-                    <option value="是">是</option>
-                    <option value="否">否</option>
-                    <option value="均可">均可</option>
-                </select></label>
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><label>需要具有污水管道:</label></div>
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="sewerLines[]" value="是"
+                                                              style="margin-bottom:5px;"/>是
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="sewerLines[]" value="否"
+                                                              style="margin-bottom:5px;"/>否
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="sewerLines[]" value="均可"
+                                                              style="margin-bottom:5px;"/>均可
+                </div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
+
         </div>
 
         <div class="grid_12" style="margin-top: 10px;">
@@ -178,26 +293,63 @@
         </div>
 
         <div class="grid_12" style="margin-top: 10px;">
-            <label class="grid_3">需要具有沼气利用工程:
-                <select name="biogasUtilization" id="zhaoqi_select" class="form-control">
-                    <option value="是">是</option>
-                    <option value="否">否</option>
-                    <option value="无限制">无限制</option>
-                </select></label>
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><label>需要具有沼气利用工程:</label></div>
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="biogasUtilization[]" value="是"
+                                                              style="margin-bottom:5px;"/>是
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="biogasUtilization[]" value="否"
+                                                              style="margin-bottom:5px;"/>否
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="biogasUtilization[]" value="无限制"
+                                                              style="margin-bottom:5px;"/>无限制
+                </div>
+            </div>
 
-            <label class="grid_4">可以与其他生活污水混合处理:
-                <select name="mixedTreatment" id="wushuihunhe_select" class="form-control">
-                    <option value="是">是</option>
-                    <option value="否">否</option>
-                    <option value="均可">均可</option>
-                </select></label>
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
 
-            <label>可以与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理:
-                <select name="otherTreatment" id="yibingchuli_select" class="form-control">
-                    <option value="是">是</option>
-                    <option value="否">否</option>
-                    <option value="均可">均可</option>
-                </select></label>
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><label>可以与其他生活污水混合处理:</label></div>
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="mixedTreatment[]" value="是"
+                                                              style="margin-bottom:5px;"/>是
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="mixedTreatment[]" value="否"
+                                                              style="margin-bottom:5px;"/>否
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="mixedTreatment[]" value="均可"
+                                                              style="margin-bottom:5px;"/>均可
+                </div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 10px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><label>可以与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理:</label></div>
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="checkbox" name="otherTreatment[]" value="是"
+                                                              style="margin-bottom:5px;"/>是
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="otherTreatment[]" value="否"
+                                                              style="margin-bottom:5px;"/>否
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="checkbox" name="otherTreatment[]" value="均可"
+                                                              style="margin-bottom:5px;"/>均可
+                </div>
+            </div>
+
+            <div class="grid_12"
+                 style="float:left;height:100%;margin-top: 5px;border-bottom-width: 10px;margin-bottom: 10px;">
+                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+            </div>
+
         </div>
 
         <div class="grid_12" align="center" style="margin-top: 10px;">
