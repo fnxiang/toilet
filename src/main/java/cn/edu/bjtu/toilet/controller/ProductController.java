@@ -224,7 +224,7 @@ public class ProductController {
         //资源
         ResourceUtilizationDTO resourceUtilizationDTO = new ResourceUtilizationDTO();
         resourceUtilizationDTO.setIsBiogasUtilization(params.get("biogasUtilization").equals("是"));
-        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment").equals("是"));
+        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment").substring(1));
         resourceUtilizationDTO.setOtherTreatment(params.get("otherTreatment").equals("是"));
         toiletPatternDTO.setResourceUtilization(resourceUtilizationDTO);
 
