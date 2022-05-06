@@ -713,7 +713,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row form-group" id="peculiar_canshu" style="display: none">
+                                <div class="row form-group" id="peculiar" style="display: none">
                                     <div class="col col-md-3"><label for="peculiar_canshu" class="form-control-label">产品参数
                                         <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
@@ -950,7 +950,7 @@
         var many_factors = $("#many_factors").get(0);
         var shiyong = $("#shiyong").get(0);
         var chanpincanshu = $("#chanpincanshu").get(0);
-        var peculiar_canshu = $("#peculiar_canshu").get(0);
+        var peculiar_canshu = $("#peculiar").get(0);
         if (product_select.value == 2) { //双瓮漏斗式厕所
             zhongliangdiv.style.display = "";
             bihoudiv.style.display = "";
