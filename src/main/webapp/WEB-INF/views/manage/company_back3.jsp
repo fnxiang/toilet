@@ -249,33 +249,32 @@
                                                 <div class="tab-pane fade active show" id="custom-nav-nature"
                                                      role="tabpanel" aria-labelledby="custom-nav-nature-tab">
 
+
                                                     <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="temperaturecondition"
-                                                                                         class=" form-control-label">温度条件：
+                                                        <div class="col col-md-3"><label class="form-control-label">温度条件：
                                                             <i class="fa fa-question-circle" data-toggle="tooltip"
                                                                data-placement="top" title="输入注意事项"></i></label></div>
                                                         <div class="col-12 col-md-9">
-                                                            <select name="temperaturecondition"
-                                                                    id="temperaturecondition" class="form-control">
-                                                                <option value="0">高寒</option>
-                                                                <option value="1">无特殊</option>
-                                                            </select>
+                                                            <input class="col-md-1" type="checkbox" name="temperaturecondition"
+                                                                   value="高寒"/>高寒
+                                                            <input class="col-md-1" type="checkbox" name="temperaturecondition"
+                                                                   value="无特殊"/>无特殊
                                                         </div>
                                                     </div>
 
+
                                                     <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="watercondition"
-                                                                                         class=" form-control-label">水资源条件：
+                                                        <div class="col col-md-3"><label class="form-control-label">水资源条件：
                                                             <i class="fa fa-question-circle" data-toggle="tooltip"
                                                                data-placement="top" title="输入注意事项"></i></label></div>
                                                         <div class="col-12 col-md-9">
-                                                            <select name="watercondition" id="watercondition"
-                                                                    class="form-control">
-                                                                <option value="0">缺水</option>
-                                                                <option value="1">良好</option>
-                                                            </select>
+                                                            <input class="col-md-1" type="checkbox" name="watercondition"
+                                                                   value="缺水"/>缺水
+                                                            <input class="col-md-1" type="checkbox" name="watercondition"
+                                                                   value="良好"/>良好
                                                         </div>
                                                     </div>
+
                                                     <div class="row form-group">
                                                         <div class="col col-md-3"><label class="form-control-label">地形条件：
                                                             <i class="fa fa-question-circle" data-toggle="tooltip"
@@ -287,12 +286,6 @@
                                                                    value="丘陵"/>丘陵
                                                             <input class="col-md-1" type="checkbox" name="dixing_check"
                                                                    value="一般地区"/>一般地区
-                                                            <%--<select name="dixing" id="dixing" class="form-control">--%>
-                                                            <%--<option value="0">平坦</option>--%>
-                                                            <%--<option value="1">山区</option>--%>
-                                                            <%--<option value="2">丘陵</option>--%>
-                                                            <%--<option value="3">无特殊</option>--%>
-                                                            <%--</select>--%>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -545,14 +538,27 @@
                                              aria-labelledby="custom-nav-nature-tab">
 
                                             <div class="row form-group" id="gui">
-                                                <div class="col col-md-3"><label for="guige"
+                                                <div class="col col-md-3"  style="margin-top: 5px"><label for="guige"
                                                                                  class="form-control-label">规格（平方米）：</label>
                                                 </div>
-                                                <div class="col-12 col-md-9" id="guige">
-                                                    <input type="text" id="gui1" name="guige"
-                                                           placeholder="规格（平方米）" class="form-control">
+                                                <div class="col-12 col-md-7" id="guigefanwei" style="margin-top: 5px">
+                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
+                                                           value="<0.05"/>0~0.5
+                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
+                                                           value="0.6~10"/>0.6~10
+                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
+                                                           value="11~25"/>11~25
+                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
+                                                           value="26~50"/>26~50
+                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
+                                                           value="51~100"/>51~100
+                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
+                                                           value="100以上"/>100以上
                                                 </div>
-
+                                                <div class="col-12 col-md-2" id="guige">
+                                                    <input class="form-control" type="text" id="gui1" name="guige"
+                                                           placeholder="规格（平方米）" >
+                                                </div>
                                             </div>
 
                                             <div class="row form-group">
@@ -566,22 +572,22 @@
 
                                             <div class="row form-group" id="chicun" >
                                                 <div class="row">
-                                                    <div class="col col-md-3"><label for="chicun_chang"
+                                                    <div class="col col-md-4"><label for="chicun_chang"
                                                                                      class="form-control-label">尺寸（长*宽*高mm）:</label>
                                                     </div>
                                                     <div class="col-12 col-md-1"><label
                                                             class="form-control-label">长：</label></div>
-                                                    <div class="col-12 col-md-2"><input type="text" id="chicun_chang"
+                                                    <div class="col-12 col-md-1"><input type="text" id="chicun_chang"
                                                                                         name="chicun_changt"
                                                                                         class="form-control"></div>
                                                     <div class="col-12 col-md-1"><label
                                                             class="form-control-label">宽：</label></div>
-                                                    <div class="col-12 col-md-2"><input type="text" id="chicun_kuan"
+                                                    <div class="col-12 col-md-1"><input type="text" id="chicun_kuan"
                                                                                         name="chicun_kuan"
                                                                                         class="form-control"></div>
                                                     <div class="col-12 col-md-1"><label
                                                             class="form-control-label">高：</label></div>
-                                                    <div class="col-12 col-md-2"><input type="text" id="chicun_gao"
+                                                    <div class="col-12 col-md-1"><input type="text" id="chicun_gao"
                                                                                         name="chicun_gao"
                                                                                         class="form-control"></div>
                                                 </div>
@@ -611,17 +617,32 @@
                                                                                  class=" form-control-label">材质：</label>
                                                 </div>
 
-                                                <div class="col-12 col-md-9">
-                                                    <%--                                                    <div class="form-check-inline form-check">--%>
-                                                    <input  class="col col-md-1" type="radio" id="caizhi" name="caizhi"
-                                                           value="玻璃钢">玻璃钢
-                                                    <input class="col col-md-1" type="radio" id="caizhi" name="caizhi"
-                                                           value="预制钢筋混凝土">预制钢筋混凝土
-                                                    <input class="col col-md-1" type="radio" id="caizhi" name="caizhi"
-                                                           value="">其他
-                                                    <input class="col col-md-1" type="text" name="jvticaizhi">
-                                                    <%--                                                    </div>--%>
+                                                                                                    <%--                                                    <div class="form-check-inline form-check">--%>
+                                                <div class="col col-md-1" id="hidden_caizhi1">
+                                                    <input  type="radio" name="caizhi"
+                                                            value="玻璃钢">玻璃钢
                                                 </div>
+                                                <div class="col col-md-2" id="hidden_caizhi2">
+                                                    <input type="radio" name="caizhi"
+                                                           value="预制钢筋混凝土">预制钢筋混凝土
+                                                </div>
+                                                <div class="col col-md-1" id="hidden_caizhi3">
+                                                    <input type="radio"  name="caizhi"
+                                                           value="PP">PP
+                                                </div>
+                                                <div class="col col-md-1" id="hidden_caizhi4">
+                                                    <input type="radio" name="caizhi"
+                                                           value="PE">PE
+                                                </div>
+                                                <div class="col col-md-1">
+                                                    <input type="radio" id="caizhi" name="caizhi"
+                                                           value="">其他
+                                                </div>
+                                                <div class="col col-md-2">
+                                                    <input  type="text" name="jvticaizhi" placeholder="输入材质">
+                                                </div>
+
+                                                    <%--                                                    </div>--%>
 
 
                                             </div>
@@ -942,6 +963,10 @@
         var guige = $("#gui").get(0);
         var chicun = $("#chicun").get(0);
         var caizhi = $("#cai").get(0);
+        var hidden_caizhi1 = $("#hidden_caizhi1").get(0);
+        var hidden_caizhi2 = $("#hidden_caizhi2").get(0);
+        var hidden_caizhi3 = $("#hidden_caizhi3").get(0);
+        var hidden_caizhi4 = $("#hidden_caizhi4").get(0);
         var yanse = $("#yan").get(0);
         var yongtu = $("#yong").get(0);
         var jvtiyongtu = $("#yong1").get(0);
@@ -981,6 +1006,24 @@
             jvtiyongtu.style.cssText = "";
             yunxingchengben.style.cssText = "";
             qinglizhouqi.style.cssText = "";
+        }
+        if (product_select.value == 2){ //双瓮漏斗式厕所
+            hidden_caizhi1.style.cssText = "";
+            hidden_caizhi2.style.cssText = "";
+            hidden_caizhi3.style.cssText = "";
+            hidden_caizhi4.style.cssText = "";
+        }
+        else if (product_select.value == 5){//真空负压厕所
+            hidden_caizhi1.style.cssText = "display:none;";
+            hidden_caizhi2.style.cssText = "display:none;";
+            hidden_caizhi3.style.cssText = "display:none;";
+            hidden_caizhi4.style.cssText = "display:none;";
+        }
+        else if (product_select.value == 9){//双坑交替式厕所
+            hidden_caizhi3.style.cssText = "display:none;";
+            hidden_caizhi4.style.cssText = "display:none;";
+            hidden_caizhi1.style.cssText = "";
+            hidden_caizhi2.style.cssText = "";
         }
         if (product_select.value == 11) { //泡沫封堵液
             many_factors.style.cssText = "display:none;"
@@ -1036,12 +1079,21 @@
 
 
         //新模式参数
-        myselect = document.getElementById("temperaturecondition"); //温度条件
-        index = myselect.selectedIndex;
-        data.append("natureTemp", encodeURI(myselect.options[index].text));
-        myselect = document.getElementById("watercondition"); //水资源条件
-        index = myselect.selectedIndex;
-        data.append("water", encodeURI(myselect.options[index].text));
+        const wenducheckbox = document.getElementsByName("temperaturecondition"); //温度条件
+        let wenducheck_val = "";
+        for (let k = 0; k < wenducheckbox.length; k++) {
+            if (wenducheckbox[k].checked)
+                wenducheck_val = wenducheck_val + "," + wenducheckbox[k].value;
+        }
+        data.append("natureTemp", encodeURI(wenducheck_val));
+
+        const shuiziyuancheckbox = document.getElementsByName("watercondition"); //水资源条件
+        let shuiziyuancheck_val = "";
+        for (let k = 0; k < shuiziyuancheckbox.length; k++) {
+            if (shuiziyuancheckbox[k].checked)
+                shuiziyuancheck_val = shuiziyuancheck_val + "," + shuiziyuancheckbox[k].value;
+        }
+        data.append("water", encodeURI(shuiziyuancheck_val));
 
         const mycheckbox = document.getElementsByName("dixing_check"); //地形条件
         let check_val = "";
@@ -1116,6 +1168,13 @@
 
         // 产品参数
         data.append("standard", encodeURI($('#guige').val())); //规格（平方米）
+        const guigefanweicheckbox = document.getElementsByName("guigefanwei"); //规格范围
+        let guigefanwei_check_val = "";
+        for (let k = 0; k < guigefanweicheckbox.length; k++) {
+            if (guigefanweicheckbox[k].checked)
+                guigefanwei_check_val = guigefanwei_check_val + "," + guigefanweicheckbox[k].value;
+        }
+        data.append("standradRange", encodeURI($('#guigefanwei').val()));
         data.append("weight", encodeURI($('#zhongliang').val())); //重量kg
         data.append("thickness", encodeURI($('#houdu').val())); //houdu
         data.append("applicableNum", encodeURI($('#renshu').val())); //适用人数（人）
@@ -1125,7 +1184,9 @@
         radio = document.getElementsByName("caizhi"); //材质
         data.append("texture1", radio[0].checked);
         data.append("texture2", radio[1].checked);
-        data.append("texture3", document.getElementsByName("jvticaizhi"));
+        data.append("texture3", radio[2].checked);
+        data.append("texture4", radio[3].checked);
+        data.append("texture5", document.getElementsByName("jvticaizhi"));
         // myselect = document.getElementById("caizhi"); //材质
         // index = myselect.selectedIndex;
         // data.append("texture", encodeURI(myselect.options[index].text));
