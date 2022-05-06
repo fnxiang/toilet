@@ -133,7 +133,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private String buildProductSource(ToiletProductDTO productDTO) {
-        return String.format("%s-%s-%s", productDTO.getProductName(), productDTO.getPatternName(), productDTO.getCompanyEmail());
+        // 企业 + 产品名称 + 规格
+        return String.format("%s-%s-%s", productDTO.getCompanyEmail(), productDTO.getProductName(), productDTO.getProductParameters().getStandard());
     }
 
     private String buildPatternSource(ToiletPatternDTO patternDTO) {
