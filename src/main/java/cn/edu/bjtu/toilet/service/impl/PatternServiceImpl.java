@@ -1,18 +1,24 @@
 package cn.edu.bjtu.toilet.service.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.constant.*;
 import cn.edu.bjtu.toilet.converter.ProductConverter;
 import cn.edu.bjtu.toilet.dao.ToiletPatternDao;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
 import cn.edu.bjtu.toilet.dao.request.PatternQueryRequest;
-import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
+import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.service.PatternService;
 import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
@@ -39,6 +45,78 @@ public class PatternServiceImpl implements PatternService {
         return patternDao.queryAllPatternByPage(patternQueryRequest).stream()
                 .map(ProductConverter::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ToiletPatternDTO> sortPatternWithCondition(PatternSortRequest request, ToiletPatternDTO condition) {
+
+        LinkedList<ToiletPatternDTO> resultList = Lists.newLinkedList();
+        Integer searchIndex = request.getPageIndex();
+        Integer iteratorIndex = 1;
+        request.setPageIndex(iteratorIndex);
+        List<ToiletPatternDTO> patternDTOSFromDb;
+        do {
+            patternDTOSFromDb = sortPattern(request);
+            patternDTOSFromDb = matchPatternConditions(patternDTOSFromDb, condition);
+            resultList.addAll(patternDTOSFromDb);
+            if (resultList.size() > request.getPageSize() && !searchIndex.equals(iteratorIndex)) {
+                for (int i=0; i<request.getPageSize();i++) {
+                    resultList.removeFirst();
+                }
+            }
+            iteratorIndex++;
+            request.setPageIndex(iteratorIndex);
+        } while (resultList.size()<20 && !CollectionUtils.isEmpty(sortPattern(request)));
+
+        if (resultList.size() > 20) {
+            for (int i=20;i<resultList.size();i++) {
+                resultList.removeFirst();
+            }
+        }
+
+        return resultList;
+    }
+
+    private List<ToiletPatternDTO> matchPatternConditions(List<ToiletPatternDTO> patternDTOS, ToiletPatternDTO searchDTO) {
+
+        return patternDTOS.stream().map(item -> {
+            if (patternCompare(item, searchDTO)) {
+                return item;
+            }
+            return null;
+        }).filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    private Boolean patternCompare(ToiletPatternDTO patternDTODb, ToiletPatternDTO condition) {
+        return compareEnvConditions(patternDTODb.getEnvConditions(), condition.getEnvConditions())
+                && compareHumanFactors(patternDTODb.getHumanFactors(), condition.getHumanFactors())
+                && comparePipNetworkConditions(patternDTODb.getPipNetworkConditions(), condition.getPipNetworkConditions())
+                && compareResourceUtilization(patternDTODb.getResourceUtilization(), condition.getResourceUtilization());
+    }
+
+    private Boolean compareEnvConditions(EnvConditionsDTO envDb, EnvConditionsDTO conditions) {
+        return (envDb.getEcotope().contains(conditions.getEcotope()) || conditions.getEcotope().equals("无限制"))
+                && (envDb.getGeolocation().contains(conditions.getGeolocation()) || conditions.getGeolocation().equals("无限制"))
+                && (envDb.getTemperature().contains(conditions.getTemperature()) || conditions.getTemperature().equals("无限制"))
+                && (envDb.getTerrain().contains(conditions.getTerrain()) || conditions.getTerrain().equals("无限制"))
+                && (envDb.getWaterResource().contains(conditions.getWaterResource()) || conditions.getWaterResource().equals("无限制"));
+    }
+
+    private Boolean compareHumanFactors(HumanFactorsDTO humanFactorsDTO, HumanFactorsDTO conditions) {
+        return (humanFactorsDTO.getUsageHabits().contains(conditions.getUsageHabits()) || conditions.getUsageHabits().equals("均可"))
+                && (humanFactorsDTO.getDensity().contains(conditions.getDensity()) || conditions.getDensity().equals("无限制"));
+    }
+
+    private Boolean comparePipNetworkConditions(PipNetworkConditionsDTO db, PipNetworkConditionsDTO conditions) {
+        return (conditions.getHasSewageTreatment() == null || conditions.getHasSewageTreatment().equals(db.getHasSewageTreatment()))
+                && (conditions.getHasSewerLines() == null || conditions.getHasSewerLines().equals(db.getHasSewerLines()));
+    }
+
+    private Boolean compareResourceUtilization(ResourceUtilizationDTO db, ResourceUtilizationDTO conditions) {
+        return (conditions.getIsBiogasUtilization() == null || conditions.getIsBiogasUtilization().equals(db.getIsBiogasUtilization()))
+                && (db.getMixedSewageTreatment().contains(conditions.getMixedSewageTreatment()) || conditions.getMixedSewageTreatment().equals("均可"))
+                && (conditions.getOtherTreatment() == null || conditions.getOtherTreatment().equals(db.getOtherTreatment()));
     }
 
     private PatternQueryRequest buildPatternQueryRequest(PatternSortRequest request) {

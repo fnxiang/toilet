@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class PageRequest {
-    private Integer pageSize;
-    private Integer pageIndex;
+    private Integer pageSize=20;
+    private Integer pageIndex=1;
 //    设置默认值
     private Boolean isDesc;
     private String sortBy;

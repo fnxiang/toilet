@@ -7,6 +7,7 @@ import cn.edu.bjtu.toilet.service.PatternService;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,7 +92,6 @@ public class SearchController {
 
             ToiletPatternDTO searchDTO = buildModeSearchCondition(params);
 
-//            List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
             PatternSortRequest sortRequest = new PatternSortRequest();
             sortRequest.setSortBy("water_save_score");
             sortRequest.setIsDesc(false);
@@ -101,6 +101,7 @@ public class SearchController {
             patternDTOS = matchPatternConditions(patternDTOS, searchDTO);
 
             request.setAttribute("patternList", patternDTOS);
+            request.setAttribute("search_condition", JSON.toJSONString(searchDTO));
 
         } catch (Exception e) {
             LOG.error("search mode error with : {}", e.getMessage());
@@ -108,10 +109,6 @@ public class SearchController {
         }
 
         return "/product/mode_list";
-    }
-
-    private String buildIds(String s, String v) {
-        return s + "," + v;
     }
 
     private List<ToiletProductDTO> matchProductConditions(List<ToiletProductDTO> productDTOS, ToiletPatternDTO searchDTO) {
@@ -139,10 +136,6 @@ public class SearchController {
     }
 
     private Boolean patternCompare(ToiletPatternDTO patternDTODb, ToiletPatternDTO condition) {
-        Boolean f1 = compareEnvConditions(patternDTODb.getEnvConditions(), condition.getEnvConditions());
-        Boolean f2 = compareHumanFactors(patternDTODb.getHumanFactors(), condition.getHumanFactors());
-        Boolean f3 = comparePipNetworkConditions(patternDTODb.getPipNetworkConditions(), condition.getPipNetworkConditions());
-        Boolean f4 = compareResourceUtilization(patternDTODb.getResourceUtilization(), condition.getResourceUtilization());
         return compareEnvConditions(patternDTODb.getEnvConditions(), condition.getEnvConditions())
             && compareHumanFactors(patternDTODb.getHumanFactors(), condition.getHumanFactors())
             && comparePipNetworkConditions(patternDTODb.getPipNetworkConditions(), condition.getPipNetworkConditions())
@@ -158,10 +151,6 @@ public class SearchController {
     }
 
     private Boolean compareHumanFactors(HumanFactorsDTO humanFactorsDTO, HumanFactorsDTO conditions) {
-        Boolean ff1 = humanFactorsDTO.getUsageHabits().contains(conditions.getUsageHabits());
-        Boolean ff2 = conditions.getUsageHabits().equals("均可");
-        Boolean f1 = (ff1 || ff2);
-        Boolean f2 = (humanFactorsDTO.getDensity().contains(conditions.getDensity()) || conditions.getDensity().equals("无限制"));
         return (humanFactorsDTO.getUsageHabits().contains(conditions.getUsageHabits()) || conditions.getUsageHabits().equals("均可"))
             && (humanFactorsDTO.getDensity().contains(conditions.getDensity()) || conditions.getDensity().equals("无限制"));
     }

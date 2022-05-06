@@ -58,6 +58,7 @@ public class GlobalWebMvcConfigurer implements WebMvcConfigurer {
                 .excludePathPatterns("/toProductPage/**")
                 .excludePathPatterns("/toProductPage")
                 .excludePathPatterns("/product/sort")
+                .excludePathPatterns("/pattern/sort")
                 .excludePathPatterns("/search/**")
                 .excludePathPatterns("/error")
                 .excludePathPatterns("/toBasePage/**")

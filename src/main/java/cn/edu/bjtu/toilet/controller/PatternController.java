@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -38,25 +39,40 @@ public class PatternController {
                 return ERROR_PAGE;
             }
             PatternSortRequest sortRequest = buildSortPatternRequest(params);
-            List<ToiletPatternDTO> patternDTOS = patternService.sortPattern(sortRequest);
+            List<ToiletPatternDTO> patternDTOS;
+            ToiletPatternDTO searchCondition = JSON.parseObject(params.get("search_condition"), ToiletPatternDTO.class);
+
+            if (searchCondition == null) {
+                patternDTOS = patternService.sortPattern(sortRequest);
+            } else {
+                patternDTOS = patternService.sortPatternWithCondition(sortRequest, searchCondition);
+
+            }
+            request.setAttribute("search_condition", params.get("search_condition"));
             request.setAttribute("sort_condition", params.get("sortBy"));
             request.setAttribute("sort_way", params.get("desc"));
 
             request.setAttribute("patternList", patternDTOS);
-            request.getRequestDispatcher("/toilet/mode_list").forward(request, response);
         } catch (Exception e) {
-            LOG.error("upload products failed");
+            LOG.error("PatternController -> sortPattern ,sort pattern failed : {}", e.getMessage());
         }
 
-        return INDEX;
+        return "/product/mode_list";
     }
 
     private PatternSortRequest buildSortPatternRequest(Map<String, String> params) {
         PatternSortRequest request = new PatternSortRequest();
         request.setIsDesc(params.get("isDesc").equals("true"));
         request.setSortBy(params.get("sortBy"));
-        request.setPageIndex(Integer.valueOf(params.get("index")));
-        request.setPageSize(Integer.valueOf(params.get("size")));
+
+        if (!StringUtils.isEmpty(params.get("index"))) {
+            request.setPageIndex(Integer.valueOf(params.get("index")));
+        }
+
+        if (!StringUtils.isEmpty(params.get("size"))) {
+            request.setPageSize(Integer.valueOf(params.get("size")));
+        }
+
 
         if (params.get("patternIds") != null) {
             List<Integer> patternIds = JSON.parseArray(params.get("patternIds"), ToiletPatternDO.class).stream()
