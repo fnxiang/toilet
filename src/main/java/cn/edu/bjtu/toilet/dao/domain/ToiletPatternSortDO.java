@@ -26,7 +26,7 @@ public class ToiletPatternSortDO implements Serializable {
 
     private Integer patternId;
 
-    private String usage;
+    private String purpose;
 
     private Integer version;
 
@@ -126,12 +126,12 @@ public class ToiletPatternSortDO implements Serializable {
         this.patternId = patternId;
     }
 
-    public String getUsage() {
-        return usage;
+    public String getPurpose() {
+        return purpose;
     }
 
-    public void setUsage(String usage) {
-        this.usage = usage == null ? null : usage.trim();
+    public void setPurpose(String purpose) {
+        this.purpose = purpose == null ? null : purpose.trim();
     }
 
     public Integer getVersion() {
@@ -183,7 +183,7 @@ public class ToiletPatternSortDO implements Serializable {
         sb.append(", convenienceScore=").append(convenienceScore);
         sb.append(", comprehensiveScore=").append(comprehensiveScore);
         sb.append(", patternId=").append(patternId);
-        sb.append(", usage=").append(usage);
+        sb.append(", purpose=").append(purpose);
         sb.append(", version=").append(version);
         sb.append(", source=").append(source);
         sb.append(", deleted=").append(deleted);

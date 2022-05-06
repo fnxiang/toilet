@@ -13,7 +13,7 @@
     <result column="convenience_score" jdbcType="INTEGER" property="convenienceScore" />
     <result column="comprehensive_score" jdbcType="DOUBLE" property="comprehensiveScore" />
     <result column="pattern_id" jdbcType="INTEGER" property="patternId" />
-    <result column="usage" jdbcType="VARCHAR" property="usage" />
+    <result column="purpose" jdbcType="VARCHAR" property="purpose" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
@@ -80,7 +80,7 @@
   <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, water_save_score, tech_applicability_score, tech_cost_score, 
     resource_utilization_score, sanitation_score, convenience_score, comprehensive_score, 
-    pattern_id, usage, version, source, deleted, attribute
+    pattern_id, purpose, version, source, deleted, attribute
   </sql>
   <select id="selectByExample" parameterType="cn.edu.bjtu.toilet.dao.domain.ToiletPatternSortDOSelective" resultMap="BaseResultMap">
     select
@@ -117,14 +117,14 @@
       water_save_score, tech_applicability_score, 
       tech_cost_score, resource_utilization_score, 
       sanitation_score, convenience_score, comprehensive_score, 
-      pattern_id, usage, version, 
+      pattern_id, purpose, version, 
       source, deleted, attribute
       )
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{waterSaveScore,jdbcType=INTEGER}, #{techApplicabilityScore,jdbcType=INTEGER}, 
       #{techCostScore,jdbcType=INTEGER}, #{resourceUtilizationScore,jdbcType=INTEGER}, 
       #{sanitationScore,jdbcType=INTEGER}, #{convenienceScore,jdbcType=INTEGER}, #{comprehensiveScore,jdbcType=DOUBLE}, 
-      #{patternId,jdbcType=INTEGER}, #{usage,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
+      #{patternId,jdbcType=INTEGER}, #{purpose,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
       #{source,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, #{attribute,jdbcType=VARCHAR}
       )
   </insert>
@@ -164,8 +164,8 @@
       <if test="patternId != null">
         pattern_id,
       </if>
-      <if test="usage != null">
-        usage,
+      <if test="purpose != null">
+        purpose,
       </if>
       <if test="version != null">
         version,
@@ -214,8 +214,8 @@
       <if test="patternId != null">
         #{patternId,jdbcType=INTEGER},
       </if>
-      <if test="usage != null">
-        #{usage,jdbcType=VARCHAR},
+      <if test="purpose != null">
+        #{purpose,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -273,8 +273,8 @@
       <if test="record.patternId != null">
         pattern_id = #{record.patternId,jdbcType=INTEGER},
       </if>
-      <if test="record.usage != null">
-        usage = #{record.usage,jdbcType=VARCHAR},
+      <if test="record.purpose != null">
+        purpose = #{record.purpose,jdbcType=VARCHAR},
       </if>
       <if test="record.version != null">
         version = #{record.version,jdbcType=INTEGER},
@@ -306,7 +306,7 @@
       convenience_score = #{record.convenienceScore,jdbcType=INTEGER},
       comprehensive_score = #{record.comprehensiveScore,jdbcType=DOUBLE},
       pattern_id = #{record.patternId,jdbcType=INTEGER},
-      usage = #{record.usage,jdbcType=VARCHAR},
+      purpose = #{record.purpose,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       source = #{record.source,jdbcType=VARCHAR},
       deleted = #{record.deleted,jdbcType=BIT},
@@ -348,8 +348,8 @@
       <if test="patternId != null">
         pattern_id = #{patternId,jdbcType=INTEGER},
       </if>
-      <if test="usage != null">
-        usage = #{usage,jdbcType=VARCHAR},
+      <if test="purpose != null">
+        purpose = #{purpose,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -378,7 +378,7 @@
       convenience_score = #{convenienceScore,jdbcType=INTEGER},
       comprehensive_score = #{comprehensiveScore,jdbcType=DOUBLE},
       pattern_id = #{patternId,jdbcType=INTEGER},
-      usage = #{usage,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       source = #{source,jdbcType=VARCHAR},
       deleted = #{deleted,jdbcType=BIT},

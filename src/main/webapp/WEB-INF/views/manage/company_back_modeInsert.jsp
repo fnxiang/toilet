@@ -212,7 +212,7 @@
                                                         <input class="col-md-1" type="checkbox" name="water_check"
                                                                value="缺水"/>缺水
                                                         <input class="col-md-1" type="checkbox" name="water_check"
-                                                               value="缺水"/>良好
+                                                               value="良好"/>良好
                                                     </div>
                                                 </div>
 
@@ -502,9 +502,11 @@
         const watercheckbox = document.getElementsByName("water_check"); //水资源条件
         let water_check_val = "";
         for (let k = 0; k < watercheckbox.length; k++) {
-            if (watercheckbox[k].checked)
+            if (watercheckbox[k].checked) {
                 water_check_val = water_check_val + "," + watercheckbox[k].value;
+            }
         }
+        alert(encodeURI(water_check_val));
         data.append("water", encodeURI(water_check_val));
 
         const dixingcheckbox = document.getElementsByName("dixing_check"); //地形条件

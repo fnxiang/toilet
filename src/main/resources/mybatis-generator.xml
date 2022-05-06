@@ -64,7 +64,7 @@
         <!-- <table schema="" tableName="WECHAT_MESSAGE"/> -->
 
 <!--        <table schema="" tableName="toilet_pattern" domainObjectName="ToiletPatternDO"/>-->
-        <table schema="" tableName="toilet_product" domainObjectName="ToiletProductDO"/>
+<!--        <table schema="" tableName="toilet_product" domainObjectName="ToiletProductDO"/>-->
         <table schema="" tableName="toilet_pattern_sort" domainObjectName="ToiletPatternSortDO"/>
 <!--        <table schema="" tableName="user" domainObjectName="UserDO"/>-->
 <!--        <table schema="" tableName="company" domainObjectName="CompanyDO"/>-->

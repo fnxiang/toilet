@@ -1,3 +1,6 @@
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
+<%@ page import="com.alibaba.fastjson.JSON" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -22,20 +25,17 @@
 
 </head>
 <body>
-<header id="branding">
-    <jsp:include page="product_banner.jsp"/>
-    <%
-        String sort_condition = "price";
-        String sort_way = "false";
-        if (request.getAttribute("sort_condition")!=null) {
-            sort_condition = request.getAttribute("sort_condition").toString();
-        }
-        if (request.getAttribute("sort_way")!=null) {
-            sort_way = request.getAttribute("sort_way").toString();
-        }
-    %>
-    <!-- .grid_6 -->
-</header>
+<jsp:include page="product_banner.jsp"/>
+<%
+    String sort_condition = "price";
+    String sort_way = "false";
+    if (request.getAttribute("sort_condition")!=null) {
+        sort_condition = request.getAttribute("sort_condition").toString();
+    }
+    if (request.getAttribute("sort_way")!=null) {
+        sort_way = request.getAttribute("sort_way").toString();
+    }
+%>
 <!-- .container_12 -->
 
 <div class="clear"></div>
@@ -105,7 +105,46 @@
             </div>
             <!-- .c_header -->
             <div id="list_carousel" class="list_carousel">
-                <jsp:include page="product_list_content.jsp"/>
+
+                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>)request.getAttribute("productList");%>
+                <c:set var="list" value="<%=JSON.toJSONString(productList)%>" scope="application"/>
+                <% String path = request.getContextPath();
+                    String basePath = request.getScheme() + "://"
+                            + request.getServerName() + ":" + request.getServerPort()
+                            + path + "/";%>
+                <ul id="list_product" class="list_product">
+                    <% for (ToiletProductDTO productDTO : productList) {
+                        String firstPicPath = productDTO.getPicsPath().split(";")[0];
+                    %>
+                    <li value="">
+                        <div class="grid_3 product">
+                            <div class="prev">
+                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_info&product_id=<%=productDTO.getId()%>"><img
+                                        src="<%=basePath+firstPicPath%>"
+                                        alt="" title=""/></a>
+                            </div>
+                            <!-- .prev -->
+                            <h3 class="title" style="height: 25px;"><%=productDTO.getProductName()%>
+                            </h3>
+
+                            <div class="cart">
+                                <div class="price" style="width: 120px">
+                                    <div class="vert">
+                                        <div class="price_new">价格：<%=productDTO.getProductParameters().getPrice()%>万元
+                                        </div>
+                                        <div class="price_new">使用寿命：<%=productDTO.getProductParameters().getServiceLife()%>年
+                                        </div>
+                                        <div class="price_new">清理周期：<%=productDTO.getProductParameters().getCleanupCycle()%>个月
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .cart -->
+                        </div>
+                        <!-- .grid_3 -->
+                    </li>
+                    <%}%>
+                </ul>
 
                 <div class="clear"></div>
                 <div id="content_bottom">
@@ -190,26 +229,7 @@
 
 <%--排序--%>
 <script>
-
-    function Post(url, params) {
-        var temp = document.createElement("form");
-        temp.action = url;
-        temp.method = "post";
-        temp.enctype = "multipart/form-data";
-        temp.style.display = "none";
-        for (var key in params) {
-            var opt = document.createElement("textarea");
-            opt.name = key;
-            opt.value = params[key];
-            temp.appendChild(opt);
-        }
-        document.body.appendChild(temp);
-        temp.submit();
-        return temp;
-    }
-
     function sort() {
-
         let data = {};
         data["sortBy"] = $('#sortCondition').val();
         data["desc"] = $('#sortWay').val();

@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
 <%String uId = (String)request.getSession().getAttribute("uId");%>
 <div class="container_12">
     <div id="top">
@@ -240,5 +239,21 @@
         });
 
     }
+
+    function Post(url, params) {
+        var temp = document.createElement("form");
+        temp.action = url;
+        temp.method = "post";
+        temp.enctype = "multipart/form-data";
+        temp.style.display = "none";
+        for (var key in params) {
+            var opt = document.createElement("textarea");
+            opt.name = key;
+            opt.value = params[key];
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+    }
 </script>
-</html>
