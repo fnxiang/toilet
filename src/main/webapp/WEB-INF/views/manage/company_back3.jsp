@@ -541,23 +541,9 @@
                                                 <div class="col col-md-3"  style="margin-top: 5px"><label for="guige"
                                                                                  class="form-control-label">规格（平方米）：</label>
                                                 </div>
-                                                <div class="col-12 col-md-7" id="guigefanwei" style="margin-top: 5px">
-                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
-                                                           value="<0.05"/>0~0.5
-                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
-                                                           value="0.6~10"/>0.6~10
-                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
-                                                           value="11~25"/>11~25
-                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
-                                                           value="26~50"/>26~50
-                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
-                                                           value="51~100"/>51~100
-                                                    <input class="col-md-1" type="checkbox" name="guigefanwei"
-                                                           value="100以上"/>100以上
-                                                </div>
                                                 <div class="col-12 col-md-2" id="guige">
-                                                    <input class="form-control" type="text" id="gui1" name="guige"
-                                                           placeholder="规格（平方米）" >
+                                                    <input type="text" id="gui1" name="guige"
+                                                           placeholder="规格（平方米）" class="form-control">
                                                 </div>
                                             </div>
 
@@ -618,11 +604,31 @@
                                                 </div>
 
                                                                                                     <%--                                                    <div class="form-check-inline form-check">--%>
-                                                <div class="col col-md-9">
-                                                    <input  type="text" id="caizhi" name="caizhi" placeholder="输入材质" class="form-control">
+                                                <div class="col col-md-1" id="hidden_caizhi1">
+                                                    <input  type="radio" name="caizhi"
+                                                            value="玻璃钢">玻璃钢
+                                                </div>
+                                                <div class="col col-md-2" id="hidden_caizhi2">
+                                                    <input type="radio" name="caizhi"
+                                                           value="预制钢筋混凝土">预制钢筋混凝土
+                                                </div>
+                                                <div class="col col-md-1" id="hidden_caizhi3">
+                                                    <input type="radio"  name="caizhi"
+                                                           value="PP">PP
+                                                </div>
+                                                <div class="col col-md-1" id="hidden_caizhi4">
+                                                    <input type="radio" name="caizhi"
+                                                           value="PE">PE
+                                                </div>
+                                                <div class="col col-md-1">
+                                                    <input type="radio" id="qitacaizhi" name="caizhi"
+                                                           value="qita">其他
+                                                </div>
+                                                <div class="col col-md-2">
+                                                    <input  type="text" id="jvticaizhi" name="jvticaizhi" placeholder="输入材质" disabled>
                                                 </div>
 
-
+                                                    <%--                                                    </div>--%>
 
 
                                             </div>
@@ -897,6 +903,16 @@
     });
 
     $(document).ready(function () {
+        $('input[type=radio][name=caizhi]').change(function () {
+            if (this.value == "qita") {
+                $("#jvticaizhi").removeAttr("disabled");//将输入可用
+            } else {
+                $("#jvticaizhi").attr({"disabled":"disabled"});
+            }
+        });
+    });
+
+    $(document).ready(function () {
         $.ajax({
             url: "/toilet/company/product/modes/get",
             type: "POST",
@@ -943,6 +959,10 @@
         var guige = $("#gui").get(0);
         var chicun = $("#chicun").get(0);
         var caizhi = $("#cai").get(0);
+        var hidden_caizhi1 = $("#hidden_caizhi1").get(0);
+        var hidden_caizhi2 = $("#hidden_caizhi2").get(0);
+        var hidden_caizhi3 = $("#hidden_caizhi3").get(0);
+        var hidden_caizhi4 = $("#hidden_caizhi4").get(0);
         var yanse = $("#yan").get(0);
         var yongtu = $("#yong").get(0);
         var jvtiyongtu = $("#yong1").get(0);
@@ -982,6 +1002,24 @@
             jvtiyongtu.style.cssText = "";
             yunxingchengben.style.cssText = "";
             qinglizhouqi.style.cssText = "";
+        }
+        if (product_select.value == 2){ //双瓮漏斗式厕所
+            hidden_caizhi1.style.cssText = "";
+            hidden_caizhi2.style.cssText = "";
+            hidden_caizhi3.style.cssText = "";
+            hidden_caizhi4.style.cssText = "";
+        }
+        else if (product_select.value == 5){//真空负压厕所
+            hidden_caizhi1.style.cssText = "display:none;";
+            hidden_caizhi2.style.cssText = "display:none;";
+            hidden_caizhi3.style.cssText = "display:none;";
+            hidden_caizhi4.style.cssText = "display:none;";
+        }
+        else if (product_select.value == 9){//双坑交替式厕所
+            hidden_caizhi3.style.cssText = "display:none;";
+            hidden_caizhi4.style.cssText = "display:none;";
+            hidden_caizhi1.style.cssText = "";
+            hidden_caizhi2.style.cssText = "";
         }
         if (product_select.value == 11) { //泡沫封堵液
             many_factors.style.cssText = "display:none;"
@@ -1126,20 +1164,18 @@
 
         // 产品参数
         data.append("standard", encodeURI($('#guige').val())); //规格（平方米）
-        const guigefanweicheckbox = document.getElementsByName("guigefanwei"); //规格范围
-        let guigefanwei_check_val = "";
-        for (let k = 0; k < guigefanweicheckbox.length; k++) {
-            if (guigefanweicheckbox[k].checked)
-                guigefanwei_check_val = guigefanwei_check_val + "," + guigefanweicheckbox[k].value;
-        }
-        data.append("standradRange", encodeURI($('#guigefanwei').val()));
         data.append("weight", encodeURI($('#zhongliang').val())); //重量kg
         data.append("thickness", encodeURI($('#houdu').val())); //houdu
-        data.append("applicableNum", encodeURI($('#renshu').val())); //适用人数（人）
+        data.append("applicableNum", encodeURI($('#shiyongrenshu').val())); //适用人数（人）
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
         data.append("high", $('#chicun_gao').val());
-        data.append("texture", $('#caizhi').val());//材质
+        radio = document.getElementsByName("caizhi"); //材质
+        data.append("texture1", radio[0].checked);
+        data.append("texture2", radio[1].checked);
+        data.append("texture3", radio[2].checked);
+        data.append("texture4", radio[3].checked);
+        data.append("texture5", $('#jvticaizhi').val());
         // myselect = document.getElementById("caizhi"); //材质
         // index = myselect.selectedIndex;
         // data.append("texture", encodeURI(myselect.options[index].text));
