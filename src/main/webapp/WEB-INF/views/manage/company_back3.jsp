@@ -541,8 +541,8 @@
                                                 <div class="col col-md-3"  style="margin-top: 5px"><label for="guige"
                                                                                  class="form-control-label">规格（平方米）：</label>
                                                 </div>
-                                                <div class="col-12 col-md-9" id="guige">
-                                                    <input type="text" id="gui1" name="guige"
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="guige" name="guige"
                                                            placeholder="规格（平方米）" class="form-control">
                                                 </div>
                                             </div>
@@ -1165,7 +1165,7 @@
         // 产品参数
         data.append("standard", encodeURI($('#guige').val())); //规格（平方米）
         data.append("weight", encodeURI($('#zhongliang').val())); //重量kg
-        data.append("thickness", encodeURI($('#houdu').val())); //houdu
+        data.append("thickness", encodeURI($('#bihou').val())); //houdu
         data.append("applicableNum", encodeURI($('#shiyongrenshu').val())); //适用人数（人）
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
@@ -1193,6 +1193,7 @@
         data.append("runningCost", encodeURI($('#yunxingchengben').val())); //运行成本
         data.append("cleanupCycle", encodeURI($('#qinglizhouqi').val())); //清理周期
         data.append("specialParam", encodeURI($('#peculiar_canshu').val())); //产品参数
+        data.append("othercanshu", encodeURI($('#qitacanshu').val())); //其他参数
 
 
 
