@@ -679,11 +679,11 @@
                                                 <div class="col col-md-3"><label class="form-control-label">用途：
                                                 </label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <input class="col-md-1" type="checkbox" name="cesuoyongtu"
+                                                    <input class="col-md-1" type="radio" name="cesuoyongtu"
                                                            value="户厕"/>户厕
-                                                    <input class="col-md-1" type="checkbox" name="cesuoyongtu"
+                                                    <input class="col-md-1" type="radio" name="cesuoyongtu"
                                                            value="公厕"/>公厕
-                                                    <input class="col-md-1" type="checkbox" name="cesuoyongtu"
+                                                    <input class="col-md-1" type="radio" name="cesuoyongtu"
                                                            value="均可"/>均可
                                                 </div>
                                             </div>
@@ -1177,14 +1177,13 @@
         data.append("texture", encodeURI(texture));
         data.append("color", encodeURI($('#yanse').val())); //颜色
         data.append("serviceLife", encodeURI($('#shouming').val())); //使用寿命
-        data.append("price", $('#jiage').val()); //价格（万元）
-        const cesuoyongtucheckbox = document.getElementsByName("cesuoyongtu"); //厕所用途
-        let cesuoyongtu_check_val = "";
-        for (let k = 0; k < cesuoyongtucheckbox.length; k++) {
-            if (cesuoyongtucheckbox[k].checked)
-                cesuoyongtu_check_val = cesuoyongtu_check_val + "," + cesuoyongtucheckbox[k].value;
-        }
-        data.append("paramPurpose", encodeURI(cesuoyongtu_check_val));//用途
+        data.append("price", $('#jiage').val()); //价格（元）
+
+        radio = document.getElementsByName("cesuoyongtu"); //厕所用途
+        data.append("cesuoyongtu1", radio[0].checked); //户厕
+        data.append("cesuoyongtu2", radio[1].checked); //公厕
+        data.append("cesuoyongtu3", radio[2].checked);//均可
+
         data.append("purpose", encodeURI($('#jvtiyongtu').val())); //具体用途
         data.append("runningCost", encodeURI($('#yunxingchengben').val())); //运行成本
         data.append("cleanupCycle", encodeURI($('#qinglizhouqi').val())); //清理周期
@@ -1207,8 +1206,8 @@
                 if (result.success) {
                     alert("保存成功！");
                     location.reload();
-                    for (var value of data.values()) {
-                        console.log(value);
+                    for (var key of data.keys()) {
+                        console.log(key + ":" + data.get(key));
                     }
                 } else {
                     alert(result.errorMessage);
