@@ -541,7 +541,7 @@
                                                 <div class="col col-md-3"  style="margin-top: 5px"><label for="guige"
                                                                                  class="form-control-label">规格（平方米）：</label>
                                                 </div>
-                                                <div class="col-12 col-md-2" id="guige">
+                                                <div class="col-12 col-md-9" id="guige">
                                                     <input type="text" id="gui1" name="guige"
                                                            placeholder="规格（平方米）" class="form-control">
                                                 </div>
