@@ -1054,7 +1054,7 @@
 
     function entry() {
 
-        var data = new FormData();
+        let data = new FormData();
         data.append("productName", encodeURI($('#product_name').val())); //产品名称
         data.append("factoryName", encodeURI($('#producer_name').val())); //厂家
         data.append("factoryNum", $('#phonenum').val()); //联系方式
@@ -1145,8 +1145,8 @@
         data.append("province", encodeURI($('#province').val())); //适用省份
         data.append("temperature", encodeURI($('#wendufanwei').val())); //适用温度范围
         data.append("features", encodeURI($('#chanpingtedian').val())); //产品特点
-        data.append("requirements", encodeURI($('#shiyongtiaojian').val())); //适用条件
-        data.append("copositionAndPrinciple", encodeURI($('#chanpinyuanli').val())); //产品原理及组成
+        data.append("applicableCondition", encodeURI($('#shiyongtiaojian').val())); //适用条件
+        data.append("productTheory", encodeURI($('#chanpinyuanli').val())); //产品原理及组成
 
         // 文件上传
         var quality = $('#zhiliangbaozhang')[0].files[0];
@@ -1180,9 +1180,8 @@
         data.append("price", $('#jiage').val()); //价格（元）
 
         radio = document.getElementsByName("cesuoyongtu"); //厕所用途
-        data.append("cesuoyongtu1", radio[0].checked); //户厕
-        data.append("cesuoyongtu2", radio[1].checked); //公厕
-        data.append("cesuoyongtu3", radio[2].checked);//均可
+        const toiletPurpose = getRadioValue(radio);
+        data.append("toiletPurpose", encodeURI(toiletPurpose));
 
         data.append("purpose", encodeURI($('#jvtiyongtu').val())); //具体用途
         data.append("runningCost", encodeURI($('#yunxingchengben').val())); //运行成本
@@ -1223,12 +1222,12 @@
         let texture = "";
         for (let i=0;i<radio.length;i++) {
             if (radio[i].checked) {
-                texture = radio[i].value();
+                texture = radio[i].value;
                 alert(texture);
             }
         }
 
-        if (texture.equal("其他")) {
+        if (texture==="其他") {
             texture = $('#jvticaizhi').val();
         }
         return texture;

@@ -98,8 +98,8 @@ public class ProductServiceImpl implements ProductService {
                 return null;
             });
         } else {
-            template.execute(status -> {
-                ToiletPatternDO patternDO = toiletPatternDao.queryPatternBySource(buildPatternSource(patternDTO));
+
+                ToiletPatternDO patternDO = toiletPatternDao.queryPatternBySource(buildPatternSource(productDTO));
                 if (patternDO == null) {
                     throw new ToiletBizException("模式不存在，请选择新建模式！", BIZ_ERROR);
                 }
@@ -121,8 +121,6 @@ public class ProductServiceImpl implements ProductService {
                     toiletProductDao.updateProductBySource(productDO);
                 }
 
-                return null;
-            });
         }
         ToiletProductDO productDOFromDB = toiletProductDao.queryProductBySource(buildProductSource(productDTO));
         ToiletPatternDO patternDO = toiletPatternDao.queryPatternById(productDOFromDB.getPatternId());
@@ -137,8 +135,8 @@ public class ProductServiceImpl implements ProductService {
         return String.format("%s-%s-%s", productDTO.getCompanyEmail(), productDTO.getProductName(), productDTO.getProductParameters().getStandard());
     }
 
-    private String buildPatternSource(ToiletPatternDTO patternDTO) {
-        return String.format("%s-%s", patternDTO.getProductType(), patternDTO.getPatternType());
+    private String buildPatternSource(ToiletProductDTO productDTO) {
+        return String.format("%s-%s", productDTO.getProductType(), productDTO.getPatternType());
     }
 
     @Override

@@ -40,6 +40,12 @@ public class ParameterUtil {
         for (FileItem item : items) {
             if(item.isFormField()) {
                 String fieldName = item.getFieldName();
+
+                if (decodeJsString(item.getString()).equals("undefined")) {
+                    params.put(fieldName, "");
+                    continue;
+                }
+
                 if (!StringUtils.isEmpty(params.get(fieldName))) {
                     params.put(fieldName, buildMulti(params.get(fieldName), decodeJsString(item.getString())));
                 }else {

@@ -19,7 +19,7 @@ public class ToiletProductDTO {
 
     private String manufacturerCell;
 
-    private Integer productType;
+    private String productType;
 
     private String patternType;
 
@@ -34,6 +34,12 @@ public class ToiletProductDTO {
     private String applicableTemperature;
 
     private String purpose;
+
+    private String productTheory;
+
+    private String specialParam;
+
+    private String applicableCondition;
 
     private ProductParamsDTO productParameters;
 

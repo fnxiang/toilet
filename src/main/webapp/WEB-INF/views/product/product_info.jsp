@@ -31,10 +31,9 @@
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";%>
     <!-- #top -->
-<header id="branding">
     <jsp:include page="product_banner.jsp"/>
     <!-- .grid_6 -->
-</header>
+
 <!-- .container_12 -->
 
 <div class="clear"></div>
@@ -79,7 +78,7 @@
 <section id="main">
     <div class="container_12">
 
-
+        <%String firstPicPath = productDTO.getPicsPath().split(";")[0];%>
         <div id="content" class="grid_12">
             <h1 class="page_title"><%=productDTO.getProductName()%></h1>
 
@@ -87,15 +86,15 @@
                 <div class="grid_4 img_slid" id="products">
                     <div class="preview slides_container">
                         <div class="prev_bg">
-                            <a href="<%=basePath+productDTO.getPicsPath()%>" class="jqzoom"
+                            <a href="<%=basePath+firstPicPath%>" class="jqzoom"
                                rel='gal1' title="">
-                                <img src="<%=basePath+productDTO.getPicsPath()%>" height="500px"
+                                <img src="<%=basePath+firstPicPath%>" height="500px"
                                      width="500px" title="" alt=""/>
                             </a>
                         </div>
                     </div>
                     <!-- .prev -->
-                    <%List<String> pathList = Lists.newArrayList(productDTO.getPicsPath());%>
+                    <%List<String> pathList = Lists.newArrayList(productDTO.getPicsPath().split(";"));%>
                     <ul class="pagination clearfix" id="thumblist">
                         <li><a class="zoomThumbActive" href='javascript:void(0);'
                                rel="{gallery: 'gal1', smallimage: '<%=basePath+pathList.get(0)%>',largeimage: '<%=basePath+pathList.get(0)%>'}"><img
@@ -185,7 +184,7 @@
                                 </tr>
                                 <tr>
                                     <td class="bg">用途</td>
-                                    <td><%=productDTO.getProductParameters().getParamPurpose()%></td>
+                                    <td><%=productDTO.getPurpose()%></td>
                                     <td class="bg">清理周期</td>
                                     <td><%=productDTO.getProductParameters().getCleanupCycle()%></td>
                                 </tr>

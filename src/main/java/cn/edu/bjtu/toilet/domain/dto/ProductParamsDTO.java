@@ -32,4 +32,9 @@ public class ProductParamsDTO {
     private String otherParams;
 
     private String applyCase;
+
+    private Double wallThickness;
+
+    private Double weight;
+
 }
