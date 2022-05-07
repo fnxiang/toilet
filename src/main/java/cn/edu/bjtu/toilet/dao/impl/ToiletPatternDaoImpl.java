@@ -9,6 +9,7 @@ import cn.edu.bjtu.toilet.dao.domain.ToiletPatternSortDOSelective;
 import cn.edu.bjtu.toilet.dao.mapper.ToiletPatternDOMapper;
 import cn.edu.bjtu.toilet.dao.mapper.ToiletPatternSortDOMapper;
 import cn.edu.bjtu.toilet.dao.request.PatternQueryRequest;
+import com.google.common.collect.Lists;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -120,7 +121,7 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
         List<ToiletPatternSortDO> patternSortDOS = patternSortDOMapper.selectByExample(toiletPatternDOSelective);
 
         if (CollectionUtils.isEmpty(patternSortDOS)) {
-            throw new ToiletBizException("not pattern score in db!", -1);
+            return Lists.newArrayList();
         }
 
         List<Integer> patternIds = patternSortDOS.stream()

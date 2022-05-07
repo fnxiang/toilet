@@ -1,6 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="com.alibaba.fastjson.JSON" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
@@ -28,8 +26,14 @@
 <body>
 <jsp:include page="product_banner.jsp"/>
 <%
-    String sort_condition = "price";
+    String sort_condition = "water_save_score";
     String sort_way = "false";
+    String search_condition = "";
+
+    if (request.getAttribute("search_condition")!=null) {
+        search_condition = request.getAttribute("search_condition").toString();
+    }
+
     if (request.getAttribute("sort_condition")!=null) {
         sort_condition = request.getAttribute("sort_condition").toString();
     }
@@ -93,32 +97,28 @@
                 </div>
                 <div class="grid_2">
                     <select class="grid_2" name="sortCondition" id="sortCondition">
-                        <option value="0">节水节能性</option>
-                        <option value="1">技术适用性</option>
-                        <option value="2">技术成本</option>
-                        <option value="3">资源化利用</option>
-                        <option value="4">环境卫生性</option>
-                        <option value="5">便利舒适性</option>
-                        <option value="6">综合</option>
+                        <option value="water_save_score">节水节能性</option>
+                        <option value="tech_applicability_score">技术适用性</option>
+                        <option value="tech_cost_score">技术成本</option>
+                        <option value="resource_utilization_score">资源化利用</option>
+                        <option value="sanitation_score">环境卫生性</option>
+                        <option value="convenience_score">便利舒适性</option>
+                        <option value="comprehensive_score">综合</option>
                     </select>
                 </div>
                 <div class="grid_2">
                     <select class="grid_2" name="sortWay" id="sortWay">
-                        <option value="0">升序</option>
-                        <option value="1">降序</option>
+                        <option value="false">升序</option>
+                        <option value="true">降序</option>
                     </select>
                 </div>
                 <div class="grid_2">
-                    <button class="grid_2" onclick="sortByName()">应用</button>
+                    <button class="grid_2" onclick="sort()">应用</button>
                 </div>
                 <!-- .grid_10 -->
 
 
             </div>
-
-
-
-
 
             <%List<ToiletPatternDTO> results = (List<ToiletPatternDTO>) request.getAttribute("patternList");%>
             <div class="listing_product grid_12">
@@ -302,148 +302,14 @@
             $(this).addClass('click')
         });
     })
-</script>
-<!-- /Added by HTTrack -->
-<script>
 
+    function sort() {
+        let data = {};
+        data["sortBy"] = $('#sortCondition').val();
+        data["isDesc"] = $('#sortWay').val();
+        data["search_condition"] = '<%=search_condition%>';
 
-    function productSearch() {
-
-        var XHR = new XMLHttpRequest();
-
-        var data = new FormData();
-
-        var myselect = document.getElementById("guige_select"); //规格
-        var index = myselect.selectedIndex;
-        data.append("standard_select", encodeURI(myselect.options[index].text));
-
-        //myselect.options[index].value;
-        myselect = document.getElementById("caizhi_select"); //材质
-        index = myselect.selectedIndex;
-        data.append("texture_select", encodeURI(myselect.options[index].text));
-
-        myselect = document.getElementById("life_select"); //使用寿命
-        index = myselect.selectedIndex;
-        data.append("life_select", encodeURI(myselect.options[index].text));
-
-        myselect = document.getElementById("price_select"); //价格（万元）
-        index = myselect.selectedIndex;
-        data.append("price_select", encodeURI(myselect.options[index].text));
-
-        myselect = document.getElementById("clean_select"); //清理周期
-        index = myselect.selectedIndex;
-        data.append("clean_select", encodeURI(myselect.options[index].text));
-        //
-        // // 建立我们的请求
-        // XHR.open('POST', '/toilet/search/product');
-        //
-        // // 最后，发送我们的数据。
-        // XHR.send(data);
-
-        $.ajax({
-            url: "/toilet/search/product",
-            type: "POST",
-            dataType: "json",
-            data: data,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                if (result) {
-
-                } else {
-                    alert("error");
-                }
-            }
-        });
-
+        Post("${pageContext.request.contextPath}/pattern/sort", data);
     }
-
-    function modeSearch() {
-
-        var data = new FormData();
-
-        var myselect = document.getElementById("wendu_select"); //温度条件
-        var index = myselect.selectedIndex;
-        data.append("wendu_select", myselect.options[index].text);
-
-        myselect = document.getElementById("water_select"); //水资源条件
-        index = myselect.selectedIndex;
-        data.append("water_select", myselect.options[index].text);
-
-        var mycheckbox = document.getElementsByName("dixing_check"); //地形条件
-        var check_val = [];
-        for (k in mycheckbox) {
-            if (mycheckbox[k].checked)
-                check_val.push(mycheckbox[k].value);
-        }
-        data.append("dixing_check", check_val);
-
-        mycheckbox = document.getElementsByName("diliweizhi_check"); //地理位置条件
-        check_val = [];
-        for (k in mycheckbox) {
-            if (mycheckbox[k].checked)
-                check_val.push(mycheckbox[k].value);
-        }
-        data.append("diliweizhi_check", check_val);
-
-        mycheckbox = document.getElementsByName("shengtai_check"); //生态限制条件
-        check_val = [];
-        for (k in mycheckbox) {
-            if (mycheckbox[k].checked)
-                check_val.push(mycheckbox[k].value);
-        }
-        data.append("shengtai_check", check_val);
-
-        myselect = document.getElementById("renkou_select"); //人口密集程度
-        index = myselect.selectedIndex;
-        data.append("renkou_select", myselect.options[index].text);
-
-        myselect = document.getElementById("yetaifei_select"); //可形成液态肥
-        index = myselect.selectedIndex;
-        data.append("yetaifei_select", myselect.options[index].text);
-
-        myselect = document.getElementById("wushuichuli_select"); //需要具有完整城镇污水处理系统
-        index = myselect.selectedIndex;
-        data.append("wushuichuli_select", myselect.options[index].text);
-
-        myselect = document.getElementById("wushuiguandao_select"); //需要具有污水管道
-        index = myselect.selectedIndex;
-        data.append("wushuiguandao_select", myselect.options[index].text);
-
-        myselect = document.getElementById("zhaoqi_select"); //需要具有沼气利用工程
-        index = myselect.selectedIndex;
-        data.append("zhaoqi_select", myselect.options[index].text);
-
-        myselect = document.getElementById("wushuihunhe_select"); //可以与其他生活污水混合处理
-        index = myselect.selectedIndex;
-        data.append("wushuihunhe_select", myselect.options[index].text);
-
-        myselect = document.getElementById("yibingchuli_select"); //可以与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
-        index = myselect.selectedIndex;
-        data.append("yibingchuli_select", myselect.options[index].text);
-
-
-        $.ajax({
-            url: "/toilet/search/mode",
-            type: "POST",
-            dataType: "json",
-            data: data,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                if (result) {
-                    location.href = "/toilet/admin/index";
-                } else {
-                    alert("error");
-                }
-            }
-        });
-
-    }
-
 </script>
 </html>
