@@ -1170,15 +1170,11 @@
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
         data.append("high", $('#chicun_gao').val());
+
         radio = document.getElementsByName("caizhi"); //材质
-        data.append("texture1", radio[0].checked);
-        data.append("texture2", radio[1].checked);
-        data.append("texture3", radio[2].checked);
-        data.append("texture4", radio[3].checked);
-        data.append("texture5", $('#jvticaizhi').val());
-        // myselect = document.getElementById("caizhi"); //材质
-        // index = myselect.selectedIndex;
-        // data.append("texture", encodeURI(myselect.options[index].text));
+        const texture = getRadioValue(radio);
+
+        data.append("texture", encodeURI(texture));
         data.append("color", encodeURI($('#yanse').val())); //颜色
         data.append("serviceLife", encodeURI($('#shouming').val())); //使用寿命
         data.append("price", $('#jiage').val()); //价格（万元）
@@ -1193,9 +1189,7 @@
         data.append("runningCost", encodeURI($('#yunxingchengben').val())); //运行成本
         data.append("cleanupCycle", encodeURI($('#qinglizhouqi').val())); //清理周期
         data.append("specialParam", encodeURI($('#peculiar_canshu').val())); //产品参数
-        data.append("othercanshu", encodeURI($('#qitacanshu').val())); //其他参数
-
-
+        data.append("otherParams", encodeURI($('#qitacanshu').val())); //其他参数
 
         //应用案例
         data.append("case", encodeURI($('#yingyonganli').val())); //应用案例
@@ -1212,6 +1206,7 @@
             success: function (result) {
                 if (result.success) {
                     alert("保存成功！");
+                    location.reload();
                     for (var value of data.values()) {
                         console.log(value);
                     }
@@ -1222,6 +1217,23 @@
         });
     }
 
+</script>
+
+<script>
+    function getRadioValue(radio) {
+        let texture = "";
+        for (let i=0;i<radio.length;i++) {
+            if (radio[i].checked) {
+                texture = radio[i].value();
+                alert(texture);
+            }
+        }
+
+        if (texture.equal("其他")) {
+            texture = $('#jvticaizhi').val();
+        }
+        return texture;
+    }
 </script>
 
 

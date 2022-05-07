@@ -31,7 +31,6 @@ public class ParameterUtil {
         String uploadPath = buildUploadPath(request);
 
         File uploadDir = new File(uploadPath);
-        System.out.println(uploadPath);
         if (!uploadDir.exists()) {
             if (!uploadDir.mkdirs()) {
                 return null;

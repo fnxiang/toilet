@@ -77,9 +77,12 @@ public class ProductController {
             if (Objects.isNull(params)) {
                 return ProductResponse.failed("resolve params error");
             }
-
+            ToiletPatternDTO toiletPatternDTO = null;
             ToiletProductDTO toiletProductDTO = buildProductDTO(params);
-            ToiletPatternDTO toiletPatternDTO = buildPatternDTO(params);
+            if (toiletProductDTO.getIsNewPattern()) {
+                toiletPatternDTO = buildPatternDTO(params);
+            }
+
             toiletProductDTO.setCompanyEmail(request.getSession().getAttribute("uId").toString());
             toiletProductDTO = productService.saveProduct(toiletProductDTO, toiletPatternDTO);
             if (Objects.isNull(toiletProductDTO)) {

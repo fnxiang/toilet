@@ -28,4 +28,8 @@ public class ProductParamsDTO {
     private String wide;
 
     private String high;
+
+    private String otherParams;
+
+    private String applyCase;
 }
