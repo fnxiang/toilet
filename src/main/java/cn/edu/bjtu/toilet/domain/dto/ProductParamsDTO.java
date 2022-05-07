@@ -19,6 +19,7 @@ public class ProductParamsDTO {
 
     private String paramPurpose;
 
+    //TODO 改成Integer
     private String cleanupCycle;
 
     private String runCost;
