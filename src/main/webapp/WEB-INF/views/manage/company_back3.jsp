@@ -622,7 +622,7 @@
                                                     <input  type="text" id="caizhi" name="caizhi" placeholder="输入材质" class="form-control">
                                                 </div>
 
-                                                    <%--                                                    </div>--%>
+
 
 
                                             </div>
