@@ -618,28 +618,8 @@
                                                 </div>
 
                                                                                                     <%--                                                    <div class="form-check-inline form-check">--%>
-                                                <div class="col col-md-1" id="hidden_caizhi1">
-                                                    <input  type="radio" name="caizhi"
-                                                            value="玻璃钢">玻璃钢
-                                                </div>
-                                                <div class="col col-md-2" id="hidden_caizhi2">
-                                                    <input type="radio" name="caizhi"
-                                                           value="预制钢筋混凝土">预制钢筋混凝土
-                                                </div>
-                                                <div class="col col-md-1" id="hidden_caizhi3">
-                                                    <input type="radio"  name="caizhi"
-                                                           value="PP">PP
-                                                </div>
-                                                <div class="col col-md-1" id="hidden_caizhi4">
-                                                    <input type="radio" name="caizhi"
-                                                           value="PE">PE
-                                                </div>
-                                                <div class="col col-md-1">
-                                                    <input type="radio" id="caizhi" name="caizhi"
-                                                           value="">其他
-                                                </div>
-                                                <div class="col col-md-2">
-                                                    <input  type="text" name="jvticaizhi" placeholder="输入材质">
+                                                <div class="col col-md-9">
+                                                    <input  type="text" id="caizhi" name="caizhi" placeholder="输入材质" class="form-control">
                                                 </div>
 
                                                     <%--                                                    </div>--%>
@@ -963,10 +943,6 @@
         var guige = $("#gui").get(0);
         var chicun = $("#chicun").get(0);
         var caizhi = $("#cai").get(0);
-        var hidden_caizhi1 = $("#hidden_caizhi1").get(0);
-        var hidden_caizhi2 = $("#hidden_caizhi2").get(0);
-        var hidden_caizhi3 = $("#hidden_caizhi3").get(0);
-        var hidden_caizhi4 = $("#hidden_caizhi4").get(0);
         var yanse = $("#yan").get(0);
         var yongtu = $("#yong").get(0);
         var jvtiyongtu = $("#yong1").get(0);
@@ -1006,24 +982,6 @@
             jvtiyongtu.style.cssText = "";
             yunxingchengben.style.cssText = "";
             qinglizhouqi.style.cssText = "";
-        }
-        if (product_select.value == 2){ //双瓮漏斗式厕所
-            hidden_caizhi1.style.cssText = "";
-            hidden_caizhi2.style.cssText = "";
-            hidden_caizhi3.style.cssText = "";
-            hidden_caizhi4.style.cssText = "";
-        }
-        else if (product_select.value == 5){//真空负压厕所
-            hidden_caizhi1.style.cssText = "display:none;";
-            hidden_caizhi2.style.cssText = "display:none;";
-            hidden_caizhi3.style.cssText = "display:none;";
-            hidden_caizhi4.style.cssText = "display:none;";
-        }
-        else if (product_select.value == 9){//双坑交替式厕所
-            hidden_caizhi3.style.cssText = "display:none;";
-            hidden_caizhi4.style.cssText = "display:none;";
-            hidden_caizhi1.style.cssText = "";
-            hidden_caizhi2.style.cssText = "";
         }
         if (product_select.value == 11) { //泡沫封堵液
             many_factors.style.cssText = "display:none;"
@@ -1181,12 +1139,7 @@
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
         data.append("high", $('#chicun_gao').val());
-        radio = document.getElementsByName("caizhi"); //材质
-        data.append("texture1", radio[0].checked);
-        data.append("texture2", radio[1].checked);
-        data.append("texture3", radio[2].checked);
-        data.append("texture4", radio[3].checked);
-        data.append("texture5", document.getElementsByName("jvticaizhi"));
+        data.append("texture", $('#caizhi').val());//材质
         // myselect = document.getElementById("caizhi"); //材质
         // index = myselect.selectedIndex;
         // data.append("texture", encodeURI(myselect.options[index].text));
@@ -1199,7 +1152,7 @@
             if (cesuoyongtucheckbox[k].checked)
                 cesuoyongtu_check_val = cesuoyongtu_check_val + "," + cesuoyongtucheckbox[k].value;
         }
-        data.append("paramPurpose", encodeURI(cesuoyongtu_check_val));
+        data.append("paramPurpose", encodeURI(cesuoyongtu_check_val));//用途
         data.append("purpose", encodeURI($('#jvtiyongtu').val())); //具体用途
         data.append("runningCost", encodeURI($('#yunxingchengben').val())); //运行成本
         data.append("cleanupCycle", encodeURI($('#qinglizhouqi').val())); //清理周期
@@ -1222,6 +1175,9 @@
             success: function (result) {
                 if (result.success) {
                     alert("保存成功！");
+                    for (var value of data.values()) {
+                        console.log(value);
+                    }
                 } else {
                     alert(result.errorMessage);
                 }
