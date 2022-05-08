@@ -198,23 +198,6 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
         return patternDOMapper.selectByPrimaryKey(id);
     }
 
-    public ToiletPatternDO updatePatternByName(ToiletPatternDO patternDO) {
-
-        if (Objects.isNull(patternDO.getId())) {
-            throw new ToiletBizException("update pattern Id can not be null", BIZ_ERROR);
-        }
-
-        patternDO.setGmtModified(new Date());
-        patternDO.setVersion(patternDO.getVersion() + 1);
-
-        int c = patternDOMapper.updateByPrimaryKey(patternDO);
-
-        if (c != 1) {
-            throw new ToiletBizException("update error", BIZ_ERROR);
-        }
-        return queryPatternBySource(patternDO.getSource());
-    }
-
     @Override
     public ToiletPatternDO insertPattern(ToiletPatternDO patternDO) {
         if (Objects.isNull(patternDO)

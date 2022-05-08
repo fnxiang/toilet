@@ -37,7 +37,6 @@ public class ParameterUtil {
 
                 if (fieldName.equals("productName") || fieldName.equals("standard")) {
                     uploadPath = uploadPath + decodeJsString(item.getString()) + File.separator;
-                    setUploadDirectory(uploadPath);
                 }
 
                 if (decodeJsString(item.getString()).equals("undefined")) {
@@ -54,7 +53,7 @@ public class ParameterUtil {
                 if (item.getName() != null) {
                     String name = item.getName();
                     String type = name.substring(name.lastIndexOf('.') + 1);
-
+                    setUploadDirectory(uploadPath);
                     if (!allowTypes.contains(type)) {
                         throw new ToiletBizException("请上传PDF或PNG等格式文件!", -1);
                     } else {
