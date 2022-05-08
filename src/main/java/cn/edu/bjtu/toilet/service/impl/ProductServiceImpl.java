@@ -87,14 +87,17 @@ public class ProductServiceImpl implements ProductService {
                 // product 判断
                 ToiletProductDO productDOFromDb = toiletProductDao.queryProductBySource(buildProductSource(productDTO));
                 productDO.setSource(buildProductSource(productDTO));
-                productDO.appendPatternId(patternDO.getId());
+
                 if (productDOFromDb == null) {
+                    productDO.appendPatternId(patternDO.getId());
                     toiletProductDao.insertProduct(productDO);
                 } else {
                     productDO.setVersion(productDOFromDb.getVersion());
                     productDO.setDeleted(productDOFromDb.getDeleted());
                     productDO.setId(productDOFromDb.getId());
                     productDO.setGmtCreate(productDOFromDb.getGmtCreate());
+                    productDO.setPatternId(productDOFromDb.getPatternId());
+                    productDO.appendPatternId(patternDO.getId());
                     toiletProductDao.updateProductBySource(productDO);
                 }
                 return null;
