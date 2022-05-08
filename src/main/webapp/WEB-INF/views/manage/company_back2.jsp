@@ -13,7 +13,7 @@
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/manage/res/logo.ico">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}">
 
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
@@ -71,8 +71,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/company/index"><img src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="${pageContext.request.contextPath}/static/manage/images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/static/manage/images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
