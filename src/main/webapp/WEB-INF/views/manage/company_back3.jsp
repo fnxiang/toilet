@@ -189,10 +189,8 @@
                                     <div class="col col-md-3"><label for="multiple-select" class=" form-control-label">模式类型
                                         <i id="model_type_tips" class="fa fa-question-circle" data-toggle="tooltip"
                                            data-placement="top" title="输入注意事项"></i></label></div>
-                                    <div class="col col-md-9">
-                                        <select name="multiple-select" id="multiple-select" multiple=""
-                                                class="form-control">
-                                        </select>
+                                    <div class="multiple-select">
+
                                     </div>
                                 </div>
                                 <div id="many_factors">
@@ -932,12 +930,30 @@
                     var productTpyes = result['selectMap'];
                     console.log("***************")
                     console.log(productSelect.value);
-                    var mode_select = document.getElementById("multiple-select");
+                    var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
                     var product_value = productSelect.options[0].text;
                     var mode_list = mode_content_selectMap[product_value];
-                    for (let i = 0; i < mode_list.length; i++) {
-                        mode_select.options.add(new Option(mode_list[i], i));
+                    mode_selectDiv.innerHTML="";
+                    var ul=document.createElement("ul");
+
+                    for(var i=0;i<mode_list.length;i++){
+                        var arr=mode_list[i];
+                        // 加入复选框
+                        var checkBox=document.createElement("input");
+                        checkBox.setAttribute("type","checkbox");
+                        checkBox.setAttribute("name","moshileixing");
+                        checkBox.setAttribute("value",arr);
+
+
+                        ul.appendChild(checkBox);
+                        ul.appendChild(document.createTextNode(arr));
+                        ul.appendChild(document.createElement("div"))
                     }
+
+
+                    mode_selectDiv.appendChild(ul);
+
+
 
                 } else {
                     alert(result.errorMessage);
@@ -950,7 +966,7 @@
     function productchange() { // mode_content_selectMap   mode_content_patternDTOMap
 
         var product_select = document.getElementById("productselect");
-        var mode_select = document.getElementById("multiple-select");
+        var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
         console.log(product_select.value)
         var zhongliangdiv = $("#zhong").get(0);
         var bihoudiv = $("#hou").get(0);
@@ -1033,28 +1049,36 @@
             peculiar_canshu.style.cssText = "display:none;"
         }
 
-        mode_select.options.length = 0; // 清除second下拉框的所有内容
-
         var product_index = product_select.selectedIndex;
         var product_value = product_select.options[product_index].text;
 
         var mode_list = mode_content_selectMap[product_value];
-        for (let i = 0; i < mode_list.length; i++) {
-            mode_select.options.add(new Option(mode_list[i], i));
+
+        mode_selectDiv.innerHTML="";
+        var ul=document.createElement("ul");
+
+        for(var i=0;i<mode_list.length;i++){
+            var arr=mode_list[i];
+            // 加入复选框
+            var checkBox=document.createElement("input");
+            checkBox.setAttribute("type","checkbox");
+            checkBox.setAttribute("name","moshileixing");
+            checkBox.setAttribute("value",arr);
+
+
+            ul.appendChild(checkBox);
+            ul.appendChild(document.createTextNode(arr));
+            ul.appendChild(document.createElement("div"))
         }
 
 
-//        y.options.length = 0; // 清除second下拉框的所有内容
-//
-//        if (x.selectedIndex == 0) { //完整的下水道水冲厕所
-//            y.options.add(new Option("洁具便器+完整下水道水冲式厕所+市政污水处理系统", "0"));
-//        }
+        mode_selectDiv.appendChild(ul);
 
     }
 
     function entry() {
 
-        var data = new FormData();
+        let data = new FormData();
         data.append("productName", encodeURI($('#product_name').val())); //产品名称
         data.append("factoryName", encodeURI($('#producer_name').val())); //厂家
         data.append("factoryNum", $('#phonenum').val()); //联系方式
@@ -1063,9 +1087,17 @@
         var index = myselect.selectedIndex;
         data.append("productType", encodeURI(myselect.options[index].text));
 
-        myselect = document.getElementById("multiple-select"); //模式类型
-        index = myselect.selectedIndex;
-        data.append("patternType", encodeURI(myselect.options[index].text));
+        // myselect = document.getElementById("multiple-select"); //模式类型
+        // index = myselect.selectedIndex;
+        // data.append("patternType", encodeURI(myselect.options[index].text));
+        const moshileixingcheckbox = document.getElementsByName("moshileixing"); //模式类型
+        let moshileixingcheck_val = "";
+        for (let k = 0; k < moshileixingcheckbox.length; k++) {
+            if (moshileixingcheckbox[k].checked)
+                moshileixingcheck_val = moshileixingcheck_val + "," + moshileixingcheckbox[k].value;
+        }
+        data.append("patternType", encodeURI(moshileixingcheck_val));
+
 
         data.append("patternName", encodeURI($('#newmodename').val())); //新模式名称
 
@@ -1145,8 +1177,8 @@
         data.append("province", encodeURI($('#province').val())); //适用省份
         data.append("temperature", encodeURI($('#wendufanwei').val())); //适用温度范围
         data.append("features", encodeURI($('#chanpingtedian').val())); //产品特点
-        data.append("requirements", encodeURI($('#shiyongtiaojian').val())); //适用条件
-        data.append("copositionAndPrinciple", encodeURI($('#chanpinyuanli').val())); //产品原理及组成
+        data.append("applicableCondition", encodeURI($('#shiyongtiaojian').val())); //适用条件
+        data.append("productTheory", encodeURI($('#chanpinyuanli').val())); //产品原理及组成
 
         // 文件上传
         var quality = $('#zhiliangbaozhang')[0].files[0];
@@ -1165,36 +1197,29 @@
         // 产品参数
         data.append("standard", encodeURI($('#guige').val())); //规格（平方米）
         data.append("weight", encodeURI($('#zhongliang').val())); //重量kg
-        data.append("thickness", encodeURI($('#bihou').val())); //houdu
+        data.append("thickness", encodeURI($('#bihou').val())); //壁厚
         data.append("applicableNum", encodeURI($('#shiyongrenshu').val())); //适用人数（人）
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
         data.append("high", $('#chicun_gao').val());
+
         radio = document.getElementsByName("caizhi"); //材质
-        data.append("texture1", radio[0].checked);
-        data.append("texture2", radio[1].checked);
-        data.append("texture3", radio[2].checked);
-        data.append("texture4", radio[3].checked);
-        data.append("texture5", $('#jvticaizhi').val());
-        // myselect = document.getElementById("caizhi"); //材质
-        // index = myselect.selectedIndex;
-        // data.append("texture", encodeURI(myselect.options[index].text));
+        const texture = getRadioValue(radio);
+
+        data.append("texture", encodeURI(texture));
         data.append("color", encodeURI($('#yanse').val())); //颜色
         data.append("serviceLife", encodeURI($('#shouming').val())); //使用寿命
         data.append("price", $('#jiage').val()); //价格（元）
 
         radio = document.getElementsByName("cesuoyongtu"); //厕所用途
-        data.append("cesuoyongtu1", radio[0].checked); //户厕
-        data.append("cesuoyongtu2", radio[1].checked); //公厕
-        data.append("cesuoyongtu3", radio[2].checked);//均可
+        const toiletPurpose = getRadioValue(radio);
+        data.append("toiletPurpose", encodeURI(toiletPurpose));
 
         data.append("purpose", encodeURI($('#jvtiyongtu').val())); //具体用途
         data.append("runningCost", encodeURI($('#yunxingchengben').val())); //运行成本
         data.append("cleanupCycle", encodeURI($('#qinglizhouqi').val())); //清理周期
         data.append("specialParam", encodeURI($('#peculiar_canshu').val())); //产品参数
-        data.append("othercanshu", encodeURI($('#qitacanshu').val())); //其他参数
-
-
+        data.append("otherParams", encodeURI($('#qitacanshu').val())); //其他参数
 
         //应用案例
         data.append("case", encodeURI($('#yingyonganli').val())); //应用案例
@@ -1211,16 +1236,37 @@
             success: function (result) {
                 if (result.success) {
                     alert("保存成功！");
+                    location.reload();
                     for (var key of data.keys()) {
                         console.log(key + ":" + data.get(key));
                     }
                 } else {
                     alert(result.errorMessage);
+                    for (var key of data.keys()) {
+                        console.log(key + ":" + data.get(key));
+                    }
                 }
             }
         });
     }
 
+</script>
+
+<script>
+    function getRadioValue(radio) {
+        let texture = "";
+        for (let i=0;i<radio.length;i++) {
+            if (radio[i].checked) {
+                texture = radio[i].value;
+                alert(texture);
+            }
+        }
+
+        if (texture==="qita") {
+            texture = $('#jvticaizhi').val();
+        }
+        return texture;
+    }
 </script>
 
 
