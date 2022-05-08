@@ -200,7 +200,7 @@ public class ProductController {
         ToiletPatternDTO toiletPatternDTO = new ToiletPatternDTO();
 
         toiletPatternDTO.setProductType(params.get("productType"));
-        toiletPatternDTO.setPatternType(params.get("patternType"));
+        toiletPatternDTO.setPatternType(params.get("patternType").substring(1));
         toiletPatternDTO.setPatternInfo(params.get("patternInfo"));
 
         // 自然环境条件
@@ -244,7 +244,7 @@ public class ProductController {
         productDTO.setManufacturerName(params.get("factoryName"));
         productDTO.setManufacturerCell(params.get("factoryNum"));
         productDTO.setProductType(params.get("productType"));
-        productDTO.setPatternType(params.get("patternType"));
+        productDTO.setPatternType(params.get("patternType").substring(1));
         productDTO.setPatternName(params.get("patternName"));
         productDTO.setIsNewPattern(params.get("newmoderadios1").equals("true"));
         productDTO.setApplicableProvince(params.get("provinces"));

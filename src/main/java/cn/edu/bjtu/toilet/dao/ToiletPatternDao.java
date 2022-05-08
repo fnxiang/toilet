@@ -14,7 +14,11 @@ public interface ToiletPatternDao {
 
     ToiletPatternDO savePattern(ToiletPatternDO patternDO);
 
+    ToiletPatternDO insertPattern(ToiletPatternDO patternDO);
+
     ToiletPatternDO queryPatternBySource(String source);
+
+    ToiletPatternDO updatePatternBySource(ToiletPatternDO patternDO, String source);
 
     ToiletPatternDO queryPatternById(Integer Id);
 

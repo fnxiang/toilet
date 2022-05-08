@@ -93,6 +93,29 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
     }
 
     @Override
+    public ToiletPatternDO updatePatternBySource(ToiletPatternDO patternDO, String source) {
+        if (StringUtils.isEmpty(source)) {
+            throw new ToiletBizException("updatePatternBySource -> source can not be null", BIZ_ERROR);
+        }
+        patternDO.setGmtModified(new Date());
+        patternDO.setVersion(patternDO.getVersion() + 1);
+
+        ToiletPatternDOSelective patternDOSelective = new ToiletPatternDOSelective();
+        ToiletPatternDOSelective.Criteria criteria = patternDOSelective.createCriteria();
+
+        criteria.andDeletedNotEqualTo(true);
+        criteria.andSourceEqualTo(source);
+
+        int count = patternDOMapper.updateByExampleWithBLOBs(patternDO, patternDOSelective);
+
+        if (count != 1) {
+            throw new ToiletBizException("update pattern error count:" + count , BIZ_ERROR);
+        }
+
+        return queryPatternBySource(patternDO.getSource());
+    }
+
+    @Override
     public List<ToiletPatternDO> queryAllPattern() {
 
         ToiletPatternDOSelective toiletPatternDOSelective = new ToiletPatternDOSelective();
@@ -133,18 +156,11 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
 
     @Override
     public ToiletPatternDO savePattern(ToiletPatternDO patternDO) {
-        ToiletPatternDO patternDOFromDb = queryPatternByName(patternDO.getPatternType());
-        if (patternDOFromDb != null) {
-            throw new ToiletBizException("改模式名称已存在！", BIZ_ERROR);
-        }
-
-        int patternId = insertPattern(patternDO, buildSourceKey(patternDO));
-
-        return queryPatternById(patternId);
+        return null;
     }
 
     private String buildSourceKey(ToiletPatternDO patternDO) {
-        return String.format("%s-%s", patternDO.getSource(), patternDO.getPatternType());
+        return String.format("%s-%s", patternDO.getProductType(), patternDO.getPatternType());
     }
 
     public ToiletPatternDO queryPatternByName(String name) {
@@ -199,7 +215,8 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
         return queryPatternBySource(patternDO.getSource());
     }
 
-    public Integer insertPattern(ToiletPatternDO patternDO, String sourceKey) {
+    @Override
+    public ToiletPatternDO insertPattern(ToiletPatternDO patternDO) {
         if (Objects.isNull(patternDO)
                 || StringUtils.isEmpty(patternDO.getEnvConditions())
                 || StringUtils.isEmpty(patternDO.getHumanFactors())
@@ -211,7 +228,6 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
         patternDO.setGmtCreate(new Date());
         patternDO.setGmtModified(new Date());
         patternDO.setDeleted(false);
-        patternDO.setSource(sourceKey);
         patternDO.setVersion(0);
 
         int c = patternDOMapper.insert(patternDO);
@@ -220,7 +236,7 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
             throw new ToiletBizException("insert error", BIZ_ERROR);
         }
 
-        return queryPatternBySource(sourceKey).getId();
+        return queryPatternBySource(patternDO.getSource());
 
     }
 }

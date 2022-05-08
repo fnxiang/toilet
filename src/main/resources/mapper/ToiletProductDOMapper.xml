@@ -11,7 +11,7 @@
     <result column="manufacturer_cell" jdbcType="VARCHAR" property="manufacturerCell" />
     <result column="product_type" jdbcType="VARCHAR" property="productType" />
     <result column="pattern_type" jdbcType="VARCHAR" property="patternType" />
-    <result column="pattern_id" jdbcType="INTEGER" property="patternId" />
+    <result column="pattern_id" jdbcType="VARCHAR" property="patternId" />
     <result column="pattern_name" jdbcType="VARCHAR" property="patternName" />
     <result column="company_email" jdbcType="VARCHAR" property="companyEmail" />
     <result column="applicable_province" jdbcType="VARCHAR" property="applicableProvince" />
@@ -169,7 +169,7 @@
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{productName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{manufacturerName,jdbcType=VARCHAR}, 
       #{manufacturerCell,jdbcType=VARCHAR}, #{productType,jdbcType=VARCHAR}, #{patternType,jdbcType=VARCHAR}, 
-      #{patternId,jdbcType=INTEGER}, #{patternName,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, 
+      #{patternId,jdbcType=VARCHAR}, #{patternName,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, 
       #{applicableProvince,jdbcType=VARCHAR}, #{applicableTemperature,jdbcType=VARCHAR}, 
       #{professorId,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, 
       #{source,jdbcType=VARCHAR}, #{attributes,jdbcType=VARCHAR}, #{patternSortId,jdbcType=INTEGER}, 
@@ -308,7 +308,7 @@
         #{patternType,jdbcType=VARCHAR},
       </if>
       <if test="patternId != null">
-        #{patternId,jdbcType=INTEGER},
+        #{patternId,jdbcType=VARCHAR},
       </if>
       <if test="patternName != null">
         #{patternName,jdbcType=VARCHAR},
@@ -415,7 +415,7 @@
         pattern_type = #{record.patternType,jdbcType=VARCHAR},
       </if>
       <if test="record.patternId != null">
-        pattern_id = #{record.patternId,jdbcType=INTEGER},
+        pattern_id = #{record.patternId,jdbcType=VARCHAR},
       </if>
       <if test="record.patternName != null">
         pattern_name = #{record.patternName,jdbcType=VARCHAR},
@@ -499,7 +499,7 @@
       manufacturer_cell = #{record.manufacturerCell,jdbcType=VARCHAR},
       product_type = #{record.productType,jdbcType=VARCHAR},
       pattern_type = #{record.patternType,jdbcType=VARCHAR},
-      pattern_id = #{record.patternId,jdbcType=INTEGER},
+      pattern_id = #{record.patternId,jdbcType=VARCHAR},
       pattern_name = #{record.patternName,jdbcType=VARCHAR},
       company_email = #{record.companyEmail,jdbcType=VARCHAR},
       applicable_province = #{record.applicableProvince,jdbcType=VARCHAR},
@@ -537,7 +537,7 @@
       manufacturer_cell = #{record.manufacturerCell,jdbcType=VARCHAR},
       product_type = #{record.productType,jdbcType=VARCHAR},
       pattern_type = #{record.patternType,jdbcType=VARCHAR},
-      pattern_id = #{record.patternId,jdbcType=INTEGER},
+      pattern_id = #{record.patternId,jdbcType=VARCHAR},
       pattern_name = #{record.patternName,jdbcType=VARCHAR},
       company_email = #{record.companyEmail,jdbcType=VARCHAR},
       applicable_province = #{record.applicableProvince,jdbcType=VARCHAR},
@@ -586,7 +586,7 @@
         pattern_type = #{patternType,jdbcType=VARCHAR},
       </if>
       <if test="patternId != null">
-        pattern_id = #{patternId,jdbcType=INTEGER},
+        pattern_id = #{patternId,jdbcType=VARCHAR},
       </if>
       <if test="patternName != null">
         pattern_name = #{patternName,jdbcType=VARCHAR},
@@ -667,7 +667,7 @@
       manufacturer_cell = #{manufacturerCell,jdbcType=VARCHAR},
       product_type = #{productType,jdbcType=VARCHAR},
       pattern_type = #{patternType,jdbcType=VARCHAR},
-      pattern_id = #{patternId,jdbcType=INTEGER},
+      pattern_id = #{patternId,jdbcType=VARCHAR},
       pattern_name = #{patternName,jdbcType=VARCHAR},
       company_email = #{companyEmail,jdbcType=VARCHAR},
       applicable_province = #{applicableProvince,jdbcType=VARCHAR},
@@ -702,7 +702,7 @@
       manufacturer_cell = #{manufacturerCell,jdbcType=VARCHAR},
       product_type = #{productType,jdbcType=VARCHAR},
       pattern_type = #{patternType,jdbcType=VARCHAR},
-      pattern_id = #{patternId,jdbcType=INTEGER},
+      pattern_id = #{patternId,jdbcType=VARCHAR},
       pattern_name = #{patternName,jdbcType=VARCHAR},
       company_email = #{companyEmail,jdbcType=VARCHAR},
       applicable_province = #{applicableProvince,jdbcType=VARCHAR},

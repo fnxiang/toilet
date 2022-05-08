@@ -10,6 +10,7 @@ import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.ProductService;
+import com.google.common.collect.Lists;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -38,13 +39,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ToiletProductDTO> queryAllProductList(String email) {
         List<ToiletProductDO> productDOS = toiletProductDao.queryAllProducts(email);
-        List<ToiletProductDTO> productDTOS = productDOS.stream().map(item -> {
-            ToiletProductDTO toiletProductDTO = ProductConverter.toDTO(item);
-            ToiletPatternDO toiletPatternDO = toiletPatternDao.queryPatternById(item.getPatternId());
-            toiletProductDTO.setToiletPatternDTO(ProductConverter.toDTO(toiletPatternDO));
-            return toiletProductDTO;
-        }).collect(Collectors.toList());
-        return productDTOS;
+        return productDOS.stream().map(ProductConverter::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -61,11 +56,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ToiletProductDTO queryToiletById(String id) {
         ToiletProductDO productDO = toiletProductDao.queryProductById(Integer.valueOf(id));
-        ToiletPatternDO patternDO = toiletPatternDao.queryPatternById(productDO.getPatternId());
-        ToiletProductDTO productDTO = ProductConverter.toDTO(productDO);
-        productDTO.setToiletPatternDTO(ProductConverter.toDTO(patternDO));
 
-        return productDTO;
+        return ProductConverter.toDTO(productDO);
     }
 
     @Override
@@ -81,62 +73,76 @@ public class ProductServiceImpl implements ProductService {
         ToiletProductDO productDO = ProductConverter.toDO(productDTO);
         if (productDTO.getIsNewPattern()) {
             template.execute(status -> {
-                ToiletPatternDO patternDO = toiletPatternDao.savePattern(ProductConverter.toDO(patternDTO));
-                /**选择默认的权重*/
-                ToiletPatternSortDO sortDO = toiletPatternDao.queryPatternSortId(DEFAULT_SORT_INDEX, DEFAULT_SORT_USAGE);
+                ToiletPatternDO patternDO = ProductConverter.toDO(patternDTO);
+                patternDO.setSource(buildPatternSource(patternDTO));
 
-                productDO.setPatternId(patternDO.getId());
-                productDO.setPatternSortId(sortDO.getId());
+                ToiletPatternDO patternDOFromDb = toiletPatternDao.queryPatternBySource(patternDO.getSource());
 
+                if (patternDOFromDb != null) {
+                    patternDO = toiletPatternDao.updatePatternBySource(patternDO, patternDO.getSource());
+                } else {
+                    patternDO = toiletPatternDao.insertPattern(patternDO);
+                }
+
+                // product 判断
                 ToiletProductDO productDOFromDb = toiletProductDao.queryProductBySource(buildProductSource(productDTO));
                 productDO.setSource(buildProductSource(productDTO));
+                productDO.appendPatternId(patternDO.getId());
                 if (productDOFromDb == null) {
                     toiletProductDao.insertProduct(productDO);
                 } else {
+                    productDO.setVersion(productDOFromDb.getVersion());
+                    productDO.setDeleted(productDOFromDb.getDeleted());
+                    productDO.setId(productDOFromDb.getId());
+                    productDO.setGmtCreate(productDOFromDb.getGmtCreate());
                     toiletProductDao.updateProductBySource(productDO);
                 }
                 return null;
             });
         } else {
+            template.execute(status -> {
+                List<String> patternTypes = Lists.newArrayList(productDTO.getPatternType().split(","));
+                List<Integer> patternIds = Lists.newArrayList();
 
-                ToiletPatternDO patternDO = toiletPatternDao.queryPatternBySource(buildPatternSource(productDTO));
-                if (patternDO == null) {
-                    throw new ToiletBizException("模式不存在，请选择新建模式！", BIZ_ERROR);
+                // 检查是否有不存在的ID
+                for (String pType : patternTypes) {
+                    ToiletPatternDO patternDOFromDb = toiletPatternDao.queryPatternBySource(String.format("%s-%s", productDTO.getProductType(), pType));
+
+                    if (patternDOFromDb == null) {
+                        throw new ToiletBizException(String.format("%s 模式不存在!", pType), BIZ_ERROR);
+                    }
+                    patternIds.add(patternDOFromDb.getId());
                 }
-                productDO.setPatternId(patternDO.getId());
 
-                ToiletPatternSortDO sortDO = toiletPatternDao.queryPatternSortId(patternDO.getId(), productDTO.getPurpose());
-
-                if (sortDO == null) {
-                    sortDO = toiletPatternDao.queryPatternSortId(DEFAULT_SORT_INDEX, DEFAULT_SORT_USAGE);
-                }
-
-                productDO.setPatternSortId(sortDO.getId());
                 ToiletProductDO productDOFromDb = toiletProductDao.queryProductBySource(buildProductSource(productDTO));
 
                 productDO.setSource(buildProductSource(productDTO));
+                patternIds.forEach(productDO::appendPatternId);
                 if (productDOFromDb == null) {
                     toiletProductDao.insertProduct(productDO);
                 } else {
+                    productDO.setVersion(productDOFromDb.getVersion());
+                    productDO.setDeleted(productDOFromDb.getDeleted());
+                    productDO.setId(productDOFromDb.getId());
+                    productDO.setGmtCreate(productDOFromDb.getGmtCreate());
                     toiletProductDao.updateProductBySource(productDO);
                 }
+                return null;
+            });
 
         }
         ToiletProductDO productDOFromDB = toiletProductDao.queryProductBySource(buildProductSource(productDTO));
-        ToiletPatternDO patternDO = toiletPatternDao.queryPatternById(productDOFromDB.getPatternId());
 
-        ToiletProductDTO productDTOFromDB = ProductConverter.toDTO(productDOFromDB);
-        productDTOFromDB.setToiletPatternDTO(ProductConverter.toDTO(patternDO));
-        return productDTOFromDB;
+        return ProductConverter.toDTO(productDOFromDB);
     }
 
     private String buildProductSource(ToiletProductDTO productDTO) {
-        // 企业 + 产品名称 + 规格
+        // 企业 + 产品名称 + 模式 + 规格
         return String.format("%s-%s-%s", productDTO.getCompanyEmail(), productDTO.getProductName(), productDTO.getProductParameters().getStandard());
     }
 
-    private String buildPatternSource(ToiletProductDTO productDTO) {
-        return String.format("%s-%s", productDTO.getProductType(), productDTO.getPatternType());
+    private String buildPatternSource(ToiletPatternDTO patternDTO) {
+        return String.format("%s-%s", patternDTO.getProductType(), patternDTO.getPatternType());
     }
 
     @Override

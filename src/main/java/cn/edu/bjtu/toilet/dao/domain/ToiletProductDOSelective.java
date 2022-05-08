@@ -705,52 +705,62 @@ public class ToiletProductDOSelective {
             return (Criteria) this;
         }
 
-        public Criteria andPatternIdEqualTo(Integer value) {
+        public Criteria andPatternIdEqualTo(String value) {
             addCriterion("pattern_id =", value, "patternId");
             return (Criteria) this;
         }
 
-        public Criteria andPatternIdNotEqualTo(Integer value) {
+        public Criteria andPatternIdNotEqualTo(String value) {
             addCriterion("pattern_id <>", value, "patternId");
             return (Criteria) this;
         }
 
-        public Criteria andPatternIdGreaterThan(Integer value) {
+        public Criteria andPatternIdGreaterThan(String value) {
             addCriterion("pattern_id >", value, "patternId");
             return (Criteria) this;
         }
 
-        public Criteria andPatternIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPatternIdGreaterThanOrEqualTo(String value) {
             addCriterion("pattern_id >=", value, "patternId");
             return (Criteria) this;
         }
 
-        public Criteria andPatternIdLessThan(Integer value) {
+        public Criteria andPatternIdLessThan(String value) {
             addCriterion("pattern_id <", value, "patternId");
             return (Criteria) this;
         }
 
-        public Criteria andPatternIdLessThanOrEqualTo(Integer value) {
+        public Criteria andPatternIdLessThanOrEqualTo(String value) {
             addCriterion("pattern_id <=", value, "patternId");
             return (Criteria) this;
         }
 
-        public Criteria andPatternIdIn(List<Integer> values) {
+        public Criteria andPatternIdLike(String value) {
+            addCriterion("pattern_id like", value, "patternId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternIdNotLike(String value) {
+            addCriterion("pattern_id not like", value, "patternId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternIdIn(List<String> values) {
             addCriterion("pattern_id in", values, "patternId");
             return (Criteria) this;
         }
 
-        public Criteria andPatternIdNotIn(List<Integer> values) {
+        public Criteria andPatternIdNotIn(List<String> values) {
             addCriterion("pattern_id not in", values, "patternId");
             return (Criteria) this;
         }
 
-        public Criteria andPatternIdBetween(Integer value1, Integer value2) {
+        public Criteria andPatternIdBetween(String value1, String value2) {
             addCriterion("pattern_id between", value1, value2, "patternId");
             return (Criteria) this;
         }
 
-        public Criteria andPatternIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andPatternIdNotBetween(String value1, String value2) {
             addCriterion("pattern_id not between", value1, value2, "patternId");
             return (Criteria) this;
         }

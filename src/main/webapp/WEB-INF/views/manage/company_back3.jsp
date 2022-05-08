@@ -1045,8 +1045,6 @@
             peculiar_canshu.style.cssText = "display:none;"
         }
 
-        mode_select.options.length = 0; // 清除second下拉框的所有内容
-
         var product_index = product_select.selectedIndex;
         var product_value = product_select.options[product_index].text;
 
@@ -1256,7 +1254,7 @@
             }
         }
 
-        if (texture==="其他") {
+        if (texture==="qita") {
             texture = $('#jvticaizhi').val();
         }
         return texture;
