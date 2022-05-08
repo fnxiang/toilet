@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.springframework.util.StringUtils" %><%--
   Created by IntelliJ IDEA.
   User: fring
   Date: 2022/4/27
@@ -21,7 +21,7 @@
         <!-- .grid_3 -->
 
         <div class="grid_7">
-            <%if (uId == null) {%>
+            <%if (StringUtils.isEmpty(uId)) {%>
             <div class="welcome">
                 欢迎来访，你可以 <a
                     href="javascript:window.location.href='${pageContext.request.contextPath}/login/index'">登录</a> 或者
@@ -69,7 +69,7 @@
                     <li><a href="javascript:void(0)" onclick="product_search_action()">产品高级搜索</a></li>
                     <li class="separator">|</li>
                     <li><a href="javascript:void(0)" onclick="model_search_action()">模式高级搜索</a></li>
-                    <% if (uId == null) {%>
+                    <% if (StringUtils.isEmpty(uId)) {%>
                     <li class="separator">|</li>
                     <li><a href="${pageContext.request.contextPath}/login/index">登录</a></li>
                     <li class="separator">|</li>
