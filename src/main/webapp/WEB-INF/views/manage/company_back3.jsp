@@ -190,9 +190,9 @@
                                         <i id="model_type_tips" class="fa fa-question-circle" data-toggle="tooltip"
                                            data-placement="top" title="输入注意事项"></i></label></div>
                                     <div class="col col-md-9">
-                                        <select name="multiple-select" id="multiple-select" multiple=""
-                                                class="form-control">
-                                        </select>
+                                        <div class="multiple-select">
+                                    </div>
+
                                     </div>
                                 </div>
                                 <div id="many_factors">
@@ -932,12 +932,30 @@
                     var productTpyes = result['selectMap'];
                     console.log("***************")
                     console.log(productSelect.value);
-                    var mode_select = document.getElementById("multiple-select");
+                    var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
                     var product_value = productSelect.options[0].text;
                     var mode_list = mode_content_selectMap[product_value];
-                    for (let i = 0; i < mode_list.length; i++) {
-                        mode_select.options.add(new Option(mode_list[i], i));
+                    mode_selectDiv.innerHTML="";
+                    var ul=document.createElement("ul");
+
+                    for(var i=0;i<mode_list.length;i++){
+                        var arr=mode_list[i];
+                        // 加入复选框
+                        var checkBox=document.createElement("input");
+                        checkBox.setAttribute("type","checkbox");
+                        checkBox.setAttribute("name","moshileixing");
+                        checkBox.setAttribute("value",arr);
+
+
+                        ul.appendChild(checkBox);
+                        ul.appendChild(document.createTextNode(arr));
+                        ul.appendChild(document.createElement("div"))
                     }
+
+
+                    mode_selectDiv.appendChild(ul);
+
+
 
                 } else {
                     alert(result.errorMessage);
@@ -950,7 +968,7 @@
     function productchange() { // mode_content_selectMap   mode_content_patternDTOMap
 
         var product_select = document.getElementById("productselect");
-        var mode_select = document.getElementById("multiple-select");
+        var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
         console.log(product_select.value)
         var zhongliangdiv = $("#zhong").get(0);
         var bihoudiv = $("#hou").get(0);
@@ -964,8 +982,6 @@
         var hidden_caizhi3 = $("#hidden_caizhi3").get(0);
         var hidden_caizhi4 = $("#hidden_caizhi4").get(0);
         var yanse = $("#yan").get(0);
-        var yongtu = $("#yong").get(0);
-        var jvtiyongtu = $("#yong1").get(0);
         var yunxingchengben = $("#yun").get(0);
         var qinglizhouqi = $("#qing").get(0);
         var many_factors = $("#many_factors").get(0);
@@ -987,8 +1003,6 @@
             chicun.style.cssText = "display:none;"
             caizhi.style.cssText = "display:none;"
             yanse.style.cssText = "display:none;"
-            yongtu.style.cssText = "display:none;"
-            jvtiyongtu.style.cssText = "display:none;"
             yunxingchengben.style.cssText = "display:none;"
             qinglizhouqi.style.cssText = "display:none;"
         } else {
@@ -998,8 +1012,6 @@
             chicun.style.cssText = "";
             caizhi.style.cssText = "";
             yanse.style.cssText = "";
-            yongtu.style.cssText = "";
-            jvtiyongtu.style.cssText = "";
             yunxingchengben.style.cssText = "";
             qinglizhouqi.style.cssText = "";
         }
@@ -1039,16 +1051,26 @@
         var product_value = product_select.options[product_index].text;
 
         var mode_list = mode_content_selectMap[product_value];
-        for (let i = 0; i < mode_list.length; i++) {
-            mode_select.options.add(new Option(mode_list[i], i));
+
+        mode_selectDiv.innerHTML="";
+        var ul=document.createElement("ul");
+
+        for(var i=0;i<mode_list.length;i++){
+            var arr=mode_list[i];
+            // 加入复选框
+            var checkBox=document.createElement("input");
+            checkBox.setAttribute("type","checkbox");
+            checkBox.setAttribute("name","moshileixing");
+            checkBox.setAttribute("value",arr);
+
+
+            ul.appendChild(checkBox);
+            ul.appendChild(document.createTextNode(arr));
+            ul.appendChild(document.createElement("div"))
         }
 
 
-//        y.options.length = 0; // 清除second下拉框的所有内容
-//
-//        if (x.selectedIndex == 0) { //完整的下水道水冲厕所
-//            y.options.add(new Option("洁具便器+完整下水道水冲式厕所+市政污水处理系统", "0"));
-//        }
+        mode_selectDiv.appendChild(ul);
 
     }
 
@@ -1063,9 +1085,17 @@
         var index = myselect.selectedIndex;
         data.append("productType", encodeURI(myselect.options[index].text));
 
-        myselect = document.getElementById("multiple-select"); //模式类型
-        index = myselect.selectedIndex;
-        data.append("patternType", encodeURI(myselect.options[index].text));
+        // myselect = document.getElementById("multiple-select"); //模式类型
+        // index = myselect.selectedIndex;
+        // data.append("patternType", encodeURI(myselect.options[index].text));
+        const moshileixingcheckbox = document.getElementsByName("moshileixing"); //模式类型
+        let moshileixingcheck_val = "";
+        for (let k = 0; k < moshileixingcheckbox.length; k++) {
+            if (moshileixingcheckbox[k].checked)
+                moshileixingcheck_val = moshileixingcheck_val + "," + moshileixingcheckbox[k].value;
+        }
+        data.append("patternType", encodeURI(moshileixingcheck_val));
+
 
         data.append("patternName", encodeURI($('#newmodename').val())); //新模式名称
 
@@ -1165,7 +1195,7 @@
         // 产品参数
         data.append("standard", encodeURI($('#guige').val())); //规格（平方米）
         data.append("weight", encodeURI($('#zhongliang').val())); //重量kg
-        data.append("thickness", encodeURI($('#bihou').val())); //houdu
+        data.append("thickness", encodeURI($('#bihou').val())); //壁厚
         data.append("applicableNum", encodeURI($('#shiyongrenshu').val())); //适用人数（人）
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
@@ -1204,10 +1234,10 @@
             success: function (result) {
                 if (result.success) {
                     alert("保存成功！");
-                    location.reload();
                     for (var key of data.keys()) {
                         console.log(key + ":" + data.get(key));
                     }
+                    // location.reload();
                 } else {
                     alert(result.errorMessage);
                 }
