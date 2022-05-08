@@ -32,9 +32,9 @@ public class UserController {
     @ResponseBody
     public CommandResponse approveUser(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
 
-            if (params == null) {
+            if (params.size() == 0) {
                 return CommandResponse.failed("请求参数错误");
             }
 

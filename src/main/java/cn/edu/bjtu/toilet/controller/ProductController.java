@@ -73,7 +73,7 @@ public class ProductController {
     @ResponseBody
     public ProductResponse productEntry(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, UPLOAD_DIRECTORY);
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             if (Objects.isNull(params)) {
                 return ProductResponse.failed("resolve params error");
             }
@@ -102,7 +102,7 @@ public class ProductController {
     @ResponseBody
     public ModeResponse patternEntry(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, UPLOAD_DIRECTORY);
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             if (Objects.isNull(params)) {
                 return ModeResponse.failed("resolve params error");
             }
@@ -158,7 +158,7 @@ public class ProductController {
     @RequestMapping("/product/sort")
     public String sortProduct(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             if (Objects.isNull(params)) {
                 return ERROR_PAGE;
             }

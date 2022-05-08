@@ -182,7 +182,7 @@ public class IndexController {
     @ResponseBody
     public RegisterResponse registerProfessor(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             if (Objects.isNull(params)) {
                 LOG.error("params is empty!");
                 return RegisterResponse.failed("参数不能为空");

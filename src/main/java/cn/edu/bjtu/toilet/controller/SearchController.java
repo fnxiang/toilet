@@ -47,7 +47,7 @@ public class SearchController {
     @ResponseBody
     public SearchResponse productSearch(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             ProductSearchConditionsDTO searchConditions = buildSearchConditions(params);
 
             List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
@@ -66,7 +66,7 @@ public class SearchController {
     @RequestMapping("/search/product/results")
     public String productResults(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             ProductSearchConditionsDTO searchConditions = buildSearchConditions(params);
 
             List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
@@ -83,9 +83,9 @@ public class SearchController {
     @RequestMapping("/search/mode/results")
     public String modeSearch(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
 
-            if (params == null) {
+            if (params.size() == 0) {
                 LOG.error("params is null!");
                 return ERROR_PAGE;
             }
