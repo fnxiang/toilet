@@ -35,8 +35,8 @@ public class ParameterUtil {
             if(item.isFormField()) {
                 String fieldName = item.getFieldName();
 
-                if (fieldName.equals("productName")) {
-                    uploadPath = uploadPath + decodeJsString(item.getString());
+                if (fieldName.equals("productName") || fieldName.equals("standard")) {
+                    uploadPath = uploadPath + decodeJsString(item.getString()) + File.separator;
                     setUploadDirectory(uploadPath);
                 }
 
