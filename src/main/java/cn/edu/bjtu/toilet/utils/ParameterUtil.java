@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.utils;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
 import com.google.common.collect.Sets;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -20,9 +21,9 @@ import java.util.Set;
 public class ParameterUtil {
 
     private static final String UPLOAD_DIRECTORY = "/upload/register/";
-    private static Set<String> allowTypes = Sets.newHashSet("doc", "docx", "pdf", "jpg", "jpeg", "png", "PNG");
+    private static Set<String> allowTypes = Sets.newHashSet("doc", "docx", "pdf", "jpg", "jpeg", "png", "PNG", "JPG");
 
-    public static Map<String, String> resolveParams(HttpServletRequest request, String outputPath) throws Exception {
+    public static Map<String, String> resolveParams(HttpServletRequest request) throws Exception {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         Map<String, String> params = new HashMap<>();
@@ -30,16 +31,13 @@ public class ParameterUtil {
         List<FileItem> items = upload.parseRequest(request);
         String uploadPath = buildUploadPath(request);
 
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            if (!uploadDir.mkdirs()) {
-                return null;
-            }
-        }
-
         for (FileItem item : items) {
             if(item.isFormField()) {
                 String fieldName = item.getFieldName();
+
+                if (fieldName.equals("productName") || fieldName.equals("standard")) {
+                    uploadPath = uploadPath + decodeJsString(item.getString()) + File.separator;
+                }
 
                 if (decodeJsString(item.getString()).equals("undefined")) {
                     params.put(fieldName, "");
@@ -55,9 +53,9 @@ public class ParameterUtil {
                 if (item.getName() != null) {
                     String name = item.getName();
                     String type = name.substring(name.lastIndexOf('.') + 1);
-
+                    setUploadDirectory(uploadPath);
                     if (!allowTypes.contains(type)) {
-                        throw new FileUploadException();
+                        throw new ToiletBizException("请上传PDF或PNG等格式文件!", -1);
                     } else {
                         int start = name.lastIndexOf("\\");
                         String filename = name.substring(start + 1);
@@ -71,6 +69,15 @@ public class ParameterUtil {
             }
         }
         return params;
+    }
+
+    private static void setUploadDirectory(String path) {
+        File uploadDir = new File(path);
+        if (!uploadDir.exists()) {
+            if (!uploadDir.mkdirs()) {
+                throw new ToiletBizException("创建"+path+"错误！", -1);
+            }
+        }
     }
 
     private static String buildMulti(String origin, String append) {

@@ -33,6 +33,7 @@ public enum ProductPriceType {
     }
 
     public static ProductPriceType of(Double standard) {
+        standard = standard/10000.0;
         if (standard < 0.5) {
             return PRICE_LEVEL1;
         } else if (standard <= 1) {

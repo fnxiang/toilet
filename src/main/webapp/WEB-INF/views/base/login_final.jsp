@@ -35,7 +35,7 @@
           <div class="row">
             <div class="col-md-12 ">
                 <div class="contact-h-cont">
-                  <h3 class="text-center"><a href="" target="_blank"><img src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a></h3><br>
+                  <h3 class="text-center"><a href="${pageContext.request.contextPath}/" target="_blank"><img src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a></h3><br>
                   <form id="login_form">
                     <div class="form-group">
                       <label for="accountId">账号</label>

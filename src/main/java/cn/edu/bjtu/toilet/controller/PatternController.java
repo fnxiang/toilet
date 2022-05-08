@@ -34,7 +34,7 @@ public class PatternController {
     @RequestMapping("/pattern/sort")
     public String sortPattern(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             if (Objects.isNull(params)) {
                 return ERROR_PAGE;
             }
