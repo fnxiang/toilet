@@ -66,16 +66,13 @@
                  style="float:left;height:100%;border-bottom-width: 5px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label><b><h2>厕所用途:</h2></b></label></div>
                 <div style="float:left;padding:0 100px;"><b><h2><input type="radio" name="wc_type[]" value="公厕"
-                                                                      />公厕</h2></b>
+                />公厕</h2></b>
                 </div>
                 <div style="float:left;padding:0 50px;"><b><h2><input type="radio" name="wc_type[]" value="户厕"
-                                                                      />户厕</h2></b>
+                />户厕</h2></b>
                 </div>
             </div>
 
-            <div class="grid_12">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
-            </div>
 
         </div>
 
@@ -90,38 +87,43 @@
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>温度条件:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="natureTemp[]" value="高寒"
-                                                              style="margin-bottom:5px;"/>高寒
+                                                                           style="margin-bottom:5px;"/>高寒
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="natureTemp[]" value="普通"
-                                                              style="margin-bottom:5px;"/>普通
+                                                                          style="margin-bottom:5px;"/>普通
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="natureTemp[]" value="无限制"
-                                                              style="margin-bottom:5px;"/>无限制
+                                                                          style="margin-bottom:5px;"/>无限制
                 </div>
             </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+                <div style="float:left;padding:0 5px;"><p>高寒地区包括高海拔地区与寒冷地区。高海拔地区指海拔＞1000m的地区，分布在我国西藏、云南、贵州、青海、宁夏、甘肃、山西、内蒙古、新疆等地区。
+                    寒冷地区指最冷月平均温度＜0℃或日平均温度≤5℃天数在90d以上的地区，分布在我国辽宁、吉林、黑龙江、青海、宁夏、山西、甘肃、内蒙古、新疆、西藏等地区。
+                    除此外其他地区称为普通地区。
+                </p></div>
             </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>水资源条件:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="water[]" value="缺水"
-                                                              style="margin-bottom:5px;"/>缺水
+                                                                           style="margin-bottom:5px;"/>缺水
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="water[]" value="良好"
-                                                              style="margin-bottom:5px;"/>良好
+                                                                          style="margin-bottom:5px;"/>良好
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="water[]" value="无限制"
-                                                              style="margin-bottom:5px;"/>无限制
+                                                                          style="margin-bottom:5px;"/>无限制
                 </div>
             </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+                <div style="float:left;padding:0 5px;"><p>缺水地区指年降水量＜200mm的干旱区域及人均水资源量＜600m3的缺水地区，如北京、天津、河北、山西、山东、新疆等地区。
+                    除缺水地区外，其他地区统称良好地区。
+                </p></div>
             </div>
         </div>
 
@@ -131,61 +133,57 @@
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>地形条件:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="terrain[]" value="山区"
-                                                              style="margin-bottom:5px;"/>山区
+                                                                           style="margin-bottom:5px;"/>山区
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="terrain[]" value="丘陵"
-                                                              style="margin-bottom:5px;"/>丘陵
+                                                                          style="margin-bottom:5px;"/>丘陵
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="terrain[]" value="一般地区"
-                                                              style="margin-bottom:5px;"/>一般地区
+                                                                          style="margin-bottom:5px;"/>一般地区
                 </div>
             </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+                <div style="float:left;padding:0 5px;"><p>山区分为高山、中山和低山。海拔在3500米以上为高山，海拔在1000-3500米为中山，海拔低于1000米为低山。
+                    丘陵指绝对高度在500米以内，相对高度不超过200米，起伏不大，坡度较缓，地面崎岖不平，由连绵不断的低矮山丘组成的地形。
+                    除山区与丘陵地区外，其他地区统称为一般地区。
+                </p></div>
             </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>地理位置条件:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="geolocation[]" value="城市近郊"
-                                                              style="margin-bottom:5px;"/>城市近郊
+                                                                           style="margin-bottom:5px;"/>城市近郊
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="geolocation[]" value="城中村"
-                                                              style="margin-bottom:5px;"/>城中村
+                                                                          style="margin-bottom:5px;"/>城中村
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="geolocation[]" value="中心城镇地区"
-                                                              style="margin-bottom:5px;"/>中心城镇地区
+                                                                          style="margin-bottom:5px;"/>中心城镇地区
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="geolocation[]" value="一般地区"
-                                                              style="margin-bottom:5px;"/>一般地区
+                                                                          style="margin-bottom:5px;"/>一般地区
                 </div>
             </div>
 
-            <div class="grid_12"
-                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
-            </div>
+
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>生态限制条件:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="ecotope[]" value="生态保护区"
-                                                              style="margin-bottom:5px;"/>生态保护区
+                                                                           style="margin-bottom:5px;"/>生态保护区
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="ecotope[]" value="水源保护区"
-                                                              style="margin-bottom:5px;"/>水源保护区
+                                                                          style="margin-bottom:5px;"/>水源保护区
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="ecotope[]" value="一般地区"
-                                                              style="margin-bottom:5px;"/>一般地区
+                                                                          style="margin-bottom:5px;"/>一般地区
                 </div>
             </div>
 
-            <div class="grid_12"
-                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
-            </div>
 
         </div>
 
@@ -199,42 +197,41 @@
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>人口密集程度:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="density[]" value="聚集"
-                                                              style="margin-bottom:5px;"/>聚集
+                                                                           style="margin-bottom:5px;"/>聚集
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="density[]" value="分散"
-                                                              style="margin-bottom:5px;"/>分散
+                                                                          style="margin-bottom:5px;"/>分散
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="density[]" value="一般"
-                                                              style="margin-bottom:5px;"/>一般
+                                                                          style="margin-bottom:5px;"/>一般
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="density[]" value="无限制"
-                                                              style="margin-bottom:5px;"/>无限制
+                                                                          style="margin-bottom:5px;"/>无限制
                 </div>
             </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
+                <div style="float:left;padding:0 5px;"><p>聚集地区指村庄布局紧凑，人口密集，居民点集中的较集中区域。
+                    分散地区指村庄布局分散，且单村人口密度较小的地区。
+                    其他地区统称为一般地区。
+                </p></div>
             </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>可形成液态肥:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="usageHabits[]" value="是"
-                                                              style="margin-bottom:5px;"/>是
+                                                                           style="margin-bottom:5px;"/>是
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="usageHabits[]" value="否"
-                                                              style="margin-bottom:5px;"/>否
+                                                                          style="margin-bottom:5px;"/>否
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="usageHabits[]" value="均可"
-                                                              style="margin-bottom:5px;"/>均可
+                                                                          style="margin-bottom:5px;"/>均可
                 </div>
             </div>
 
-            <div class="grid_12"
-                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
-            </div>
 
         </div>
 
@@ -248,39 +245,31 @@
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>需要具有完整城镇污水处理系统:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="sewageTreatment[]" value="是"
-                                                              style="margin-bottom:5px;"/>是
+                                                                           style="margin-bottom:5px;"/>是
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="sewageTreatment[]" value="否"
-                                                              style="margin-bottom:5px;"/>否
+                                                                          style="margin-bottom:5px;"/>否
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="sewageTreatment[]" value="无限制"
-                                                              style="margin-bottom:5px;"/>无限制
+                                                                          style="margin-bottom:5px;"/>无限制
                 </div>
             </div>
 
-            <div class="grid_12"
-                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
-            </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>需要具有污水管道:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="sewerLines[]" value="是"
-                                                              style="margin-bottom:5px;"/>是
+                                                                           style="margin-bottom:5px;"/>是
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="sewerLines[]" value="否"
-                                                              style="margin-bottom:5px;"/>否
+                                                                          style="margin-bottom:5px;"/>否
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="sewerLines[]" value="均可"
-                                                              style="margin-bottom:5px;"/>均可
+                                                                          style="margin-bottom:5px;"/>均可
                 </div>
             </div>
 
-            <div class="grid_12"
-                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
-            </div>
 
         </div>
 
@@ -293,58 +282,46 @@
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>需要具有沼气利用工程:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="biogasUtilization[]" value="是"
-                                                              style="margin-bottom:5px;"/>是
+                                                                           style="margin-bottom:5px;"/>是
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="biogasUtilization[]" value="否"
-                                                              style="margin-bottom:5px;"/>否
+                                                                          style="margin-bottom:5px;"/>否
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="biogasUtilization[]" value="无限制"
-                                                              style="margin-bottom:5px;"/>无限制
+                                                                          style="margin-bottom:5px;"/>无限制
                 </div>
             </div>
 
-            <div class="grid_12"
-                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
-            </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>可以与其他生活污水混合处理:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="mixedTreatment[]" value="是"
-                                                              style="margin-bottom:5px;"/>是
+                                                                           style="margin-bottom:5px;"/>是
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="mixedTreatment[]" value="否"
-                                                              style="margin-bottom:5px;"/>否
+                                                                          style="margin-bottom:5px;"/>否
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="mixedTreatment[]" value="均可"
-                                                              style="margin-bottom:5px;"/>均可
+                                                                          style="margin-bottom:5px;"/>均可
                 </div>
             </div>
 
-            <div class="grid_12"
-                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
-            </div>
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>可以与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="otherTreatment[]" value="是"
-                                                              style="margin-bottom:5px;"/>是
+                                                                           style="margin-bottom:5px;"/>是
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="otherTreatment[]" value="否"
-                                                              style="margin-bottom:5px;"/>否
+                                                                          style="margin-bottom:5px;"/>否
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="otherTreatment[]" value="均可"
-                                                              style="margin-bottom:5px;"/>均可
+                                                                          style="margin-bottom:5px;"/>均可
                 </div>
             </div>
 
-            <div class="grid_12"
-                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><p>介绍*************************</p></div>
-            </div>
 
         </div>
 
