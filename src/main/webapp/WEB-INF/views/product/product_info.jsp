@@ -30,11 +30,10 @@
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";%>
-    <!-- #top -->
-<header id="branding">
-    <jsp:include page="product_banner.jsp"/>
-    <!-- .grid_6 -->
-</header>
+<!-- #top -->
+<jsp:include page="product_banner.jsp"/>
+<!-- .grid_6 -->
+
 <!-- .container_12 -->
 
 <div class="clear"></div>
@@ -79,7 +78,7 @@
 <section id="main">
     <div class="container_12">
 
-
+        <%String firstPicPath = productDTO.getPicsPath().split(";")[0];%>
         <div id="content" class="grid_12">
             <h1 class="page_title"><%=productDTO.getProductName()%></h1>
 
@@ -87,15 +86,15 @@
                 <div class="grid_4 img_slid" id="products">
                     <div class="preview slides_container">
                         <div class="prev_bg">
-                            <a href="<%=basePath+productDTO.getPicsPath()%>" class="jqzoom"
+                            <a href="<%=basePath+firstPicPath%>" class="jqzoom"
                                rel='gal1' title="">
-                                <img src="<%=basePath+productDTO.getPicsPath()%>" height="500px"
+                                <img src="<%=basePath+firstPicPath%>" height="500px"
                                      width="500px" title="" alt=""/>
                             </a>
                         </div>
                     </div>
                     <!-- .prev -->
-                    <%List<String> pathList = Lists.newArrayList(productDTO.getPicsPath());%>
+                    <%List<String> pathList = Lists.newArrayList(productDTO.getPicsPath().split(";"));%>
                     <ul class="pagination clearfix" id="thumblist">
                         <li><a class="zoomThumbActive" href='javascript:void(0);'
                                rel="{gallery: 'gal1', smallimage: '<%=basePath+pathList.get(0)%>',largeimage: '<%=basePath+pathList.get(0)%>'}"><img
@@ -185,20 +184,70 @@
                                 </tr>
                                 <tr>
                                     <td class="bg">用途</td>
-                                    <td><%=productDTO.getProductParameters().getParamPurpose()%></td>
+                                    <td><%=productDTO.getPurpose()%></td>
                                     <td class="bg">清理周期</td>
                                     <td><%=productDTO.getProductParameters().getCleanupCycle()%></td>
                                 </tr>
+                                <%if (productDTO.getProductType().equals("双瓮漏斗式厕所")){%>
+                                <tr>
+                                    <td class="bg">重量</td>
+                                    <td><%=productDTO.getProductParameters().getWeight()%></td>
+                                    <td class="bg">壁厚</td>
+                                    <td><%=productDTO.getProductParameters().getWallThickness()%></td>
+                                </tr>
+                                <%} else{}%>
+                                <%if (productDTO.getProductType().equals("三联沼气池式厕所") || productDTO.getProductType().equals("复合生物反应微水冲厕所") || productDTO.getProductType().equals("多级生化组合电催化氧化厕所") || productDTO.getProductType().equals("膜生物反应器（MBR）厕所") || productDTO.getProductType().equals("生态旱厕") || productDTO.getProductType().equals("粪尿分集式厕所")){%>
+                                <tr>
+                                    <td class="bg">其他参数</td>
+                                    <td><%=productDTO.getProductParameters().getOtherParams()%></td>
+                                    <td class="bg"></td>
+                                    <td></td>
+                                    <%} else{}%>
+                                </tr>
+                                <tr>
+                                    <td class="bg">厕所用途</td>
+                                    <td><%=productDTO.getPurpose()%></td>
+                                    <td class="bg">具体用途</td>
+                                    <td><%=productDTO.getProductParameters().getParamPurpose()%></td>
+                                </tr>
+                                <tr>
+                                    <td class="bg">应用案例</td>
+                                    <td><%=productDTO.getProductParameters().getApplyCase()%></td>
+                                    <%if (productDTO.getProductType().equals("三联沼气池式厕所") || productDTO.getProductType().equals("复合生物反应微水冲厕所") || productDTO.getProductType().equals("多级生化组合电催化氧化厕所") || productDTO.getProductType().equals("膜生物反应器（MBR）厕所") || productDTO.getProductType().equals("生态旱厕") || productDTO.getProductType().equals("粪尿分集式厕所")){%>
+                                    <td class="bg">产品原理及组成</td>
+                                    <td>
+                                        <%=productDTO.getProductTheory()%>
+                                    </td>
+                                    <%} else{%>
+                                    <td class="bg"></td>
+                                    <td>
+                                    </td>
+                                    <%}%>
+                                </tr>
+
+                                <%if (productDTO.getProductType().equals("泡沫封堵液")){%>
+                                <tr><td class="bg">适用条件</td>
+                                    <td><%=productDTO.getApplicableCondition()%></td>
+                                    <td class="bg">产品参数</td>
+                                    <td><%=productDTO.getSpecialParam()%></td>
+                                </tr>
+                                <%} else{}%>
+
                             </table>
                             <div class="clear"></div>
                         </div>
                         <!-- .tab1 .tab_body -->
-<%--                        //TODO 限制大小--%>
+                        <%--                        //TODO 限制大小--%>
                         <div class="tab2 tab_body">
                             <h4>使用说明</h4>
                             <div class="preview slides_container">
                                 <div class="prev_bg">
-                                    <img src="<%=basePath + productDTO.getInstructionFilePath()%>" height="600px" title="" alt=""/>
+                                    <%String p = productDTO.getInstructionFilePath();%>
+                                    <%if (p.substring(p.length()-3,p.length()).equals("pdf")){%>
+                                    <embed src="<%=basePath + p%>" style=" width: 1000PX; height: 820px; ">
+                                    <%}else {%>
+                                    <img src="<%=basePath + p%>" height="600px" title="" alt=""/>
+                                    <%}%>
                                 </div>
                             </div><!-- .prev -->
 
@@ -206,12 +255,17 @@
                             <div class="clear"></div>
                         </div>
                         <!-- .tab2 .tab_body -->
-<%--                        //TODO 限制大小--%>
+                        <%--                        //TODO 限制大小--%>
                         <div class="tab3 tab_body">
                             <h4>质保证书</h4>
                             <div class="preview slides_container">
                                 <div class="prev_bg">
-                                    <img src="<%=basePath + productDTO.getQualityAssuranceMaterialsFilePath()%>" height="600px" title="" alt=""/>
+                                    <%String p2 = productDTO.getQualityAssuranceMaterialsFilePath();%>
+                                    <%if (p2.substring(p.length()-3,p.length()).equals("pdf")){%>
+                                    <embed src="<%=basePath + p2%>" style=" width: 1000PX; height: 820px; ">
+                                    <%}else {%>
+                                    <img src="<%=basePath + p2%>" height="600px" title="" alt=""/>
+                                    <%}%>
                                 </div>
                             </div><!-- .prev -->
 
