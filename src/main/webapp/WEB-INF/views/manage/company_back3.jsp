@@ -189,7 +189,9 @@
                                     <div class="col col-md-3"><label for="multiple-select" class=" form-control-label">模式类型
                                         <i id="model_type_tips" class="fa fa-question-circle" data-toggle="tooltip"
                                            data-placement="top" title="输入注意事项"></i></label></div>
-                                    <div class="multiple-select">
+                                    <div class="col col-md-9">
+                                        <div class="multiple-select">
+                                    </div>
 
                                     </div>
                                 </div>
@@ -980,8 +982,6 @@
         var hidden_caizhi3 = $("#hidden_caizhi3").get(0);
         var hidden_caizhi4 = $("#hidden_caizhi4").get(0);
         var yanse = $("#yan").get(0);
-        var yongtu = $("#yong").get(0);
-        var jvtiyongtu = $("#yong1").get(0);
         var yunxingchengben = $("#yun").get(0);
         var qinglizhouqi = $("#qing").get(0);
         var many_factors = $("#many_factors").get(0);
@@ -1003,8 +1003,6 @@
             chicun.style.cssText = "display:none;"
             caizhi.style.cssText = "display:none;"
             yanse.style.cssText = "display:none;"
-            yongtu.style.cssText = "display:none;"
-            jvtiyongtu.style.cssText = "display:none;"
             yunxingchengben.style.cssText = "display:none;"
             qinglizhouqi.style.cssText = "display:none;"
         } else {
@@ -1014,8 +1012,6 @@
             chicun.style.cssText = "";
             caizhi.style.cssText = "";
             yanse.style.cssText = "";
-            yongtu.style.cssText = "";
-            jvtiyongtu.style.cssText = "";
             yunxingchengben.style.cssText = "";
             qinglizhouqi.style.cssText = "";
         }
@@ -1236,10 +1232,10 @@
             success: function (result) {
                 if (result.success) {
                     alert("保存成功！");
-                    location.reload();
                     for (var key of data.keys()) {
                         console.log(key + ":" + data.get(key));
                     }
+                    // location.reload();
                 } else {
                     alert(result.errorMessage);
                     for (var key of data.keys()) {
