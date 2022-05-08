@@ -1223,7 +1223,6 @@
         for (let i=0;i<radio.length;i++) {
             if (radio[i].checked) {
                 texture = radio[i].value;
-                alert(texture);
             }
         }
 
