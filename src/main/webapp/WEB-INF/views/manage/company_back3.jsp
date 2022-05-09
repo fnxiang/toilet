@@ -1201,15 +1201,8 @@
             success: function (result) {
                 if (result.success) {
                     alert("保存成功！");
-                    for (var key of data.keys()) {
-                        console.log(key + ":" + data.get(key));
-                    }
-                    // location.reload();
                 } else {
                     alert(result.errorMessage);
-                    for (var key of data.keys()) {
-                        console.log(key + ":" + data.get(key));
-                    }
                 }
             }
         });
@@ -1223,7 +1216,6 @@
         for (let i=0;i<radio.length;i++) {
             if (radio[i].checked) {
                 texture = radio[i].value;
-                alert(texture);
             }
         }
 
