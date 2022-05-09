@@ -175,17 +175,17 @@
                             <table>
                                 <tr>
                                     <th class="bg">规格</th>
-                                    <th><%=productDTO.getProductParameters().getStandard()%>
+                                    <th><%=productDTO.getProductParameters().getStandard()%>立方米
                                     </th>
                                     <th class="bg">适用人数（人）</th>
-                                    <th><%=productDTO.getProductParameters().getApplicableNum()%>
+                                    <th><%=productDTO.getProductParameters().getApplicableNum()%>人
                                     </th>
                                 </tr>
                                 <tr>
                                     <td class="bg">尺寸（长*宽*高 mm）</td>
-                                    <td><%=productDTO.getProductParameters().getLength()%>
-                                        *<%=productDTO.getProductParameters().getWide()%>
-                                        *<%=productDTO.getProductParameters().getHigh()%>
+                                    <td><%=productDTO.getProductParameters().getLength()%>mm
+                                        *<%=productDTO.getProductParameters().getWide()%>mm
+                                        *<%=productDTO.getProductParameters().getHigh()%>mm
                                     </td>
                                     <td class="bg">材质</td>
                                     <td><%=productDTO.getProductParameters().getTexture()%>
@@ -196,24 +196,24 @@
                                     <td><%=productDTO.getProductParameters().getColor()%>
                                     </td>
                                     <td class="bg">使用寿命</td>
-                                    <td><%=productDTO.getProductParameters().getServiceLife()%>
+                                    <td><%=productDTO.getProductParameters().getServiceLife()%>年
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="bg">用途</td>
-                                    <td><%=productDTO.getPurpose()%>
+                                    <td class="bg">产品特点</td>
+                                    <td><%=productDTO.getProductFeatures()%>
                                     </td>
                                     <td class="bg">清理周期</td>
-                                    <td><%=productDTO.getProductParameters().getCleanupCycle()%>
+                                    <td><%=productDTO.getProductParameters().getCleanupCycle()%>月
                                     </td>
                                 </tr>
                                 <%if (productDTO.getProductType().equals("双瓮漏斗式厕所")) {%>
                                 <tr>
                                     <td class="bg">重量</td>
-                                    <td><%=productDTO.getProductParameters().getWeight()%>
+                                    <td><%=productDTO.getProductParameters().getWeight()%>kg
                                     </td>
                                     <td class="bg">壁厚</td>
-                                    <td><%=productDTO.getProductParameters().getWallThickness()%>
+                                    <td><%=productDTO.getProductParameters().getWallThickness()%>mm
                                     </td>
                                 </tr>
                                 <%
