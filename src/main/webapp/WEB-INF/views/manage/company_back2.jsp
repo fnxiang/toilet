@@ -13,7 +13,7 @@
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/manage/res/logo.ico">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}">
 
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 

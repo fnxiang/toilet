@@ -101,7 +101,7 @@
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><div style="color: #99abb4;font-size: 4px;">高寒地区包括高海拔地区与寒冷地区。高海拔地区指海拔＞1000m的地区，分布在我国西藏、云南、贵州、青海、宁夏、甘肃、山西、内蒙古、新疆等地区。
                     寒冷地区指最</div><div style="color: #99abb4;font-size: 4px;">冷月平均温度＜0℃或日平均温度≤5℃天数在90d以上的地区，分布在我国辽宁、吉林、黑龙江、青海、宁夏、山西、甘肃、内蒙古、新疆、西藏等地区。
-                    除此外其他地区称></div><div style="color: #99abb4;font-size: 4px;">为普通地区。</div>
+                    除此外其他地区称</div><div style="color: #99abb4;font-size: 4px;">为普通地区。</div>
                 </div>
             </div>
 
@@ -123,7 +123,7 @@
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><p><div style="color: #99abb4;font-size: 4px;">缺水地区指年降水量＜200mm的干旱区域及人均水资源量＜600m3的缺水地区，如北京、天津、河北、山西、山东、新疆等地区。
                     除缺水地区外，其他地区统称良好地区。</div>
-                </p></div>
+                    </p></div>
             </div>
         </div>
 
@@ -148,7 +148,7 @@
                 <div style="float:left;padding:0 5px;"><p><div style="color: #99abb4;font-size: 4px;">山区分为高山、中山和低山。海拔在3500米以上为高山，海拔在1000-3500米为中山，海拔低于1000米为低山。
                     丘陵指绝对高度在500米以内，相对高度不超过200米，起伏</div><div style="color: #99abb4;font-size: 4px;">不大，坡度较缓，地面崎岖不平，由连绵不断的低矮山丘组成的地形。
                     除山区与丘陵地区外，其他地区统称为一般地区。</div>
-                </p></div>
+                    </p></div>
             </div>
 
             <div class="grid_12"
@@ -214,7 +214,7 @@
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><p><div style="color: #99abb4;font-size: 5px;">聚集地区指村庄布局紧凑，人口密集，居民点集中的较集中区域。
                     分散地区指村庄布局分散，且单村人口密度较小的地区。其他地区统称为一般地区。</div>
-                </p></div>
+                    </p></div>
             </div>
 
             <div class="grid_12"

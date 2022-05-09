@@ -41,7 +41,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
 
         ToiletProductDOSelective toiletProductDOSelective = new ToiletProductDOSelective();
         ToiletProductDOSelective.Criteria criteria = toiletProductDOSelective.createCriteria();
-        toiletProductDOSelective.setOrderByClause("id limit" + request.getOffset() + "," + request.getLimit());
+        toiletProductDOSelective.setOrderByClause(request.getSortBy() + " " + request.getSortDirection() + " limit " + request.getOffset() + "," + request.getLimit());
 
         if (!StringUtils.isEmpty(request.getEmail())) {
             criteria.andCompanyEmailEqualTo(request.getEmail());

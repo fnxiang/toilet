@@ -508,7 +508,7 @@
 
                                             <div class="row form-group" id="gui">
                                                 <div class="col col-md-3"  style="margin-top: 5px"><label for="guige"
-                                                                                 class="form-control-label">规格（平方米）：</label>
+                                                                                                          class="form-control-label">规格（平方米）：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="guige" name="guige"
@@ -572,7 +572,7 @@
                                                                                  class=" form-control-label">材质：</label>
                                                 </div>
 
-                                                                                                    <%--                                                    <div class="form-check-inline form-check">--%>
+                                                <%--                                                    <div class="form-check-inline form-check">--%>
                                                 <div class="col col-md-1" id="hidden_caizhi1">
                                                     <input  type="radio" name="caizhi"
                                                             value="玻璃钢">玻璃钢
@@ -597,7 +597,7 @@
                                                     <input  type="text" id="jvticaizhi" name="jvticaizhi" placeholder="输入材质" disabled>
                                                 </div>
 
-                                                    <%--                                                    </div>--%>
+                                                <%--                                                    </div>--%>
 
 
                                             </div>
@@ -1201,7 +1201,6 @@
             success: function (result) {
                 if (result.success) {
                     alert("保存成功！");
-                    location.reload();
                 } else {
                     alert(result.errorMessage);
                 }

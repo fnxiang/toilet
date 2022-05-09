@@ -2,6 +2,7 @@
 <%@ page import="com.alibaba.fastjson.JSON" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.apache.commons.collections4.CollectionUtils" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.response.ProductQueryResponse" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -108,6 +109,7 @@
             <div id="list_carousel" class="list_carousel">
 
                 <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>
+                <% ProductQueryResponse productQueryResponse = (ProductQueryResponse) request.getAttribute("pageResponse");%>
                 <c:set var="list" value="<%=JSON.toJSONString(productList)%>" scope="application"/>
                 <% String path = request.getContextPath();
                     String basePath = request.getScheme() + "://"
@@ -120,7 +122,7 @@
                 <ul id="list_product_<%=i%>" class="list_product">
                     <%
 
-                        for (j=i*4; j < 4*(i+1); j++) {
+                        for (j=i*4;j<productList.size()&&j < 4*(i+1); j++) {
                             String firstPicPath = productList.get(j).getPicsPath().split(";")[0];
                     %>
                     <li value="">

@@ -20,4 +20,5 @@ public interface ToiletProductDao {
     List<ToiletProductDO> queryAllProductsByPage(ProductQueryRequest request);
 
     ToiletProductDO updateProductBySource(ToiletProductDO productDO);
+
 }
