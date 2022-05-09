@@ -74,6 +74,21 @@ public class ProductController {
         return queryRequest;
     }
 
+    @RequestMapping(value = "/product/next")
+    public String toNextPage(HttpServletRequest request) {
+        try {
+            ProductSortRequest productSortRequest = buildQueryRequest(request);
+            ProductQueryResponse response = productService.queryPageProduct(productSortRequest);
+
+            request.setAttribute("pageResponse", response);
+            request.setAttribute("productList", response.getProductDTOList());
+            return INDEX;
+        } catch (Exception e) {
+            LOG.error("query product page error : {}", e.getMessage());
+            return ERROR_PAGE;
+        }
+    }
+
     @RequestMapping("/toProductPage")
     public String toPage(HttpServletRequest request){
         String url = request.getParameter("url");
