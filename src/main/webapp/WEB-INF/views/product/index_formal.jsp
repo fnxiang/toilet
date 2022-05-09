@@ -120,7 +120,7 @@
                 <ul id="list_product_<%=i%>" class="list_product">
                     <%
 
-                        for (j=i*4; j < 4*(i+1); j++) {
+                        for (j=i*4;j<productList.size()&&j < 4*(i+1); j++) {
                             String firstPicPath = productList.get(j).getPicsPath().split(";")[0];
                     %>
                     <li value="">

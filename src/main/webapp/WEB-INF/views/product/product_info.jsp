@@ -24,15 +24,15 @@
           type="text/css">
 </head>
 <body>
-<%ToiletProductDTO productDTO = (ToiletProductDTO)request.getAttribute("product");%>
+<%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");%>
 <%--获取路径用于显示图片和文件--%>
-<%  String path = request.getContextPath();
+<% String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";%>
-    <!-- #top -->
-    <jsp:include page="product_banner.jsp"/>
-    <!-- .grid_6 -->
+<!-- #top -->
+<jsp:include page="product_banner.jsp"/>
+<!-- .grid_6 -->
 
 <!-- .container_12 -->
 
@@ -80,7 +80,8 @@
 
         <%String firstPicPath = productDTO.getPicsPath().split(";")[0];%>
         <div id="content" class="grid_12">
-            <h1 class="page_title"><%=productDTO.getProductName()%></h1>
+            <h1 class="page_title"><%=productDTO.getProductName()%>
+            </h1>
 
             <div class="product_page grid_12">
                 <div class="grid_4 img_slid" id="products">
@@ -99,7 +100,7 @@
                         <li><a class="zoomThumbActive" href='javascript:void(0);'
                                rel="{gallery: 'gal1', smallimage: '<%=basePath+pathList.get(0)%>',largeimage: '<%=basePath+pathList.get(0)%>'}"><img
                                 src='<%=basePath+pathList.get(0)%>' alt="" style="opacity: 1;"></a></li>
-                        <%for (int i=1;i<pathList.size();i++) {%>
+                        <%for (int i = 1; i < pathList.size(); i++) {%>
                         <li><a href='javascript:void(0);'
                                rel="{gallery: 'gal1', smallimage: '<%=basePath+pathList.get(i)%>',largeimage: '<%=basePath+pathList.get(i)%>'}"><img
                                 src='<%=basePath+pathList.get(i)%>' alt=""></a></li>
@@ -112,10 +113,13 @@
                 <div class="grid_7">
                     <div class="entry_content">
                         <div class="review">
-                            <h5><%=productDTO.getProductName()%></h5>
+                            <h5><%=productDTO.getProductName()%>
+                            </h5>
                         </div>
-                        <p><%=productDTO.getManufacturerName()%></p>
-                        <p><%=productDTO.getManufacturerCell()%></p>
+                        <p><%=productDTO.getManufacturerName()%>
+                        </p>
+                        <p><%=productDTO.getManufacturerCell()%>
+                        </p>
 
                         <div class="ava_price">
                             <div class="availability_sku">
@@ -154,84 +158,117 @@
                         <div class="clear"></div>
 
                         <div class="tab1 tab_body">
-                            <h4><%=productDTO.getProductName()%></h4>
+                            <h4><%=productDTO.getProductName()%>
+                            </h4>
 
-                            <p><%=productDTO.getManufacturerName()%></p>
+                            <p><%=productDTO.getManufacturerName()%>
+                            </p>
                             <ul>
-                                <li>联系方式：<%=productDTO.getManufacturerCell()%></li>
-                                <li>适用省份：<%=productDTO.getApplicableProvince()%></li>
-                                <li>用途：<%=productDTO.getPurpose()%></li>
+                                <li>联系方式：<%=productDTO.getManufacturerCell()%>
+                                </li>
+                                <li>适用省份：<%=productDTO.getApplicableProvince()%>
+                                </li>
+                                <li>用途：<%=productDTO.getPurpose()%>
+                                </li>
                             </ul>
 
                             <table>
                                 <tr>
                                     <th class="bg">规格</th>
-                                    <th><%=productDTO.getProductParameters().getStandard()%></th>
+                                    <th><%=productDTO.getProductParameters().getStandard()%>
+                                    </th>
                                     <th class="bg">适用人数（人）</th>
-                                    <th><%=productDTO.getProductParameters().getApplicableNum()%></th>
+                                    <th><%=productDTO.getProductParameters().getApplicableNum()%>
+                                    </th>
                                 </tr>
                                 <tr>
                                     <td class="bg">尺寸（长*宽*高 mm）</td>
-                                    <td><%=productDTO.getProductParameters().getLength()%>*<%=productDTO.getProductParameters().getWide()%>*<%=productDTO.getProductParameters().getHigh()%></td>
+                                    <td><%=productDTO.getProductParameters().getLength()%>
+                                        *<%=productDTO.getProductParameters().getWide()%>
+                                        *<%=productDTO.getProductParameters().getHigh()%>
+                                    </td>
                                     <td class="bg">材质</td>
-                                    <td><%=productDTO.getProductParameters().getTexture()%></td>
+                                    <td><%=productDTO.getProductParameters().getTexture()%>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bg">颜色</td>
-                                    <td><%=productDTO.getProductParameters().getColor()%></td>
+                                    <td><%=productDTO.getProductParameters().getColor()%>
+                                    </td>
                                     <td class="bg">使用寿命</td>
-                                    <td><%=productDTO.getProductParameters().getServiceLife()%></td>
+                                    <td><%=productDTO.getProductParameters().getServiceLife()%>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bg">用途</td>
-                                    <td><%=productDTO.getPurpose()%></td>
+                                    <td><%=productDTO.getPurpose()%>
+                                    </td>
                                     <td class="bg">清理周期</td>
-                                    <td><%=productDTO.getProductParameters().getCleanupCycle()%></td>
+                                    <td><%=productDTO.getProductParameters().getCleanupCycle()%>
+                                    </td>
                                 </tr>
-                                <%if (productDTO.getProductType().equals("双瓮漏斗式厕所")){%>
+                                <%if (productDTO.getProductType().equals("双瓮漏斗式厕所")) {%>
                                 <tr>
                                     <td class="bg">重量</td>
-                                    <td><%=productDTO.getProductParameters().getWeight()%></td>
+                                    <td><%=productDTO.getProductParameters().getWeight()%>
+                                    </td>
                                     <td class="bg">壁厚</td>
-                                    <td><%=productDTO.getProductParameters().getWallThickness()%></td>
+                                    <td><%=productDTO.getProductParameters().getWallThickness()%>
+                                    </td>
                                 </tr>
-                                <%} else{}%>
-                                <%if (productDTO.getProductType().equals("三联沼气池式厕所") || productDTO.getProductType().equals("复合生物反应微水冲厕所") || productDTO.getProductType().equals("多级生化组合电催化氧化厕所") || productDTO.getProductType().equals("膜生物反应器（MBR）厕所") || productDTO.getProductType().equals("生态旱厕") || productDTO.getProductType().equals("粪尿分集式厕所")){%>
+                                <%
+                                    } else {
+                                    }
+                                %>
+                                <%if (productDTO.getProductType().equals("三联沼气池式厕所") || productDTO.getProductType().equals("复合生物反应微水冲厕所") || productDTO.getProductType().equals("多级生化组合电催化氧化厕所") || productDTO.getProductType().equals("膜生物反应器（MBR）厕所") || productDTO.getProductType().equals("生态旱厕") || productDTO.getProductType().equals("粪尿分集式厕所")) {%>
                                 <tr>
                                     <td class="bg">其他参数</td>
-                                    <td><%=productDTO.getProductParameters().getOtherParams()%></td>
+                                    <td><%=productDTO.getProductParameters().getOtherParams()%>
+                                    </td>
                                     <td class="bg"></td>
                                     <td></td>
-                                    <%} else{}%>
+                                    <%
+                                        } else {
+                                        }
+                                    %>
                                 </tr>
                                 <tr>
                                     <td class="bg">厕所用途</td>
-                                    <td><%=productDTO.getPurpose()%></td>
+                                    <td><%=productDTO.getPurpose()%>
+                                    </td>
                                     <td class="bg">具体用途</td>
-                                    <td><%=productDTO.getProductParameters().getParamPurpose()%></td>
+                                    <td><%=productDTO.getProductParameters().getParamPurpose()%>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bg">应用案例</td>
-                                    <td><%=productDTO.getProductParameters().getApplyCase()%></td>
-                                    <%if (productDTO.getProductType().equals("三联沼气池式厕所") || productDTO.getProductType().equals("复合生物反应微水冲厕所") || productDTO.getProductType().equals("多级生化组合电催化氧化厕所") || productDTO.getProductType().equals("膜生物反应器（MBR）厕所") || productDTO.getProductType().equals("生态旱厕") || productDTO.getProductType().equals("粪尿分集式厕所")){%>
+                                    <td><%=productDTO.getProductParameters().getApplyCase()%>
+                                    </td>
+                                    <%if (productDTO.getProductType().equals("三联沼气池式厕所") || productDTO.getProductType().equals("复合生物反应微水冲厕所") || productDTO.getProductType().equals("多级生化组合电催化氧化厕所") || productDTO.getProductType().equals("膜生物反应器（MBR）厕所") || productDTO.getProductType().equals("生态旱厕") || productDTO.getProductType().equals("粪尿分集式厕所")) {%>
                                     <td class="bg">产品原理及组成</td>
                                     <td>
                                         <%=productDTO.getProductTheory()%>
                                     </td>
-                                    <%} else{%>
+                                    <%} else {%>
                                     <td class="bg"></td>
                                     <td>
                                     </td>
                                     <%}%>
                                 </tr>
 
-                                <%if (productDTO.getProductType().equals("泡沫封堵液")){%>
-                                <tr><td class="bg">适用条件</td>
-                                    <td><%=productDTO.getApplicableCondition()%></td>
+                                <%if (productDTO.getProductType().equals("泡沫封堵液")) {%>
+                                <tr>
+                                    <td class="bg">适用条件</td>
+                                    <td><%=productDTO.getApplicableCondition()%>
+                                    </td>
                                     <td class="bg">产品参数</td>
-                                    <td><%=productDTO.getSpecialParam()%></td>
+                                    <td><%=productDTO.getSpecialParam()%>
+                                    </td>
                                 </tr>
-                                <%} else{}%>
+                                <%
+                                    } else {
+                                    }
+                                %>
 
                             </table>
                             <div class="clear"></div>
@@ -243,9 +280,9 @@
                             <div class="preview slides_container">
                                 <div class="prev_bg">
                                     <%String p = productDTO.getInstructionFilePath();%>
-                                    <%if (p.length() != 0 && p.substring(p.length()-3,p.length()).equals("pdf")){%>
+                                    <%if (p.length() != 0 && p.substring(p.length() - 3).equals("pdf")) {%>
                                     <embed src="<%=basePath + p%>" style=" width: 1000PX; height: 820px; ">
-                                    <%}else {%>
+                                    <%} else {%>
                                     <img src="<%=basePath + p%>" height="600px" title="" alt=""/>
                                     <%}%>
                                 </div>
@@ -261,9 +298,9 @@
                             <div class="preview slides_container">
                                 <div class="prev_bg">
                                     <%String p2 = productDTO.getQualityAssuranceMaterialsFilePath();%>
-                                    <%if(p2.length() != 0 && p2.substring(p.length()-3,p.length()).equals("pdf")){%>
+                                    <%if (p2.length() != 0 && p2.substring(p2.length() - 3, p2.length()).equals("pdf")) {%>
                                     <embed src="<%=basePath + p2%>" style=" width: 1000PX; height: 820px; ">
-                                    <%}else {%>
+                                    <%} else {%>
                                     <img src="<%=basePath + p2%>" height="600px" title="" alt=""/>
                                     <%}%>
                                 </div>
