@@ -243,7 +243,7 @@
                             <div class="preview slides_container">
                                 <div class="prev_bg">
                                     <%String p = productDTO.getInstructionFilePath();%>
-                                    <%if (p.substring(p.length()-3,p.length()).equals("pdf")){%>
+                                    <%if (p.length() != 0 && p.substring(p.length()-3,p.length()).equals("pdf")){%>
                                     <embed src="<%=basePath + p%>" style=" width: 1000PX; height: 820px; ">
                                     <%}else {%>
                                     <img src="<%=basePath + p%>" height="600px" title="" alt=""/>
@@ -261,7 +261,7 @@
                             <div class="preview slides_container">
                                 <div class="prev_bg">
                                     <%String p2 = productDTO.getQualityAssuranceMaterialsFilePath();%>
-                                    <%if (p2.substring(p.length()-3,p.length()).equals("pdf")){%>
+                                    <%if(p2.length() != 0 && p2.substring(p.length()-3,p.length()).equals("pdf")){%>
                                     <embed src="<%=basePath + p2%>" style=" width: 1000PX; height: 820px; ">
                                     <%}else {%>
                                     <img src="<%=basePath + p2%>" height="600px" title="" alt=""/>
