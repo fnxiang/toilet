@@ -247,7 +247,7 @@ public class ProductController {
         productDTO.setPatternType(params.get("patternType").substring(1));
         productDTO.setPatternName(params.get("patternName"));
         productDTO.setIsNewPattern(params.get("newmoderadios1").equals("true"));
-        productDTO.setApplicableProvince(params.get("provinces"));
+        productDTO.setApplicableProvince(params.get("province"));
         productDTO.setApplicableTemperature(params.get("temperature"));
         productDTO.setPurpose(params.get("purpose"));
         productDTO.setProductFeatures(params.get("features"));

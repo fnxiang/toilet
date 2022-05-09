@@ -1,5 +1,7 @@
 package cn.edu.bjtu.toilet.dao.domain;
 
+import org.springframework.util.StringUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -148,6 +150,14 @@ public class ToiletProductDO implements Serializable {
 
     public void setPatternId(String patternId) {
         this.patternId = patternId == null ? null : patternId.trim();
+    }
+
+    public void appendPatternId(Integer patternId) {
+        if (StringUtils.isEmpty(this.patternId)) {
+            this.patternId = ";" + patternId.toString() + ";";
+        } else if (!this.patternId.contains(patternId.toString())){
+            this.patternId = this.patternId + patternId.toString() + ";";
+        }
     }
 
     public String getPatternName() {
