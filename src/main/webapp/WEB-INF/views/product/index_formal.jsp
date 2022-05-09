@@ -239,7 +239,7 @@
         data : product_list,
         showRefresh : false,
         showToggle : false,
-        pageSize: 4, //每页3条
+        pageSize: 4, //每页3
         pageNumber: 1,  //第1页
         cache: false,   //不缓存
         striped: true,
