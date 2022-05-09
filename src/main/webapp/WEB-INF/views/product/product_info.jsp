@@ -130,7 +130,7 @@
                             <!-- .availability_sku -->
 
                             <div class="price">
-                                <div class="price_new"><%=productDTO.getProductParameters().getPrice()%>元</div>
+                                <div class="price_new"><%=productDTO.getProductParameters().getPrice() * 10000%>元</div>
                             </div>
                             <!-- .price -->
                         </div>
