@@ -1,6 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="com.alibaba.fastjson.JSON" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.apache.commons.collections4.CollectionUtils" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -22,6 +23,10 @@
           type="text/css">
     <link href="${pageContext.request.contextPath}/static/product/css/grid.css" media="screen" rel="stylesheet"
           type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/product/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/product/css/bootstrap-table.css">
+
+
 
 </head>
 <body>
@@ -29,10 +34,10 @@
 <%
     String sort_condition = "price";
     String sort_way = "false";
-    if (request.getAttribute("sort_condition")!=null) {
+    if (request.getAttribute("sort_condition") != null) {
         sort_condition = request.getAttribute("sort_condition").toString();
     }
-    if (request.getAttribute("sort_way")!=null) {
+    if (request.getAttribute("sort_way") != null) {
         sort_way = request.getAttribute("sort_way").toString();
     }
 %>
@@ -83,22 +88,22 @@
                 <div class="grid_6">
                     <h2>产品展示</h2>
                 </div>
-                <div class="grid_2">
-                    <select class="grid_2" name="sortCondition" id="sortCondition">
-                        <option value="price">价格</option>
-                        <option value="life">使用寿命</option>
-                        <option value="cleanCycle">清理周期</option>
-                    </select>
-                </div>
-                <div class="grid_2">
-                    <select class="grid_2" name="sortWay" id="sortWay">
-                        <option value="false">升序</option>
-                        <option value="true">降序</option>
-                    </select>
-                </div>
-                <div class="grid_2">
-                    <button class="grid_2" onclick="sort()">应用</button>
-                </div>
+<%--                <div class="grid_2">--%>
+<%--                    <select class="grid_2" name="sortCondition" id="sortCondition">--%>
+<%--                        <option value="price">价格</option>--%>
+<%--                        <option value="life">使用寿命</option>--%>
+<%--                        <option value="cleanCycle">清理周期</option>--%>
+<%--                    </select>--%>
+<%--                </div>--%>
+<%--                <div class="grid_2">--%>
+<%--                    <select class="grid_2" name="sortWay" id="sortWay">--%>
+<%--                        <option value="false">升序</option>--%>
+<%--                        <option value="true">降序</option>--%>
+<%--                    </select>--%>
+<%--                </div>--%>
+<%--                <div class="grid_2">--%>
+<%--                    <button class="grid_2" onclick="sort()">应用</button>--%>
+<%--                </div>--%>
                 <!-- .grid_10 -->
 
 
@@ -106,46 +111,17 @@
             <!-- .c_header -->
             <div id="list_carousel" class="list_carousel">
 
-                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>)request.getAttribute("productList");%>
+                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>
                 <c:set var="list" value="<%=JSON.toJSONString(productList)%>" scope="application"/>
                 <% String path = request.getContextPath();
                     String basePath = request.getScheme() + "://"
                             + request.getServerName() + ":" + request.getServerPort()
                             + path + "/";%>
-                <ul id="list_product" class="list_product">
-                    <% for (ToiletProductDTO productDTO : productList) {
-                        String firstPicPath = productDTO.getPicsPath().split(";")[0];
-                    %>
-                    <li value="">
-                        <div class="grid_3 product">
-                            <div class="prev">
-                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_info&product_id=<%=productDTO.getId()%>"><img
-                                        src="<%=basePath+firstPicPath%>"
-                                        alt="" title=""/></a>
-                            </div>
-                            <!-- .prev -->
-                            <h3 class="title" style="height: 25px;"><%=productDTO.getProductName()%>
-                            </h3>
-
-                            <div class="cart">
-                                <div class="price" style="width: 120px">
-                                    <div class="vert">
-                                        <div class="price_new">价格：<%=productDTO.getProductParameters().getPrice()%>万元
-                                        </div>
-                                        <div class="price_new">使用寿命：<%=productDTO.getProductParameters().getServiceLife()%>年
-                                        </div>
-                                        <div class="price_new">清理周期：<%=productDTO.getProductParameters().getCleanupCycle()%>个月
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .cart -->
-                        </div>
-                        <!-- .grid_3 -->
-                    </li>
-                    <%}%>
-                </ul>
-
+                <div class="card">
+                    <table id="bootstrap-data-table" class="table table-striped table-bordered table-hover">
+                    </table>
+                </div>
+                <div class="clearfix"></div>
                 <div class="clear"></div>
                 <div id="content_bottom">
                     <div class="grid_12">
@@ -186,10 +162,15 @@
 <!-- /Added by HTTrack -->
 
 
-<script src="${pageContext.request.contextPath}/static/product/js/jquery-1.7.2.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/assets/js/vendor/jquery-2.1.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/product/js/html5.js"></script>
 <script src="${pageContext.request.contextPath}/static/product/js/jflow.plus.js"></script>
 <script src="${pageContext.request.contextPath}/static/product/js/jquery.carouFredSel-5.2.2-packed.js"></script>
+
+<script src="${pageContext.request.contextPath}/static/product/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/product/js/bootstrap-table.min.js"></script>
+
+
 
 <script>
     $(document).ready(function () {
@@ -206,36 +187,83 @@
             auto: true
         });
     });
-</script>
-<script>
-    $(function () {
-        $('#list_product').carouFredSel({
-            prev: '#prev_c1',
-            next: '#next_c1',
-            auto: false
-        });
-        $(window).resize();
+    <%--$(document).ready(function () {--%>
+    <%--    $('#sortCondition').val('<%=sort_condition%>');--%>
+    <%--    $('#sortWay').val('<%=sort_way%>');--%>
+    <%--    $("button").click(function () {--%>
+    <%--        $(this).addClass('click')--%>
+    <%--    });--%>
+    <%--});--%>
+    var tableColumns = [
+        {field: "pic", width: "300%", align: "center", title: "设备图片", formatter: function (value, row, index) {
+                var image =  '<div ><a href="${pageContext.request.contextPath}/toProductPage?url=product_info&product_id=' + row.id + '">'+
+                    '<img src=' + value + ' style="width: 280px;height: 220px; margin: auto" title=""/></a></div><h3 class="title" style="height: 5px;"><div style="font-size: 20px;">' + row.name + '</div></h3>'+
+                // '<div class="cart">'+
+                    // '<div class="price" style="width: 120px">'+
+                    //     '<div class="vert">'+
+                    //         '<div class="price_new">'+
+                    //             '价格：' + row.price + '万元'+
+                    //         '</div>'+
+                    //         '<div class="price_new">'+
+                    //             '使用寿命：' + row.life + '年'+
+                    //         '</div>'+
+                    //         '<div class="price_new">'+
+                    //             '清理周期：' + row.clear_cycle + '个月' +
+                    //         '</div>'+
+                    //     '</div>'+
+                    // '</div>'+
+               '</div>';
+                return image;
+            }
+        },
+        {field: 'price', title: '价格', sortable: true},
+        {field: 'life', title: '使用寿命', sortable: true},
+        {field: 'clear_cycle', title: '清理周期', sortable: true}
+    ];
+    var product_list = []
+    <% for(int i=0; i<productList.size();i++){%>
+        var product = {};
+        product.id = "<%=productList.get(i).getId()%>";
+        product.name = "<%=productList.get(i).getProductName()%>";
+        product.price = <%=productList.get(i).getProductParameters().getPrice()%>;
+        product.life = <%=productList.get(i).getProductParameters().getServiceLife()%>
+        product.clear_cycle =  <%=productList.get(i).getProductParameters().getCleanupCycle()%>
+        <% String firstPicPath = productList.get(i).getPicsPath().split(";")[0];%>
+        product.pic = "<%=basePath+firstPicPath%>"
+        product_list.push(product)
+    <%}%>
+    $('#bootstrap-data-table').bootstrapTable('destroy');   //动态加载表格之前，先销毁表格
+    console.log(product_list)
+    $('#bootstrap-data-table').bootstrapTable({//表格初始化
+        columns : tableColumns,
+        data : product_list,
+        showRefresh : false,
+        showToggle : false,
+        pageSize: 4, //每页3条
+        pageNumber: 1,  //第1页
+        cache: false,   //不缓存
+        striped: true,
+        pagination: true,
+        sidePagination: 'client',
+        queryParams : function(params) {
+            return {
+                // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                limit : params.limit,
+                offset : params.offset
+            };
+        },
     });
-</script>
-<script>
-    $(document).ready(function () {
-        $('#sortCondition').val('<%=sort_condition%>');
-        $('#sortWay').val('<%=sort_way%>');
-        $("button").click(function () {
-            $(this).addClass('click')
-        });
-    })
 </script>
 
 <%--排序--%>
-<script>
-    function sort() {
-        let data = {};
-        data["sortBy"] = $('#sortCondition').val();
-        data["desc"] = $('#sortWay').val();
-        data["list"] = '${list}';
+<%--<script>--%>
+<%--    function sort() {--%>
+<%--        let data = {};--%>
+<%--        data["sortBy"] = $('#sortCondition').val();--%>
+<%--        data["desc"] = $('#sortWay').val();--%>
+<%--        data["list"] = '${list}';--%>
 
-        Post("${pageContext.request.contextPath}/product/sort", data);
-    }
-</script>
+<%--        Post("${pageContext.request.contextPath}/product/sort", data);--%>
+<%--    }--%>
+<%--</script>--%>
 </html>

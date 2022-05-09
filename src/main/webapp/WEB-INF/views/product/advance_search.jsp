@@ -101,7 +101,7 @@
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><div style="color: #99abb4;font-size: 4px;">高寒地区包括高海拔地区与寒冷地区。高海拔地区指海拔＞1000m的地区，分布在我国西藏、云南、贵州、青海、宁夏、甘肃、山西、内蒙古、新疆等地区。
                     寒冷地区指最</div><div style="color: #99abb4;font-size: 4px;">冷月平均温度＜0℃或日平均温度≤5℃天数在90d以上的地区，分布在我国辽宁、吉林、黑龙江、青海、宁夏、山西、甘肃、内蒙古、新疆、西藏等地区。
-                    除此外其他地区称></div><div style="color: #99abb4;font-size: 4px;">为普通地区。</div>
+                    除此外其他地区称</div><div style="color: #99abb4;font-size: 4px;">为普通地区。</div>
                 </div>
             </div>
 
