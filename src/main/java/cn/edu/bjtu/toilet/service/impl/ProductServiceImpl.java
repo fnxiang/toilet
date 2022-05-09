@@ -5,12 +5,15 @@ import cn.edu.bjtu.toilet.converter.ProductConverter;
 import cn.edu.bjtu.toilet.dao.ToiletPatternDao;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
 import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
-import cn.edu.bjtu.toilet.dao.domain.ToiletPatternSortDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
+import cn.edu.bjtu.toilet.dao.request.ProductQueryRequest;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.ProductService;
+import cn.edu.bjtu.toilet.domain.request.ProductRequest;
+import cn.edu.bjtu.toilet.domain.response.ProductQueryResponse;
 import com.google.common.collect.Lists;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -40,6 +43,25 @@ public class ProductServiceImpl implements ProductService {
     public List<ToiletProductDTO> queryAllProductList(String email) {
         List<ToiletProductDO> productDOS = toiletProductDao.queryAllProducts(email);
         return productDOS.stream().map(ProductConverter::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductQueryResponse queryPageProduct(ProductRequest request) {
+        ProductQueryResponse response = new ProductQueryResponse();
+
+        ProductQueryRequest queryRequest = new ProductQueryRequest();
+        BeanUtils.copyProperties(request, queryRequest);
+        List<ToiletProductDTO> productDTOS = toiletProductDao.queryAllProductsByPage(queryRequest).stream()
+                .map(ProductConverter::toDTO)
+                .collect(Collectors.toList());
+
+        Integer maxSize = toiletPatternDao.queryAllPattern().size();
+        response.setCurrent(request.getPageIndex());
+        response.setMaxPage(maxSize/request.getPageSize());
+        response.setPageSize(request.getPageSize());
+        response.setProductDTOList(productDTOS);
+
+        return response;
     }
 
     @Override
