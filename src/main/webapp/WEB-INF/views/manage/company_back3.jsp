@@ -12,7 +12,7 @@
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/manage/res/logo.ico">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/normalize.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/bootstrap.min.css">
@@ -67,38 +67,7 @@
 <div id="right-panel" class="right-panel">
 
     <!-- Header-->
-    <header id="header" class="header">
-        <div class="top-left">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="${pageContext.request.contextPath}"><img
-                        src="${pageContext.request.contextPath}/static/manage/res/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="${pageContext.request.contextPath}"><img src="images/logo2.png" alt="Logo"></a>
-                <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
-            </div>
-        </div>
-        <div class="top-right">
-            <div class="header-menu">
-
-                <div class="user-area dropdown float-right">
-                    <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        <img class="user-avatar rounded-circle"
-                             src="${pageContext.request.contextPath}/static/manage/./res/logo.png" alt="User Avatar">
-                    </a>
-
-                    <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href=".${pageContext.request.contextPath}/toPage?url=company_back2"><i
-                                class="fa fa-user"></i>企业信息管理</a>
-
-                        <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=company_back4"><i
-                                class="fa fa-cog"></i>设置</a>
-
-                        <a class="nav-link" href="${pageContext.request.contextPath}"><i class="fa fa-power-off"></i>注销</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <jsp:include page="company_header.jsp"/>
     <!-- /header -->
     <!-- Header-->
 

@@ -1,5 +1,7 @@
 package cn.edu.bjtu.toilet.dao.domain;
 
+import org.springframework.util.StringUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,11 +20,11 @@ public class ToiletProductDO implements Serializable {
 
     private String manufacturerCell;
 
-    private Integer productType;
+    private String productType;
 
     private String patternType;
 
-    private Integer patternId;
+    private String patternId;
 
     private String patternName;
 
@@ -43,6 +45,18 @@ public class ToiletProductDO implements Serializable {
     private String attributes;
 
     private Integer patternSortId;
+
+    private Double price;
+
+    private Integer cleanCycle;
+
+    private Integer serviceLife;
+
+    private String productTheory;
+
+    private String params;
+
+    private String appliableCondition;
 
     private String purpose;
 
@@ -114,12 +128,12 @@ public class ToiletProductDO implements Serializable {
         this.manufacturerCell = manufacturerCell == null ? null : manufacturerCell.trim();
     }
 
-    public Integer getProductType() {
+    public String getProductType() {
         return productType;
     }
 
-    public void setProductType(Integer productType) {
-        this.productType = productType;
+    public void setProductType(String productType) {
+        this.productType = productType == null ? null : productType.trim();
     }
 
     public String getPatternType() {
@@ -130,12 +144,20 @@ public class ToiletProductDO implements Serializable {
         this.patternType = patternType == null ? null : patternType.trim();
     }
 
-    public Integer getPatternId() {
+    public String getPatternId() {
         return patternId;
     }
 
-    public void setPatternId(Integer patternId) {
-        this.patternId = patternId;
+    public void setPatternId(String patternId) {
+        this.patternId = patternId == null ? null : patternId.trim();
+    }
+
+    public void appendPatternId(Integer patternId) {
+        if (StringUtils.isEmpty(this.patternId)) {
+            this.patternId = ";" + patternId.toString() + ";";
+        } else if (!this.patternId.contains(patternId.toString())){
+            this.patternId = this.patternId + patternId.toString() + ";";
+        }
     }
 
     public String getPatternName() {
@@ -218,6 +240,54 @@ public class ToiletProductDO implements Serializable {
         this.patternSortId = patternSortId;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getCleanCycle() {
+        return cleanCycle;
+    }
+
+    public void setCleanCycle(Integer cleanCycle) {
+        this.cleanCycle = cleanCycle;
+    }
+
+    public Integer getServiceLife() {
+        return serviceLife;
+    }
+
+    public void setServiceLife(Integer serviceLife) {
+        this.serviceLife = serviceLife;
+    }
+
+    public String getProductTheory() {
+        return productTheory;
+    }
+
+    public void setProductTheory(String productTheory) {
+        this.productTheory = productTheory == null ? null : productTheory.trim();
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params == null ? null : params.trim();
+    }
+
+    public String getAppliableCondition() {
+        return appliableCondition;
+    }
+
+    public void setAppliableCondition(String appliableCondition) {
+        this.appliableCondition = appliableCondition == null ? null : appliableCondition.trim();
+    }
+
     public String getPurpose() {
         return purpose;
     }
@@ -292,6 +362,12 @@ public class ToiletProductDO implements Serializable {
         sb.append(", source=").append(source);
         sb.append(", attributes=").append(attributes);
         sb.append(", patternSortId=").append(patternSortId);
+        sb.append(", price=").append(price);
+        sb.append(", cleanCycle=").append(cleanCycle);
+        sb.append(", serviceLife=").append(serviceLife);
+        sb.append(", productTheory=").append(productTheory);
+        sb.append(", params=").append(params);
+        sb.append(", appliableCondition=").append(appliableCondition);
         sb.append(", purpose=").append(purpose);
         sb.append(", productParameters=").append(productParameters);
         sb.append(", qualityAssuranceMaterialsFilePath=").append(qualityAssuranceMaterialsFilePath);

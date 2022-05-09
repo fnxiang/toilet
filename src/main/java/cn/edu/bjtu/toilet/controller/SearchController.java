@@ -26,6 +26,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.ERROR_PAGE;
+import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.INDEX;
 
 @Controller
 public class SearchController {
@@ -47,7 +48,7 @@ public class SearchController {
     @ResponseBody
     public SearchResponse productSearch(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             ProductSearchConditionsDTO searchConditions = buildSearchConditions(params);
 
             List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
@@ -66,7 +67,7 @@ public class SearchController {
     @RequestMapping("/search/product/results")
     public String productResults(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             ProductSearchConditionsDTO searchConditions = buildSearchConditions(params);
 
             List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
@@ -77,15 +78,15 @@ public class SearchController {
         } catch (Exception e) {
             LOG.error("search error with exception: {}", e.getMessage());
         }
-        return "/product/product_results";
+        return INDEX;
     }
 
     @RequestMapping("/search/mode/results")
     public String modeSearch(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
 
-            if (params == null) {
+            if (params.size() == 0) {
                 LOG.error("params is null!");
                 return ERROR_PAGE;
             }

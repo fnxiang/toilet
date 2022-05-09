@@ -19,6 +19,7 @@ public class ProductParamsDTO {
 
     private String paramPurpose;
 
+    //TODO 改成Integer
     private String cleanupCycle;
 
     private String runCost;
@@ -28,4 +29,13 @@ public class ProductParamsDTO {
     private String wide;
 
     private String high;
+
+    private String otherParams;
+
+    private String applyCase;
+
+    private Double wallThickness;
+
+    private Double weight;
+
 }

@@ -80,7 +80,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         ToiletProductDOSelective productDOSelective = new ToiletProductDOSelective();
         ToiletProductDOSelective.Criteria criteria = productDOSelective.createCriteria();
 
-        criteria.andProductNameEqualTo(productDO.getSource());
+        criteria.andSourceEqualTo(productDO.getSource());
         criteria.andDeletedNotEqualTo(true);
 
         int c = productDOMapper.updateByExampleSelective(productDO, productDOSelective);
@@ -88,34 +88,8 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         if (c != 1) {
             throw new ToiletBizException("update error", BIZ_ERROR);
         }
-        return queryProductByName(productDO.getProductName());
+        return queryProductBySource(productDO.getSource());
     }
-
-    private ToiletProductDO queryProductByName(String productName) {
-
-        if (StringUtils.isEmpty(productName)) {
-            throw new ToiletBizException("product name can not be null", BIZ_ERROR);
-        }
-
-        ToiletProductDOSelective toiletProductDOSelective = new ToiletProductDOSelective();
-        ToiletProductDOSelective.Criteria criteria = toiletProductDOSelective.createCriteria();
-
-        criteria.andProductNameEqualTo(productName);
-        criteria.andDeletedNotEqualTo(true);
-
-        List<ToiletProductDO> productDOList = productDOMapper.selectByExample(toiletProductDOSelective);
-
-        if (CollectionUtils.isEmpty(productDOList)) {
-            return  null;
-        }
-
-        if (productDOList.size() != 1) {
-            throw new ToiletBizException("too many results returned", BIZ_ERROR);
-        }
-
-        return productDOList.get(0);
-    }
-
 
     @Override
     public ToiletProductDO queryProductBySource(String source) {
@@ -160,7 +134,7 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         ToiletProductDOSelective toiletProductDOSelective = new ToiletProductDOSelective();
         ToiletProductDOSelective.Criteria criteria = toiletProductDOSelective.createCriteria();
 
-        criteria.andPatternIdEqualTo(patternId);
+        criteria.andPatternIdLike("%;"+patternId+";%");
         criteria.andDeletedNotEqualTo(true);
 
         return productDOMapper.selectByExampleWithBLOBs(toiletProductDOSelective);

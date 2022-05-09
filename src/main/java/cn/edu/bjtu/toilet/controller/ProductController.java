@@ -73,20 +73,27 @@ public class ProductController {
     @ResponseBody
     public ProductResponse productEntry(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, UPLOAD_DIRECTORY);
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             if (Objects.isNull(params)) {
                 return ProductResponse.failed("resolve params error");
             }
-
+            ToiletPatternDTO toiletPatternDTO = null;
             ToiletProductDTO toiletProductDTO = buildProductDTO(params);
-            ToiletPatternDTO toiletPatternDTO = buildPatternDTO(params);
+            if (toiletProductDTO.getIsNewPattern()) {
+                toiletPatternDTO = buildPatternDTO(params);
+            }
+
             toiletProductDTO.setCompanyEmail(request.getSession().getAttribute("uId").toString());
             toiletProductDTO = productService.saveProduct(toiletProductDTO, toiletPatternDTO);
             if (Objects.isNull(toiletProductDTO)) {
                 return ProductResponse.failed("save product failed");
             }
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("save product error with {}", e.getMessage());
+            return ProductResponse.failed(e.getMessage());
         } catch (Exception e) {
-            LOG.error("upload products failed");
+            LOG.error("upload products failed : {}", e.getMessage());
+            return ProductResponse.failed(e.getMessage());
         }
         return ProductResponse.success();
     }
@@ -95,7 +102,7 @@ public class ProductController {
     @ResponseBody
     public ModeResponse patternEntry(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, UPLOAD_DIRECTORY);
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             if (Objects.isNull(params)) {
                 return ModeResponse.failed("resolve params error");
             }
@@ -151,7 +158,7 @@ public class ProductController {
     @RequestMapping("/product/sort")
     public String sortProduct(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request, "");
+            Map<String, String> params = ParameterUtil.resolveParams(request);
             if (Objects.isNull(params)) {
                 return ERROR_PAGE;
             }
@@ -166,7 +173,7 @@ public class ProductController {
                     productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getPrice()))).collect(Collectors.toList());
                     break;
                 case "cleanCycle":
-                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getCleanupCycle()))).collect(Collectors.toList());
+                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> Integer.valueOf(o.getProductParameters().getCleanupCycle())))).collect(Collectors.toList());
                     break;
                 case "life":
                     productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> Integer.valueOf(o.getProductParameters().getServiceLife())))).collect(Collectors.toList());
@@ -193,7 +200,7 @@ public class ProductController {
         ToiletPatternDTO toiletPatternDTO = new ToiletPatternDTO();
 
         toiletPatternDTO.setProductType(params.get("productType"));
-        toiletPatternDTO.setPatternType(params.get("patternType"));
+        toiletPatternDTO.setPatternType(params.get("patternType").substring(1));
         toiletPatternDTO.setPatternInfo(params.get("patternInfo"));
 
         // 自然环境条件
@@ -236,8 +243,8 @@ public class ProductController {
         productDTO.setProductName(params.get("productName"));
         productDTO.setManufacturerName(params.get("factoryName"));
         productDTO.setManufacturerCell(params.get("factoryNum"));
-        productDTO.setProductType(ProductType.ofName(params.get("productType")).getCode());
-        productDTO.setPatternType(params.get("patternType"));
+        productDTO.setProductType(params.get("productType"));
+        productDTO.setPatternType(params.get("patternType").substring(1));
         productDTO.setPatternName(params.get("patternName"));
         productDTO.setIsNewPattern(params.get("newmoderadios1").equals("true"));
         productDTO.setApplicableProvince(params.get("provinces"));
@@ -256,7 +263,7 @@ public class ProductController {
         paramsDTO.setApplicableNum(Integer.valueOf(params.get("applicableNum")));
         paramsDTO.setTexture(params.get("texture"));
         paramsDTO.setColor(params.get("color"));
-        paramsDTO.setParamPurpose(params.get("paramPurpose"));
+        paramsDTO.setParamPurpose(params.get("paramPurpose")); // 具体参数
         paramsDTO.setCleanupCycle(params.get("cleanupCycle"));
         paramsDTO.setRunCost(params.get("runningCost"));
         paramsDTO.setPrice(Double.valueOf(params.get("price")));
@@ -264,6 +271,18 @@ public class ProductController {
         paramsDTO.setLength(params.get("length"));
         paramsDTO.setWide(params.get("wide"));
         paramsDTO.setHigh(params.get("high"));
+        paramsDTO.setApplyCase(params.get("case"));
+        paramsDTO.setOtherParams(params.get("otherParams"));
+        if (!StringUtils.isEmpty(params.get("weight"))) {
+            paramsDTO.setWeight(Double.valueOf(params.get("weight")));
+        }
+        if (!StringUtils.isEmpty(params.get("thickness"))) {
+            paramsDTO.setWallThickness(Double.valueOf(params.get("thickness")));
+        }
+        productDTO.setPurpose(params.get("toiletPurpose"));// "公厕等"
+        productDTO.setApplicableCondition(params.get("applicableCondition"));
+        productDTO.setSpecialParam(params.get("specialParam"));
+        productDTO.setProductTheory(params.get("productTheory"));
 
 
         productDTO.setProductParameters(paramsDTO);
@@ -274,7 +293,7 @@ public class ProductController {
     private String buildPicsPath(Map<String, String> params) {
         List<String> picsPathKey = Lists.newArrayList("pics1", "pics2", "pics3", "pics4");
 
-        List<String> picsPath = picsPathKey.stream().filter(e -> params.get(e)!=null).map(params::get).collect(Collectors.toList());
+        List<String> picsPath = picsPathKey.stream().filter(e -> !StringUtils.isEmpty(params.get(e))).map(params::get).collect(Collectors.toList());
 
         if (CollectionUtils.isEmpty(picsPath)) {
             throw new ToiletBizException("上传图片不能为空！", -1);

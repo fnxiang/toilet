@@ -11,6 +11,9 @@ public class ProductConverter {
 
     public static ToiletProductDO toDO(ToiletProductDTO productDTO) {
         ToiletProductDO productDO = new ToiletProductDO();
+        productDO.setPrice(productDTO.getProductParameters().getPrice());
+        productDO.setCleanCycle(Integer.valueOf(productDTO.getProductParameters().getCleanupCycle()));
+        productDO.setServiceLife(Integer.valueOf(productDTO.getProductParameters().getServiceLife()));
         BeanUtils.copyProperties(productDTO, productDO);
         productDO.setProductParameters(JSON.toJSONString(productDTO.getProductParameters()));
         return productDO;

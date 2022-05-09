@@ -9,9 +9,9 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="manufacturer_name" jdbcType="VARCHAR" property="manufacturerName" />
     <result column="manufacturer_cell" jdbcType="VARCHAR" property="manufacturerCell" />
-    <result column="product_type" jdbcType="INTEGER" property="productType" />
+    <result column="product_type" jdbcType="VARCHAR" property="productType" />
     <result column="pattern_type" jdbcType="VARCHAR" property="patternType" />
-    <result column="pattern_id" jdbcType="INTEGER" property="patternId" />
+    <result column="pattern_id" jdbcType="VARCHAR" property="patternId" />
     <result column="pattern_name" jdbcType="VARCHAR" property="patternName" />
     <result column="company_email" jdbcType="VARCHAR" property="companyEmail" />
     <result column="applicable_province" jdbcType="VARCHAR" property="applicableProvince" />
@@ -22,6 +22,12 @@
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="attributes" jdbcType="VARCHAR" property="attributes" />
     <result column="pattern_sort_id" jdbcType="INTEGER" property="patternSortId" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="clean_cycle" jdbcType="INTEGER" property="cleanCycle" />
+    <result column="service_life" jdbcType="INTEGER" property="serviceLife" />
+    <result column="product_theory" jdbcType="VARCHAR" property="productTheory" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="appliable_condition" jdbcType="VARCHAR" property="appliableCondition" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.bjtu.toilet.dao.domain.ToiletProductDO">
     <result column="purpose" jdbcType="LONGVARCHAR" property="purpose" />
@@ -92,7 +98,8 @@
   <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, product_name, status, manufacturer_name, manufacturer_cell, 
     product_type, pattern_type, pattern_id, pattern_name, company_email, applicable_province, 
-    `applicable _temperature`, professor_id, version, deleted, source, attributes, pattern_sort_id
+    `applicable _temperature`, professor_id, version, deleted, source, attributes, pattern_sort_id, 
+    price, clean_cycle, service_life, product_theory, params, appliable_condition
   </sql>
   <sql id="Blob_Column_List">
     purpose, product_parameters, quality_assurance_materials_file_path, instruction_file_path, 
@@ -154,16 +161,20 @@
       applicable_province, `applicable _temperature`, 
       professor_id, version, deleted, 
       source, attributes, pattern_sort_id, 
+      price, clean_cycle, service_life, 
+      product_theory, params, appliable_condition, 
       purpose, product_parameters, quality_assurance_materials_file_path, 
       instruction_file_path, product_features, 
       pics_path)
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{productName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{manufacturerName,jdbcType=VARCHAR}, 
-      #{manufacturerCell,jdbcType=VARCHAR}, #{productType,jdbcType=INTEGER}, #{patternType,jdbcType=VARCHAR}, 
-      #{patternId,jdbcType=INTEGER}, #{patternName,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, 
+      #{manufacturerCell,jdbcType=VARCHAR}, #{productType,jdbcType=VARCHAR}, #{patternType,jdbcType=VARCHAR}, 
+      #{patternId,jdbcType=VARCHAR}, #{patternName,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, 
       #{applicableProvince,jdbcType=VARCHAR}, #{applicableTemperature,jdbcType=VARCHAR}, 
       #{professorId,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, 
       #{source,jdbcType=VARCHAR}, #{attributes,jdbcType=VARCHAR}, #{patternSortId,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE}, #{cleanCycle,jdbcType=INTEGER}, #{serviceLife,jdbcType=INTEGER}, 
+      #{productTheory,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{appliableCondition,jdbcType=VARCHAR}, 
       #{purpose,jdbcType=LONGVARCHAR}, #{productParameters,jdbcType=LONGVARCHAR}, #{qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR}, 
       #{instructionFilePath,jdbcType=LONGVARCHAR}, #{productFeatures,jdbcType=LONGVARCHAR}, 
       #{picsPath,jdbcType=LONGVARCHAR})
@@ -231,6 +242,24 @@
       <if test="patternSortId != null">
         pattern_sort_id,
       </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="cleanCycle != null">
+        clean_cycle,
+      </if>
+      <if test="serviceLife != null">
+        service_life,
+      </if>
+      <if test="productTheory != null">
+        product_theory,
+      </if>
+      <if test="params != null">
+        params,
+      </if>
+      <if test="appliableCondition != null">
+        appliable_condition,
+      </if>
       <if test="purpose != null">
         purpose,
       </if>
@@ -273,13 +302,13 @@
         #{manufacturerCell,jdbcType=VARCHAR},
       </if>
       <if test="productType != null">
-        #{productType,jdbcType=INTEGER},
+        #{productType,jdbcType=VARCHAR},
       </if>
       <if test="patternType != null">
         #{patternType,jdbcType=VARCHAR},
       </if>
       <if test="patternId != null">
-        #{patternId,jdbcType=INTEGER},
+        #{patternId,jdbcType=VARCHAR},
       </if>
       <if test="patternName != null">
         #{patternName,jdbcType=VARCHAR},
@@ -310,6 +339,24 @@
       </if>
       <if test="patternSortId != null">
         #{patternSortId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="cleanCycle != null">
+        #{cleanCycle,jdbcType=INTEGER},
+      </if>
+      <if test="serviceLife != null">
+        #{serviceLife,jdbcType=INTEGER},
+      </if>
+      <if test="productTheory != null">
+        #{productTheory,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="appliableCondition != null">
+        #{appliableCondition,jdbcType=VARCHAR},
       </if>
       <if test="purpose != null">
         #{purpose,jdbcType=LONGVARCHAR},
@@ -362,13 +409,13 @@
         manufacturer_cell = #{record.manufacturerCell,jdbcType=VARCHAR},
       </if>
       <if test="record.productType != null">
-        product_type = #{record.productType,jdbcType=INTEGER},
+        product_type = #{record.productType,jdbcType=VARCHAR},
       </if>
       <if test="record.patternType != null">
         pattern_type = #{record.patternType,jdbcType=VARCHAR},
       </if>
       <if test="record.patternId != null">
-        pattern_id = #{record.patternId,jdbcType=INTEGER},
+        pattern_id = #{record.patternId,jdbcType=VARCHAR},
       </if>
       <if test="record.patternName != null">
         pattern_name = #{record.patternName,jdbcType=VARCHAR},
@@ -399,6 +446,24 @@
       </if>
       <if test="record.patternSortId != null">
         pattern_sort_id = #{record.patternSortId,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cleanCycle != null">
+        clean_cycle = #{record.cleanCycle,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceLife != null">
+        service_life = #{record.serviceLife,jdbcType=INTEGER},
+      </if>
+      <if test="record.productTheory != null">
+        product_theory = #{record.productTheory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.params != null">
+        params = #{record.params,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appliableCondition != null">
+        appliable_condition = #{record.appliableCondition,jdbcType=VARCHAR},
       </if>
       <if test="record.purpose != null">
         purpose = #{record.purpose,jdbcType=LONGVARCHAR},
@@ -432,9 +497,9 @@
       status = #{record.status,jdbcType=INTEGER},
       manufacturer_name = #{record.manufacturerName,jdbcType=VARCHAR},
       manufacturer_cell = #{record.manufacturerCell,jdbcType=VARCHAR},
-      product_type = #{record.productType,jdbcType=INTEGER},
+      product_type = #{record.productType,jdbcType=VARCHAR},
       pattern_type = #{record.patternType,jdbcType=VARCHAR},
-      pattern_id = #{record.patternId,jdbcType=INTEGER},
+      pattern_id = #{record.patternId,jdbcType=VARCHAR},
       pattern_name = #{record.patternName,jdbcType=VARCHAR},
       company_email = #{record.companyEmail,jdbcType=VARCHAR},
       applicable_province = #{record.applicableProvince,jdbcType=VARCHAR},
@@ -445,6 +510,12 @@
       source = #{record.source,jdbcType=VARCHAR},
       attributes = #{record.attributes,jdbcType=VARCHAR},
       pattern_sort_id = #{record.patternSortId,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DOUBLE},
+      clean_cycle = #{record.cleanCycle,jdbcType=INTEGER},
+      service_life = #{record.serviceLife,jdbcType=INTEGER},
+      product_theory = #{record.productTheory,jdbcType=VARCHAR},
+      params = #{record.params,jdbcType=VARCHAR},
+      appliable_condition = #{record.appliableCondition,jdbcType=VARCHAR},
       purpose = #{record.purpose,jdbcType=LONGVARCHAR},
       product_parameters = #{record.productParameters,jdbcType=LONGVARCHAR},
       quality_assurance_materials_file_path = #{record.qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR},
@@ -464,9 +535,9 @@
       status = #{record.status,jdbcType=INTEGER},
       manufacturer_name = #{record.manufacturerName,jdbcType=VARCHAR},
       manufacturer_cell = #{record.manufacturerCell,jdbcType=VARCHAR},
-      product_type = #{record.productType,jdbcType=INTEGER},
+      product_type = #{record.productType,jdbcType=VARCHAR},
       pattern_type = #{record.patternType,jdbcType=VARCHAR},
-      pattern_id = #{record.patternId,jdbcType=INTEGER},
+      pattern_id = #{record.patternId,jdbcType=VARCHAR},
       pattern_name = #{record.patternName,jdbcType=VARCHAR},
       company_email = #{record.companyEmail,jdbcType=VARCHAR},
       applicable_province = #{record.applicableProvince,jdbcType=VARCHAR},
@@ -476,7 +547,13 @@
       deleted = #{record.deleted,jdbcType=BIT},
       source = #{record.source,jdbcType=VARCHAR},
       attributes = #{record.attributes,jdbcType=VARCHAR},
-      pattern_sort_id = #{record.patternSortId,jdbcType=INTEGER}
+      pattern_sort_id = #{record.patternSortId,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DOUBLE},
+      clean_cycle = #{record.cleanCycle,jdbcType=INTEGER},
+      service_life = #{record.serviceLife,jdbcType=INTEGER},
+      product_theory = #{record.productTheory,jdbcType=VARCHAR},
+      params = #{record.params,jdbcType=VARCHAR},
+      appliable_condition = #{record.appliableCondition,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -503,13 +580,13 @@
         manufacturer_cell = #{manufacturerCell,jdbcType=VARCHAR},
       </if>
       <if test="productType != null">
-        product_type = #{productType,jdbcType=INTEGER},
+        product_type = #{productType,jdbcType=VARCHAR},
       </if>
       <if test="patternType != null">
         pattern_type = #{patternType,jdbcType=VARCHAR},
       </if>
       <if test="patternId != null">
-        pattern_id = #{patternId,jdbcType=INTEGER},
+        pattern_id = #{patternId,jdbcType=VARCHAR},
       </if>
       <if test="patternName != null">
         pattern_name = #{patternName,jdbcType=VARCHAR},
@@ -541,6 +618,24 @@
       <if test="patternSortId != null">
         pattern_sort_id = #{patternSortId,jdbcType=INTEGER},
       </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="cleanCycle != null">
+        clean_cycle = #{cleanCycle,jdbcType=INTEGER},
+      </if>
+      <if test="serviceLife != null">
+        service_life = #{serviceLife,jdbcType=INTEGER},
+      </if>
+      <if test="productTheory != null">
+        product_theory = #{productTheory,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        params = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="appliableCondition != null">
+        appliable_condition = #{appliableCondition,jdbcType=VARCHAR},
+      </if>
       <if test="purpose != null">
         purpose = #{purpose,jdbcType=LONGVARCHAR},
       </if>
@@ -570,9 +665,9 @@
       status = #{status,jdbcType=INTEGER},
       manufacturer_name = #{manufacturerName,jdbcType=VARCHAR},
       manufacturer_cell = #{manufacturerCell,jdbcType=VARCHAR},
-      product_type = #{productType,jdbcType=INTEGER},
+      product_type = #{productType,jdbcType=VARCHAR},
       pattern_type = #{patternType,jdbcType=VARCHAR},
-      pattern_id = #{patternId,jdbcType=INTEGER},
+      pattern_id = #{patternId,jdbcType=VARCHAR},
       pattern_name = #{patternName,jdbcType=VARCHAR},
       company_email = #{companyEmail,jdbcType=VARCHAR},
       applicable_province = #{applicableProvince,jdbcType=VARCHAR},
@@ -583,6 +678,12 @@
       source = #{source,jdbcType=VARCHAR},
       attributes = #{attributes,jdbcType=VARCHAR},
       pattern_sort_id = #{patternSortId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      clean_cycle = #{cleanCycle,jdbcType=INTEGER},
+      service_life = #{serviceLife,jdbcType=INTEGER},
+      product_theory = #{productTheory,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      appliable_condition = #{appliableCondition,jdbcType=VARCHAR},
       purpose = #{purpose,jdbcType=LONGVARCHAR},
       product_parameters = #{productParameters,jdbcType=LONGVARCHAR},
       quality_assurance_materials_file_path = #{qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR},
@@ -599,9 +700,9 @@
       status = #{status,jdbcType=INTEGER},
       manufacturer_name = #{manufacturerName,jdbcType=VARCHAR},
       manufacturer_cell = #{manufacturerCell,jdbcType=VARCHAR},
-      product_type = #{productType,jdbcType=INTEGER},
+      product_type = #{productType,jdbcType=VARCHAR},
       pattern_type = #{patternType,jdbcType=VARCHAR},
-      pattern_id = #{patternId,jdbcType=INTEGER},
+      pattern_id = #{patternId,jdbcType=VARCHAR},
       pattern_name = #{patternName,jdbcType=VARCHAR},
       company_email = #{companyEmail,jdbcType=VARCHAR},
       applicable_province = #{applicableProvince,jdbcType=VARCHAR},
@@ -611,7 +712,13 @@
       deleted = #{deleted,jdbcType=BIT},
       source = #{source,jdbcType=VARCHAR},
       attributes = #{attributes,jdbcType=VARCHAR},
-      pattern_sort_id = #{patternSortId,jdbcType=INTEGER}
+      pattern_sort_id = #{patternSortId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      clean_cycle = #{cleanCycle,jdbcType=INTEGER},
+      service_life = #{serviceLife,jdbcType=INTEGER},
+      product_theory = #{productTheory,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      appliable_condition = #{appliableCondition,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,6 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="com.alibaba.fastjson.JSON" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.apache.commons.collections4.CollectionUtils" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -29,10 +30,10 @@
 <%
     String sort_condition = "price";
     String sort_way = "false";
-    if (request.getAttribute("sort_condition")!=null) {
+    if (request.getAttribute("sort_condition") != null) {
         sort_condition = request.getAttribute("sort_condition").toString();
     }
-    if (request.getAttribute("sort_way")!=null) {
+    if (request.getAttribute("sort_way") != null) {
         sort_way = request.getAttribute("sort_way").toString();
     }
 %>
@@ -106,35 +107,44 @@
             <!-- .c_header -->
             <div id="list_carousel" class="list_carousel">
 
-                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>)request.getAttribute("productList");%>
+                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>
                 <c:set var="list" value="<%=JSON.toJSONString(productList)%>" scope="application"/>
                 <% String path = request.getContextPath();
                     String basePath = request.getScheme() + "://"
                             + request.getServerName() + ":" + request.getServerPort()
                             + path + "/";%>
-                <ul id="list_product" class="list_product">
-                    <% for (ToiletProductDTO productDTO : productList) {
-                        String firstPicPath = productDTO.getPicsPath().split(";")[0];
+
+                <%
+                    if (!CollectionUtils.isEmpty(productList)) {
+                        for (int i = 0, j; i < Math.ceil(productList.size() / 4.0); i++) {%>
+                <ul id="list_product_<%=i%>" class="list_product">
+                    <%
+
+                        for (j=i*4; j < 4*(i+1); j++) {
+                            String firstPicPath = productList.get(j).getPicsPath().split(";")[0];
                     %>
                     <li value="">
                         <div class="grid_3 product">
                             <div class="prev">
-                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_info&product_id=<%=productDTO.getId()%>"><img
+                                <a href="${pageContext.request.contextPath}/toProductPage?url=product_info&product_id=<%=productList.get(j).getId()%>"><img
                                         src="<%=basePath+firstPicPath%>"
                                         alt="" title=""/></a>
                             </div>
                             <!-- .prev -->
-                            <h3 class="title" style="height: 25px;"><%=productDTO.getProductName()%>
+                            <h3 class="title" style="height: 25px;"><%=productList.get(j).getProductName()%>
                             </h3>
 
                             <div class="cart">
                                 <div class="price" style="width: 120px">
                                     <div class="vert">
-                                        <div class="price_new">价格：<%=productDTO.getProductParameters().getPrice()%>万元
+                                        <div class="price_new">
+                                            价格：<%=productList.get(j).getProductParameters().getPrice()%>万元
                                         </div>
-                                        <div class="price_new">使用寿命：<%=productDTO.getProductParameters().getServiceLife()%>年
+                                        <div class="price_new">
+                                            使用寿命：<%=productList.get(j).getProductParameters().getServiceLife()%>年
                                         </div>
-                                        <div class="price_new">清理周期：<%=productDTO.getProductParameters().getCleanupCycle()%>个月
+                                        <div class="price_new">
+                                            清理周期：<%=productList.get(j).getProductParameters().getCleanupCycle()%>个月
                                         </div>
                                     </div>
                                 </div>
@@ -143,6 +153,12 @@
                         </div>
                         <!-- .grid_3 -->
                     </li>
+                    <%
+                            }
+                        }
+                    } else {
+                    %>
+                    <h3>暂无相关产品</h3>
                     <%}%>
                 </ul>
 

@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
+<%@ page import="org.apache.commons.collections4.CollectionUtils" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html>
@@ -21,7 +22,6 @@
           type="text/css">
 
 
-
 </head>
 <body>
 <jsp:include page="product_banner.jsp"/>
@@ -30,14 +30,14 @@
     String sort_way = "false";
     String search_condition = "";
 
-    if (request.getAttribute("search_condition")!=null) {
+    if (request.getAttribute("search_condition") != null) {
         search_condition = request.getAttribute("search_condition").toString();
     }
 
-    if (request.getAttribute("sort_condition")!=null) {
+    if (request.getAttribute("sort_condition") != null) {
         sort_condition = request.getAttribute("sort_condition").toString();
     }
-    if (request.getAttribute("sort_way")!=null) {
+    if (request.getAttribute("sort_way") != null) {
         sort_way = request.getAttribute("sort_way").toString();
     }
 %>
@@ -90,7 +90,6 @@
         <div id="content" class="grid_12">
 
 
-
             <div class="c_header">
                 <div class="grid_5">
                     <h2 onclick="">模式搜索结果</h2>
@@ -122,14 +121,15 @@
 
             <%List<ToiletPatternDTO> results = (List<ToiletPatternDTO>) request.getAttribute("patternList");%>
             <div class="listing_product grid_12">
-                <%  if (results != null) {
+                <% if (!CollectionUtils.isEmpty(results)) {
                     for (ToiletPatternDTO patternDTO : results) {%>
                 <div class="product_li">
 
                     <div class="grid_10">
                         <div class="entry_content" style="border-right-width: 0px; height: 80px;">
-                            <a href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results'">
-                                <h3 class="title"><%=patternDTO.getPatternType()%></h3>
+                            <a href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results&patternId=<%=patternDTO.getId()%>'">
+                                <h3 class="title"><%=patternDTO.getPatternType()%>
+                                </h3>
                             </a>
                             <a class="more"
                                href="javascript:window.location.href='${pageContext.request.contextPath}/toProductPage?url=product_results&patternId=<%=patternDTO.getId()%>'">查看产品列表</a>
@@ -140,10 +140,12 @@
 
                     <div class="clear"></div>
                 </div>
-                <%}} else {%>
-                    <h2>暂无搜索结果</h2>
+                <%
+                    }
+                } else {
+                %>
+                <h2>暂无符合条件的模式:(</h2>
                 <%}%>
-
 
 
                 <div class="clear"></div>
