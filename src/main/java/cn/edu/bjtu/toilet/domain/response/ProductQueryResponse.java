@@ -10,7 +10,7 @@ public class ProductQueryResponse {
 
     private Integer maxPage;
 
-    private Integer current;
+    private Integer currentPage;
 
     private Integer pageSize;
 

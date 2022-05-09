@@ -1,13 +1,14 @@
 package cn.edu.bjtu.toilet.service;
 
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
+import cn.edu.bjtu.toilet.domain.response.PatternQueryResponse;
 import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 
 import java.util.List;
 
 public interface PatternService {
 
-    List<ToiletPatternDTO> sortPattern(PatternSortRequest request);
+    PatternQueryResponse sortPattern(PatternSortRequest request);
 
-    List<ToiletPatternDTO> sortPatternWithCondition(PatternSortRequest request, ToiletPatternDTO condition);
+    PatternQueryResponse sortPatternWithCondition(PatternSortRequest request, ToiletPatternDTO condition);
 }

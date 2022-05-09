@@ -3,6 +3,7 @@ package cn.edu.bjtu.toilet.controller;
 import cn.edu.bjtu.toilet.constant.*;
 import cn.edu.bjtu.toilet.domain.SearchResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
+import cn.edu.bjtu.toilet.domain.response.PatternQueryResponse;
 import cn.edu.bjtu.toilet.service.PatternService;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
@@ -73,7 +74,7 @@ public class SearchController {
             List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
 
             List<ToiletProductDTO> searchResults = matchConditions(productDTOS, searchConditions);
-            request.setAttribute("test", "searchResults");
+            request.setAttribute("product_search_condition", JSON.toJSONString(searchConditions));
             request.setAttribute("productList", searchResults);
         } catch (Exception e) {
             LOG.error("search error with exception: {}", e.getMessage());
@@ -84,6 +85,7 @@ public class SearchController {
     @RequestMapping("/search/mode/results")
     public String modeSearch(HttpServletRequest request) {
         try {
+            PatternQueryResponse response;
             Map<String, String> params = ParameterUtil.resolveParams(request);
 
             if (params.size() == 0) {
@@ -97,9 +99,9 @@ public class SearchController {
             sortRequest.setSortBy("water_save_score");
             sortRequest.setIsDesc(false);
 
-            List<ToiletPatternDTO> patternDTOS = patternService.sortPattern(sortRequest);
+            response = patternService.sortPattern(sortRequest);
 
-            patternDTOS = matchPatternConditions(patternDTOS, searchDTO);
+            List<ToiletPatternDTO> patternDTOS = matchPatternConditions(response.getPatternDTOList(), searchDTO);
 
             request.setAttribute("patternList", patternDTOS);
             request.setAttribute("search_condition", JSON.toJSONString(searchDTO));

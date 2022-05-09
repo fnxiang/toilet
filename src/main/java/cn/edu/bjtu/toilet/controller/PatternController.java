@@ -2,6 +2,7 @@ package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
+import cn.edu.bjtu.toilet.domain.response.PatternQueryResponse;
 import cn.edu.bjtu.toilet.service.PatternService;
 import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
@@ -32,27 +33,27 @@ public class PatternController {
     private PatternService patternService;
 
     @RequestMapping("/pattern/sort")
-    public String sortPattern(HttpServletRequest request, HttpServletResponse response) {
+    public String sortPattern(HttpServletRequest request) {
         try {
+            PatternQueryResponse response;
             Map<String, String> params = ParameterUtil.resolveParams(request);
-            if (Objects.isNull(params)) {
+            if (params.size()==0) {
                 return ERROR_PAGE;
             }
             PatternSortRequest sortRequest = buildSortPatternRequest(params);
-            List<ToiletPatternDTO> patternDTOS;
             ToiletPatternDTO searchCondition = JSON.parseObject(params.get("search_condition"), ToiletPatternDTO.class);
 
             if (searchCondition == null) {
-                patternDTOS = patternService.sortPattern(sortRequest);
+                response = patternService.sortPattern(sortRequest);
             } else {
-                patternDTOS = patternService.sortPatternWithCondition(sortRequest, searchCondition);
+                response = patternService.sortPatternWithCondition(sortRequest, searchCondition);
 
             }
             request.setAttribute("search_condition", params.get("search_condition"));
             request.setAttribute("sort_condition", params.get("sortBy"));
             request.setAttribute("sort_way", params.get("desc"));
 
-            request.setAttribute("patternList", patternDTOS);
+            request.setAttribute("patternList", response.getPatternDTOList());
         } catch (Exception e) {
             LOG.error("PatternController -> sortPattern ,sort pattern failed : {}", e.getMessage());
         }

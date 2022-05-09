@@ -1,8 +1,9 @@
 package cn.edu.bjtu.toilet.service;
 
+import cn.edu.bjtu.toilet.domain.dto.ProductSearchConditionsDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
-import cn.edu.bjtu.toilet.domain.request.ProductRequest;
+import cn.edu.bjtu.toilet.domain.request.ProductSortRequest;
 import cn.edu.bjtu.toilet.domain.response.ProductQueryResponse;
 
 import java.util.List;
@@ -15,7 +16,9 @@ public interface ProductService {
 
     List<ToiletProductDTO> queryAllProductList(String email);
 
-    ProductQueryResponse queryPageProduct(ProductRequest request);
+    ProductQueryResponse queryPageProduct(ProductSortRequest request);
+
+    ProductQueryResponse queryPageProductWithCondition(ProductSortRequest request, ProductSearchConditionsDTO searchConditions);
 
     List<ToiletProductDTO> queryProductListByPattern(Integer patternId);
 
