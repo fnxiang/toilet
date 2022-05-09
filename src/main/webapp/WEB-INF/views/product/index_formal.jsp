@@ -140,7 +140,7 @@
                                 <div class="price" style="width: 120px">
                                     <div class="vert">
                                         <div class="price_new">
-                                            价格：<%=productList.get(j).getProductParameters().getPrice()%>万元
+                                            价格：<%=productList.get(j).getProductParameters().getPrice() * 10000%>元
                                         </div>
                                         <div class="price_new">
                                             使用寿命：<%=productList.get(j).getProductParameters().getServiceLife()%>年
