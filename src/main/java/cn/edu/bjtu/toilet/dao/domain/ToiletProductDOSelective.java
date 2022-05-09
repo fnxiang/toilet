@@ -1745,73 +1745,73 @@ public class ToiletProductDOSelective {
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionIsNull() {
-            addCriterion("appliable_condition is null");
+        public Criteria andApplicableConditionIsNull() {
+            addCriterion("applicable_condition is null");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionIsNotNull() {
-            addCriterion("appliable_condition is not null");
+        public Criteria andApplicableConditionIsNotNull() {
+            addCriterion("applicable_condition is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionEqualTo(String value) {
-            addCriterion("appliable_condition =", value, "appliableCondition");
+        public Criteria andApplicableConditionEqualTo(String value) {
+            addCriterion("applicable_condition =", value, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionNotEqualTo(String value) {
-            addCriterion("appliable_condition <>", value, "appliableCondition");
+        public Criteria andApplicableConditionNotEqualTo(String value) {
+            addCriterion("applicable_condition <>", value, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionGreaterThan(String value) {
-            addCriterion("appliable_condition >", value, "appliableCondition");
+        public Criteria andApplicableConditionGreaterThan(String value) {
+            addCriterion("applicable_condition >", value, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionGreaterThanOrEqualTo(String value) {
-            addCriterion("appliable_condition >=", value, "appliableCondition");
+        public Criteria andApplicableConditionGreaterThanOrEqualTo(String value) {
+            addCriterion("applicable_condition >=", value, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionLessThan(String value) {
-            addCriterion("appliable_condition <", value, "appliableCondition");
+        public Criteria andApplicableConditionLessThan(String value) {
+            addCriterion("applicable_condition <", value, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionLessThanOrEqualTo(String value) {
-            addCriterion("appliable_condition <=", value, "appliableCondition");
+        public Criteria andApplicableConditionLessThanOrEqualTo(String value) {
+            addCriterion("applicable_condition <=", value, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionLike(String value) {
-            addCriterion("appliable_condition like", value, "appliableCondition");
+        public Criteria andApplicableConditionLike(String value) {
+            addCriterion("applicable_condition like", value, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionNotLike(String value) {
-            addCriterion("appliable_condition not like", value, "appliableCondition");
+        public Criteria andApplicableConditionNotLike(String value) {
+            addCriterion("applicable_condition not like", value, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionIn(List<String> values) {
-            addCriterion("appliable_condition in", values, "appliableCondition");
+        public Criteria andApplicableConditionIn(List<String> values) {
+            addCriterion("applicable_condition in", values, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionNotIn(List<String> values) {
-            addCriterion("appliable_condition not in", values, "appliableCondition");
+        public Criteria andApplicableConditionNotIn(List<String> values) {
+            addCriterion("applicable_condition not in", values, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionBetween(String value1, String value2) {
-            addCriterion("appliable_condition between", value1, value2, "appliableCondition");
+        public Criteria andApplicableConditionBetween(String value1, String value2) {
+            addCriterion("applicable_condition between", value1, value2, "applicableCondition");
             return (Criteria) this;
         }
 
-        public Criteria andAppliableConditionNotBetween(String value1, String value2) {
-            addCriterion("appliable_condition not between", value1, value2, "appliableCondition");
+        public Criteria andApplicableConditionNotBetween(String value1, String value2) {
+            addCriterion("applicable_condition not between", value1, value2, "applicableCondition");
             return (Criteria) this;
         }
     }

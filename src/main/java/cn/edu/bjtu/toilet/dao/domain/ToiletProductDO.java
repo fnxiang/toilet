@@ -54,7 +54,7 @@ public class ToiletProductDO implements Serializable {
 
     private String params;
 
-    private String appliableCondition;
+    private String applicableCondition;
 
     private String purpose;
 
@@ -270,12 +270,12 @@ public class ToiletProductDO implements Serializable {
         this.params = params == null ? null : params.trim();
     }
 
-    public String getAppliableCondition() {
-        return appliableCondition;
+    public String getApplicableCondition() {
+        return applicableCondition;
     }
 
-    public void setAppliableCondition(String appliableCondition) {
-        this.appliableCondition = appliableCondition == null ? null : appliableCondition.trim();
+    public void setApplicableCondition(String applicableCondition) {
+        this.applicableCondition = applicableCondition == null ? null : applicableCondition.trim();
     }
 
     public String getPurpose() {
@@ -357,7 +357,7 @@ public class ToiletProductDO implements Serializable {
         sb.append(", serviceLife=").append(serviceLife);
         sb.append(", productTheory=").append(productTheory);
         sb.append(", params=").append(params);
-        sb.append(", appliableCondition=").append(appliableCondition);
+        sb.append(", applicableCondition=").append(applicableCondition);
         sb.append(", purpose=").append(purpose);
         sb.append(", productParameters=").append(productParameters);
         sb.append(", qualityAssuranceMaterialsFilePath=").append(qualityAssuranceMaterialsFilePath);

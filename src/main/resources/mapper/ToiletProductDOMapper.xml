@@ -27,7 +27,7 @@
     <result column="service_life" jdbcType="INTEGER" property="serviceLife" />
     <result column="product_theory" jdbcType="VARCHAR" property="productTheory" />
     <result column="params" jdbcType="VARCHAR" property="params" />
-    <result column="appliable_condition" jdbcType="VARCHAR" property="appliableCondition" />
+    <result column="applicable_condition" jdbcType="VARCHAR" property="applicableCondition" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.bjtu.toilet.dao.domain.ToiletProductDO">
     <result column="purpose" jdbcType="LONGVARCHAR" property="purpose" />
@@ -99,7 +99,7 @@
     id, gmt_create, gmt_modified, product_name, status, manufacturer_name, manufacturer_cell, 
     product_type, pattern_type, pattern_id, pattern_name, company_email, applicable_province, 
     `applicable _temperature`, professor_id, version, deleted, source, attributes, pattern_sort_id, 
-    price, clean_cycle, service_life, product_theory, params, appliable_condition
+    price, clean_cycle, service_life, product_theory, params, applicable_condition
   </sql>
   <sql id="Blob_Column_List">
     purpose, product_parameters, quality_assurance_materials_file_path, instruction_file_path, 
@@ -162,7 +162,7 @@
       professor_id, version, deleted, 
       source, attributes, pattern_sort_id, 
       price, clean_cycle, service_life, 
-      product_theory, params, appliable_condition, 
+      product_theory, params, applicable_condition, 
       purpose, product_parameters, quality_assurance_materials_file_path, 
       instruction_file_path, product_features, 
       pics_path)
@@ -174,7 +174,7 @@
       #{professorId,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, 
       #{source,jdbcType=VARCHAR}, #{attributes,jdbcType=VARCHAR}, #{patternSortId,jdbcType=INTEGER}, 
       #{price,jdbcType=DOUBLE}, #{cleanCycle,jdbcType=INTEGER}, #{serviceLife,jdbcType=INTEGER}, 
-      #{productTheory,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{appliableCondition,jdbcType=VARCHAR}, 
+      #{productTheory,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{applicableCondition,jdbcType=VARCHAR}, 
       #{purpose,jdbcType=LONGVARCHAR}, #{productParameters,jdbcType=LONGVARCHAR}, #{qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR}, 
       #{instructionFilePath,jdbcType=LONGVARCHAR}, #{productFeatures,jdbcType=LONGVARCHAR}, 
       #{picsPath,jdbcType=LONGVARCHAR})
@@ -257,8 +257,8 @@
       <if test="params != null">
         params,
       </if>
-      <if test="appliableCondition != null">
-        appliable_condition,
+      <if test="applicableCondition != null">
+        applicable_condition,
       </if>
       <if test="purpose != null">
         purpose,
@@ -355,8 +355,8 @@
       <if test="params != null">
         #{params,jdbcType=VARCHAR},
       </if>
-      <if test="appliableCondition != null">
-        #{appliableCondition,jdbcType=VARCHAR},
+      <if test="applicableCondition != null">
+        #{applicableCondition,jdbcType=VARCHAR},
       </if>
       <if test="purpose != null">
         #{purpose,jdbcType=LONGVARCHAR},
@@ -462,8 +462,8 @@
       <if test="record.params != null">
         params = #{record.params,jdbcType=VARCHAR},
       </if>
-      <if test="record.appliableCondition != null">
-        appliable_condition = #{record.appliableCondition,jdbcType=VARCHAR},
+      <if test="record.applicableCondition != null">
+        applicable_condition = #{record.applicableCondition,jdbcType=VARCHAR},
       </if>
       <if test="record.purpose != null">
         purpose = #{record.purpose,jdbcType=LONGVARCHAR},
@@ -515,7 +515,7 @@
       service_life = #{record.serviceLife,jdbcType=INTEGER},
       product_theory = #{record.productTheory,jdbcType=VARCHAR},
       params = #{record.params,jdbcType=VARCHAR},
-      appliable_condition = #{record.appliableCondition,jdbcType=VARCHAR},
+      applicable_condition = #{record.applicableCondition,jdbcType=VARCHAR},
       purpose = #{record.purpose,jdbcType=LONGVARCHAR},
       product_parameters = #{record.productParameters,jdbcType=LONGVARCHAR},
       quality_assurance_materials_file_path = #{record.qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR},
@@ -553,7 +553,7 @@
       service_life = #{record.serviceLife,jdbcType=INTEGER},
       product_theory = #{record.productTheory,jdbcType=VARCHAR},
       params = #{record.params,jdbcType=VARCHAR},
-      appliable_condition = #{record.appliableCondition,jdbcType=VARCHAR}
+      applicable_condition = #{record.applicableCondition,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -633,8 +633,8 @@
       <if test="params != null">
         params = #{params,jdbcType=VARCHAR},
       </if>
-      <if test="appliableCondition != null">
-        appliable_condition = #{appliableCondition,jdbcType=VARCHAR},
+      <if test="applicableCondition != null">
+        applicable_condition = #{applicableCondition,jdbcType=VARCHAR},
       </if>
       <if test="purpose != null">
         purpose = #{purpose,jdbcType=LONGVARCHAR},
@@ -683,7 +683,7 @@
       service_life = #{serviceLife,jdbcType=INTEGER},
       product_theory = #{productTheory,jdbcType=VARCHAR},
       params = #{params,jdbcType=VARCHAR},
-      appliable_condition = #{appliableCondition,jdbcType=VARCHAR},
+      applicable_condition = #{applicableCondition,jdbcType=VARCHAR},
       purpose = #{purpose,jdbcType=LONGVARCHAR},
       product_parameters = #{productParameters,jdbcType=LONGVARCHAR},
       quality_assurance_materials_file_path = #{qualityAssuranceMaterialsFilePath,jdbcType=LONGVARCHAR},
@@ -718,7 +718,7 @@
       service_life = #{serviceLife,jdbcType=INTEGER},
       product_theory = #{productTheory,jdbcType=VARCHAR},
       params = #{params,jdbcType=VARCHAR},
-      appliable_condition = #{appliableCondition,jdbcType=VARCHAR}
+      applicable_condition = #{applicableCondition,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
