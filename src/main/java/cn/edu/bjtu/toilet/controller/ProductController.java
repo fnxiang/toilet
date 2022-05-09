@@ -2,11 +2,10 @@ package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
-import cn.edu.bjtu.toilet.constant.ProductType;
 import cn.edu.bjtu.toilet.domain.ModeResponse;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
-import cn.edu.bjtu.toilet.domain.request.ProductRequest;
+import cn.edu.bjtu.toilet.domain.request.ProductSortRequest;
 import cn.edu.bjtu.toilet.domain.response.ProductQueryResponse;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
@@ -39,7 +38,7 @@ public class ProductController {
     @RequestMapping("/")
     public String index(HttpServletRequest request){
         try {
-            ProductRequest queryRequest = new ProductRequest();
+            ProductSortRequest queryRequest = new ProductSortRequest();
             queryRequest.setEmail("");
             queryRequest.setIsDesc(false);
             queryRequest.setSortBy("id");
@@ -59,9 +58,9 @@ public class ProductController {
         return INDEX;
     }
 
-    private ProductRequest buildQueryRequest(HttpServletRequest request) throws Exception {
+    private ProductSortRequest buildQueryRequest(HttpServletRequest request) throws Exception {
         Map<String,String> params = ParameterUtil.resolveParams(request);
-        ProductRequest queryRequest = new ProductRequest();
+        ProductSortRequest queryRequest = new ProductSortRequest();
         queryRequest.setEmail("");
         queryRequest.setIsDesc(false);
         queryRequest.setSortBy("id");
@@ -92,8 +91,8 @@ public class ProductController {
                     request.setAttribute("productList", productDTOS);
                     return INDEX;
                 case "next":
-                    ProductRequest productRequest = buildQueryRequest(request);
-                    ProductQueryResponse response = productService.queryPageProduct(productRequest);
+                    ProductSortRequest productSortRequest = buildQueryRequest(request);
+                    ProductQueryResponse response = productService.queryPageProduct(productSortRequest);
 
                     request.setAttribute("pageResponse", response);
                     request.setAttribute("productList", response.getProductDTOList());
@@ -202,42 +201,45 @@ public class ProductController {
     @RequestMapping("/product/sort")
     public String sortProduct(HttpServletRequest request) {
         try {
+            ProductQueryResponse response;
             Map<String, String> params = ParameterUtil.resolveParams(request);
             if (params.size()==0) {
                 return ERROR_PAGE;
             }
-            List<ToiletProductDTO> productDTOS = JSON.parseArray(params.get("list"), ToiletProductDTO.class);
+            ProductSortRequest sortRequest = buildSortProductRequest(params);
+            ProductSearchConditionsDTO searchCondition = JSON.parseObject(params.get("product_search_condition"), ProductSearchConditionsDTO.class);
 
-            if (CollectionUtils.isEmpty(productDTOS)) {
-                return ERROR_PAGE;
+            if (searchCondition == null) {
+                response = productService.queryPageProduct(sortRequest);
+            } else {
+                response = productService.queryPageProductWithCondition(sortRequest, searchCondition);
+
             }
-
-            switch (params.get("sortBy")) {
-                case "price":
-                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getPrice()))).collect(Collectors.toList());
-                    break;
-                case "cleanCycle":
-                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> Integer.valueOf(o.getProductParameters().getCleanupCycle())))).collect(Collectors.toList());
-                    break;
-                case "life":
-                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> Integer.valueOf(o.getProductParameters().getServiceLife())))).collect(Collectors.toList());
-                    break;
-                default:
-                    break;
-            }
-
-            if (params.get("desc").equals("true")) {
-                Collections.reverse(productDTOS);
-            }
-
+            request.setAttribute("product_search_condition", params.get("search_condition"));
             request.setAttribute("sort_condition", params.get("sortBy"));
             request.setAttribute("sort_way", params.get("desc"));
 
-            request.setAttribute("productList", productDTOS);
+            request.setAttribute("productList", response.getProductDTOList());
         } catch (Exception e) {
-            LOG.error("upload products failed");
+            LOG.error("sort products failed :{}", e.getMessage());
+            return ERROR_PAGE;
         }
         return INDEX;
+    }
+
+    private ProductSortRequest buildSortProductRequest(Map<String, String> params) {
+        ProductSortRequest request = new ProductSortRequest();
+        request.setIsDesc(params.get("isDesc").equals("true"));
+        request.setSortBy(params.get("sortBy"));
+
+        if (!StringUtils.isEmpty(params.get("index"))) {
+            request.setPageIndex(Integer.valueOf(params.get("index")));
+        }
+
+        if (!StringUtils.isEmpty(params.get("size"))) {
+            request.setPageSize(Integer.valueOf(params.get("size")));
+        }
+        return request;
     }
 
     private ToiletPatternDTO buildPatternDTO(Map<String, String> params) {

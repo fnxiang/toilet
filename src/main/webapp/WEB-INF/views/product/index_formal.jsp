@@ -88,7 +88,7 @@
                 <div class="grid_2">
                     <select class="grid_2" name="sortCondition" id="sortCondition">
                         <option value="price">价格</option>
-                        <option value="life">使用寿命</option>
+                        <option value="service_life">使用寿命</option>
                         <option value="cleanCycle">清理周期</option>
                     </select>
                 </div>
@@ -250,8 +250,8 @@
     function sort() {
         let data = {};
         data["sortBy"] = $('#sortCondition').val();
-        data["desc"] = $('#sortWay').val();
-        data["list"] = '${list}';
+        data["isDesc"] = $('#sortWay').val();
+        data["product_search_condition"] = '<%=(String) request.getAttribute("product_search_condition")%>';
 
         Post("${pageContext.request.contextPath}/product/sort", data);
     }

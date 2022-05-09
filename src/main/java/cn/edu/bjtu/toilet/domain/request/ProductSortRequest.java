@@ -4,6 +4,6 @@ import cn.edu.bjtu.toilet.dao.model.PageRequest;
 import lombok.Data;
 
 @Data
-public class ProductRequest extends PageRequest {
+public class ProductSortRequest extends PageRequest {
     private String email;
 }

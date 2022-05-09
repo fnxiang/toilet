@@ -1,24 +1,30 @@
 package cn.edu.bjtu.toilet.service.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.constant.*;
 import cn.edu.bjtu.toilet.converter.ProductConverter;
 import cn.edu.bjtu.toilet.dao.ToiletPatternDao;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
 import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.dao.request.ProductQueryRequest;
+import cn.edu.bjtu.toilet.domain.dto.ProductParamsDTO;
+import cn.edu.bjtu.toilet.domain.dto.ProductSearchConditionsDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.ProductService;
-import cn.edu.bjtu.toilet.domain.request.ProductRequest;
+import cn.edu.bjtu.toilet.domain.request.ProductSortRequest;
 import cn.edu.bjtu.toilet.domain.response.ProductQueryResponse;
 import com.google.common.collect.Lists;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static cn.edu.bjtu.toilet.constant.ToiletErrorCode.BIZ_ERROR;
@@ -46,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductQueryResponse queryPageProduct(ProductRequest request) {
+    public ProductQueryResponse queryPageProduct(ProductSortRequest request) {
         ProductQueryResponse response = new ProductQueryResponse();
 
         ProductQueryRequest queryRequest = new ProductQueryRequest();
@@ -56,12 +62,65 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
 
         Integer maxSize = toiletPatternDao.queryAllPattern().size();
-        response.setCurrent(request.getPageIndex());
+        response.setCurrentPage(request.getPageIndex());
         response.setMaxPage(maxSize/request.getPageSize());
         response.setPageSize(request.getPageSize());
         response.setProductDTOList(productDTOS);
 
         return response;
+    }
+
+    @Override
+    public ProductQueryResponse queryPageProductWithCondition(ProductSortRequest request, ProductSearchConditionsDTO searchConditions) {
+        ProductQueryResponse response = new ProductQueryResponse();
+        LinkedList<ToiletProductDTO> resultList = Lists.newLinkedList();
+        Integer searchIndex = request.getPageIndex();
+
+        double matchCount = 0L;
+        Integer iteratorIndex = 1;
+        request.setPageIndex(iteratorIndex);
+        List<ToiletProductDTO> productDTOSFromDb;
+        do {
+            productDTOSFromDb = queryPageProduct(request).getProductDTOList();
+            productDTOSFromDb = matchConditions(productDTOSFromDb, searchConditions);
+            matchCount += productDTOSFromDb.size();
+            resultList.addAll(productDTOSFromDb);
+            if (resultList.size() > request.getPageSize() && !searchIndex.equals(iteratorIndex)) {
+                for (int i=0; i<request.getPageSize();i++) {
+                    resultList.removeFirst();
+                }
+            }
+            iteratorIndex++;
+            request.setPageIndex(iteratorIndex);
+        } while (!CollectionUtils.isEmpty(queryPageProduct(request).getProductDTOList()));
+
+        if (resultList.size() > 20) {
+            for (int i=20;i<resultList.size();i++) {
+                resultList.removeFirst();
+            }
+        }
+        response.setMaxPage((int) Math.ceil(matchCount/request.getPageSize()));
+        response.setCurrentPage(iteratorIndex-1);
+        response.setPageSize(request.getPageSize());
+        response.setProductDTOList(resultList);
+
+        return response;
+    }
+
+    private List<ToiletProductDTO> matchConditions(List<ToiletProductDTO> productDTOS, ProductSearchConditionsDTO searchConditions) {
+        return productDTOS.stream().map(productDTO -> {
+            ProductParamsDTO productParamsDTO = productDTO.getProductParameters();
+            if (ProductStandardType.of(productParamsDTO.getStandard()).equals(searchConditions.getStandardType())
+                    && ProductTextureType.ofTypeName(productParamsDTO.getTexture()).equals(searchConditions.getTextureType())
+                    && ProductLifeCycleType.of(Integer.valueOf(productParamsDTO.getServiceLife())).equals(searchConditions.getLifeCycleType())
+                    && ProductPriceType.of(productParamsDTO.getPrice()).equals(searchConditions.getPriceType())
+                    && ProductCleanCycleType.of(Integer.valueOf(productParamsDTO.getCleanupCycle())).equals(searchConditions.getCleanCycleType())) {
+                return productDTO;
+            } else {
+                return null;
+            }
+
+        }).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     @Override
