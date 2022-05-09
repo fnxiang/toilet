@@ -159,7 +159,7 @@
                             <p><%=productDTO.getManufacturerName()%></p>
                             <ul>
                                 <li>联系方式：<%=productDTO.getManufacturerCell()%></li>
-                                <li>适用省份：<%=productDTO.getProductName()%></li>
+                                <li>适用省份：<%=productDTO.getApplicableProvince()%></li>
                                 <li>用途：<%=productDTO.getPurpose()%></li>
                             </ul>
 

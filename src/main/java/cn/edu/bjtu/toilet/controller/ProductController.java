@@ -159,7 +159,7 @@ public class ProductController {
     public String sortProduct(HttpServletRequest request) {
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request);
-            if (Objects.isNull(params)) {
+            if (params.size()==0) {
                 return ERROR_PAGE;
             }
             List<ToiletProductDTO> productDTOS = JSON.parseArray(params.get("list"), ToiletProductDTO.class);
