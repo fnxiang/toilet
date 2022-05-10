@@ -2,6 +2,7 @@
 <%@ page import="com.alibaba.fastjson.JSON" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.apache.commons.collections4.CollectionUtils" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.response.ProductQueryResponse" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -19,10 +20,11 @@
     <title>厕所选型系统</title>
 
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/product/res/logo.ico">
-    <link href="${pageContext.request.contextPath}/static/product/css/style.css" media="screen" rel="stylesheet"
-          type="text/css">
     <link href="${pageContext.request.contextPath}/static/product/css/grid.css" media="screen" rel="stylesheet"
           type="text/css">
+    <link href="${pageContext.request.contextPath}/static/product/css/style.css" media="screen" rel="stylesheet"
+          type="text/css">
+<%--    <link href="${pageContext.request.contextPath}/static/product/css/bootstrap.min.css" rel="stylesheet">--%>
 
 </head>
 <body>
@@ -87,7 +89,7 @@
                 <div class="grid_2">
                     <select class="grid_2" name="sortCondition" id="sortCondition">
                         <option value="price">价格</option>
-                        <option value="life">使用寿命</option>
+                        <option value="service_life">使用寿命</option>
                         <option value="cleanCycle">清理周期</option>
                     </select>
                 </div>
@@ -107,7 +109,9 @@
             <!-- .c_header -->
             <div id="list_carousel" class="list_carousel">
 
-                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>
+<%--                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>--%>
+                <% ProductQueryResponse productQueryResponse = (ProductQueryResponse) request.getAttribute("pageResponse");%>
+                <% List<ToiletProductDTO> productList = productQueryResponse.getProductDTOList();%>
                 <c:set var="list" value="<%=JSON.toJSONString(productList)%>" scope="application"/>
                 <% String path = request.getContextPath();
                     String basePath = request.getScheme() + "://"
@@ -117,6 +121,7 @@
                 <%
                     if (!CollectionUtils.isEmpty(productList)) {
                         for (int i = 0, j; i < Math.ceil(productList.size() / 4.0); i++) {%>
+                            <%if(i > 12){break;}%>
                 <ul id="list_product_<%=i%>" class="list_product">
                     <%
 
@@ -161,8 +166,17 @@
                     <h3>暂无相关产品</h3>
                     <%}%>
                 </ul>
+                <div class="clear">
 
-                <div class="clear"></div>
+                </div>
+                <div style="height: 20px;">
+                </div>
+                <div class="grid_12" style="text-align: center">
+                    <div class="page" id="page" style="text-align: center">
+
+                    </div>
+                </div>
+
                 <div id="content_bottom">
                     <div class="grid_12">
                         <div class="bottom_block about_as">
@@ -186,6 +200,7 @@
                 <div class="clear"></div>
                 <!-- .container_12 -->
             </div>
+
         </div>
     </div>
 
@@ -201,11 +216,11 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
 <!-- /Added by HTTrack -->
 
-
-<script src="${pageContext.request.contextPath}/static/product/js/jquery-1.7.2.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/product/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/product/js/html5.js"></script>
 <script src="${pageContext.request.contextPath}/static/product/js/jflow.plus.js"></script>
 <script src="${pageContext.request.contextPath}/static/product/js/jquery.carouFredSel-5.2.2-packed.js"></script>
+<script src="${pageContext.request.contextPath}/static/product/js/jquery.pagination.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -233,14 +248,111 @@
         $(window).resize();
     });
 </script>
+
+<%--分页--%>
 <script>
-    $(document).ready(function () {
-        $('#sortCondition').val('<%=sort_condition%>');
-        $('#sortWay').val('<%=sort_way%>');
-        $("button").click(function () {
-            $(this).addClass('click')
-        });
+    let $page = $('#page');
+    let pageNow = <%=productQueryResponse.getCurrentPage() + 1%>;
+    let total = <%=productQueryResponse.getMaxPage() + 1%>;
+    let data = {};
+    function getprepage() {
+        data["sortBy"] = $('#sortCondition').val();
+        data["isDesc"] = $('#sortWay').val();
+        data["pageIndex"] = pageNow - 2;
+        console.log("up")
+        Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
+    }
+    function findpage(pageindex) {
+        data["sortBy"] = $('#sortCondition').val();
+        data["isDesc"] = $('#sortWay').val();
+        data["pageIndex"] = pageindex - 1;
+        Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
+    }
+    function getnextpage() {
+        data["sortBy"] = $('#sortCondition').val();
+        data["isDesc"] = $('#sortWay').val();
+        data["pageIndex"] = pageNow;
+        console.log("up")
+        Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
+    }
+    pageSet(total, pageNow);
+    $page.on("click", 'label', function(e) {
+        let sign = e.target.innerText;
+        console.log(e, sign, sign === '...');
+        if (sign === '...') {
+            let i = pageNow + 5;
+            if (i > total) pageNow = total
+            else pageNow = i
+        } else {
+            let i = pageNow - 5
+            if (i < 1) pageNow = 1
+            else pageNow = i
+        }
+        pageSet(total, pageNow);
     })
+    $page.on("click", 'span', function(e) {
+        pageNow = parseInt(e.target.innerText)
+        if(pageNow === pageNow){
+            findpage(pageNow);
+            pageSet(total, pageNow);
+        }else{
+            document.getElementById("aa")
+        }
+    })
+    $('#up').click(function(){
+        getprepage();
+    })
+    $('#down').click(function(){
+        getnextpage();
+    })
+    function pageSet(total, pageNow) {
+        let i = 1, dom = '';
+        let firstDisabled = '';
+        if (pageNow === 1){
+            firstDisabled = 'disabled';
+        }else{}
+        let endDisabled = '';
+        if(pageNow === total){
+            endDisabled = 'disabled';
+        }else{}
+        dom = '<span id="up" class="' + firstDisabled +  ' text">上一页</span>';
+        if (total < 10) {
+            while (i < total || i === 1) {
+                let active = pageNow === i ? 'active' : '';
+                dom += '<span class="'+ active+ '">' + i + '</span>';
+                i++;
+            }
+        } else {
+            if (pageNow < 4) {
+                while (i < 6) {
+                    let active = pageNow === i ? 'active' : '';
+                    dom += '<span class="' + active + '">' + i + '</span>';
+                    i++;
+                }
+                dom += '<label title="向后5页">...</label><span>' + total + '</span>';
+            } else if (pageNow > 3 && pageNow < total - 3) {
+                dom += '<span >1</span>';
+                dom += '<label title="向前5页">...</label>';
+                dom += '<span >' + (pageNow - 2) + '</span>';
+                dom += '<span>'+ (pageNow - 1) + '</span>';
+                dom += '<span class="active">' + pageNow + '</span>';
+                dom += '<span>' + (pageNow + 1) + '</span>';
+                dom += '<span>' + (pageNow + 2) + '</span>';
+                dom += '<label title="向后5页">...</label><span>' + total+ '</span>';
+            } else {
+                dom += '<span id="1">1</span>';
+                dom += '<label title="向前5页">...</label>';
+                i = total - 4;
+                while (i <= total) {
+                    let active = pageNow === i ? 'active' : '';
+                    dom += '<span class="' +active + '">' + i + '</span>';
+                    i++;
+                }
+            }
+        }
+        dom += '<span class="' + endDisabled + ' text" id="down">下一页';
+        $page.html(dom);
+    }
 </script>
 
 <%--排序--%>
@@ -248,10 +360,14 @@
     function sort() {
         let data = {};
         data["sortBy"] = $('#sortCondition').val();
-        data["desc"] = $('#sortWay').val();
-        data["list"] = '${list}';
+        data["isDesc"] = $('#sortWay').val();
+        data["product_search_condition"] = '<%=(String) request.getAttribute("product_search_condition")%>';
 
         Post("${pageContext.request.contextPath}/product/sort", data);
     }
 </script>
 </html>
+
+
+
+

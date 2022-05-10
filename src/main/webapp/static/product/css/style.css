@@ -1402,7 +1402,7 @@ a.more:hover{text-decoration: underline!important;}
 }
 .pagination li{
 	display: inline-block;
-	border-right: 1px solid #e0e0e0;
+	/*border-right: 1px solid #e0e0e0;*/
 }
 .pagination li a,
 .pagination li span{
@@ -1439,6 +1439,44 @@ a.more:hover{text-decoration: underline!important;}
 	color: #777;
 	text-align: center;
 	font:italic 11px/11px Segoeui-Italic, Arial, Verdana, serif;
+}
+.page {
+	display:inline-block;
+	width:660px
+}
+.page .disabled {
+	color:#999;
+	cursor:not-allowed
+}
+.page .active {
+	background-color:#489AF6;
+	color:#fff;
+	border-color:#489AF6
+}
+.page label,.page span {
+	display:inline-block;
+	cursor:pointer;
+	color:#489AF6
+}
+.page span {
+	height:32px;
+	color:#489AF6;
+	width:32px;
+	line-height:32px;
+	text-align:center;
+	border:1px solid #d8d8d8;
+	border-radius:4px;
+	box-sizing:border-box
+}
+.page span:nth-child(n+2) {
+	margin-left:10px
+}
+.page .text {
+	width:auto;
+	padding:0 10px
+}
+.page label {
+	padding-left:10px
 }
 
 
