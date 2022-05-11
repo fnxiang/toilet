@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PageRequest {
-    private Integer pageSize=2;
+    private Integer pageSize=12;
     private Integer pageIndex=1;
 //    设置默认值
     private Boolean isDesc;
@@ -20,7 +20,7 @@ public class PageRequest {
 
     public void setPageIndex(Integer index) {
         if (index == null || index<=0) {
-                this.pageIndex = 12;
+                this.pageIndex = 1;
         } else {
             this.pageIndex = index;
         }
