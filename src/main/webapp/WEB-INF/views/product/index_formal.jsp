@@ -24,7 +24,7 @@
           type="text/css">
     <link href="${pageContext.request.contextPath}/static/product/css/style.css" media="screen" rel="stylesheet"
           type="text/css">
-<%--    <link href="${pageContext.request.contextPath}/static/product/css/bootstrap.min.css" rel="stylesheet">--%>
+    <%--    <link href="${pageContext.request.contextPath}/static/product/css/bootstrap.min.css" rel="stylesheet">--%>
 
 </head>
 <body>
@@ -109,7 +109,7 @@
             <!-- .c_header -->
             <div id="list_carousel" class="list_carousel">
 
-<%--                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>--%>
+                <%--                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>--%>
                 <% ProductQueryResponse productQueryResponse = (ProductQueryResponse) request.getAttribute("pageResponse");%>
                 <% List<ToiletProductDTO> productList = productQueryResponse.getProductDTOList();%>
                 <c:set var="list" value="<%=JSON.toJSONString(productList)%>" scope="application"/>
@@ -121,7 +121,6 @@
                 <%
                     if (!CollectionUtils.isEmpty(productList)) {
                         for (int i = 0, j; i < Math.ceil(productList.size() / 4.0); i++) {%>
-                            <%if(i > 12){break;}%>
                 <ul id="list_product_<%=i%>" class="list_product">
                     <%
 
@@ -252,26 +251,26 @@
 <%--分页--%>
 <script>
     let $page = $('#page');
-    let pageNow = <%=productQueryResponse.getCurrentPage() + 1%>;
-    let total = <%=productQueryResponse.getMaxPage() + 1%>;
+    let pageNow = <%=productQueryResponse.getCurrentPage()%>;
+    let total = <%=productQueryResponse.getMaxPage()%>;
     let data = {};
     function getprepage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
-        data["pageIndex"] = pageNow - 2;
+        data["pageIndex"] = pageNow - 1;
         console.log("up")
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
     function findpage(pageindex) {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
-        data["pageIndex"] = pageindex - 1;
+        data["pageIndex"] = pageindex;
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
     function getnextpage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
-        data["pageIndex"] = pageNow;
+        data["pageIndex"] = pageNow + 1;
         console.log("up")
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
@@ -296,7 +295,6 @@
             findpage(pageNow);
             pageSet(total, pageNow);
         }else{
-            document.getElementById("aa")
         }
     })
     $('#up').click(function(){
@@ -307,17 +305,21 @@
     })
     function pageSet(total, pageNow) {
         let i = 1, dom = '';
-        let firstDisabled = '';
+        let firstDisabled;
         if (pageNow === 1){
             firstDisabled = 'disabled';
-        }else{}
-        let endDisabled = '';
+        }else{
+            firstDisabled = ''
+        }
+        let endDisabled;
         if(pageNow === total){
             endDisabled = 'disabled';
-        }else{}
+        }else{
+            endDisabled = '';
+        }
         dom = '<span id="up" class="' + firstDisabled +  ' text">上一页</span>';
         if (total < 10) {
-            while (i < total || i === 1) {
+            while (i <= total || i === 1) {
                 let active = pageNow === i ? 'active' : '';
                 dom += '<span class="'+ active+ '">' + i + '</span>';
                 i++;
