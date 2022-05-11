@@ -61,9 +61,14 @@ public class ProductServiceImpl implements ProductService {
                 .map(ProductConverter::toDTO)
                 .collect(Collectors.toList());
 
-        Integer maxSize = toiletPatternDao.queryAllPattern().size();
+        Integer maxSize = toiletProductDao.queryAllProducts(request.getEmail()).size();
         response.setCurrentPage(request.getPageIndex());
-        response.setMaxPage(maxSize/request.getPageSize());
+        if(maxSize % request.getPageSize() != 0){
+            response.setMaxPage(maxSize/request.getPageSize() + 1) ;
+        }
+        else{
+            response.setMaxPage(maxSize/request.getPageSize());
+        }
         response.setPageSize(request.getPageSize());
         response.setProductDTOList(productDTOS);
 
