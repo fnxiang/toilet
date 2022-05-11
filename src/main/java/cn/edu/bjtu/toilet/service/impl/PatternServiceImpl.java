@@ -7,6 +7,7 @@ import cn.edu.bjtu.toilet.dao.ToiletPatternDao;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
 import cn.edu.bjtu.toilet.dao.request.PatternQueryRequest;
 import cn.edu.bjtu.toilet.domain.dto.*;
+import cn.edu.bjtu.toilet.domain.response.PatternQueryResponse;
 import cn.edu.bjtu.toilet.service.PatternService;
 import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 import com.alibaba.fastjson.JSON;
@@ -33,7 +34,8 @@ public class PatternServiceImpl implements PatternService {
     private ToiletPatternDao patternDao;
 
     @Override
-    public List<ToiletPatternDTO> sortPattern(PatternSortRequest request) {
+    public PatternQueryResponse sortPattern(PatternSortRequest request) {
+        PatternQueryResponse response = new PatternQueryResponse();
 
         if (!ALLOWED_SORT_FIELDS.contains(request.getSortBy())) {
             throw new ToiletBizException("排序字段错误！", -1);
@@ -42,22 +44,30 @@ public class PatternServiceImpl implements PatternService {
         PatternQueryRequest patternQueryRequest = buildPatternQueryRequest(request);
 
 
-        return patternDao.queryAllPatternByPage(patternQueryRequest).stream()
+        List<ToiletPatternDTO> patternDTOS = patternDao.queryAllPatternByPage(patternQueryRequest).stream()
                 .map(ProductConverter::toDTO)
                 .collect(Collectors.toList());
+        Double maxSize = (double) patternDao.queryAllPattern().size();
+        response.setCurrentPage(request.getPageIndex());
+        response.setMaxPage((int) Math.ceil(maxSize/request.getPageSize()));
+        response.setPatternDTOList(patternDTOS);
+        return response;
     }
 
     @Override
-    public List<ToiletPatternDTO> sortPatternWithCondition(PatternSortRequest request, ToiletPatternDTO condition) {
-
+    public PatternQueryResponse sortPatternWithCondition(PatternSortRequest request, ToiletPatternDTO condition) {
+        PatternQueryResponse response = new PatternQueryResponse();
         LinkedList<ToiletPatternDTO> resultList = Lists.newLinkedList();
         Integer searchIndex = request.getPageIndex();
+
+        double matchCount = 0L;
         Integer iteratorIndex = 1;
         request.setPageIndex(iteratorIndex);
         List<ToiletPatternDTO> patternDTOSFromDb;
         do {
-            patternDTOSFromDb = sortPattern(request);
+            patternDTOSFromDb = sortPattern(request).getPatternDTOList();
             patternDTOSFromDb = matchPatternConditions(patternDTOSFromDb, condition);
+            matchCount += patternDTOSFromDb.size();
             resultList.addAll(patternDTOSFromDb);
             if (resultList.size() > request.getPageSize() && !searchIndex.equals(iteratorIndex)) {
                 for (int i=0; i<request.getPageSize();i++) {
@@ -66,15 +76,18 @@ public class PatternServiceImpl implements PatternService {
             }
             iteratorIndex++;
             request.setPageIndex(iteratorIndex);
-        } while (resultList.size()<20 && !CollectionUtils.isEmpty(sortPattern(request)));
+        } while (!CollectionUtils.isEmpty(sortPattern(request).getPatternDTOList()));
 
         if (resultList.size() > 20) {
             for (int i=20;i<resultList.size();i++) {
                 resultList.removeFirst();
             }
         }
+        response.setMaxPage((int) Math.ceil(matchCount/request.getPageSize()));
+        response.setCurrentPage(iteratorIndex-1);
+        response.setPatternDTOList(resultList);
 
-        return resultList;
+        return response;
     }
 
     private List<ToiletPatternDTO> matchPatternConditions(List<ToiletPatternDTO> patternDTOS, ToiletPatternDTO searchDTO) {

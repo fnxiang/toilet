@@ -2,10 +2,11 @@ package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
-import cn.edu.bjtu.toilet.constant.ProductType;
 import cn.edu.bjtu.toilet.domain.ModeResponse;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
+import cn.edu.bjtu.toilet.domain.request.ProductSortRequest;
+import cn.edu.bjtu.toilet.domain.response.ProductQueryResponse;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.alibaba.fastjson.JSON;
@@ -30,41 +31,98 @@ public class ProductController {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-    private static final String UPLOAD_DIRECTORY = "/upload/product/";
-
     @Resource
     private ProductService productService;
 
 
     @RequestMapping("/")
     public String index(HttpServletRequest request){
-        List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
+        try {
+            ProductSortRequest queryRequest = new ProductSortRequest();
+            queryRequest.setEmail("");
+            queryRequest.setIsDesc(false);
+            queryRequest.setSortBy("id");
 
-        if (Objects.isNull(productDTOS)) {
-            productDTOS = Lists.newArrayList();
+            ProductQueryResponse response = productService.queryPageProduct(queryRequest);
+
+            request.setAttribute("pageResponse", response);
+            request.setAttribute("productList", response.getProductDTOList());
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("save product error with {}", e.getMessage());
+            return ERROR_PAGE;
+        } catch (Exception e) {
+            LOG.error("upload products failed : {}", e.getMessage());
+            return ERROR_PAGE;
         }
-        request.setAttribute("productList", productDTOS);
+
         return INDEX;
+    }
+
+    private ProductSortRequest buildQueryRequest(HttpServletRequest request) throws Exception {
+        Map<String,String> params = ParameterUtil.resolveParams(request);
+        ProductSortRequest queryRequest = new ProductSortRequest();
+        queryRequest.setEmail("");
+        queryRequest.setIsDesc(false);
+        queryRequest.setSortBy("id");
+        if (!StringUtils.isEmpty(params.get("pageIndex"))) {
+            queryRequest.setPageIndex(Integer.valueOf(params.get("pageIndex")));
+        }
+
+        if (!StringUtils.isEmpty(params.get("pageSize"))) {
+            queryRequest.setPageSize(Integer.valueOf(params.get("pageSize")));
+        }
+        return queryRequest;
+    }
+
+    @RequestMapping(value = "/product/next")
+    public String toNextPage(HttpServletRequest request) {
+        try {
+            ProductSortRequest productSortRequest = buildQueryRequest(request);
+            ProductQueryResponse response = productService.queryPageProduct(productSortRequest);
+
+            request.setAttribute("pageResponse", response);
+            request.setAttribute("productList", response.getProductDTOList());
+            return INDEX;
+        } catch (Exception e) {
+            LOG.error("query product page error : {}", e.getMessage());
+            return ERROR_PAGE;
+        }
     }
 
     @RequestMapping("/toProductPage")
     public String toPage(HttpServletRequest request){
         String url = request.getParameter("url");
-        switch (url) {
-            case "product_info":
-                String productId = request.getParameter("product_id");
-                ToiletProductDTO toiletProductDTO = productService.queryToiletById(productId);
-                request.setAttribute("product", toiletProductDTO);
-                break;
-            case "product_results":
-                String patternId = request.getParameter("patternId");
+        try {
+            switch (url) {
+                case "product_info":
+                    String productId = request.getParameter("product_id");
+                    ToiletProductDTO toiletProductDTO = productService.queryToiletById(productId);
+                    request.setAttribute("product", toiletProductDTO);
+                    break;
+                case "product_results":
+                    String patternId = request.getParameter("patternId");
 
-                List<ToiletProductDTO> productDTOS = productService.queryProductListByPattern(Integer.valueOf(patternId));
-                request.setAttribute("productList", productDTOS);
-                return INDEX;
-            default:
-                break;
+                    List<ToiletProductDTO> productDTOS = productService.queryProductListByPattern(Integer.valueOf(patternId));
+                    request.setAttribute("productList", productDTOS);
+                    return INDEX;
+                case "next":
+                    ProductSortRequest productSortRequest = buildQueryRequest(request);
+                    ProductQueryResponse response = productService.queryPageProduct(productSortRequest);
+
+                    request.setAttribute("pageResponse", response);
+                    request.setAttribute("productList", response.getProductDTOList());
+                    return INDEX;
+                default:
+                    break;
+            }
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("save product error with {}", e.getMessage());
+            return ERROR_PAGE;
+        } catch (Exception e) {
+            LOG.error("upload products failed : {}", e.getMessage());
+            return ERROR_PAGE;
         }
+
         url = PRODUCT_BASE + url;
         return url;
     }
@@ -158,42 +216,45 @@ public class ProductController {
     @RequestMapping("/product/sort")
     public String sortProduct(HttpServletRequest request) {
         try {
+            ProductQueryResponse response;
             Map<String, String> params = ParameterUtil.resolveParams(request);
             if (params.size()==0) {
                 return ERROR_PAGE;
             }
-            List<ToiletProductDTO> productDTOS = JSON.parseArray(params.get("list"), ToiletProductDTO.class);
+            ProductSortRequest sortRequest = buildSortProductRequest(params);
+            ProductSearchConditionsDTO searchCondition = JSON.parseObject(params.get("product_search_condition"), ProductSearchConditionsDTO.class);
 
-            if (CollectionUtils.isEmpty(productDTOS)) {
-                return ERROR_PAGE;
+            if (searchCondition == null) {
+                response = productService.queryPageProduct(sortRequest);
+            } else {
+                response = productService.queryPageProductWithCondition(sortRequest, searchCondition);
+
             }
-
-            switch (params.get("sortBy")) {
-                case "price":
-                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> o.getProductParameters().getPrice()))).collect(Collectors.toList());
-                    break;
-                case "cleanCycle":
-                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> Integer.valueOf(o.getProductParameters().getCleanupCycle())))).collect(Collectors.toList());
-                    break;
-                case "life":
-                    productDTOS = productDTOS.stream().sorted((Comparator.comparing(o -> Integer.valueOf(o.getProductParameters().getServiceLife())))).collect(Collectors.toList());
-                    break;
-                default:
-                    break;
-            }
-
-            if (params.get("desc").equals("true")) {
-                Collections.reverse(productDTOS);
-            }
-
+            request.setAttribute("product_search_condition", params.get("search_condition"));
             request.setAttribute("sort_condition", params.get("sortBy"));
             request.setAttribute("sort_way", params.get("desc"));
 
-            request.setAttribute("productList", productDTOS);
+            request.setAttribute("productList", response.getProductDTOList());
         } catch (Exception e) {
-            LOG.error("upload products failed");
+            LOG.error("sort products failed :{}", e.getMessage());
+            return ERROR_PAGE;
         }
         return INDEX;
+    }
+
+    private ProductSortRequest buildSortProductRequest(Map<String, String> params) {
+        ProductSortRequest request = new ProductSortRequest();
+        request.setIsDesc(params.get("isDesc").equals("true"));
+        request.setSortBy(params.get("sortBy"));
+
+        if (!StringUtils.isEmpty(params.get("index"))) {
+            request.setPageIndex(Integer.valueOf(params.get("index")));
+        }
+
+        if (!StringUtils.isEmpty(params.get("size"))) {
+            request.setPageSize(Integer.valueOf(params.get("size")));
+        }
+        return request;
     }
 
     private ToiletPatternDTO buildPatternDTO(Map<String, String> params) {
