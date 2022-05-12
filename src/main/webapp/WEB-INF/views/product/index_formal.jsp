@@ -112,7 +112,6 @@
                 <%--                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>--%>
                 <% ProductQueryResponse productQueryResponse = (ProductQueryResponse) request.getAttribute("pageResponse");%>
                 <% List<ToiletProductDTO> productList = productQueryResponse.getProductDTOList();%>
-                <c:set var="list" value="<%=JSON.toJSONString(productList)%>" scope="application"/>
                 <% String path = request.getContextPath();
                     String basePath = request.getScheme() + "://"
                             + request.getServerName() + ":" + request.getServerPort()
@@ -258,7 +257,7 @@
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow - 1;
-        console.log("up")
+        console.log("up");
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
     function findpage(pageindex) {
@@ -271,7 +270,7 @@
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow + 1;
-        console.log("up")
+        console.log("up");
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
     pageSet(total, pageNow);
@@ -280,29 +279,29 @@
         console.log(e, sign, sign === '...');
         if (sign === '...') {
             let i = pageNow + 5;
-            if (i > total) pageNow = total
+            if (i > total) pageNow = total;
             else pageNow = i
         } else {
-            let i = pageNow - 5
-            if (i < 1) pageNow = 1
+            let i = pageNow - 5;
+            if (i < 1) pageNow = 1;
             else pageNow = i
         }
         pageSet(total, pageNow);
-    })
+    });
     $page.on("click", 'span', function(e) {
-        pageNow = parseInt(e.target.innerText)
+        pageNow = parseInt(e.target.innerText);
         if(pageNow === pageNow){
             findpage(pageNow);
             pageSet(total, pageNow);
         }else{
         }
-    })
+    });
     $('#up').click(function(){
         getprepage();
-    })
+    });
     $('#down').click(function(){
         getnextpage();
-    })
+    });
     function pageSet(total, pageNow) {
         let i = 1, dom = '';
         let firstDisabled;
