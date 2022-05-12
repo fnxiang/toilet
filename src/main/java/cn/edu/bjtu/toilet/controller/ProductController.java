@@ -62,8 +62,15 @@ public class ProductController {
         Map<String,String> params = ParameterUtil.resolveParams(request);
         ProductSortRequest queryRequest = new ProductSortRequest();
         queryRequest.setEmail("");
-        queryRequest.setIsDesc(false);
-        queryRequest.setSortBy("id");
+        if (!StringUtils.isEmpty(params.get("sortBy"))) {
+            queryRequest.setSortBy(params.get("sortBy"));
+        }
+
+        if (params.get("isDesc") != null) {
+            queryRequest.setIsDesc(params.get("isDesc").equals("true"));
+        }
+
+
         if (!StringUtils.isEmpty(params.get("pageIndex"))) {
             queryRequest.setPageIndex(Integer.valueOf(params.get("pageIndex")));
         }
