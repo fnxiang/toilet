@@ -23,6 +23,7 @@
     <!-- Core stylesheets -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/pages/register.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/pages/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/dialog.css">
 	
 	<style>
 		label.xrequired:before {
@@ -133,6 +134,25 @@
 			</div> 
 
         </div>
+        <%--                            弹窗--%>
+        <div>
+            <div class="dialog">
+                <!-- 弹窗遮罩层 -->
+                <div>
+                    <!-- 弹窗内容 -->
+                    <div style="height: 200px;"></div>
+                    <div class="content_dialog">
+                        <div class="aclose">
+                            <a class="close" href="javascript:close();">&times;</a>
+                        </div>
+                        <div class="contain" id="dialog_text" style="font-size: 20px; color: #fcfdfd">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
 	</section>
     <!--Global Javascript -->
     <script src="${pageContext.request.contextPath}/static/base/js/jquery.min.js"></script>
@@ -162,23 +182,35 @@
             data.append("password", $('#registerPasswd').val());
             data.append("confirmPassword", $('#confirmPasswd').val());
 
-            $.ajax({
-                url:"/toilet/register/company",
-                type:"POST",
-                dataType: "json",
-                data: data,
-                async: false,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success:function(result){
-                    if (result.success) {
-                        location.href = "/toilet/login/index";
-                    } else {
-                        alert(result.errorMessage);
+            if (! data.get("companyName")){show("公司名称不能为空!");}
+            else if (! data.get("creditCode")){show("统一社会信用代码不能为空!");}
+            else if (! $('#file').val().length){show("营业执照不能为空!");}
+            else if (! data.get("webAddress")){show("企业官网不能为空!");}
+            else if (! data.get("contactName")){show("联系人不能为空!");}
+            else if (data.get("phoneNum").length > 11){show("请输入正确手机号!");}
+            else if (! IsEmail(data.get("email"))){show("请输入正确邮箱地址!");}
+            else if (! data.get("password")){show("密码不能为空!");}
+            else if (! data.get("confirmPassword")){show("确认密码不能为空!");}
+            else if(! document.getElementById('yonghuxieyi').checked){show('请勾选同意用户协议！');}
+            else{
+                $.ajax({
+                    url:"/toilet/register/company",
+                    type:"POST",
+                    dataType: "json",
+                    data: data,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success:function(result){
+                        if (result.success) {
+                            location.href = "/toilet/login/index";
+                        } else {
+                            show(result.errorMessage);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
         function getSelectorContent() {
@@ -277,6 +309,23 @@
 		} 
  
 	</script>
+
+    <script>
+        function show(msg){
+            document.getElementById("dialog_text").innerHTML = msg;
+            $(".dialog").css("display","block");
+        }
+        function close(){
+            $(".dialog").css("display","none");
+        }
+    </script>
+<script>
+    // 校验邮箱
+    function IsEmail(el) {
+        var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        return reg.test(el);
+    }
+</script>
 	
 </body>
 
