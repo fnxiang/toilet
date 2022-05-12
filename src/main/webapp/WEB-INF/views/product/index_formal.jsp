@@ -1,8 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
-<%@ page import="com.alibaba.fastjson.JSON" %>
-<%@ page import="java.util.List" %>
-<%@ page import="org.apache.commons.collections4.CollectionUtils" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.response.ProductQueryResponse" %>
+<%@ page import="org.apache.commons.collections4.CollectionUtils" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -123,7 +122,7 @@
                 <ul id="list_product_<%=i%>" class="list_product">
                     <%
 
-                        for (j=i*4;j<productList.size()&&j < 4*(i+1); j++) {
+                        for (j = i * 4; j < productList.size() && j < 4 * (i + 1); j++) {
                             String firstPicPath = productList.get(j).getPicsPath().split(";")[0];
                     %>
                     <li value="">
@@ -253,6 +252,7 @@
     let pageNow = <%=productQueryResponse.getCurrentPage()%>;
     let total = <%=productQueryResponse.getMaxPage()%>;
     let data = {};
+
     function getprepage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
@@ -260,12 +260,14 @@
         console.log("up");
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
+
     function findpage(pageindex) {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageindex;
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
+
     function getnextpage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
@@ -273,8 +275,9 @@
         console.log("up");
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
+
     pageSet(total, pageNow);
-    $page.on("click", 'label', function(e) {
+    $page.on("click", 'label', function (e) {
         let sign = e.target.innerText;
         console.log(e, sign, sign === '...');
         if (sign === '...') {
@@ -288,39 +291,40 @@
         }
         pageSet(total, pageNow);
     });
-    $page.on("click", 'span', function(e) {
+    $page.on("click", 'span', function (e) {
         pageNow = parseInt(e.target.innerText);
-        if(pageNow === pageNow){
+        if (pageNow === pageNow) {
             findpage(pageNow);
             pageSet(total, pageNow);
-        }else{
+        } else {
         }
     });
-    $('#up').click(function(){
+    $('#up').click(function () {
         getprepage();
     });
-    $('#down').click(function(){
+    $('#down').click(function () {
         getnextpage();
     });
+
     function pageSet(total, pageNow) {
         let i = 1, dom = '';
         let firstDisabled;
-        if (pageNow === 1){
+        if (pageNow === 1) {
             firstDisabled = 'disabled';
-        }else{
+        } else {
             firstDisabled = ''
         }
         let endDisabled;
-        if(pageNow === total){
+        if (pageNow === total) {
             endDisabled = 'disabled';
-        }else{
+        } else {
             endDisabled = '';
         }
-        dom = '<span id="up" class="' + firstDisabled +  ' text">上一页</span>';
+        dom = '<span id="up" class="' + firstDisabled + ' text">上一页</span>';
         if (total < 10) {
             while (i <= total || i === 1) {
                 let active = pageNow === i ? 'active' : '';
-                dom += '<span class="'+ active+ '">' + i + '</span>';
+                dom += '<span class="' + active + '">' + i + '</span>';
                 i++;
             }
         } else {
@@ -335,18 +339,18 @@
                 dom += '<span >1</span>';
                 dom += '<label title="向前5页">...</label>';
                 dom += '<span >' + (pageNow - 2) + '</span>';
-                dom += '<span>'+ (pageNow - 1) + '</span>';
+                dom += '<span>' + (pageNow - 1) + '</span>';
                 dom += '<span class="active">' + pageNow + '</span>';
                 dom += '<span>' + (pageNow + 1) + '</span>';
                 dom += '<span>' + (pageNow + 2) + '</span>';
-                dom += '<label title="向后5页">...</label><span>' + total+ '</span>';
+                dom += '<label title="向后5页">...</label><span>' + total + '</span>';
             } else {
                 dom += '<span id="1">1</span>';
                 dom += '<label title="向前5页">...</label>';
                 i = total - 4;
                 while (i <= total) {
                     let active = pageNow === i ? 'active' : '';
-                    dom += '<span class="' +active + '">' + i + '</span>';
+                    dom += '<span class="' + active + '">' + i + '</span>';
                     i++;
                 }
             }

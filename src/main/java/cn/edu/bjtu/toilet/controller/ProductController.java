@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
@@ -36,7 +39,7 @@ public class ProductController {
 
 
     @RequestMapping("/")
-    public String index(HttpServletRequest request){
+    public String index(HttpServletRequest request) {
         try {
             ProductSortRequest queryRequest = new ProductSortRequest();
             queryRequest.setEmail("");
@@ -74,7 +77,7 @@ public class ProductController {
     }
 
     @RequestMapping("/toProductPage")
-    public String toPage(HttpServletRequest request){
+    public String toPage(HttpServletRequest request) {
         String url = request.getParameter("url");
         try {
             switch (url) {
@@ -224,7 +227,7 @@ public class ProductController {
 
     private ProductSortRequest buildSortProductRequest(HttpServletRequest request) throws Exception {
         Map<String, String> params = ParameterUtil.resolveParams(request);
-        if (params.size()==0) {
+        if (params.size() == 0) {
             throw new ToiletBizException("参数不能为空", -1);
         }
         ProductSortRequest sortRequest = new ProductSortRequest();

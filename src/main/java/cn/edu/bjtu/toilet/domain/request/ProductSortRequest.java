@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ProductSortRequest extends PageRequest {
-    private String email="";
+    private String email = "";
 
     private ProductSearchConditionsDTO searchCondition;
 }
