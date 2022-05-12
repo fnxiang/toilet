@@ -1,8 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
-<%@ page import="com.alibaba.fastjson.JSON" %>
-<%@ page import="java.util.List" %>
-<%@ page import="org.apache.commons.collections4.CollectionUtils" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.response.ProductQueryResponse" %>
+<%@ page import="org.apache.commons.collections4.CollectionUtils" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -112,7 +111,6 @@
                 <%--                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>--%>
                 <% ProductQueryResponse productQueryResponse = (ProductQueryResponse) request.getAttribute("pageResponse");%>
                 <% List<ToiletProductDTO> productList = productQueryResponse.getProductDTOList();%>
-                <c:set var="list" value="<%=JSON.toJSONString(productList)%>" scope="application"/>
                 <% String path = request.getContextPath();
                     String basePath = request.getScheme() + "://"
                             + request.getServerName() + ":" + request.getServerPort()
@@ -123,8 +121,7 @@
                         for (int i = 0, j; i < Math.ceil(productList.size() / 4.0); i++) {%>
                 <ul id="list_product_<%=i%>" class="list_product">
                     <%
-
-                        for (j=i*4;j<productList.size()&&j < 4*(i+1); j++) {
+                        for (j = i * 4; j < productList.size() && j < 4 * (i + 1); j++) {
                             String firstPicPath = productList.get(j).getPicsPath().split(";")[0];
                     %>
                     <li value="">
@@ -236,6 +233,10 @@
             auto: true
         });
     });
+    $(document).ready(function () {
+        $('#sortCondition').val('<%=sort_condition%>');
+        $('#sortWay').val('<%=sort_way%>');
+    });
 </script>
 <script>
     $(function () {
@@ -258,7 +259,6 @@
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow - 1;
-        console.log("up")
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
     function findpage(pageindex) {
@@ -271,57 +271,56 @@
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow + 1;
-        console.log("up")
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
     pageSet(total, pageNow);
-    $page.on("click", 'label', function(e) {
+    $page.on("click", 'label', function (e) {
         let sign = e.target.innerText;
         console.log(e, sign, sign === '...');
         if (sign === '...') {
             let i = pageNow + 5;
-            if (i > total) pageNow = total
+            if (i > total) pageNow = total;
             else pageNow = i
         } else {
-            let i = pageNow - 5
-            if (i < 1) pageNow = 1
+            let i = pageNow - 5;
+            if (i < 1) pageNow = 1;
             else pageNow = i
         }
         pageSet(total, pageNow);
-    })
-    $page.on("click", 'span', function(e) {
-        pageNow = parseInt(e.target.innerText)
-        if(pageNow === pageNow){
+    });
+    $page.on("click", 'span', function (e) {
+        pageNow = parseInt(e.target.innerText);
+        if (pageNow === pageNow) {
             findpage(pageNow);
             pageSet(total, pageNow);
-        }else{
+        } else {
         }
-    })
-    $('#up').click(function(){
+    });
+    $('#up').click(function () {
         getprepage();
-    })
-    $('#down').click(function(){
+    });
+    $('#down').click(function () {
         getnextpage();
-    })
+    });
     function pageSet(total, pageNow) {
         let i = 1, dom = '';
         let firstDisabled;
-        if (pageNow === 1){
+        if (pageNow === 1) {
             firstDisabled = 'disabled';
-        }else{
+        } else {
             firstDisabled = ''
         }
         let endDisabled;
-        if(pageNow === total){
+        if (pageNow === total) {
             endDisabled = 'disabled';
-        }else{
+        } else {
             endDisabled = '';
         }
-        dom = '<span id="up" class="' + firstDisabled +  ' text">上一页</span>';
+        dom = '<span id="up" class="' + firstDisabled + ' text">上一页</span>';
         if (total < 10) {
             while (i <= total || i === 1) {
                 let active = pageNow === i ? 'active' : '';
-                dom += '<span class="'+ active+ '">' + i + '</span>';
+                dom += '<span class="' + active + '">' + i + '</span>';
                 i++;
             }
         } else {
@@ -336,18 +335,18 @@
                 dom += '<span >1</span>';
                 dom += '<label title="向前5页">...</label>';
                 dom += '<span >' + (pageNow - 2) + '</span>';
-                dom += '<span>'+ (pageNow - 1) + '</span>';
+                dom += '<span>' + (pageNow - 1) + '</span>';
                 dom += '<span class="active">' + pageNow + '</span>';
                 dom += '<span>' + (pageNow + 1) + '</span>';
                 dom += '<span>' + (pageNow + 2) + '</span>';
-                dom += '<label title="向后5页">...</label><span>' + total+ '</span>';
+                dom += '<label title="向后5页">...</label><span>' + total + '</span>';
             } else {
                 dom += '<span id="1">1</span>';
                 dom += '<label title="向前5页">...</label>';
                 i = total - 4;
                 while (i <= total) {
                     let active = pageNow === i ? 'active' : '';
-                    dom += '<span class="' +active + '">' + i + '</span>';
+                    dom += '<span class="' + active + '">' + i + '</span>';
                     i++;
                 }
             }
@@ -364,12 +363,7 @@
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["product_search_condition"] = '<%=(String) request.getAttribute("product_search_condition")%>';
-
         Post("${pageContext.request.contextPath}/product/sort", data);
     }
 </script>
 </html>
-
-
-
-
