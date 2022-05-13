@@ -23,6 +23,7 @@
     <!-- Core stylesheets -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/pages/register.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/pages/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/dialog.css">
 	
 	<style>
 		label.xrequired:before {
@@ -108,6 +109,24 @@
 			</div> 
 
         </div>
+
+        <div class="dialog">
+            <!-- 弹窗遮罩层 -->
+            <div>
+                <!-- 弹窗内容 -->
+                <div style="height: 200px;"></div>
+                <div class="content_dialog">
+                    <div class="aclose">
+                        <a class="close" href="javascript:close();">&times;</a>
+                    </div>
+                    <div class="contain" id="dialog_text" style="font-size: 20px; color: #fcfdfd">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
 	</section>
     <!--Global Javascript -->
     <script src="${pageContext.request.contextPath}/static/base/js/jquery.min.js"></script>
@@ -134,6 +153,16 @@
             data.append("password", encodeURI($('#registerPasswd').val()));
             data.append("confirmPassword", $('#confirmPasswd').val());
 
+            if (! data.get("userName")){show("姓名不能为空!");}
+            else if (! data.get("company")){show("单位不能为空!");}
+            else if (! data.get("position")){show("职务不能为空!");}
+            else if (! data.get("title")){show("职称不能为空!");}
+            else if (data.get("phoneNum").length > 11){show("请输入正确手机号!");}
+            else if (! IsEmail(data.get("emailAddress"))){show("请输入正确邮箱地址!");}
+            else if (! data.get("password")){show("密码不能为空!");}
+            else if (! data.get("confirmPassword")){show("确认密码不能为空!");}
+            else if(! document.getElementById('yonghuxieyi').checked){show('请勾选同意用户协议！');}
+            else{
             $.ajax({
                 url:"/toilet/register/professor",
                 type:"POST",
@@ -144,7 +173,7 @@
                 contentType: false,
                 processData: false,
                 success:function(result){
-                    alert(result.success);
+                    show("注册成功！");
                     if (result.success) {
                         window.location.href = "/toilet/login/index";
                     } else {
@@ -152,80 +181,25 @@
                     }
                 }
             });
+        }}
+    </script>
+
+    <script>
+        function show(msg){
+            document.getElementById("dialog_text").innerHTML = msg;
+            $(".dialog").css("display","block");
+        }
+        function close(){
+            $(".dialog").css("display","none");
         }
     </script>
-    
-    <!--Core Javascript -->	
-	<script>
-		// 当框框加载完成之后调用设置省份
-		window.onload = setProvince;
-		 
-		// 获取省市县/区的select选择框对象
-		var province = document.getElementById("provinceselect");
-		var city = document.getElementById("cityselect");
-		var county = document.getElementById("countyselect");
-		//var province = document.getElementsByTagName("select")[0];
-		//var city = document.getElementsByTagName("select")[1];
-		//var county = document.getElementsByTagName("select")[2];
-		 
-		// 设置省份
-		function setProvince() {
-			// 遍历省份数组, provinceArr在city.js中
-			for (var i = 0; i < provinceArr.length; i++){
-				// 创建省份option选项
-				var opt = document.createElement("option");
-				opt.value = provinceArr[i];         // 设置value-提交给服务器用
-				opt.innerHTML = provinceArr[i];     // 设置option文本显示内容
-				province.appendChild(opt);          // 追加城市到下拉框
-		 
-				// 当省份发生变化更改城市
-				province.onchange = function(){
-					setCity(this.selectedIndex);
-				};
-			}
-		 
-			// 省份加载完成，默认显示第一个省份的城市
-			setCity(0);
-		}
-		 
-		// 设置城市
-		function setCity(provincePos) {
-			// 获取省份对象的城市，cityArr在city.js中
-			var citys = cityArr[provincePos];
-			city.length = 0;                  // 清空长度，重新从0开始赋值下拉框
-		 
-			for (var i = 0; i < citys.length; i++){
-			   // 创建城市option选项
-			   var opt = document.createElement("option");
-			   opt.value = citys[i];         // 设置value-提交给服务器用
-			   opt.innerHTML = citys[i];     // 设置option文本显示内容
-		 
-				city.appendChild(opt);
-				city.onchange = function() {
-					setCounty(provincePos, this.selectedIndex);
-				}
-			}
-		 
-			// 默认显示城市的第一个县/区
-			setCounty(provincePos, 0);
-		}
-		 
-		// 设置县/区, 县/区是三位数组，需要传入哪个省份和城市
-		function setCounty(provincePos, cityPos) {
-			// 获取县/区，countyArr在city.js中国
-			var countys = countyArr[provincePos][cityPos];
-			county.length = 0;
-			
-			for (var i = 0; i < countys.length; i++){
-				// 创建县/区option选项
-				var opt = document.createElement("option");
-				opt.value = countys[i];         // 设置value-提交给服务器用
-				opt.innerHTML = countys[i];     // 设置option文本显示内容
-				county.appendChild(opt);        // 追加到县/区选择框中
-			}
-		} 
- 
-	</script>
+    <script>
+        // 校验邮箱
+        function IsEmail(el) {
+            var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            return reg.test(el);
+        }
+    </script>
 	
 </body>
 
