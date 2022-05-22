@@ -141,7 +141,7 @@ public class IndexController {
 
     @RequestMapping(value = "/health")
     @ResponseBody
-    public String registerUser(HttpServletRequest request, HttpServletResponse response){
+    public String registerUser(){
         return "success";
     }
 

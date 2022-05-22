@@ -153,6 +153,47 @@ public class ProductController {
         return ProductResponse.success();
     }
 
+    @RequestMapping(value = "/company/product/update")
+    public ProductResponse updateProduct(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            ToiletProductDTO productDTO = buildProductDTO(params);
+
+            checkProduct(productDTO);
+
+            productService.updateProduct(productDTO);
+
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("save product error with {}", e.getMessage());
+            return ProductResponse.failed(e.getMessage());
+        } catch (Exception e) {
+            LOG.error("upload products failed : {}", e.getMessage());
+            return ProductResponse.failed(e.getMessage());
+        }
+
+        return ProductResponse.success();
+    }
+
+    private void checkProduct(ToiletProductDTO productDTO) {
+        ToiletProductDTO productDTOFromDb = productService.queryToiletById(productDTO.getId().toString());
+
+        // 检查文件是否有重新上传，路径为空则和数据库保持一致
+
+        if (StringUtils.isEmpty(productDTO.getQualityAssuranceMaterialsFilePath())) {
+            productDTO.setQualityAssuranceMaterialsFilePath(productDTOFromDb.getQualityAssuranceMaterialsFilePath());
+        }
+
+        if (StringUtils.isEmpty(productDTO.getInstructionFilePath())) {
+            productDTO.setInstructionFilePath(productDTOFromDb.getInstructionFilePath());
+        }
+
+        if (StringUtils.isEmpty(productDTO.getInstructionFilePath())) {
+            productDTO.setInstructionFilePath(productDTOFromDb.getInstructionFilePath());
+        }
+
+    }
+
     @RequestMapping("/company/pattern/entry")
     @ResponseBody
     public ModeResponse patternEntry(HttpServletRequest request) {
