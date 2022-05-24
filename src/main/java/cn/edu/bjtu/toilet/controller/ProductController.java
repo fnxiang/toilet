@@ -143,23 +143,24 @@ public class ProductController {
             Map<String, String> params = ParameterUtil.resolveParams(request);
 
             ToiletProductDTO productDTO = buildUpdateProductDTO(params);
+            productDTO.setCompanyEmail(request.getSession().getAttribute("uId").toString());
 
             checkProduct(productDTO);
 
             productService.updateProduct(productDTO);
 
         } catch (ToiletBizException | ToiletSystemException e) {
-            LOG.error("save product error with {}", e.getMessage());
-            return ProductResponse.failed(e.getMessage());
+            LOG.error("update product error with {}", e.getMessage());
+            return ProductResponse.failed("update product error with " + e.getMessage());
         } catch (Exception e) {
             LOG.error("update products failed : {}", e.getStackTrace());
-            return ProductResponse.failed(e.getMessage());
+            return ProductResponse.failed("update product error with " + e.getMessage());
         }
 
         return ProductResponse.success();
     }
 
-    private void checkProduct(ToiletProductDTO productDTO, Map<String, String> params) {
+    private void checkProduct(ToiletProductDTO productDTO) {
         ToiletProductDTO productDTOFromDb = productService.queryToiletById(productDTO.getId().toString());
 
         // 检查文件是否有重新上传，路径为空则和数据库保持一致
@@ -169,10 +170,6 @@ public class ProductController {
         }
 
         if (StringUtils.isEmpty(productDTO.getInstructionFilePath())) {
-            productDTO.setInstructionFilePath(productDTOFromDb.getInstructionFilePath());
-        }
-
-        if (StringUtils.isEmpty(productDTO.getPicsPath())) {
             productDTO.setInstructionFilePath(productDTOFromDb.getInstructionFilePath());
         }
 
@@ -398,6 +395,7 @@ public class ProductController {
     private ProductParamsDTO buildProductParameter(Map<String, String> params) {
         //  产品参数
         ProductParamsDTO paramsDTO = new ProductParamsDTO();
+        paramsDTO.setStandard(Double.valueOf(params.get("standard")));
         paramsDTO.setApplicableNum(Integer.valueOf(params.get("applicableNum")));
         paramsDTO.setTexture(params.get("texture"));
         paramsDTO.setColor(params.get("color"));
@@ -411,10 +409,10 @@ public class ProductController {
         paramsDTO.setHigh(params.get("high"));
         paramsDTO.setApplyCase(params.get("case"));
         paramsDTO.setOtherParams(params.get("otherParams"));
-        if (!StringUtils.isEmpty(params.get("weight"))) {
+        if (!StringUtils.isEmpty(params.get("weight"))&&!params.get("weight").equals("null")) {
             paramsDTO.setWeight(Double.valueOf(params.get("weight")));
         }
-        if (!StringUtils.isEmpty(params.get("thickness"))) {
+        if (!StringUtils.isEmpty(params.get("thickness"))&&!params.get("thickness").equals("null")) {
             paramsDTO.setWallThickness(Double.valueOf(params.get("thickness")));
         }
         return paramsDTO;

@@ -185,10 +185,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="text-input"
+                                                        <div class="col col-md-3"><label for="price"
                                                                                          class=" form-control-label">价格（元）</label>
                                                         </div>
-                                                        <div class="col-12 col-md-9"><input type="text" id="text-input"
+                                                        <div class="col-12 col-md-9"><input type="text" id="price"
                                                                                             name="text-input"
                                                                                             placeholder=""
                                                                                             class="form-control"
@@ -237,6 +237,7 @@
                                                                                             name="updateTime"
                                                                                             placeholder=""
                                                                                             class="form-control"
+                                                                                            value="<%=productDTO.getGmtModified().toInstant()%>"
                                                         >
                                                         </div>
                                                     </div>
@@ -389,7 +390,7 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="jvticaizhi" name="jvticaizhi"
                                                            placeholder="输入材质" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getTexture().substring(2)%>">
+                                                           value="<%=productDTO.getProductParameters().getTexture()%>">
                                                 </div>
 
                                                 <%--                                                    </div>--%>
@@ -846,6 +847,7 @@
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
         data.append("high", $('#chicun_gao').val());
+        data.append("price", $('#price').val());
         data.append("texture", $('#jvticaizhi').val());//材质
         data.append("color", encodeURI($('#yanse').val())); //颜色
         data.append("serviceLife", encodeURI($('#shouming').val())); //使用寿命
@@ -896,7 +898,6 @@
             success: function (result) {
                 if (result.success) {
                     show("更新成功!");
-
                 } else {
                     show(result.errorMessage);
                 }

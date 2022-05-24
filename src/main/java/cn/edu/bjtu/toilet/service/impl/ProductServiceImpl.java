@@ -160,6 +160,8 @@ public class ProductServiceImpl implements ProductService {
         String source = buildProductSource(productDTO);
         productDO.setSource(source);
         productDO.setPatternId(productDOFromDb.getPatternId());
+        productDO.setVersion(productDOFromDb.getVersion());
+        productDO.setDeleted(productDOFromDb.getDeleted());
 
         productDO = toiletProductDao.updateProductBySource(productDO);
         return ProductConverter.toDTO(productDO);
