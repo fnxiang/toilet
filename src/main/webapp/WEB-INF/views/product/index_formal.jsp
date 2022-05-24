@@ -1,8 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
-<%@ page import="com.alibaba.fastjson.JSON" %>
-<%@ page import="java.util.List" %>
-<%@ page import="org.apache.commons.collections4.CollectionUtils" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.response.ProductQueryResponse" %>
+<%@ page import="org.apache.commons.collections4.CollectionUtils" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -112,7 +111,6 @@
                 <%--                <% List<ToiletProductDTO> productList = (List<ToiletProductDTO>) request.getAttribute("productList");%>--%>
                 <% ProductQueryResponse productQueryResponse = (ProductQueryResponse) request.getAttribute("pageResponse");%>
                 <% List<ToiletProductDTO> productList = productQueryResponse.getProductDTOList();%>
-                <c:set var="list" value="<%=JSON.toJSONString(productList)%>" scope="application"/>
                 <% String path = request.getContextPath();
                     String basePath = request.getScheme() + "://"
                             + request.getServerName() + ":" + request.getServerPort()
@@ -257,30 +255,24 @@
     let pageNow = <%=productQueryResponse.getCurrentPage()%>;
     let total = <%=productQueryResponse.getMaxPage()%>;
     let data = {};
-
     function getprepage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow - 1;
-        console.log("up");
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
-
     function findpage(pageindex) {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageindex;
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
-
     function getnextpage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow + 1;
-        console.log("up");
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
-
     pageSet(total, pageNow);
     $page.on("click", 'label', function (e) {
         let sign = e.target.innerText;
@@ -310,7 +302,6 @@
     $('#down').click(function () {
         getnextpage();
     });
-
     function pageSet(total, pageNow) {
         let i = 1, dom = '';
         let firstDisabled;
@@ -372,12 +363,7 @@
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["product_search_condition"] = '<%=(String) request.getAttribute("product_search_condition")%>';
-
         Post("${pageContext.request.contextPath}/product/sort", data);
     }
 </script>
 </html>
-
-
-
-
