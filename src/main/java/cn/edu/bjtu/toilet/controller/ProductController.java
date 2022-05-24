@@ -58,22 +58,6 @@ public class ProductController {
         return INDEX;
     }
 
-    private ProductSortRequest buildQueryRequest(HttpServletRequest request) throws Exception {
-        Map<String,String> params = ParameterUtil.resolveParams(request);
-        ProductSortRequest queryRequest = new ProductSortRequest();
-        queryRequest.setEmail("");
-        queryRequest.setIsDesc(false);
-        queryRequest.setSortBy("id");
-        if (!StringUtils.isEmpty(params.get("pageIndex"))) {
-            queryRequest.setPageIndex(Integer.valueOf(params.get("pageIndex")));
-        }
-
-        if (!StringUtils.isEmpty(params.get("pageSize"))) {
-            queryRequest.setPageSize(Integer.valueOf(params.get("pageSize")));
-        }
-        return queryRequest;
-    }
-
     @RequestMapping(value = "/product/next")
     public String toNextPage(HttpServletRequest request) {
         try {
@@ -158,7 +142,7 @@ public class ProductController {
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request);
 
-            ToiletProductDTO productDTO = buildProductDTO(params);
+            ToiletProductDTO productDTO = buildUpdateProductDTO(params);
 
             checkProduct(productDTO);
 
@@ -168,14 +152,14 @@ public class ProductController {
             LOG.error("save product error with {}", e.getMessage());
             return ProductResponse.failed(e.getMessage());
         } catch (Exception e) {
-            LOG.error("upload products failed : {}", e.getMessage());
+            LOG.error("update products failed : {}", e.getStackTrace());
             return ProductResponse.failed(e.getMessage());
         }
 
         return ProductResponse.success();
     }
 
-    private void checkProduct(ToiletProductDTO productDTO) {
+    private void checkProduct(ToiletProductDTO productDTO, Map<String, String> params) {
         ToiletProductDTO productDTOFromDb = productService.queryToiletById(productDTO.getId().toString());
 
         // 检查文件是否有重新上传，路径为空则和数据库保持一致
@@ -188,7 +172,7 @@ public class ProductController {
             productDTO.setInstructionFilePath(productDTOFromDb.getInstructionFilePath());
         }
 
-        if (StringUtils.isEmpty(productDTO.getInstructionFilePath())) {
+        if (StringUtils.isEmpty(productDTO.getPicsPath())) {
             productDTO.setInstructionFilePath(productDTOFromDb.getInstructionFilePath());
         }
 
@@ -345,6 +329,39 @@ public class ProductController {
         return toiletPatternDTO;
     }
 
+    private ToiletProductDTO buildUpdateProductDTO(Map<String, String> params) {
+        ToiletProductDTO productDTO = new ToiletProductDTO();
+        productDTO.setId(Integer.valueOf(params.get("productId")));
+        productDTO.setProductName(params.get("productName"));
+        productDTO.setManufacturerName(params.get("factoryName"));
+        productDTO.setManufacturerCell(params.get("factoryNum"));
+        productDTO.setProductType(params.get("productType"));
+        productDTO.setApplicableProvince(params.get("province"));
+        productDTO.setApplicableTemperature(params.get("temperature"));
+        productDTO.setPurpose(params.get("purpose"));
+        productDTO.setProductFeatures(params.get("features"));
+
+        productDTO.setQualityAssuranceMaterialsFilePath(params.get("qualityMaterial"));
+        productDTO.setInstructionFilePath(params.get("introductions"));
+        List<String> picPath = buildPicsPath(params);
+
+        if (CollectionUtils.isEmpty(picPath)) {
+            throw new ToiletBizException("展示图片不能为空！", -1);
+        }
+        productDTO.setPicsPath(StringUtils.join(picPath, ";"));
+
+        productDTO.setPurpose(params.get("toiletPurpose"));// "公厕等"
+        productDTO.setApplicableCondition(params.get("applicableCondition"));
+        productDTO.setSpecialParam(params.get("specialParam"));
+        productDTO.setProductTheory(params.get("productTheory"));
+
+        ProductParamsDTO productParamsDTO = buildProductParameter(params);
+
+        productDTO.setProductParameters(productParamsDTO);
+
+        return productDTO;
+    }
+
     private ToiletProductDTO buildProductDTO(Map<String, String> params) {
         ToiletProductDTO productDTO = new ToiletProductDTO();
         productDTO.setProductName(params.get("productName"));
@@ -361,12 +378,26 @@ public class ProductController {
 
         productDTO.setQualityAssuranceMaterialsFilePath(params.get("qualityMaterial"));
         productDTO.setInstructionFilePath(params.get("introductions"));
-        productDTO.setPicsPath(buildPicsPath(params));
+        List<String> picPath = buildPicsPath(params);
 
+        if (CollectionUtils.isEmpty(picPath)) {
+            throw new ToiletBizException("展示图片不能为空！", -1);
+        }
+        productDTO.setPicsPath(StringUtils.join(picPath, ";"));
+        productDTO.setPurpose(params.get("toiletPurpose"));// "公厕等"
+        productDTO.setApplicableCondition(params.get("applicableCondition"));
+        productDTO.setSpecialParam(params.get("specialParam"));
+        productDTO.setProductTheory(params.get("productTheory"));
 
+        ProductParamsDTO productParamsDTO = buildProductParameter(params);
+        productDTO.setProductParameters(productParamsDTO);
+
+        return productDTO;
+    }
+
+    private ProductParamsDTO buildProductParameter(Map<String, String> params) {
         //  产品参数
         ProductParamsDTO paramsDTO = new ProductParamsDTO();
-        paramsDTO.setStandard(Double.valueOf(params.get("standard")));
         paramsDTO.setApplicableNum(Integer.valueOf(params.get("applicableNum")));
         paramsDTO.setTexture(params.get("texture"));
         paramsDTO.setColor(params.get("color"));
@@ -386,27 +417,13 @@ public class ProductController {
         if (!StringUtils.isEmpty(params.get("thickness"))) {
             paramsDTO.setWallThickness(Double.valueOf(params.get("thickness")));
         }
-        productDTO.setPurpose(params.get("toiletPurpose"));// "公厕等"
-        productDTO.setApplicableCondition(params.get("applicableCondition"));
-        productDTO.setSpecialParam(params.get("specialParam"));
-        productDTO.setProductTheory(params.get("productTheory"));
-
-
-        productDTO.setProductParameters(paramsDTO);
-
-        return productDTO;
+        return paramsDTO;
     }
 
-    private String buildPicsPath(Map<String, String> params) {
+    private List<String> buildPicsPath(Map<String, String> params) {
         List<String> picsPathKey = Lists.newArrayList("pics1", "pics2", "pics3", "pics4");
 
-        List<String> picsPath = picsPathKey.stream().filter(e -> !StringUtils.isEmpty(params.get(e))).map(params::get).collect(Collectors.toList());
-
-        if (CollectionUtils.isEmpty(picsPath)) {
-            throw new ToiletBizException("上传图片不能为空！", -1);
-        }
-
-        return StringUtils.join(picsPath, ";");
+        return picsPathKey.stream().filter(e -> !StringUtils.isEmpty(params.get(e))).map(params::get).collect(Collectors.toList());
     }
 
 }

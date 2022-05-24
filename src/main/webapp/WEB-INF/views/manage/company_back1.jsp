@@ -111,7 +111,7 @@
                                     <% List<ToiletProductDTO> list = (List<ToiletProductDTO>)request.getAttribute("productList");%>
                                     <tbody>
                                     <% for (int i=0;i<list.size();i++) {%>
-                                        <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back5'">
+                                        <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>'">
                                             <td><%=i+1%></td>
                                             <td><%=list.get(i).getProductName()%></td>
                                             <td>否</td>

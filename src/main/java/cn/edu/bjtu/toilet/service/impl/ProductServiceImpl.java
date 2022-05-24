@@ -144,12 +144,6 @@ public class ProductServiceImpl implements ProductService {
         ToiletProductDTO productDTOFromDb;
         ToiletProductDO productDO = toiletProductDao.queryProductById(Integer.valueOf(id));
         productDTOFromDb = ProductConverter.toDTO(productDO);
-
-        if (Objects.nonNull(productDO.getPatternId())) {
-            ToiletPatternDO patternDO = toiletPatternDao.queryPatternById(Integer.valueOf(productDO.getPatternId()));
-            productDTOFromDb.setToiletPatternDTO(ProductConverter.toDTO(patternDO));
-        }
-
         return productDTOFromDb;
     }
 
