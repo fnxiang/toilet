@@ -64,6 +64,10 @@
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
                 </li>
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/toPage?url=company_back6"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-adjust"></i>产品信息修改</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
