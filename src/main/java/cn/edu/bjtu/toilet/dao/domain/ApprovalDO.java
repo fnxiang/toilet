@@ -26,6 +26,8 @@ public class ApprovalDO implements Serializable {
 
     private Boolean deleted;
 
+    private String approverEmail;
+
     private String content;
 
     private String attribute;
@@ -120,6 +122,14 @@ public class ApprovalDO implements Serializable {
         this.deleted = deleted;
     }
 
+    public String getApproverEmail() {
+        return approverEmail;
+    }
+
+    public void setApproverEmail(String approverEmail) {
+        this.approverEmail = approverEmail == null ? null : approverEmail.trim();
+    }
+
     public String getContent() {
         return content;
     }
@@ -153,6 +163,7 @@ public class ApprovalDO implements Serializable {
         sb.append(", source=").append(source);
         sb.append(", version=").append(version);
         sb.append(", deleted=").append(deleted);
+        sb.append(", approverEmail=").append(approverEmail);
         sb.append(", content=").append(content);
         sb.append(", attribute=").append(attribute);
         sb.append(", serialVersionUID=").append(serialVersionUID);

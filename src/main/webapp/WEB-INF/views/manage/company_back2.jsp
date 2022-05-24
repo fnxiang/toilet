@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="cn.edu.bjtu.toilet.dao.domain.CompanyDO" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO" %>
+<%@ page import="com.alibaba.fastjson.JSON" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -68,7 +70,8 @@
     <!-- Left Panel -->
 
     <!-- Right Panel -->
-    <% CompanyDO companyDO = (CompanyDO)request.getAttribute("user");%>
+    <% CompanyDO companyDO = (CompanyDO)request.getAttribute("user");
+        EnterpriseAddressDTO addressDTO = JSON.parseObject(companyDO.getEnterpriseAddress(), EnterpriseAddressDTO.class);%>
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
@@ -129,7 +132,7 @@
 									<div class="row form-group">
 										<div class="col col-md-3"><label for="disabledSelect1" class=" form-control-label">企业地址</label></div>
 										<div class="col-md-3">
-                                            <select name="disabledSelect" id="disabledSelect1" disabled="" class="form-control">
+                                            <select name="disabledSelect" id="provinceSelect" disabled="" class="form-control">
                                                 <option value="北京市">北京市</option>
                                                 <option value="山西省">山西省</option>
                                                 <option value="江苏省">江苏省</option>
@@ -138,7 +141,7 @@
                                         </div>
 										
 										<div class="col-md-3">
-                                            <select name="disabledSelect" id="disabledSelect2" disabled="" class="form-control">
+                                            <select name="disabledSelect" id="citySelect" disabled="" class="form-control">
                                                 <option value="北京市">北京市</option>
                                                 <option value="朔州市">朔州市</option>
                                                 <option value="南京市">南京市</option>
@@ -147,7 +150,7 @@
                                         </div>
 										
 										<div class="col-md-3">
-                                            <select name="disabledSelect" id="disabledSelect3" disabled="" class="form-control">
+                                            <select name="disabledSelect" id="countrySelect" disabled="" class="form-control">
                                                 <option value="海淀区">海淀区</option>
                                                 <option value="东城区">东城区</option>
                                                 <option value="建邺区">建邺区</option>
@@ -234,7 +237,9 @@
     <script type="text/javascript">
         $(document).ready(function() {
           $('#bootstrap-data-table-export').DataTable();
-
+          $('#provinceSelect').val('<%=addressDTO.getProvince()%>');
+          $('#citySelect').val('<%=addressDTO.getCity()%>');
+          $('#countrySelect').val('<%=addressDTO.getCountry()%>');
       } );
     </script>
 

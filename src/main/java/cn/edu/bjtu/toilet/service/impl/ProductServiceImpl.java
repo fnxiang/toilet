@@ -46,6 +46,17 @@ public class ProductServiceImpl implements ProductService {
     private TransactionTemplate template;
 
     @Override
+    public List<ToiletProductDTO> queryProductListByProfessor(String email) {
+        ProductQueryRequest queryRequest = new ProductQueryRequest();
+        queryRequest.setProfessorEmail(email);
+        queryRequest.setSortBy("id");
+        queryRequest.setIsDesc(false);
+        return toiletProductDao.queryAllProductsByPage(queryRequest).stream()
+                .map(ProductConverter::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<ToiletProductDTO> queryAllProductList(String email) {
         List<ToiletProductDO> productDOS = toiletProductDao.queryAllProducts(email);
         return productDOS.stream().map(ProductConverter::toDTO).collect(Collectors.toList());

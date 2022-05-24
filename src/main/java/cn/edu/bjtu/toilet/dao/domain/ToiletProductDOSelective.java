@@ -1105,6 +1105,76 @@ public class ToiletProductDOSelective {
             return (Criteria) this;
         }
 
+        public Criteria andProfessorEmailIsNull() {
+            addCriterion("professor_email is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailIsNotNull() {
+            addCriterion("professor_email is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailEqualTo(String value) {
+            addCriterion("professor_email =", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailNotEqualTo(String value) {
+            addCriterion("professor_email <>", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailGreaterThan(String value) {
+            addCriterion("professor_email >", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("professor_email >=", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailLessThan(String value) {
+            addCriterion("professor_email <", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailLessThanOrEqualTo(String value) {
+            addCriterion("professor_email <=", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailLike(String value) {
+            addCriterion("professor_email like", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailNotLike(String value) {
+            addCriterion("professor_email not like", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailIn(List<String> values) {
+            addCriterion("professor_email in", values, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailNotIn(List<String> values) {
+            addCriterion("professor_email not in", values, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailBetween(String value1, String value2) {
+            addCriterion("professor_email between", value1, value2, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailNotBetween(String value1, String value2) {
+            addCriterion("professor_email not between", value1, value2, "professorEmail");
+            return (Criteria) this;
+        }
+
         public Criteria andVersionIsNull() {
             addCriterion("version is null");
             return (Criteria) this;

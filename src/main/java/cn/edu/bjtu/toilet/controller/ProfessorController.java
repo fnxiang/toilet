@@ -1,10 +1,14 @@
 package cn.edu.bjtu.toilet.controller;
 
+import cn.edu.bjtu.toilet.constant.ProductStatus;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.CommandResponse;
+import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.domain.response.ProfessorResponse;
+import cn.edu.bjtu.toilet.service.AuditService;
+import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.service.UserService;
+import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -20,6 +24,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.ERROR_PAGE;
+import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.PROF_INDEX;
+
 @Controller
 @RequestMapping("/professor")
 public class ProfessorController {
@@ -29,6 +36,12 @@ public class ProfessorController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private AuditService auditService;
+
+    @Resource
+    private ProductService productService;
+
     @RequestMapping(value = "/product/audit")
     public ProfessorResponse auditProduct(HttpServletRequest request) {
         try {
@@ -36,7 +49,13 @@ public class ProfessorController {
 
             String auditStatus = params.get("auditStatus");
             String comment = params.get("comment");
-            
+            String productId = params.get("productId");
+            ApprovalRequest approvalRequest = new ApprovalRequest();
+            approvalRequest.setProfessorEmail(request.getSession().getAttribute("uId").toString());
+            approvalRequest.setComment(comment);
+            approvalRequest.setProductId(productId);
+            approvalRequest.setStatus(ProductStatus.valueOf(auditStatus));
+            auditService.updateApproval(approvalRequest);
 
         } catch (Exception e) {
             LOG.error("ProfessorResponse error with : ", e);
@@ -58,7 +77,7 @@ public class ProfessorController {
                 userDOS = Lists.newArrayList(userService.queryUserByEmail(params.get("pEmail")));
             }
 
-            response.setNameList(userDOS.stream().map(UserDO::getName).collect(Collectors.toList()));
+            response.setNameMap(userDOS.stream().collect(Collectors.toMap(UserDO::getEmail, UserDO::getName)));
             response.setSuccess(true);
 
         } catch (Exception e) {
@@ -66,5 +85,22 @@ public class ProfessorController {
             return ProfessorResponse.failed(e.getMessage());
         }
         return response;
+    }
+
+    @RequestMapping(value = "/index")
+    public String getProducts(HttpServletRequest request) {
+        try {
+            String email = request.getSession().getAttribute("uId").toString();
+
+            List<ToiletProductDTO> productDTOS = productService.queryProductListByProfessor(email);
+
+            request.setAttribute("productList", productDTOS);
+
+
+        } catch (Exception e) {
+            LOG.error("ProfessorResponse error with : ", e);
+            return ERROR_PAGE;
+        }
+        return PROF_INDEX;
     }
 }

@@ -13,6 +13,7 @@
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="approver_email" jdbcType="VARCHAR" property="approverEmail" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -78,7 +79,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, type, status, approver_id, product_id, pattern_id, 
-    source, version, deleted
+    source, version, deleted, approver_email
   </sql>
   <sql id="Blob_Column_List">
     content, attribute
@@ -131,17 +132,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDO" keyProperty="id" useGeneratedKeys="true">
+  <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
     insert into approval (id, gmt_create, gmt_modified, 
       type, status, approver_id, 
       product_id, pattern_id, source, 
-      version, deleted, content, 
-      attribute)
+      version, deleted, approver_email, 
+      content, attribute)
     values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{approverId,jdbcType=INTEGER}, 
       #{productId,jdbcType=INTEGER}, #{patternId,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, 
-      #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}, 
-      #{attribute,jdbcType=LONGVARCHAR})
+      #{version,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, #{approverEmail,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR}, #{attribute,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
     insert into approval
@@ -178,6 +179,9 @@
       </if>
       <if test="deleted != null">
         deleted,
+      </if>
+      <if test="approverEmail != null">
+        approver_email,
       </if>
       <if test="content != null">
         content,
@@ -219,6 +223,9 @@
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
+      </if>
+      <if test="approverEmail != null">
+        #{approverEmail,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -270,6 +277,9 @@
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
       </if>
+      <if test="record.approverEmail != null">
+        approver_email = #{record.approverEmail,jdbcType=VARCHAR},
+      </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -294,6 +304,7 @@
       source = #{record.source,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
       deleted = #{record.deleted,jdbcType=BIT},
+      approver_email = #{record.approverEmail,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR},
       attribute = #{record.attribute,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
@@ -312,7 +323,8 @@
       pattern_id = #{record.patternId,jdbcType=INTEGER},
       source = #{record.source,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=INTEGER},
-      deleted = #{record.deleted,jdbcType=BIT}
+      deleted = #{record.deleted,jdbcType=BIT},
+      approver_email = #{record.approverEmail,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -350,6 +362,9 @@
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
+      <if test="approverEmail != null">
+        approver_email = #{approverEmail,jdbcType=VARCHAR},
+      </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -371,6 +386,7 @@
       source = #{source,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
+      approver_email = #{approverEmail,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
       attribute = #{attribute,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
@@ -386,7 +402,8 @@
       pattern_id = #{patternId,jdbcType=INTEGER},
       source = #{source,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
-      deleted = #{deleted,jdbcType=BIT}
+      deleted = #{deleted,jdbcType=BIT},
+      approver_email = #{approverEmail,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
