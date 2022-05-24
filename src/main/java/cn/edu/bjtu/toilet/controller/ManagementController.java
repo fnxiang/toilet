@@ -69,6 +69,11 @@ public class ManagementController {
                 companyDO.setPassword("");
                 request.setAttribute("user", companyDO);
                 break;
+            case "company_back6":
+                String productId = request.getParameter("productId");
+                ToiletProductDTO productDTO = productService.queryToiletById(productId);
+                request.setAttribute("product", productDTO);
+                break;
             case "company_back3":
                 //TODO
                 break;

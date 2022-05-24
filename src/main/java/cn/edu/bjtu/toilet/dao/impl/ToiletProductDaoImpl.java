@@ -74,8 +74,10 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
 
     @Override
     public ToiletProductDO updateProductBySource(ToiletProductDO productDO) {
+        ToiletProductDO productDOFromDb = queryProductBySource(productDO.getSource());
         productDO.setGmtModified(new Date());
-        productDO.setVersion(productDO.getVersion() + 1);
+        productDO.setVersion(productDOFromDb.getVersion() + 1);
+        productDO.setDeleted(productDOFromDb.getDeleted());
 
         ToiletProductDOSelective productDOSelective = new ToiletProductDOSelective();
         ToiletProductDOSelective.Criteria criteria = productDOSelective.createCriteria();

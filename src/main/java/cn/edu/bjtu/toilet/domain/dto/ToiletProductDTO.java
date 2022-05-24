@@ -35,6 +35,8 @@ public class ToiletProductDTO {
 
     private String purpose;
 
+    private Integer professorId;
+
     private String productTheory;
 
     private String specialParam;
@@ -54,5 +56,7 @@ public class ToiletProductDTO {
     private String companyEmail;
 
     private ProductStatus status;
+
+    private String source;
 
 }

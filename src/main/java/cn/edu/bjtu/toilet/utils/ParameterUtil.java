@@ -24,50 +24,56 @@ public class ParameterUtil {
     private static Set<String> allowTypes = Sets.newHashSet("doc", "docx", "pdf", "jpg", "jpeg", "png", "PNG", "JPG");
 
     public static Map<String, String> resolveParams(HttpServletRequest request) throws Exception {
+        Map<String, String> params = new HashMap<>();
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
-        Map<String, String> params = new HashMap<>();
+        try {
+            List<FileItem> items = upload.parseRequest(request);
+            String uploadPath = buildUploadPath(request);
 
-        List<FileItem> items = upload.parseRequest(request);
-        String uploadPath = buildUploadPath(request);
+            for (FileItem item : items) {
+                if(item.isFormField()) {
+                    String fieldName = item.getFieldName();
 
-        for (FileItem item : items) {
-            if(item.isFormField()) {
-                String fieldName = item.getFieldName();
+                    if (fieldName.equals("productName") || fieldName.equals("standard")) {
+                        uploadPath = uploadPath + decodeJsString(item.getString()) + File.separator;
+                    }
 
-                if (fieldName.equals("productName") || fieldName.equals("standard")) {
-                    uploadPath = uploadPath + decodeJsString(item.getString()) + File.separator;
-                }
+                    if (decodeJsString(item.getString()).equals("undefined")) {
+                        params.put(fieldName, "");
+                        continue;
+                    }
 
-                if (decodeJsString(item.getString()).equals("undefined")) {
-                    params.put(fieldName, "");
-                    continue;
-                }
-
-                if (!StringUtils.isEmpty(params.get(fieldName))) {
-                    params.put(fieldName, buildMulti(params.get(fieldName), decodeJsString(item.getString())));
-                }else {
-                    params.put(fieldName, decodeJsString(item.getString()));
-                }
-            } else {
-                if (item.getName() != null) {
-                    String name = item.getName();
-                    String type = name.substring(name.lastIndexOf('.') + 1);
-                    setUploadDirectory(uploadPath);
-                    if (!allowTypes.contains(type)) {
-                        throw new ToiletBizException("请上传PDF或PNG等格式文件!", -1);
-                    } else {
-                        int start = name.lastIndexOf("\\");
-                        String filename = name.substring(start + 1);
-                        String filePath = uploadPath + "/" + filename;
-                        String relativePath = filePath.replace(request.getServletContext().getRealPath("."), "");
-                        File file = new File(filePath);
-                        item.write(file);
-                        params.put(item.getFieldName(), relativePath);
+                    if (!StringUtils.isEmpty(params.get(fieldName))) {
+                        params.put(fieldName, buildMulti(params.get(fieldName), decodeJsString(item.getString())));
+                    }else {
+                        params.put(fieldName, decodeJsString(item.getString()));
+                    }
+                } else {
+                    if (item.getName() != null) {
+                        String name = item.getName();
+                        String type = name.substring(name.lastIndexOf('.') + 1);
+                        setUploadDirectory(uploadPath);
+                        if (!allowTypes.contains(type)) {
+                            throw new ToiletBizException("请上传PDF或PNG等格式文件!", -1);
+                        } else {
+                            int start = name.lastIndexOf("\\");
+                            String filename = name.substring(start + 1);
+                            String filePath = uploadPath + "/" + filename;
+                            String relativePath = filePath.replace(request.getServletContext().getRealPath("."), "");
+                            File file = new File(filePath);
+                            item.write(file);
+                            params.put(item.getFieldName(), relativePath);
+                        }
                     }
                 }
             }
+        } catch (ToiletBizException e) {
+            throw e;
+        } catch (Exception e) {
+            return params;
         }
+
         return params;
     }
 

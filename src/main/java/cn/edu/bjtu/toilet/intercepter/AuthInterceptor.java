@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.intercepter;
 
+import cn.edu.bjtu.toilet.constant.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,10 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (!StringUtils.isEmpty(uId)&&!StringUtils.isEmpty(role)) {
             String uri = request.getRequestURI();
             String param = request.getQueryString();
+
+            if (role.equals(UserRole.ADMIN.getRole())) {
+                return true;
+            }
 
             if (!Objects.isNull(param) && param.contains(role)) {
                 return true;

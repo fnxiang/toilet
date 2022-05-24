@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/pe-icon-7-filled.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/flag-icon.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/dialog.css">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/manage/assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/style.css">
@@ -52,6 +53,10 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/toPage?url=company_back6"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-adjust"></i>产品信息修改</a>
                 </li>
             </ul>
         </div>
@@ -796,7 +801,6 @@
                             </div>
 
                         </div>
-
                     </div>
                 </div>
 
@@ -822,6 +826,25 @@
         </div>
     </footer>
 
+</div>
+<%--                            弹窗--%>
+<div>
+    <div class="dialog">
+        <!-- 弹窗遮罩层 -->
+        <div>
+            <!-- 弹窗内容 -->
+            <div style="height: 200px;"></div>
+            <div class="content_dialog">
+                <div class="aclose">
+                    <a class="close" href="javascript:close();">&times;</a>
+                </div>
+                <div class="contain" id="dialog_text" style="font-size: 20px; color: #fcfdfd">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </div>
 <!-- /#right-panel -->
 
@@ -893,14 +916,11 @@
             processData: false,
             success: function (result) {
                 if (result.success) {
-
                     mode_content_selectMap = result['selectMap'];
                     mode_content_patternDTOMap = result['patternDTOMap'];
                     //动态赋值给控件  productselect   multiple-select
                     var productSelect = document.getElementById("productselect");
                     var productTpyes = result['selectMap'];
-                    console.log("***************")
-                    console.log(productSelect.value);
                     var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
                     var product_value = productSelect.options[0].text;
                     var mode_list = mode_content_selectMap[product_value];
@@ -927,7 +947,8 @@
 
 
                 } else {
-                    alert(result.errorMessage);
+                    var msg = confirm(result.errorMessage);
+                    show(msg);
                 }
             }
         });
@@ -938,7 +959,6 @@
 
         var product_select = document.getElementById("productselect");
         var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
-        console.log(product_select.value)
         var zhongliangdiv = $("#zhong").get(0);
         var bihoudiv = $("#hou").get(0);
         var chanpinyuanli = $("#chanpinzucheng").get(0);
@@ -1042,7 +1062,6 @@
     }
 
     function entry() {
-
         let data = new FormData();
         data.append("productName", encodeURI($('#product_name').val())); //产品名称
         data.append("factoryName", encodeURI($('#producer_name').val())); //厂家
@@ -1188,26 +1207,45 @@
 
         //应用案例
         data.append("case", encodeURI($('#yingyonganli').val())); //应用案例
+        //判断输入
+        if (! data.get("productName")){show("产品名称不能为空!");}
+        else if (! data.get("factoryName")){show("厂家不能为空!");}
+        else if (! data.get("patternType")){show("模式类型不能为空!");}
+        else if (! data.get("standard")){show("产品规格不能为空!");}
+        else if (! data.get("price")){show("价格不能为空!");}
+        else if (! data.get("applicableNum")){data["applicableNum"] = "0"}
+        else{
+            $.ajax({
+                url: "/toilet/company/product/entry",
+                type: "POST",
+                dataType: "json",
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    if (result.success) {
+                        show("保存成功!");
 
-        $.ajax({
-            url: "/toilet/company/product/entry",
-            type: "POST",
-            dataType: "json",
-            data: data,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                if (result.success) {
-                    alert("保存成功！");
-                } else {
-                    alert(result.errorMessage);
+                    } else {
+                        show(result.errorMessage);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
+</script>
+
+<script>
+    function show(msg){
+        document.getElementById("dialog_text").innerHTML = msg;
+        $(".dialog").css("display","block");
+    }
+    function close(){
+        $(".dialog").css("display","none");
+    }
 </script>
 
 <script>
