@@ -316,7 +316,8 @@
         if (!file) {
             file = $('#file')[0].files[0];
         }
-        data.append("file", file)
+        data.append("id", <%=companyDO.getId()%>);
+        data.append("file", file);
         data.append("companyName", encodeURI($('#companyName').val()));
         data.append("creditCode", $('#creditCode').val());
         data.append("companyAddress", getSelectorContent());
