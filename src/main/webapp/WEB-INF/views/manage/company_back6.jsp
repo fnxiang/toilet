@@ -64,6 +64,10 @@
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
                 </li>
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/toPage?url=company_back6"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-adjust"></i>产品信息修改</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -177,7 +181,7 @@
                                                                                             name="product_name"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value=<%=productDTO.getProductName()%>>
+                                                                                            value="<%=productDTO.getProductName()%>" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -201,7 +205,7 @@
                                                                                             name="producer_name"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value=<%=productDTO.getManufacturerName()%>>
+                                                                                            value="<%=productDTO.getManufacturerName()%>" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -307,7 +311,7 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="guige" name="guige"
                                                            placeholder="规格（平方米）" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getStandard()%>">
+                                                           value="<%=productDTO.getProductParameters().getStandard()%>" disabled>
                                                 </div>
                                             </div>
 
