@@ -130,28 +130,28 @@
 										<div class="col col-md-3"><label for="disabledSelect1" class=" form-control-label">企业地址</label></div>
 										<div class="col-md-3">
                                             <select name="disabledSelect" id="disabledSelect1" disabled="" class="form-control">
-                                                <option value="0">北京市</option>
-                                                <option value="1">山西省</option>
-                                                <option value="2">江苏省</option>
-                                                <option value="3">广东省</option>
+                                                <option value="北京市">北京市</option>
+                                                <option value="山西省">山西省</option>
+                                                <option value="江苏省">江苏省</option>
+                                                <option value="广东省">广东省</option>
                                             </select>
                                         </div>
 										
 										<div class="col-md-3">
                                             <select name="disabledSelect" id="disabledSelect2" disabled="" class="form-control">
-                                                <option value="0">北京市</option>
-                                                <option value="1">朔州市</option>
-                                                <option value="2">南京市</option>
-                                                <option value="3">广州市</option>
+                                                <option value="北京市">北京市</option>
+                                                <option value="朔州市">朔州市</option>
+                                                <option value="南京市">南京市</option>
+                                                <option value="广州市">广州市</option>
                                             </select>
                                         </div>
 										
 										<div class="col-md-3">
                                             <select name="disabledSelect" id="disabledSelect3" disabled="" class="form-control">
-                                                <option value="0">海淀区</option>
-                                                <option value="1">朔城区</option>
-                                                <option value="2">建邺区</option>
-                                                <option value="3">不知道</option>
+                                                <option value="海淀区">海淀区</option>
+                                                <option value="东城区">东城区</option>
+                                                <option value="建邺区">建邺区</option>
+                                                <option value="不知道">不知道</option>
                                             </select>
                                         </div>
 									</div>
@@ -234,6 +234,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
           $('#bootstrap-data-table-export').DataTable();
+
       } );
     </script>
 
