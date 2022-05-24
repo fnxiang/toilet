@@ -185,10 +185,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="text-input"
+                                                        <div class="col col-md-3"><label for="price"
                                                                                          class=" form-control-label">价格（元）</label>
                                                         </div>
-                                                        <div class="col-12 col-md-9"><input type="text" id="text-input"
+                                                        <div class="col-12 col-md-9"><input type="text" id="price"
                                                                                             name="text-input"
                                                                                             placeholder=""
                                                                                             class="form-control"
@@ -237,6 +237,7 @@
                                                                                             name="updateTime"
                                                                                             placeholder=""
                                                                                             class="form-control"
+                                                                                            value="<%=productDTO.getGmtModified().toInstant()%>"
                                                         >
                                                         </div>
                                                     </div>
@@ -389,7 +390,7 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="jvticaizhi" name="jvticaizhi"
                                                            placeholder="输入材质" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getTexture().substring(2)%>">
+                                                           value="<%=productDTO.getProductParameters().getTexture()%>">
                                                 </div>
 
                                                 <%--                                                    </div>--%>
@@ -425,13 +426,13 @@
                                                 </label></div>
                                                 <div class="col-12 col-md-9">
                                                     <input class="col-md-1" type="radio" name="cesuoyongtu"
-                                                           value="户厕" <%if(productDTO.getProductParameters().getParamPurpose().substring(2).equals("户厕")){%>
+                                                           value="户厕" <%if(productDTO.getPurpose().equals("户厕")){%>
                                                            checked <%}%>>户厕
                                                     <input class="col-md-1" type="radio" name="cesuoyongtu"
-                                                           value="公厕" <%if(productDTO.getProductParameters().getParamPurpose().substring(2).equals("公厕")){%>
+                                                           value="公厕" <%if(productDTO.getPurpose().equals("公厕")){%>
                                                            checked <%}%>>公厕
                                                     <input class="col-md-1" type="radio" name="cesuoyongtu"
-                                                           value="均可" <%if(productDTO.getProductParameters().getParamPurpose().substring(2).equals("均可")){%>
+                                                           value="均可" <%if(productDTO.getPurpose().equals("均可")){%>
                                                            checked <%}%> >均可
                                                 </div>
                                             </div>
@@ -846,6 +847,7 @@
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
         data.append("high", $('#chicun_gao').val());
+        data.append("price", $('#price').val());
         data.append("texture", $('#jvticaizhi').val());//材质
         data.append("color", encodeURI($('#yanse').val())); //颜色
         data.append("serviceLife", encodeURI($('#shouming').val())); //使用寿命
@@ -872,10 +874,10 @@
             pic2 = $('#picturefile2')[0].files[0];
         }
         if (!pic3) {
-            pic3 = $('#picturefile2')[0].files[0];
+            pic3 = $('#picturefile3')[0].files[0];
         }
         if (!pic4) {
-            pic4 = $('#picturefile2')[0].files[0];
+            pic4 = $('#picturefile4')[0].files[0];
         }
         data.append("qualityMaterial", quality); //质量保障材料
         data.append("introductions", introduction); //使用说明
@@ -896,7 +898,6 @@
             success: function (result) {
                 if (result.success) {
                     show("更新成功!");
-
                 } else {
                     show(result.errorMessage);
                 }

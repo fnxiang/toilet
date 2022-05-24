@@ -131,7 +131,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDO">
+  <insert id="insert" parameterType="cn.edu.bjtu.toilet.dao.domain.ApprovalDO" keyProperty="id" useGeneratedKeys="true">
     insert into approval (id, gmt_create, gmt_modified, 
       type, status, approver_id, 
       product_id, pattern_id, source, 

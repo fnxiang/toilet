@@ -25,4 +25,6 @@ public interface ProductService {
     ToiletProductDTO queryToiletById(String id);
 
     List<ToiletPatternDTO> queryAllPattern();
+
+    ToiletProductDTO updateProduct(ToiletProductDTO productDTO);
 }

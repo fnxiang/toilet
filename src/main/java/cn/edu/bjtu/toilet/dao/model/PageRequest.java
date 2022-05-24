@@ -1,6 +1,7 @@
 package cn.edu.bjtu.toilet.dao.model;
 
 import lombok.Data;
+import org.springframework.util.StringUtils;
 
 @Data
 public class PageRequest {
@@ -23,6 +24,21 @@ public class PageRequest {
             this.pageIndex = 1;
         } else {
             this.pageIndex = index;
+        }
+    }
+
+    public void setSortBy(String value) {
+        if (!StringUtils.isEmpty(value)) {
+            this.sortBy = value;
+        } else {
+            this.sortBy = "id";
+        }
+
+    }
+
+    public void setIsDesc(Boolean isDesc) {
+        if (isDesc != null) {
+            this.isDesc = isDesc;
         }
     }
 

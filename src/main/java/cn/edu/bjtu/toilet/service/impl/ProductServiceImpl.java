@@ -141,14 +141,30 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ToiletProductDTO queryToiletById(String id) {
+        ToiletProductDTO productDTOFromDb;
         ToiletProductDO productDO = toiletProductDao.queryProductById(Integer.valueOf(id));
-
-        return ProductConverter.toDTO(productDO);
+        productDTOFromDb = ProductConverter.toDTO(productDO);
+        return productDTOFromDb;
     }
 
     @Override
     public List<ToiletPatternDTO> queryAllPattern() {
         return toiletPatternDao.queryAllPattern().stream().map(ProductConverter::toDTO).filter(item -> item.getPatternType() != null).collect(Collectors.toList());
+    }
+
+    @Override
+    public ToiletProductDTO updateProduct(ToiletProductDTO productDTO) {
+        ToiletProductDO productDO = ProductConverter.toDO(productDTO);
+        ToiletProductDO productDOFromDb = toiletProductDao.queryProductById(productDO.getId());
+
+        String source = buildProductSource(productDTO);
+        productDO.setSource(source);
+        productDO.setPatternId(productDOFromDb.getPatternId());
+        productDO.setVersion(productDOFromDb.getVersion());
+        productDO.setDeleted(productDOFromDb.getDeleted());
+
+        productDO = toiletProductDao.updateProductBySource(productDO);
+        return ProductConverter.toDTO(productDO);
     }
 
     /**
