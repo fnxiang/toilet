@@ -177,7 +177,7 @@
                                                                                             name="product_name"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value=<%=productDTO.getProductName()%>>
+                                                                                            value="<%=productDTO.getProductName()%>" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -201,7 +201,7 @@
                                                                                             name="producer_name"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value=<%=productDTO.getManufacturerName()%>>
+                                                                                            value="<%=productDTO.getManufacturerName()%>" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -307,7 +307,7 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="guige" name="guige"
                                                            placeholder="规格（平方米）" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getStandard()%>">
+                                                           value="<%=productDTO.getProductParameters().getStandard()%>" disabled>
                                                 </div>
                                             </div>
 
