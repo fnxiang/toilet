@@ -707,13 +707,13 @@
                     var name_list = result.nameMap;
                     var i = 0;
                     for (var key in name_list) {
-                        if(i === 0){
+                        if (i === 0) {
                             var str = '<option value="' + key + '" selected>' + name_list[key] + '</option>';
-                        }
-                        else{
+                        } else {
                             var str = '<option value="' + key + '">' + name_list[key] + '</option>'
                         }
                         $("#professorSelect").append(str);
+                        i = i + 1;
                     }
                 } else {
                     alert(result.errorMessage);
@@ -808,12 +808,13 @@
 </script>
 
 <script>
-    function show(msg){
+    function show(msg) {
         document.getElementById("dialog_text").innerHTML = msg;
-        $(".dialog").css("display","block");
+        $(".dialog").css("display", "block");
     }
-    function close(){
-        $(".dialog").css("display","none");
+
+    function close() {
+        $(".dialog").css("display", "none");
     }
 </script>
 </body>
