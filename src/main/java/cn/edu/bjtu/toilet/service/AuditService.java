@@ -7,4 +7,6 @@ public interface AuditService {
 
     ApprovalDO updateApproval(ApprovalRequest request);
 
+    ApprovalDO getApproval(ApprovalRequest request);
+
 }

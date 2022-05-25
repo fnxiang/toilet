@@ -26,9 +26,34 @@ public class AuditServiceImpl implements AuditService {
     @Override
     public ApprovalDO updateApproval(ApprovalRequest request) {
 
-        ApprovalDO approvalDO = buildApproval(request);
 
-        return null;
+        ToiletProductDO productDO = productDao.queryProductById(Integer.valueOf(request.getProductId()));
+        request.setProductBelongEmail(productDO.getCompanyEmail());
+        ApprovalDO approvalDO = buildApproval(request);
+        productDO.setStatus(request.getStatus().getCode());
+        ApprovalDO approvalDOFromDb = approvalDao.getApprovalDOBySource(buildApprovalSource(request));
+
+        transactionTemplate.execute(status -> {
+            if (approvalDOFromDb == null) {
+                approvalDao.insertApproval(approvalDO);
+            } else {
+                approvalDO.setId(approvalDOFromDb.getId());
+                approvalDO.setVersion(approvalDOFromDb.getVersion());
+                approvalDO.setDeleted(approvalDOFromDb.getDeleted());
+                approvalDao.updateApprovalById(approvalDO);
+            }
+
+            productDao.updateProductBySource(productDO);
+            return null;
+        });
+        return approvalDao.getApprovalDOBySource(buildApprovalSource(request));
+    }
+
+    @Override
+    public ApprovalDO getApproval(ApprovalRequest request) {
+
+        Integer productId = Integer.valueOf(request.getProductId());
+        return approvalDao.getApprovalDOByProductId(productId);
     }
 
     private ApprovalDO buildApproval(ApprovalRequest request) {
@@ -39,18 +64,10 @@ public class AuditServiceImpl implements AuditService {
         approvalDO.setContent(request.getComment());
         approvalDO.setSource(source);
 
-        ToiletProductDO productDO = productDao.queryProductById(Integer.valueOf(request.getProductId()));
-        productDO.setStatus(request.getStatus().getCode());
-
-        transactionTemplate.execute(status -> {
-            approvalDao.insertApproval(approvalDO);
-            productDao.updateProductBySource(productDO);
-           return null;
-        });
-        return approvalDao.getApprovalDOBySource(source);
+        return approvalDO;
     }
 
     private String buildApprovalSource(ApprovalRequest request) {
-        return String.format("%s-%s-%s", request.getProfessorEmail(), "p", request.getProductId());
+        return String.format("%s-%s-%s-%s", request.getProductBelongEmail(), request.getProfessorEmail(), "p", request.getProductId());
     }
 }
