@@ -50,11 +50,6 @@ public class ManagementController {
         return ADMIN_INDEX;
     }
 
-    @RequestMapping("/professor/index")
-    public String professorIndex(){
-        return PROF_INDEX;
-    }
-
     @RequestMapping("/toPage")
     public String toPage(HttpServletRequest request){
         String url = request.getParameter("url");

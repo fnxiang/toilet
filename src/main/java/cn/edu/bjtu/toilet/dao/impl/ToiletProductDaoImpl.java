@@ -46,6 +46,11 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         if (!StringUtils.isEmpty(request.getEmail())) {
             criteria.andCompanyEmailEqualTo(request.getEmail());
         }
+
+        if (!StringUtils.isEmpty(request.getProfessorEmail())) {
+            criteria.andProfessorEmailEqualTo(request.getProfessorEmail());
+        }
+
         criteria.andDeletedNotEqualTo(true);
 
         return productDOMapper.selectByExampleWithBLOBs(toiletProductDOSelective);

@@ -414,7 +414,7 @@
                                     <div class="col col-md-3"><label for="select"
                                                                      class=" form-control-label">专家列表</label></div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select" id="select" class="form-control">
+                                        <select name="select" id="professorSelect" class="form-control">
                                             <option value="0">未选择</option>
                                             <option value="1">张三</option>
                                             <option value="2">李四</option>
@@ -482,12 +482,59 @@
     $(document).ready(function () {
         $('#bootstrap-data-table-export').DataTable();
     });
+
+    $(document).ready(function () {
+        $.ajax({
+            url:"/toilet/professor/get",
+            type:"POST",
+            dataType: "json",
+            data: "",
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(result){
+                if (result.success) {
+                    //TODO 回调给专家列表赋值
+                    console.log(result.nameMap)
+                } else {
+                    alert(result.errorMessage);
+                }
+            }
+        });
+    });
 </script>
 
 <script type="text/javascript">
     function showbigpic(obj) {
         var _this = $(obj);//将当前的pimg元素作为_this传入函数
         imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
+    }
+    
+    function assignProfessor() {
+        const data = new FormData();
+
+        // TODO 完成页面填充和传入ID填充
+        data.append("professorEmail", $('#professorSelect').val());
+        data.append("productId", <%=10%>);
+
+        $.ajax({
+            url:"/toilet/admin/assign",
+            type:"POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(result){
+                if (result.success) {
+                    alert("分配成功！");
+                } else {
+                    alert(result.errorMessage);
+                }
+            }
+        });
     }
 
     function imgShow(outerdiv, innerdiv, bigimg, _this) {

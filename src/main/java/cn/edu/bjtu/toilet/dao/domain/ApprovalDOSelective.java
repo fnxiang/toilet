@@ -774,6 +774,76 @@ public class ApprovalDOSelective {
             addCriterion("deleted not between", value1, value2, "deleted");
             return (Criteria) this;
         }
+
+        public Criteria andApproverEmailIsNull() {
+            addCriterion("approver_email is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailIsNotNull() {
+            addCriterion("approver_email is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailEqualTo(String value) {
+            addCriterion("approver_email =", value, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailNotEqualTo(String value) {
+            addCriterion("approver_email <>", value, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailGreaterThan(String value) {
+            addCriterion("approver_email >", value, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("approver_email >=", value, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailLessThan(String value) {
+            addCriterion("approver_email <", value, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailLessThanOrEqualTo(String value) {
+            addCriterion("approver_email <=", value, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailLike(String value) {
+            addCriterion("approver_email like", value, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailNotLike(String value) {
+            addCriterion("approver_email not like", value, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailIn(List<String> values) {
+            addCriterion("approver_email in", values, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailNotIn(List<String> values) {
+            addCriterion("approver_email not in", values, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailBetween(String value1, String value2) {
+            addCriterion("approver_email between", value1, value2, "approverEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andApproverEmailNotBetween(String value1, String value2) {
+            addCriterion("approver_email not between", value1, value2, "approverEmail");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -36,6 +36,8 @@ public class ToiletProductDO implements Serializable {
 
     private Integer professorId;
 
+    private String professorEmail;
+
     private Integer version;
 
     private Boolean deleted;
@@ -200,6 +202,14 @@ public class ToiletProductDO implements Serializable {
         this.professorId = professorId;
     }
 
+    public String getProfessorEmail() {
+        return professorEmail;
+    }
+
+    public void setProfessorEmail(String professorEmail) {
+        this.professorEmail = professorEmail == null ? null : professorEmail.trim();
+    }
+
     public Integer getVersion() {
         return version;
     }
@@ -357,6 +367,7 @@ public class ToiletProductDO implements Serializable {
         sb.append(", applicableProvince=").append(applicableProvince);
         sb.append(", applicableTemperature=").append(applicableTemperature);
         sb.append(", professorId=").append(professorId);
+        sb.append(", professorEmail=").append(professorEmail);
         sb.append(", version=").append(version);
         sb.append(", deleted=").append(deleted);
         sb.append(", source=").append(source);

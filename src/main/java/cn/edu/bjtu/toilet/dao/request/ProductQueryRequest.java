@@ -8,4 +8,6 @@ public class ProductQueryRequest extends PageRequest {
 
     private String email;
 
+    private String professorEmail;
+
 }

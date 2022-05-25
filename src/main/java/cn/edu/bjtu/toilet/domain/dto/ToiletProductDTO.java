@@ -37,6 +37,8 @@ public class ToiletProductDTO {
 
     private Integer professorId;
 
+    private String professorEmail;
+
     private String productTheory;
 
     private String specialParam;

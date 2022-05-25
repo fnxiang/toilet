@@ -64,11 +64,11 @@
         <!-- <table schema="" tableName="WECHAT_MESSAGE"/> -->
 
 <!--        <table schema="" tableName="toilet_pattern" domainObjectName="ToiletPatternDO"/>-->
-<!--        <table schema="" tableName="toilet_product" domainObjectName="ToiletProductDO"/>-->
+        <table schema="" tableName="toilet_product" domainObjectName="ToiletProductDO"/>
 <!--        <table schema="" tableName="toilet_pattern_sort" domainObjectName="ToiletPatternSortDO"/>-->
 <!--        <table schema="" tableName="user" domainObjectName="UserDO"/>-->
 <!--        <table schema="" tableName="company" domainObjectName="CompanyDO"/>-->
-        <table schema="" tableName="approval" domainObjectName="ApprovalDO"/>
+<!--        <table schema="" tableName="approval" domainObjectName="ApprovalDO"/>-->
 
         <!-- 指定数据库所有表  -->
         <!-- <table schema="" tableName="%"/> -->
