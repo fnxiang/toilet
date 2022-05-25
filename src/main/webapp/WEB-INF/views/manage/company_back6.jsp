@@ -25,6 +25,7 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/manage/res/logo.ico">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/normalize.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/dialog.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/themify-icons.css">
@@ -34,7 +35,6 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/manage/assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/dialog.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -50,7 +50,8 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>我的申请</a>
+                    <a href="${pageContext.request.contextPath}/toPage?url=company_back1"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>我的申请</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back2"
@@ -63,10 +64,6 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
-                </li>
-                <li class="active">
-                    <a href="${pageContext.request.contextPath}/toPage?url=company_back6"
-                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-adjust"></i>产品信息修改</a>
                 </li>
             </ul>
         </div>
@@ -181,7 +178,8 @@
                                                                                             name="product_name"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="<%=productDTO.getProductName()%>" disabled>
+                                                                                            value="<%=productDTO.getProductName()%>"
+                                                                                            disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -205,7 +203,8 @@
                                                                                             name="producer_name"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="<%=productDTO.getManufacturerName()%>" disabled>
+                                                                                            value="<%=productDTO.getManufacturerName()%>"
+                                                                                            disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -312,7 +311,8 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="guige" name="guige"
                                                            placeholder="规格（平方米）" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getStandard()%>" disabled>
+                                                           value="<%=productDTO.getProductParameters().getStandard()%>"
+                                                           disabled>
                                                 </div>
                                             </div>
 
@@ -666,8 +666,7 @@
     </footer>
 
 </div>
-
-<%-- 弹窗--%>
+<%--                            弹窗--%>
 <div>
     <div class="dialog">
         <!-- 弹窗遮罩层 -->
@@ -686,6 +685,8 @@
 
     </div>
 </div>
+
+
 <!-- /#right-panel -->
 
 <!-- Right Panel -->
@@ -885,7 +886,6 @@
         data.append("pics2", pic2); //使用图片
         data.append("pics3", pic3); //使用图片
         data.append("pics4", pic4); //使用图片
-
         $.ajax({
             url: "/toilet/company/product/update",
             type: "POST",
@@ -899,7 +899,7 @@
                 if (result.success) {
                     show("更新成功!");
                 } else {
-                    show(result.errorMessage);
+                    show("更新失败!");
                 }
             }
         });
@@ -907,16 +907,6 @@
 </script>
 
 <script>
-    //弹窗
-    function show(msg) {
-        document.getElementById("dialog_text").innerHTML = msg;
-        $(".dialog").css("display", "block");
-    }
-
-    function close() {
-        $(".dialog").css("display", "none");
-    }
-
     function getRadioValue(radio) {
         let texture = "";
         for (let i = 0; i < radio.length; i++) {
@@ -929,6 +919,17 @@
             texture = $('#jvticaizhi').val();
         }
         return texture;
+    }
+</script>
+<%--弹窗--%>
+<script>
+    function show(msg) {
+        document.getElementById("dialog_text").innerHTML = msg;
+        $(".dialog").css("display", "block");
+    }
+
+    function close() {
+        $(".dialog").css("display", "none");
     }
 </script>
 </body>
