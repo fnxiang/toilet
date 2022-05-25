@@ -13,4 +13,6 @@ public class ApprovalRequest {
     private ProductStatus status;
 
     private String comment;
+
+    private String productBelongEmail;
 }

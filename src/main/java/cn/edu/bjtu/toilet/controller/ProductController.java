@@ -2,12 +2,15 @@ package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
+import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.domain.ModeResponse;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.domain.request.ProductSortRequest;
 import cn.edu.bjtu.toilet.domain.response.ProductQueryResponse;
+import cn.edu.bjtu.toilet.service.AuditService;
 import cn.edu.bjtu.toilet.service.ProductService;
+import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
@@ -33,6 +36,9 @@ public class ProductController {
 
     @Resource
     private ProductService productService;
+
+    @Resource
+    private AuditService auditService;
 
 
     @RequestMapping("/")
@@ -139,6 +145,27 @@ public class ProductController {
 
     @RequestMapping(value = "/company/product/update")
     public ProductResponse updateProduct(HttpServletRequest request) {
+        try {
+            String productId = request.getParameter("productId");
+            ApprovalRequest approvalRequest = new ApprovalRequest();
+            approvalRequest.setProductId(productId);
+            ApprovalDO approvalDO = auditService.getApproval(approvalRequest);
+
+            request.setAttribute("approval", approvalDO);
+
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("update product error with {}", e.getMessage());
+            return ProductResponse.failed("update product error with " + e.getMessage());
+        } catch (Exception e) {
+            LOG.error("update products failed : {}", e.getStackTrace());
+            return ProductResponse.failed("update product error with " + e.getMessage());
+        }
+
+        return ProductResponse.success();
+    }
+
+    @RequestMapping(value = "/company/product/audit")
+    public ProductResponse getProductAudit(HttpServletRequest request) {
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request);
 
