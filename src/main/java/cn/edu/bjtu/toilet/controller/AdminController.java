@@ -43,6 +43,7 @@ public class AdminController {
             UserDO userDO = userService.queryUserByEmail(professorEmail);
 
             productDTO.setProfessorId(userDO.getId());
+            productDTO.setProfessorEmail(professorEmail);
 
             productService.updateProduct(productDTO);
 

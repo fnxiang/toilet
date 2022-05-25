@@ -16,6 +16,8 @@ public interface ProductService {
 
     List<ToiletProductDTO> queryAllProductList(String email);
 
+    List<ToiletProductDTO> queryProductListByProfessor(String email);
+
     ProductQueryResponse queryPageProduct(ProductSortRequest request);
 
     ProductQueryResponse queryPageProductWithCondition(ProductSortRequest request, ProductSearchConditionsDTO searchConditions);

@@ -10,6 +10,8 @@ public interface ApprovalDao {
 
     ApprovalDO getApprovalDOByProductId(Integer id);
 
+    ApprovalDO getApprovalDOBySource(String source);
+
     void updateApprovalById(ApprovalDO approvalDO);
 
 }
