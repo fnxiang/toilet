@@ -6,6 +6,7 @@ import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.dao.domain.ApprovalDOSelective;
 import cn.edu.bjtu.toilet.dao.mapper.ApprovalDOMapper;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Objects;
 
 import static cn.edu.bjtu.toilet.constant.ToiletErrorCode.BIZ_ERROR;
 
+@Component
 public class ApprovalDaoImpl implements ApprovalDao {
 
     @Resource
