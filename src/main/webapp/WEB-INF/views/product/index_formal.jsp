@@ -254,6 +254,10 @@
     let $page = $('#page');
     let pageNow = <%=productQueryResponse.getCurrentPage()%>;
     let total = <%=productQueryResponse.getMaxPage()%>;
+    if(total === 0){
+        total = 1;
+    }
+    pageSet(total, pageNow);
     let data = {};
     function getprepage() {
         data["sortBy"] = $('#sortCondition').val();
@@ -273,7 +277,6 @@
         data["pageIndex"] = pageNow + 1;
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
-    pageSet(total, pageNow);
     $page.on("click", 'label', function (e) {
         let sign = e.target.innerText;
         console.log(e, sign, sign === '...');
