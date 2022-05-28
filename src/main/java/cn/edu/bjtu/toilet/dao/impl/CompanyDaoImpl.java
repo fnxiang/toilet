@@ -121,10 +121,9 @@ public class CompanyDaoImpl implements CompanyDao {
     public String updateCompanyDO(CompanyDO companyDO) {
         if (companyDO.getId() == null ||
                 StringUtils.isEmpty(companyDO.getEmail()) ||
-                StringUtils.isEmpty(companyDO.getCreditCode()) ||
-                StringUtils.isEmpty(companyDO.getSource())) {
-            LOG.error("required params email, credit and source code can not be null");
-            throw new ToiletBizException("required params email, credit and source code can not be null", BIZ_ERROR);
+                StringUtils.isEmpty(companyDO.getCreditCode())) {
+            LOG.error("required params email, credit can not be null");
+            throw new ToiletBizException("required params email, credit can not be null", BIZ_ERROR);
         }
         companyDO.setGmtModified(new Date());
         companyDO.setVersion(companyDO.getVersion() + 1);

@@ -1,3 +1,5 @@
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
+<%@ page import="cn.edu.bjtu.toilet.dao.domain.ApprovalDO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -95,6 +97,9 @@
                             <div class="card-header">
                                 <strong class="card-title">产品信息审核</strong>
                             </div>
+
+							<% 	// TODO 产品信息填充
+								ToiletProductDTO productDTO = (ToiletProductDTO)request.getAttribute("product");%>
                             <div class="card-body">
                                 
 								

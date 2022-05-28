@@ -26,7 +26,6 @@ public class AuditServiceImpl implements AuditService {
     @Override
     public ApprovalDO updateApproval(ApprovalRequest request) {
 
-
         ToiletProductDO productDO = productDao.queryProductById(Integer.valueOf(request.getProductId()));
         request.setProductBelongEmail(productDO.getCompanyEmail());
         ApprovalDO approvalDO = buildApproval(request);
@@ -51,7 +50,6 @@ public class AuditServiceImpl implements AuditService {
 
     @Override
     public ApprovalDO getApproval(ApprovalRequest request) {
-
         Integer productId = Integer.valueOf(request.getProductId());
         return approvalDao.getApprovalDOByProductId(productId);
     }

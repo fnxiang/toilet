@@ -8,6 +8,7 @@ import cn.edu.bjtu.toilet.domain.CommandResponse;
 import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
+import cn.edu.bjtu.toilet.domain.request.CompanyUpdateRequest;
 import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.service.UserService;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -66,6 +68,32 @@ public class ManagementController {
         return CommandResponse.success();
     }
 
+    @RequestMapping("/company/pwd/update")
+    @ResponseBody
+    public CommandResponse updateCompanyPwd(HttpServletRequest request){
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String email = request.getSession().getAttribute("uId").toString();
+
+            CompanyUpdateRequest updateRequest = buildComapanyUpdateRequest(params);
+            updateRequest.setEmail(email);
+            companyService.updatePassword(updateRequest);
+        } catch (Exception e) {
+            LOG.error("update company pwd error with : {}", e.getMessage());
+            return CommandResponse.failed(e.getMessage());
+        }
+        return CommandResponse.success();
+    }
+
+    private CompanyUpdateRequest buildComapanyUpdateRequest(Map<String, String> params) {
+        CompanyUpdateRequest request = new CompanyUpdateRequest();
+        request.setOriginPassword(params.get("originPwd"));
+        request.setPassword(params.get("pwd"));
+        request.setConfirmPassword(params.get("confirmPwd"));
+        return request;
+    }
+
     @RequestMapping("/admin/index")
     public String adminIndex(HttpServletRequest request){
 
@@ -92,6 +120,8 @@ public class ManagementController {
                 companyDO.setPassword("");
                 request.setAttribute("user", companyDO);
                 break;
+            case "admin_back9":
+            case "professor_back5":
             case "company_back6":
                 String productId = request.getParameter("productId");
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
@@ -106,7 +136,6 @@ public class ManagementController {
                 request.setAttribute("user", userDO);
                 break;
             case "admin_back1":
-                // fixme 审核完后刷新无数据
                 List<UserDO> users = userService.queryAllUser(UserRole.PROFESSOR);
                 List<CompanyDO> companyDOS = companyService.queryAllCompany();
 
