@@ -1,3 +1,5 @@
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
+<%@ page import="cn.edu.bjtu.toilet.dao.domain.ApprovalDO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -87,6 +89,9 @@
         </div>
 
         <div class="content">
+            <%ToiletProductDTO productDTO = (ToiletProductDTO)request.getAttribute("product");
+                ApprovalDO approvalDO = (ApprovalDO)request.getAttribute("approval");
+            %>
             <div class="animated fadeIn">
                 <div class="row">
 
@@ -114,6 +119,7 @@
                                             <td>审核结果</td>
                                             <td>
 												<!--<a href="./company_back3.jsp" class="btn btn-link">返回修改</a>-->
+                                                <%//TODO 对不同的状态暴露不同的按钮， approval， deny不显示，返回再修改都显示%>
 												<button type="button" class="btn btn-link" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back3'">返回修改</button>
 												<button type="button" class="btn btn-link" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back1'">舍弃该申请</button>
 											</td>

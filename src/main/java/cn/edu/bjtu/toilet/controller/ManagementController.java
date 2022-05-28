@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.controller;
 
+import cn.edu.bjtu.toilet.constant.ProductStatus;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
@@ -9,9 +10,11 @@ import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.domain.request.CompanyUpdateRequest;
+import cn.edu.bjtu.toilet.service.AuditService;
 import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.service.UserService;
+import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
@@ -44,6 +47,9 @@ public class ManagementController {
 
     @Resource
     private ProductService productService;
+
+    @Resource
+    private AuditService auditService;
 
     @RequestMapping("/company/index")
     public String companyIndex(HttpServletRequest request){
@@ -110,6 +116,7 @@ public class ManagementController {
     public String toPage(HttpServletRequest request){
         String url = request.getParameter("url");
         String email = request.getSession().getAttribute("uId").toString();
+        String productId = request.getParameter("productId");
         switch (url){
             case "company_back1":
                 List<ToiletProductDTO> productDTOList = productService.queryAllProductList(email);
@@ -120,10 +127,15 @@ public class ManagementController {
                 companyDO.setPassword("");
                 request.setAttribute("user", companyDO);
                 break;
+            case "company_back5":
+                ApprovalRequest approvalRequest = new ApprovalRequest();
+                approvalRequest.setProductId(productId);
+                request.setAttribute("product", productService.queryToiletById(productId));
+                request.setAttribute("approval", auditService.getApproval(approvalRequest));
             case "admin_back9":
             case "professor_back5":
             case "company_back6":
-                String productId = request.getParameter("productId");
+
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
                 request.setAttribute("product", productDTO);
                 break;

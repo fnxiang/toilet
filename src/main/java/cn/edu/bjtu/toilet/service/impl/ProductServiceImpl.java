@@ -51,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
         queryRequest.setProfessorEmail(email);
         queryRequest.setSortBy("id");
         queryRequest.setIsDesc(false);
+        queryRequest.setProductStatus(ProductStatus.PROCESSING);
         return toiletProductDao.queryAllProductsByPage(queryRequest).stream()
                 .map(ProductConverter::toDTO)
                 .collect(Collectors.toList());
@@ -59,6 +60,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ToiletProductDTO> queryAllProductList(String email) {
         List<ToiletProductDO> productDOS = toiletProductDao.queryAllProducts(email);
+        return productDOS.stream().map(ProductConverter::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ToiletProductDTO> queryAllProductList(String email, List<ProductStatus> statuses) {
+        List<ToiletProductDO> productDOS = toiletProductDao.queryAllProductsWithStatus(email, statuses);
         return productDOS.stream().map(ProductConverter::toDTO).collect(Collectors.toList());
     }
 
@@ -72,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
                 .map(ProductConverter::toDTO)
                 .collect(Collectors.toList());
 
-        Integer maxSize = toiletProductDao.queryAllProducts("").size();
+        Integer maxSize = toiletProductDao.queryAllProductsWithStatus("", Lists.newArrayList(request.getProductStatus())).size();
         response.setCurrentPage(request.getPageIndex());
         if(maxSize % request.getPageSize() != 0){
             response.setMaxPage(maxSize/request.getPageSize() + 1) ;

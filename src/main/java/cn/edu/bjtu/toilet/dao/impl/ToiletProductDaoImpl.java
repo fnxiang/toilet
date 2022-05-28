@@ -1,6 +1,7 @@
 package cn.edu.bjtu.toilet.dao.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.constant.ProductStatus;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDOSelective;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static cn.edu.bjtu.toilet.constant.ToiletErrorCode.BIZ_ERROR;
 
@@ -37,11 +39,35 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     }
 
     @Override
+    public List<ToiletProductDO> queryAllProductsWithStatus(String email, List<ProductStatus> productStatuses) {
+
+        if (CollectionUtils.isEmpty(productStatuses)) {
+            throw new ToiletBizException("query status can not be null", BIZ_ERROR);
+        }
+
+        ToiletProductDOSelective toiletProductDOSelective = new ToiletProductDOSelective();
+        ToiletProductDOSelective.Criteria criteria = toiletProductDOSelective.createCriteria();
+
+        criteria.andStatusIn(productStatuses.stream().map(ProductStatus::getCode).collect(Collectors.toList()));
+
+        if (!StringUtils.isEmpty(email)) {
+            criteria.andCompanyEmailEqualTo(email);
+        }
+        criteria.andDeletedNotEqualTo(true);
+
+        return productDOMapper.selectByExampleWithBLOBs(toiletProductDOSelective);
+    }
+
+    @Override
     public List<ToiletProductDO> queryAllProductsByPage(ProductQueryRequest request) {
 
         ToiletProductDOSelective toiletProductDOSelective = new ToiletProductDOSelective();
         ToiletProductDOSelective.Criteria criteria = toiletProductDOSelective.createCriteria();
         toiletProductDOSelective.setOrderByClause(request.getSortBy() + " " + request.getSortDirection() + " limit " + request.getOffset() + "," + request.getLimit());
+
+        if (request.getProductStatus() != null) {
+            criteria.andStatusEqualTo(request.getProductStatus().getCode());
+        }
 
         if (!StringUtils.isEmpty(request.getEmail())) {
             criteria.andCompanyEmailEqualTo(request.getEmail());

@@ -1,5 +1,6 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="cn.edu.bjtu.toilet.constant.ProductStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -118,6 +119,7 @@
                                 <% List<ToiletProductDTO> list = (List<ToiletProductDTO>) request.getAttribute("productList");%>
                                 <tbody>
                                 <% for (int i = 0; i < list.size(); i++) {%>
+                                <tr>
                                     <td style="text-align: center"><%=i + 1%>
                                     </td>
                                     <td style="text-align: center"><%=list.get(i).getProductName()%>
@@ -125,9 +127,19 @@
                                     <td style="text-align: center">否</td>
                                     <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                     </td>
-                                    <td style="text-align: center" ><a type="button" class="btn btn-link fa fa-edit"
-                                           href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>">修改信息</a><a
-                                            type="button" class="btn btn-link fa fa-th-list" href="${pageContext.request.contextPath}/toPage?url=company_back5">查看审批意见</a></td>
+                                    <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit"
+                                                                      href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>">修改信息</a>
+                                        <%if (list.get(i).getStatus().equals(ProductStatus.APPROVAL)
+                                                || list.get(i).getStatus().equals(ProductStatus.DENY)
+                                                || list.get(i).getStatus().equals(ProductStatus.WAITED_AMEND)) {%>
+                                        <a type="button" class="btn btn-link fa fa-th-list"
+                                           href="${pageContext.request.contextPath}/toPage?url=company_back5">查看审批意见</a>
+                                        <%} else if (list.get(i).getStatus().equals(ProductStatus.WAITED)
+                                                    ||list.get(i).getStatus().equals(ProductStatus.UNKNOWN)) {%>
+                                        <a type="button" class="btn btn-link fa fa-th-list"
+                                           href="${pageContext.request.contextPath}/toPage?url=company_back5">提交审核</a>
+                                        <%}%>
+                                    </td>
                                 </tr>
                                 <%}%>
 
