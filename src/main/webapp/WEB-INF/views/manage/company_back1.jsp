@@ -126,8 +126,8 @@
                                     <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                     </td>
                                     <td style="text-align: center" ><a type="button" class="btn btn-link fa fa-edit"
-                                           href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>">修改信息</a><a
-                                            type="button" class="btn btn-link fa fa-th-list" href="${pageContext.request.contextPath}/toPage?url=company_back5">查看审批意见</a></td>
+                                           onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>'">修改信息</a><a
+                                            type="button" class="btn btn-link fa fa-th-list" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back5'">查看审批意见</a></td>
                                 </tr>
                                 <%}%>
 
