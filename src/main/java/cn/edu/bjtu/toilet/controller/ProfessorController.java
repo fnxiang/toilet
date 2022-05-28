@@ -1,7 +1,10 @@
 package cn.edu.bjtu.toilet.controller;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.ProductStatus;
 import cn.edu.bjtu.toilet.constant.UserRole;
+import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.domain.response.ProfessorResponse;
@@ -85,6 +88,31 @@ public class ProfessorController {
             return ProfessorResponse.failed(e.getMessage());
         }
         return response;
+    }
+
+    @RequestMapping(value = "/product/audit/info")
+    public String getProductAuditInfo(HttpServletRequest request) {
+        try {
+
+            String productId = request.getParameter("productId");
+            String email = request.getSession().getAttribute("uId").toString();
+
+            ApprovalRequest approvalRequest = new ApprovalRequest();
+            approvalRequest.setProductId(productId);
+            approvalRequest.setProfessorEmail(email);
+            ApprovalDO approvalDO = auditService.getApproval(approvalRequest);
+
+            ToiletProductDTO productDTO = productService.queryToiletById(productId);
+
+            request.setAttribute("product", productDTO);
+            request.setAttribute("approval", approvalDO);
+
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("get product audit info error with : {}", e.getMessage());
+            return ERROR_PAGE;
+        }
+
+        return "/manage/professor_back5";
     }
 
     @RequestMapping(value = "/index")

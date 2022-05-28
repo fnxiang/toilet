@@ -703,7 +703,6 @@
             processData: false,
             success: function (result) {
                 if (result.success) {
-                    //TODO 回调给专家列表赋值
                     var name_list = result.nameMap;
                     var i = 0;
                     for (var key in name_list) {

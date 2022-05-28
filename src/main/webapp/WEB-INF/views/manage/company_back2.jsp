@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="cn.edu.bjtu.toilet.dao.domain.CompanyDO" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO" %>
+<%@ page import="com.alibaba.fastjson.JSON" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -71,7 +73,8 @@
 <!-- Left Panel -->
 
 <!-- Right Panel -->
-<% CompanyDO companyDO = (CompanyDO) request.getAttribute("user");%>
+<% CompanyDO companyDO = (CompanyDO) request.getAttribute("user");
+    EnterpriseAddressDTO enterpriseAddressDTO = JSON.parseObject(companyDO.getEnterpriseAddress(), EnterpriseAddressDTO.class);%>
 <div id="right-panel" class="right-panel">
 
     <!-- Header-->
@@ -306,7 +309,12 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#bootstrap-data-table-export').DataTable();
+        $(document).ready(function() {
+            $('#bootstrap-data-table-export').DataTable();
+            $('#provinceSelect').val('<%=enterpriseAddressDTO.getProvince()%>');
+            $('#citySelect').val('<%=enterpriseAddressDTO.getCity()%>');
+            $('#countrySelect').val('<%=enterpriseAddressDTO.getCountry()%>');
+        } );
 
     });
     var file = "<%=companyDO.getBusinessLicenseFilePath()%>";
@@ -317,7 +325,7 @@
             file = $('#file')[0].files[0];
         }
         data.append("id", <%=companyDO.getId()%>);
-        data.append("file", file);
+        data.append("filePath", file);
         data.append("companyName", encodeURI($('#companyName').val()));
         data.append("creditCode", $('#creditCode').val());
         data.append("companyAddress", getSelectorContent());
@@ -345,7 +353,7 @@
             show("请输入正确手机号!");
         } else {
             $.ajax({
-                url: "/toilet/company/update",
+                url: "/toilet/company/info/update",
                 type: "POST",
                 dataType: "json",
                 data: data,
@@ -355,7 +363,7 @@
                 processData: false,
                 success: function (result) {
                     if (result.success) {
-                        location.href = "/toilet/login/index";
+                        show("更新成功");
                     } else {
                         show(result.errorMessage);
                     }
