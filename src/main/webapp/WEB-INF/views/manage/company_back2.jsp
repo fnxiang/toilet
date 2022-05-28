@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="cn.edu.bjtu.toilet.dao.domain.CompanyDO" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO" %>
+<%@ page import="com.alibaba.fastjson.JSON" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -71,7 +73,8 @@
 <!-- Left Panel -->
 
 <!-- Right Panel -->
-<% CompanyDO companyDO = (CompanyDO) request.getAttribute("user");%>
+<% CompanyDO companyDO = (CompanyDO) request.getAttribute("user");
+    EnterpriseAddressDTO enterpriseAddressDTO = JSON.parseObject(companyDO.getEnterpriseAddress(), EnterpriseAddressDTO.class);%>
 <div id="right-panel" class="right-panel">
 
     <!-- Header-->
@@ -306,7 +309,12 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#bootstrap-data-table-export').DataTable();
+        $(document).ready(function() {
+            $('#bootstrap-data-table-export').DataTable();
+            $('#provinceSelect').val('<%=enterpriseAddressDTO.getProvince()%>');
+            $('#citySelect').val('<%=enterpriseAddressDTO.getCity()%>');
+            $('#countrySelect').val('<%=enterpriseAddressDTO.getCountry()%>');
+        } );
 
     });
     var file = "<%=companyDO.getBusinessLicenseFilePath()%>";

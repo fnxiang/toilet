@@ -11,6 +11,8 @@ public interface CompanyService {
 
     CompanyDO saveCompany(CompanyDO companyDO);
 
+    CompanyDO updateCompany(CompanyDO companyDO);
+
     CompanyDO registerCompany(CompanyRegisterRequest companyRegisterRequest);
 
     CompanyDO queryCompanyByEmail(String email);

@@ -45,6 +45,21 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public CompanyDO updateCompany(CompanyDO companyDO) {
+        CompanyDO companyDOFromDb = companyDao.getCompanyByEmail(companyDO.getEmail());
+
+        companyDO.setId(companyDOFromDb.getId());
+        companyDO.setStatus(companyDOFromDb.getStatus());
+        companyDO.setPassword(companyDOFromDb.getPassword());
+        companyDO.setSource(companyDOFromDb.getSource());
+        companyDO.setVersion(companyDOFromDb.getVersion());
+        companyDO.setDeleted(companyDOFromDb.getDeleted());
+
+        companyDao.updateCompanyDO(companyDO);
+        return companyDao.getCompanyByEmail(companyDO.getEmail());
+    }
+
+    @Override
     public CompanyDO registerCompany(CompanyRegisterRequest companyRegisterRequest) {
 
         validate(companyRegisterRequest);
