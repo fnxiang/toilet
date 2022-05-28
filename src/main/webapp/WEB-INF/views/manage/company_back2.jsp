@@ -320,10 +320,6 @@
         data.append("contactName", encodeURI($('#contactName').val()));
         data.append("phoneNum", $('#phoneNum').val());
 
-        for (var key of data.keys()) {
-            console.log("key:" + key + " value:" + data.get(key));
-        }
-
         if (!data.get("companyName")) {
             show("公司名称不能为空!");
         } else if (!data.get("creditCode")) {
