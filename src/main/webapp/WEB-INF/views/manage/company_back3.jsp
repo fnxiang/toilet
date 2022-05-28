@@ -15,13 +15,13 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/manage/res/logo.ico">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/normalize.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/dialog.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/themify-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/pe-icon-7-filled.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/flag-icon.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/dialog.css">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/manage/assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/style.css">
