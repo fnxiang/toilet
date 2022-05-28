@@ -157,7 +157,7 @@
                                 <hr>
                                 <div class="card-text text-lg-center">
                                     <button type="submit" class="btn btn-outline-secondary" onclick="modify()">
-                                        申请修改
+                                        确认修改
                                     </button>
                                 </div>
                             </form>
@@ -243,9 +243,6 @@
         data.append("title", encodeURI($('#title').val())); //职称
         data.append("phone", $('#phone').val()); //手机号
         data.append("email", $('#email').val()); //邮箱
-        for(var key of data.keys()){
-            console.log(data.get(key))
-        }
         $.ajax({
             url: "/toilet/professor/modify",
             type: "POST",
