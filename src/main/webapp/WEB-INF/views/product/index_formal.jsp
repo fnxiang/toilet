@@ -1,7 +1,8 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.response.ProductQueryResponse" %>
 <%@ page import="org.apache.commons.collections4.CollectionUtils" %>
-<%@ page import="java.util.List" %>
+<%@ page import="com.alibaba.fastjson.JSONObject" %>
+<%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -100,6 +101,7 @@
                 </div>
                 <div class="grid_2">
                     <button class="grid_2" onclick="sort()">应用</button>
+                    <button class="grid_2" onclick="exportXSL()">导出</button>
                 </div>
                 <!-- .grid_10 -->
 
@@ -168,11 +170,9 @@
                 <div style="height: 20px;">
                 </div>
                 <div class="grid_12" style="text-align: center">
-                    <div class="page" id="page" style="text-align: center">
-
+                    <div class="page" id="page" style="text-align: center; height: 50px;">
                     </div>
                 </div>
-
                 <div id="content_bottom">
                     <div class="grid_12">
                         <div class="bottom_block about_as">
@@ -254,29 +254,33 @@
     let $page = $('#page');
     let pageNow = <%=productQueryResponse.getCurrentPage()%>;
     let total = <%=productQueryResponse.getMaxPage()%>;
-    if(total === 0){
+    if (total === 0) {
         total = 1;
     }
     pageSet(total, pageNow);
     let data = {};
+
     function getprepage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow - 1;
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
+
     function findpage(pageindex) {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageindex;
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
+
     function getnextpage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow + 1;
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
+
     $page.on("click", 'label', function (e) {
         let sign = e.target.innerText;
         console.log(e, sign, sign === '...');
@@ -299,12 +303,13 @@
         } else {
         }
     });
-    $('#up').click(function () {
+    $('#up').click(function () { //上一页
         getprepage();
     });
-    $('#down').click(function () {
+    $('#down').click(function () { //下一页
         getnextpage();
     });
+
     function pageSet(total, pageNow) {
         let i = 1, dom = '';
         let firstDisabled;
@@ -367,6 +372,114 @@
         data["isDesc"] = $('#sortWay').val();
         data["product_search_condition"] = '<%=(String) request.getAttribute("product_search_condition")%>';
         Post("${pageContext.request.contextPath}/product/sort", data);
+    }
+</script>
+
+<%--导出--%>
+<script>
+    //转换为json
+    function exportXSL() {
+        <%
+        List<JSONObject> data = new ArrayList<>();
+
+        //遍历获取到的需要导出的数据
+        for(int i = 0; i < productList.size(); i++) {
+            JSONObject dataMap = new JSONObject(true);
+            ToiletProductDTO productDTO = productList.get(i);
+            dataMap.put("序号",productDTO.getId());
+            dataMap.put("产品名称",productDTO.getProductName());
+            dataMap.put("生产厂家",productDTO.getManufacturerName());
+            dataMap.put("产品类型",productDTO.getProductType());
+            dataMap.put("联系方式",productDTO.getManufacturerCell());
+            dataMap.put("厂家邮箱",productDTO.getCompanyEmail());
+            dataMap.put("适用省份",productDTO.getApplicableProvince());
+            dataMap.put("适用温度",productDTO.getApplicableTemperature());
+            dataMap.put("规格（平方米）",productDTO.getProductParameters().getStandard());
+            dataMap.put("适用人数（人）",productDTO.getProductParameters().getApplicableNum());
+            dataMap.put("长（mm）",productDTO.getProductParameters().getLength());
+            dataMap.put("宽（mm）",productDTO.getProductParameters().getWide());
+            dataMap.put("高（mm）",productDTO.getProductParameters().getHigh());
+            dataMap.put("壁厚（mm）",productDTO.getProductParameters().getWallThickness());
+            dataMap.put("重量（kg）",productDTO.getProductParameters().getWeight());
+            dataMap.put("材质",productDTO.getProductParameters().getTexture());
+            dataMap.put("颜色",productDTO.getProductParameters().getColor());
+            dataMap.put("使用寿命（年）",productDTO.getProductParameters().getServiceLife());
+            dataMap.put("用途",productDTO.getPurpose());
+            dataMap.put("具体用途",productDTO.getProductParameters().getParamPurpose());
+            dataMap.put("运行成本",productDTO.getProductParameters().getRunCost());
+            dataMap.put("清理周期（月）",productDTO.getProductParameters().getCleanupCycle());
+            dataMap.put("应用案例",productDTO.getProductParameters().getApplyCase());
+            dataMap.put("产品特点",productDTO.getProductFeatures());
+            data.add(dataMap);}%>
+        var dataList = new Array();
+        <%for(JSONObject x : data){%>
+        dataList.push(<%=x%>);
+        <%}%>
+        JSONToExcelConvertor(dataList,"产品详情");
+    }
+    //json导出excel
+    //json数据转excel
+    function JSONToExcelConvertor(JSONData, FileName) {
+        //先转化json
+        var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+        var excel = '<table>';
+        var row = "<tr>";
+        //设置表头
+        var keys = Object.keys(JSONData[0]);
+        keys.forEach(function (item) {
+            row += "<td>" + item + '</td>';
+        });
+        //换行
+        excel += row + "</tr>";
+        //设置数据
+        for (var i = 0; i < arrData.length; i++) {
+            var row = "<tr>";
+            for (var index in arrData[i]) {
+                row += '<td style="text-align: left">' + arrData[i][index] + '</td>';
+            }
+            excel += row + "</tr>";
+        }
+
+        excel += "</table>";
+
+        var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>";
+        excelFile += '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">';
+        excelFile += '<meta http-equiv="content-type" content="application/vnd.ms-excel';
+        excelFile += '; charset=UTF-8">';
+        excelFile += "<head>";
+        excelFile += "<!--[if gte mso 9]>";
+        excelFile += "<xml>";
+        excelFile += "<x:ExcelWorkbook>";
+        excelFile += "<x:ExcelWorksheets>";
+        excelFile += "<x:ExcelWorksheet>";
+        excelFile += "<x:Name>";
+        excelFile += "{worksheet}";
+        excelFile += "</x:Name>";
+        excelFile += "<x:WorksheetOptions>";
+        excelFile += "<x:DisplayGridlines/>";
+        excelFile += "</x:WorksheetOptions>";
+        excelFile += "</x:ExcelWorksheet>";
+        excelFile += "</x:ExcelWorksheets>";
+        excelFile += "</x:ExcelWorkbook>";
+        excelFile += "</xml>";
+        excelFile += "<![endif]-->";
+        excelFile += "</head>";
+        excelFile += "<body>";
+        excelFile += excel;
+        excelFile += "</body>";
+        excelFile += "</html>";
+
+        var uri = 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(excelFile);
+
+        var link = document.createElement("a");
+        link.href = uri;
+
+        link.style = "visibility:hidden";
+        link.download = FileName + ".xls";
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 </script>
 </html>
