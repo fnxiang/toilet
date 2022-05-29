@@ -201,7 +201,9 @@
         $('#bootstrap-data-table-export').DataTable();
     });
 
-    // TODO 传入参数
+</script>
+
+<script>
     function updatePwd() {
         const data = new FormData();
 
@@ -209,27 +211,30 @@
         data.append("pwd", $('#pwd').val());
         data.append("confirmPwd", $('#confirmPwd').val());
 
-        $.ajax({
-            url: "/toilet/company/pwd/update",
-            type: "POST",
-            dataType: "json",
-            data: data,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                if (result.success) {
-                    show("更新成功！");
-                } else {
-                    show(result.errorMessage);
+        if(!data.get("originPwd")){show("初始密码不能为空！")}
+        else if(!data.get("pwd")){show("新密码不能为空！")}
+        else if(!data.get("confirmPwd")){show("确认密码不能为空！")}
+        else if(data.get("pwd") !== data.get("confirmPwd")){show("两次输入密码不一致！")}
+        else{
+            $.ajax({
+                url: "/toilet/company/pwd/update",
+                type: "POST",
+                dataType: "json",
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    if (result.success) {
+                        show("更新成功！");
+                    } else {
+                        show(result.errorMessage);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
-</script>
-
-<script>
     function show(msg){
         document.getElementById("dialog_text").innerHTML = msg;
         $(".dialog").css("display","block");
