@@ -194,7 +194,6 @@
 
                                                         </div>
                                                     </div>
-                                                    <% CompanyDTO companyDTO = (CompanyDTO)request.getAttribute("company");%>
                                                     <div class="row form-group">
                                                         <div class="col col-md-3"><label for="producer_name"
                                                                                          class=" form-control-label">企业名称</label>
@@ -204,7 +203,7 @@
                                                                                             name="producer_name"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="<%=companyDTO.getCompanyName()%>"
+                                                                                            value="<%=productDTO.getManufacturerName()%>"
                                                                                             disabled>
                                                         </div>
                                                     </div>
@@ -216,7 +215,7 @@
                                                                                             name="phonenum"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value=<%=companyDTO.getContactPhone()%>>
+                                                                                            value=<%=productDTO.getManufacturerCell()%>>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -226,7 +225,7 @@
                                                         <div class="col-12 col-md-9"><input type="text" id="address"
                                                                                             name="address"
                                                                                             placeholder=""
-                                                                                            value="<%=companyDTO.getCompanyAddress()%>"
+                                                                                            value=""
                                                                                             class="form-control">
                                                         </div>
                                                     </div>
