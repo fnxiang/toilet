@@ -406,7 +406,7 @@
                                             </div>
                                             <div class="row form-group" id="shou">
                                                 <div class="col col-md-3"><label for="shouming"
-                                                                                 class=" form-control-label">使用寿命：</label>
+                                                                                 class=" form-control-label">使用寿命（年）：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="shouming" name="shouming"
@@ -545,10 +545,10 @@
                             <hr>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="select"
+                                    <div class="col col-md-3"><label for="select_status"
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select" id="select" class="form-control">
+                                        <select name="select_status" id="select_status" class="form-control">
                                             <option value="审核通过">审核通过</option>
                                             <option value="审核不通过">审核不通过</option>
                                             <option value="修改后重新审核">修改后重新审核</option>
@@ -556,16 +556,16 @@
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">审核意见</label>
+                                    <div class="col col-md-3"><label for="opinion" class=" form-control-label">审核意见</label>
                                     </div>
-                                    <div class="col-12 col-md-9"><textarea name="textarea-input" id="textarea-input"
+                                    <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder="审核意见..."
                                                                            class="form-control"></textarea></div>
                                 </div>
                             </form>
                             <div class="card-text text-lg-center">
                                 <button type="button" class="btn btn-outline-secondary">保存草稿</button>
-                                <button type="button" class="btn btn-outline-secondary offset-md-2">确认提交</button>
+                                <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="commit()">确认提交</button>
                             </div>
 
                         </div>
@@ -677,11 +677,10 @@
     }
 
     function commit() {
-        // TODO 审核 -> 状态和意见
         const data = new FormData();
-        data.append("status", "");
-        data.append("comment", "");
-
+        data.append("productId", "<%=productDTO.getId()%>");
+        data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').text));
+        data.append("comment", encodeURI($('#opinion').val()));
         $.ajax({
             url: "/toilet/professor/product/audit",
             type: "POST",
