@@ -59,7 +59,29 @@ public class ProfessorController {
             approvalRequest.setComment(comment);
             approvalRequest.setProductId(productId);
             approvalRequest.setStatus(AuditStatus.valueOf(auditStatus));
-            auditService.updateApproval(approvalRequest);
+            auditService.updateProductApproval(approvalRequest);
+
+        } catch (Exception e) {
+            LOG.error("ProfessorResponse error with : ", e);
+            return ProfessorResponse.failed(e.getMessage());
+        }
+        return ProfessorResponse.success();
+    }
+
+    @RequestMapping(value = "/pattern/audit")
+    public ProfessorResponse auditPattern(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String auditStatus = params.get("auditStatus");
+            String comment = params.get("comment");
+            String patternId = params.get("patternId");
+            ApprovalRequest approvalRequest = new ApprovalRequest();
+            approvalRequest.setProfessorEmail(request.getSession().getAttribute("uId").toString());
+            approvalRequest.setComment(comment);
+            approvalRequest.setPatternId(patternId);
+            approvalRequest.setStatus(AuditStatus.valueOf(auditStatus));
+            auditService.updateProductApproval(approvalRequest);
 
         } catch (Exception e) {
             LOG.error("ProfessorResponse error with : ", e);

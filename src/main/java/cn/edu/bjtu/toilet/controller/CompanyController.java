@@ -71,14 +71,18 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/product/update")
+    @ResponseBody
     public ProductResponse updateProduct(HttpServletRequest request) {
         try {
-            String productId = request.getParameter("productId");
-            ApprovalRequest approvalRequest = new ApprovalRequest();
-            approvalRequest.setProductId(productId);
-            ApprovalDO approvalDO = auditService.getApproval(approvalRequest);
 
-            request.setAttribute("approval", approvalDO);
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            ToiletProductDTO productDTO = buildUpdateProductDTO(params);
+            productDTO.setCompanyEmail(request.getSession().getAttribute("uId").toString());
+
+            checkProduct(productDTO);
+
+            productService.updateProduct(productDTO);
 
         } catch (ToiletBizException | ToiletSystemException e) {
             LOG.error("update product error with {}", e.getMessage());
@@ -119,15 +123,12 @@ public class CompanyController {
     @RequestMapping(value = "/product/audit")
     public ProductResponse getProductAudit(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request);
+            String productId = request.getParameter("productId");
+            ApprovalRequest approvalRequest = new ApprovalRequest();
+            approvalRequest.setProductId(productId);
+            ApprovalDO approvalDO = auditService.getApproval(approvalRequest);
 
-            ToiletProductDTO productDTO = buildUpdateProductDTO(params);
-            productDTO.setCompanyEmail(request.getSession().getAttribute("uId").toString());
-
-            checkProduct(productDTO);
-
-            productService.updateProduct(productDTO);
-
+            request.setAttribute("approval", approvalDO);
         } catch (ToiletBizException | ToiletSystemException e) {
             LOG.error("update product error with {}", e.getMessage());
             return ProductResponse.failed("update product error with " + e.getMessage());
@@ -198,6 +199,10 @@ public class CompanyController {
 
     private void checkProduct(ToiletProductDTO productDTO) {
         ToiletProductDTO productDTOFromDb = productService.queryToiletById(productDTO.getId().toString());
+
+        productDTO.setStatus(productDTOFromDb.getStatus());
+        productDTO.setProfessorEmail(productDTOFromDb.getProfessorEmail());
+        productDTO.setProfessorId(productDTOFromDb.getProfessorId());
 
         // 检查文件是否有重新上传，路径为空则和数据库保持一致
 

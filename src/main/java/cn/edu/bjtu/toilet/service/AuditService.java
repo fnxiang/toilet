@@ -5,7 +5,9 @@ import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 
 public interface AuditService {
 
-    ApprovalDO updateApproval(ApprovalRequest request);
+    ApprovalDO updateProductApproval(ApprovalRequest request);
+
+    ApprovalDO updatePatternApproval(ApprovalRequest request);
 
     ApprovalDO getApproval(ApprovalRequest request);
 
