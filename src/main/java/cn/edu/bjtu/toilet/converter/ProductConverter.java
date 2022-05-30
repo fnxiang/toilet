@@ -11,6 +11,12 @@ public class ProductConverter {
 
     public static ToiletProductDO toDO(ToiletProductDTO productDTO) {
         ToiletProductDO productDO = new ToiletProductDO();
+        if (productDTO.getStatus() != null) {
+            productDO.setStatus(productDTO.getStatus().getCode());
+        } else {
+            productDO.setStatus(-1);
+        }
+
         productDO.setPrice(productDTO.getProductParameters().getPrice());
         productDO.setCleanCycle(Integer.valueOf(productDTO.getProductParameters().getCleanupCycle()));
         productDO.setServiceLife(Integer.valueOf(productDTO.getProductParameters().getServiceLife()));

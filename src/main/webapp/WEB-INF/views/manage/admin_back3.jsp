@@ -1,6 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.springframework.util.StringUtils" %>
+<%@ page import="cn.edu.bjtu.toilet.constant.ProductStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -130,7 +131,7 @@
                                 </td>
                                 <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit"
                                                                   href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>">查看详情</a>
-									<%if (StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
+									<%if (list.get(i).getStatus().equals(ProductStatus.PROCESSING) && StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
 									<a type="button" class="btn btn-link fa fa-check-square"
 									   onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back9&productId=<%=list.get(i).getId()%>'">
 										分配专家</a>

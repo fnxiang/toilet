@@ -2,6 +2,7 @@ package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
+import cn.edu.bjtu.toilet.constant.ProductStatus;
 import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.domain.ModeResponse;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
@@ -17,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -77,6 +79,31 @@ public class CompanyController {
             ApprovalDO approvalDO = auditService.getApproval(approvalRequest);
 
             request.setAttribute("approval", approvalDO);
+
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("update product error with {}", e.getMessage());
+            return ProductResponse.failed("update product error with " + e.getMessage());
+        } catch (Exception e) {
+            LOG.error("update products failed : {}", e.getStackTrace());
+            return ProductResponse.failed("update product error with " + e.getMessage());
+        }
+
+        return ProductResponse.success();
+    }
+
+    @RequestMapping(value = "/product/audit/submit", method = RequestMethod.POST)
+    @ResponseBody
+    public ProductResponse submitProductAudit(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String productId = params.get("productId");
+
+            ToiletProductDTO productDTO = productService.queryToiletById(productId);
+
+            productDTO.setStatus(ProductStatus.PROCESSING);
+
+            productService.updateProduct(productDTO);
 
         } catch (ToiletBizException | ToiletSystemException e) {
             LOG.error("update product error with {}", e.getMessage());

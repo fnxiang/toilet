@@ -137,7 +137,7 @@
                                         <%} else if (list.get(i).getStatus().equals(ProductStatus.WAITED)
                                                     ||list.get(i).getStatus().equals(ProductStatus.UNKNOWN)) {%>
                                         <a type="button" class="btn btn-link fa fa-th-list"
-                                           href="${pageContext.request.contextPath}/toPage?url=company_back5">提交审核</a>
+                                           onclick="submit('<%=list.get(i).getId()%>')">提交审核</a>
                                         <%}%>
                                     </td>
                                 </tr>
@@ -153,6 +153,25 @@
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+
+    <div>
+        <div class="dialog">
+            <!-- 弹窗遮罩层 -->
+            <div>
+                <!-- 弹窗内容 -->
+                <div style="height: 200px;"></div>
+                <div class="content_dialog">
+                    <div class="aclose">
+                        <a class="close" href="javascript:close();">&times;</a>
+                    </div>
+                    <div class="contain" id="dialog_text" style="font-size: 20px; color: #fcfdfd">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 
 
     <div class="clearfix"></div>
@@ -191,6 +210,7 @@
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.print.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/init/datatables-init.js"></script>
+<script src="${pageContext.request.contextPath}/static/toilet/message.notify.js"></script>
 
 
 <script type="text/javascript">
@@ -198,6 +218,30 @@
         $('#bootstrap-data-table-export').DataTable(
         );
     });
+
+    function submit(productId) {
+        const data = new FormData();
+        data.append("productId", productId);
+
+        $.ajax({
+            url: "/toilet/company/product/audit/submit",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    show("提交审核成功！");
+                    //TODO 去掉对应的提交审核按钮
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
+    }
 </script>
 
 

@@ -7,6 +7,7 @@ import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
+import cn.edu.bjtu.toilet.domain.response.ProductStatusResponse;
 import cn.edu.bjtu.toilet.domain.response.ProfessorResponse;
 import cn.edu.bjtu.toilet.service.AuditService;
 import cn.edu.bjtu.toilet.service.ProductService;
@@ -69,7 +70,7 @@ public class ProfessorController {
 
     @RequestMapping(value = "/get")
     @ResponseBody
-    public ProfessorResponse response(HttpServletRequest request) {
+    public ProfessorResponse getProfessors(HttpServletRequest request) {
         ProfessorResponse response = new ProfessorResponse();
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request);
@@ -86,6 +87,22 @@ public class ProfessorController {
         } catch (Exception e) {
             LOG.error("ProfessorResponse error with : ", e);
             return ProfessorResponse.failed(e.getMessage());
+        }
+        return response;
+    }
+
+    @RequestMapping(value = "/audit/status/get")
+    @ResponseBody
+    public ProductStatusResponse getAuditStatus(HttpServletRequest request) {
+        ProductStatusResponse response = new ProductStatusResponse();
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            response.setSuccess(true);
+
+        } catch (Exception e) {
+            LOG.error("ProfessorResponse error with : ", e);
+            return ProductStatusResponse.failed(e.getMessage());
         }
         return response;
     }
