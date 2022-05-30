@@ -421,7 +421,7 @@
         }
 
         // 省份加载完成，默认显示第一个省份的城市
-        setCity(0);
+        setCity(province.selectedIndex);
     }
 
     // 设置城市
@@ -434,7 +434,7 @@
             // 创建城市option选项
             var opt = document.createElement("option");
             opt.value = citys[i];         // 设置value-提交给服务器用
-            if(provinceArr[i] === "<%=enterpriseAddressDTO.getCity()%>"){
+            if(citys[i] === "<%=enterpriseAddressDTO.getCity()%>"){
                 opt.selected = "selected"
             }
             opt.innerHTML = citys[i];     // 设置option文本显示内容
@@ -445,7 +445,7 @@
         }
 
         // 默认显示城市的第一个县/区
-        setCounty(provincePos, 0);
+        setCounty(provincePos, city.selectedIndex);
     }
 
     // 设置县/区, 县/区是三位数组，需要传入哪个省份和城市
@@ -458,7 +458,7 @@
             // 创建县/区option选项
             var opt = document.createElement("option");
             opt.value = countys[i];         // 设置value-提交给服务器用
-            if(provinceArr[i] === "<%=enterpriseAddressDTO.getCountry()%>"){
+            if(countys[i] === "<%=enterpriseAddressDTO.getCountry()%>"){
                 opt.selected = "selected"
             }
             opt.innerHTML = countys[i];     // 设置option文本显示内容
