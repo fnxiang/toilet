@@ -136,8 +136,8 @@
                                            href="${pageContext.request.contextPath}/toPage?url=company_back5">查看审批意见</a>
                                         <%} else if (list.get(i).getStatus().equals(AuditStatus.WAITED)
                                                     ||list.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {%>
-                                        <a type="button" class="btn btn-link fa fa-th-list"
-                                           onclick="submit('<%=list.get(i).getId()%>')">提交审核</a>
+                                        <a type="button" class="btn btn-link fa fa-th-list" id="shenhe"
+                                           onclick="submit('<%=list.get(i).getId()%>')" <%if(list.get(i).getStatus().getName() == "无状态"){%> disabled="" <%} else{%> disabled="none"<%}%>>提交审核</a>
                                         <%}%>
                                     </td>
                                 </tr>
@@ -168,6 +168,10 @@
             </div>
         </div>
     </footer>
+
+    <%--弹窗--%>
+    <jsp:include page="dialog.jsp"/>
+    <%--弹窗--%>
 
 </div><!-- /#right-panel -->
 
@@ -215,7 +219,7 @@
             success: function (result) {
                 if (result.success) {
                     show("提交审核成功！");
-                    //TODO 去掉对应的提交审核按钮
+
                 } else {
                     show(result.errorMessage);
                 }

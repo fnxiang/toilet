@@ -21,7 +21,6 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/normalize.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/dialog.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/themify-icons.css">
@@ -250,25 +249,9 @@
         </div>
     </footer>
 
-    <%--                            弹窗--%>
-    <div>
-        <div class="dialog">
-            <!-- 弹窗遮罩层 -->
-            <div>
-                <!-- 弹窗内容 -->
-                <div style="height: 200px;"></div>
-                <div class="content_dialog">
-                    <div class="aclose">
-                        <a class="close" href="javascript:close();">&times;</a>
-                    </div>
-                    <div class="contain" id="dialog_text" style="font-size: 20px; color: #fcfdfd">
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
+    <%--弹窗--%>
+    <jsp:include page="dialog.jsp"/>
+    <%--弹窗--%>
 
 </div><!-- /#right-panel -->
 
@@ -467,18 +450,5 @@
     }
 
 </script>
-
-<script>
-    function show(msg) {
-        document.getElementById("dialog_text").innerHTML = msg;
-        $(".dialog").css("display", "block");
-    }
-
-    function close() {
-        $(".dialog").css("display", "none");
-    }
-</script>
-
-
 </body>
 </html>
