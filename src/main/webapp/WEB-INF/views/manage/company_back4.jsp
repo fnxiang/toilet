@@ -15,6 +15,7 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/normalize.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/dialog.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/themify-icons.css">
@@ -102,27 +103,27 @@
                         </div>
                         <div class="card-body">
                             <div class="row form-group">
-                                <div class="col col-md-3 offset-md-2"><label for="password-input"
+                                <div class="col col-md-3 offset-md-2"><label for="originPwd"
                                                                              class=" form-control-label">原始密码</label>
                                 </div>
-                                <div class="col-12 col-md-6"><input type="password" id="password-input"
-                                                                    name="password-input" placeholder="原始密码"
+                                <div class="col-12 col-md-6"><input type="password" id="originPwd"
+                                                                    name="originPwd" placeholder="原始密码"
                                                                     class="form-control"></div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3 offset-md-2"><label for="password-input"
+                                <div class="col col-md-3 offset-md-2"><label for="pwd"
                                                                              class=" form-control-label">新密码</label>
                                 </div>
-                                <div class="col-12 col-md-6"><input type="password" id="password-input"
-                                                                    name="password-input" placeholder="新密码"
+                                <div class="col-12 col-md-6"><input type="password" id="pwd"
+                                                                    name="pwd" placeholder="新密码"
                                                                     class="form-control"></div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3 offset-md-2"><label for="password-input"
+                                <div class="col col-md-3 offset-md-2"><label for="confirmPwd"
                                                                              class=" form-control-label">确认密码</label>
                                 </div>
-                                <div class="col-12 col-md-6"><input type="password" id="password-input"
-                                                                    name="password-input" placeholder="确认密码"
+                                <div class="col-12 col-md-6"><input type="password" id="confirmPwd"
+                                                                    name="confirmPwd" placeholder="确认密码"
                                                                     class="form-control"></div>
                             </div>
                             <hr>
@@ -151,6 +152,25 @@
             </div>
         </div>
     </footer>
+    <%--                            弹窗--%>
+    <div>
+        <div class="dialog">
+            <!-- 弹窗遮罩层 -->
+            <div>
+                <!-- 弹窗内容 -->
+                <div style="height: 200px;"></div>
+                <div class="content_dialog">
+                    <div class="aclose">
+                        <a class="close" href="javascript:close();">&times;</a>
+                    </div>
+                    <div class="contain" id="dialog_text" style="font-size: 20px; color: #fcfdfd">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 
 </div><!-- /#right-panel -->
 
@@ -181,34 +201,47 @@
         $('#bootstrap-data-table-export').DataTable();
     });
 
-    // TODO 传入参数
+</script>
+
+<script>
     function updatePwd() {
         const data = new FormData();
 
-        data.append("originPwd", "");
-        data.append("pwd", "");
-        data.append("confirmPwd", "");
+        data.append("originPwd", $('#originPwd').val());
+        data.append("pwd", $('#pwd').val());
+        data.append("confirmPwd", $('#confirmPwd').val());
 
-        $.ajax({
-            url: "/toilet/company/pwd/update",
-            type: "POST",
-            dataType: "json",
-            data: data,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                if (result.success) {
-                    show("更新成功！");
-                } else {
-                    show(result.errorMessage);
+        if(!data.get("originPwd")){show("初始密码不能为空！")}
+        else if(!data.get("pwd")){show("新密码不能为空！")}
+        else if(!data.get("confirmPwd")){show("确认密码不能为空！")}
+        else if(data.get("pwd") !== data.get("confirmPwd")){show("两次输入密码不一致！")}
+        else{
+            $.ajax({
+                url: "/toilet/company/pwd/update",
+                type: "POST",
+                dataType: "json",
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    if (result.success) {
+                        show("更新成功！");
+                    } else {
+                        show(result.errorMessage);
+                    }
                 }
-            }
-        });
+            });
+        }
+    }
+    function show(msg){
+        document.getElementById("dialog_text").innerHTML = msg;
+        $(".dialog").css("display","block");
+    }
+    function close(){
+        $(".dialog").css("display","none");
     }
 </script>
-
-
 </body>
 </html>

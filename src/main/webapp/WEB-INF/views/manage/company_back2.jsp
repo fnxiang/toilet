@@ -162,28 +162,16 @@
                                     </div>
                                     <div class="col-md-3">
                                         <select name="provinceSelect" id="provinceSelect" class="form-control">
-                                            <option value="北京市">北京市</option>
-                                            <option value="山西省">山西省</option>
-                                            <option value="江苏省">江苏省</option>
-                                            <option value="广东省">广东省</option>
                                         </select>
                                     </div>
 
                                     <div class="col-md-3">
                                         <select name="citySelect" id="citySelect" class="form-control">
-                                            <option value="北京市">北京市</option>
-                                            <option value="朔州市">朔州市</option>
-                                            <option value="南京市">南京市</option>
-                                            <option value="广州市">广州市</option>
                                         </select>
                                     </div>
 
                                     <div class="col-md-3">
                                         <select name="countrySelect" id="countrySelect" class="form-control">
-                                            <option value="海淀区">海淀区</option>
-                                            <option value="东城区">东城区</option>
-                                            <option value="建邺区">建邺区</option>
-                                            <option value="不知道">不知道</option>
                                         </select>
                                     </div>
                                 </div>
@@ -304,16 +292,13 @@
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.print.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/init/datatables-init.js"></script>
-<script src="${pageContext.request.contextPath}/static/base/./js/final/cityinfo.js"></script>
+<script src="${pageContext.request.contextPath}/static/manage/assets/js/cityinfo.js"></script>
 
 
 <script type="text/javascript">
     $(document).ready(function () {
         $(document).ready(function() {
             $('#bootstrap-data-table-export').DataTable();
-            $('#provinceSelect').val('<%=enterpriseAddressDTO.getProvince()%>');
-            $('#citySelect').val('<%=enterpriseAddressDTO.getCity()%>');
-            $('#countrySelect').val('<%=enterpriseAddressDTO.getCountry()%>');
         } );
 
     });
@@ -334,10 +319,6 @@
         data.append("webAddress", $('#webAddress').val());
         data.append("contactName", encodeURI($('#contactName').val()));
         data.append("phoneNum", $('#phoneNum').val());
-
-        for (var key of data.keys()) {
-            console.log("key:" + key + " value:" + data.get(key));
-        }
 
         if (!data.get("companyName")) {
             show("公司名称不能为空!");
@@ -370,23 +351,24 @@
                 }
             });
         }
-
-        function getSelectorContent() {
-            const provinceName = $('#provinceSelect').find("option:selected").text();
-            const cityName = $('#citySelect').find("option:selected").text();
-            const countryName = $('#countrySelect').find("option:selected").text();
-
-            const address = provinceName + "," + cityName + "," + countryName;
-            return encodeURIComponent(address);
-        }
     }
 
+    //上传营业执照
+    function upload_file() {
+        var yingyezhizhao = document.getElementById("yingyezhizhao");
+        var file_button = document.getElementById("file_button");
+        var shuruzhizhao = document.getElementById("shuruzhizhao");
+        file_button.style.cssText = "display:none;";
+        yingyezhizhao.style.cssText = "display:none;";
+        shuruzhizhao.style.cssText = "";
+        file = null;
+    }
     function getSelectorContent() {
         const provinceName = $('#provinceSelect').find("option:selected").text();
         const cityName = $('#citySelect').find("option:selected").text();
         const countryName = $('#countrySelect').find("option:selected").text();
 
-        const address = provinceName + "," + cityName + "," + countryName;
+        const address = provinceName+","+cityName+","+countryName;
         return encodeURIComponent(address);
     }
 
@@ -404,19 +386,9 @@
         }
         return bytes;
     }
-
-    //上传营业执照
-    function upload_file() {
-        var yingyezhizhao = document.getElementById("yingyezhizhao");
-        var file_button = document.getElementById("file_button");
-        var shuruzhizhao = document.getElementById("shuruzhizhao");
-        file_button.style.cssText = "display:none;";
-        yingyezhizhao.style.cssText = "display:none;";
-        shuruzhizhao.style.cssText = "";
-        file = null;
-    }
 </script>
 
+<!--Core Javascript -->
 <script>
     // 当框框加载完成之后调用设置省份
     window.onload = setProvince;
@@ -432,15 +404,18 @@
     // 设置省份
     function setProvince() {
         // 遍历省份数组, provinceArr在city.js中
-        for (var i = 0; i < provinceArr.length; i++) {
+        for (var i = 0; i < provinceArr.length; i++){
             // 创建省份option选项
             var opt = document.createElement("option");
             opt.value = provinceArr[i];         // 设置value-提交给服务器用
+            <%String province = enterpriseAddressDTO.getProvince();%>
+            if(provinceArr[i] === "<%=province.substring(0, province.length() - 1)%>"){
+                opt.selected = "selected"
+            }
             opt.innerHTML = provinceArr[i];     // 设置option文本显示内容
             province.appendChild(opt);          // 追加城市到下拉框
-
             // 当省份发生变化更改城市
-            province.onchange = function () {
+            province.onchange = function(){
                 setCity(this.selectedIndex);
             };
         }
@@ -455,14 +430,16 @@
         var citys = cityArr[provincePos];
         city.length = 0;                  // 清空长度，重新从0开始赋值下拉框
 
-        for (var i = 0; i < citys.length; i++) {
+        for (var i = 0; i < citys.length; i++){
             // 创建城市option选项
             var opt = document.createElement("option");
             opt.value = citys[i];         // 设置value-提交给服务器用
+            if(provinceArr[i] === "<%=enterpriseAddressDTO.getCity()%>"){
+                opt.selected = "selected"
+            }
             opt.innerHTML = citys[i];     // 设置option文本显示内容
-
             city.appendChild(opt);
-            city.onchange = function () {
+            city.onchange = function() {
                 setCounty(provincePos, this.selectedIndex);
             }
         }
@@ -477,10 +454,13 @@
         var countys = countyArr[provincePos][cityPos];
         county.length = 0;
 
-        for (var i = 0; i < countys.length; i++) {
+        for (var i = 0; i < countys.length; i++){
             // 创建县/区option选项
             var opt = document.createElement("option");
             opt.value = countys[i];         // 设置value-提交给服务器用
+            if(provinceArr[i] === "<%=enterpriseAddressDTO.getCountry()%>"){
+                opt.selected = "selected"
+            }
             opt.innerHTML = countys[i];     // 设置option文本显示内容
             county.appendChild(opt);        // 追加到县/区选择框中
         }

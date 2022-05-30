@@ -1,5 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="cn.edu.bjtu.toilet.dao.domain.ApprovalDO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.google.common.collect.Lists" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -67,6 +69,12 @@
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel">
+    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");%>
+    <%--获取路径用于显示图片和文件--%>
+    <% String path = request.getContextPath();
+        String basePath = request.getScheme() + "://"
+                + request.getServerName() + ":" + request.getServerPort()
+                + path + "/";%>
 
     <!-- Header-->
     <jsp:include page="professor_header.jsp"/>
@@ -105,9 +113,6 @@
                         <div class="card-header">
                             <strong class="card-title">产品信息审核</strong>
                         </div>
-
-                        <% // TODO 产品信息填充
-                            ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");%>
                         <div class="card-body">
 
 
@@ -138,90 +143,98 @@
                                                 </div>
 
                                                 <div class="col col-md-5">
+                                                    <%String firstPicPath = productDTO.getPicsPath().split(";")[0];%>
                                                     <div class="col-12 col-md-12">
-                                                        <img class="card-img-top"
-                                                             src="${pageContext.request.contextPath}/static/manage/res/2.png"
-                                                             alt="Card image cap" id="sampleimg"
-                                                             onclick="showbigpic(this)">
+                                                        <img class="card-img-top" src="<%=basePath+firstPicPath%>"
+                                                             alt="Card image cap"
+                                                             id="sampleimg" onclick="showbigpic(this)">
                                                     </div>
+                                                    <%
+                                                        List<String> pathList = Lists.newArrayList(productDTO.getPicsPath().split(";"));
+                                                        int sizeOfPic = 12 / (pathList.size() + 1);
+                                                    %>
                                                     <div class="col-12 col-md-12">
-                                                        <img class="card-img-top col-md-3"
-                                                             src="${pageContext.request.contextPath}/static/manage/res/1.png"
+                                                        <%for (String value : pathList) {%>
+                                                        <img class="card-img-top col-md-<%=sizeOfPic%>"
+                                                             src="<%=basePath+value%>"
                                                              alt="Card image cap" onclick="changeimg(this)">
-                                                        <img class="card-img-top col-md-3"
-                                                             src="${pageContext.request.contextPath}/static/manage/res/2.png"
-                                                             alt="Card image cap" onclick="changeimg(this)">
-                                                        <img class="card-img-top col-md-3"
-                                                             src="${pageContext.request.contextPath}/static/manage/res/3.png"
-                                                             alt="Card image cap" onclick="changeimg(this)">
+                                                        <%}%>
                                                     </div>
 
                                                 </div>
                                                 <div class="col-12 col-md-7">
                                                     <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="text-input"
+                                                        <div class="col col-md-3"><label for="product_name"
                                                                                          class=" form-control-label">产品名称</label>
                                                         </div>
-                                                        <div class="col-12 col-md-9"><input type="text" id="text-input"
-                                                                                            name="text-input"
+                                                        <div class="col-12 col-md-9"><input type="text"
+                                                                                            id="product_name"
+                                                                                            name="product_name"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="三格化粪池" disabled>
+                                                                                            value="<%=productDTO.getProductName()%>"
+                                                                                            disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="text-input"
-                                                                                         class=" form-control-label">价格</label>
+                                                        <div class="col col-md-3"><label for="price"
+                                                                                         class=" form-control-label">价格（元）</label>
                                                         </div>
-                                                        <div class="col-12 col-md-9"><input type="text" id="text-input"
+                                                        <div class="col-12 col-md-9"><input type="text" id="price"
                                                                                             name="text-input"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="1.8万元" disabled>
+                                                                                            value=<%=productDTO.getProductParameters().getPrice() * 10000%>
+                                                                                                    disabled>
+
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="text-input"
+                                                        <div class="col col-md-3"><label for="producer_name"
                                                                                          class=" form-control-label">企业名称</label>
                                                         </div>
-                                                        <div class="col-12 col-md-9"><input type="text" id="text-input"
-                                                                                            name="text-input"
+                                                        <div class="col-12 col-md-9"><input type="text"
+                                                                                            id="producer_name"
+                                                                                            name="producer_name"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="某某某科技股份有限公司"
-                                                                                            disabled></div>
+                                                                                            value="<%=productDTO.getManufacturerName()%>"
+                                                                                            disabled>
+                                                        </div>
                                                     </div>
                                                     <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="text-input"
+                                                        <div class="col col-md-3"><label for="phonenum"
                                                                                          class=" form-control-label">联系方式</label>
                                                         </div>
-                                                        <div class="col-12 col-md-9"><input type="text" id="text-input"
-                                                                                            name="text-input"
+                                                        <div class="col-12 col-md-9"><input type="text" id="phonenum"
+                                                                                            name="phonenum"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="1234567890" disabled>
+                                                                                            value=<%=productDTO.getManufacturerCell()%>
+                                                                                                    disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="text-input"
+                                                        <div class="col col-md-3"><label for="address"
                                                                                          class=" form-control-label">地址</label>
                                                         </div>
-                                                        <div class="col-12 col-md-9"><input type="text" id="text-input"
-                                                                                            name="text-input"
+                                                        <div class="col-12 col-md-9"><input type="text" id="address"
+                                                                                            name="address"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="北京市海淀区上园村3号"
-                                                                                            disabled></div>
+                                                                                            disabled>
+                                                        </div>
                                                     </div>
                                                     <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="text-input"
+                                                        <div class="col col-md-3"><label for="updateTime"
                                                                                          class=" form-control-label">最后更新</label>
                                                         </div>
-                                                        <div class="col-12 col-md-9"><input type="text" id="text-input"
-                                                                                            name="text-input"
+                                                        <div class="col-12 col-md-9"><input type="text" id="updateTime"
+                                                                                            name="updateTime"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="2021年9月23日" disabled>
+                                                                                            value="<%=productDTO.getGmtModified().toInstant()%>"
+                                                                                            disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -242,31 +255,32 @@
                                         <div class="tab-pane fade active show" id="custom-nav-condition" role="tabpanel"
                                              aria-labelledby="custom-nav-condition-tab">
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="text-input"
+                                                <div class="col col-md-3"><label for="province"
                                                                                  class=" form-control-label">适用省份</label>
                                                 </div>
-                                                <div class="col-12 col-md-9"><input type="text" id="text-input"
-                                                                                    name="text-input" placeholder=""
+                                                <div class="col-12 col-md-9"><input type="text" id="province"
+                                                                                    name="province" placeholder=""
                                                                                     class="form-control"
-                                                                                    value="山西，河北，河南" disabled></div>
+                                                                                    value=<%=productDTO.getApplicableProvince()%> disabled>
+                                                </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="text-input"
+                                                <div class="col col-md-3"><label for="wendufanwei"
                                                                                  class=" form-control-label">适用温度范围</label>
                                                 </div>
-                                                <div class="col-12 col-md-9"><input type="text" id="text-input"
-                                                                                    name="text-input" placeholder=""
-                                                                                    class="form-control" value="20~25℃"
-                                                                                    disabled></div>
+                                                <div class="col-12 col-md-9"><input type="text" id="wendufanwei"
+                                                                                    name="wendufanwei" placeholder=""
+                                                                                    class="form-control"
+                                                                                    value="<%=productDTO.getApplicableTemperature()%>" disabled></div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="textarea-input"
+                                                <div class="col col-md-3"><label for="jvtiyongtu"
                                                                                  class=" form-control-label">用途</label>
                                                 </div>
-                                                <div class="col-12 col-md-9"><textarea name="textarea-input"
-                                                                                       id="textarea-input" rows="5"
+                                                <div class="col-12 col-md-9"><textarea name="jvtiyongtu"
+                                                                                       id="jvtiyongtu" rows="5"
                                                                                        placeholder=""
-                                                                                       class="form-control" disabled>用途。。。</textarea>
+                                                                                       class="form-control" disabled><%=productDTO.getPurpose()%></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -282,20 +296,164 @@
                                         </div>
                                     </nav>
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                        <div class="tab-pane fade active show" id="custom-nav-parameter" role="tabpanel"
-                                             aria-labelledby="custom-nav-parameter-tab">
+                                        <div class="tab-pane fade active show" id="custom-nav-nature"
+                                             role="tabpanel"
+                                             aria-labelledby="custom-nav-nature-tab">
 
-                                            <div class="row form-group">
-                                                <div class="col col-md-3"><label for="textarea-input"
-                                                                                 class=" form-control-label">产品参数</label>
+                                            <div class="row form-group" id="gui">
+                                                <div class="col col-md-3" style="margin-top: 5px"><label for="guige"
+                                                                                                         class="form-control-label">规格（平方米）：</label>
                                                 </div>
-                                                <div class="col-12 col-md-9"><textarea name="textarea-input"
-                                                                                       id="textarea-input" rows="9"
-                                                                                       placeholder=""
-                                                                                       class="form-control" disabled>产品参数</textarea>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="guige" name="guige"
+                                                           placeholder="规格（平方米）" class="form-control"
+                                                           value="<%=productDTO.getProductParameters().getStandard()%>"
+                                                           disabled>
                                                 </div>
                                             </div>
 
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="shiyongrenshu"
+                                                                                 class="form-control-label">适用人数（人）
+                                                    <i class="fa fa-question-circle" data-toggle="tooltip"
+                                                       data-placement="top"
+                                                       title="输入注意事项"></i></label></div>
+                                                <div class="col-12 col-md-9"><input type="text" id="shiyongrenshu"
+                                                                                    name="shiyongrenshu"
+                                                                                    placeholder="输入适用人数"
+                                                                                    class="form-control"
+                                                                                    value="<%=productDTO.getProductParameters().getApplicableNum()%>" disabled>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group" id="chicun">
+                                                <div class="row">
+                                                    <div class="col col-md-4"><label for="chicun_chang"
+                                                                                     class="form-control-label">尺寸（长*宽*高mm）:</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-1"><label
+                                                            class="form-control-label">长：</label></div>
+                                                    <div class="col-12 col-md-1"><input type="text"
+                                                                                        id="chicun_chang"
+                                                                                        name="chicun_changt"
+                                                                                        class="form-control"
+                                                                                        value="<%=productDTO.getProductParameters().getLength()%>" disabled>
+                                                    </div>
+                                                    <div class="col-12 col-md-1"><label
+                                                            class="form-control-label">宽：</label></div>
+                                                    <div class="col-12 col-md-1"><input type="text" id="chicun_kuan"
+                                                                                        name="chicun_kuan"
+                                                                                        class="form-control"
+                                                                                        value="<%=productDTO.getProductParameters().getWide()%>" disabled>
+                                                    </div>
+                                                    <div class="col-12 col-md-1"><label
+                                                            class="form-control-label">高：</label></div>
+                                                    <div class="col-12 col-md-1"><input type="text" id="chicun_gao"
+                                                                                        name="chicun_gao"
+                                                                                        class="form-control"
+                                                                                        value="<%=productDTO.getProductParameters().getHigh()%>" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group" id="hou">
+                                                <div class="col col-md-3"><label for="bihou"
+                                                                                 class=" form-control-label">壁厚（mm）：</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="bihou" name="bihou"
+                                                           placeholder="壁厚" class="form-control"
+                                                           value="<%=productDTO.getProductParameters().getWallThickness()%>" disabled>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group" id="zhong">
+                                                <div class="col col-md-3"><label for="zhongliang"
+                                                                                 class=" form-control-label">重量（kg）：</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="zhongliang" name="zhongliang"
+                                                           placeholder="重量" class="form-control"
+                                                           value="<%=productDTO.getProductParameters().getWeight()%>" disabled>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group" id="cai">
+                                                <div class="col col-md-3"><label
+                                                        class=" form-control-label">材质：</label>
+                                                </div>
+
+                                                <%--   <div class="form-check-inline form-check">--%>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="jvticaizhi" name="jvticaizhi"
+                                                           placeholder="输入材质" class="form-control"
+                                                           value="<%=productDTO.getProductParameters().getTexture()%>" disabled>
+                                                </div>
+
+                                                <%--                                                    </div>--%>
+
+
+                                            </div>
+
+                                            <div class="row form-group" id="yan">
+                                                <div class="col col-md-3"><label for="yanse"
+                                                                                 class=" form-control-label">颜色：</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="yanse" name="yanse"
+                                                           placeholder="" class="form-control"
+                                                           value="<%=productDTO.getProductParameters().getColor()%>" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group" id="shou">
+                                                <div class="col col-md-3"><label for="shouming"
+                                                                                 class=" form-control-label">使用寿命：</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="shouming" name="shouming"
+                                                           placeholder="" class="form-control"
+                                                           value="<%=productDTO.getProductParameters().getServiceLife()%>" disabled>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="row form-group" id="yong">
+                                                <div class="col col-md-3"><label class="form-control-label">用途：
+                                                </label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <input class="col-md-1" type="radio" name="cesuoyongtu"
+                                                           value="户厕" <%if(productDTO.getPurpose().equals("户厕")){%>
+                                                           checked <%}%> disabled>户厕
+                                                    <input class="col-md-1" type="radio" name="cesuoyongtu"
+                                                           value="公厕" <%if(productDTO.getPurpose().equals("公厕")){%>
+                                                           checked <%}%> disabled>公厕
+                                                    <input class="col-md-1" type="radio" name="cesuoyongtu"
+                                                           value="均可" <%if(productDTO.getPurpose().equals("均可")){%>
+                                                           checked <%}%> disabled>均可
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group" id="yun">
+                                                <div class="col col-md-3"><label for="yunxingchengben"
+                                                                                 class=" form-control-label">运行成本：</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="yunxingchengben" name="yunxingchengben"
+                                                           placeholder="" class="form-control"
+                                                           value="<%=productDTO.getProductParameters().getRunCost()%>" disabled>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group" id="qing">
+                                                <div class="col col-md-3"><label for="qinglizhouqi"
+                                                                                 class=" form-control-label">清理周期（月）：</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="qinglizhouqi" name="qinglizhouqi"
+                                                           placeholder="" class="form-control"
+                                                           value="<%=productDTO.getProductParameters().getCleanupCycle()%>" disabled>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -311,19 +469,20 @@
                                         <div class="tab-pane fade active show" id="custom-nav-features" role="tabpanel"
                                              aria-labelledby="custom-nav-features-tab">
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="textarea-input"
+                                                <div class="col col-md-3"><label for="chanpingtedian"
                                                                                  class=" form-control-label">产品特点</label>
                                                 </div>
-                                                <div class="col-12 col-md-9"><textarea name="textarea-input"
-                                                                                       id="textarea-input" rows="9"
+                                                <div class="col-12 col-md-9"><textarea name="chanpingtedian"
+                                                                                       id="chanpingtedian" rows="9"
                                                                                        placeholder=""
-                                                                                       class="form-control" disabled>产品特点..</textarea>
+                                                                                       class="form-control" disabled><%=productDTO.getProductFeatures()%></textarea>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="textarea-input"
-                                                                                 class=" form-control-label">使用图片</label>
+                                                <div class="col col-md-3"><label
+                                                        class=" form-control-label">使用图片</label>
                                                 </div>
+
 
                                                 <!-- 承载大图片的div -->
                                                 <div id="outerdiv"
@@ -336,15 +495,11 @@
                                                 </div>
 
                                                 <div class="col-12 col-md-9">
+                                                    <%for (String value : pathList) {%>
                                                     <img class="card-img-top col-md-3"
-                                                         src="${pageContext.request.contextPath}/static/manage/res/1.png"
-                                                         alt="Card image cap" onclick="showbigpic(this)">
-                                                    <img class="card-img-top col-md-3"
-                                                         src="${pageContext.request.contextPath}/static/manage/res/2.png"
-                                                         alt="Card image cap" onclick="showbigpic(this)">
-                                                    <img class="card-img-top col-md-3"
-                                                         src="${pageContext.request.contextPath}/static/manage/res/3.png"
-                                                         alt="Card image cap" onclick="showbigpic(this)">
+                                                         src="<%=basePath+value%>"
+                                                         alt="Card image cap" onclick="changeimg(this)">
+                                                    <%}%>
                                                 </div>
                                             </div>
                                         </div>
@@ -361,7 +516,7 @@
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                         <div class="tab-pane fade active show" id="custom-nav-quality" role="tabpanel"
                                              aria-labelledby="custom-nav-quality-tab">
-                                            <iframe src="${pageContext.request.contextPath}/static/manage/res/PR_final.pdf"
+                                            <iframe src="<%=basePath + productDTO.getQualityAssuranceMaterialsFilePath()%>"
                                                     width="100%" height="100%" style="height: 500px;"></iframe>
                                         </div>
                                     </div>
@@ -378,7 +533,7 @@
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                         <div class="tab-pane fade active show" id="custom-nav-use" role="tabpanel"
                                              aria-labelledby="custom-nav-use-tab">
-                                            <iframe src="${pageContext.request.contextPath}/static/manage/res/PR_final.pdf"
+                                            <iframe src="<%=basePath + productDTO.getInstructionFilePath()%>"
                                                     width="100%" height="100%" style="height: 500px;"></iframe>
                                         </div>
                                     </div>
@@ -394,9 +549,9 @@
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
                                         <select name="select" id="select" class="form-control">
-                                            <option value="审核通过">审核通过</option>
-                                            <option value="审核不通过">审核不通过</option>
-                                            <option value="修改后重新审核">修改后重新审核</option>
+                                            <option value="0">通过</option>
+                                            <option value="1">不通过</option>
+                                            <option value="2">修改后重新审查</option>
                                         </select>
                                     </div>
                                 </div>
@@ -519,31 +674,6 @@
         var _this = $(obj);
         var src = _this.attr("src");
         $("#sampleimg").attr("src", src);
-    }
-
-    function commit() {
-        // TODO 审核 -> 状态和意见
-		const data = new FormData();
-    	data.append("status", "");
-		data.append("comment", "");
-
-		$.ajax({
-			url: "/toilet/professor/product/audit",
-			type: "POST",
-			dataType: "json",
-			data: data,
-			async: false,
-			cache: false,
-			contentType: false,
-			processData: false,
-			success: function (result) {
-				if (result.success) {
-					show("提交成功！");
-				} else {
-					show(result.errorMessage);
-				}
-			}
-		});
     }
 
 </script>

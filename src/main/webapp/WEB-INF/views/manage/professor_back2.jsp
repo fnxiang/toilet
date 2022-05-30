@@ -1,3 +1,5 @@
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -106,178 +108,17 @@
                                             <th>状态</th>
                                         </tr>
                                     </thead>
+                                    <% List<ToiletPatternDTO> list = (List<ToiletPatternDTO>)request.getAttribute("patternList");%>
                                     <tbody>
-                                        <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=professor_back6'">
-                                            <td>1</td>
-                                            <td>模式名称1</td>
-                                            <td>2021年9月1日</td>
-											<td>2021年10月8日</td>
-                                            <td>等待审核</td>
-                                        </tr>
-										<tr>
-                                            <td>2</td>
-                                            <td>模式名称2</td>
-                                            <td>2021年9月5日</td>
-											<td>2021年10月10日</td>
-                                            <td>审核中</td>
-                                        </tr>
-										<tr>
-                                            <td>3</td>
-                                            <td>模式名称3</td>
-                                            <td>2021年9月10日</td>
-											<td>2021年10月13日</td>
-                                            <td>审核完成</td>
-                                        </tr>
-										<tr>
-                                            <td>4</td>
-                                            <td>模式名称4</td>
-                                            <td>2021年9月6日</td>
-											<td>2021年10月19日</td>
-                                            <td>审核中</td>
-                                        </tr>
-										<tr>
-                                            <td>5</td>
-                                            <td>模式名称6</td>
-                                            <td>2021年9月19日</td>
-											<td>2021年10月20日</td>
-                                            <td>审核完成</td>
-                                        </tr>
-										<tr>
-                                            <td>6</td>
-                                            <td>模式名称6</td>
-                                            <td>2021年9月18日</td>
-											<td>2021年10月22日</td>
-                                            <td>审核中</td>
-                                        </tr>
-										
-										<tr>
-                                            <td>7</td>
-                                            <td>模式名称7</td>
-                                            <td>2021年9月19日</td>
-											<td>2021年10月22日</td>
-                                            <td>等待审核</td>
-                                        </tr>
-										<tr>
-                                            <td>8</td>
-                                            <td>模式名称8</td>
-                                            <td>2021年9月20日</td>
-											<td>2021年10月23日</td>
-                                            <td>审核中</td>
-                                        </tr>
-										<tr>
-                                            <td>9</td>
-                                            <td>模式名称9</td>
-                                            <td>2021年9月22日</td>
-											<td>2021年10月25日</td>
-                                            <td>审核完成</td>
-                                        </tr>
-										<tr>
-                                            <td>10</td>
-                                            <td>模式名称10</td>
-                                            <td>2021年9月26日</td>
-											<td>2021年10月27日</td>
-                                            <td>审核中</td>
-                                        </tr>
-										<tr>
-                                            <td>11</td>
-                                            <td>模式名称11</td>
-                                            <td>2021年9月28日</td>
-											<td>2021年10月29日</td>
-                                            <td>审核完成</td>
-                                        </tr>
-										<tr>
-                                            <td>12</td>
-                                            <td>模式名称12</td>
-                                            <td>2021年9月29日</td>
-											<td>2021年10月30日</td>
-                                            <td>审核中</td>
-                                        </tr>
-										
-										<tr>
-                                            <td>13</td>
-                                            <td>模式名称13</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>审核完成</td>
-                                        </tr>
-										<tr>
-                                            <td>14</td>
-                                            <td>模式名称14</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>审核中</td>
-                                        </tr>
-										<tr>
-                                            <td>15</td>
-                                            <td>模式名称15</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>审核完成</td>
-                                        </tr>
-										<tr>
-                                            <td>16</td>
-                                            <td>模式名称16</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>审核中</td>
-                                        </tr>
-										<tr>
-                                            <td>17</td>
-                                            <td>模式名称17</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>等待审核</td>
-                                        </tr>
-										<tr>
-                                            <td>18</td>
-                                            <td>模式名称18</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>审核完成</td>
-                                        </tr>
-										
-										<tr>
-                                            <td>19</td>
-                                            <td>模式名称19</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>审核中</td>
-                                        </tr>
-										<tr>
-                                            <td>20</td>
-                                            <td>模式名称20</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>等待审核</td>
-                                        </tr>
-										<tr>
-                                            <td>21</td>
-                                            <td>模式名称21</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>审核完成</td>
-                                        </tr>
-										<tr>
-                                            <td>22</td>
-                                            <td>模式名称22</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>审核完成</td>
-                                        </tr>
-										<tr>
-                                            <td>23</td>
-                                            <td>模式名称23</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>审核完成</td>
-                                        </tr>
-										<tr>
-                                            <td>24</td>
-                                            <td>模式名称24</td>
-                                            <td>2021年10月8日</td>
-											<td>2021年11月9日</td>
-                                            <td>等待审核</td>
-                                        </tr>
+                                        <% for (int i=0;i<list.size();i++) {%>
+                                    <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=professor_back6'">
+                                        <td><%=i+1%></td>
+                                        <td><%=list.get(i).getPatternType()%></td>
+                                        <td><%=list.get(i).getGmtCreate().toInstant()%></td>
+                                        <td><%=list.get(i).getGmtModified().toInstant()%></td>
+                                        <td><%=list.get(i).getStatus().getName()%></td>
+                                    </tr>
+                                        <%}%>
                                     </tbody>
                                 </table>
                             </div>

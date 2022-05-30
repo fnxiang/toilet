@@ -154,25 +154,6 @@
         </div><!-- .animated -->
     </div><!-- .content -->
 
-    <div>
-        <div class="dialog">
-            <!-- 弹窗遮罩层 -->
-            <div>
-                <!-- 弹窗内容 -->
-                <div style="height: 200px;"></div>
-                <div class="content_dialog">
-                    <div class="aclose">
-                        <a class="close" href="javascript:close();">&times;</a>
-                    </div>
-                    <div class="contain" id="dialog_text" style="font-size: 20px; color: #fcfdfd">
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
 
     <div class="clearfix"></div>
 
@@ -210,7 +191,6 @@
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.print.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/init/datatables-init.js"></script>
-<script src="${pageContext.request.contextPath}/static/toilet/message.notify.js"></script>
 
 
 <script type="text/javascript">
