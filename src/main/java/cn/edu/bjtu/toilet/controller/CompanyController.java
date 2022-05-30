@@ -3,7 +3,6 @@ package cn.edu.bjtu.toilet.controller;
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.AuditStatus;
-import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.domain.ModeResponse;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
@@ -71,14 +70,18 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/product/update")
+    @ResponseBody
     public ProductResponse updateProduct(HttpServletRequest request) {
         try {
-            String productId = request.getParameter("productId");
-            ApprovalRequest approvalRequest = new ApprovalRequest();
-            approvalRequest.setProductId(productId);
-            ApprovalDO approvalDO = auditService.getApproval(approvalRequest);
 
-            request.setAttribute("approval", approvalDO);
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            ToiletProductDTO productDTO = buildUpdateProductDTO(params);
+            productDTO.setCompanyEmail(request.getSession().getAttribute("uId").toString());
+
+            checkProduct(productDTO);
+
+            productService.updateProduct(productDTO);
 
         } catch (ToiletBizException | ToiletSystemException e) {
             LOG.error("update product error with {}", e.getMessage());
@@ -98,10 +101,13 @@ public class CompanyController {
             Map<String, String> params = ParameterUtil.resolveParams(request);
 
             String productId = params.get("productId");
+            String statusCode = params.get("statusCode");
+
+            AuditStatus auditStatus = resolveStatus(statusCode);
 
             ToiletProductDTO productDTO = productService.queryToiletById(productId);
 
-            productDTO.setStatus(AuditStatus.PROCESSING);
+            productDTO.setStatus(auditStatus);
 
             productService.updateProduct(productDTO);
 
@@ -116,18 +122,27 @@ public class CompanyController {
         return ProductResponse.success();
     }
 
+    private AuditStatus resolveStatus(String statusCode) {
+        Integer code = Integer.decode(statusCode);
+
+        AuditStatus status = AuditStatus.of(code);
+
+        if (status.equals(AuditStatus.UNKNOWN)) {
+            throw new ToiletBizException("不支持的状态码", -1);
+        }
+
+        return status;
+    }
+
     @RequestMapping(value = "/product/audit")
     public ProductResponse getProductAudit(HttpServletRequest request) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request);
+            String productId = request.getParameter("productId");
+            ApprovalRequest approvalRequest = new ApprovalRequest();
+            approvalRequest.setProductId(productId);
+            ApprovalDTO approvalDTO = auditService.getApproval(approvalRequest);
 
-            ToiletProductDTO productDTO = buildUpdateProductDTO(params);
-            productDTO.setCompanyEmail(request.getSession().getAttribute("uId").toString());
-
-            checkProduct(productDTO);
-
-            productService.updateProduct(productDTO);
-
+            request.setAttribute("approval", approvalDTO);
         } catch (ToiletBizException | ToiletSystemException e) {
             LOG.error("update product error with {}", e.getMessage());
             return ProductResponse.failed("update product error with " + e.getMessage());
@@ -198,6 +213,10 @@ public class CompanyController {
 
     private void checkProduct(ToiletProductDTO productDTO) {
         ToiletProductDTO productDTOFromDb = productService.queryToiletById(productDTO.getId().toString());
+
+        productDTO.setStatus(productDTOFromDb.getStatus());
+        productDTO.setProfessorEmail(productDTOFromDb.getProfessorEmail());
+        productDTO.setProfessorId(productDTOFromDb.getProfessorId());
 
         // 检查文件是否有重新上传，路径为空则和数据库保持一致
 
@@ -336,10 +355,10 @@ public class CompanyController {
         paramsDTO.setHigh(params.get("high"));
         paramsDTO.setApplyCase(params.get("case"));
         paramsDTO.setOtherParams(params.get("otherParams"));
-        if (!StringUtils.isEmpty(params.get("weight"))&&!params.get("weight").equals("null")) {
+        if (!StringUtils.isEmpty(params.get("weight")) && !params.get("weight").equals("null")) {
             paramsDTO.setWeight(Double.valueOf(params.get("weight")));
         }
-        if (!StringUtils.isEmpty(params.get("thickness"))&&!params.get("thickness").equals("null")) {
+        if (!StringUtils.isEmpty(params.get("thickness")) && !params.get("thickness").equals("null")) {
             paramsDTO.setWallThickness(Double.valueOf(params.get("thickness")));
         }
         return paramsDTO;

@@ -8,6 +8,8 @@ public class ApprovalRequest {
 
     private String productId;
 
+    private String patternId;
+
     private String professorEmail;
 
     private AuditStatus status;

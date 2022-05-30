@@ -9,6 +9,7 @@
 <%@page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.google.common.collect.Lists" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -100,7 +101,7 @@
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
                                 <li><a href="${pageContext.request.contextPath}/company/index">后台</a></li>
-                                <li class="active">产品审核结果</li>
+                                <li class="active">产品信息修改</li>
                             </ol>
                         </div>
                     </div>
@@ -189,10 +190,11 @@
                                                                                             name="text-input"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value=<%=productDTO.getProductParameters().getPrice() * 10000%>>
+                                                                                            value=<%=productDTO.getProductParameters().getPrice()%>>
 
                                                         </div>
                                                     </div>
+                                                    <% CompanyDTO companyDTO = (CompanyDTO)request.getAttribute("company");%>
                                                     <div class="row form-group">
                                                         <div class="col col-md-3"><label for="producer_name"
                                                                                          class=" form-control-label">企业名称</label>
@@ -202,7 +204,7 @@
                                                                                             name="producer_name"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="<%=productDTO.getManufacturerName()%>"
+                                                                                            value="<%=companyDTO.getCompanyName()%>"
                                                                                             disabled>
                                                         </div>
                                                     </div>
@@ -214,7 +216,7 @@
                                                                                             name="phonenum"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value=<%=productDTO.getManufacturerCell()%>>
+                                                                                            value=<%=companyDTO.getContactPhone()%>>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -224,6 +226,7 @@
                                                         <div class="col-12 col-md-9"><input type="text" id="address"
                                                                                             name="address"
                                                                                             placeholder=""
+                                                                                            value="<%=companyDTO.getCompanyAddress()%>"
                                                                                             class="form-control">
                                                         </div>
                                                     </div>

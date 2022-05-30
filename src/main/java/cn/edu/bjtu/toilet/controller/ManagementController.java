@@ -2,6 +2,7 @@ package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.constant.UserStatus;
+import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.CommandResponse;
@@ -132,9 +133,10 @@ public class ManagementController {
             case "admin_back9":
             case "professor_back5":
             case "company_back6":
-
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
+                CompanyDO company = companyService.queryCompanyByEmail(productDTO.getCompanyEmail());
                 request.setAttribute("product", productDTO);
+                request.setAttribute("company", CompanyConverter.toCompanyDTO(company));
                 break;
             case "company_back3":
                 //TODO

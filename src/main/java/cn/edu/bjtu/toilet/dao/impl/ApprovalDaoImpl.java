@@ -49,7 +49,7 @@ public class ApprovalDaoImpl implements ApprovalDao {
     @Override
     public Integer insertApproval(ApprovalDO approvalDO) {
 
-        if (Objects.isNull(approvalDO.getApproverId()) || (Objects.isNull(approvalDO.getProductId())&&Objects.isNull(approvalDO.getPatternId()))) {
+        if (Objects.isNull(approvalDO.getApproverId()) && (Objects.isNull(approvalDO.getProductId())&&Objects.isNull(approvalDO.getPatternId()))) {
             throw new ToiletBizException("approverId or productId or patternId can not be null", BIZ_ERROR);
         }
 
@@ -74,7 +74,7 @@ public class ApprovalDaoImpl implements ApprovalDao {
         criteria.andProductIdEqualTo(productId);
         criteria.andDeletedNotEqualTo(true);
 
-        List<ApprovalDO> approvalDOS = approvalDOMapper.selectByExample(approvalDOSelective);
+        List<ApprovalDO> approvalDOS = approvalDOMapper.selectByExampleWithBLOBs(approvalDOSelective);
 
         if (CollectionUtils.isEmpty(approvalDOS)) {
             return null;
@@ -107,12 +107,19 @@ public class ApprovalDaoImpl implements ApprovalDao {
 
     @Override
     public void updateApprovalById(ApprovalDO approvalDO) {
+        ApprovalDO approvalDOFromDb = getApprovalDOById(approvalDO.getId());
+        approvalDO.setGmtCreate(approvalDOFromDb.getGmtCreate());
+        approvalDO.setGmtModified(new Date());
+        approvalDO.setVersion(approvalDOFromDb.getVersion());
+        approvalDO.setDeleted(approvalDOFromDb.getDeleted());
+        approvalDO.setSource(approvalDOFromDb.getSource());
+
         ApprovalDOSelective approvalDOSelective = new ApprovalDOSelective();
         ApprovalDOSelective.Criteria criteria = approvalDOSelective.createCriteria();
         criteria.andIdEqualTo(approvalDO.getId());
         criteria.andDeletedNotEqualTo(true);
 
-       int count = approvalDOMapper.updateByExample(approvalDO, approvalDOSelective);
+       int count = approvalDOMapper.updateByExampleWithBLOBs(approvalDO, approvalDOSelective);
 
         if (count != 1) {
             throw new ToiletBizException("too many approval updated", BIZ_ERROR);
