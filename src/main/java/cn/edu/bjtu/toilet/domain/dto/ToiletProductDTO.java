@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.domain.dto;
 
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import lombok.Data;
 
 import java.util.Date;
@@ -57,7 +57,7 @@ public class ToiletProductDTO {
 
     private String companyEmail;
 
-    private ProductStatus status;
+    private AuditStatus status;
 
     private String source;
 

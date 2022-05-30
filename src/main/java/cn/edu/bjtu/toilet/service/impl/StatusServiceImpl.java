@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.service.impl;
 
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.service.StatusService;
 import org.springframework.stereotype.Component;
 
@@ -11,12 +11,12 @@ import java.util.Map;
 @Component
 public class StatusServiceImpl implements StatusService {
 
-    private static final Map<ProductStatus, List<ProductStatus>>  TARGET_STATUS= new HashMap<ProductStatus, List<ProductStatus>>(){
+    private static final Map<AuditStatus, List<AuditStatus>>  TARGET_STATUS= new HashMap<AuditStatus, List<AuditStatus>>(){
 
     };
 
     @Override
-    public List<ProductStatus> getTargetStatus(ProductStatus status) {
+    public List<AuditStatus> getTargetStatus(AuditStatus status) {
         return null;
     }
 }

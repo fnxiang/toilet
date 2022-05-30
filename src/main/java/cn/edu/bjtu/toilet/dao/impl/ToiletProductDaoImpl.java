@@ -1,7 +1,7 @@
 package cn.edu.bjtu.toilet.dao.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDOSelective;
@@ -39,16 +39,16 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     }
 
     @Override
-    public List<ToiletProductDO> queryAllProductsWithStatus(String email, List<ProductStatus> productStatuses) {
+    public List<ToiletProductDO> queryAllProductsWithStatus(String email, List<AuditStatus> auditStatuses) {
 
-        if (CollectionUtils.isEmpty(productStatuses)) {
+        if (CollectionUtils.isEmpty(auditStatuses)) {
             throw new ToiletBizException("query status can not be null", BIZ_ERROR);
         }
 
         ToiletProductDOSelective toiletProductDOSelective = new ToiletProductDOSelective();
         ToiletProductDOSelective.Criteria criteria = toiletProductDOSelective.createCriteria();
 
-        criteria.andStatusIn(productStatuses.stream().map(ProductStatus::getCode).collect(Collectors.toList()));
+        criteria.andStatusIn(auditStatuses.stream().map(AuditStatus::getCode).collect(Collectors.toList()));
 
         if (!StringUtils.isEmpty(email)) {
             criteria.andCompanyEmailEqualTo(email);
@@ -65,8 +65,8 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
         ToiletProductDOSelective.Criteria criteria = toiletProductDOSelective.createCriteria();
         toiletProductDOSelective.setOrderByClause(request.getSortBy() + " " + request.getSortDirection() + " limit " + request.getOffset() + "," + request.getLimit());
 
-        if (request.getProductStatus() != null) {
-            criteria.andStatusEqualTo(request.getProductStatus().getCode());
+        if (request.getAuditStatus() != null) {
+            criteria.andStatusEqualTo(request.getAuditStatus().getCode());
         }
 
         if (!StringUtils.isEmpty(request.getEmail())) {

@@ -2,7 +2,7 @@ package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
@@ -58,7 +58,7 @@ public class ProfessorController {
             approvalRequest.setProfessorEmail(request.getSession().getAttribute("uId").toString());
             approvalRequest.setComment(comment);
             approvalRequest.setProductId(productId);
-            approvalRequest.setStatus(ProductStatus.valueOf(auditStatus));
+            approvalRequest.setStatus(AuditStatus.valueOf(auditStatus));
             auditService.updateApproval(approvalRequest);
 
         } catch (Exception e) {

@@ -2,7 +2,7 @@ package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.domain.ModeResponse;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
@@ -101,7 +101,7 @@ public class CompanyController {
 
             ToiletProductDTO productDTO = productService.queryToiletById(productId);
 
-            productDTO.setStatus(ProductStatus.PROCESSING);
+            productDTO.setStatus(AuditStatus.PROCESSING);
 
             productService.updateProduct(productDTO);
 

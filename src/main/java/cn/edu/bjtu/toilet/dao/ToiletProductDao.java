@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.dao;
 
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.dao.request.ProductQueryRequest;
 
@@ -18,7 +18,7 @@ public interface ToiletProductDao {
 
     List<ToiletProductDO> queryAllProducts(String email);
 
-    List<ToiletProductDO> queryAllProductsWithStatus(String email, List<ProductStatus> productStatuses);
+    List<ToiletProductDO> queryAllProductsWithStatus(String email, List<AuditStatus> auditStatuses);
 
     List<ToiletProductDO> queryAllProductsByPage(ProductQueryRequest request);
 

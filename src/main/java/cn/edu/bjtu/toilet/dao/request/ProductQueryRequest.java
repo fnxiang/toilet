@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.dao.request;
 
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.dao.model.PageRequest;
 import lombok.Data;
 
@@ -11,6 +11,6 @@ public class ProductQueryRequest extends PageRequest {
 
     private String professorEmail;
 
-    private ProductStatus productStatus;
+    private AuditStatus auditStatus;
 
 }

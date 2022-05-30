@@ -3,7 +3,7 @@ package cn.edu.bjtu.toilet.constant;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
 
-public enum ProductStatus {
+public enum AuditStatus {
     WAITED("等待提交审核", 100),
     PROCESSING("审核中", 110),
     WAITED_AMEND("修改后再审核", 120),
@@ -18,17 +18,17 @@ public enum ProductStatus {
     @Getter
     private Integer code;
 
-    ProductStatus(String name, Integer code) {
+    AuditStatus(String name, Integer code) {
         this.name = name;
         this.code = code;
     }
 
-    public static ProductStatus of(Integer code) {
+    public static AuditStatus of(Integer code) {
         if (StringUtils.isEmpty(code)) {
             return UNKNOWN;
         }
 
-        for (ProductStatus status : ProductStatus.values()) {
+        for (AuditStatus status : AuditStatus.values()) {
             if (status.getCode().equals(code)) {
                 return status;
             }

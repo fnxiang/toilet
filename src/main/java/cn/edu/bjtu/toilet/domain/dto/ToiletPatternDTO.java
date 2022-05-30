@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.domain.dto;
 
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import lombok.Data;
 
 import java.util.Date;
@@ -26,6 +27,10 @@ public class ToiletPatternDTO {
     private PipNetworkConditionsDTO pipNetworkConditions;
 
     private ResourceUtilizationDTO resourceUtilization;
+
+    private AuditStatus status;
+
+    private String professorEmail;
 
     private String source;
 

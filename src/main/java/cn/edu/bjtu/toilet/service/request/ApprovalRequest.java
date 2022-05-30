@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.service.request;
 
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import lombok.Data;
 
 @Data
@@ -10,7 +10,7 @@ public class ApprovalRequest {
 
     private String professorEmail;
 
-    private ProductStatus status;
+    private AuditStatus status;
 
     private String comment;
 

@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.service;
 
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.domain.dto.ProductSearchConditionsDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
@@ -17,7 +17,7 @@ public interface ProductService {
 
     List<ToiletProductDTO> queryAllProductList(String email);
 
-    List<ToiletProductDTO> queryAllProductList(String email, List<ProductStatus> statuses);
+    List<ToiletProductDTO> queryAllProductList(String email, List<AuditStatus> statuses);
 
     List<ToiletProductDTO> queryProductListByProfessor(String email);
 

@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.converter;
 
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.domain.dto.*;
@@ -39,7 +39,7 @@ public class ProductConverter {
         ToiletProductDTO productDTO = new ToiletProductDTO();
         BeanUtils.copyProperties(productDO, productDTO);
         productDTO.setProductParameters(JSON.parseObject(productDO.getProductParameters(), ProductParamsDTO.class));
-        productDTO.setStatus(ProductStatus.of(productDO.getStatus()));
+        productDTO.setStatus(AuditStatus.of(productDO.getStatus()));
         return productDTO;
     }
 

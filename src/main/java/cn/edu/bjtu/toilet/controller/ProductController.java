@@ -2,7 +2,7 @@ package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
-import cn.edu.bjtu.toilet.constant.ProductStatus;
+import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.domain.dto.ProductSearchConditionsDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.domain.request.ProductSortRequest;
@@ -43,7 +43,7 @@ public class ProductController {
             queryRequest.setEmail("");
             queryRequest.setIsDesc(false);
             queryRequest.setSortBy("id");
-            queryRequest.setProductStatus(ProductStatus.APPROVAL);
+            queryRequest.setAuditStatus(AuditStatus.APPROVAL);
 
             ProductQueryResponse response = productService.queryPageProduct(queryRequest);
 

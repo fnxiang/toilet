@@ -1,6 +1,6 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="cn.edu.bjtu.toilet.constant.ProductStatus" %>
+<%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -129,13 +129,13 @@
                                     </td>
                                     <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit"
                                                                       href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>">修改信息</a>
-                                        <%if (list.get(i).getStatus().equals(ProductStatus.APPROVAL)
-                                                || list.get(i).getStatus().equals(ProductStatus.DENY)
-                                                || list.get(i).getStatus().equals(ProductStatus.WAITED_AMEND)) {%>
+                                        <%if (list.get(i).getStatus().equals(AuditStatus.APPROVAL)
+                                                || list.get(i).getStatus().equals(AuditStatus.DENY)
+                                                || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
                                         <a type="button" class="btn btn-link fa fa-th-list"
                                            href="${pageContext.request.contextPath}/toPage?url=company_back5">查看审批意见</a>
-                                        <%} else if (list.get(i).getStatus().equals(ProductStatus.WAITED)
-                                                    ||list.get(i).getStatus().equals(ProductStatus.UNKNOWN)) {%>
+                                        <%} else if (list.get(i).getStatus().equals(AuditStatus.WAITED)
+                                                    ||list.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {%>
                                         <a type="button" class="btn btn-link fa fa-th-list"
                                            onclick="submit('<%=list.get(i).getId()%>')">提交审核</a>
                                         <%}%>
