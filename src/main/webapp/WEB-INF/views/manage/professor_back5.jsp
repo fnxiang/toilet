@@ -549,7 +549,7 @@
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
                                         <select name="select_status" id="select_status" class="form-control">
-                                            <option value="审核通过">审核通过</option>
+                                            <option value="审核通过" selected="selected">审核通过</option>
                                             <option value="审核不通过">审核不通过</option>
                                             <option value="修改后重新审核">修改后重新审核</option>
                                         </select>
@@ -683,7 +683,7 @@
     function commit() {
         const data = new FormData();
         data.append("productId", "<%=productDTO.getId()%>");
-        data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').text));
+        data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').value));
         data.append("comment", encodeURI($('#opinion').val()));
         $.ajax({
             url: "/toilet/professor/product/audit",
