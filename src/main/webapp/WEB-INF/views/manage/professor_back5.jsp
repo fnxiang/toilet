@@ -549,9 +549,9 @@
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
                                         <select name="select" id="select" class="form-control">
-                                            <option value="0">通过</option>
-                                            <option value="1">不通过</option>
-                                            <option value="2">修改后重新审查</option>
+                                            <option value="审核通过">审核通过</option>
+                                            <option value="审核不通过">审核不通过</option>
+                                            <option value="修改后重新审核">修改后重新审核</option>
                                         </select>
                                     </div>
                                 </div>
@@ -676,6 +676,30 @@
         $("#sampleimg").attr("src", src);
     }
 
+    function commit() {
+        // TODO 审核 -> 状态和意见
+        const data = new FormData();
+        data.append("status", "");
+        data.append("comment", "");
+
+        $.ajax({
+            url: "/toilet/professor/product/audit",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    show("提交成功！");
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>
