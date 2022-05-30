@@ -425,76 +425,6 @@ public class ToiletPatternDOSelective {
             return (Criteria) this;
         }
 
-        public Criteria andPatternInfoIsNull() {
-            addCriterion("pattern_info is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoIsNotNull() {
-            addCriterion("pattern_info is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoEqualTo(String value) {
-            addCriterion("pattern_info =", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoNotEqualTo(String value) {
-            addCriterion("pattern_info <>", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoGreaterThan(String value) {
-            addCriterion("pattern_info >", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoGreaterThanOrEqualTo(String value) {
-            addCriterion("pattern_info >=", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoLessThan(String value) {
-            addCriterion("pattern_info <", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoLessThanOrEqualTo(String value) {
-            addCriterion("pattern_info <=", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoLike(String value) {
-            addCriterion("pattern_info like", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoNotLike(String value) {
-            addCriterion("pattern_info not like", value, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoIn(List<String> values) {
-            addCriterion("pattern_info in", values, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoNotIn(List<String> values) {
-            addCriterion("pattern_info not in", values, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoBetween(String value1, String value2) {
-            addCriterion("pattern_info between", value1, value2, "patternInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatternInfoNotBetween(String value1, String value2) {
-            addCriterion("pattern_info not between", value1, value2, "patternInfo");
-            return (Criteria) this;
-        }
-
         public Criteria andVersionIsNull() {
             addCriterion("version is null");
             return (Criteria) this;
@@ -752,6 +682,266 @@ public class ToiletPatternDOSelective {
 
         public Criteria andAttributesNotBetween(String value1, String value2) {
             addCriterion("attributes not between", value1, value2, "attributes");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoIsNull() {
+            addCriterion("pattern_info is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoIsNotNull() {
+            addCriterion("pattern_info is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoEqualTo(String value) {
+            addCriterion("pattern_info =", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotEqualTo(String value) {
+            addCriterion("pattern_info <>", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoGreaterThan(String value) {
+            addCriterion("pattern_info >", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoGreaterThanOrEqualTo(String value) {
+            addCriterion("pattern_info >=", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoLessThan(String value) {
+            addCriterion("pattern_info <", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoLessThanOrEqualTo(String value) {
+            addCriterion("pattern_info <=", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoLike(String value) {
+            addCriterion("pattern_info like", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotLike(String value) {
+            addCriterion("pattern_info not like", value, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoIn(List<String> values) {
+            addCriterion("pattern_info in", values, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotIn(List<String> values) {
+            addCriterion("pattern_info not in", values, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoBetween(String value1, String value2) {
+            addCriterion("pattern_info between", value1, value2, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatternInfoNotBetween(String value1, String value2) {
+            addCriterion("pattern_info not between", value1, value2, "patternInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdIsNull() {
+            addCriterion("professor_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdIsNotNull() {
+            addCriterion("professor_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdEqualTo(Integer value) {
+            addCriterion("professor_id =", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdNotEqualTo(Integer value) {
+            addCriterion("professor_id <>", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdGreaterThan(Integer value) {
+            addCriterion("professor_id >", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("professor_id >=", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdLessThan(Integer value) {
+            addCriterion("professor_id <", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("professor_id <=", value, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdIn(List<Integer> values) {
+            addCriterion("professor_id in", values, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdNotIn(List<Integer> values) {
+            addCriterion("professor_id not in", values, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdBetween(Integer value1, Integer value2) {
+            addCriterion("professor_id between", value1, value2, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("professor_id not between", value1, value2, "professorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailIsNull() {
+            addCriterion("professor_email is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailIsNotNull() {
+            addCriterion("professor_email is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailEqualTo(String value) {
+            addCriterion("professor_email =", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailNotEqualTo(String value) {
+            addCriterion("professor_email <>", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailGreaterThan(String value) {
+            addCriterion("professor_email >", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("professor_email >=", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailLessThan(String value) {
+            addCriterion("professor_email <", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailLessThanOrEqualTo(String value) {
+            addCriterion("professor_email <=", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailLike(String value) {
+            addCriterion("professor_email like", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailNotLike(String value) {
+            addCriterion("professor_email not like", value, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailIn(List<String> values) {
+            addCriterion("professor_email in", values, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailNotIn(List<String> values) {
+            addCriterion("professor_email not in", values, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailBetween(String value1, String value2) {
+            addCriterion("professor_email between", value1, value2, "professorEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andProfessorEmailNotBetween(String value1, String value2) {
+            addCriterion("professor_email not between", value1, value2, "professorEmail");
             return (Criteria) this;
         }
     }
