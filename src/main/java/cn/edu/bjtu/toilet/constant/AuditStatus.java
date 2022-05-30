@@ -6,7 +6,7 @@ import org.springframework.util.StringUtils;
 public enum AuditStatus {
     WAITED("等待提交审核", 100),
     PROCESSING("审核中", 110),
-    WAITED_AMEND("修改后再审核", 120),
+    WAITED_AMEND("修改后重新审核", 120),
     APPROVAL("审核通过", 200),
     DENY("审核不通过", 300),
     DISCARD("放弃申请", 400),
@@ -30,6 +30,19 @@ public enum AuditStatus {
 
         for (AuditStatus status : AuditStatus.values()) {
             if (status.getCode().equals(code)) {
+                return status;
+            }
+        }
+        return UNKNOWN;
+    }
+
+    public static AuditStatus ofName(String name) {
+        if (StringUtils.isEmpty(name)) {
+            return UNKNOWN;
+        }
+
+        for (AuditStatus status : AuditStatus.values()) {
+            if (status.getName().equals(name)) {
                 return status;
             }
         }

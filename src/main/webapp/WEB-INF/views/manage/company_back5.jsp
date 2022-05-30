@@ -1,5 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="cn.edu.bjtu.toilet.dao.domain.ApprovalDO" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %>
+<%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -98,7 +100,7 @@
 
         <div class="content">
             <%
-                ApprovalDO approvalDO = (ApprovalDO)request.getAttribute("approval");
+                ApprovalDTO approvalDTO = (ApprovalDTO) request.getAttribute("approval");
             %>
             <div class="animated fadeIn">
                 <div class="row">
@@ -113,30 +115,35 @@
                                 <tbody>
                                 <tr>
                                     <td>产品名称</td>
-                                    <td>XXXXXXXXXX</td>
+                                    <td><%=productDTO.getProductName()%></td>
                                 </tr>
                                 <tr>
                                     <td>审核结果</td>
-                                    <td>不通过</td>
+                                    <td><%=approvalDTO.getStatus().getName()%></td>
                                 </tr>
                                 <tr>
                                     <td>专家评审意见</td>
                                     <td>
-                                        论文反映作者阅读了大量相关文献，对本专业基础理论和课题方面的知识掌握深入、牢固，能利用所学知识解决课题中的实际问题，具有较强的科研工作能力和动手能力。论文条理清楚、图表规范、数据可信，已达到硕士论文水平，同意该同学按期参加答辩。
+                                        <%=approvalDTO.getContent()%>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>审核结果</td>
                                     <td>
                                         <!--<a href="./company_back3.jsp" class="btn btn-link">返回修改</a>-->
+                                        <%if (approvalDTO.getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
                                         <button type="button" class="btn btn-link"
                                                 onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=productDTO.getId()%>'">
                                             返回修改
                                         </button>
+                                        <%}%>
+
+                                        <%if (approvalDTO.getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
                                         <button type="button" class="btn btn-link"
-                                                onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back1'">
+                                                onclick="submit('<%=productDTO.getId()%>', '<%=AuditStatus.DISCARD.getCode()%>')">
                                             舍弃该申请
                                         </button>
+                                        <%}%>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -187,12 +194,10 @@
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.print.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/init/datatables-init.js"></script>
+<script src="${pageContext.request.contextPath}/static/toilet/audit.process.js"></script>
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#bootstrap-data-table-export').DataTable();
-    });
 </script>
 
 

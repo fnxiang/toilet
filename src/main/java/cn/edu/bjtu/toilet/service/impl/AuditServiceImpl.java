@@ -1,11 +1,13 @@
 package cn.edu.bjtu.toilet.service.impl;
 
+import cn.edu.bjtu.toilet.converter.ApprovalConverter;
 import cn.edu.bjtu.toilet.dao.ApprovalDao;
 import cn.edu.bjtu.toilet.dao.ToiletPatternDao;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
 import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
 import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
+import cn.edu.bjtu.toilet.domain.dto.ApprovalDTO;
 import cn.edu.bjtu.toilet.service.AuditService;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 import org.springframework.stereotype.Component;
@@ -78,9 +80,9 @@ public class AuditServiceImpl implements AuditService {
     }
 
     @Override
-    public ApprovalDO getApproval(ApprovalRequest request) {
+    public ApprovalDTO getApproval(ApprovalRequest request) {
         Integer productId = Integer.valueOf(request.getProductId());
-        return approvalDao.getApprovalDOByProductId(productId);
+        return ApprovalConverter.toDTO(approvalDao.getApprovalDOByProductId(productId));
     }
 
     private ApprovalDO buildApproval(ApprovalRequest request) {
@@ -92,6 +94,7 @@ public class AuditServiceImpl implements AuditService {
             approvalDO.setProductId(Integer.valueOf(request.getProductId()));
         }
         approvalDO.setApproverEmail(request.getProfessorEmail());
+        approvalDO.setStatus(request.getStatus().getCode());
         approvalDO.setContent(request.getComment());
         approvalDO.setSource(source);
 
@@ -100,6 +103,6 @@ public class AuditServiceImpl implements AuditService {
 
     private String buildApprovalSource(ApprovalRequest request) {
         String tag = StringUtils.isEmpty(request.getProductId())?"PR":"PA";
-        return String.format("%s-%s-%s-%s", request.getProductBelongEmail(), request.getProfessorEmail(), "p", request.getProductId());
+        return String.format("%s-%s-%s-%s", request.getProductBelongEmail(), request.getProfessorEmail(), tag, request.getProductId());
     }
 }

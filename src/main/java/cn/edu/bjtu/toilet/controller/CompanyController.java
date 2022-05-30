@@ -3,7 +3,6 @@ package cn.edu.bjtu.toilet.controller;
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.AuditStatus;
-import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.domain.ModeResponse;
 import cn.edu.bjtu.toilet.domain.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
@@ -102,10 +101,13 @@ public class CompanyController {
             Map<String, String> params = ParameterUtil.resolveParams(request);
 
             String productId = params.get("productId");
+            String statusCode = params.get("statusCode");
+
+            AuditStatus auditStatus = resolveStatus(statusCode);
 
             ToiletProductDTO productDTO = productService.queryToiletById(productId);
 
-            productDTO.setStatus(AuditStatus.PROCESSING);
+            productDTO.setStatus(auditStatus);
 
             productService.updateProduct(productDTO);
 
@@ -120,15 +122,27 @@ public class CompanyController {
         return ProductResponse.success();
     }
 
+    private AuditStatus resolveStatus(String statusCode) {
+        Integer code = Integer.decode(statusCode);
+
+        AuditStatus status = AuditStatus.of(code);
+
+        if (status.equals(AuditStatus.UNKNOWN)) {
+            throw new ToiletBizException("不支持的状态码", -1);
+        }
+
+        return status;
+    }
+
     @RequestMapping(value = "/product/audit")
     public ProductResponse getProductAudit(HttpServletRequest request) {
         try {
             String productId = request.getParameter("productId");
             ApprovalRequest approvalRequest = new ApprovalRequest();
             approvalRequest.setProductId(productId);
-            ApprovalDO approvalDO = auditService.getApproval(approvalRequest);
+            ApprovalDTO approvalDTO = auditService.getApproval(approvalRequest);
 
-            request.setAttribute("approval", approvalDO);
+            request.setAttribute("approval", approvalDTO);
         } catch (ToiletBizException | ToiletSystemException e) {
             LOG.error("update product error with {}", e.getMessage());
             return ProductResponse.failed("update product error with " + e.getMessage());
@@ -341,10 +355,10 @@ public class CompanyController {
         paramsDTO.setHigh(params.get("high"));
         paramsDTO.setApplyCase(params.get("case"));
         paramsDTO.setOtherParams(params.get("otherParams"));
-        if (!StringUtils.isEmpty(params.get("weight"))&&!params.get("weight").equals("null")) {
+        if (!StringUtils.isEmpty(params.get("weight")) && !params.get("weight").equals("null")) {
             paramsDTO.setWeight(Double.valueOf(params.get("weight")));
         }
-        if (!StringUtils.isEmpty(params.get("thickness"))&&!params.get("thickness").equals("null")) {
+        if (!StringUtils.isEmpty(params.get("thickness")) && !params.get("thickness").equals("null")) {
             paramsDTO.setWallThickness(Double.valueOf(params.get("thickness")));
         }
         return paramsDTO;

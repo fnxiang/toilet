@@ -6,6 +6,7 @@ import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
+import cn.edu.bjtu.toilet.domain.dto.ApprovalDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.domain.response.ProductStatusResponse;
 import cn.edu.bjtu.toilet.domain.response.ProfessorResponse;
@@ -58,7 +59,7 @@ public class ProfessorController {
             approvalRequest.setProfessorEmail(request.getSession().getAttribute("uId").toString());
             approvalRequest.setComment(comment);
             approvalRequest.setProductId(productId);
-            approvalRequest.setStatus(AuditStatus.valueOf(auditStatus));
+            approvalRequest.setStatus(AuditStatus.ofName(auditStatus));
             auditService.updateProductApproval(approvalRequest);
 
         } catch (Exception e) {
@@ -69,6 +70,7 @@ public class ProfessorController {
     }
 
     @RequestMapping(value = "/pattern/audit")
+    @ResponseBody
     public ProfessorResponse auditPattern(HttpServletRequest request) {
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request);
@@ -139,12 +141,12 @@ public class ProfessorController {
             ApprovalRequest approvalRequest = new ApprovalRequest();
             approvalRequest.setProductId(productId);
             approvalRequest.setProfessorEmail(email);
-            ApprovalDO approvalDO = auditService.getApproval(approvalRequest);
+            ApprovalDTO approvalDTO = auditService.getApproval(approvalRequest);
 
             ToiletProductDTO productDTO = productService.queryToiletById(productId);
 
             request.setAttribute("product", productDTO);
-            request.setAttribute("approval", approvalDO);
+            request.setAttribute("approval", approvalDTO);
 
         } catch (ToiletBizException | ToiletSystemException e) {
             LOG.error("get product audit info error with : {}", e.getMessage());
