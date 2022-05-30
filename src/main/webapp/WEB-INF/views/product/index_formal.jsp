@@ -99,9 +99,11 @@
                         <option value="true">降序</option>
                     </select>
                 </div>
-                <div class="grid_2">
-                    <button class="grid_2" onclick="sort()">应用</button>
-                    <button class="grid_2" onclick="exportXSL()">导出</button>
+                <div class="grid_1">
+                    <button class="grid_1" onclick="sort()">应用</button>
+                </div>
+                <div class="grid_1">
+                    <button class="grid_1" onclick="exportXSL()">导出</button>
                 </div>
                 <!-- .grid_10 -->
 
@@ -379,13 +381,15 @@
 <script>
     //转换为json
     function exportXSL() {
+        //获取整个产品列表
+        <%
+        List<ToiletProductDTO> productListAll = productQueryResponse.getAllProductDTOList();%>
         <%
         List<JSONObject> data = new ArrayList<>();
-
         //遍历获取到的需要导出的数据
-        for(int i = 0; i < productList.size(); i++) {
+        for(int i = 0; i < productListAll.size(); i++) {
             JSONObject dataMap = new JSONObject(true);
-            ToiletProductDTO productDTO = productList.get(i);
+            ToiletProductDTO productDTO = productListAll.get(i);
             dataMap.put("序号",productDTO.getId());
             dataMap.put("产品名称",productDTO.getProductName());
             dataMap.put("生产厂家",productDTO.getManufacturerName());
@@ -418,7 +422,6 @@
         JSONToExcelConvertor(dataList,"产品详情");
     }
     //json导出excel
-    //json数据转excel
     function JSONToExcelConvertor(JSONData, FileName) {
         //先转化json
         var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
