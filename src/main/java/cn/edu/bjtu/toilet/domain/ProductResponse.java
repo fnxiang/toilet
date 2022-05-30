@@ -1,11 +1,16 @@
 package cn.edu.bjtu.toilet.domain;
 
+import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class ProductResponse {
 
     private Boolean success;
+
+    private List<ToiletProductDTO> productList;
 
     private String errorMessage;
 
