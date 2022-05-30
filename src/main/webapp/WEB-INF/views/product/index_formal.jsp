@@ -381,46 +381,67 @@
 <script>
     //转换为json
     function exportXSL() {
-        //获取整个产品列表
-        <%
-        List<ToiletProductDTO> productListAll = productQueryResponse.getAllProductDTOList();%>
-        <%
-        List<JSONObject> data = new ArrayList<>();
-        //遍历获取到的需要导出的数据
-        for(int i = 0; i < productListAll.size(); i++) {
-            JSONObject dataMap = new JSONObject(true);
-            ToiletProductDTO productDTO = productListAll.get(i);
-            dataMap.put("序号",productDTO.getId());
-            dataMap.put("产品名称",productDTO.getProductName());
-            dataMap.put("生产厂家",productDTO.getManufacturerName());
-            dataMap.put("产品类型",productDTO.getProductType());
-            dataMap.put("联系方式",productDTO.getManufacturerCell());
-            dataMap.put("厂家邮箱",productDTO.getCompanyEmail());
-            dataMap.put("适用省份",productDTO.getApplicableProvince());
-            dataMap.put("适用温度",productDTO.getApplicableTemperature());
-            dataMap.put("规格（平方米）",productDTO.getProductParameters().getStandard());
-            dataMap.put("适用人数（人）",productDTO.getProductParameters().getApplicableNum());
-            dataMap.put("长（mm）",productDTO.getProductParameters().getLength());
-            dataMap.put("宽（mm）",productDTO.getProductParameters().getWide());
-            dataMap.put("高（mm）",productDTO.getProductParameters().getHigh());
-            dataMap.put("壁厚（mm）",productDTO.getProductParameters().getWallThickness());
-            dataMap.put("重量（kg）",productDTO.getProductParameters().getWeight());
-            dataMap.put("材质",productDTO.getProductParameters().getTexture());
-            dataMap.put("颜色",productDTO.getProductParameters().getColor());
-            dataMap.put("使用寿命（年）",productDTO.getProductParameters().getServiceLife());
-            dataMap.put("用途",productDTO.getPurpose());
-            dataMap.put("具体用途",productDTO.getProductParameters().getParamPurpose());
-            dataMap.put("运行成本",productDTO.getProductParameters().getRunCost());
-            dataMap.put("清理周期（月）",productDTO.getProductParameters().getCleanupCycle());
-            dataMap.put("应用案例",productDTO.getProductParameters().getApplyCase());
-            dataMap.put("产品特点",productDTO.getProductFeatures());
-            data.add(dataMap);}%>
-        var dataList = new Array();
-        <%for(JSONObject x : data){%>
-        dataList.push(<%=x%>);
-        <%}%>
+        const data = new FormData();
+        data.append("status", "");
+
+        $.ajax({
+            url: "/toilet/products/export",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                   console.log(result.productList);
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
+        <%--//获取整个产品列表--%>
+        <%--<%--%>
+        <%--List<ToiletProductDTO> productListAll = productQueryResponse.();%>--%>
+        <%--<%--%>
+        <%--List<JSONObject> data = new ArrayList<>();--%>
+        <%--//遍历获取到的需要导出的数据--%>
+        <%--for(int i = 0; i < productListAll.size(); i++) {--%>
+        <%--    JSONObject dataMap = new JSONObject(true);--%>
+        <%--    ToiletProductDTO productDTO = productListAll.get(i);--%>
+        <%--    dataMap.put("序号",productDTO.getId());--%>
+        <%--    dataMap.put("产品名称",productDTO.getProductName());--%>
+        <%--    dataMap.put("生产厂家",productDTO.getManufacturerName());--%>
+        <%--    dataMap.put("产品类型",productDTO.getProductType());--%>
+        <%--    dataMap.put("联系方式",productDTO.getManufacturerCell());--%>
+        <%--    dataMap.put("厂家邮箱",productDTO.getCompanyEmail());--%>
+        <%--    dataMap.put("适用省份",productDTO.getApplicableProvince());--%>
+        <%--    dataMap.put("适用温度",productDTO.getApplicableTemperature());--%>
+        <%--    dataMap.put("规格（平方米）",productDTO.getProductParameters().getStandard());--%>
+        <%--    dataMap.put("适用人数（人）",productDTO.getProductParameters().getApplicableNum());--%>
+        <%--    dataMap.put("长（mm）",productDTO.getProductParameters().getLength());--%>
+        <%--    dataMap.put("宽（mm）",productDTO.getProductParameters().getWide());--%>
+        <%--    dataMap.put("高（mm）",productDTO.getProductParameters().getHigh());--%>
+        <%--    dataMap.put("壁厚（mm）",productDTO.getProductParameters().getWallThickness());--%>
+        <%--    dataMap.put("重量（kg）",productDTO.getProductParameters().getWeight());--%>
+        <%--    dataMap.put("材质",productDTO.getProductParameters().getTexture());--%>
+        <%--    dataMap.put("颜色",productDTO.getProductParameters().getColor());--%>
+        <%--    dataMap.put("使用寿命（年）",productDTO.getProductParameters().getServiceLife());--%>
+        <%--    dataMap.put("用途",productDTO.getPurpose());--%>
+        <%--    dataMap.put("具体用途",productDTO.getProductParameters().getParamPurpose());--%>
+        <%--    dataMap.put("运行成本",productDTO.getProductParameters().getRunCost());--%>
+        <%--    dataMap.put("清理周期（月）",productDTO.getProductParameters().getCleanupCycle());--%>
+        <%--    dataMap.put("应用案例",productDTO.getProductParameters().getApplyCase());--%>
+        <%--    dataMap.put("产品特点",productDTO.getProductFeatures());--%>
+        <%--    data.add(dataMap);}%>--%>
+        <%--var dataList = new Array();--%>
+        <%--<%for(JSONObject x : data){%>--%>
+        <%--dataList.push(<%=x%>);--%>
+        <%--<%}%>--%>
         JSONToExcelConvertor(dataList,"产品详情");
     }
+
     //json导出excel
     function JSONToExcelConvertor(JSONData, FileName) {
         //先转化json
