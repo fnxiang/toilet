@@ -219,7 +219,7 @@
             success: function (result) {
                 if (result.success) {
                     show("提交审核成功！");
-
+                    location.reload();
                 } else {
                     show(result.errorMessage);
                 }
