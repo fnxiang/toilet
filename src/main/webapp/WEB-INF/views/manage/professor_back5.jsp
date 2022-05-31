@@ -489,13 +489,16 @@
                                                aria-controls="custom-nav-quality" aria-selected="true">质量保障</a>
                                         </div>
                                     </nav>
+                                    <%String filePath = productDTO.getQualityAssuranceMaterialsFilePath();%>
+                                    <%if(filePath.length() != 0){%>
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                         <div class="tab-pane fade active show" id="custom-nav-quality" role="tabpanel"
                                              aria-labelledby="custom-nav-quality-tab">
-                                            <iframe src="<%=basePath + productDTO.getQualityAssuranceMaterialsFilePath()%>"
+                                            <iframe src="<%=basePath + filePath%>"
                                                     width="100%" height="100%" style="height: 500px;"></iframe>
                                         </div>
                                     </div>
+                                    <%}%>
                                 </div>
 
                                 <div class="custom-tab">
@@ -506,13 +509,16 @@
                                                aria-controls="custom-nav-use" aria-selected="true">使用说明</a>
                                         </div>
                                     </nav>
+                                    <%filePath = productDTO.getInstructionFilePath();%>
+                                    <%if(filePath.length() != 0){%>
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                         <div class="tab-pane fade active show" id="custom-nav-use" role="tabpanel"
                                              aria-labelledby="custom-nav-use-tab">
-                                            <iframe src="<%=basePath + productDTO.getInstructionFilePath()%>"
+                                            <iframe src="<%=basePath + filePath%>"
                                                     width="100%" height="100%" style="height: 500px;"></iframe>
                                         </div>
                                     </div>
+                                    <%}%>
                                 </div>
 
                             </div>
@@ -525,7 +531,7 @@
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
                                         <select name="select_status" id="select_status" class="form-control">
-                                            <option value="审核通过">审核通过</option>
+                                            <option value="审核通过" selected="selected">审核通过</option>
                                             <option value="审核不通过">审核不通过</option>
                                             <option value="修改后重新审核">修改后重新审核</option>
                                         </select>
@@ -567,6 +573,10 @@
             </div>
         </div>
     </footer>
+
+    <%--弹窗--%>
+    <jsp:include page="../common/dialog.jsp"/>
+    <%--弹窗--%>
 
 </div><!-- /#right-panel -->
 
@@ -655,7 +665,7 @@
     function commit() {
         const data = new FormData();
         data.append("productId", "<%=productDTO.getId()%>");
-        data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').text));
+        data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').value));
         data.append("comment", encodeURI($('#opinion').val()));
         $.ajax({
             url: "/toilet/professor/product/audit",

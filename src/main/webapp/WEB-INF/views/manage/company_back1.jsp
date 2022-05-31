@@ -127,28 +127,17 @@
                                     <td style="text-align: center">否</td>
                                     <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                     </td>
-                                    <td style="text-align: center">
-                                        <% if (list.get(i).getStatus().equals(AuditStatus.WAITED)
+                                    <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit"
+                                                                      href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>">修改信息</a>
+                                        <%if (list.get(i).getStatus().equals(AuditStatus.APPROVAL)
+                                                || list.get(i).getStatus().equals(AuditStatus.DENY)
                                                 || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
-                                        <a type="button" class="btn btn-link fa fa-edit"
-                                           href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>">修改信息</a>
-                                        <%
-                                            }
-                                            if (list.get(i).getStatus().equals(AuditStatus.APPROVAL)
-                                                    || list.get(i).getStatus().equals(AuditStatus.DENY)
-                                                    || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {
-                                        %>
                                         <a type="button" class="btn btn-link fa fa-th-list"
-                                           href="${pageContext.request.contextPath}/toPage?url=company_back5&productId=<%=list.get(i).getId()%>">查看审批意见</a>
-                                        <%
-                                            }
-
-                                            if (list.get(i).getStatus().equals(AuditStatus.WAITED)
-                                                    || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)
-                                                    || list.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {
-                                        %>
-                                        <a type="button" class="btn btn-link fa fa-th-list"
-                                           onclick="submit('<%=list.get(i).getId()%>', '<%=AuditStatus.PROCESSING.getCode()%>')">提交审核</a>
+                                           href="${pageContext.request.contextPath}/toPage?url=company_back5">查看审批意见</a>
+                                        <%} else if (list.get(i).getStatus().equals(AuditStatus.WAITED)
+                                                    ||list.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {%>
+                                        <a type="button" class="btn btn-link fa fa-th-list" id="shenhe"
+                                           onclick="submit('<%=list.get(i).getId()%>')" <%if(list.get(i).getStatus().getName() == "无状态"){%> disabled="" <%} else{%> disabled="none"<%}%>>提交审核</a>
                                         <%}%>
                                     </td>
                                 </tr>
@@ -180,6 +169,10 @@
         </div>
     </footer>
 
+    <%--弹窗--%>
+    <jsp:include page="../common/dialog.jsp"/>
+    <%--弹窗--%>
+
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
@@ -202,7 +195,6 @@
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.print.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/init/datatables-init.js"></script>
-<script src="${pageContext.request.contextPath}/static/toilet/audit.process.js"></script>
 
 
 <script type="text/javascript">
@@ -210,6 +202,30 @@
         $('#bootstrap-data-table-export').DataTable(
         );
     });
+
+    function submit(productId) {
+        const data = new FormData();
+        data.append("productId", productId);
+
+        $.ajax({
+            url: "/toilet/company/product/audit/submit",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    show("提交审核成功！");
+                    location.reload();
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
+    }
 </script>
 
 

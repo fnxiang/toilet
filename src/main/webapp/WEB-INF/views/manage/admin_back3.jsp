@@ -130,7 +130,7 @@
                                 <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                 </td>
                                 <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit"
-                                                                  href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>">查看详情</a>
+                                                                  href="${pageContext.request.contextPath}/toPage?url=admin_back6&productId=<%=list.get(i).getId()%>">查看详情</a>
 									<%if (list.get(i).getStatus().equals(AuditStatus.PROCESSING) && StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
 									<a type="button" class="btn btn-link fa fa-check-square"
 									   onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back9&productId=<%=list.get(i).getId()%>'">
@@ -165,6 +165,9 @@
             </div>
         </div>
     </footer>
+    <%--弹窗--%>
+    <jsp:include page="../common/dialog.jsp"/>
+    <%--弹窗--%>
 
 </div><!-- /#right-panel -->
 

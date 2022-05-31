@@ -15,7 +15,6 @@
 
     <!-- global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/dialog.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/base/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -65,25 +64,9 @@
             </div>
         </div>
     </div>
-    <%--                            弹窗--%>
-    <div>
-        <div class="dialog">
-            <!-- 弹窗遮罩层 -->
-            <div>
-                <!-- 弹窗内容 -->
-                <div style="height: 200px;"></div>
-                <div class="content_dialog">
-                    <div class="aclose">
-                        <a class="close" href="javascript:close();">&times;</a>
-                    </div>
-                    <div class="contain" id="dialog_text" style="font-size: 20px; color: #fcfdfd">
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
+    <%--弹窗--%>
+    <jsp:include page="../common/dialog.jsp"/>
+    <%--弹窗--%>
 </section>
 
 <!--Global Javascript -->
@@ -127,16 +110,6 @@
                 }
             }
         });
-    }
-</script>
-<script>
-    function show(msg) {
-        document.getElementById("dialog_text").innerHTML = msg;
-        $(".dialog").css("display", "block");
-    }
-
-    function close() {
-        $(".dialog").css("display", "none");
     }
 </script>
 </body>

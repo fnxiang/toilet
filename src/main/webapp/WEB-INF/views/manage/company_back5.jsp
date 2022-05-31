@@ -172,6 +172,10 @@
         </div>
     </footer>
 
+    <%--弹窗--%>
+    <jsp:include page="../common/dialog.jsp"/>
+    <%--弹窗--%>
+
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->

@@ -21,7 +21,6 @@
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/normalize.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/dialog.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/themify-icons.css">
@@ -132,13 +131,16 @@
                                                                         value="<%=companyDO.getCreditCode()%>"
                                                                         class="form-control"></div>
                                 </div>
+                                <%String filePath = companyDO.getBusinessLicenseFilePath();%>
+                                <%if(filePath.length() != 0){%>
                                 <div class="row form-group" id="yingyezhizhao">
                                     <div class="col col-md-3"><label class=" form-control-label">营业执照</label></div>
                                     <div class="col-12 col-md-9">
-                                        <iframe src="<%=basePath%><%=companyDO.getBusinessLicenseFilePath()%>"
+                                        <iframe src="<%=basePath + filePath%>"
                                                 width="100%" height="100%" style="height: 500px;"></iframe>
                                     </div>
                                 </div>
+                                <%}%>
 
                                 <div class="row form-group" id="shuruzhizhao" style="display: none">
                                     <div class="col col-md-3"><label for="file" class="form-control-label">营业执照
@@ -250,25 +252,9 @@
         </div>
     </footer>
 
-    <%--                            弹窗--%>
-    <div>
-        <div class="dialog">
-            <!-- 弹窗遮罩层 -->
-            <div>
-                <!-- 弹窗内容 -->
-                <div style="height: 200px;"></div>
-                <div class="content_dialog">
-                    <div class="aclose">
-                        <a class="close" href="javascript:close();">&times;</a>
-                    </div>
-                    <div class="contain" id="dialog_text" style="font-size: 20px; color: #fcfdfd">
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
+    <%--弹窗--%>
+    <jsp:include page="../common/dialog.jsp"/>
+    <%--弹窗--%>
 
 </div><!-- /#right-panel -->
 
@@ -421,7 +407,7 @@
         }
 
         // 省份加载完成，默认显示第一个省份的城市
-        setCity(0);
+        setCity(province.selectedIndex);
     }
 
     // 设置城市
@@ -434,7 +420,7 @@
             // 创建城市option选项
             var opt = document.createElement("option");
             opt.value = citys[i];         // 设置value-提交给服务器用
-            if(provinceArr[i] === "<%=enterpriseAddressDTO.getCity()%>"){
+            if(citys[i] === "<%=enterpriseAddressDTO.getCity()%>"){
                 opt.selected = "selected"
             }
             opt.innerHTML = citys[i];     // 设置option文本显示内容
@@ -445,7 +431,7 @@
         }
 
         // 默认显示城市的第一个县/区
-        setCounty(provincePos, 0);
+        setCounty(provincePos, city.selectedIndex);
     }
 
     // 设置县/区, 县/区是三位数组，需要传入哪个省份和城市
@@ -458,7 +444,7 @@
             // 创建县/区option选项
             var opt = document.createElement("option");
             opt.value = countys[i];         // 设置value-提交给服务器用
-            if(provinceArr[i] === "<%=enterpriseAddressDTO.getCountry()%>"){
+            if(countys[i] === "<%=enterpriseAddressDTO.getCountry()%>"){
                 opt.selected = "selected"
             }
             opt.innerHTML = countys[i];     // 设置option文本显示内容
@@ -467,18 +453,5 @@
     }
 
 </script>
-
-<script>
-    function show(msg) {
-        document.getElementById("dialog_text").innerHTML = msg;
-        $(".dialog").css("display", "block");
-    }
-
-    function close() {
-        $(".dialog").css("display", "none");
-    }
-</script>
-
-
 </body>
 </html>
