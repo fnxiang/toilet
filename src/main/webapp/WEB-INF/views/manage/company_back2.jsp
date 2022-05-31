@@ -131,13 +131,16 @@
                                                                         value="<%=companyDO.getCreditCode()%>"
                                                                         class="form-control"></div>
                                 </div>
+                                <%String filePath = companyDO.getBusinessLicenseFilePath();%>
+                                <%if(filePath.length() != 0){%>
                                 <div class="row form-group" id="yingyezhizhao">
                                     <div class="col col-md-3"><label class=" form-control-label">营业执照</label></div>
                                     <div class="col-12 col-md-9">
-                                        <iframe src="<%=basePath%><%=companyDO.getBusinessLicenseFilePath()%>"
+                                        <iframe src="<%=basePath + filePath%>"
                                                 width="100%" height="100%" style="height: 500px;"></iframe>
                                     </div>
                                 </div>
+                                <%}%>
 
                                 <div class="row form-group" id="shuruzhizhao" style="display: none">
                                     <div class="col col-md-3"><label for="file" class="form-control-label">营业执照

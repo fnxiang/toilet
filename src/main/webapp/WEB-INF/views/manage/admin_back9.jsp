@@ -562,14 +562,17 @@
                                                aria-controls="custom-nav-quality" aria-selected="true">质量保障</a>
                                         </div>
                                     </nav>
+                                    <%String filePath = productDTO.getQualityAssuranceMaterialsFilePath();%>
+                                    <%if(filePath.length() != 0){%>
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                         <div class="tab-pane fade active show" id="custom-nav-quality" role="tabpanel"
                                              aria-labelledby="custom-nav-quality-tab">
-                                            <iframe src="${pageContext.request.contextPath}/static/manage/res/PR_final.pdf"
+                                            <iframe src="<%=basePath + filePath%>"
                                                     width="100%" height="100%"
                                                     style="height: 500px;"></iframe>
                                         </div>
                                     </div>
+                                    <%}%>
                                 </div>
 
                                 <div class="custom-tab">
@@ -580,14 +583,17 @@
                                                aria-controls="custom-nav-use" aria-selected="true">使用说明</a>
                                         </div>
                                     </nav>
+                                    <%filePath = productDTO.getInstructionFilePath();%>
+                                    <%if(filePath.length() != 0){%>
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                         <div class="tab-pane fade active show" id="custom-nav-use" role="tabpanel"
                                              aria-labelledby="custom-nav-use-tab">
-                                            <iframe src="${pageContext.request.contextPath}/static/manage/res/PR_final.pdf"
+                                            <iframe src="<%=basePath + filePath%>"
                                                     width="100%" height="100%"
                                                     style="height: 500px;"></iframe>
                                         </div>
                                     </div>
+                                    <%}%>
                                 </div>
 
                             </div>
