@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface PatternService {
 
+    List<ToiletPatternDTO> queryPatternWithStatus(PatternSortRequest request);
+
     PatternQueryResponse sortPattern(PatternSortRequest request);
 
     PatternQueryResponse sortPatternWithCondition(PatternSortRequest request, ToiletPatternDTO condition);

@@ -110,7 +110,7 @@ public class IndexController {
                 userRole = UserRole.codeOf(userDO.getRole());
                 userStatusCode = userDO.getStatus();
             } else {
-                throw new ToiletBizException("用户不存在！", BIZ_ERROR);
+                throw new ToiletBizException("邮箱或密码错误！", BIZ_ERROR);
             }
 
             UserStatus status = UserStatus.codeOf(userStatusCode);

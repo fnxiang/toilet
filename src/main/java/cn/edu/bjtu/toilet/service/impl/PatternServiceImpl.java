@@ -34,6 +34,12 @@ public class PatternServiceImpl implements PatternService {
     private ToiletPatternDao patternDao;
 
     @Override
+    public List<ToiletPatternDTO> queryPatternWithStatus(PatternSortRequest request) {
+        PatternQueryRequest patternQueryRequest = buildPatternQueryRequest(request);
+        return null;
+    }
+
+    @Override
     public PatternQueryResponse sortPattern(PatternSortRequest request) {
         PatternQueryResponse response = new PatternQueryResponse();
 

@@ -4,15 +4,15 @@ import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.constant.UserRole;
-import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
+import cn.edu.bjtu.toilet.converter.CompanyConverter;
+import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.ApprovalDTO;
+import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.domain.response.ProductStatusResponse;
 import cn.edu.bjtu.toilet.domain.response.ProfessorResponse;
-import cn.edu.bjtu.toilet.service.AuditService;
-import cn.edu.bjtu.toilet.service.ProductService;
-import cn.edu.bjtu.toilet.service.UserService;
+import cn.edu.bjtu.toilet.service.*;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.google.common.collect.Lists;
@@ -29,8 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.ERROR_PAGE;
-import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.PROF_INDEX;
+import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.*;
 
 @Controller
 @RequestMapping("/professor")
@@ -46,6 +45,12 @@ public class ProfessorController {
 
     @Resource
     private ProductService productService;
+
+    @Resource
+    private PatternService patternService;
+
+    @Resource
+    private CompanyService companyService;
 
     @RequestMapping(value = "/product/audit")
     public ProfessorResponse auditProduct(HttpServletRequest request) {
@@ -171,5 +176,36 @@ public class ProfessorController {
             return ERROR_PAGE;
         }
         return PROF_INDEX;
+    }
+
+    @RequestMapping("/toProfessorPage")
+    public String toPage(HttpServletRequest request){
+        String url = request.getParameter("url");
+        String email = request.getSession().getAttribute("uId").toString();
+        String productId = request.getParameter("productId");
+        switch (url){
+            case "professor_back5":
+                ToiletProductDTO productDTO = productService.queryToiletById(productId);
+                CompanyDO company = companyService.queryCompanyByEmail(productDTO.getCompanyEmail());
+                request.setAttribute("product", productDTO);
+                request.setAttribute("company", CompanyConverter.toCompanyDTO(company));
+                break;
+            case "professor_back3":
+                UserDO userDO = userService.queryUserByEmail(email);
+                userDO.setPassword("");
+                request.setAttribute("user", userDO);
+                break;
+            case "professor_back2":
+                // TODO
+                List<ToiletPatternDTO> patternDTOS = patternService.queryPatternWithStatus(null);
+                break;
+            default:
+                break;
+        }
+
+
+
+        url = MANAGE_BASE + url;
+        return url;
     }
 }

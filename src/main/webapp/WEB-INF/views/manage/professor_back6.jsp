@@ -30,27 +30,8 @@
 <body>
     <!-- Left Panel -->
 
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=professor_back1" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>产品信息审核列表</a>
-                    </li>
-                    <li class="active">
-                        <a href="${pageContext.request.contextPath}/toPage?url=professor_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>模式审核列表</a>
-                    </li>
-					<li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=professor_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>基本信息</a>
-                    </li>
-					<li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=professor_back4" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel -->
+	<jsp:include page="professor_side.jsp"/>
+	<!-- /#left-panel -->
 
     <!-- Left Panel -->
 
