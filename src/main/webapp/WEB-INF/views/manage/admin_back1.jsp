@@ -3,6 +3,8 @@
 <%@page import="java.util.List" %>
 <%@ page import="cn.edu.bjtu.toilet.dao.domain.UserDO" %>
 <%@ page import="cn.edu.bjtu.toilet.dao.domain.CompanyDO" %>
+<%@ page import="com.alibaba.fastjson.JSONObject" %>
+<%@ page import="java.util.ArrayList" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -102,7 +104,14 @@
                             <div class="card-header">
                                 <strong class="card-title">用户管理</strong>
                             </div>
-                            <div class="card-body">	
+                            <div class="card-body">
+                                <div class="grid_2">
+                                    <button class="grid_2" style="position: absolute;left: 30px; top: 40px;" onclick="exportProfessor()">导出专家信息</button>
+                                </div>
+
+                                <div class="grid_2">
+                                    <button class="grid_2" style="position: absolute;left: 160px; top: 40px;" onclick="exportCompany()">导出企业信息</button>
+                                </div>
                                 <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 									<thead>
 										<tr>
@@ -224,6 +233,57 @@
 
     <script type="text/javascript">
   </script>
+    <%--导出--%>
+    <script>
+        //json转换为excel
+        <jsp:include page="admin_export.jsp"/>
+        //转换为json
+        function exportProfessor() {
+            //获取专家用户列表
+            <%
+            List<JSONObject> professor_data = new ArrayList<>();
+            //遍历获取到的需要导出的数据
+            for(int i = 0; i < list.size(); i++) {
+                JSONObject dataMap = new JSONObject(true);
+                UserDO userDO = list.get(i);
+                dataMap.put("姓名",userDO.getName());
+                dataMap.put("单位",userDO.getWorkCompany());
+                dataMap.put("职务",userDO.getPosition());
+                dataMap.put("职称",userDO.getTitle());
+                dataMap.put("电话",userDO.getPhone());
+                dataMap.put("电子邮箱",userDO.getEmail());
+                professor_data.add(dataMap);}%>
+            var dataList = new Array();
+            <%for(JSONObject x : professor_data){%>
+            dataList.push(<%=x%>);
+            <%}%>
+            JSONToExcelConvertor(dataList,"专家用户信息");
+        }
+
+        function exportCompany() {
+            //获取整个企业用户列表
+            <%
+            List<JSONObject> company_data = new ArrayList<>();
+            //遍历获取到的需要导出的数据
+            for(int i = 0; i < companyDOS.size(); i++) {
+                JSONObject dataMap = new JSONObject(true);
+                CompanyDO companyDO = companyDOS.get(i);
+                dataMap.put("公司名称",companyDO.getCompanyName());
+                dataMap.put("统一社会信用代码",companyDO.getCreditCode());
+                dataMap.put("营业执照",companyDO.getBusinessLicenseFilePath());
+                dataMap.put("企业地址",companyDO.getEnterpriseAddress());
+                dataMap.put("注册邮箱",companyDO.getEmail());
+                dataMap.put("公司官网",companyDO.getOfficialSite());
+                dataMap.put("联系人",companyDO.getContactName());
+                dataMap.put("手机号",companyDO.getContactPhone());
+                company_data.add(dataMap);}%>
+            var dataList = new Array();
+            <%for(JSONObject x : company_data){%>
+            dataList.push(<%=x%>);
+            <%}%>
+            JSONToExcelConvertor(dataList,"企业用户信息");
+        }
+    </script>
 
 
 </body>
