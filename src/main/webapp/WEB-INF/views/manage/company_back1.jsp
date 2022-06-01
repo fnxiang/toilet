@@ -127,18 +127,20 @@
                                     <td style="text-align: center">否</td>
                                     <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                     </td>
-                                    <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit"
-                                                                      href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>">修改信息</a>
+                                    <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit" id="xiugai"
+                                                                      href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>" <%if(!list.get(i).getStatus().getName().equals("无状态")){%>  style="display: none" <%}%>>修改信息</a>
                                         <%if (list.get(i).getStatus().equals(AuditStatus.APPROVAL)
                                                 || list.get(i).getStatus().equals(AuditStatus.DENY)
                                                 || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
-                                        <a type="button" class="btn btn-link fa fa-th-list"
+                                        <a type="button" class="btn btn-link fa fa-eye"
                                            href="${pageContext.request.contextPath}/toPage?url=company_back5">查看审批意见</a>
                                         <%} else if (list.get(i).getStatus().equals(AuditStatus.WAITED)
                                                     ||list.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {%>
-                                        <a type="button" class="btn btn-link fa fa-th-list" id="shenhe"
-                                           onclick="submit('<%=list.get(i).getId()%>')" <%if(list.get(i).getStatus().getName() == "无状态"){%> disabled="" <%} else{%> disabled="none"<%}%>>提交审核</a>
+                                        <a type="button" class="btn btn-link fa fa-upload" id="shenhe" href="javascript:void(0);"
+                                           onclick="submit('<%=list.get(i).getId()%>')" <%if(list.get(i).getStatus().getName().equals("无状态")){%><%} else{%> style="display: none"<%}%>>提交审核</a>
                                         <%}%>
+
+                                        <a type="button" class="btn btn-link fa fa-info-circle" id="shenhe" href="${pageContext.request.contextPath}/toPage?url=company_back7&productId=<%=list.get(i).getId()%>">产品详情</a>
                                     </td>
                                 </tr>
                                 <%}%>
