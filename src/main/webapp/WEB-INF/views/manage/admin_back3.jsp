@@ -130,13 +130,13 @@
                                 <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                 </td>
                                 <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit"
-                                                                  href="${pageContext.request.contextPath}/toPage?url=admin_back6&productId=<%=list.get(i).getId()%>">查看详情</a>
+                                                                  onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6&productId=<%=list.get(i).getId()%>'">查看详情</a>
 									<%if (list.get(i).getStatus().equals(AuditStatus.PROCESSING) && StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
 									<a type="button" class="btn btn-link fa fa-check-square"
 									   onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back9&productId=<%=list.get(i).getId()%>'">
 										分配专家</a>
 									<%}%>
-									<a type="button" class="btn btn-link fa fa-trash-o" href="delete()">删除</a></td>
+									<a type="button" class="btn btn-link fa fa-trash-o" onclick="delete()">删除</a></td>
                                 </tr>
                                     <%}%>
 								</tbody>
