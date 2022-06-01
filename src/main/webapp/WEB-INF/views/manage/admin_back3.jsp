@@ -114,7 +114,7 @@
                         <div class="card-body">
 
                             <div class="grid_2">
-                                <button class="grid_2" style="position: absolute;left: 30px; top: 40px;" onclick="exportXSL()">导出</button>
+                                <button class="grid_2" style="position: absolute;left: 30px; top: 40px;" onclick="exportXSL()">导出产品信息</button>
                             </div>
 
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
