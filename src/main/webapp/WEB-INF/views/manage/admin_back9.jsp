@@ -614,7 +614,7 @@
                                 <button type="button" class="btn btn-outline-secondary" onclick="assignProfessor()">
                                     确认分配
                                 </button>
-                                <button type="button" class="btn btn-outline-secondary"
+                                <button type="button" class="btn btn-outline-secondary offset-2"
                                         onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back3'">
                                     返回
                                 </button>
