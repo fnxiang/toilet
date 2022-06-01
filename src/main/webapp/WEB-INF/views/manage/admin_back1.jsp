@@ -123,7 +123,7 @@
 										<td>专家用户</td>
 										<td class="text-center">
 											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back7'"> 查看详情</a>
-											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
+											<a type="button" class="btn btn-link fa fa-trash-o" onclick="show('删除')"> 删除</a>
 										</td>
 									</tr>
 										<%}}%>
@@ -137,7 +137,7 @@
 										<td>企业用户</td>
 										<td class="text-center">
 											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6'"> 查看详情</a>
-											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
+											<a type="button" class="btn btn-link fa fa-trash-o" onclick="show('删除')"> 删除</a>
 										</td>
 									</tr>
 									<%}
@@ -221,14 +221,8 @@
     <script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 	<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/datatables-init.js"></script>
-	
+
     <script type="text/javascript">
-       
-	  
-	  
-	
-	  
-	  
   </script>
 
 
