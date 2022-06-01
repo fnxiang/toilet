@@ -218,7 +218,7 @@
 
                                 <hr>
                                 <div class="card-text text-lg-center">
-                                    <button type="button" class="btn btn-outline-secondary offset-md-2"
+                                    <button type="button" class="btn btn-outline-secondary"
                                             onclick="modify()">确认修改
                                     </button>
                                 </div>
