@@ -218,9 +218,6 @@
 
                                 <hr>
                                 <div class="card-text text-lg-center">
-                                    <button type="button" class="btn btn-outline-secondary" onclick="">确认分配</button>
-                                    <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="">返回
-                                    </button>
                                     <button type="button" class="btn btn-outline-secondary offset-md-2"
                                             onclick="modify()">确认修改
                                     </button>
