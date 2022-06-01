@@ -2,6 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.springframework.util.StringUtils" %>
 <%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
+<%@ page import="com.alibaba.fastjson.JSONObject" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -110,6 +112,11 @@
                             <strong class="card-title">产品管理</strong>
                         </div>
                         <div class="card-body">
+
+                            <div class="grid_2">
+                                <button class="grid_2" style="position: absolute;left: 30px; top: 40px;" onclick="exportXSL()">导出</button>
+                            </div>
+
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
                                    cellspacing="0" width="100%">
                                 <thead>
@@ -221,6 +228,55 @@
 <script type="text/javascript">
 
 
+</script>
+
+<%--导出--%>
+<script>
+    //json转换为excel
+    <jsp:include page="admin_export.jsp"/>
+    //转换为json
+    function exportXSL() {
+        //获取整个产品列表
+        <%
+        List<JSONObject> data = new ArrayList<>();
+        //遍历获取到的需要导出的数据
+        for(int i = 0; i < list.size(); i++) {
+            JSONObject dataMap = new JSONObject(true);
+            ToiletProductDTO productDTO = list.get(i);
+            dataMap.put("序号",productDTO.getId());
+            dataMap.put("产品名称",productDTO.getProductName());
+            dataMap.put("生产厂家",productDTO.getManufacturerName());
+            dataMap.put("产品类型",productDTO.getProductType());
+            dataMap.put("联系方式",productDTO.getManufacturerCell());
+            dataMap.put("厂家邮箱",productDTO.getCompanyEmail());
+            dataMap.put("适用省份",productDTO.getApplicableProvince());
+            dataMap.put("适用温度",productDTO.getApplicableTemperature());
+            dataMap.put("规格（平方米）",productDTO.getProductParameters().getStandard());
+            dataMap.put("适用人数（人）",productDTO.getProductParameters().getApplicableNum());
+            dataMap.put("长（mm）",productDTO.getProductParameters().getLength());
+            dataMap.put("宽（mm）",productDTO.getProductParameters().getWide());
+            dataMap.put("高（mm）",productDTO.getProductParameters().getHigh());
+            dataMap.put("壁厚（mm）",productDTO.getProductParameters().getWallThickness());
+            dataMap.put("重量（kg）",productDTO.getProductParameters().getWeight());
+            dataMap.put("材质",productDTO.getProductParameters().getTexture());
+            dataMap.put("颜色",productDTO.getProductParameters().getColor());
+            dataMap.put("使用寿命（年）",productDTO.getProductParameters().getServiceLife());
+            dataMap.put("用途",productDTO.getPurpose());
+            dataMap.put("具体用途",productDTO.getProductParameters().getParamPurpose());
+            dataMap.put("运行成本",productDTO.getProductParameters().getRunCost());
+            dataMap.put("清理周期（月）",productDTO.getProductParameters().getCleanupCycle());
+            dataMap.put("使用图片",productDTO.getPicsPath());
+            dataMap.put("质量保证材料",productDTO.getQualityAssuranceMaterialsFilePath());
+            dataMap.put("使用说明",productDTO.getInstructionFilePath());
+            dataMap.put("应用案例",productDTO.getProductParameters().getApplyCase());
+            dataMap.put("产品特点",productDTO.getProductFeatures());
+            data.add(dataMap);}%>
+        var dataList = new Array();
+        <%for(JSONObject x : data){%>
+        dataList.push(<%=x%>);
+        <%}%>
+        JSONToExcelConvertor(dataList,"产品详情");
+    }
 </script>
 
 
