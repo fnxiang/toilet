@@ -189,7 +189,7 @@
                                     <div class="col-12 col-md-9"><input type="text" id="emailAddress"
                                                                         name="emailAddress" placeholder="123@456.com"
                                                                         value="<%=companyDO.getEmail()%>"
-                                                                        class="form-control"></div>
+                                                                        class="form-control" disabled></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="webAddress"
@@ -298,7 +298,6 @@
         data.append("creditCode", $('#creditCode').val());
         data.append("companyAddress", getSelectorContent());
         data.append("detailAddress", encodeURI($('#fullAddress').val()));
-        data.append("email", $('#emailAddress').val());
         data.append("webAddress", $('#webAddress').val());
         data.append("contactName", encodeURI($('#contactName').val()));
         data.append("phoneNum", $('#phoneNum').val());
