@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.service.impl;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
@@ -65,9 +66,12 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDO updatePassword(CompanyUpdateRequest request) {
         CompanyDO companyDO = companyDao.getCompanyByEmail(request.getEmail());
+
         if (Base64.getEncoder().encodeToString(request.getOriginPassword().getBytes()).equals(companyDO.getPassword())
             && request.getPassword().equals(request.getConfirmPassword())) {
             companyDO.setPassword(Base64.getEncoder().encodeToString(request.getPassword().getBytes()));
+        } else {
+            throw new ToiletBizException("原始密码不正确！", -1);
         }
         companyDao.updateCompanyDO(companyDO);
         return companyDao.getCompanyByEmail(companyDO.getEmail());

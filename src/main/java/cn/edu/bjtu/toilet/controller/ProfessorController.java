@@ -53,6 +53,7 @@ public class ProfessorController {
     private CompanyService companyService;
 
     @RequestMapping(value = "/product/audit")
+    @ResponseBody
     public ProfessorResponse auditProduct(HttpServletRequest request) {
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request);
