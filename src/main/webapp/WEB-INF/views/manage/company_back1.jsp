@@ -150,6 +150,8 @@
                                         <a type="button" class="btn btn-link fa fa-th-list"
                                            onclick="submit('<%=list.get(i).getId()%>', '<%=AuditStatus.PROCESSING.getCode()%>')" <%if(list.get(i).getStatus().getName() == "无状态"){%> disabled="" <%} else{%> disabled="none"<%}%>>提交审核</a>
                                         <%}%>
+
+                                        <a type="button" class="btn btn-link fa fa-info-circle" id="shenhe" href="${pageContext.request.contextPath}/toPage?url=company_back7&productId=<%=list.get(i).getId()%>">产品详情</a>
                                     </td>
                                 </tr>
                                 <%}%>

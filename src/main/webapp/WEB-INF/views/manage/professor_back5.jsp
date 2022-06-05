@@ -546,8 +546,7 @@
                                 </div>
                             </form>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary">保存草稿</button>
-                                <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="commit()">确认提交</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="commit()">确认提交</button>
                             </div>
 
                         </div>

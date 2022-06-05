@@ -6,6 +6,8 @@ $(document).ready(function() {
                     "visible": false,
                     "targets": 2
                 }],
+                "bLengthChange" : false,
+                "bInfo": false,
                 "order": [
                     [2, 'asc']
                 ],
@@ -38,8 +40,6 @@ $(document).ready(function() {
         });
     });
     $('#example23').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+        "bLengthChange" : false,
+        "bInfo" : false,
     });

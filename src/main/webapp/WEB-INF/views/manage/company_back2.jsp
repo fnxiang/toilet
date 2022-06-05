@@ -189,7 +189,7 @@
                                     <div class="col-12 col-md-9"><input type="text" id="emailAddress"
                                                                         name="emailAddress" placeholder="123@456.com"
                                                                         value="<%=companyDO.getEmail()%>"
-                                                                        class="form-control"></div>
+                                                                        class="form-control" disabled></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="webAddress"
@@ -218,10 +218,7 @@
 
                                 <hr>
                                 <div class="card-text text-lg-center">
-                                    <button type="button" class="btn btn-outline-secondary" onclick="">确认分配</button>
-                                    <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="">返回
-                                    </button>
-                                    <button type="button" class="btn btn-outline-secondary offset-md-2"
+                                    <button type="button" class="btn btn-outline-secondary"
                                             onclick="modify()">确认修改
                                     </button>
                                 </div>
@@ -301,7 +298,6 @@
         data.append("creditCode", $('#creditCode').val());
         data.append("companyAddress", getSelectorContent());
         data.append("detailAddress", encodeURI($('#fullAddress').val()));
-        data.append("email", $('#emailAddress').val());
         data.append("webAddress", $('#webAddress').val());
         data.append("contactName", encodeURI($('#contactName').val()));
         data.append("phoneNum", $('#phoneNum').val());

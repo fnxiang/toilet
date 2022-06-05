@@ -128,7 +128,7 @@
                                     <div class="col-12 col-md-9"><input type="text" id="email" name="email"
                                                                         placeholder="123@456.com"
                                                                         value="<%=userDO.getEmail()%>"
-                                                                        class="form-control"></div>
+                                                                        class="form-control" disabled></div>
                                 </div>
                                 <hr>
                                 <div class="card-text text-lg-center">
@@ -201,7 +201,6 @@
         data.append("position", encodeURI($('#position').val())); //职务
         data.append("title", encodeURI($('#title').val())); //职称
         data.append("phone", $('#phone').val()); //手机号
-        data.append("email", $('#email').val()); //邮箱
         $.ajax({
             url: "/toilet/professor/modify",
             type: "POST",

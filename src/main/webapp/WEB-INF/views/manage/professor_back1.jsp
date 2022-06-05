@@ -84,7 +84,6 @@
                                             <th>序号</th>
                                             <th>产品名称</th>
                                             <th>提交时间</th>
-											<th>截至时间</th>
                                             <th>状态</th>
                                         </tr>
                                     </thead>
@@ -95,7 +94,6 @@
                                         <td><%=i+1%></td>
                                         <td><%=list.get(i).getProductName()%></td>
                                         <td><%=list.get(i).getGmtCreate().toInstant()%></td>
-                                        <td>——</td>
                                         <td><%=list.get(i).getStatus().getName()%></td>
                                     </tr>
                                         <%}%>

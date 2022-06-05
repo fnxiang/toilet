@@ -99,11 +99,8 @@
                         <option value="true">降序</option>
                     </select>
                 </div>
-                <div class="grid_1">
-                    <button class="grid_1" onclick="sort()">应用</button>
-                </div>
-                <div class="grid_1">
-                    <button class="grid_1" onclick="exportXSL()">导出</button>
+                <div class="grid_2">
+                    <button class="grid_2" onclick="sort()">应用</button>
                 </div>
                 <!-- .grid_10 -->
 
@@ -316,17 +313,22 @@
         let i = 1, dom = '';
         let firstDisabled;
         if (pageNow === 1) {
-            firstDisabled = 'disabled';
+            firstDisabled = 'none';
         } else {
             firstDisabled = ''
         }
         let endDisabled;
         if (pageNow === total) {
-            endDisabled = 'disabled';
+            endDisabled = 'none';
         } else {
             endDisabled = '';
         }
-        dom = '<span id="up" class="' + firstDisabled + ' text">上一页</span>';
+        if (firstDisabled === 'none') {
+            dom = '<span id="up" style="display: none" class="text">上一页</span>';
+        } else {
+            dom = '<span id="up" class="text">上一页</span>';
+        }
+
         if (total < 10) {
             while (i <= total || i === 1) {
                 let active = pageNow === i ? 'active' : '';
@@ -361,7 +363,12 @@
                 }
             }
         }
-        dom += '<span class="' + endDisabled + ' text" id="down">下一页';
+        if (endDisabled === 'none') {
+
+            dom += '<span id="down" class="text" style="display: none">下一页</span>';
+        } else {
+            dom += '<span id="down" class="text">下一页</span>';
+        }
         $page.html(dom);
     }
 </script>
@@ -377,95 +384,4 @@
     }
 </script>
 
-<%--导出--%>
-<script>
-    //转换为json
-    function exportXSL() {
-        const data = new FormData();
-        data.append("status", "");
-        //TODO 导出
-        $.ajax({
-            url: "/toilet/products/export",
-            type: "POST",
-            dataType: "json",
-            data: data,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                if (result.success) {
-                    JSONToExcelConvertor(result.productList,"产品详情");
-                   // console.log(result.productList);
-                } else {
-                    show(result.errorMessage);
-                }
-            }
-        });
-    }
-
-    //json导出excel
-    function JSONToExcelConvertor(JSONData, FileName) {
-        //先转化json
-        var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
-        var excel = '<table>';
-        var row = "<tr>";
-        //设置表头
-        var keys = Object.keys(JSONData[0]);
-        keys.forEach(function (item) {
-            row += "<td>" + item + '</td>';
-        });
-        //换行
-        excel += row + "</tr>";
-        //设置数据
-        for (var i = 0; i < arrData.length; i++) {
-            var row = "<tr>";
-            for (var index in arrData[i]) {
-                row += '<td style="text-align: left">' + arrData[i][index] + '</td>';
-            }
-            excel += row + "</tr>";
-        }
-
-        excel += "</table>";
-
-        var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>";
-        excelFile += '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">';
-        excelFile += '<meta http-equiv="content-type" content="application/vnd.ms-excel';
-        excelFile += '; charset=UTF-8">';
-        excelFile += "<head>";
-        excelFile += "<!--[if gte mso 9]>";
-        excelFile += "<xml>";
-        excelFile += "<x:ExcelWorkbook>";
-        excelFile += "<x:ExcelWorksheets>";
-        excelFile += "<x:ExcelWorksheet>";
-        excelFile += "<x:Name>";
-        excelFile += "{worksheet}";
-        excelFile += "</x:Name>";
-        excelFile += "<x:WorksheetOptions>";
-        excelFile += "<x:DisplayGridlines/>";
-        excelFile += "</x:WorksheetOptions>";
-        excelFile += "</x:ExcelWorksheet>";
-        excelFile += "</x:ExcelWorksheets>";
-        excelFile += "</x:ExcelWorkbook>";
-        excelFile += "</xml>";
-        excelFile += "<![endif]-->";
-        excelFile += "</head>";
-        excelFile += "<body>";
-        excelFile += excel;
-        excelFile += "</body>";
-        excelFile += "</html>";
-
-        var uri = 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(excelFile);
-
-        var link = document.createElement("a");
-        link.href = uri;
-
-        link.style = "visibility:hidden";
-        link.download = FileName + ".xls";
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-</script>
 </html>

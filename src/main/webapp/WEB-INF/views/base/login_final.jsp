@@ -19,6 +19,7 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/base/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/font-icon-style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/dialog.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/style.default.css"
           id="theme-stylesheet">
 
@@ -35,7 +36,7 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-12 ">
+            <div class="col-md-12">
                 <div class="contact-h-cont">
                     <h3 class="text-center"><a href="${pageContext.request.contextPath}/" target="_blank"><img
                             src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a>
@@ -53,20 +54,36 @@
                             <a href="" target="_blank">忘记密码</a>
                         </div>
                         <div class="form-group text-right">
-                            <a href="${pageContext.request.contextPath}/toBasePage?url=register_final" target="_blank">没有账号？点击注册</a>
+                            <a type="button" onclick="goRegister()" href="javascript:;">没有账号？点击注册</a>
                         </div>
                     </form>
                     <div class="form-group text-center">
                         <button id="login_btn" onclick="login()" class="btn btn-general btn-blue" role="button">登录
                         </button>
                     </div>
+                    <div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <%--弹窗--%>
-    <jsp:include page="../common/dialog.jsp"/>
-    <%--弹窗--%>
+
+            <div id="zhuce" style="position: absolute; left: 720px; top: 400px; background: #99999975; height: 100px; display: none">
+                <!-- 弹窗遮罩层 -->
+                <div class="aclose">
+                    <a class="close" href="javascript:choseClose();">&times;</a>
+                </div>
+                <div class="contain" id="dialog_text">
+                    <a href='${pageContext.request.contextPath}/toBasePage?url=register_final'
+                             role="button">企业注册&nbsp;&nbsp;&nbsp;&nbsp;
+                    </a>
+                    <a href='${pageContext.request.contextPath}/toBasePage?url=register_professor'
+                             role="button">专家注册
+                    </a>
+                </div>
+            </div>
+
+            <%--弹窗--%>
+            <jsp:include page="../common/dialog.jsp"/>
+            <%--弹窗--%>
 </section>
 
 <!--Global Javascript -->
@@ -110,6 +127,23 @@
                 }
             }
         });
+    }
+</script>
+
+<%--注册--%>
+<script>
+    function goRegister() {
+        chose()
+    }
+
+</script>
+<script>
+    function chose() {
+        $("#zhuce").css("display", "block");
+    }
+
+    function choseClose() {
+        $("#zhuce").css("display", "none");
     }
 </script>
 </body>
