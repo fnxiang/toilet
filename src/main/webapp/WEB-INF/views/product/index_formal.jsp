@@ -295,8 +295,8 @@
         pageSet(total, pageNow);
     });
     $page.on("click", 'span', function (e) {
-        pageNow = parseInt(e.target.innerText);
-        if (pageNow === pageNow) {
+        var pagenow = parseInt(e.target.innerText);
+        if (pagenow !== pageNow) {
             findpage(pageNow);
             pageSet(total, pageNow);
         } else {
