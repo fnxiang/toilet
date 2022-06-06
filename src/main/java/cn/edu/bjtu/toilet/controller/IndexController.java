@@ -4,12 +4,13 @@ import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.constant.UserStatus;
+import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
-import cn.edu.bjtu.toilet.domain.LoginResponse;
-import cn.edu.bjtu.toilet.domain.ProfessorRegisterRequest;
-import cn.edu.bjtu.toilet.domain.RegisterResponse;
+import cn.edu.bjtu.toilet.domain.request.CompanyRegisterRequest;
+import cn.edu.bjtu.toilet.domain.response.LoginResponse;
+import cn.edu.bjtu.toilet.domain.request.ProfessorRegisterRequest;
+import cn.edu.bjtu.toilet.domain.response.RegisterResponse;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.UserService;
@@ -164,9 +165,6 @@ public class IndexController {
 
             UserRole userRole = UserRole.codeOf(companyDO.getRole());
 
-            if(Objects.isNull(userRole)) {
-                return RegisterResponse.failed("Error Role with user!");
-            }
             request.getSession().setAttribute("uId", companyDO.getEmail());
             request.getSession().setAttribute("role", userRole.getRole());
         }catch (Exception e) {
@@ -188,7 +186,7 @@ public class IndexController {
                 return RegisterResponse.failed("参数不能为空");
             }
 
-            ProfessorRegisterRequest registerRequest = buildProfRequest(params);
+            ProfessorRegisterRequest registerRequest = UserConverter.buildProfRequest(params);
             UserDO userDO = userService.saveProfessorUser(registerRequest);
 
             if (userDO == null) {
@@ -213,19 +211,6 @@ public class IndexController {
         }
 
         return RegisterResponse.success();
-    }
-
-    private ProfessorRegisterRequest buildProfRequest(Map<String, String> params) {
-        ProfessorRegisterRequest registerRequest = new ProfessorRegisterRequest();
-        registerRequest.setUserName(params.get("userName"));
-        registerRequest.setCompany(params.get("company"));
-        registerRequest.setPosition(params.get("position"));
-        registerRequest.setTitle(params.get("title"));
-        registerRequest.setPhoneNum(params.get("phoneNum"));
-        registerRequest.setPassword(params.get("password"));
-        registerRequest.setConfirmPassword(params.get("confirmPassword"));
-        registerRequest.setEmail(params.get("emailAddress"));
-        return registerRequest;
     }
 
     private CompanyRegisterRequest resolveRegisterParams(Map<String, String> params) {

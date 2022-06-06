@@ -5,10 +5,10 @@ import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.CommandResponse;
+import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
-import cn.edu.bjtu.toilet.domain.request.CompanyUpdateRequest;
+import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
 import cn.edu.bjtu.toilet.service.AuditService;
 import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.ProductService;
@@ -62,8 +62,10 @@ public class ManagementController {
     public CommandResponse updateCompanyInfo(HttpServletRequest request){
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request);
+            String email = request.getSession().getAttribute("uId").toString();
 
             CompanyDO companyDO = resolveCompanyParams(params);
+            companyDO.setEmail(email);
             companyService.updateCompany(companyDO);
         } catch (Exception e) {
             LOG.error("update company info error with : {}", e.getMessage());
@@ -80,7 +82,7 @@ public class ManagementController {
 
             String email = request.getSession().getAttribute("uId").toString();
 
-            CompanyUpdateRequest updateRequest = buildComapanyUpdateRequest(params);
+            UserUpdateRequest updateRequest = buildComapanyUpdateRequest(params);
             updateRequest.setEmail(email);
             companyService.updatePassword(updateRequest);
         } catch (Exception e) {
@@ -90,12 +92,12 @@ public class ManagementController {
         return CommandResponse.success();
     }
 
-    private CompanyUpdateRequest buildComapanyUpdateRequest(Map<String, String> params) {
-        CompanyUpdateRequest request = new CompanyUpdateRequest();
-        request.setOriginPassword(params.get("originPwd"));
-        request.setPassword(params.get("pwd"));
-        request.setConfirmPassword(params.get("confirmPwd"));
-        return request;
+    private UserUpdateRequest buildComapanyUpdateRequest(Map<String, String> params) {
+        return UserUpdateRequest.builder()
+                .originPassword(params.get("originPwd"))
+                .password(params.get("pwd"))
+                .confirmPassword(params.get("confirmPwd"))
+                .build();
     }
 
     @RequestMapping("/admin/index")
@@ -132,6 +134,7 @@ public class ManagementController {
                 request.setAttribute("approval", auditService.getApproval(approvalRequest));
             case "admin_back9":
             case "professor_back5":
+            case "company_back7":
             case "company_back6":
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
                 CompanyDO company = companyService.queryCompanyByEmail(productDTO.getCompanyEmail());
@@ -191,17 +194,15 @@ public class ManagementController {
 
         List<String> address = Lists.newArrayList(companyAddress.split(","));
 
-        if (CollectionUtils.isEmpty(address) || address.size()<3) {
-            return null;
+        if (!CollectionUtils.isEmpty(address) && address.size()>=3) {
+            enterpriseAddress.setProvince(address.get(0));
+            enterpriseAddress.setCity(address.get(1));
+            enterpriseAddress.setCountry(address.get(2));
+
+            enterpriseAddress.setDetailAddress(detailAddress);
+
+            companyDO.setEnterpriseAddress(JSON.toJSONString(enterpriseAddress));
         }
-
-        enterpriseAddress.setProvince(address.get(0));
-        enterpriseAddress.setCity(address.get(1));
-        enterpriseAddress.setCountry(address.get(2));
-
-        enterpriseAddress.setDetailAddress(detailAddress);
-
-        companyDO.setEnterpriseAddress(JSON.toJSONString(enterpriseAddress));
 
         return companyDO;
     }

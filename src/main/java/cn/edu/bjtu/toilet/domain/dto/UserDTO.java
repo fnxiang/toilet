@@ -1,9 +1,9 @@
-package cn.edu.bjtu.toilet.domain;
+package cn.edu.bjtu.toilet.domain.dto;
 
 import lombok.Data;
 
 @Data
-public class ProfessorRegisterRequest {
+public class UserDTO {
 
     private String userName;
 
@@ -16,9 +16,5 @@ public class ProfessorRegisterRequest {
     private String phoneNum;
 
     private String email;
-
-    private String password;
-
-    private String confirmPassword;
 
 }

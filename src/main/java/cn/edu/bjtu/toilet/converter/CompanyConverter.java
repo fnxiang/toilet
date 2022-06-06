@@ -2,12 +2,10 @@ package cn.edu.bjtu.toilet.converter;
 
 import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
-import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
+import cn.edu.bjtu.toilet.domain.request.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.domain.dto.CompanyDTO;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.Base64;
 

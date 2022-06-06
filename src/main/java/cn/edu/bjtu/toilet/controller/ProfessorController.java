@@ -5,11 +5,14 @@ import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.converter.CompanyConverter;
+import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.ApprovalDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
+import cn.edu.bjtu.toilet.domain.dto.UserDTO;
+import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
 import cn.edu.bjtu.toilet.domain.response.ProductStatusResponse;
 import cn.edu.bjtu.toilet.domain.response.ProfessorResponse;
 import cn.edu.bjtu.toilet.service.*;
@@ -160,6 +163,50 @@ public class ProfessorController {
         }
 
         return "/manage/professor_back5";
+    }
+
+    @RequestMapping(value = "/pwd/update")
+    @ResponseBody
+    public ProfessorResponse updatePwd(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String email = request.getSession().getAttribute("uId").toString();
+
+            UserUpdateRequest updateRequest = buildUpdateRequest(params);
+            updateRequest.setEmail(email);
+            userService.updatePassword(updateRequest);
+        } catch (Exception e) {
+            LOG.error("update password error with {}", e.getMessage());
+            return ProfessorResponse.failed(e.getMessage());
+        }
+        return ProfessorResponse.success();
+    }
+
+    @RequestMapping(value = "/info/update")
+    @ResponseBody
+    public ProfessorResponse updateInfo(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+            String email = request.getSession().getAttribute("uId").toString();
+
+            UserDTO userDTO = UserConverter.buildProfessorInfo(params);
+            userDTO.setEmail(email);
+            userService.saveProfessorUser(userDTO);
+
+        } catch (Exception e) {
+            LOG.error("update password error with {}", e.getMessage());
+            return ProfessorResponse.failed(e.getMessage());
+        }
+        return ProfessorResponse.success();
+    }
+
+    private UserUpdateRequest buildUpdateRequest(Map<String, String> params) {
+         return UserUpdateRequest.builder()
+                    .originPassword(params.get("originPwd"))
+                    .password(params.get("pwd"))
+                    .confirmPassword(params.get("confirmPwd"))
+                    .build();
     }
 
     @RequestMapping(value = "/index")

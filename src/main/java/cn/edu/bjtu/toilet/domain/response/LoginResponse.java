@@ -1,4 +1,4 @@
-package cn.edu.bjtu.toilet.domain;
+package cn.edu.bjtu.toilet.domain.response;
 
 import lombok.Data;
 

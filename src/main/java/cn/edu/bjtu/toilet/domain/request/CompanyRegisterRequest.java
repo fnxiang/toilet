@@ -1,4 +1,4 @@
-package cn.edu.bjtu.toilet.domain;
+package cn.edu.bjtu.toilet.domain.request;
 
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;

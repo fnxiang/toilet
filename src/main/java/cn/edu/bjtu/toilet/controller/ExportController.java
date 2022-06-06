@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.controller;
 
-import cn.edu.bjtu.toilet.domain.ProductResponse;
+import cn.edu.bjtu.toilet.domain.response.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.ProductService;
 import org.slf4j.Logger;

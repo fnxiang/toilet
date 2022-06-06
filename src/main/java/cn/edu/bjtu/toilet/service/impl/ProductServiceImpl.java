@@ -51,7 +51,6 @@ public class ProductServiceImpl implements ProductService {
         queryRequest.setProfessorEmail(email);
         queryRequest.setSortBy("id");
         queryRequest.setIsDesc(false);
-        queryRequest.setAuditStatus(AuditStatus.PROCESSING);
         return toiletProductDao.queryAllProductsByPage(queryRequest).stream()
                 .map(ProductConverter::toDTO)
                 .collect(Collectors.toList());

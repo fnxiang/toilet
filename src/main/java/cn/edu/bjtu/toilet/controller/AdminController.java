@@ -1,7 +1,7 @@
 package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.CommandResponse;
+import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.service.UserService;

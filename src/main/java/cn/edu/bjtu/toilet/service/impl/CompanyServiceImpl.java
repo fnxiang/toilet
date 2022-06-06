@@ -5,14 +5,15 @@ import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
-import cn.edu.bjtu.toilet.domain.CompanyRegisterRequest;
-import cn.edu.bjtu.toilet.domain.request.CompanyUpdateRequest;
+import cn.edu.bjtu.toilet.domain.request.CompanyRegisterRequest;
+import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
 import cn.edu.bjtu.toilet.service.CompanyService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -64,8 +65,12 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDO updatePassword(CompanyUpdateRequest request) {
+    public CompanyDO updatePassword(UserUpdateRequest request) {
         CompanyDO companyDO = companyDao.getCompanyByEmail(request.getEmail());
+
+        if (Objects.isNull(companyDO)) {
+            throw new ToiletBizException("角色错误！", -1);
+        }
 
         if (Base64.getEncoder().encodeToString(request.getOriginPassword().getBytes()).equals(companyDO.getPassword())
             && request.getPassword().equals(request.getConfirmPassword())) {

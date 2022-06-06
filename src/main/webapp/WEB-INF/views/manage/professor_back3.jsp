@@ -196,13 +196,13 @@
 <script>
     function modify() {
         let data = new FormData();
-        data.append("name", encodeURI($('#professorName').val())); //专家姓名
-        data.append("workCompany", encodeURI($('#company').val())); //单位
+        data.append("userName", encodeURI($('#professorName').val())); //专家姓名
+        data.append("company", encodeURI($('#company').val())); //单位
         data.append("position", encodeURI($('#position').val())); //职务
         data.append("title", encodeURI($('#title').val())); //职称
-        data.append("phone", $('#phone').val()); //手机号
+        data.append("phoneNum", $('#phone').val()); //手机号
         $.ajax({
-            url: "/toilet/professor/modify",
+            url: "/toilet/professor/info/update",
             type: "POST",
             dataType: "json",
             data: data,

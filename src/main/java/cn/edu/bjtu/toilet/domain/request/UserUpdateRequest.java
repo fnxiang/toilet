@@ -1,9 +1,11 @@
 package cn.edu.bjtu.toilet.domain.request;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class CompanyUpdateRequest {
+@Builder
+public class UserUpdateRequest {
 
     private String email;
 
