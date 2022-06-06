@@ -152,6 +152,11 @@ public class AdminController {
                 request.setAttribute("pattern", patternDTO);
                 request.setAttribute("approval", approvalDTO);
                 break;
+            case "admin_back12":
+                String queryCompanyEmail = request.getParameter("email");
+                company = companyService.queryCompanyByEmail(queryCompanyEmail);
+                request.setAttribute("company", company);
+                break;
             default:
                 break;
         }
