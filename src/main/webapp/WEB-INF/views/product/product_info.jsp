@@ -279,12 +279,9 @@
                             <h4>使用说明</h4>
                             <div class="preview slides_container">
                                 <div class="prev_bg">
-                                    <%String p = productDTO.getInstructionFilePath();%>
-                                    <%if (p.length() != 0 && p.substring(p.length() - 3).equals("pdf")) {%>
-                                    <embed src="<%=basePath + p%>" style=" width: 1000PX; height: 820px; ">
-                                    <%} else {%>
-                                    <img src="<%=basePath + p%>" height="600px" title="" alt=""/>
-                                    <%}%>
+                                    <%String instructionFilePath = productDTO.getInstructionFilePath();%>
+                                            <iframe src="<%=basePath + instructionFilePath%>"
+                                                    width="100%" height="100%" style="height: 500px;"></iframe>
                                 </div>
                             </div><!-- .prev -->
 
@@ -292,20 +289,14 @@
                             <div class="clear"></div>
                         </div>
                         <!-- .tab2 .tab_body -->
-                        <%--                        //TODO 限制大小--%>
+                        <%--                        //TODO 限制大小 已修改--%>
                         <div class="tab3 tab_body">
                             <h4>质保证书</h4>
-                            <div class="preview slides_container">
-                                <div class="prev_bg">
-                                    <%String p2 = productDTO.getQualityAssuranceMaterialsFilePath();%>
-                                    <%if (p2.length() != 0 && p2.substring(p2.length() - 3, p2.length()).equals("pdf")) {%>
-                                    <embed src="<%=basePath + p2%>" style=" width: 1000PX; height: 820px; ">
-                                    <%} else {%>
-                                    <img src="<%=basePath + p2%>" height="600px" title="" alt=""/>
-                                    <%}%>
-                                </div>
-                            </div><!-- .prev -->
-
+                            <div class="custom-tab">
+                                <%String filePath = productDTO.getQualityAssuranceMaterialsFilePath();%>
+                                        <iframe src="<%=basePath + filePath%>"
+                                                width="100%" height="100%" style="height: 500px;"></iframe>
+                            </div>
                             <div class="clear"></div>
                         </div>
                         <!-- .tab3 .tab_body -->
@@ -415,8 +406,6 @@
         } else {
             document.getElementById('product_search').style.display = "none";
         }
-
-
     }
 
     function model_search_action() {
