@@ -145,7 +145,7 @@
 										<td><%=companyDOS.get(i).getCompanyName()%></td>
 										<td>企业用户</td>
 										<td class="text-center">
-											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back6&email=<%=companyDOS.get(i).getEmail()%>'"> 查看详情</a>
+											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back12&email=<%=companyDOS.get(i).getEmail()%>'"> 查看详情</a>
 											<a type="button" class="btn btn-link fa fa-trash-o" onclick="show('删除')"> 删除</a>
 										</td>
 									</tr>
