@@ -74,8 +74,6 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="${pageContext.request.contextPath}/professor/index">后台</a></li>
-                                <li class="active">产品信息审核</li>
                             </ol>
                         </div>
                     </div>
@@ -543,7 +541,7 @@
                                     <div class="col col-md-3"><label for="select_status"
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control">
+                                        <select name="select_status" id="select_status" class="form-control" disabled>
                                             <option value="审核通过" selected="selected">审核通过</option>
                                             <option value="审核不通过">审核不通过</option>
                                             <option value="修改后重新审核">修改后重新审核</option>
@@ -555,11 +553,12 @@
                                     </div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder="审核意见..."
-                                                                           class="form-control"></textarea></div>
+                                                                           class="form-control" disabled></textarea></div>
                                 </div>
                             </form>
                             <div class="card-text text-lg-center">
-                                <button type="button" id="submit_btn" class="btn btn-outline-secondary" onclick="commit()">确认提交</button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="javascript:window.location.href='${pageContext.request.contextPath}/professor/index'">返回</button>
+                            </button>
                             </div>
 
                         </div>
@@ -618,7 +617,7 @@
     $(document).ready(function () {
         $('#bootstrap-data-table-export').DataTable();
         if ('<%=approvalDTO!=null&&approvalDTO.getStatus()!=null%>' === 'true') {
-            // TODO 下拉框，审核意见填充内容和禁止，提交按钮不显示
+            // TODO 下拉框，审核意见填充内容和禁止，提交按钮不显示 已修改
             $('#select_status').val('<%=approvalDTO.getStatus().getName()%>');
             console.log('<%=approvalDTO.getContent()%>');
 
