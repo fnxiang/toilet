@@ -126,7 +126,6 @@
         </div>
     </div>
     <div class="content">
-        <%--                //fixme 信息填充，专家列表获取，分配请求提交--%>
         <% ToiletPatternDTO patternDTO = (ToiletPatternDTO)request.getAttribute("pattern");%>
         <div class="animated fadeIn">
             <div class="row">
