@@ -55,7 +55,7 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-cogs"></i>模式审核</a>
                 </li>
@@ -125,274 +125,233 @@
             </div>
         </div>
     </div>
-
     <div class="content">
+        <%--                //fixme 信息填充，专家列表获取，分配请求提交--%>
+        <% ToiletPatternDTO patternDTO = (ToiletPatternDTO)request.getAttribute("pattern");%>
         <div class="animated fadeIn">
             <div class="row">
-<%--                //fixme 信息填充，专家列表获取，分配请求提交--%>
-                <% ToiletPatternDTO patternDTO = (ToiletPatternDTO)request.getAttribute("pattern");%>
-
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">新模式信息</strong>
+                            <strong class="card-title">模式审核</strong>
                         </div>
-                        <div class="card-body card-block">
-                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
-
-                                <!--  style="display:none;"  -->
-                                <div id="newModeAdding" style="">
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">新模式名称</label>
-                                        </div>
-                                        <div class="col-12 col-md-4"><input type="text" id="text-input"
-                                                                            name="text-input" value="一级名称" disabled
-                                                                            class="form-control"></div>
-                                        <div class="col-12 col-md-4 offset-md-1"><input type="text" id="text-input"
-                                                                                        name="text-input" value="二级名称"
-                                                                                        disabled class="form-control">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="custom-tab">
-                                        <nav>
-                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                <a class="nav-item nav-link active show" id="custom-nav-nature-tab"
-                                                   data-toggle="tab" href="#custom-nav-nature" role="tab"
-                                                   aria-controls="custom-nav-nature"
-                                                   aria-selected="true">适用条件：自然环境条件</a>
-                                            </div>
-                                        </nav>
-                                        <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                            <div class="tab-pane fade active show" id="custom-nav-nature"
-                                                 role="tabpanel" aria-labelledby="custom-nav-nature-tab">
-
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">温度条件：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">高寒</option>
-                                                            <option value="1">无特殊</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">水资源条件：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">缺水</option>
-                                                            <option value="1">良好</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">地形条件：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">平坦</option>
-                                                            <option value="1">山区</option>
-                                                            <option value="2">丘陵</option>
-                                                            <option value="3">无特殊</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">地理位置条件：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">城市近郊</option>
-                                                            <option value="1">城中村</option>
-                                                            <option value="2">中心城镇地区</option>
-                                                            <option value="3">其他</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">生态限制条件：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">生态保护区</option>
-                                                            <option value="1">水源保护区</option>
-                                                            <option value="2">一般地区</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-tab">
-                                        <nav>
-                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                <a class="nav-item nav-link active show" id="custom-nav-people-tab"
-                                                   data-toggle="tab" href="#custom-nav-people" role="tab"
-                                                   aria-controls="custom-nav-people" aria-selected="true">适用条件：人文因素</a>
-                                            </div>
-                                        </nav>
-                                        <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                            <div class="tab-pane fade active show" id="custom-nav-people"
-                                                 role="tabpanel" aria-labelledby="custom-nav-people-tab">
-
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">人口密集程度：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">聚集</option>
-                                                            <option value="1">分散</option>
-                                                            <option value="2">一般</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">液态肥使用习惯：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">是</option>
-                                                            <option value="1">否</option>
-                                                            <option value="2">均可</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-tab">
-                                        <nav>
-                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                <a class="nav-item nav-link active show" id="custom-nav-pip-tab"
-                                                   data-toggle="tab" href="#custom-nav-pip" role="tab"
-                                                   aria-controls="custom-nav-pip" aria-selected="true">适用条件：管网条件</a>
-                                            </div>
-                                        </nav>
-                                        <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                            <div class="tab-pane fade active show" id="custom-nav-pip" role="tabpanel"
-                                                 aria-labelledby="custom-nav-pip-tab">
-
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">具有污水管道：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">是</option>
-                                                            <option value="1">否</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">具有完整城镇污水处理系统：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">是</option>
-                                                            <option value="1">否</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-tab">
-                                        <nav>
-                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                <a class="nav-item nav-link active show" id="custom-nav-resource-tab"
-                                                   data-toggle="tab" href="#custom-nav-resource" role="tab"
-                                                   aria-controls="custom-nav-resource"
-                                                   aria-selected="true">适用条件：资源化利用</a>
-                                            </div>
-                                        </nav>
-                                        <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                            <div class="tab-pane fade active show" id="custom-nav-resource"
-                                                 role="tabpanel" aria-labelledby="custom-nav-resource-tab">
-
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">具有沼气利用工程：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">是</option>
-                                                            <option value="1">否</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">计划与其他生活污水混合处理：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">是</option>
-                                                            <option value="1">否</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select"
-                                                                                     class=" form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control" disabled>
-                                                            <option value="0">是</option>
-                                                            <option value="1">否</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <hr>
-
-                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="card-body">
+                            <div id="newModeAdding" style="">
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="select"
-                                                                     class=" form-control-label">专家列表</label></div>
-                                    <div class="col-12 col-md-9">
-                                        <select name="select" id="select" class="form-control">
-                                            <option value="0">未选择</option>
-                                            <option value="1">张三</option>
-                                            <option value="2">李四</option>
-                                        </select>
+                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">新模式名称</label></div>
+                                    <div class="col-12 col-md-4"><input type="text" id="text-input" name="text-input" placeholder="" class="form-control" value="<%=patternDTO.getPatternType()%>" disabled></div>
+                                </div>
+
+
+                                <div class="custom-tab">
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active show" id="custom-nav-nature-tab" data-toggle="tab" href="#custom-nav-nature" role="tab" aria-controls="custom-nav-nature" aria-selected="true">适用条件：自然环境条件</a>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                                        <div class="tab-pane fade active show" id="custom-nav-nature" role="tabpanel" aria-labelledby="custom-nav-nature-tab">
+
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">温度条件：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="高寒" <%if(patternDTO.getEnvConditions().getTemperature().equals("高寒")){%>
+                                                                selected="selected" <%}%>>高寒</option>
+                                                        <option value="无特殊"  <%if(patternDTO.getEnvConditions().getTemperature().equals("无特殊")){%>
+                                                                selected="selected" <%}%>>无特殊</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">水资源条件：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="缺水"  <%if(patternDTO.getEnvConditions().getWaterResource().equals("缺水")){%>
+                                                                selected="selected" <%}%>>缺水</option>
+                                                        <option value="良好" <%if(patternDTO.getEnvConditions().getWaterResource().equals("良好")){%>
+                                                                selected="selected" <%}%>>良好</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">地形条件：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getEnvConditions().getTerrain().equals("平坦")){%>
+                                                                selected="selected" <%}%>>平坦</option>
+                                                        <option value="1" <%if(patternDTO.getEnvConditions().getTerrain().equals("山区")){%>
+                                                                selected="selected" <%}%>>山区</option>
+                                                        <option value="2" <%if(patternDTO.getEnvConditions().getTerrain().equals("丘陵")){%>
+                                                                selected="selected" <%}%>>丘陵</option>
+                                                        <option value="3" <%if(patternDTO.getEnvConditions().getTerrain().equals("无特殊")){%>
+                                                                selected="selected" <%}%>>无特殊</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">地理位置条件：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getEnvConditions().getGeolocation().equals("城市近郊")){%>
+                                                                selected="selected" <%}%>>城市近郊</option>
+                                                        <option value="1" <%if(patternDTO.getEnvConditions().getGeolocation().equals("城中村")){%>
+                                                                selected="selected" <%}%>>城中村</option>
+                                                        <option value="2" <%if(patternDTO.getEnvConditions().getGeolocation().equals("中心城镇地区")){%>
+                                                                selected="selected" <%}%>>中心城镇地区</option>
+                                                        <option value="3" <%if(patternDTO.getEnvConditions().getGeolocation().equals("其他")){%>
+                                                                selected="selected" <%}%>>其他</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">生态限制条件：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getEnvConditions().getEcotope().equals("生态保护区")){%>
+                                                                selected="selected" <%}%>>生态保护区</option>
+                                                        <option value="1" <%if(patternDTO.getEnvConditions().getEcotope().equals("水源保护区")){%>
+                                                                selected="selected" <%}%>>水源保护区</option>
+                                                        <option value="2" <%if(patternDTO.getEnvConditions().getEcotope().equals("一般地区")){%>
+                                                                selected="selected" <%}%>>一般地区</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </form>
 
+                                <div class="custom-tab">
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active show" id="custom-nav-people-tab" data-toggle="tab" href="#custom-nav-people" role="tab" aria-controls="custom-nav-people" aria-selected="true">适用条件：人文因素</a>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                                        <div class="tab-pane fade active show" id="custom-nav-people" role="tabpanel" aria-labelledby="custom-nav-people-tab">
 
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">人口密集程度：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getHumanFactors().getDensity().equals("聚集")){%>
+                                                                selected="selected" <%}%>>聚集</option>
+                                                        <option value="1" <%if(patternDTO.getHumanFactors().getDensity().equals("分散")){%>
+                                                                selected="selected" <%}%>>分散</option>
+                                                        <option value="2" <%if(patternDTO.getHumanFactors().getDensity().equals("一般")){%>
+                                                                selected="selected" <%}%>>一般</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">液态肥使用习惯：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                        <option value="2" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("均可")){%>
+                                                                selected="selected" <%}%>>均可</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="custom-tab">
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active show" id="custom-nav-pip-tab" data-toggle="tab" href="#custom-nav-pip" role="tab" aria-controls="custom-nav-pip" aria-selected="true">适用条件：管网条件</a>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                                        <div class="tab-pane fade active show" id="custom-nav-pip" role="tabpanel" aria-labelledby="custom-nav-pip-tab">
+
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">具有污水管道：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">具有完整城镇污水处理系统：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getPipNetworkConditions().getHasSewageTreatment().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1" <%if(patternDTO.getPipNetworkConditions().getHasSewageTreatment().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="custom-tab">
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active show" id="custom-nav-resource-tab" data-toggle="tab" href="#custom-nav-resource" role="tab" aria-controls="custom-nav-resource" aria-selected="true">适用条件：资源化利用</a>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                                        <div class="tab-pane fade active show" id="custom-nav-resource" role="tabpanel" aria-labelledby="custom-nav-resource-tab">
+
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">具有沼气利用工程：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">计划与其他生活污水混合处理：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1"  <%if(patternDTO.getResourceUtilization().getOtherTreatment().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back4'">确认分配</button>
-                                <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back4'">返回
+                                <button type="button" class="btn btn-outline-secondary" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back4'">返回</button>
                                 </button>
                             </div>
 
                         </div>
-
                     </div>
                 </div>
 
 
             </div>
-        </div>
-        <!-- .animated -->
-    </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
     <!-- .content -->
 
 
