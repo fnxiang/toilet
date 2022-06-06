@@ -186,8 +186,7 @@
                             </form>
                             <hr>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back1'">保存</button>
-                                <button type="button" class="btn btn-outline-secondary offset-md-2" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back1'">取消
+                                <button type="button" class="btn btn-outline-secondary" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back1'">返回</button>
                                 </button>
                             </div>
                         </div>
