@@ -274,7 +274,7 @@
                             <div class="clear"></div>
                         </div>
                         <!-- .tab1 .tab_body -->
-                        <%--                        //TODO 限制大小--%>
+                        <%--                        //TODO 限制大小 已修改--%>
                         <div class="tab2 tab_body">
                             <h4>使用说明</h4>
                             <div class="preview slides_container">
