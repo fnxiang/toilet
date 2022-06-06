@@ -146,16 +146,21 @@ public class AdminController {
             case "admin_back11":
                 String  patternId = request.getParameter("patternId");
                 ToiletPatternDTO patternDTO = patternService.queryPatternById(patternId);
-                ApprovalRequest approvalRequest = new ApprovalRequest();
-                approvalRequest.setPatternId(patternId);
-                ApprovalDTO approvalDTO = auditService.getApproval(approvalRequest);
                 request.setAttribute("pattern", patternDTO);
-                request.setAttribute("approval", approvalDTO);
                 break;
             case "admin_back12":
                 String queryCompanyEmail = request.getParameter("email");
                 company = companyService.queryCompanyByEmail(queryCompanyEmail);
                 request.setAttribute("company", company);
+                break;
+            case "admin_back13":
+                patternId = request.getParameter("patternId");
+                patternDTO = patternService.queryPatternById(patternId);
+                ApprovalRequest approvalRequest = new ApprovalRequest();
+                approvalRequest.setPatternId(patternId);
+                ApprovalDTO approvalDTO = auditService.getApproval(approvalRequest);
+                request.setAttribute("pattern", patternDTO);
+                request.setAttribute("approval", approvalDTO);
                 break;
             default:
                 break;
