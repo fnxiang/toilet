@@ -32,4 +32,6 @@ public interface ProductService {
     List<ToiletPatternDTO> queryAllPattern();
 
     ToiletProductDTO updateProduct(ToiletProductDTO productDTO);
+
+    void deleteProduct(String id);
 }

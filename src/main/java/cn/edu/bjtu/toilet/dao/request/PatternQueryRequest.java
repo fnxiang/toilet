@@ -10,7 +10,12 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class PatternQueryRequest extends PageRequest {
+
+    private Integer patternId;
+
     private String usage = "公厕";
+
+    private String email;
 
     private List<Integer> statuses;
 

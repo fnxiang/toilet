@@ -26,4 +26,6 @@ public interface ToiletPatternDao {
 
     List<ToiletPatternDO> queryAllPatternByPage(PatternQueryRequest request);
 
+    List<ToiletPatternDO> queryPatternByPageWithStatus(PatternQueryRequest request);
+
 }

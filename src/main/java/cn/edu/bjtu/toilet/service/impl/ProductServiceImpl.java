@@ -183,6 +183,14 @@ public class ProductServiceImpl implements ProductService {
         return ProductConverter.toDTO(productDO);
     }
 
+    @Override
+    public void deleteProduct(String id) {
+        Integer productId = Integer.valueOf(id);
+        ToiletProductDO productDO = toiletProductDao.queryProductById(productId);
+        productDO.setDeleted(true);
+        toiletProductDao.updateProductBySource(productDO);
+    }
+
     /**
      * 保存产品
      */

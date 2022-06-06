@@ -47,18 +47,18 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back1"
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back2"
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
                 <li class="active">
                     <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back4"
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>模式管理</a>
                 </li>
             </ul>
@@ -137,10 +137,10 @@
                                 <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                 </td>
                                 <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit"
-                                                                  onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6&productId=<%=list.get(i).getId()%>'">查看详情</a>
+                                                                  onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back6&productId=<%=list.get(i).getId()%>'">查看详情</a>
 									<%if (list.get(i).getStatus().equals(AuditStatus.PROCESSING) && StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
 									<a type="button" class="btn btn-link fa fa-check-square"
-									   onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back9&productId=<%=list.get(i).getId()%>'">
+									   onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back9&productId=<%=list.get(i).getId()%>'">
 										分配专家</a>
 									<%}%>
 									<a type="button" class="btn btn-link fa fa-trash-o" onclick="delete()">删除</a></td>

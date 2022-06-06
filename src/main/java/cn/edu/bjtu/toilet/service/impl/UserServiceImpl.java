@@ -70,11 +70,11 @@ public class UserServiceImpl implements UserService {
 
         UserDO userDO = userDao.getUserByEmail(user.getEmail());
 
-        userDO.setPhone(user.getPhoneNum());
+        userDO.setPhone(user.getPhone());
         userDO.setTitle(user.getTitle());
         userDO.setPosition(user.getPosition());
-        userDO.setWorkCompany(user.getCompany());
-        userDO.setName(user.getUserName());
+        userDO.setWorkCompany(user.getWorkCompany());
+        userDO.setName(user.getName());
 
         String email = userDao.updateUserDO(userDO);
 

@@ -2,6 +2,8 @@
 <%@ page import="cn.edu.bjtu.toilet.dao.domain.ApprovalDO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.google.common.collect.Lists" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -45,7 +47,9 @@
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel">
-    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");%>
+    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");
+        CompanyDTO companyDTO = (CompanyDTO)request.getAttribute("company");
+    %>
     <%--获取路径用于显示图片和文件--%>
     <% String path = request.getContextPath();
         String basePath = request.getScheme() + "://"
@@ -196,6 +200,7 @@
                                                         </div>
                                                         <div class="col-12 col-md-9"><input type="text" id="address"
                                                                                             name="address"
+                                                                                            value="<%=companyDTO.getCompanyAddress()%>"
                                                                                             placeholder=""
                                                                                             class="form-control"
                                                                                             disabled>
@@ -523,6 +528,14 @@
 
                             </div>
 
+                            <%ApprovalDTO approvalDTO = (ApprovalDTO)request.getAttribute("approval");
+                            String status = "";
+                            String content = "";
+                                if (approvalDTO != null) {
+                                    status = approvalDTO.getStatus().getName();
+                                    content = approvalDTO.getContent();
+                                }
+                            %>
 
                             <hr>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -546,7 +559,7 @@
                                 </div>
                             </form>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="commit()">确认提交</button>
+                                <button type="button" id="submit_btn" class="btn btn-outline-secondary" onclick="commit()">确认提交</button>
                             </div>
 
                         </div>
@@ -604,6 +617,15 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#bootstrap-data-table-export').DataTable();
+        if ('<%=approvalDTO!=null&&approvalDTO.getStatus()!=null%>' === 'true') {
+            // TODO 下拉框，审核意见填充内容和禁止，提交按钮不显示
+            $('#select_status').val('<%=approvalDTO.getStatus().getName()%>');
+            console.log('<%=approvalDTO.getContent()%>');
+
+            $('#opinion').attr('value','<%=approvalDTO.getContent()%>');
+
+            $('#submit_btn').attr('display', 'none');
+        }
     });
 </script>
 

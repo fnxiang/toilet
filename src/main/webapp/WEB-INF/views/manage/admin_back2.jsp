@@ -41,16 +41,16 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
                     </li>
                     <li class="active">
                         <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
                     </li>
 					<li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
                     </li>
 					<li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>模式管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>模式管理</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -123,7 +123,7 @@
 											<td><%=list.get(i).getName()%></td>
 											<td><%=list.get(i).getGmtCreate()%></td>
 											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back7'"> 查看详情</a>
+												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back7&email=<%=list.get(i).getEmail()%>'"> 查看详情</a>
 												<a type="button" id="<%=list.get(i).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=list.get(i).getEmail()%>', '<%=list.get(i).getRole()%>')"> 审核通过</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 											</td>
@@ -138,7 +138,8 @@
 											<td><%=companyDOS.get(j).getCompanyName()%></td>
 											<td><%=companyDOS.get(j).getGmtCreate()%></td>
 											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6'"> 查看详情</a>
+<%--                                                //TODO  企业用户信息跳转错误--%>
+												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back6&email=<%=companyDOS.get(j).getEmail()%>'"> 查看详情</a>
 												<a type="button" id="<%=companyDOS.get(j).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=companyDOS.get(j).getEmail()%>','<%=companyDOS.get(j).getRole()%>')"> 审核通过</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 											</td>

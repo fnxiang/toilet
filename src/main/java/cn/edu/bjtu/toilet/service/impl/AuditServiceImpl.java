@@ -38,6 +38,7 @@ public class AuditServiceImpl implements AuditService {
         request.setProductBelongEmail(productDO.getCompanyEmail());
         ApprovalDO approvalDO = buildApproval(request);
         productDO.setStatus(request.getStatus().getCode());
+        productDO.setDeleted(productDO.getDeleted());
         ApprovalDO approvalDOFromDb = approvalDao.getApprovalDOBySource(buildApprovalSource(request));
 
         transactionTemplate.execute(status -> {

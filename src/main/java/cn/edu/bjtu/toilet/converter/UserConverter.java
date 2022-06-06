@@ -5,6 +5,7 @@ import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.UserDTO;
 import cn.edu.bjtu.toilet.domain.request.ProfessorRegisterRequest;
+import org.springframework.beans.BeanUtils;
 
 import java.util.Base64;
 import java.util.Map;
@@ -41,11 +42,17 @@ public class UserConverter {
 
     public static UserDTO buildProfessorInfo(Map<String, String> params) {
         UserDTO userDTO = new UserDTO();
-        userDTO.setUserName(params.get("userName"));
-        userDTO.setCompany(params.get("company"));
+        userDTO.setName(params.get("userName"));
+        userDTO.setWorkCompany(params.get("company"));
         userDTO.setPosition(params.get("position"));
         userDTO.setTitle(params.get("title"));
-        userDTO.setPhoneNum(params.get("phoneNum"));
+        userDTO.setPhone(params.get("phoneNum"));
+        return userDTO;
+    }
+
+    public static UserDTO toUserDTO(UserDO userDO) {
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(userDO, userDTO);
         return userDTO;
     }
 }

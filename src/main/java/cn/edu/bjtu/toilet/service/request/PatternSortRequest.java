@@ -11,6 +11,8 @@ import java.util.List;
 @Data
 public class PatternSortRequest extends PageRequest {
 
+    private String email;
+
     private String toiletType;
 
     private String sortBy;

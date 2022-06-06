@@ -5,15 +5,15 @@ import lombok.Data;
 @Data
 public class UserDTO {
 
-    private String userName;
+    private String name;
 
-    private String company;
+    private String workCompany;
 
     private String position;
 
     private String title;
 
-    private String phoneNum;
+    private String phone;
 
     private String email;
 

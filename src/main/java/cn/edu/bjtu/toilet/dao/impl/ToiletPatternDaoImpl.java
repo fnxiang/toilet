@@ -155,6 +155,20 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
     }
 
     @Override
+    public List<ToiletPatternDO> queryPatternByPageWithStatus(PatternQueryRequest request) {
+
+        ToiletPatternDOSelective toiletPatternDOSelective = new ToiletPatternDOSelective();
+        ToiletPatternDOSelective.Criteria criteria = toiletPatternDOSelective.createCriteria();
+
+        criteria.andDeletedNotEqualTo(true);
+        criteria.andStatusIn(request.getStatuses());
+        criteria.andProfessorEmailEqualTo(request.getEmail());
+
+        return patternDOMapper.selectByExampleWithBLOBs(toiletPatternDOSelective);
+
+    }
+
+    @Override
     public ToiletPatternDO savePattern(ToiletPatternDO patternDO) {
         return null;
     }

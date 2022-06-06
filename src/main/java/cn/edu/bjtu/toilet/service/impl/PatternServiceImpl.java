@@ -13,6 +13,7 @@ import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -36,7 +37,10 @@ public class PatternServiceImpl implements PatternService {
     @Override
     public List<ToiletPatternDTO> queryPatternWithStatus(PatternSortRequest request) {
         PatternQueryRequest patternQueryRequest = buildPatternQueryRequest(request);
-        return null;
+        BeanUtils.copyProperties(request, patternQueryRequest);
+        patternQueryRequest.setStatuses(request.getAuditStatuses().stream().map(AuditStatus::getCode).collect(Collectors.toList()));
+
+        return patternDao.queryPatternByPageWithStatus(patternQueryRequest).stream().map(ProductConverter::toDTO).collect(Collectors.toList());
     }
 
     @Override

@@ -48,22 +48,22 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back1"
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1"
                        style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back2"
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2"
                        style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
                 <li class="active">
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back3"
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3"
                        style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-tasks"></i>产品管理</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back4"
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-cogs"></i>模式管理</a>
                 </li>
@@ -109,7 +109,7 @@
                     </a>
 
                     <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=admin_back5"><i
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/toPage?url=admin_back5"><i
                                 class="fa fa-cog"></i>设置</a>
 
                         <a class="nav-link" href="${pageContext.request.contextPath}"><i class="fa fa-power-off"></i>注销</a>
@@ -615,7 +615,7 @@
                                     确认分配
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
-                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back3'">
+                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back3'">
                                     返回
                                 </button>
                             </div>

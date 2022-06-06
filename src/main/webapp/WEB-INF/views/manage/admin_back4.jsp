@@ -1,3 +1,6 @@
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
+<%@ page import="cn.edu.bjtu.toilet.utils.DateUtil" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -38,13 +41,13 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
+                        <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
                     </li>
 					<li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
                     </li>
 					<li class="active">
                         <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>模式管理</a>
@@ -104,125 +107,38 @@
 									<thead>
 										<tr>
 											<th>序号</th>
-											<th>用户名</th>
+											<th>模式类型</th>
 											<th>提交时间</th>
+											<th>状态</th>
 											<th class="text-center">操作</th>
 										</tr>
 									</thead>
+									<% List<ToiletPatternDTO> list = (List<ToiletPatternDTO>)request.getAttribute("patternList");%>
 									<tbody>
-										<tr>
-											<td>1</td>
-											<td>三格化粪池+XXXXXXX</td>
-											<td>审核通过</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back10'"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>三格化粪池+XXXXXXX</td>
-											<td>专家审核中</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>三格化粪池+XXXXXXX</td>
-											<td>待审核</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td>XXXXXXX</td>
-											<td>待分配</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back11'"> 分配专家</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										
-										<tr>
-											<td>5</td>
-											<td>XXXXXXX</td>
-											<td>审核通过</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>6</td>
-											<td>XXXXXXX</td>
-											<td>专家审核中</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>7</td>
-											<td>XXXXXXX</td>
-											<td>待审核</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>8</td>
-											<td>XXXXXXX</td>
-											<td>待分配</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 分配专家</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>9</td>
-											<td>三格化粪池XXXXXXX</td>
-											<td>审核通过</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>10</td>
-											<td>三格化粪池XXXXXXX</td>
-											<td>专家审核中</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>11</td>
-											<td>三格化粪池XXXXXXX</td>
-											<td>待审核</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-										<tr>
-											<td>12</td>
-											<td>三格化粪池XXXXXXX</td>
-											<td>待分配</td>
-											<td class="text-center">
-												<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-												<a type="button" class="btn btn-link fa fa-check-square" onclick="alert('delete')"> 分配专家</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
-											</td>
-										</tr>
-									</tbody>
+									<tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=professor_back6'">
+										<td>0</td>
+										<td>测试模式1</td>
+										<td>——</td>
+										<td>审核中</td>
+										<td class="text-center">
+											<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
+											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&PatternId=10'"> 分配专家</a>
+											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
+										</td>
+									</tr>
+									<% for (int i=0;i<list.size();i++) {%>
+									<tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=professor_back6'">
+										<td><%=i+1%></td>
+										<td><%=list.get(i).getPatternType()%></td>
+										<td><%=DateUtil.toStandardFormat(list.get(i).getGmtCreate())%></td>
+										<td><%=list.get(i).getStatus().getName()%></td>
+										<td class="text-center">
+											<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
+											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&PatternId=<%=list.get(i).getId()%>'"> 分配专家</a>
+											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
+										</td>
+									</tr>
+									<%}%>
 								</table>
                             </div>
 							
@@ -303,14 +219,8 @@
 	<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/datatables-init.js"></script>
 	
     <script type="text/javascript">
-       
-	  
-	  
-	
-	  
 	  
   </script>
-
 
 </body>
 </html>

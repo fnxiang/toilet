@@ -1,4 +1,4 @@
-<%--
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.UserDTO" %><%--
   Created by IntelliJ IDEA.
   User: kokorozashinao
   Date: 2022/3/5
@@ -139,33 +139,34 @@
                             <strong class="card-title">专家个人基本信息</strong>
                         </div>
                         <div class="card-body card-block">
+                            <%UserDTO userDTO = (UserDTO)request.getAttribute("user");%>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="disabled-input"
                                                                      class=" form-control-label">姓名</label></div>
                                     <div class="col-12 col-md-9"><input type="text" id="disabled-input"
-                                                                        name="disabled-input" placeholder="" value="张三"
+                                                                        name="disabled-input" placeholder="" value="<%=userDTO.getName()%>"
                                                                         class="form-control"></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="disabled-input"
                                                                      class=" form-control-label">单位</label></div>
                                     <div class="col-12 col-md-9"><input type="text" id="disabled-input"
-                                                                        name="disabled-input" placeholder="" value="某单位"
+                                                                        name="disabled-input" placeholder="" value="<%=userDTO.getWorkCompany()%>"
                                                                         class="form-control"></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="disabled-input"
                                                                      class=" form-control-label">职务</label></div>
                                     <div class="col-12 col-md-9"><input type="text" id="disabled-input"
-                                                                        name="disabled-input" placeholder=""
-                                                                        value="人工智能研究组组长" class="form-control"></div>
+                                                                        name="disabled-input" placeholder="人工智能研究组组长"
+                                                                        value="<%=userDTO.getPosition()%>" class="form-control"></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="disabled-input"
                                                                      class=" form-control-label">职称</label></div>
                                     <div class="col-12 col-md-9"><input type="text" id="disabled-input"
-                                                                        name="disabled-input" placeholder="" value="副教授"
+                                                                        name="disabled-input" placeholder="副教授" value="<%=userDTO.getTitle()%>"
                                                                         class="form-control"></div>
                                 </div>
                                 <div class="row form-group">
@@ -173,14 +174,14 @@
                                     </div>
                                     <div class="col-12 col-md-9"><input type="text" id="disabled-input"
                                                                         name="disabled-input" placeholder=""
-                                                                        value="1234567890" class="form-control"></div>
+                                                                        value="<%=userDTO.getPhone()%>" class="form-control"></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="disabled-input"
                                                                      class=" form-control-label">邮箱</label></div>
                                     <div class="col-12 col-md-9"><input type="text" id="disabled-input"
                                                                         name="disabled-input" placeholder=""
-                                                                        value="123@456.com" class="form-control"></div>
+                                                                        value="<%=userDTO.getEmail()%>" class="form-control" disabled></div>
                                 </div>
                             </form>
                             <hr>

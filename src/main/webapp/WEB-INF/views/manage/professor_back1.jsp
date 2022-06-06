@@ -90,7 +90,7 @@
                                     <% List<ToiletProductDTO> list = (List<ToiletProductDTO>)request.getAttribute("productList");%>
                                     <tbody>
                                         <% for (int i=0;i<list.size();i++) {%>
-                                    <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=professor_back5&productId=<%=list.get(i).getId()%>'">
+                                    <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back5&productId=<%=list.get(i).getId()%>'">
                                         <td><%=i+1%></td>
                                         <td><%=list.get(i).getProductName()%></td>
                                         <td><%=list.get(i).getGmtCreate().toInstant()%></td>

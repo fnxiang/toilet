@@ -17,6 +17,7 @@ import cn.edu.bjtu.toilet.domain.response.ProductStatusResponse;
 import cn.edu.bjtu.toilet.domain.response.ProfessorResponse;
 import cn.edu.bjtu.toilet.service.*;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
+import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -232,9 +233,14 @@ public class ProfessorController {
         String email = request.getSession().getAttribute("uId").toString();
         String productId = request.getParameter("productId");
         switch (url){
+            // 详细信息 + 审核信息
             case "professor_back5":
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
                 CompanyDO company = companyService.queryCompanyByEmail(productDTO.getCompanyEmail());
+                ApprovalRequest approvalRequest = new ApprovalRequest();
+                approvalRequest.setProductId(productId);
+                ApprovalDTO approvalDTO = auditService.getApproval(approvalRequest);
+                request.setAttribute("approval", approvalDTO);
                 request.setAttribute("product", productDTO);
                 request.setAttribute("company", CompanyConverter.toCompanyDTO(company));
                 break;
@@ -245,15 +251,25 @@ public class ProfessorController {
                 break;
             case "professor_back2":
                 // TODO
-                List<ToiletPatternDTO> patternDTOS = patternService.queryPatternWithStatus(null);
+                PatternSortRequest sortRequest = buildPatternQueryRequest(email);
+                List<ToiletPatternDTO> patternDTOS = patternService.queryPatternWithStatus(sortRequest);
+                request.setAttribute("patternList", patternDTOS);
                 break;
             default:
                 break;
         }
 
-
-
         url = MANAGE_BASE + url;
         return url;
+    }
+
+    private PatternSortRequest buildPatternQueryRequest(String email) {
+        PatternSortRequest sortRequest = new PatternSortRequest();
+        sortRequest.setIsDesc(false);
+        sortRequest.setSortBy("id");
+        sortRequest.setPageSize(100);
+        sortRequest.setAuditStatuses(Lists.newArrayList(AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
+        sortRequest.setEmail(email);
+        return sortRequest;
     }
 }

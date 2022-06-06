@@ -118,54 +118,16 @@ public class ManagementController {
         String email = request.getSession().getAttribute("uId").toString();
         String productId = request.getParameter("productId");
         switch (url){
-            case "company_back1":
-                List<ToiletProductDTO> productDTOList = productService.queryAllProductList(email);
-                request.setAttribute("productList", productDTOList);
-                break;
-            case "company_back2":
-                CompanyDO companyDO = companyService.queryCompanyByEmail(email);
-                companyDO.setPassword("");
-                request.setAttribute("user", companyDO);
-                break;
-            case "company_back5":
-                ApprovalRequest approvalRequest = new ApprovalRequest();
-                approvalRequest.setProductId(productId);
-                request.setAttribute("product", productService.queryToiletById(productId));
-                request.setAttribute("approval", auditService.getApproval(approvalRequest));
-            case "admin_back9":
             case "professor_back5":
-            case "company_back7":
-            case "company_back6":
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
                 CompanyDO company = companyService.queryCompanyByEmail(productDTO.getCompanyEmail());
                 request.setAttribute("product", productDTO);
                 request.setAttribute("company", CompanyConverter.toCompanyDTO(company));
                 break;
-            case "company_back3":
-                //TODO
-                break;
             case "professor_back3":
                 UserDO userDO = userService.queryUserByEmail(email);
                 userDO.setPassword("");
                 request.setAttribute("user", userDO);
-                break;
-            case "admin_back1":
-                List<UserDO> users = userService.queryAllUser(UserRole.PROFESSOR);
-                List<CompanyDO> companyDOS = companyService.queryAllCompany();
-
-                request.setAttribute("profList", users);
-                request.setAttribute("companyList", companyDOS);
-                break;
-            case "admin_back2":
-                List<UserDO> check_users = userService.queryAllUser(UserRole.PROFESSOR).stream().filter(user -> user.getStatus().equals(UserStatus.WAIT_APPROVE.getCode())).collect(Collectors.toList());
-                List<CompanyDO> checkCompanyDOS = companyService.queryAllCompany().stream().filter(user -> user.getStatus().equals(UserStatus.WAIT_APPROVE.getCode())).collect(Collectors.toList());
-
-                request.setAttribute("profList", check_users);
-                request.setAttribute("companyList", checkCompanyDOS);
-                break;
-            case "admin_back3":
-                List<ToiletProductDTO> allList = productService.queryAllProductList("");
-                request.setAttribute("productList", allList);
                 break;
             default:
                 break;

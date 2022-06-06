@@ -1,6 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.google.common.collect.Lists" %><%--
+<%@ page import="com.google.common.collect.Lists" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %><%--
   Created by IntelliJ IDEA.
   User: kokorozashinao
   Date: 2022/3/5
@@ -48,19 +49,19 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-tasks"></i>产品管理</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-cogs"></i>模式管理</a>
                 </li>
             </ul>
@@ -75,7 +76,9 @@
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel">
-    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");%>
+    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");
+        CompanyDTO companyDTO = (CompanyDTO)request.getAttribute("company");
+    %>
     <%--获取路径用于显示图片和文件--%>
     <% String path = request.getContextPath();
         String basePath = request.getScheme() + "://"
@@ -102,7 +105,7 @@
                     </a>
 
                     <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=admin_back5"><i class="fa fa-cog"></i>设置</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/toPage?url=admin_back5"><i class="fa fa-cog"></i>设置</a>
 
                         <a class="nav-link" href="${pageContext.request.contextPath}"><i class="fa fa-power-off"></i>注销</a>
                     </div>
@@ -254,6 +257,7 @@
                                                         <div class="col-12 col-md-9"><input type="text" id="address"
                                                                                             name="address"
                                                                                             placeholder=""
+                                                                                            value="<%=companyDTO.getCompanyAddress()%>"
                                                                                             class="form-control"
                                                                                             disabled>
                                                         </div>
@@ -581,7 +585,7 @@
                             </div>
 
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back3'">返回</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back3'">返回</button>
                             </div>
 
                         </div>

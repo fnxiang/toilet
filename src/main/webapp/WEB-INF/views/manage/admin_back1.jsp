@@ -46,13 +46,13 @@
                         <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
+                        <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
                     </li>
 					<li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
                     </li>
 					<li>
-                        <a href="${pageContext.request.contextPath}/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>模式管理</a>
+                        <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>模式管理</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -131,7 +131,7 @@
 										<td><%=list.get(i).getName()%></td>
 										<td>专家用户</td>
 										<td class="text-center">
-											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back7'"> 查看详情</a>
+											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back7&email=<%=list.get(i).getEmail()%>'"> 查看详情</a>
 											<a type="button" class="btn btn-link fa fa-trash-o" onclick="show('删除')"> 删除</a>
 										</td>
 									</tr>
@@ -145,7 +145,7 @@
 										<td><%=companyDOS.get(i).getCompanyName()%></td>
 										<td>企业用户</td>
 										<td class="text-center">
-											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=admin_back6'"> 查看详情</a>
+											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back6&email=<%=companyDOS.get(i).getEmail()%>'"> 查看详情</a>
 											<a type="button" class="btn btn-link fa fa-trash-o" onclick="show('删除')"> 删除</a>
 										</td>
 									</tr>
