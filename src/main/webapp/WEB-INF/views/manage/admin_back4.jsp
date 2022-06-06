@@ -115,14 +115,15 @@
 									</thead>
 									<% List<ToiletPatternDTO> list = (List<ToiletPatternDTO>)request.getAttribute("patternList");%>
 									<tbody>
-									<tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=professor_back6'">
+									<tr>
 										<td>0</td>
 										<td>测试模式1</td>
 										<td>——</td>
 										<td>审核中</td>
 										<td class="text-center">
+<%--                                            //fixme 查看详情连接？ --%>
 											<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&PatternId=10'"> 分配专家</a>
+											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=10'"> 分配专家</a>
 											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 										</td>
 									</tr>
@@ -134,7 +135,7 @@
 										<td><%=list.get(i).getStatus().getName()%></td>
 										<td class="text-center">
 											<a type="button" class="btn btn-link fa fa-edit" onclick="alert('delete')"> 查看详情</a>
-											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&PatternId=<%=list.get(i).getId()%>'"> 分配专家</a>
+											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=<%=list.get(i).getId()%>'"> 分配专家</a>
 											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
 										</td>
 									</tr>

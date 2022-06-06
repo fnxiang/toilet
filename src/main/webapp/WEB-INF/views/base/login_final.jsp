@@ -71,7 +71,7 @@
                 <div class="aclose">
                     <a class="close" href="javascript:choseClose();">&times;</a>
                 </div>
-                <div class="contain" id="dialog_text">
+                <div class="contain" id="dialog">
                     <a href='${pageContext.request.contextPath}/toBasePage?url=register_final'
                              role="button">企业注册&nbsp;&nbsp;&nbsp;&nbsp;
                     </a>
@@ -80,10 +80,10 @@
                     </a>
                 </div>
             </div>
-
-            <%--弹窗--%>
-            <jsp:include page="../common/dialog.jsp"/>
-            <%--弹窗--%>
+        </div>
+    </div>
+<%--    //fixme 引用错误，弹窗不显示--%>
+    <jsp:include page="../common/dialog.jsp"/>
 </section>
 
 <!--Global Javascript -->

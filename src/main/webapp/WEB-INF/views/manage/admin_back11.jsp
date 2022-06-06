@@ -1,4 +1,4 @@
-<%--
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %><%--
   Created by IntelliJ IDEA.
   User: kokorozashinao
   Date: 2022/3/6
@@ -129,6 +129,8 @@
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
+<%--                //fixme 信息填充，专家列表获取，分配请求提交--%>
+                <% ToiletPatternDTO patternDTO = (ToiletPatternDTO)request.getAttribute("pattern");%>
 
                 <div class="col-md-12">
                     <div class="card">

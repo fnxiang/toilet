@@ -10,6 +10,8 @@ public interface PatternService {
 
     List<ToiletPatternDTO> queryPatternWithStatus(PatternSortRequest request);
 
+    ToiletPatternDTO queryPatternById(String Id);
+
     PatternQueryResponse sortPattern(PatternSortRequest request);
 
     PatternQueryResponse sortPatternWithCondition(PatternSortRequest request, ToiletPatternDTO condition);

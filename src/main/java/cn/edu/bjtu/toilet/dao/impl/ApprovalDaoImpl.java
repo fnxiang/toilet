@@ -87,6 +87,25 @@ public class ApprovalDaoImpl implements ApprovalDao {
     }
 
     @Override
+    public ApprovalDO getApprovalDOByPatternId(Integer patternId) {
+        ApprovalDOSelective approvalDOSelective = new ApprovalDOSelective();
+        ApprovalDOSelective.Criteria criteria = approvalDOSelective.createCriteria();
+        criteria.andPatternIdEqualTo(patternId);
+        criteria.andDeletedNotEqualTo(true);
+
+        List<ApprovalDO> approvalDOS = approvalDOMapper.selectByExampleWithBLOBs(approvalDOSelective);
+
+        if (CollectionUtils.isEmpty(approvalDOS)) {
+            return null;
+        }
+
+        if (approvalDOS.size() != 1) {
+            throw new ToiletBizException("too many approval results returned", BIZ_ERROR);
+        }
+        return approvalDOS.get(0);
+    }
+
+    @Override
     public ApprovalDO getApprovalDOBySource(String source) {
         ApprovalDOSelective approvalDOSelective = new ApprovalDOSelective();
         ApprovalDOSelective.Criteria criteria = approvalDOSelective.createCriteria();

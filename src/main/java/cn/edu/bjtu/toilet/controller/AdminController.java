@@ -7,14 +7,12 @@ import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
+import cn.edu.bjtu.toilet.domain.dto.ApprovalDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.UserDTO;
 import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
-import cn.edu.bjtu.toilet.service.CompanyService;
-import cn.edu.bjtu.toilet.service.PatternService;
-import cn.edu.bjtu.toilet.service.ProductService;
-import cn.edu.bjtu.toilet.service.UserService;
+import cn.edu.bjtu.toilet.service.*;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
@@ -50,6 +48,9 @@ public class AdminController {
 
     @Resource
     private PatternService patternService;
+
+    @Resource
+    private AuditService auditService;
 
     @RequestMapping(value = "/assign")
     @ResponseBody
@@ -141,6 +142,15 @@ public class AdminController {
                 CompanyDO company = companyService.queryCompanyByEmail(productDTO.getCompanyEmail());
                 request.setAttribute("product", productDTO);
                 request.setAttribute("company", CompanyConverter.toCompanyDTO(company));
+                break;
+            case "admin_back11":
+                String  patternId = request.getParameter("patternId");
+                ToiletPatternDTO patternDTO = patternService.queryPatternById(patternId);
+                ApprovalRequest approvalRequest = new ApprovalRequest();
+                approvalRequest.setPatternId(patternId);
+                ApprovalDTO approvalDTO = auditService.getApproval(approvalRequest);
+                request.setAttribute("pattern", patternDTO);
+                request.setAttribute("approval", approvalDTO);
                 break;
             default:
                 break;

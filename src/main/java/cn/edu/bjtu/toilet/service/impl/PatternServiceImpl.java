@@ -5,6 +5,7 @@ import cn.edu.bjtu.toilet.constant.*;
 import cn.edu.bjtu.toilet.converter.ProductConverter;
 import cn.edu.bjtu.toilet.dao.ToiletPatternDao;
 import cn.edu.bjtu.toilet.dao.ToiletProductDao;
+import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
 import cn.edu.bjtu.toilet.dao.request.PatternQueryRequest;
 import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.domain.response.PatternQueryResponse;
@@ -41,6 +42,13 @@ public class PatternServiceImpl implements PatternService {
         patternQueryRequest.setStatuses(request.getAuditStatuses().stream().map(AuditStatus::getCode).collect(Collectors.toList()));
 
         return patternDao.queryPatternByPageWithStatus(patternQueryRequest).stream().map(ProductConverter::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public ToiletPatternDTO queryPatternById(String id) {
+        Integer patternId = Integer.valueOf(id);
+        ToiletPatternDO patternDO = patternDao.queryPatternById(patternId);
+        return ProductConverter.toDTO(patternDO);
     }
 
     @Override

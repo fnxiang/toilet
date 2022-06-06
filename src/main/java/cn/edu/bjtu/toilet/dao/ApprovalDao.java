@@ -8,7 +8,9 @@ public interface ApprovalDao {
 
     ApprovalDO getApprovalDOById(Integer id);
 
-    ApprovalDO getApprovalDOByProductId(Integer id);
+    ApprovalDO getApprovalDOByProductId(Integer productId);
+
+    ApprovalDO getApprovalDOByPatternId(Integer patternId);
 
     ApprovalDO getApprovalDOBySource(String source);
 

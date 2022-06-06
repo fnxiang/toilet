@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.service.impl;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.converter.ApprovalConverter;
 import cn.edu.bjtu.toilet.dao.ApprovalDao;
 import cn.edu.bjtu.toilet.dao.ToiletPatternDao;
@@ -82,8 +83,25 @@ public class AuditServiceImpl implements AuditService {
 
     @Override
     public ApprovalDTO getApproval(ApprovalRequest request) {
-        Integer productId = Integer.valueOf(request.getProductId());
-        return ApprovalConverter.toDTO(approvalDao.getApprovalDOByProductId(productId));
+
+        if (request.getProductId()==null&&request.getPatternId()==null) {
+            throw new ToiletBizException("product id and pattern id is null!", -1);
+        }
+
+        ApprovalDO approvalDO;
+        if (request.getProductId()!=null) {
+            Integer productId = Integer.valueOf(request.getProductId());
+            approvalDO = approvalDao.getApprovalDOByProductId(productId);
+        } else {
+            Integer patternId = Integer.valueOf(request.getPatternId());
+            approvalDO = approvalDao.getApprovalDOByPatternId(patternId);
+        }
+
+        if (approvalDO == null) {
+            return null;
+        }
+
+        return ApprovalConverter.toDTO(approvalDO);
     }
 
     private ApprovalDO buildApproval(ApprovalRequest request) {
