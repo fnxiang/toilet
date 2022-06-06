@@ -138,7 +138,7 @@
 											<td><%=companyDOS.get(j).getCompanyName()%></td>
 											<td><%=companyDOS.get(j).getGmtCreate()%></td>
 											<td class="text-center">
-<%--                                                //fixme  企业用户信息跳转错误--%>
+<%--                                                //fixme  企业用户信息跳转错误 已修改--%>
 												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back12&email=<%=companyDOS.get(j).getEmail()%>'"> 查看详情</a>
 												<a type="button" id="<%=companyDOS.get(j).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=companyDOS.get(j).getEmail()%>','<%=companyDOS.get(j).getRole()%>')"> 审核通过</a>
 												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
