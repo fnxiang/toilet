@@ -461,16 +461,13 @@
         });
     });
 
-
+// fixme 模式分配专家接口
     function assignProfessor() {
         let data = new FormData();
         var myselect = document.getElementById("professorSelect");
         var selected_val = myselect.options[myselect.selectedIndex].value;
         data.append("professorEmail", encodeURI(selected_val));
         data.append("patternId", <%=patternDTO.getId()%>);
-        for (var key of data.keys()) {
-            console.log(data.get(key));
-        }
         $.ajax({
             url: "/toilet/admin/assign",
             type: "POST",
