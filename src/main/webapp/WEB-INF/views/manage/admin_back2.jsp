@@ -125,7 +125,7 @@
 											<td class="text-center">
 												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back7&email=<%=list.get(i).getEmail()%>'"> 查看详情</a>
 												<a type="button" id="<%=list.get(i).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=list.get(i).getEmail()%>', '<%=list.get(i).getRole()%>')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
+												<a type="button" class="btn btn-link fa fa-trash-o" onclick="deleteProfessor(<%=list.get(i).getId()%>)"> 删除</a>
 											</td>
 										</tr>
 										<%}}%>
@@ -141,7 +141,7 @@
 <%--                                                //fixme  企业用户信息跳转错误 已修改--%>
 												<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back12&email=<%=companyDOS.get(j).getEmail()%>'"> 查看详情</a>
 												<a type="button" id="<%=companyDOS.get(j).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=companyDOS.get(j).getEmail()%>','<%=companyDOS.get(j).getRole()%>')"> 审核通过</a>
-												<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
+												<a type="button" class="btn btn-link fa fa-trash-o" onclick="deleteCompany(<%=companyDOS.get(j).getId()%>)"> 删除</a>
 											</td>
 										</tr>
 									<%}
@@ -244,14 +244,58 @@
 				processData: false,
 				success:function(result){
 					if (result.success) {
-					    alert("审核通过！");
+					    show("审核通过！");
 						document.getElementById(email).hidden = true;
 					} else {
-						alert(result.errorMessage);
+						show(result.errorMessage);
 					}
 				}
 			});
 		}
+
+        function deleteProfessor(professor_id) {
+            let data = new FormData();
+            data.append("professorId", professor_id)
+            $.ajax({
+                url: "/toilet/admin/professor/delete",
+                type: "POST",
+                dataType: "json",
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    if (result.success) {
+                        show("删除成功!");
+                    } else {
+                        show(result.errorMessage);
+                    }
+                }
+            });
+        }
+
+        function deleteCompany(company_id) {
+            let data = new FormData();
+            data.append("companyId", company_id)
+            $.ajax({
+                url: "/toilet/admin/company/delete",
+                type: "POST",
+                dataType: "json",
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    if (result.success) {
+                        show("删除成功!");
+                    } else {
+                        show(result.errorMessage);
+                    }
+                }
+            });
+        }
   </script>
 
 
