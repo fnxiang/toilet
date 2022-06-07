@@ -552,7 +552,7 @@
                                     <div class="col col-md-3"><label for="opinion" class=" form-control-label">审核意见</label>
                                     </div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
-                                                                           rows="9" placeholder="审核意见..."
+                                                                           rows="9" placeholder=""
                                                                            class="form-control" disabled></textarea></div>
                                 </div>
                             </form>
