@@ -50,9 +50,6 @@
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back3"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品信息录入</a>
                 </li>
-                <li class="active">
-                    <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>模式信息录入</a>
-                </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
@@ -166,9 +163,9 @@
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="temperature_check"
-                                                               value="高寒"/>高寒
+                                                               value="寒冷地区"/>寒冷地区
                                                         <input class="col-md-1" type="checkbox" name="temperature_check"
-                                                               value="普通"/>普通
+                                                               value="普通地区"/>普通地区
                                                     </div>
                                                 </div>
 
@@ -190,27 +187,31 @@
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="dixing_check"
-                                                               value="山区"/>山区
+                                                               value="平原"/>平原
                                                         <input class="col-md-1" type="checkbox" name="dixing_check"
                                                                value="丘陵"/>丘陵
                                                         <input class="col-md-1" type="checkbox" name="dixing_check"
-                                                               value="一般地区"/>一般地区
+                                                               value="山地"/>山地
+                                                        <input class="col-md-1" type="checkbox" name="dixing_check"
+                                                               value="高原"/>高原
+                                                        <input class="col-md-1" type="checkbox" name="dixing_check"
+                                                               value="盆地"/>盆地
                                                     </div>
                                                 </div>
 
                                                 <div class="row form-group">
-                                                    <div class="col col-md-3"><label class="form-control-label">地理位置条件：
+                                                    <div class="col col-md-3"><label class="form-control-label">村庄条件：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="diliweizhi_check"
-                                                               value="城市近郊"/>城市近郊
+                                                               value="中心镇"/>中心镇
                                                         <input class="col-md-1" type="checkbox" name="diliweizhi_check"
-                                                               value="城中村"/>城中村
+                                                               value="一般镇"/>一般镇
                                                         <input class="col-md-1" type="checkbox" name="diliweizhi_check"
-                                                               value="中心城镇地区"/>中心城镇地区
+                                                               value="中心村"/>中心村
                                                         <input class="col-md-1" type="checkbox" name="diliweizhi_check"
-                                                               value="一般地区"/>一般地区
+                                                               value="基层村"/>基层村
                                                     </div>
                                                 </div>
 
@@ -224,7 +225,7 @@
                                                         <input class="col-md-1" type="checkbox" name="shengtai_check"
                                                                value="水源保护区"/>水源保护区
                                                         <input class="col-md-1" type="checkbox" name="shengtai_check"
-                                                               value="一般地区"/>一般地区
+                                                               value="普通地区"/>普通地区
                                                     </div>
                                                 </div>
 
@@ -252,18 +253,18 @@
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="renkou_check"
-                                                               value="聚集"/>聚集
+                                                               value="密集"/>密集
                                                         <input class="col-md-1" type="checkbox" name="renkou_check"
                                                                value="分散"/>分散
                                                         <input class="col-md-1" type="checkbox" name="renkou_check"
-                                                               value="一般"/>一般
+                                                               value="普通"/>普通
                                                     </div>
                                                 </div>
 
 
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label for="yetaifei"
-                                                                                     class="form-control-label">液态肥使用习惯：
+                                                                                     class="form-control-label">需要形成液态肥：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
@@ -292,25 +293,12 @@
                                                  aria-labelledby="custom-nav-pip-tab">
 
                                                 <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="wushuiguandao"
-                                                                                     class="form-control-label">具有污水管道：
+                                                    <div class="col col-md-3"><label for="wangguantiaojian"
+                                                                                     class="form-control-label">需要具备管网条件：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
-                                                        <select name="wushuiguandao" id="wushuiguandao"
-                                                                class="form-control">
-                                                            <option value="0">是</option>
-                                                            <option value="1">否</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="wushuichuli"
-                                                                                     class="form-control-label">具有完整城镇污水处理系统：
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="wushuichuli" id="wushuichuli"
+                                                        <select name="wangguantiaojian" id="wangguantiaojian"
                                                                 class="form-control">
                                                             <option value="0">是</option>
                                                             <option value="1">否</option>
@@ -325,7 +313,7 @@
                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                                 <a class="nav-item nav-link active show" id="custom-nav-resource-tab"
                                                    data-toggle="tab" href="#custom-nav-resource" role="tab"
-                                                   aria-controls="custom-nav-resource" aria-selected="true">适用条件：资源化利用
+                                                   aria-controls="custom-nav-resource" aria-selected="true">适用条件：资源化利用条件
                                                     <i class="fa fa-question-circle" data-toggle="tooltip"
                                                        data-placement="top" title="输入注意事项"></i></a>
                                             </div>
@@ -336,7 +324,7 @@
 
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label for="zhaoqi"
-                                                                                     class=" form-control-label">具有沼气利用工程：
+                                                                                     class=" form-control-label">需要具有沼气利用工程：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
@@ -348,7 +336,7 @@
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label for="wushuihunhe"
-                                                                                     class="form-control-label">计划与其他生活污水混合处理：
+                                                                                     class="form-control-label">可以与其他生活污水混合处理：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
@@ -362,7 +350,7 @@
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label for="yibingchuli"
-                                                                                     class="form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：
+                                                                                     class="form-control-label">可以与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
@@ -381,8 +369,7 @@
 
                             <hr>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary">保存草稿</button>
-                                <button type="button" class="btn btn-outline-secondary offset-md-2"
+                                <button type="button" class="btn btn-outline-secondary"
                                         onclick="mode_enter()">
                                     确认提交
                                 </button>
@@ -493,7 +480,7 @@
         }
         data.append("geolocation", encodeURI(position_check_val));
 
-        const shengtaicheckbox = document.getElementsByName("shengtai_check"); //地形条件
+        const shengtaicheckbox = document.getElementsByName("shengtai_check"); //生态限制条件
         let shengtai_check_val = "";
         for (let k = 0; k < shengtaicheckbox.length; k++) {
             if (shengtaicheckbox[k].checked)
@@ -513,13 +500,10 @@
         index = myselect.selectedIndex;
         data.append("usageHabits", encodeURI(myselect.options[index].text));
 
-        myselect = document.getElementById("wushuiguandao"); //具有污水管道
+        myselect = document.getElementById("wangguantiaojian"); //具有管网条件
         index = myselect.selectedIndex;
         data.append("sewerLines", encodeURI(myselect.options[index].text));
 
-        myselect = document.getElementById("wushuichuli"); //具有完整城镇污水处理系统
-        index = myselect.selectedIndex;
-        data.append("sewageTreatment", encodeURI(myselect.options[index].text));
 
         myselect = document.getElementById("zhaoqi"); //具有沼气利用工程
         index = myselect.selectedIndex;
