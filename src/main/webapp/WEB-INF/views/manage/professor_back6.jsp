@@ -39,6 +39,7 @@
     <!-- Right Panel -->
 
     <div id="right-panel" class="right-panel">
+<%--		fixme patternDTO为空--%>
 	<%ToiletPatternDTO patternDTO = (ToiletPatternDTO) request.getAttribute("pattern");%>
 
 		<!-- Header-->
