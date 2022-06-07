@@ -124,7 +124,7 @@
 <%--&lt;%&ndash;                                            //fixme 查看详情连接？ 已修改&ndash;%&gt;--%>
 <%--											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=23'"> 查看详情</a>--%>
 <%--											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=23'"> 分配专家</a>--%>
-<%--											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>--%>
+<%--											<a type="button" class="btn btn-link fa fa-trash-o" onclick=""> 删除</a>--%>
 <%--										</td>--%>
 <%--									</tr>--%>
 									<% for (int i=0;i<list.size();i++) {%>
@@ -136,7 +136,7 @@
 										<td class="text-center">
 											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=<%=list.get(i).getId()%>"> 查看详情</a>
 											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=<%=list.get(i).getId()%>'"> 分配专家</a>
-											<a type="button" class="btn btn-link fa fa-trash-o" onclick="alert('delete')"> 删除</a>
+											<a type="button" class="btn btn-link fa fa-trash-o" onclick="del(<%=list.get(i).getId()%>)"> 删除</a>
 										</td>
 									</tr>
 									<%}%>
@@ -220,6 +220,28 @@
 	<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/datatables-init.js"></script>
 	
     <script type="text/javascript">
+        // fixme 删除模式接口
+        function del(pattern_id) {
+            let data = new FormData();
+            data.append("patternId", pattern_id)
+            $.ajax({
+                url: "/toilet/admin/pattern/delete",
+                type: "POST",
+                dataType: "json",
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    if (result.success) {
+                        show("删除成功!");
+                    } else {
+                        show(result.errorMessage);
+                    }
+                }
+            });
+        }
 	  
   </script>
 
