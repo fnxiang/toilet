@@ -68,6 +68,7 @@
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel">
+<%--    fixme productDTO为空--%>
     <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");%>
 
     <!-- Header-->
