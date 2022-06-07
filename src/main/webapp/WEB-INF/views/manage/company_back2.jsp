@@ -72,6 +72,7 @@
 <!-- Left Panel -->
 
 <!-- Right Panel -->
+<%--    fixme companyDO为空--%>
 <% CompanyDO companyDO = (CompanyDO) request.getAttribute("company");
     EnterpriseAddressDTO enterpriseAddressDTO = JSON.parseObject(companyDO.getEnterpriseAddress(), EnterpriseAddressDTO.class);%>
 <div id="right-panel" class="right-panel">

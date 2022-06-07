@@ -77,6 +77,7 @@
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel">
+    <%--    fixme productDTO为空--%>
     <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");%>
     <%--获取路径用于显示图片和文件--%>
     <% String path = request.getContextPath();
