@@ -159,7 +159,7 @@
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><label>地理位置条件:</label></div>
+                <div style="float:left;padding:0 5px;"><label>村庄条件:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="geolocation[]" value="中心镇"
                                                                            style="margin-bottom:5px;"/>中心镇
                 </div>
@@ -229,7 +229,7 @@
 
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-                <div style="float:left;padding:0 5px;"><label>可形成液态肥:</label></div>
+                <div style="float:left;padding:0 5px;"><label>需要形成液态肥:</label></div>
                 <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="usageHabits[]" value="是"
                                                                            style="margin-bottom:5px;"/>是
                 </div>
@@ -319,7 +319,7 @@
         </div>
 
         <div class="grid_12" align="center" style="">
-            <button type="submit" style="width: 300px; margin-bottom: 5px">搜索</button>
+            <button type="submit" style="width: 300px; margin-bottom: 5px" onclick="search()">搜索</button>
         </div>
     </form>
 </div>
@@ -333,8 +333,12 @@
         document.getElementById('model_search').style.display = "none";
         if (document.getElementById('product_search').style.display == "none") {
             document.getElementById('product_search').style.display = "";
+            document.getElementById('block_nav_primary').style.display = "none";
+            document.getElementById('main').style.display = "none";
         } else {
             document.getElementById('product_search').style.display = "none";
+            document.getElementById('block_nav_primary').style.display = "";
+            document.getElementById('main').style.display = "";
         }
 
 
@@ -344,9 +348,82 @@
         document.getElementById('product_search').style.display = "none";
         if (document.getElementById('model_search').style.display == "none") {
             document.getElementById('model_search').style.display = "";
+            document.getElementById('block_nav_primary').style.display = "none";
+            document.getElementById('main').style.display = "none";
         } else {
             document.getElementById('model_search').style.display = "none";
+            document.getElementById('block_nav_primary').style.display = "";
+            document.getElementById('main').style.display = "";
         }
+    }
+
+    function search(){
+        var data = new FormData();
+
+        var radio = document.getElementsByName("wc_type[]"); //厕所用途
+        const cesuoyongtu = getRadioValue(radio);
+        data.append("toiletPurpose", encodeURI(cesuoyongtu));
+
+        radio = document.getElementsByName("natureTemp[]"); //温度条件
+        const wendu = getRadioValue(radio);
+        data.append("natureTemp", encodeURI(wendu));
+
+        radio = document.getElementsByName("water[]"); //水资源条件
+        const shui = getRadioValue(radio);
+        data.append("water", encodeURI(shui));
+
+        radio = document.getElementsByName("terrain[]"); //地形条件
+        const dixing = getRadioValue(radio);
+        data.append("terrain", encodeURI(dixing));
+
+        radio = document.getElementsByName("geolocation[]"); //村庄条件
+        const cunzhuang = getRadioValue(radio);
+        data.append("geolocation", encodeURI(cunzhuang));
+
+        radio = document.getElementsByName("ecotope[]"); //生态限制条件
+        const shengtai = getRadioValue(radio);
+        data.append("ecotope", encodeURI(shengtai));
+
+        radio = document.getElementsByName("density[]"); //人口密集程度
+        const renkou = getRadioValue(radio);
+        data.append("density", encodeURI(renkou));
+
+        radio = document.getElementsByName("usageHabits[]"); //需要形成液态肥
+        const yetaifei = getRadioValue(radio);
+        data.append("usageHabits", encodeURI(yetaifei));
+
+        radio = document.getElementsByName("sewageTreatment[]"); //计划修建或已具有管网条件
+        const guanwang = getRadioValue(radio);
+        data.append("sewerLines", encodeURI(guanwang));
+
+        radio = document.getElementsByName("biogasUtilization[]"); //计划建设或已有沼气利用工程
+        const zhaoqi = getRadioValue(radio);
+        data.append("biogasUtilization", encodeURI(zhaoqi));
+
+        radio = document.getElementsByName("mixedTreatment[]"); //计划与其他生活污水混合处理
+        const wushui = getRadioValue(radio);
+        data.append("mixedTreatment", encodeURI(wushui));
+
+        radio = document.getElementsByName("otherTreatment[]"); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
+        const qita = getRadioValue(radio);
+        data.append("otherTreatment", encodeURI(qita));
+
+        $.ajax({
+            url: "/toilet/company/pattern/search",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    location.reload();
+                } else {
+                }
+            }
+        });
     }
 </script>
 </html>
