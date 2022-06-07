@@ -143,7 +143,7 @@
 									   onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back9&productId=<%=list.get(i).getId()%>'">
 										分配专家</a>
 									<%}%>
-									<a type="button" class="btn btn-link fa fa-trash-o" onclick="delete()">删除</a></td>
+									<a type="button" class="btn btn-link fa fa-trash-o" onclick="del(<%=list.get(i).getId()%>)">删除</a></td>
                                 </tr>
                                     <%}%>
 								</tbody>
@@ -278,7 +278,29 @@
         JSONToExcelConvertor(dataList,"产品详情");
     }
 </script>
-
+<script>
+    function del(product_id) {
+        let data = new FormData();
+        data.append("productId", product_id)
+        $.ajax({
+            url: "/toilet/admin/product/delete",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    show("删除成功!");
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
