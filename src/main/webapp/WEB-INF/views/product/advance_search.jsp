@@ -356,7 +356,7 @@
             document.getElementById('main').style.display = "";
         }
     }
-
+    // fixme 模式搜索接口
     function search(){
         var data = new FormData();
 

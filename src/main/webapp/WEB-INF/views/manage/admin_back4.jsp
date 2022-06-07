@@ -121,7 +121,7 @@
 <%--										<td>——</td>--%>
 <%--										<td>审核中</td>--%>
 <%--										<td class="text-center">--%>
-<%--&lt;%&ndash;                                            //fixme 查看详情连接？ 已修改&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                            //fixme 查看详情连接？ 已修改--%>
 <%--											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=23'"> 查看详情</a>--%>
 <%--											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=23'"> 分配专家</a>--%>
 <%--											<a type="button" class="btn btn-link fa fa-trash-o" onclick=""> 删除</a>--%>
