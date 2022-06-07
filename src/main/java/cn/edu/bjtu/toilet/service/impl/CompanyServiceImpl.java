@@ -8,6 +8,7 @@ import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.domain.request.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
 import cn.edu.bjtu.toilet.service.CompanyService;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,6 +31,15 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<CompanyDO> queryAllCompany() {
         return companyDao.getCompanyListByRole(UserRole.COMPANY_USER.getCode());
+    }
+
+    @Override
+    public void deleteCompany(String companyId) {
+        if (!NumberUtils.isDigits(companyId)) {
+            throw new ToiletBizException("company id error!", -1);
+        }
+        CompanyDO companyDO = companyDao.getCompanyById(Integer.valueOf(companyId));
+        companyDao.deleteCompany(companyDO);
     }
 
     @Override

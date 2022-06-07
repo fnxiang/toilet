@@ -10,10 +10,12 @@ import cn.edu.bjtu.toilet.domain.dto.UserDTO;
 import cn.edu.bjtu.toilet.domain.request.ProfessorRegisterRequest;
 import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
 import cn.edu.bjtu.toilet.service.UserService;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,6 +38,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDO> queryAllUser(UserRole user) {
          return userDao.getUserByCode(user.getCode());
+    }
+
+    @Override
+    public void deleteUserById(String userId) {
+        if (!NumberUtils.isDigits(userId)) {
+            throw new ToiletBizException("userId error!", -1);
+        }
+        UserDO userDO = userDao.getUserById(Integer.valueOf(userId));
+        userDO.setGmtModified(new Date());
+        userDO.setDeleted(true);
+        userDao.updateUserDO(userDO);
     }
 
     @Override

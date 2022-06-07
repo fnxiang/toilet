@@ -23,4 +23,6 @@ public interface UserService {
     UserDO checkUser(String email, String password);
 
     List<UserDO> queryAllUser(UserRole userCode);
+
+    void deleteUserById(String userId);
 }

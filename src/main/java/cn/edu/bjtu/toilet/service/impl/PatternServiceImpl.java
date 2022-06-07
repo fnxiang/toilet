@@ -36,6 +36,17 @@ public class PatternServiceImpl implements PatternService {
     private ToiletPatternDao patternDao;
 
     @Override
+    public void updatePattern(ToiletPatternDTO patternDTO) {
+        ToiletPatternDO patternDOFromDB = patternDao.queryPatternById(patternDTO.getId());
+        ToiletPatternDO patternDO = ProductConverter.toDO(patternDTO);
+        patternDO.setSource(patternDOFromDB.getSource());
+        patternDO.setDeleted(patternDOFromDB.getDeleted());
+        patternDO.setVersion(patternDOFromDB.getVersion());
+
+        patternDao.updatePatternBySource(patternDO, patternDO.getSource());
+    }
+
+    @Override
     public List<ToiletPatternDTO> queryPatternWithStatus(PatternSortRequest request) {
         PatternQueryRequest patternQueryRequest = buildPatternQueryRequest(request);
         BeanUtils.copyProperties(request, patternQueryRequest);

@@ -32,6 +32,7 @@ public class ProductConverter {
         patternDO.setHumanFactors(JSON.toJSONString(patternDTO.getHumanFactors()));
         patternDO.setPipNetworkConditions(JSON.toJSONString(patternDTO.getPipNetworkConditions()));
         patternDO.setResourceUtilization(JSON.toJSONString(patternDTO.getResourceUtilization()));
+        patternDO.setStatus(patternDTO.getStatus().getCode());
         return patternDO;
     }
 
@@ -50,6 +51,8 @@ public class ProductConverter {
         patternDTO.setHumanFactors(JSON.parseObject(patternDO.getHumanFactors(), HumanFactorsDTO.class));
         patternDTO.setPipNetworkConditions(JSON.parseObject(patternDO.getPipNetworkConditions(), PipNetworkConditionsDTO.class));
         patternDTO.setResourceUtilization(JSON.parseObject(patternDO.getResourceUtilization(), ResourceUtilizationDTO.class));
+        patternDTO.setStatus(AuditStatus.of(patternDO.getStatus()));
+        patternDTO.setProfessorEmail(patternDO.getProfessorEmail());
         return patternDTO;
     }
 

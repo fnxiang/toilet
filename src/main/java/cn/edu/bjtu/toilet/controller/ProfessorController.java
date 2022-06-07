@@ -92,8 +92,8 @@ public class ProfessorController {
             approvalRequest.setProfessorEmail(request.getSession().getAttribute("uId").toString());
             approvalRequest.setComment(comment);
             approvalRequest.setPatternId(patternId);
-            approvalRequest.setStatus(AuditStatus.valueOf(auditStatus));
-            auditService.updateProductApproval(approvalRequest);
+            approvalRequest.setStatus(AuditStatus.ofName(auditStatus));
+            auditService.updatePatternApproval(approvalRequest);
 
         } catch (Exception e) {
             LOG.error("ProfessorResponse error with : ", e);
@@ -232,18 +232,27 @@ public class ProfessorController {
         String url = request.getParameter("url");
         String email = request.getSession().getAttribute("uId").toString();
         String productId = request.getParameter("productId");
+        String patternId = request.getParameter("patternId");
+        ApprovalDTO approvalDTO;
+
+        ApprovalRequest approvalRequest = new ApprovalRequest();
         switch (url){
             // 详细信息 + 审核信息
             case "professor_back5":
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
                 CompanyDO company = companyService.queryCompanyByEmail(productDTO.getCompanyEmail());
-                ApprovalRequest approvalRequest = new ApprovalRequest();
                 approvalRequest.setProductId(productId);
-                ApprovalDTO approvalDTO = auditService.getApproval(approvalRequest);
+                approvalDTO = auditService.getApproval(approvalRequest);
                 request.setAttribute("approval", approvalDTO);
                 request.setAttribute("product", productDTO);
                 request.setAttribute("company", CompanyConverter.toCompanyDTO(company));
                 break;
+            case "professor_back6":
+                ToiletPatternDTO patternDTO = patternService.queryPatternById(patternId);
+                approvalRequest.setPatternId(patternId);
+                approvalDTO = auditService.getApproval(approvalRequest);
+                request.setAttribute("approval", approvalDTO);
+                request.setAttribute("pattern", patternDTO);
             case "professor_back3":
                 UserDO userDO = userService.queryUserByEmail(email);
                 userDO.setPassword("");
@@ -268,7 +277,7 @@ public class ProfessorController {
         sortRequest.setIsDesc(false);
         sortRequest.setSortBy("id");
         sortRequest.setPageSize(100);
-        sortRequest.setAuditStatuses(Lists.newArrayList(AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
+        sortRequest.setAuditStatuses(Lists.newArrayList(AuditStatus.PROCESSING, AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
         sortRequest.setEmail(email);
         return sortRequest;
     }

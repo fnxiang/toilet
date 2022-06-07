@@ -49,22 +49,24 @@ public class ParameterUtil {
                     }else {
                         params.put(fieldName, decodeJsString(item.getString()));
                     }
-                } else {
-                    if (item.getName() != null) {
-                        String name = item.getName();
-                        String type = name.substring(name.lastIndexOf('.') + 1);
-                        setUploadDirectory(uploadPath);
-                        if (!allowTypes.contains(type)) {
-                            throw new ToiletBizException("请上传PDF或PNG等格式文件!", -1);
-                        } else {
-                            int start = name.lastIndexOf("\\");
-                            String filename = name.substring(start + 1);
-                            String filePath = uploadPath + "/" + filename;
-                            String relativePath = filePath.replace(request.getServletContext().getRealPath("."), "");
-                            File file = new File(filePath);
-                            item.write(file);
-                            params.put(item.getFieldName(), relativePath);
-                        }
+                }
+            }
+
+            for (FileItem item : items) {
+                if (!item.isFormField()&&item.getName() != null) {
+                    String name = item.getName();
+                    String type = name.substring(name.lastIndexOf('.') + 1);
+                    setUploadDirectory(uploadPath);
+                    if (!allowTypes.contains(type)) {
+                        throw new ToiletBizException("请上传PDF或PNG等格式文件!", -1);
+                    } else {
+                        int start = name.lastIndexOf("\\");
+                        String filename = name.substring(start + 1);
+                        String filePath = uploadPath + "/" + filename;
+                        String relativePath = filePath.replace(request.getServletContext().getRealPath("."), "");
+                        File file = new File(filePath);
+                        item.write(file);
+                        params.put(item.getFieldName(), relativePath);
                     }
                 }
             }

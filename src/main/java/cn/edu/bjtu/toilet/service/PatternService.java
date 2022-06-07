@@ -15,4 +15,6 @@ public interface PatternService {
     PatternQueryResponse sortPattern(PatternSortRequest request);
 
     PatternQueryResponse sortPatternWithCondition(PatternSortRequest request, ToiletPatternDTO condition);
+
+    void updatePattern(ToiletPatternDTO patternDTO);
 }

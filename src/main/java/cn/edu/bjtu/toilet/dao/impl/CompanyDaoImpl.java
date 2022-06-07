@@ -49,6 +49,15 @@ public class CompanyDaoImpl implements CompanyDao {
     }
 
     @Override
+    public CompanyDO getCompanyById(Integer id) {
+        if (id == null || id <= 0) {
+            throw new ToiletBizException("company id is error!", -1);
+        }
+
+        return mapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public String insertCompanyDO(CompanyDO companyDO) {
         if (StringUtils.isEmpty(companyDO.getEmail()) || StringUtils.isEmpty(companyDO.getCreditCode()) || StringUtils.isEmpty(companyDO.getSource())) {
             //TODO throw exception code
@@ -136,5 +145,19 @@ public class CompanyDaoImpl implements CompanyDao {
         }
 
         return getCompanyByEmail(companyDO.getEmail()).getEmail();
+    }
+
+    @Override
+    public void deleteCompany(CompanyDO companyDO) {
+        if (companyDO.getId() == null || companyDO.getId() <= 0) {
+            throw new ToiletBizException("company id is error!", BIZ_ERROR);
+        }
+
+        companyDO = mapper.selectByPrimaryKey(companyDO.getId());
+
+        companyDO.setGmtModified(new Date());
+        companyDO.setDeleted(true);
+
+        mapper.updateByPrimaryKey(companyDO);
     }
 }

@@ -111,7 +111,7 @@
                                     <% List<ToiletPatternDTO> list = (List<ToiletPatternDTO>)request.getAttribute("patternList");%>
                                     <tbody>
                                         <% for (int i=0;i<list.size();i++) {%>
-                                    <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back6'">
+                                    <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back6&patternId=<%=list.get(i).getId()%>'">
                                         <td><%=i+1%></td>
                                         <td><%=list.get(i).getPatternType()%></td>
                                         <td><%=DateUtil.toStandardFormat(list.get(i).getGmtCreate())%></td>

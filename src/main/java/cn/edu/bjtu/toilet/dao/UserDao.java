@@ -14,5 +14,9 @@ public interface UserDao {
 
     UserDO getUserByEmail(String email);
 
+    UserDO getUserById(Integer userId);
+
     List<UserDO> getUserByCode(Integer code);
+
+    void deleteUser(UserDO userDO);
 }

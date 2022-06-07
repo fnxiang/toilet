@@ -162,7 +162,10 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
 
         criteria.andDeletedNotEqualTo(true);
         criteria.andStatusIn(request.getStatuses());
-        criteria.andProfessorEmailEqualTo(request.getEmail());
+
+        if (!StringUtils.isEmpty(request.getEmail())) {
+            criteria.andProfessorEmailEqualTo(request.getEmail());
+        }
 
         return patternDOMapper.selectByExampleWithBLOBs(toiletPatternDOSelective);
 

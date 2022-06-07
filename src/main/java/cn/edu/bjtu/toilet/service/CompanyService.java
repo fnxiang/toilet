@@ -21,4 +21,6 @@ public interface CompanyService {
     CompanyDO queryCompanyByEmail(String email);
 
     List<CompanyDO> queryAllCompany();
+
+    void deleteCompany(String companyId);
 }

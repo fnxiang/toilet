@@ -10,9 +10,13 @@ public interface CompanyDao {
 
     CompanyDO getCompanyByEmail(String email);
 
+    CompanyDO getCompanyById(Integer id);
+
     CompanyDO getCompanyByLicense(String license);
 
     List<CompanyDO> getCompanyListByRole(Integer code);
 
     String updateCompanyDO(CompanyDO companyDO);
+
+    void deleteCompany(CompanyDO companyDO);
 }

@@ -30,6 +30,8 @@ public class ToiletPatternDTO {
 
     private AuditStatus status;
 
+    private Integer professorId;
+
     private String professorEmail;
 
     private String source;

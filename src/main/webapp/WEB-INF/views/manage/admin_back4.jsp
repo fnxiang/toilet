@@ -115,26 +115,14 @@
 									</thead>
 									<% List<ToiletPatternDTO> list = (List<ToiletPatternDTO>)request.getAttribute("patternList");%>
 									<tbody>
-<%--									<tr>--%>
-<%--										<td>0</td>--%>
-<%--										<td>测试模式1</td>--%>
-<%--										<td>——</td>--%>
-<%--										<td>审核中</td>--%>
-<%--										<td class="text-center">--%>
-<%--&lt;%&ndash;                                            //fixme 查看详情连接？ 已修改--%>
-<%--											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=23'"> 查看详情</a>--%>
-<%--											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=23'"> 分配专家</a>--%>
-<%--											<a type="button" class="btn btn-link fa fa-trash-o" onclick=""> 删除</a>--%>
-<%--										</td>--%>
-<%--									</tr>--%>
 									<% for (int i=0;i<list.size();i++) {%>
-									<tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=professor_back6'">
+									<tr>
 										<td><%=i+1%></td>
 										<td><%=list.get(i).getPatternType()%></td>
 										<td><%=DateUtil.toStandardFormat(list.get(i).getGmtCreate())%></td>
 										<td><%=list.get(i).getStatus().getName()%></td>
 										<td class="text-center">
-											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=<%=list.get(i).getId()%>"> 查看详情</a>
+											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=<%=list.get(i).getId()%>'"> 查看详情</a>
 											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=<%=list.get(i).getId()%>'"> 分配专家</a>
 											<a type="button" class="btn btn-link fa fa-trash-o" onclick="del(<%=list.get(i).getId()%>)"> 删除</a>
 										</td>

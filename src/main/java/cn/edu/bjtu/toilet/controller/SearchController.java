@@ -1,6 +1,8 @@
 package cn.edu.bjtu.toilet.controller;
 
 import cn.edu.bjtu.toilet.constant.*;
+import cn.edu.bjtu.toilet.domain.request.ProductSortRequest;
+import cn.edu.bjtu.toilet.domain.response.ProductQueryResponse;
 import cn.edu.bjtu.toilet.domain.response.SearchResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.domain.response.PatternQueryResponse;
@@ -66,18 +68,27 @@ public class SearchController {
     @RequestMapping("/search/product/results")
     public String productResults(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Map<String, String> params = ParameterUtil.resolveParams(request);
-            ProductSearchConditionsDTO searchConditions = buildSearchConditions(params);
+            ProductSortRequest productSortRequest = buildProductQueryRequest(request);
+            ProductQueryResponse productQueryResponse = productService.queryPageProductWithCondition(productSortRequest, productSortRequest.getSearchCondition());
 
-            List<ToiletProductDTO> productDTOS = productService.queryAllProductList("");
+            request.setAttribute("product_search_condition", JSON.toJSONString(productSortRequest.getSearchCondition()));
+            request.setAttribute("pageResponse", productQueryResponse);
+            request.setAttribute("productList", productQueryResponse.getProductDTOList());
 
-            List<ToiletProductDTO> searchResults = matchConditions(productDTOS, searchConditions);
-            request.setAttribute("product_search_condition", JSON.toJSONString(searchConditions));
-            request.setAttribute("productList", searchResults);
         } catch (Exception e) {
             LOG.error("search error with exception: {}", e.getMessage());
         }
         return INDEX;
+    }
+
+    private ProductSortRequest buildProductQueryRequest(HttpServletRequest request) throws Exception {
+        Map<String, String> params = ParameterUtil.resolveParams(request);
+        ProductSortRequest productSortRequest = new ProductSortRequest();
+        productSortRequest.setAuditStatus(AuditStatus.APPROVAL);
+        productSortRequest.setSearchCondition(buildSearchConditions(params));
+        productSortRequest.setIsDesc(false);
+        productSortRequest.setSortBy("price");
+        return productSortRequest;
     }
 
     @RequestMapping("/search/mode/results")
@@ -190,7 +201,6 @@ public class SearchController {
 
         //管网
         PipNetworkConditionsDTO pipNetworkConditionsDTO = new PipNetworkConditionsDTO();
-        pipNetworkConditionsDTO.setHasSewageTreatment(buildBooleanCondition(params.get("sewageTreatment[]")));
         pipNetworkConditionsDTO.setHasSewerLines(buildBooleanCondition(params.get("sewerLines[]")));
 
         toiletPatternDTO.setPipNetworkConditions(pipNetworkConditionsDTO);

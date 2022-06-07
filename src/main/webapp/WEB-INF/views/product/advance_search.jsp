@@ -253,11 +253,11 @@
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>计划修建或已具有管网条件:</label></div>
-                <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="sewageTreatment[]"
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="sewerLines[]"
                                                                            value="是"
                                                                            style="margin-bottom:5px;"/>是
                 </div>
-                <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="sewageTreatment[]"
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="sewerLines[]"
                                                                           value="否"
                                                                           style="margin-bottom:5px;" checked/>否
                 </div>
@@ -409,7 +409,7 @@
         data.append("otherTreatment", encodeURI(qita));
 
         $.ajax({
-            url: "/toilet/company/pattern/search",
+            url: "/toilet/pattern/search",
             type: "POST",
             dataType: "json",
             data: data,

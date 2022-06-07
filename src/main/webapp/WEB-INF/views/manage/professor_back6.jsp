@@ -289,9 +289,9 @@
 										<div class="col col-md-3"><label for="select_status" class=" form-control-label">是否通过</label></div>
 										<div class="col-12 col-md-9">
 											<select name="select_status" id="select_status" class="form-control">
-												<option value="0">通过</option>
-												<option value="1">不通过</option>
-												<option value="2">修改后重新审查</option>
+												<option value="审核通过">审核通过</option>
+												<option value="审核不通过">审核不通过</option>
+												<option value="修改后重新审核">修改后重新审核</option>
 											</select>
 										</div>
 									</div>

@@ -15,6 +15,8 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import static cn.edu.bjtu.toilet.constant.ToiletErrorCode.BIZ_ERROR;
 
@@ -68,6 +70,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public void deleteUser(UserDO userDO) {
+        if (userDO.getId() == null || userDO.getId() <= 0) {
+            throw new ToiletBizException("userId error!", BIZ_ERROR);
+        }
+        userDO.setGmtModified(new Date());
+        userDO.setDeleted(true);
+        mapper.updateByPrimaryKey(userDO);
+    }
+
+    @Override
     public UserDO getUserByEmail(String email) {
         UserDOSelective userDOSelective = new UserDOSelective();
         UserDOSelective.Criteria criteria = userDOSelective.createCriteria();
@@ -87,6 +99,15 @@ public class UserDaoImpl implements UserDao {
         }
 
         return userDOList.get(0);
+    }
+
+    @Override
+    public UserDO getUserById(Integer userId) {
+        if (userId == null || userId <= 0) {
+            throw new ToiletBizException("userId error!", BIZ_ERROR);
+        }
+
+        return mapper.selectByPrimaryKey(userId);
     }
 
     @Override
@@ -139,6 +160,8 @@ public class UserDaoImpl implements UserDao {
             throw new ToiletBizException("insert user failed!", BIZ_ERROR);
         }
 
-        return getUserByEmail(userDO.getEmail()).getEmail();
+        userDO = getUserByEmail(userDO.getEmail());
+
+        return Objects.isNull(userDO)?"":userDO.getEmail();
     }
 }

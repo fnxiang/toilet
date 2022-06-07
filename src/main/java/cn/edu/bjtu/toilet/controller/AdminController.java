@@ -20,6 +20,7 @@ import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -60,16 +61,23 @@ public class AdminController {
             Map<String, String> params = ParameterUtil.resolveParams(request);
 
             String productId =  params.get("productId");
+            String patternId =  params.get("patternId");
             String professorEmail = params.get("professorEmail");
-
-            ToiletProductDTO productDTO = productService.queryToiletById(productId);
-
             UserDO userDO = userService.queryUserByEmail(professorEmail);
 
-            productDTO.setProfessorId(userDO.getId());
-            productDTO.setProfessorEmail(professorEmail);
+            if (StringUtils.isEmpty(patternId)) {
+                ToiletProductDTO productDTO = productService.queryToiletById(productId);
+                productDTO.setProfessorId(userDO.getId());
+                productDTO.setProfessorEmail(professorEmail);
 
-            productService.updateProduct(productDTO);
+                productService.updateProduct(productDTO);
+            } else {
+                ToiletPatternDTO patternDTO = patternService.queryPatternById(patternId);
+                patternDTO.setProfessorId(userDO.getId());
+                patternDTO.setProfessorEmail(professorEmail);
+
+                patternService.updatePattern(patternDTO);
+            }
 
             response.setSuccess(true);
 
@@ -99,7 +107,41 @@ public class AdminController {
         return response;
     }
 
+    @RequestMapping(value = "/professor/delete")
+    @ResponseBody
+    public CommandResponse deleteProfessor(HttpServletRequest request) {
+        CommandResponse response = new CommandResponse();
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
 
+            String professorId =  params.get("professorId");
+            userService.deleteUserById(professorId);
+            response.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("error happened: {}", e.getMessage());
+            return CommandResponse.failed(e.getMessage());
+        }
+
+        return response;
+    }
+
+    @RequestMapping(value = "/comany/delete")
+    @ResponseBody
+    public CommandResponse deleteCompany(HttpServletRequest request) {
+        CommandResponse response = new CommandResponse();
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String companyId =  params.get("companyId");
+            companyService.deleteCompany(companyId);
+            response.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("error happened: {}", e.getMessage());
+            return CommandResponse.failed(e.getMessage());
+        }
+
+        return response;
+    }
 
     @RequestMapping("/toPage")
     public String toPage(HttpServletRequest request){
@@ -126,7 +168,7 @@ public class AdminController {
                 request.setAttribute("productList", allList);
                 break;
             case "admin_back4":
-                PatternSortRequest sortRequest = buildPatternQueryRequest(email);
+                PatternSortRequest sortRequest = buildPatternQueryRequest("");
                 List<ToiletPatternDTO> patternDTOS = patternService.queryPatternWithStatus(sortRequest);
                 request.setAttribute("patternList", patternDTOS);
                 break;
