@@ -403,8 +403,12 @@
         document.getElementById('model_search').style.display = "none";
         if (document.getElementById('product_search').style.display == "none") {
             document.getElementById('product_search').style.display = "";
+            document.getElementById('block_nav_primary').style.display = "none";
+            document.getElementById('main').style.display = "none";
         } else {
             document.getElementById('product_search').style.display = "none";
+            document.getElementById('block_nav_primary').style.display = "";
+            document.getElementById('main').style.display = "";
         }
     }
 
@@ -412,8 +416,12 @@
         document.getElementById('product_search').style.display = "none";
         if (document.getElementById('model_search').style.display == "none") {
             document.getElementById('model_search').style.display = "";
+            document.getElementById('block_nav_primary').style.display = "none";
+            document.getElementById('main').style.display = "none";
         } else {
             document.getElementById('model_search').style.display = "none";
+            document.getElementById('block_nav_primary').style.display = "";
+            document.getElementById('main').style.display = "";
         }
     }
 </script>
