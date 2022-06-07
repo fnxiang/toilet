@@ -95,9 +95,13 @@
             </div>
 
             <div class="grid_12"
-                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;color: #99abb4;font-size: 4px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;寒冷地区主要指东北、内蒙古和新疆北部、西藏北部、青海等地区，累年最冷月平均温度≤10℃或日平均≤5℃的天数，一般在145天以上地区，以及我国北京、天津、河北、山<br/>东、山西、宁夏、山西大部、辽宁南部、甘肃中东部、新疆南部、河南、安徽、江苏北部以及西藏南部等地区。其主要指标为：最冷月平均温度0~10℃，辅助指标为：日平均温度<br/>≤5℃的天数为90~145d。
+                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
+                <div style="float:left;padding:0 5px;">
+                    <div style="color: #99abb4;font-size: 4px;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;寒冷地区主要指东北、内蒙古和新疆北部、西藏北部、青海等地区，累年最冷月平均温度≤10℃或日平均≤5℃的天数，一般在145天以上地区，以及我国北京、天津、河北、山<br/>东、山西、宁夏、山西大部、辽宁南部、甘肃中东部、新疆南部、河南、安徽、江苏北部以及西藏南部等地区。其主要指标为：最冷月平均温度0~10℃，辅助指标为：日平均温度<br/>≤5℃的天数为90~145d。
+                    </div>
                 </div>
+            </div>
 
 
             <div class="grid_12"
@@ -112,8 +116,12 @@
             </div>
 
             <div class="grid_12"
-                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;color: #99abb4;font-size: 4px;">
-                &nbsp;&nbsp;&nbsp;&nbsp;缺水地区指年降水量＜200mm的干旱区域及人均水资源量＜600m3的缺水地区，如北京、天津、河北、山西、山东、新疆等地区。除缺水地区外，其他地区统称良好地区。
+                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
+                <div style="float:left;padding:0 5px;">
+                    <div style="color: #99abb4;font-size: 4px;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;缺水地区指年降水量＜200mm的干旱区域及人均水资源量＜600m3的缺水地区，如北京、天津、河北、山西、山东、新疆等地区。除缺水地区外，其他地区统称良好地区。
+                    </div>
+                </div>
             </div>
 
 
@@ -174,26 +182,23 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;一般镇指在县域城镇体系规划中，中心镇以外的镇。<br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;中心村指镇域镇村体系规划中，设有兼为周围村服务的公共设施的村。<br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;基层村指镇域镇村体系规划中，中心村以外的村。<br/>
-                    </div>
                 </div>
-        <div class="grid_12"
-             style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
-            <div style="float:left;padding:0 5px;"><label>生态限制条件:</label></div>
-            <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="ecotope[]" value="生态保护区"
-                                                                       style="margin-bottom:5px;"/>生态保护区
             </div>
-            <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="ecotope[]" value="水源保护区"
-                                                                      style="margin-bottom:5px;"/>水源保护区
-            </div>
-            <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="ecotope[]" value="普通地区"
-                                                                      checked
-                                                                      style="margin-bottom:5px;"/>普通地区
+            <div class="grid_12"
+                 style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
+                <div style="float:left;padding:0 5px;"><label>生态限制条件:</label></div>
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="ecotope[]" value="生态保护区"
+                                                                           style="margin-bottom:5px;"/>生态保护区
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="ecotope[]" value="水源保护区"
+                                                                          style="margin-bottom:5px;"/>水源保护区
+                </div>
+                <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="ecotope[]" value="普通地区"
+                                                                          checked
+                                                                          style="margin-bottom:5px;"/>普通地区
+                </div>
             </div>
         </div>
-        </div>
-
-
-
 
 
         <div class="grid_12">
