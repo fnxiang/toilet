@@ -86,11 +86,11 @@
             <div class="grid_12"
                  style="float:left;height:100%;border-bottom-width: 10px;margin-bottom: 5px;">
                 <div style="float:left;padding:0 5px;"><label>温度条件:</label></div>
-                <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="natureTemp[]" value="高寒地区"
-                                                                           style="margin-bottom:5px;"/>高寒
+                <div style="float:left;padding:0px 50px 0px 100px;"><input type="radio" name="natureTemp[]" value="寒冷地区"
+                                                                           style="margin-bottom:5px;"/>寒冷地区
                 </div>
                 <div style="float:left;padding:0px 50px 0px 50px;"><input type="radio" name="natureTemp[]" value="普通地区"
-                                                                          style="margin-bottom:5px;" checked/>普通
+                                                                          style="margin-bottom:5px;" checked/>普通地区
                 </div>
             </div>
 
