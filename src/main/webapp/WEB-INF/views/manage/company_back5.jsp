@@ -119,27 +119,27 @@
                                     <td><%=productDTO.getProductName()%></td>
                                 </tr>
                                 <tr>
-                                    <td>审核结果</td>
-                                    <td><%=approvalDTO.getStatus().getName()%></td>
+                                    <td>审核结果</td><td>
+                                    <%if(approvalDTO != null){%>
+                                    <%=approvalDTO.getStatus().getName()%><%}else{%>暂无<%}%></td>
                                 </tr>
                                 <tr>
-                                    <td>专家评审意见</td>
-                                    <td>
-                                        <%=approvalDTO.getContent()%>
-                                    </td>
+                                    <td>专家评审意见</td><td>
+                                    <%if(approvalDTO != null){%>
+                                        <%=approvalDTO.getContent()%><%}else{%>暂无<%}%></td>
                                 </tr>
                                 <tr>
-                                    <td>审核结果</td>
+                                    <td>操作</td>
                                     <td>
                                         <!--<a href="./company_back3.jsp" class="btn btn-link">返回修改</a>-->
-                                        <%if (approvalDTO.getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
+                                        <%if (approvalDTO != null && approvalDTO.getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
                                         <button type="button" class="btn btn-link"
                                                 onclick="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=productDTO.getId()%>'">
                                             返回修改
                                         </button>
                                         <%}%>
 
-                                        <%if (approvalDTO.getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
+                                        <%if (approvalDTO != null && approvalDTO.getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
                                         <button type="button" class="btn btn-link"
                                                 onclick="submit('<%=productDTO.getId()%>', '<%=AuditStatus.DISCARD.getCode()%>')">
                                             舍弃该申请
