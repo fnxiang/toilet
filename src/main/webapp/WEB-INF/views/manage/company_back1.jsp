@@ -127,31 +127,19 @@
                                     <td style="text-align: center">否</td>
                                     <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                     </td>
-                                    <td style="text-align: center">
-                                        <% if (list.get(i).getStatus().equals(AuditStatus.WAITED)
+                                    <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit" id="xiugai"
+                                                                      onclick="javascript:window.location.href='/toilet/toPage?url=company_back6&productId=<%=list.get(i).getId()%>'" <%if(!list.get(i).getStatus().getName().equals("无状态")){%>  style="display: none" <%}%>>修改信息</a>
+                                        <%if (list.get(i).getStatus().equals(AuditStatus.APPROVAL)
+                                                || list.get(i).getStatus().equals(AuditStatus.DENY)
                                                 || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
-                                        <a type="button" class="btn btn-link fa fa-edit"
-                                           href="${pageContext.request.contextPath}/toPage?url=company_back6&productId=<%=list.get(i).getId()%>">修改信息</a>
-                                        <%
-                                            }
-                                            if (list.get(i).getStatus().equals(AuditStatus.APPROVAL)
-                                                    || list.get(i).getStatus().equals(AuditStatus.DENY)
-                                                    || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {
-                                        %>
-                                        <a type="button" class="btn btn-link fa fa-th-list"
-                                           href="${pageContext.request.contextPath}/toPage?url=company_back5&productId=<%=list.get(i).getId()%>">查看审批意见</a>
-                                        <%
-                                            }
-
-                                            if (list.get(i).getStatus().equals(AuditStatus.WAITED)
-                                                    || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)
-                                                    || list.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {
-                                        %>
-                                        <a type="button" class="btn btn-link fa fa-th-list"
-                                           onclick="submit('<%=list.get(i).getId()%>', '<%=AuditStatus.PROCESSING.getCode()%>')" <%if(list.get(i).getStatus().getName() == "无状态"){%> disabled="" <%} else{%> disabled="none"<%}%>>提交审核</a>
+                                        <a type="button" class="btn btn-link fa fa-eye" onclick="javascript:window.location.href='/toilet/toPage?url=company_back5&productId=<%=list.get(i).getId()%>'">查看审批意见</a>
+                                        <%} else if (list.get(i).getStatus().equals(AuditStatus.WAITED)
+                                                    ||list.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {%>
+                                        <a type="button" class="btn btn-link fa fa-upload" id="shenhe"
+                                           onclick="submit('<%=list.get(i).getId()%>')" <%if(list.get(i).getStatus().getName().equals("无状态")){%><%} else{%> style="display: none"<%}%>>提交审核</a>
                                         <%}%>
 
-                                        <a type="button" class="btn btn-link fa fa-info-circle" id="shenhe" href="${pageContext.request.contextPath}/toPage?url=company_back7&productId=<%=list.get(i).getId()%>">产品详情</a>
+                                        <a type="button" class="btn btn-link fa fa-info-circle" id="shenhe" onclick="javascript:window.location.href='/toilet/toPage?url=company_back7&productId=<%=list.get(i).getId()%>'">产品详情</a>
                                     </td>
                                 </tr>
                                 <%}%>
@@ -208,13 +196,37 @@
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.print.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/manage/assets/js/init/datatables-init.js"></script>
-<script src="${pageContext.request.contextPath}/static/toilet/audit.process.js"></script>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
         $('#bootstrap-data-table-export').DataTable(
         );
     });
+
+    function submit(productId) {
+        const data = new FormData();
+        data.append("productId", productId);
+
+        $.ajax({
+            url: "/toilet/company/product/audit/submit",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    show("提交审核成功！");
+                    location.reload();
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
+    }
 </script>
 
 
