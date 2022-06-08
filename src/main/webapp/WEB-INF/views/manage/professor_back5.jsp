@@ -542,9 +542,9 @@
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
                                         <select name="select_status" id="select_status" class="form-control" disabled>
-                                            <option value="审核通过" selected="selected">审核通过</option>
-                                            <option value="审核不通过">审核不通过</option>
-                                            <option value="修改后重新审核">修改后重新审核</option>
+                                            <option value="审核通过" <%if (status.equals("审核通过")){%>selected="selected"<%}%>>审核通过</option>
+                                            <option value="审核不通过" <%if (status.equals("审核不通过")){%>selected="selected"<%}%>>审核不通过</option>
+                                            <option value="修改后重新审核" <%if (status.equals("修改后重新审核")){%>selected="selected"<%}%>>修改后重新审核</option>
                                         </select>
                                     </div>
                                 </div>
@@ -552,7 +552,7 @@
                                     <div class="col col-md-3"><label for="opinion" class=" form-control-label">审核意见</label>
                                     </div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
-                                                                           rows="9" placeholder=""
+                                                                           rows="9" placeholder="<%=content%>"
                                                                            class="form-control" disabled></textarea></div>
                                 </div>
                             </form>
