@@ -111,12 +111,14 @@
                                     <tbody>
                                         <% for (int i=0;i<list.size();i++) {%>
                                     <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back5&productId=<%=list.get(i).getId()%>'">
+                                        <td>1<td>
                                         <td><%=i+1%></td>
                                         <td><%=list.get(i).getProductName()%></td>
                                         <td><%=list.get(i).getGmtCreate().toInstant()%></td>
                                         <td><%=list.get(i).getStatus().getName()%></td>
                                     </tr>
                                         <%}%>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -170,9 +172,6 @@
 
 
     <script type="text/javascript">
-        $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
   </script>
 
 

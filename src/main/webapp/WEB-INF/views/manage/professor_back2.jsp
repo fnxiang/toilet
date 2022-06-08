@@ -108,6 +108,7 @@
                                             <th>状态</th>
                                         </tr>
                                     </thead>
+<%--                                    fixme 返回列表为空--%>
                                     <% List<ToiletPatternDTO> list = (List<ToiletPatternDTO>)request.getAttribute("patternList");%>
                                     <tbody>
                                         <% for (int i=0;i<list.size();i++) {%>
@@ -174,9 +175,6 @@
 
 
     <script type="text/javascript">
-        $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
   </script>
 
 
