@@ -247,29 +247,122 @@
             dataMap.put("产品名称",productDTO.getProductName());
             dataMap.put("生产厂家",productDTO.getManufacturerName());
             dataMap.put("产品类型",productDTO.getProductType());
-            dataMap.put("联系方式",productDTO.getManufacturerCell());
-            dataMap.put("厂家邮箱",productDTO.getCompanyEmail());
-            dataMap.put("适用省份",productDTO.getApplicableProvince());
-            dataMap.put("适用温度",productDTO.getApplicableTemperature());
-            dataMap.put("规格（平方米）",productDTO.getProductParameters().getStandard());
-            dataMap.put("适用人数（人）",productDTO.getProductParameters().getApplicableNum());
-            dataMap.put("长（mm）",productDTO.getProductParameters().getLength());
-            dataMap.put("宽（mm）",productDTO.getProductParameters().getWide());
-            dataMap.put("高（mm）",productDTO.getProductParameters().getHigh());
-            dataMap.put("壁厚（mm）",productDTO.getProductParameters().getWallThickness());
-            dataMap.put("重量（kg）",productDTO.getProductParameters().getWeight());
-            dataMap.put("材质",productDTO.getProductParameters().getTexture());
-            dataMap.put("颜色",productDTO.getProductParameters().getColor());
-            dataMap.put("使用寿命（年）",productDTO.getProductParameters().getServiceLife());
-            dataMap.put("用途",productDTO.getPurpose());
-            dataMap.put("具体用途",productDTO.getProductParameters().getParamPurpose());
-            dataMap.put("运行成本",productDTO.getProductParameters().getRunCost());
-            dataMap.put("清理周期（月）",productDTO.getProductParameters().getCleanupCycle());
-            dataMap.put("使用图片",productDTO.getPicsPath());
-            dataMap.put("质量保证材料",productDTO.getQualityAssuranceMaterialsFilePath());
-            dataMap.put("使用说明",productDTO.getInstructionFilePath());
-            dataMap.put("应用案例",productDTO.getProductParameters().getApplyCase());
-            dataMap.put("产品特点",productDTO.getProductFeatures());
+            if(productDTO.getManufacturerCell() != null){
+                dataMap.put("联系方式",productDTO.getManufacturerCell());
+            }else {
+                dataMap.put("联系方式","无");
+            }
+            if(productDTO.getCompanyEmail() != null){
+                dataMap.put("厂家邮箱", productDTO.getCompanyEmail());
+            }else{
+                dataMap.put("厂家邮箱", "无");
+            }
+            if(productDTO.getApplicableProvince() != null){
+                dataMap.put("适用省份",productDTO.getApplicableProvince());
+            }else{
+                dataMap.put("适用省份","无");
+            }
+            if(productDTO.getApplicableTemperature() != null){
+                dataMap.put("适用温度",productDTO.getApplicableTemperature());
+            }else{
+                dataMap.put("适用温度","无");
+            }
+            if(productDTO.getProductParameters().getStandard() != null){
+                dataMap.put("规格（平方米）",productDTO.getProductParameters().getStandard());
+            }else{
+                dataMap.put("规格（平方米）","无");
+            }
+            if(productDTO.getProductParameters().getApplicableNum() != null){
+                dataMap.put("适用人数（人）",productDTO.getProductParameters().getApplicableNum());
+            }else{
+                dataMap.put("适用人数（人）","无");
+
+            }
+            if(productDTO.getProductParameters().getLength() != null){
+                dataMap.put("长（mm）",productDTO.getProductParameters().getLength());
+            }else{
+                dataMap.put("长（mm）","无");
+            }
+            if(productDTO.getProductParameters().getWide() != null){
+                dataMap.put("宽（mm）",productDTO.getProductParameters().getWide());
+            }else{
+                dataMap.put("宽（mm）","无");
+            }
+            if(productDTO.getProductParameters().getHigh() != null){
+                dataMap.put("高（mm）",productDTO.getProductParameters().getHigh());
+            }else{
+                dataMap.put("高（mm）","无");
+            }
+            if(productDTO.getProductParameters().getWallThickness() != null){
+                dataMap.put("壁厚（mm）",productDTO.getProductParameters().getWallThickness());
+            }else{
+                dataMap.put("壁厚（mm）","无");
+            }
+            if(productDTO.getProductParameters().getWeight() != null){
+                dataMap.put("重量（kg）",productDTO.getProductParameters().getWeight());
+            }else{
+                dataMap.put("重量（kg）","无");
+            }
+            if(productDTO.getProductParameters().getTexture() != null){
+                dataMap.put("材质",productDTO.getProductParameters().getTexture());
+            }else{
+                dataMap.put("材质","无");
+            }
+            if(productDTO.getProductParameters().getColor() != null){
+                dataMap.put("颜色",productDTO.getProductParameters().getColor());
+            }else{
+                dataMap.put("颜色","无");
+            }
+            if(productDTO.getProductParameters().getServiceLife() != null){
+                dataMap.put("使用寿命（年）",productDTO.getProductParameters().getServiceLife());
+            }else{
+                dataMap.put("使用寿命（年）","无");
+            }
+            if(productDTO.getPurpose() != null){
+                dataMap.put("用途",productDTO.getPurpose());
+            }else{
+                dataMap.put("用途","无");
+            }
+            if(productDTO.getProductParameters().getParamPurpose() != null){
+                dataMap.put("具体用途",productDTO.getProductParameters().getParamPurpose());
+            }else{
+                dataMap.put("具体用途","无");
+            }
+            if(productDTO.getProductParameters().getRunCost() != null){
+                dataMap.put("运行成本",productDTO.getProductParameters().getRunCost());
+            }else{
+                dataMap.put("运行成本","无");
+            }
+            if(productDTO.getProductParameters().getCleanupCycle() != null){
+                dataMap.put("清理周期（月）",productDTO.getProductParameters().getCleanupCycle());
+            }else{
+                dataMap.put("清理周期（月）","无");
+            }
+            if(productDTO.getPicsPath() != null){
+                dataMap.put("使用图片",productDTO.getPicsPath());
+            }else{
+                dataMap.put("使用图片","无");
+            }
+            if(productDTO.getQualityAssuranceMaterialsFilePath() != null){
+                dataMap.put("质量保证材料",productDTO.getQualityAssuranceMaterialsFilePath());
+            }else{
+                dataMap.put("质量保证材料","无");
+            }
+            if(productDTO.getInstructionFilePath() != null){
+                dataMap.put("使用说明",productDTO.getInstructionFilePath());
+            }else{
+                dataMap.put("使用说明","无");
+            }
+            if(productDTO.getProductParameters().getApplyCase() != null){
+                dataMap.put("应用案例",productDTO.getProductParameters().getApplyCase());
+            }else{
+                dataMap.put("应用案例","无");
+            }
+            if(productDTO.getProductFeatures() != null){
+                dataMap.put("产品特点",productDTO.getProductFeatures());
+            }else{
+                dataMap.put("产品特点","无");
+            }
             data.add(dataMap);}%>
         var dataList = new Array();
         <%for(JSONObject x : data){%>
