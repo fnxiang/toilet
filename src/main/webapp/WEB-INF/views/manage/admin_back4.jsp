@@ -125,7 +125,6 @@
 										<td class="text-center">
 											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=<%=list.get(i).getId()%>'"> 查看详情</a>
                                             <%AuditStatus status_now = list.get(i).getStatus();%>
-                                            <%=status_now%>
                                             <%if(status_now.equals(AuditStatus.APPROVAL) || status_now.equals(AuditStatus.DENY) || status_now.equals(AuditStatus.PROCESSING)){}else{%>
 											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=<%=list.get(i).getId()%>'"> 分配专家</a>
                                             <%}%>
