@@ -1,5 +1,6 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="cn.edu.bjtu.toilet.utils.DateUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -104,6 +105,7 @@
                                             <th>序号</th>
                                             <th>产品名称</th>
                                             <th>提交时间</th>
+                                            <th>修改时间</th>
                                             <th>状态</th>
                                         </tr>
                                     </thead>
@@ -111,10 +113,10 @@
                                     <tbody>
                                         <% for (int i=0;i<list.size();i++) {%>
                                     <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back5&productId=<%=list.get(i).getId()%>'">
-                                        <td>1<td>
                                         <td><%=i+1%></td>
                                         <td><%=list.get(i).getProductName()%></td>
-                                        <td><%=list.get(i).getGmtCreate().toInstant()%></td>
+                                        <td><%=DateUtil.toStandardFormat(list.get(i).getGmtCreate())%></td>
+                                        <td><%=DateUtil.toStandardFormat(list.get(i).getGmtModified())%></td>
                                         <td><%=list.get(i).getStatus().getName()%></td>
                                     </tr>
                                         <%}%>
