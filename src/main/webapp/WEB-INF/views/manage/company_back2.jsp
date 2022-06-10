@@ -133,7 +133,7 @@
                                                                         class="form-control"></div>
                                 </div>
                                 <%String filePath = companyDO.getBusinessLicenseFilePath();%>
-                                <%if(filePath.length() != 0){%>
+                                <%if (filePath.length() != 0) {%>
                                 <div class="row form-group" id="yingyezhizhao">
                                     <div class="col col-md-3"><label class=" form-control-label">营业执照</label></div>
                                     <div class="col-12 col-md-9">
@@ -154,11 +154,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                <div class="card-text text-lg-center">
-                                    <button type="button" id="file_button" class="btn btn-outline-secondary offset-md-3"
-                                            onclick="upload_file()">上传营业执照
-                                    </button>
-                                </div>
+                                    <div class="card-text text-lg-center">
+                                        <button type="button" id="file_button"
+                                                class="btn btn-outline-secondary offset-md-3"
+                                                onclick="uploadFile()">上传营业执照
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="provinceSelect" class=" form-control-label">企业地址</label>
@@ -281,13 +282,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#bootstrap-data-table-export').DataTable();
-        } );
+        });
 
     });
     var file = "<%=companyDO.getBusinessLicenseFilePath()%>";
-
+</script>
+<script>
     function modify() {
         var data = new FormData();
         if (!file) {
@@ -335,9 +337,10 @@
             });
         }
     }
-
-    //上传营业执照
-    function upload_file() {
+</script>
+<script>
+    // 上传营业执照
+    function uploadFile() {
         var yingyezhizhao = document.getElementById("yingyezhizhao");
         var file_button = document.getElementById("file_button");
         var shuruzhizhao = document.getElementById("shuruzhizhao");
@@ -346,12 +349,13 @@
         shuruzhizhao.style.cssText = "";
         file = null;
     }
+
     function getSelectorContent() {
         const provinceName = $('#provinceSelect').find("option:selected").text();
         const cityName = $('#citySelect').find("option:selected").text();
         const countryName = $('#countrySelect').find("option:selected").text();
 
-        const address = provinceName+","+cityName+","+countryName;
+        const address = provinceName + "," + cityName + "," + countryName;
         return encodeURIComponent(address);
     }
 
@@ -387,18 +391,18 @@
     // 设置省份
     function setProvince() {
         // 遍历省份数组, provinceArr在city.js中
-        for (var i = 0; i < provinceArr.length; i++){
+        for (var i = 0; i < provinceArr.length; i++) {
             // 创建省份option选项
             var opt = document.createElement("option");
             opt.value = provinceArr[i];         // 设置value-提交给服务器用
             <%String province = enterpriseAddressDTO.getProvince();%>
-            if(provinceArr[i] === "<%=province.substring(0, province.length() - 1)%>"){
+            if (provinceArr[i] === "<%=province.substring(0, province.length() - 1)%>") {
                 opt.selected = "selected"
             }
             opt.innerHTML = provinceArr[i];     // 设置option文本显示内容
             province.appendChild(opt);          // 追加城市到下拉框
             // 当省份发生变化更改城市
-            province.onchange = function(){
+            province.onchange = function () {
                 setCity(this.selectedIndex);
             };
         }
@@ -413,16 +417,16 @@
         var citys = cityArr[provincePos];
         city.length = 0;                  // 清空长度，重新从0开始赋值下拉框
 
-        for (var i = 0; i < citys.length; i++){
+        for (var i = 0; i < citys.length; i++) {
             // 创建城市option选项
             var opt = document.createElement("option");
             opt.value = citys[i];         // 设置value-提交给服务器用
-            if(citys[i] === "<%=enterpriseAddressDTO.getCity()%>"){
+            if (citys[i] === "<%=enterpriseAddressDTO.getCity()%>") {
                 opt.selected = "selected"
             }
             opt.innerHTML = citys[i];     // 设置option文本显示内容
             city.appendChild(opt);
-            city.onchange = function() {
+            city.onchange = function () {
                 setCounty(provincePos, this.selectedIndex);
             }
         }
@@ -437,11 +441,11 @@
         var countys = countyArr[provincePos][cityPos];
         county.length = 0;
 
-        for (var i = 0; i < countys.length; i++){
+        for (var i = 0; i < countys.length; i++) {
             // 创建县/区option选项
             var opt = document.createElement("option");
             opt.value = countys[i];         // 设置value-提交给服务器用
-            if(countys[i] === "<%=enterpriseAddressDTO.getCountry()%>"){
+            if (countys[i] === "<%=enterpriseAddressDTO.getCountry()%>") {
                 opt.selected = "selected"
             }
             opt.innerHTML = countys[i];     // 设置option文本显示内容
