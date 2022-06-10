@@ -2,6 +2,7 @@
 <%@ page import="cn.edu.bjtu.toilet.dao.domain.CompanyDO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
+<%@ page import="org.checkerframework.checker.units.qual.A" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -138,11 +139,39 @@
                                            onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back7&email=<%=list.get(i).getEmail()%>'">
                                             查看详情</a>
                                         <%--												<a type="button" id="<%=list.get(i).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=list.get(i).getEmail()%>', '<%=list.get(i).getRole()%>')"> 审核通过</a>--%>
-                                        <div id="shenhe<%=list.get(i).getEmail()%>" style="display: inline-block"><%if (list.get(i).getStatus().equals(AuditStatus.WAITED.getCode())){%>用户审核<%} else if (list.get(i).getStatus().equals(AuditStatus.APPROVAL.getCode())) {%>通过
+<%--                                        fixme 返回所有状态的用户--%>
+                                        <%if (list.get(i).getStatus().equals(AuditStatus.WAITED.getCode())) {%>
+                                        <div id="shenhe<%=list.get(i).getEmail()%>"
+                                             style="display: inline-block"> 用户审核
+                                        </div>
+                                        <div class="right1"
+                                             param_email="<%=list.get(i).getEmail()%>"
+                                             param_role="<%=list.get(i).getRole()%>">
+                                            <div isopen="false" class="btnn"></div>
+                                        </div>
 
-                                        <%}else{%>不通过"<%=list.get(i).getStatus()%>"<%}%></div>
-                                        <div class="right1" id="<%=list.get(i).getId()%>" param_email="<%=list.get(i).getEmail()%>" param_role="<%=list.get(i).getRole()%>">
-                                            <div <%if(list.get(i).getStatus().equals(AuditStatus.APPROVAL.getCode())){%>isopen="true"<%}else {%>isopen="false"<%}%> class="btnn"></div></div>
+                                        <%} else if (list.get(i).getStatus().equals(AuditStatus.APPROVAL.getCode())) {%>
+
+                                        <div id="shenhe<%=list.get(i).getEmail()%>"
+                                             style="display: inline-block"> 通过
+                                        </div>
+                                        <div class="right1"
+                                             param_email="<%=list.get(i).getEmail()%>"
+                                             param_role="<%=list.get(i).getRole()%>" style="background-color: #1976d2">
+                                            <div isopen="ture" class="btnn" style="left: 15px;"></div>
+                                        </div>
+
+                                        <%} else {%>
+
+                                        <div id="shenhe<%=list.get(i).getEmail()%>"
+                                             style="display: inline-block">不通过
+                                        </div>
+                                        <div class="right1"
+                                             param_email="<%=list.get(i).getEmail()%>"
+                                             param_role="<%=list.get(i).getRole()%>">
+                                            <div isopen="false" class="btnn"></div>
+                                        </div>
+                                        <%}%>
                                         <a type="button" class="btn btn-link fa fa-trash-o"
                                            onclick="deleteProfessor(<%=list.get(i).getId()%>)"> 删除</a>
                                     </td>
@@ -168,10 +197,38 @@
                                         <a type="button" class="btn btn-link fa fa-edit"
                                            onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back12&email=<%=companyDOS.get(j).getEmail()%>'">
                                             查看详情</a>
-                                        <a type="button" id="<%=companyDOS.get(j).getEmail()%>"
-                                           class="btn btn-link fa fa-check-square"
-                                           onclick="approveUser('<%=companyDOS.get(j).getEmail()%>','<%=companyDOS.get(j).getRole()%>')">
-                                            审核通过</a>
+                                        <%if (companyDOS.get(j).getStatus().equals(AuditStatus.WAITED.getCode())) {%>
+                                        <div id="shenhe<%=companyDOS.get(j).getEmail()%>"
+                                             style="display: inline-block"> 用户审核
+                                        </div>
+                                        <div class="right1"
+                                             param_email="<%=companyDOS.get(j).getEmail()%>"
+                                             param_role="<%=companyDOS.get(j).getRole()%>">
+                                            <div isopen="false" class="btnn"></div>
+                                        </div>
+
+                                        <%} else if (companyDOS.get(j).getStatus().equals(AuditStatus.APPROVAL.getCode())) {%>
+
+                                        <div id="shenhe<%=companyDOS.get(j).getEmail()%>"
+                                             style="display: inline-block"> 通过
+                                        </div>
+                                        <div class="right1"
+                                             param_email="<%=companyDOS.get(j).getEmail()%>"
+                                             param_role="<%=companyDOS.get(j).getRole()%>" style="background-color: #1976d2">
+                                            <div isopen="ture" class="btnn" style="left: 15px;"></div>
+                                        </div>
+
+                                        <%} else {%>
+
+                                        <div id="shenhe<%=companyDOS.get(j).getEmail()%>"
+                                             style="display: inline-block">不通过
+                                        </div>
+                                        <div class="right1"
+                                             param_email="<%=companyDOS.get(j).getEmail()%>"
+                                             param_role="<%=companyDOS.get(j).getRole()%>">
+                                            <div isopen="false" class="btnn"></div>
+                                        </div>
+                                        <%}%>
                                         <a type="button" class="btn btn-link fa fa-trash-o"
                                            onclick="deleteCompany(<%=companyDOS.get(j).getId()%>)"> 删除</a>
                                     </td>
@@ -285,7 +342,8 @@
             }
         });
     }
-// 审核不通过
+
+    // 审核不通过
     // fixme 用户审核不通过接口
     function denyUser(email, roleCode) {
         const data = new FormData();
@@ -358,11 +416,12 @@
 <%--滑动按钮滑动时改变样式--%>
 <script>
 
-    function setOpen(obj){
+    function setOpen(obj) {
         obj.children('div').attr('isopen', 'true').animate({left: '15px'});
         obj.css('background-color', '#1976d2');
     }
-    function setClose(obj){
+
+    function setClose(obj) {
         obj.children('div').attr('isopen', 'false').animate({left: '0px'});
         obj.css('background-color', '#838383');
     }
@@ -372,18 +431,15 @@
     $(function () {
         $('.right1').on('click', function () {
             var ele = document.getElementById('shenhe' + $(this).attr('param_email'))
-            if ($(this).children('div').attr('isopen') == 'false')
-            {
+            if ($(this).children('div').attr('isopen') == 'false') {
                 setOpen($(this));
-                ele.innerHTML="";
-                ele.innerHTML="通过";
+                ele.innerHTML = "";
+                ele.innerHTML = "通过";
                 approveUser($(this).attr('param_email'), $(this).attr('param_role'));
-            }
-            else
-            {
+            } else {
                 setClose($(this));
-                ele.innerHTML="";
-                ele.innerHTML="不通过";
+                ele.innerHTML = "";
+                ele.innerHTML = "不通过";
                 denyUser($(this).attr('param_email'), $(this).attr('param_role'));
             }
         });
