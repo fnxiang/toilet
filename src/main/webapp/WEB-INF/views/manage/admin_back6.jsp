@@ -583,7 +583,7 @@
                             </div>
 
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back3'">返回</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="location.replace(document.referrer);">返回</button>
                             </div>
 
                         </div>
