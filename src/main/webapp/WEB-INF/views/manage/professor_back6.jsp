@@ -35,7 +35,27 @@
 <body>
 <!-- Left Panel -->
 
-<jsp:include page="professor_side.jsp"/>
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="${pageContext.request.contextPath}/professor/index" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>产品信息审核列表</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>模式审核列表</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>基本信息</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back4" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
 <!-- /#left-panel -->
 
 <!-- Left Panel -->
@@ -74,7 +94,7 @@
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
                                 <li><a href="${pageContext.request.contextPath}/professor/index">后台</a></li>
-                                <li class="active">模式审核</li>
+                                <li>模式审核列表</li>
                             </ol>
                         </div>
                     </div>
@@ -121,7 +141,7 @@
                                                                                  class=" form-control-label">温度条件：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="select" id="select" class="form-control" disabled>
+                                                    <select name="select" id="select" class="form-control">
                                                         <option value="高寒" <%if (patternDTO.getEnvConditions().getTemperature().equals("高寒")) {%>
                                                                 selected="selected" <%}%>>高寒
                                                         </option>
@@ -136,7 +156,7 @@
                                                                                  class=" form-control-label">水资源条件：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="select" id="select" class="form-control" disabled>
+                                                    <select name="select" id="select" class="form-control">
                                                         <option value="缺水"  <%if (patternDTO.getEnvConditions().getWaterResource().equals("缺水")) {%>
                                                                 selected="selected" <%}%>>缺水
                                                         </option>
@@ -373,7 +393,7 @@
                                     <div class="col col-md-3"><label for="select_status" class=" form-control-label">是否通过</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control" disabled>
+                                        <select name="select_status" id="select_status" class="form-control">
                                             <option value="审核通过"
                                                     <%if (status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
                                             </option>
@@ -390,14 +410,17 @@
                                     <div class="col col-md-3"><label for="opinion"
                                                                      class=" form-control-label">审核意见</label></div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
-                                                                           rows="9" placeholder="<%=content%>"
-                                                                           class="form-control" disabled></textarea>
+                                                                           rows="9" placeholder=""
+                                                                           class="form-control"><%=content%></textarea>
                                     </div>
                                 </div>
                             </form>
                             <div class="card-text text-lg-center">
                                 <button type="button" class="btn btn-outline-secondary" onclick="commit()">
                                     确认提交
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary offset-2"
+                                        onclick="location.replace(document.referrer);">返回
                                 </button>
                             </div>
 
