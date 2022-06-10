@@ -2492,4 +2492,26 @@ footer.site-footer {
     left: inherit !important;
     right: 20px !important; }
 
+  /*滑动删除样式*/
+.text-center .right1 {
+  display: inline-block;
+  vertical-align:middle;
+  width:35px;
+  height:20px;
+  border-radius: 30px;
+  -webkit-border-radius:30px;
+  -moz-border-radius:30px;
+  background-color: #838383;
+}
+
+.text-center .right1 .btnn {
+  width:20px;
+  height:20px;
+  padding:0px;
+  -webkit-border-radius:30px;
+  -moz-border-radius:30px;
+  border-radius:30px;
+  background-color: #fff;
+  position: relative;
+}
 /*# sourceMappingURL=style.css.map */
