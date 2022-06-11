@@ -297,17 +297,16 @@
     });
     $page.on("click", 'span', function (e) {
         var pagenow = parseInt(e.target.innerText);
-        if (pagenow !== pageNow) {
-            findpage(pageNow);
-            pageSet(total, pageNow);
+        if (pagenow === pagenow) {
+            findpage(pagenow);
+            pageSet(total, pagenow);
         } else {
+            if(e.target.innerText === '上一页'){
+                getprepage();
+            }else{
+                getnextpage();
+            }
         }
-    });
-    $('#up').click(function () { //上一页
-        getprepage();
-    });
-    $('#down').click(function () { //下一页
-        getnextpage();
     });
 
     function pageSet(total, pageNow) {
