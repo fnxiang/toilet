@@ -219,7 +219,6 @@
     <script src="${pageContext.request.contextPath}/static/manage/assets/js/jquery.matchHeight.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/manage/assets/js/main.js"></script>
 
-	
     <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/datatables.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
@@ -284,7 +283,6 @@
         <%}%>
         JSONToExcelConvertor(dataList, "专家用户信息");
     }
-
     function exportCompany() {
         //获取整个企业用户列表
         <%
@@ -296,7 +294,8 @@
             dataMap.put("公司名称",companyDO.getCompanyName());
             dataMap.put("统一社会信用代码",companyDO.getCreditCode());
             dataMap.put("营业执照",companyDO.getBusinessLicenseFilePath());
-            dataMap.put("企业地址",companyDO.getEnterpriseAddress());
+            JSONObject address = JSONObject.parseObject(companyDO.getEnterpriseAddress());
+            dataMap.put("企业地址",address.getString("province") + address.getString("city") + "市" + address.getString("country") + address.getString("detailAddress"));
             dataMap.put("注册邮箱",companyDO.getEmail());
             dataMap.put("公司官网",companyDO.getOfficialSite());
             dataMap.put("联系人",companyDO.getContactName());
@@ -308,8 +307,6 @@
         <%}%>
         JSONToExcelConvertor(dataList, "企业用户信息");
     }
-
-    //fixme 删除专家用户接口
     function deleteProfessor(professor_id) {
         let data = new FormData();
         data.append("professorId", professor_id)
@@ -331,8 +328,6 @@
             }
         });
     }
-
-    //fixme 删除企业用户接口
     function deleteCompany(company_id) {
         let data = new FormData();
         data.append("companyId", company_id)
