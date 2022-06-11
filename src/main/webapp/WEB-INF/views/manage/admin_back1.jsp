@@ -5,6 +5,7 @@
 <%@ page import="cn.edu.bjtu.toilet.dao.domain.CompanyDO" %>
 <%@ page import="com.alibaba.fastjson.JSONObject" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -152,7 +153,7 @@
                                     </td>
                                 </tr>
                                     <%}}%>
-                                    <% List<CompanyDO> companyDOS = (List<CompanyDO>)request.getAttribute("companyList");%>
+                                    <% List<CompanyDTO> companyDOS = (List<CompanyDTO>)request.getAttribute("companyList");%>
                                 <tbody>
                                 <%
                                     if (companyDOS != null) {
@@ -290,16 +291,15 @@
         //遍历获取到的需要导出的数据
         for(int i = 0; i < companyDOS.size(); i++) {
             JSONObject dataMap = new JSONObject(true);
-            CompanyDO companyDO = companyDOS.get(i);
-            dataMap.put("公司名称",companyDO.getCompanyName());
-            dataMap.put("统一社会信用代码",companyDO.getCreditCode());
-            dataMap.put("营业执照",companyDO.getBusinessLicenseFilePath());
-            JSONObject address = JSONObject.parseObject(companyDO.getEnterpriseAddress());
-            dataMap.put("企业地址",address.getString("province") + address.getString("city") + "市" + address.getString("country") + address.getString("detailAddress"));
-            dataMap.put("注册邮箱",companyDO.getEmail());
-            dataMap.put("公司官网",companyDO.getOfficialSite());
-            dataMap.put("联系人",companyDO.getContactName());
-            dataMap.put("手机号",companyDO.getContactPhone());
+            CompanyDTO companyDTO = companyDOS.get(i);
+            dataMap.put("公司名称",companyDTO.getCompanyName());
+            dataMap.put("统一社会信用代码",companyDTO.getCreditCode());
+            dataMap.put("营业执照",companyDTO.getBusinessLicenseFilePath());
+            dataMap.put("企业地址",companyDTO.getCompanyAddress());
+            dataMap.put("注册邮箱",companyDTO.getEmail());
+            dataMap.put("公司官网",companyDTO.getOfficialSite());
+            dataMap.put("联系人",companyDTO.getContactName());
+            dataMap.put("手机号",companyDTO.getContactPhone());
             company_data.add(dataMap);}%>
         var dataList = new Array();
         <%for(JSONObject x : company_data){%>

@@ -5,6 +5,7 @@ import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
+import cn.edu.bjtu.toilet.domain.dto.CompanyDTO;
 import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
@@ -104,7 +105,7 @@ public class ManagementController {
     public String adminIndex(HttpServletRequest request){
 
         List<UserDO> users = userService.queryAllUser(UserRole.PROFESSOR);
-        List<CompanyDO> companyDOS = companyService.queryAllCompany();
+        List<CompanyDTO> companyDOS = companyService.queryAllCompany();
 
         request.setAttribute("profList", users);
         request.setAttribute("companyList", companyDOS);
