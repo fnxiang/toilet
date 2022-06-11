@@ -1,5 +1,7 @@
 package cn.edu.bjtu.toilet.controller;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.common.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.constant.UserStatus;
@@ -7,11 +9,8 @@ import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
-import cn.edu.bjtu.toilet.domain.dto.ApprovalDTO;
-import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
-import cn.edu.bjtu.toilet.domain.dto.UserDTO;
+import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.domain.response.CommandResponse;
-import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.*;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
@@ -89,6 +88,76 @@ public class AdminController {
         return response;
     }
 
+    @RequestMapping(value = "/user/approve")
+    @ResponseBody
+    public CommandResponse approveUser(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            if (params.size() == 0) {
+                return CommandResponse.failed("请求参数错误");
+            }
+
+            String userEmail = params.get("userEmail");
+            Integer roleCode = Integer.valueOf(params.get("roleCode"));
+
+            UserRole role = UserRole.codeOf(roleCode);
+
+
+            if (role.equals(UserRole.PROFESSOR)) {
+                UserDO userDO = userService.queryUserByEmail(userEmail);
+                userDO.setStatus(UserStatus.ALLOWED.getCode());
+                userService.saveProfessorUser(userDO);
+            } else {
+                CompanyDO companyDO = companyService.queryCompanyByEmail(userEmail);
+                companyDO.setStatus(UserStatus.ALLOWED.getCode());
+                companyService.saveCompany(companyDO);
+            }
+
+        } catch (ToiletBizException | ToiletSystemException e) {
+            return CommandResponse.failed(e.getMessage());
+        } catch (Exception e) {
+            return CommandResponse.failed("Error happened :(");
+        }
+
+        return CommandResponse.success();
+    }
+
+    @RequestMapping(value = "/user/deny")
+    @ResponseBody
+    public CommandResponse denyUser(HttpServletRequest request) {
+        CommandResponse response = new CommandResponse();
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            if (params.size() == 0) {
+                return CommandResponse.failed("请求参数不能为空");
+            }
+
+            String userEmail = params.get("userEmail");
+            Integer roleCode = Integer.valueOf(params.get("roleCode"));
+
+            UserRole role = UserRole.codeOf(roleCode);
+
+
+            if (role.equals(UserRole.PROFESSOR)) {
+                UserDO userDO = userService.queryUserByEmail(userEmail);
+                userDO.setStatus(UserStatus.WAIT_APPROVE.getCode());
+                userService.saveProfessorUser(userDO);
+            } else {
+                CompanyDO companyDO = companyService.queryCompanyByEmail(userEmail);
+                companyDO.setStatus(UserStatus.WAIT_APPROVE.getCode());
+                companyService.saveCompany(companyDO);
+            }
+            response.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("error happened: {}", e.getMessage());
+            return CommandResponse.failed(e.getMessage());
+        }
+
+        return response;
+    }
+
     @RequestMapping(value = "/product/delete")
     @ResponseBody
     public CommandResponse deleteProduct(HttpServletRequest request) {
@@ -125,7 +194,7 @@ public class AdminController {
         return response;
     }
 
-    @RequestMapping(value = "/comany/delete")
+    @RequestMapping(value = "/company/delete")
     @ResponseBody
     public CommandResponse deleteCompany(HttpServletRequest request) {
         CommandResponse response = new CommandResponse();
@@ -150,18 +219,12 @@ public class AdminController {
         String productId = request.getParameter("productId");
         switch (url){
             case "admin_back1":
+            case "admin_back2":
                 List<UserDO> users = userService.queryAllUser(UserRole.PROFESSOR);
-                List<CompanyDO> companyDOS = companyService.queryAllCompany();
+                List<CompanyDTO> companyDOS = companyService.queryAllCompany();
 
                 request.setAttribute("profList", users);
                 request.setAttribute("companyList", companyDOS);
-                break;
-            case "admin_back2":
-                List<UserDO> check_users = userService.queryAllUser(UserRole.PROFESSOR).stream().filter(user -> user.getStatus().equals(UserStatus.WAIT_APPROVE.getCode())).collect(Collectors.toList());
-                List<CompanyDO> checkCompanyDOS = companyService.queryAllCompany().stream().filter(user -> user.getStatus().equals(UserStatus.WAIT_APPROVE.getCode())).collect(Collectors.toList());
-
-                request.setAttribute("profList", check_users);
-                request.setAttribute("companyList", checkCompanyDOS);
                 break;
             case "admin_back3":
                 List<ToiletProductDTO> allList = productService.queryAllProductList("");

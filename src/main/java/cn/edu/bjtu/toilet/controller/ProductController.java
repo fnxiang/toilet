@@ -159,6 +159,7 @@ public class ProductController {
         if (!StringUtils.isEmpty(params.get("pageSize"))) {
             sortRequest.setPageSize(Integer.valueOf(params.get("pageSize")));
         }
+        sortRequest.setAuditStatus(AuditStatus.APPROVAL);
         return sortRequest;
     }
 

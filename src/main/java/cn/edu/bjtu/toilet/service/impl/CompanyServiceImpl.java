@@ -5,6 +5,7 @@ import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
+import cn.edu.bjtu.toilet.domain.dto.CompanyDTO;
 import cn.edu.bjtu.toilet.domain.request.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
 import cn.edu.bjtu.toilet.service.CompanyService;
@@ -16,6 +17,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -29,8 +31,10 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<CompanyDO> queryAllCompany() {
-        return companyDao.getCompanyListByRole(UserRole.COMPANY_USER.getCode());
+    public List<CompanyDTO> queryAllCompany() {
+        return companyDao.getCompanyListByRole(UserRole.COMPANY_USER.getCode()).stream()
+                .map(CompanyConverter::toCompanyDTO)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -3,6 +3,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
 <%@ page import="org.checkerframework.checker.units.qual.A" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %>
+<%@ page import="cn.edu.bjtu.toilet.utils.DateUtil" %>
+<%@ page import="cn.edu.bjtu.toilet.constant.UserStatus" %>
+<%@ page import="org.apache.catalina.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -118,6 +122,7 @@
                                     <th>序号</th>
                                     <th>用户名</th>
                                     <th>提交时间</th>
+                                    <th class="text-center">是否允许登录</th>
                                     <th class="text-center">操作</th>
                                 </tr>
                                 </thead>
@@ -132,17 +137,13 @@
                                     </td>
                                     <td><%=list.get(i).getName()%>
                                     </td>
-                                    <td><%=list.get(i).getGmtCreate()%>
+                                    <td><%=DateUtil.toStandardFormat(list.get(i).getGmtCreate())%>
                                     </td>
                                     <td class="text-center">
-                                        <a type="button" class="btn btn-link fa fa-edit"
-                                           onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back7&email=<%=list.get(i).getEmail()%>'">
-                                            查看详情</a>
-                                        <%--												<a type="button" id="<%=list.get(i).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=list.get(i).getEmail()%>', '<%=list.get(i).getRole()%>')"> 审核通过</a>--%>
-<%--                                        fixme 返回所有状态的用户--%>
-                                        <%if (list.get(i).getStatus().equals(AuditStatus.WAITED.getCode())) {%>
+                                        <%--                                        fixme 如果接口失败，开关仍然保持原样--%>
+                                        <%if (list.get(i).getStatus().equals(UserStatus.WAIT_APPROVE.getCode())) {%>
                                         <div id="shenhe<%=list.get(i).getEmail()%>"
-                                             style="display: inline-block"> 用户审核
+                                             style="display: inline-block">不允许
                                         </div>
                                         <div class="right1"
                                              param_email="<%=list.get(i).getEmail()%>"
@@ -150,10 +151,10 @@
                                             <div isopen="false" class="btnn"></div>
                                         </div>
 
-                                        <%} else if (list.get(i).getStatus().equals(AuditStatus.APPROVAL.getCode())) {%>
+                                        <%} else if (list.get(i).getStatus().equals(UserStatus.ALLOWED.getCode())) {%>
 
                                         <div id="shenhe<%=list.get(i).getEmail()%>"
-                                             style="display: inline-block"> 通过
+                                             style="display: inline-block">允许
                                         </div>
                                         <div class="right1"
                                              param_email="<%=list.get(i).getEmail()%>"
@@ -164,7 +165,7 @@
                                         <%} else {%>
 
                                         <div id="shenhe<%=list.get(i).getEmail()%>"
-                                             style="display: inline-block">不通过
+                                             style="display: inline-block">不允许
                                         </div>
                                         <div class="right1"
                                              param_email="<%=list.get(i).getEmail()%>"
@@ -172,6 +173,12 @@
                                             <div isopen="false" class="btnn"></div>
                                         </div>
                                         <%}%>
+                                    </td>
+                                    <td class="text-center">
+                                        <a type="button" class="btn btn-link fa fa-edit"
+                                           onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back7&email=<%=list.get(i).getEmail()%>'">
+                                            查看详情</a>
+                                        <%--												<a type="button" id="<%=list.get(i).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=list.get(i).getEmail()%>', '<%=list.get(i).getRole()%>')"> 审核通过</a>--%>
                                         <a type="button" class="btn btn-link fa fa-trash-o"
                                            onclick="deleteProfessor(<%=list.get(i).getId()%>)"> 删除</a>
                                     </td>
@@ -180,7 +187,7 @@
                                         }
                                     }
                                 %>
-                                <% List<CompanyDO> companyDOS = (List<CompanyDO>) request.getAttribute("companyList");%>
+                                <% List<CompanyDTO> companyDOS = (List<CompanyDTO>) request.getAttribute("companyList");%>
 
                                 <%
                                     if (companyDOS != null) {
@@ -191,37 +198,34 @@
                                     </td>
                                     <td><%=companyDOS.get(j).getCompanyName()%>
                                     </td>
-                                    <td><%=companyDOS.get(j).getGmtCreate()%>
+                                    <td><%=DateUtil.toStandardFormat(companyDOS.get(j).getGmtCreate())%>
                                     </td>
                                     <td class="text-center">
-                                        <a type="button" class="btn btn-link fa fa-edit"
-                                           onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back12&email=<%=companyDOS.get(j).getEmail()%>'">
-                                            查看详情</a>
-                                        <%if (companyDOS.get(j).getStatus().equals(AuditStatus.WAITED.getCode())) {%>
+                                        <%if (companyDOS.get(j).getStatus().equals(UserStatus.WAIT_APPROVE)) {%>
                                         <div id="shenhe<%=companyDOS.get(j).getEmail()%>"
-                                             style="display: inline-block"> 用户审核
+                                             style="display: inline-block">不允许
                                         </div>
                                         <div class="right1"
                                              param_email="<%=companyDOS.get(j).getEmail()%>"
-                                             param_role="<%=companyDOS.get(j).getRole()%>">
+                                             param_role="<%=companyDOS.get(j).getRole().getCode()%>">
                                             <div isopen="false" class="btnn"></div>
                                         </div>
 
-                                        <%} else if (companyDOS.get(j).getStatus().equals(AuditStatus.APPROVAL.getCode())) {%>
+                                        <%} else if (companyDOS.get(j).getStatus().equals(UserStatus.ALLOWED)) {%>
 
                                         <div id="shenhe<%=companyDOS.get(j).getEmail()%>"
-                                             style="display: inline-block"> 通过
+                                             style="display: inline-block">允许
                                         </div>
                                         <div class="right1"
                                              param_email="<%=companyDOS.get(j).getEmail()%>"
-                                             param_role="<%=companyDOS.get(j).getRole()%>" style="background-color: #1976d2">
+                                             param_role="<%=companyDOS.get(j).getRole().getCode()%>" style="background-color: #1976d2">
                                             <div isopen="ture" class="btnn" style="left: 15px;"></div>
                                         </div>
 
                                         <%} else {%>
 
                                         <div id="shenhe<%=companyDOS.get(j).getEmail()%>"
-                                             style="display: inline-block">不通过
+                                             style="display: inline-block">不允许
                                         </div>
                                         <div class="right1"
                                              param_email="<%=companyDOS.get(j).getEmail()%>"
@@ -229,6 +233,11 @@
                                             <div isopen="false" class="btnn"></div>
                                         </div>
                                         <%}%>
+                                    </td>
+                                    <td class="text-center">
+                                        <a type="button" class="btn btn-link fa fa-edit"
+                                           onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back12&email=<%=companyDOS.get(j).getEmail()%>'">
+                                            查看详情</a>
                                         <a type="button" class="btn btn-link fa fa-trash-o"
                                            onclick="deleteCompany(<%=companyDOS.get(j).getId()%>)"> 删除</a>
                                     </td>
@@ -325,7 +334,7 @@
         data.append("roleCode", roleCode);
 
         $.ajax({
-            url: "/toilet/admin/approve",
+            url: "/toilet/admin/user/approve",
             type: "POST",
             dataType: "json",
             data: data,
@@ -351,7 +360,7 @@
         data.append("roleCode", roleCode);
 
         $.ajax({
-            url: "/toilet/admin/deny",
+            url: "/toilet/admin/user/deny",
             type: "POST",
             dataType: "json",
             data: data,
