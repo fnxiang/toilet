@@ -79,7 +79,6 @@
 <div id="right-panel" class="right-panel">
 <%--    fixme productDTO为空--%>
     <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");
-//    fixme 返回公司对象
         CompanyDTO companyDTO = (CompanyDTO)request.getAttribute("company");
     %>
     <%--获取路径用于显示图片和文件--%>
