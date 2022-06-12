@@ -78,7 +78,8 @@
 
 <div id="right-panel" class="right-panel">
     <%--    fixme productDTO为空--%>
-    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");%>
+    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");
+        CompanyDTO companyDTO = (CompanyDTO)request.getAttribute("company");%>
     <%--获取路径用于显示图片和文件--%>
     <% String path = request.getContextPath();
         String basePath = request.getScheme() + "://"
@@ -228,6 +229,7 @@
                                                         <div class="col-12 col-md-9"><input type="text" id="address"
                                                                                             name="address"
                                                                                             placeholder=""
+                                                                                            value="<%=companyDTO.getCompanyAddress()%>"
                                                                                             class="form-control"
                                                                                             disabled>
                                                         </div>
