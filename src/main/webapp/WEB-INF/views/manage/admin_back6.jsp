@@ -46,7 +46,7 @@
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active">
+                <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
@@ -129,7 +129,6 @@
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
                                 <li><a href="${pageContext.request.contextPath}/admin/index">后台</a></li>
-                                <li class="active">用户管理</li>
                             </ol>
                         </div>
                     </div>
