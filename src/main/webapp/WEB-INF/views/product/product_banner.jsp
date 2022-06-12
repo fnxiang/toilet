@@ -25,7 +25,7 @@
             <div class="welcome">
                 欢迎来访，你可以 <a
                     href="javascript:window.location.href='${pageContext.request.contextPath}/login/index'">登录</a> 或者
-                <a href="javascript:window.location.href='${pageContext.request.contextPath}/register_company'">创建账户</a>.
+                <a onclick="goRegister()" href="javascript:;">创建账户</a>.
             </div>
             <%} else {%>
             <div class="welcome">
@@ -35,8 +35,6 @@
             <!-- .welcome -->
         </div>
         <!-- .grid_6 -->
-
-
     </div>
     <!-- #top -->
 
@@ -73,7 +71,7 @@
                     <li class="separator">|</li>
                     <li><a href="${pageContext.request.contextPath}/login/index">登录</a></li>
                     <li class="separator">|</li>
-                    <li><a href="${pageContext.request.contextPath}/register_company">注册</a></li>
+                    <li><a onclick="goRegister()" href="javascript:;">注册</a></li>
                     <%} else {%>
                     <li class="separator">|</li>
                     <li><a href="${pageContext.request.contextPath}/<%=role%>/index">我的账户</a></li>
@@ -266,5 +264,21 @@
         document.body.appendChild(temp);
         temp.submit();
         return temp;
+    }
+</script>
+<%--注册--%>
+<script>
+    function goRegister() {
+        chose()
+    }
+
+</script>
+<script>
+    function chose() {
+        $("#zhuce").css("display", "block");
+    }
+
+    function choseClose() {
+        $("#zhuce").css("display", "none");
     }
 </script>
