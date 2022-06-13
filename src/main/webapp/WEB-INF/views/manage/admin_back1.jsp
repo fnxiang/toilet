@@ -109,7 +109,6 @@
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
-
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -158,7 +157,7 @@
                                 </tr>
                                     <%}}%>
                                     <% List<CompanyDTO> companyDOS = (List<CompanyDTO>)request.getAttribute("companyList");%>
-                                <tbody>
+<%--                                <tbody id="qiye" style="display: none">--%>
                                 <%
                                     if (companyDOS != null) {
                                         for (int i = 0; i < companyDOS.size(); i++, index++) {
@@ -359,7 +358,6 @@
         });
     }
 </script>
-
 
 </body>
 </html>
