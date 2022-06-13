@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <input id="code" class="form-control" name="code" value="" required placeholder="请输入验证码">
                             <input type="button" id="getcode" value="发送验证码" class="btn btn-link" style="position: relative; left: 310px; top:-37px;"
-                                   onclick="getCode(this)">
+                                   onclick="getCode()">
                         </div>
 
                         <div class="form-group text-center">
@@ -89,8 +89,8 @@
 
 <script>
     //短信验证码倒计时
-    function getCode(btn){
-        btn = $('#getcode')
+    function getCode(){
+        var btn = $('#getcode')
         var number = 60;
         var countdown = function(){
             if (number == 0) {
