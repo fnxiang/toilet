@@ -184,6 +184,11 @@
 
                                 </tbody>
                             </table>
+                            <div class="grid_2">
+                                <a type="button" class="btn btn-link fa fa-user-plus" aria-hidden="true" style="position: relative;top: 5px;"
+                                   onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back14'">
+                                    添加用户</a>
+                            </div>
                         </div>
 
                     </div>
