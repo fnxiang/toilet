@@ -50,6 +50,10 @@
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back3"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品信息录入</a>
                 </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/toPage?url=company_back_modeInsert"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-info-circle"></i>模式信息录入</a>
+                </li>
                 <li class="active">
                     <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
                 </li>

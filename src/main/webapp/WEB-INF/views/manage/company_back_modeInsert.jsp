@@ -50,6 +50,10 @@
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back3"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品信息录入</a>
                 </li>
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/toPage?url=company_back_modeInsert"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-info-circle"></i>模式信息录入</a>
+                </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
@@ -403,6 +407,9 @@
     </footer>
 
 </div>
+<%--弹窗--%>
+<jsp:include page="../common/dialog.jsp"/>
+<%--弹窗--%>
 <!-- /#right-panel -->
 
 <!-- Right Panel -->
@@ -461,7 +468,6 @@
                 water_check_val = water_check_val + "," + watercheckbox[k].value;
             }
         }
-        alert(encodeURI(water_check_val));
         data.append("water", encodeURI(water_check_val));
 
         const dixingcheckbox = document.getElementsByName("dixing_check"); //地形条件
@@ -530,10 +536,10 @@
             processData: false,
             success: function (result) {
                 if (result.success) {
-                    alert("保存成功！");
+                    show("保存成功！");
                     location.reload();
                 } else {
-                    alert(result.errorMessage);
+                    show(result.errorMessage);
                 }
             }
         });
