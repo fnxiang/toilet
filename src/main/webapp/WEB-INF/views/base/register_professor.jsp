@@ -70,8 +70,14 @@
 									</div>
 									<div class="form-group row">
 										<label for="emailAddress" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">邮箱：</label>
-										<input type="email" class="form-control col-sm-9" id="emailAddress" aria-describedby="emailHelp" placeholder="邮箱">
+										<input type="email" class="form-control col-sm-7" id="emailAddress" aria-describedby="emailHelp" placeholder="邮箱">
+                                        <input type="button" id="getcode" value="发送验证码" class="btn btn-link"
+                                               onclick="getCode()">
 									</div>
+                                    <div class="form-group row">
+                                        <label for="code" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">验证码：</label>
+                                        <input id="code" class="form-control col-sm-9" placeholder="验证码">
+                                    </div>
 									<div class="form-group row">
 										<label for="registerPasswd" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">密码：</label>
 										<input type="password" class="form-control col-sm-9" id="registerPasswd" placeholder="密码">
@@ -138,7 +144,7 @@
             data.append("emailAddress", $('#emailAddress').val());
             data.append("password", encodeURI($('#registerPasswd').val()));
             data.append("confirmPassword", $('#confirmPasswd').val());
-
+            data.append("code", $('#code').val())
             if (! data.get("userName")){show("姓名不能为空!");}
             else if (! data.get("company")){show("单位不能为空!");}
             else if (! data.get("position")){show("职务不能为空!");}
@@ -174,6 +180,25 @@
         function IsEmail(el) {
             var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
             return reg.test(el);
+        }
+        //短信验证码倒计时
+        function getCode(){
+            var btn = $('#getcode')
+            var number = 60;
+            var countdown = function(){
+                if (number == 0) {
+                    btn.attr("disabled",false);
+                    btn.attr("value", "发送验证码");
+                    number = 60;
+                    return;
+                } else {
+                    btn.attr("disabled",true);
+                    btn.attr("value", number + "s 后重新发送");
+                    number--;
+                }
+                setTimeout(countdown,1000);
+            }
+            setTimeout(countdown,1000);
         }
     </script>
 	
