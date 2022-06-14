@@ -120,7 +120,7 @@
                                 <div class="col col-md-3 offset-md-2"><label for="zhanghao"
                                                                              class=" form-control-label xrequired">账号</label>
                                 </div>
-                                <div class="col-12 col-md-6"><input type="password" id="zhanghao"
+                                <div class="col-12 col-md-6"><input type="" id="zhanghao"
                                                                     name="zhanghao" placeholder="登录账号"
                                                                     class="form-control"></div>
                             </div>
