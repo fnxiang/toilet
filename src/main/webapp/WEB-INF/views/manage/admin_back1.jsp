@@ -61,6 +61,10 @@
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>模式管理</a>
                 </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back5"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cog" aria-hidden="true"></i>修改密码</a>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
@@ -105,7 +109,6 @@
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
-
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -154,7 +157,7 @@
                                 </tr>
                                     <%}}%>
                                     <% List<CompanyDTO> companyDOS = (List<CompanyDTO>)request.getAttribute("companyList");%>
-                                <tbody>
+<%--                                <tbody id="qiye" style="display: none">--%>
                                 <%
                                     if (companyDOS != null) {
                                         for (int i = 0; i < companyDOS.size(); i++, index++) {
@@ -180,6 +183,11 @@
 
                                 </tbody>
                             </table>
+                            <div class="grid_2">
+                                <a type="button" class="btn btn-link fa fa-user-plus" aria-hidden="true" style="position: relative;top: 5px;"
+                                   onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back14'">
+                                    添加用户</a>
+                            </div>
                         </div>
 
                     </div>
@@ -350,7 +358,6 @@
         });
     }
 </script>
-
 
 </body>
 </html>

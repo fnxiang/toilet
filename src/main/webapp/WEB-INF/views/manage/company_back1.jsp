@@ -53,6 +53,10 @@
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品信息录入</a>
                 </li>
                 <li>
+                    <a href="${pageContext.request.contextPath}/toPage?url=company_back_modeInsert"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-info-circle"></i>模式信息录入</a>
+                </li>
+                <li>
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
                 </li>
@@ -128,7 +132,7 @@
                                     <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                     </td>
                                     <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit" id="xiugai"
-                                                                      onclick="javascript:window.location.href='/toilet/toPage?url=company_back6&productId=<%=list.get(i).getId()%>'" <%if(!list.get(i).getStatus().getName().equals("无状态")){%>  style="display: none" <%}%>>修改信息</a>
+                                                                      onclick="javascript:window.location.href='/toilet/toPage?url=company_back6&productId=<%=list.get(i).getId()%>'" <%if(!list.get(i).getStatus().equals(AuditStatus.UNKNOWN)){%>  style="display: none" <%}%>>修改信息</a>
                                         <%if (list.get(i).getStatus().equals(AuditStatus.APPROVAL)
                                                 || list.get(i).getStatus().equals(AuditStatus.DENY)
                                                 || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>

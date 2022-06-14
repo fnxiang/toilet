@@ -47,6 +47,10 @@
 					<li>
                         <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>模式管理</a>
                     </li>
+                    <li class="active">
+                        <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back5"
+                           style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cog" aria-hidden="true"></i>修改密码</a>
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -97,21 +101,33 @@
                                 <i class="fa fa-user"></i><strong class="card-title pl-2">修改密码</strong>
                             </div>
                             <div class="card-body">
-								<div class="row form-group">
-									<div class="col col-md-3 offset-md-2"><label for="password-input" class=" form-control-label">原始密码</label></div>
-									<div class="col-12 col-md-6"><input type="password" id="password-input" name="password-input" placeholder="原始密码" class="form-control"></div>
-								</div>
-								<div class="row form-group">
-									<div class="col col-md-3 offset-md-2"><label for="password-input" class=" form-control-label">新密码</label></div>
-									<div class="col-12 col-md-6"><input type="password" id="password-input" name="password-input" placeholder="新密码" class="form-control"></div>
-								</div>
-								<div class="row form-group">
-									<div class="col col-md-3 offset-md-2"><label for="password-input" class=" form-control-label">确认密码</label></div>
-									<div class="col-12 col-md-6"><input type="password" id="password-input" name="password-input" placeholder="确认密码" class="form-control"></div>
-								</div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 offset-md-2"><label for="originPwd"
+                                                                                 class=" form-control-label">原始密码</label>
+                                    </div>
+                                    <div class="col-12 col-md-6"><input type="password" id="originPwd"
+                                                                        name="originPwd" placeholder="原始密码"
+                                                                        class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 offset-md-2"><label for="pwd"
+                                                                                 class=" form-control-label">新密码</label>
+                                    </div>
+                                    <div class="col-12 col-md-6"><input type="password" id="pwd"
+                                                                        name="pwd" placeholder="新密码"
+                                                                        class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3 offset-md-2"><label for="confirmPwd"
+                                                                                 class=" form-control-label">确认密码</label>
+                                    </div>
+                                    <div class="col-12 col-md-6"><input type="password" id="confirmPwd"
+                                                                        name="confirmPwd" placeholder="确认密码"
+                                                                        class="form-control"></div>
+                                </div>
                                 <hr>
                                 <div class="card-text text-lg-center">
-									<button type="button" class="btn btn-outline-secondary">提交修改</button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="updatePwd()">提交修改</button>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +185,39 @@
           $('#bootstrap-data-table-export').DataTable();
       } );
   </script>
+<script>
+    function updatePwd() {
+        const data = new FormData();
 
+        data.append("originPwd", $('#originPwd').val());
+        data.append("pwd", $('#pwd').val());
+        data.append("confirmPwd", $('#confirmPwd').val());
+
+        if(!data.get("originPwd")){show("初始密码不能为空！")}
+        else if(!data.get("pwd")){show("新密码不能为空！")}
+        else if(!data.get("confirmPwd")){show("确认密码不能为空！")}
+        else if(data.get("pwd") !== data.get("confirmPwd")){show("两次输入密码不一致！")}
+        else{
+            $.ajax({
+                url: "/toilet/admin/pwd/update",
+                type: "POST",
+                dataType: "json",
+                data: data,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    if (result.success) {
+                        show("更新成功！");
+                    } else {
+                        show(result.errorMessage);
+                    }
+                }
+            });
+        }
+    }
+</script>
 
 </body>
 </html>

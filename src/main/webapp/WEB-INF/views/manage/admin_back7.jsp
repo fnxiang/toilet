@@ -61,6 +61,10 @@
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-cogs"></i>模式管理</a>
                 </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back5"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cog" aria-hidden="true"></i>修改密码</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

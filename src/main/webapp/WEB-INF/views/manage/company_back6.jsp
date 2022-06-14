@@ -62,6 +62,10 @@
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品信息录入</a>
                 </li>
                 <li>
+                    <a href="${pageContext.request.contextPath}/toPage?url=company_back_modeInsert"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-info-circle"></i>模式信息录入</a>
+                </li>
+                <li>
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back4"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
                 </li>
@@ -78,7 +82,9 @@
 
 <div id="right-panel" class="right-panel">
 <%--    fixme productDTO为空--%>
-    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");%>
+    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");
+        CompanyDTO companyDTO = (CompanyDTO)request.getAttribute("company");
+    %>
     <%--获取路径用于显示图片和文件--%>
     <% String path = request.getContextPath();
         String basePath = request.getScheme() + "://"
@@ -226,7 +232,7 @@
                                                         <div class="col-12 col-md-9"><input type="text" id="address"
                                                                                             name="address"
                                                                                             placeholder=""
-                                                                                            value=""
+                                                                                            value="<%=companyDTO.getCompanyAddress()%>"
                                                                                             class="form-control">
                                                         </div>
                                                     </div>

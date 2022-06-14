@@ -1,10 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang=""> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,17 +11,15 @@
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/manage/res/logo.ico">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/normalize.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/themify-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/pe-icon-7-filled.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/flag-icon.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/static/manage/assets/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/flag-icon.min.css"><link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
@@ -39,23 +36,20 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="${pageContext.request.contextPath}/company/index"
-                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>我的申请</a>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=company_back2"
-                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>企业基本信息</a>
+                    <a href=".${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=company_back3"
-                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品信息录入</a>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=company_back_modeInsert"
-                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-info-circle"></i>模式信息录入</a>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>模式管理</a>
                 </li>
                 <li class="active">
-                    <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>修改密码</a>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back5"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cog" aria-hidden="true"></i>修改密码</a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -69,16 +63,23 @@
 <div id="right-panel" class="right-panel">
 
     <!-- Header-->
-    <jsp:include page="company_header.jsp"/>
+    <header id="header" class="header">
+        <jsp:include page="admin_banner.jsp"/>
+    </header><!-- /header -->
     <!-- Header-->
-
+    <style>
+        label.xrequired:before {
+            content: '* ';
+            color: red;
+        }
+    </style>
     <div class="breadcrumbs">
         <div class="breadcrumbs-inner">
             <div class="row m-0">
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h1>企业后台管理系统</h1>
+                            <h1>管理员后台管理系统</h1>
                         </div>
                     </div>
                 </div>
@@ -86,8 +87,7 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="${pageContext.request.contextPath}/company/index">后台</a></li>
-                                <li class="active">修改密码</li>
+                                <li><a href="${pageContext.request.contextPath}/admin/index">后台</a></li>
                             </ol>
                         </div>
                     </div>
@@ -102,36 +102,39 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="card">
                         <div class="card-header">
-                            <i class="fa fa-user"></i><strong class="card-title pl-2">修改密码</strong>
+                            <i class="fa fa-user"></i><strong class="card-title pl-2">分配用户</strong>
                         </div>
                         <div class="card-body">
                             <div class="row form-group">
-                                <div class="col col-md-3 offset-md-2"><label for="originPwd"
-                                                                             class=" form-control-label">原始密码</label>
+                                    <div class="col col-md-3 offset-md-2"><label for="typeSelect"
+                                                                     class=" form-control-label xrequired">用户类型：</label>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <select name="typeSelect" id="typeSelect" class="form-control xrequired">
+                                            <option value="professor" selected="selected">专家用户</option>
+                                            <option value="company">企业用户</option>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3 offset-md-2"><label for="zhanghao"
+                                                                             class=" form-control-label xrequired">账号</label>
                                 </div>
-                                <div class="col-12 col-md-6"><input type="password" id="originPwd"
-                                                                    name="originPwd" placeholder="原始密码"
+                                <div class="col-12 col-md-6"><input type="password" id="zhanghao"
+                                                                    name="zhanghao" placeholder="登录账号"
                                                                     class="form-control"></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3 offset-md-2"><label for="pwd"
-                                                                             class=" form-control-label">新密码</label>
+                                                                             class=" form-control-label xrequired">密码</label>
                                 </div>
                                 <div class="col-12 col-md-6"><input type="password" id="pwd"
-                                                                    name="pwd" placeholder="新密码"
-                                                                    class="form-control"></div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3 offset-md-2"><label for="confirmPwd"
-                                                                             class=" form-control-label">确认密码</label>
-                                </div>
-                                <div class="col-12 col-md-6"><input type="password" id="confirmPwd"
-                                                                    name="confirmPwd" placeholder="确认密码"
+                                                                    name="pwd" placeholder="登录密码"
                                                                     class="form-control"></div>
                             </div>
                             <hr>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="updatePwd()">提交修改</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="assign()">确认分配</button>
                             </div>
                         </div>
                     </div>
@@ -155,6 +158,7 @@
             </div>
         </div>
     </footer>
+
     <%--弹窗--%>
     <jsp:include page="../common/dialog.jsp"/>
     <%--弹窗--%>
@@ -184,27 +188,24 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#bootstrap-data-table-export').DataTable();
-    });
-
+    } );
 </script>
-
 <script>
-    function updatePwd() {
+    function assign() {
         const data = new FormData();
-
-        data.append("originPwd", $('#originPwd').val());
+        var myselect = document.getElementById("typeSelect");
+        var selected_val = myselect.options[myselect.selectedIndex].value;
+        data.append("userType", encodeURI(selected_val));
+        data.append("account", $('#zhanghao').val());
         data.append("pwd", $('#pwd').val());
-        data.append("confirmPwd", $('#confirmPwd').val());
-
-        if(!data.get("originPwd")){show("初始密码不能为空！")}
-        else if(!data.get("pwd")){show("新密码不能为空！")}
-        else if(!data.get("confirmPwd")){show("确认密码不能为空！")}
-        else if(data.get("pwd") !== data.get("confirmPwd")){show("两次输入密码不一致！")}
+        if(!data.get("userType")){show("用户类型不能为空！")}
+        else if(!data.get("account")){show("账号不能为空！")}
+        else if(!data.get("pwd")){show("密码不能为空！")}
         else{
             $.ajax({
-                url: "/toilet/company/pwd/update",
+                url: "/toilet/admin/assign",
                 type: "POST",
                 dataType: "json",
                 data: data,
@@ -214,7 +215,7 @@
                 processData: false,
                 success: function (result) {
                     if (result.success) {
-                        show("更新成功！");
+                        show("分配成功！");
                     } else {
                         show(result.errorMessage);
                     }
@@ -223,5 +224,6 @@
         }
     }
 </script>
+
 </body>
 </html>

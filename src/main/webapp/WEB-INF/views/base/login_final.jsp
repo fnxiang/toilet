@@ -51,7 +51,7 @@
                             <input class="form-control" type="password" value="" id="accpassword">
                         </div>
                         <div class="form-group text-right">
-                            <a href="" target="_blank">忘记密码</a>
+                            <a href="javascript:window.location.href='${pageContext.request.contextPath}/toPage?url=forget_password'" target="_blank">忘记密码</a>
                         </div>
                         <div class="form-group text-right">
                             <a type="button" onclick="goRegister()" href="javascript:;">没有账号？点击注册</a>

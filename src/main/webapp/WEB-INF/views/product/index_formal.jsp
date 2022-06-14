@@ -20,6 +20,7 @@
     <title>厕所选型系统</title>
 
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/product/res/logo.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/dialog.css">
     <link href="${pageContext.request.contextPath}/static/product/css/grid.css" media="screen" rel="stylesheet"
           type="text/css">
     <link href="${pageContext.request.contextPath}/static/product/css/style.css" media="screen" rel="stylesheet"
@@ -196,6 +197,21 @@
                 <!-- .container_12 -->
             </div>
 
+            <div id="zhuce" style="position: absolute; left: 720px; top: 400px; background: #99999975; height: 100px; display: none">
+                <!-- 弹窗遮罩层 -->
+                <div class="aclose">
+                    <a class="close" href="javascript:choseClose();">&times;</a>
+                </div>
+                <div class="contain" id="dialog">
+                    <a href='${pageContext.request.contextPath}/toBasePage?url=register_final'
+                       role="button">企业注册&nbsp;&nbsp;&nbsp;&nbsp;
+                    </a>
+                    <a href='${pageContext.request.contextPath}/toBasePage?url=register_professor'
+                       role="button">专家注册
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -297,17 +313,16 @@
     });
     $page.on("click", 'span', function (e) {
         var pagenow = parseInt(e.target.innerText);
-        if (pagenow !== pageNow) {
-            findpage(pageNow);
-            pageSet(total, pageNow);
+        if (pagenow === pagenow) {
+            findpage(pagenow);
+            pageSet(total, pagenow);
         } else {
+            if(e.target.innerText === '上一页'){
+                getprepage();
+            }else{
+                getnextpage();
+            }
         }
-    });
-    $('#up').click(function () { //上一页
-        getprepage();
-    });
-    $('#down').click(function () { //下一页
-        getnextpage();
     });
 
     function pageSet(total, pageNow) {
