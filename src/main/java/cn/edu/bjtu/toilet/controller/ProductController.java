@@ -140,12 +140,16 @@ public class ProductController {
 
     private ProductSortRequest buildSortProductRequest(HttpServletRequest request) throws Exception {
         Map<String, String> params = ParameterUtil.resolveParams(request);
-        if (params.size() == 0) {
-            throw new ToiletBizException("参数不能为空", -1);
-        }
+
         ProductSortRequest sortRequest = new ProductSortRequest();
-        sortRequest.setIsDesc(params.get("isDesc").equals("true"));
-        sortRequest.setSortBy(params.get("sortBy"));
+
+        if (params.size() != 0) {
+            sortRequest.setIsDesc(params.get("isDesc").equals("true"));
+            sortRequest.setSortBy(params.get("sortBy"));
+        } else {
+            sortRequest.setIsDesc(false);
+            sortRequest.setSortBy("id");
+        }
 
         if (!StringUtils.isEmpty(params.get("product_search_condition"))) {
             ProductSearchConditionsDTO searchCondition = JSON.parseObject(params.get("product_search_condition"), ProductSearchConditionsDTO.class);
