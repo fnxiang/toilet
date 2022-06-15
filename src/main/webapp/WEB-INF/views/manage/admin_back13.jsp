@@ -112,7 +112,7 @@
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h1>专家分配</h1>
+                            <h1>管理员后台管理系统</h1>
                         </div>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">模式审核</strong>
+                            <strong class="card-title">专家分配</strong>
                         </div>
                         <div class="card-body">
                             <div id="newModeAdding" style="">
