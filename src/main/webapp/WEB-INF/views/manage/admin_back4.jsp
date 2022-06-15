@@ -2,6 +2,7 @@
 <%@ page import="cn.edu.bjtu.toilet.utils.DateUtil" %>
 <%@ page import="java.util.List" %>
 <%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
+<%@ page import="org.apache.commons.lang3.StringUtils" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -129,7 +130,7 @@
 										<td class="text-center">
 											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=<%=list.get(i).getId()%>'"> 查看详情</a>
                                             <%AuditStatus status_now = list.get(i).getStatus();%>
-                                            <%if(status_now.equals(AuditStatus.APPROVAL) || status_now.equals(AuditStatus.DENY) || status_now.equals(AuditStatus.PROCESSING)){}else{%>
+                                            <%if (list.get(i).getStatus().equals(AuditStatus.PROCESSING) && StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
 											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=<%=list.get(i).getId()%>'"> 分配专家</a>
                                             <%}%>
 											<a type="button" class="btn btn-link fa fa-trash-o" onclick="del(<%=list.get(i).getId()%>)"> 删除</a>
