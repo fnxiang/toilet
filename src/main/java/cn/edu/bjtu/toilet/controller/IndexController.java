@@ -8,12 +8,14 @@ import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.request.CompanyRegisterRequest;
+import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.domain.response.LoginResponse;
 import cn.edu.bjtu.toilet.domain.request.ProfessorRegisterRequest;
 import cn.edu.bjtu.toilet.domain.response.RegisterResponse;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.service.CompanyService;
 import cn.edu.bjtu.toilet.service.UserService;
+import cn.edu.bjtu.toilet.service.request.ResetPasswordRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -58,45 +60,49 @@ public class IndexController {
 
     /**
      * page handle
-     * */
+     */
 
     @RequestMapping(value = "/login/index")
-    public String index(){
+    public String index() {
         return LOGIN_INDEX;
     }
 
     @RequestMapping(value = "/register_company")
-    public String registerCompany(){
+    public String registerCompany() {
         return REGISTER_INDEX;
     }
 
+    @RequestMapping(value = "/forget")
+    public String findPassword() {
+        return FORGET_INDEX;
+    }
 
     @RequestMapping(value = "/register_professor")
-    public String registerProfessor(){
+    public String registerProfessor() {
         return PROF_REGISTER_INDEX;
     }
 
     @RequestMapping(value = "/toBasePage")
-    public String toPage(HttpServletRequest request){
+    public String toPage(HttpServletRequest request) {
         String url = request.getParameter("url");
         url = BASE + url;
         return url;
     }
 
     @RequestMapping(value = "/logout")
-    public String logout(HttpServletRequest request){
-       request.getSession().setAttribute("uId", "");
-       request.getSession().setAttribute("role", "");
+    public String logout(HttpServletRequest request) {
+        request.getSession().setAttribute("uId", "");
+        request.getSession().setAttribute("role", "");
         return LOGIN_INDEX;
     }
 
     /**
      * request handle
-     * */
+     */
 
     @RequestMapping(value = "/login")
     @ResponseBody
-    public LoginResponse login(HttpServletRequest request, HttpServletResponse response){
+    public LoginResponse login(HttpServletRequest request, HttpServletResponse response) {
 
         try {
             Map<String, String> params = resolveParams(request);
@@ -116,18 +122,18 @@ public class IndexController {
 
             UserStatus status = UserStatus.codeOf(userStatusCode);
 
-            if (status == null || status.equals(UserStatus.FORBIDDEN)){
+            if (status == null || status.equals(UserStatus.FORBIDDEN)) {
                 throw new ToiletBizException("用户状态错误或禁止登录！", BIZ_ERROR);
             }
 
-            if (status.equals(UserStatus.WAIT_APPROVE)){
+            if (status.equals(UserStatus.WAIT_APPROVE)) {
                 throw new ToiletBizException("该账号正在审核中！", BIZ_ERROR);
             }
 
             request.getSession().setAttribute("uId", params.get("accountId"));
             request.getSession().setAttribute("role", userRole.getRole());
 
-            String forwardPath ="/toilet/"+ userRole.getRole() + "/index";
+            String forwardPath = "/toilet/" + userRole.getRole() + "/index";
 
             return LoginResponse.success(forwardPath);
         } catch (ToiletBizException | ToiletSystemException e) {
@@ -142,7 +148,7 @@ public class IndexController {
 
     @RequestMapping(value = "/health")
     @ResponseBody
-    public String registerUser(){
+    public String registerUser() {
         return "success";
     }
 
@@ -151,7 +157,8 @@ public class IndexController {
     public RegisterResponse registerCompany(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            CompanyRegisterRequest companyRegisterRequest =  resolveRequestParams(request);;
+            CompanyRegisterRequest companyRegisterRequest = resolveRequestParams(request);
+            ;
             if (Objects.isNull(companyRegisterRequest)
                     || StringUtils.isEmpty(companyRegisterRequest.getEmail())
                     || StringUtils.isEmpty(companyRegisterRequest.getPassword())) {
@@ -167,7 +174,7 @@ public class IndexController {
 
             request.getSession().setAttribute("uId", companyDO.getEmail());
             request.getSession().setAttribute("role", userRole.getRole());
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("message", "文件上传失败");
             return RegisterResponse.failed(e.getMessage());
@@ -213,6 +220,42 @@ public class IndexController {
         return RegisterResponse.success();
     }
 
+    @RequestMapping("/pwd/reset")
+    @ResponseBody
+    private CommandResponse resetPassword(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+            ResetPasswordRequest resetPasswordRequest = buildResetPassowrdRequest(params);
+            CompanyDO companyDO = companyService.queryCompanyByEmail(resetPasswordRequest.getEmail());
+            UserDO userDO = userService.queryUserByEmail(resetPasswordRequest.getEmail());
+
+
+            if (!Objects.isNull(companyDO)) {
+                companyService.resetCompanyPassword(resetPasswordRequest);
+            } else if (!Objects.isNull(userDO)) {
+                userService.resetUserPassword(resetPasswordRequest);
+            } else {
+                return CommandResponse.failed("User not found!");
+            }
+            return CommandResponse.success();
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("reset password failed! error: {}", e.getMessage());
+            return CommandResponse.failed(String.format("register failed! error: %s", e.getMessage()));
+        } catch (Exception e) {
+            LOG.error("reset password failed!");
+            return CommandResponse.failed("register failed!");
+        }
+    }
+
+    private ResetPasswordRequest buildResetPassowrdRequest(Map<String, String> params) {
+        ResetPasswordRequest resetPasswordRequest = new ResetPasswordRequest();
+        resetPasswordRequest.setCode(params.get("code"));
+        resetPasswordRequest.setEmail(params.get("requestEmail"));
+        resetPasswordRequest.setPassword(params.get("pwd"));
+        resetPasswordRequest.setConfirmPassword(params.get("confirmPwd"));
+        return resetPasswordRequest;
+    }
+
     private CompanyRegisterRequest resolveRegisterParams(Map<String, String> params) {
 
         CompanyRegisterRequest companyRegisterRequest = new CompanyRegisterRequest();
@@ -232,7 +275,7 @@ public class IndexController {
 
         List<String> address = Lists.newArrayList(companyAddress.split(","));
 
-        if (CollectionUtils.isEmpty(address) || address.size()<3) {
+        if (CollectionUtils.isEmpty(address) || address.size() < 3) {
             return null;
         }
 
@@ -260,7 +303,7 @@ public class IndexController {
         ServletFileUpload upload = new ServletFileUpload(factory);
 
         List<FileItem> items = upload.parseRequest(request);
-        String uploadPath = request.getServletContext().getRealPath(".")+File.separator+UPLOAD_DIRECTORY;
+        String uploadPath = request.getServletContext().getRealPath(".") + File.separator + UPLOAD_DIRECTORY;
 
         File uploadDir = new File(uploadPath);
         System.out.println(uploadPath);
@@ -279,7 +322,7 @@ public class IndexController {
                 String type = name.substring(name.lastIndexOf('.') + 1);
 
                 if (!allowTypes.contains(type)) {
-                   LOG.error("文件格式不支持");
+                    LOG.error("文件格式不支持");
                 } else {
                     int start = name.lastIndexOf("\\");
                     String filename = name.substring(start + 1);
@@ -302,7 +345,7 @@ public class IndexController {
         Map<String, String> params = new HashMap<>();
 
         for (FileItem item : items) {
-            if(item.isFormField()) {
+            if (item.isFormField()) {
                 params.put(item.getFieldName(), decodeJsString(item.getString()));
             }
         }

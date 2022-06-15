@@ -1,6 +1,7 @@
 package cn.edu.bjtu.toilet.service.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.constant.Constants;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
@@ -9,7 +10,10 @@ import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.UserDTO;
 import cn.edu.bjtu.toilet.domain.request.ProfessorRegisterRequest;
 import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
+import cn.edu.bjtu.toilet.helper.RedisHelper;
 import cn.edu.bjtu.toilet.service.UserService;
+import cn.edu.bjtu.toilet.service.request.ResetPasswordRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +34,9 @@ public class UserServiceImpl implements UserService {
     @Resource
     private CompanyDao companyDao;
 
+    @Resource
+    private RedisHelper redisHelper;
+
     @Override
     public UserDO queryUserByEmail(String email) {
         return userDao.getUserByEmail(email);
@@ -48,6 +55,32 @@ public class UserServiceImpl implements UserService {
         UserDO userDO = userDao.getUserById(Integer.valueOf(userId));
         userDO.setGmtModified(new Date());
         userDO.setDeleted(true);
+        userDao.updateUserDO(userDO);
+    }
+
+    @Override
+    public void resetUserPassword(ResetPasswordRequest resetPasswordRequest) {
+        if (StringUtils.isEmpty(resetPasswordRequest.getEmail()) || StringUtils.isEmpty(resetPasswordRequest.getCode())) {
+            throw new ToiletBizException("user email and code can not be null", -1);
+        }
+
+        String verifyCode = redisHelper.getCacheObject(Constants.MAIL_CODE_KEY + resetPasswordRequest.getEmail());
+
+        if (StringUtils.isEmpty(verifyCode) || !verifyCode.equals(resetPasswordRequest.getCode())) {
+            throw new ToiletBizException("code is not correct or expired", -1);
+        }
+
+        UserDO userDO = userDao.getUserByEmail(resetPasswordRequest.getEmail());
+
+        if (Objects.isNull(userDO)) {
+            throw new ToiletBizException("user not found", -1);
+        }
+
+        if (!resetPasswordRequest.getPassword().equals(resetPasswordRequest.getConfirmPassword())) {
+            throw new ToiletBizException("password is not consist!", -1);
+        }
+
+        userDO.setPassword(Base64.getEncoder().encodeToString(resetPasswordRequest.getPassword().getBytes()));
         userDao.updateUserDO(userDO);
     }
 

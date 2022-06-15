@@ -1,6 +1,7 @@
 package cn.edu.bjtu.toilet.service.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.constant.Constants;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.dao.CompanyDao;
@@ -8,7 +9,10 @@ import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.domain.dto.CompanyDTO;
 import cn.edu.bjtu.toilet.domain.request.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
+import cn.edu.bjtu.toilet.helper.RedisHelper;
 import cn.edu.bjtu.toilet.service.CompanyService;
+import cn.edu.bjtu.toilet.service.request.ResetPasswordRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,9 @@ public class CompanyServiceImpl implements CompanyService {
     @Resource
     private CompanyDao companyDao;
 
+    @Resource
+    private RedisHelper redisHelper;
+
     @Override
     public CompanyDO queryCompanyByEmail(String email) {
         return companyDao.getCompanyByEmail(email);
@@ -35,6 +42,32 @@ public class CompanyServiceImpl implements CompanyService {
         return companyDao.getCompanyListByRole(UserRole.COMPANY_USER.getCode()).stream()
                 .map(CompanyConverter::toCompanyDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void resetCompanyPassword(ResetPasswordRequest resetPasswordRequest) {
+        if (StringUtils.isEmpty(resetPasswordRequest.getEmail()) || StringUtils.isEmpty(resetPasswordRequest.getCode())) {
+            throw new ToiletBizException("company email and code can not be null", -1);
+        }
+
+        String verifyCode = redisHelper.getCacheObject(Constants.MAIL_CODE_KEY + resetPasswordRequest.getEmail());
+
+        if (StringUtils.isEmpty(verifyCode) || !verifyCode.equals(resetPasswordRequest.getCode())) {
+            throw new ToiletBizException("code is not correct or expired", -1);
+        }
+
+        CompanyDO companyDO = companyDao.getCompanyByEmail(resetPasswordRequest.getEmail());
+
+        if (Objects.isNull(companyDO)) {
+            throw new ToiletBizException("user not found", -1);
+        }
+
+        if (!resetPasswordRequest.getPassword().equals(resetPasswordRequest.getConfirmPassword())) {
+            throw new ToiletBizException("password is not consist!", -1);
+        }
+
+        companyDO.setPassword(Base64.getEncoder().encodeToString(resetPasswordRequest.getPassword().getBytes()));
+        companyDao.updateCompanyDO(companyDO);
     }
 
     @Override

@@ -1,0 +1,96 @@
+package cn.edu.bjtu.toilet.service.impl;
+
+import cn.edu.bjtu.toilet.constant.Constants;
+import cn.edu.bjtu.toilet.dao.UserDao;
+import cn.edu.bjtu.toilet.dao.domain.UserDO;
+import cn.edu.bjtu.toilet.domain.response.CommandResponse;
+import cn.edu.bjtu.toilet.helper.RedisHelper;
+import cn.edu.bjtu.toilet.service.MailService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+@Component
+public class MailServiceImpl implements MailService {
+
+    @Resource
+    private UserDao userDao;
+
+    @Resource
+    private JavaMailSender mailSender;
+
+    @Resource
+    private RedisHelper redisHelper;
+
+    @Value("${spring.mail.username}")
+    private String mailUserName;
+
+    @Value("${mail.code.overtime}")
+    private Integer overtime;
+
+    /**
+     * 获取重置密码的验证码
+     *
+     * @param mailAddress 用户邮箱
+     * @return
+     */
+    @Override
+    public CommandResponse getCode(String mailAddress) {
+        // 非空校验
+        if (null == mailAddress || "".equals(mailAddress)) return CommandResponse.failed("邮箱不能为空！");
+
+        // 账号存在校验
+        UserDO userDO = userDao.getUserByEmail(mailAddress);
+        if (null == userDO) return CommandResponse.success();
+        if (!userDO.getEmail().equals(mailAddress)) return CommandResponse.failed("输入邮箱和预留邮箱不一致！");
+
+
+        String verifyCode = redisHelper.getCacheObject(Constants.MAIL_CODE_KEY + mailAddress);
+        if (verifyCode == null) {
+            verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);//生成短信验证码
+        } else {
+            return CommandResponse.success();
+        }
+        // 验证码存入redis并设置过期时间
+        redisHelper.setCacheObject(Constants.MAIL_CODE_KEY + mailAddress, verifyCode, overtime, TimeUnit.MINUTES);
+
+        // 编写邮箱内容
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<html><head><title></title></head><body>");
+        stringBuilder.append("您好<br/>");
+        stringBuilder.append("您的验证码是：").append(verifyCode).append("<br/>");
+        stringBuilder.append("您可以复制此验证码并返回至厕所选型系统找回密码页面，以验证您的邮箱。<br/>");
+        stringBuilder.append("此验证码只能使用一次，在");
+        stringBuilder.append("5");
+        stringBuilder.append("分钟内有效。验证成功则自动失效。<br/>");
+        stringBuilder.append("如果您没有进行上述操作，请忽略此邮件。");
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+
+        // 发件配置并发送邮件
+        try {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            //这里只是设置username 并没有设置host和password，因为host和password在springboot启动创建JavaMailSender实例的时候已经读取了
+            mimeMessageHelper.setFrom(mailUserName);
+            // 用户的邮箱地址
+            mimeMessageHelper.setTo(mailAddress);
+            mimeMessageHelper.addBcc(new InternetAddress("654879744@qq.com","接收人","utf-8"));
+            // 邮件的标题
+            mimeMessage.setSubject("厕所选型系统-找回密码");
+            // 上面所拼接的邮件内容
+            mimeMessageHelper.setText(stringBuilder.toString(), true);
+            mailSender.send(mimeMessage);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return CommandResponse.success();
+    }
+}

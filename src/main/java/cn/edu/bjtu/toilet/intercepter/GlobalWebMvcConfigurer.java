@@ -64,7 +64,9 @@ public class GlobalWebMvcConfigurer implements WebMvcConfigurer {
                 .excludePathPatterns("/toBasePage/**")
                 .excludePathPatterns("/upload/**")
                 .excludePathPatterns("/toProductPage/**")
-                .excludePathPatterns("/static/**");
+                .excludePathPatterns("/static/**")
+                .excludePathPatterns("/mail/**")
+                .excludePathPatterns("/forget");
 //        interceptorRegistry.addInterceptor(authInterceptor).addPathPatterns("/**")
 //                .excludePathPatterns("/")
 //                .excludePathPatterns("/login")

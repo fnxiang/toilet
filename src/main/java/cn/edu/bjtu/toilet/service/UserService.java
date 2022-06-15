@@ -5,6 +5,7 @@ import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.UserDTO;
 import cn.edu.bjtu.toilet.domain.request.ProfessorRegisterRequest;
 import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
+import cn.edu.bjtu.toilet.service.request.ResetPasswordRequest;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface UserService {
     List<UserDO> queryAllUser(UserRole userCode);
 
     void deleteUserById(String userId);
+
+    void resetUserPassword(ResetPasswordRequest resetPasswordRequest);
 }

@@ -18,6 +18,8 @@ public class PageIndexPathConstants {
 
     public static final String REGISTER_INDEX = "/base/register_final";
 
+    public static final String FORGET_INDEX = "/base/forget_password";
+
     public static final String PROF_REGISTER_INDEX = "/base/register_professor";
 
     public static final String SEARCH_INDEX = "/product/model_list";
