@@ -112,7 +112,7 @@
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h1>专家分配</h1>
+                            <h1>查看详情</h1>
                         </div>
                     </div>
                 </div>
