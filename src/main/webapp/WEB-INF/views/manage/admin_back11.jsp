@@ -112,7 +112,7 @@
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h1>查看详情</h1>
+                            <h1>管理员后台管理系统</h1>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,6 @@
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
                                 <li><a href="${pageContext.request.contextPath}/admin/index">后台</a></li>
-                                <li class="active">专家分配</li>
                             </ol>
                         </div>
                     </div>
@@ -137,7 +136,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">模式审核</strong>
+                            <strong class="card-title">模式详情</strong>
                         </div>
                         <div class="card-body">
                             <div id="newModeAdding" style="">
