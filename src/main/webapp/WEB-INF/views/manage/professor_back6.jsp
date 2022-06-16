@@ -43,7 +43,7 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/professor/index" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>产品信息审核列表</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>模式审核列表</a>
                 </li>
                 <li>

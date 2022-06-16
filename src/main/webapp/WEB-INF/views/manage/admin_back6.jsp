@@ -54,7 +54,7 @@
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-tasks"></i>产品管理</a>
                 </li>
