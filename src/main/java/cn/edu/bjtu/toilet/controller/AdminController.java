@@ -10,6 +10,7 @@ import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.*;
+import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
 import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.service.*;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
@@ -212,6 +213,28 @@ public class AdminController {
         return response;
     }
 
+    @RequestMapping(value = "/pwd/update")
+    @ResponseBody
+    public CommandResponse updatePwd(HttpServletRequest request) {
+        CommandResponse response = new CommandResponse();
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String email = request.getSession().getAttribute("uId").toString();
+
+            UserUpdateRequest updateRequest = buildUpdateRequest(params);
+            updateRequest.setEmail(email);
+            userService.updatePassword(updateRequest);
+            response.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("error happened: {}", e.getMessage());
+            return CommandResponse.failed(e.getMessage());
+        }
+
+        return response;
+    }
+
+
     @RequestMapping("/toPage")
     public String toPage(HttpServletRequest request){
         String url = request.getParameter("url");
@@ -273,6 +296,14 @@ public class AdminController {
 
         url = MANAGE_BASE + url;
         return url;
+    }
+
+    private UserUpdateRequest buildUpdateRequest(Map<String, String> params) {
+        return UserUpdateRequest.builder()
+                .originPassword(params.get("originPwd"))
+                .password(params.get("pwd"))
+                .confirmPassword(params.get("confirmPwd"))
+                .build();
     }
 
     private PatternSortRequest buildPatternQueryRequest(String email) {

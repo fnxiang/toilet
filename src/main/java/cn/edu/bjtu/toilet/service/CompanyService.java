@@ -4,6 +4,7 @@ import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.domain.dto.CompanyDTO;
 import cn.edu.bjtu.toilet.domain.request.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
+import cn.edu.bjtu.toilet.service.request.ResetPasswordRequest;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface CompanyService {
     List<CompanyDTO> queryAllCompany();
 
     void deleteCompany(String companyId);
+
+    void resetCompanyPassword(ResetPasswordRequest resetPasswordRequest);
 }

@@ -90,10 +90,11 @@
 <script>
     //短信验证码倒计时
     function getCode(){
-        var btn = $('#getcode')
+        sendCode();
+        var btn = $('#getcode');
         var number = 60;
         var countdown = function(){
-            if (number == 0) {
+            if (number === 0) {
                 btn.attr("disabled",false);
                 btn.attr("value", "发送验证码");
                 number = 60;
@@ -104,8 +105,30 @@
                 number--;
             }
             setTimeout(countdown,1000);
-        }
+        };
         setTimeout(countdown,1000);
+    }
+
+    function sendCode() {
+        var data = new FormData();
+        data.append("sendAddress", $('#email').val());
+        $.ajax({
+            url: "/toilet/mail/getCode",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    show("验证码发送成功！");
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
     }
 
 

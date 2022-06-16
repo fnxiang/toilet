@@ -165,6 +165,7 @@ public class CompanyController {
 
             ToiletPatternDTO toiletPatternDTO = buildPatternDTO(params);
             toiletPatternDTO.setSource(request.getSession().getAttribute("uId").toString());
+            toiletPatternDTO.setStatus(AuditStatus.APPROVAL);
             toiletPatternDTO = productService.savePattern(toiletPatternDTO);
             if (Objects.isNull(toiletPatternDTO)) {
                 return ModeResponse.failed("save pattern failed");
