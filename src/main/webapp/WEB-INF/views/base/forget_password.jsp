@@ -68,7 +68,7 @@
                         <div class="form-group">
                             <input id="rePWD" class="form-control" name="rePWD" value="" required placeholder="请再次输入密码">
                         </div>
-                        <div class="form-group m-0">
+                        <div class="form-group text-center">
                             <button  class="btn btn-primary" onclick="commit()">
                                 确认修改
                             </button>
@@ -132,11 +132,13 @@
     }
 
 
+    var code;
     // 提交验证码
     function resetPWD() {
         var data = new FormData();
         data.append("email", $('#email').val());
         data.append("code", $('#code').val());
+        code =  $('#code').val();
         $.ajax({
             url: "/toilet/verifyCode",
             type: "POST",
@@ -167,6 +169,7 @@
         else{
             data.append("email", $('#email').val());
             data.append("PWD", newPWD);
+            data.append("code", code);
             $.ajax({
                 url: "/toilet/changePWD",
                 type: "POST",
