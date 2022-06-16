@@ -196,7 +196,7 @@
                                                                                             name="text-input"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value=<%=productDTO.getProductParameters().getPrice() * 10000%>
+                                                                                            value=<%=productDTO.getProductParameters().getPrice()%>
                                                                                                     disabled>
 
                                                         </div>
