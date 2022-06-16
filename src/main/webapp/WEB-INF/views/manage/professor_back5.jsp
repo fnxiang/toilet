@@ -334,6 +334,7 @@
                                                     <div class="col col-md-4"><label for="chicun_chang"
                                                                                      class="form-control-label">尺寸（长*宽*高mm）:</label>
                                                     </div>
+                                                    <div class="col-12 col-md-1"></div>
                                                     <div class="col-12 col-md-1"><label
                                                             class="form-control-label">长：</label></div>
                                                     <div class="col-12 col-md-1"><input type="text"
