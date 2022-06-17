@@ -597,7 +597,7 @@
                                     </div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder=""
-                                                                           class="form-control"><%=content%></textarea></div>
+                                                                           class="form-control" <%if(status.equals("审核中") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>><%=content%></textarea></div>
                                 </div>
                             </form>
                             <div class="card-text text-lg-center">
