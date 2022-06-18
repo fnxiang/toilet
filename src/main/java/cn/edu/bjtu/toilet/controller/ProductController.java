@@ -7,7 +7,6 @@ import cn.edu.bjtu.toilet.domain.dto.ProductSearchConditionsDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.domain.request.ProductSortRequest;
 import cn.edu.bjtu.toilet.domain.response.ProductQueryResponse;
-import cn.edu.bjtu.toilet.service.AuditService;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.alibaba.fastjson.JSON;
@@ -31,10 +30,6 @@ public class ProductController {
 
     @Resource
     private ProductService productService;
-
-    @Resource
-    private AuditService auditService;
-
 
     @RequestMapping("/")
     public String index(HttpServletRequest request) {
@@ -166,7 +161,6 @@ public class ProductController {
         sortRequest.setAuditStatus(AuditStatus.APPROVAL);
         return sortRequest;
     }
-
 
 
 }

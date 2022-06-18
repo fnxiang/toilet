@@ -8,6 +8,7 @@ import cn.edu.bjtu.toilet.domain.response.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.service.AuditService;
 import cn.edu.bjtu.toilet.service.ProductService;
+import cn.edu.bjtu.toilet.service.StatusCheckService;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.google.common.collect.Lists;
@@ -39,6 +40,9 @@ public class CompanyController {
 
     @Resource
     private AuditService auditService;
+
+    @Resource
+    private StatusCheckService statusCheckService;
 
     @RequestMapping("/product/entry")
     @ResponseBody
@@ -107,6 +111,8 @@ public class CompanyController {
 
             ToiletProductDTO productDTO = productService.queryToiletById(productId);
 
+            statusCheckService.transformProductToStatus(productDTO, auditStatus);
+
             productDTO.setStatus(auditStatus);
 
             productService.updateProduct(productDTO);
@@ -115,7 +121,7 @@ public class CompanyController {
             LOG.error("update product error with {}", e.getMessage());
             return ProductResponse.failed("update product error with " + e.getMessage());
         } catch (Exception e) {
-            LOG.error("update products failed : {}", e.getStackTrace());
+            LOG.error("update products failed : {}", e.getMessage());
             return ProductResponse.failed("update product error with " + e.getMessage());
         }
 
