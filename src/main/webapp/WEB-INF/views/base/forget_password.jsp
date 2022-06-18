@@ -106,7 +106,7 @@
         var data = new FormData();
         data.append("sendAddress", $('#email').val());
         $.ajax({
-            url: "/toilet/mail/getCode",
+            url: "/toilet/mail/getForgetCode",
             type: "POST",
             dataType: "json",
             data: data,
@@ -127,16 +127,18 @@
     // 提交验证码
     function resetPWD() {
         var data = new FormData();
-        data.append("email", $('#email').val());
+        data.append("requestEmail", $('#email').val());
         data.append("code", $('#code').val());
         var newPWD = $('#newPWD').val();
         var rePWD = $('#rePWD').val();
-        if(newPWD != rePWD){
+        data.append("pwd", newPWD);
+        data.append("confirmPwd", rePWD);
+        if(newPWD !== rePWD){
             show("两次输入密码不一致！");
         }
         else{
         $.ajax({
-            url: "/toilet/verifyCode",
+            url: "/toilet/pwd/reset",
             type: "POST",
             dataType: "json",
             data: data,

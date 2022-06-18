@@ -231,7 +231,7 @@ public class IndexController {
 
     @RequestMapping("/pwd/reset")
     @ResponseBody
-    private CommandResponse resetPassword(HttpServletRequest request) {
+    public CommandResponse resetPassword(HttpServletRequest request) {
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request);
             ResetPasswordRequest resetPasswordRequest = buildResetPassowrdRequest(params);

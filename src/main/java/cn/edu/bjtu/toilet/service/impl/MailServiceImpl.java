@@ -55,11 +55,6 @@ public class MailServiceImpl implements MailService {
         // 非空校验
         if (null == mailAddress || "".equals(mailAddress)) return CommandResponse.failed("邮箱不能为空！");
 
-        // 账号存在校验
-        UserDO userDO = userDao.getUserByEmail(mailAddress);
-        CompanyDO companyDO = companyDao.getCompanyByEmail(mailAddress);
-        if (null == userDO && companyDO == null) return CommandResponse.failed("User not found!");
-
         String verifyCode = redisHelper.getCacheObject(Constants.MAIL_CODE_KEY + mailAddress);
         if (verifyCode == null) {
             verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);//生成短信验证码
