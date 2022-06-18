@@ -130,7 +130,7 @@
                             <!-- .availability_sku -->
 
                             <div class="price">
-                                <div class="price_new"><%=productDTO.getProductParameters().getPrice() * 10000%>元</div>
+                                <div class="price_new"><%=productDTO.getProductParameters().getPrice()%>元</div>
                             </div>
                             <!-- .price -->
                         </div>
@@ -174,11 +174,11 @@
 
                             <table>
                                 <tr>
-                                    <th class="bg">规格</th>
-                                    <th><%=productDTO.getProductParameters().getStandard()%>立方米
+                                    <th class="bg" width="15%">规格</th>
+                                    <th width="35%"><%=productDTO.getProductParameters().getStandard()%>立方米
                                     </th>
-                                    <th class="bg">适用人数（人）</th>
-                                    <th><%=productDTO.getProductParameters().getApplicableNum()%>人
+                                    <th class="bg" width="15%">适用人数（人）</th>
+                                    <th width="35%"><%=productDTO.getProductParameters().getApplicableNum()%>人
                                     </th>
                                 </tr>
                                 <tr>

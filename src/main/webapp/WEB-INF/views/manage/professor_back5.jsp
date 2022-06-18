@@ -44,7 +44,7 @@
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>
+                <li class="active">
                     <a href="${pageContext.request.contextPath}/professor/index" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>产品信息审核列表</a>
                 </li>
                 <li>
@@ -183,7 +183,7 @@
                                                                                             name="text-input"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value=<%=productDTO.getProductParameters().getPrice() * 10000%>
+                                                                                            value=<%=productDTO.getProductParameters().getPrice()%>
                                                                                                     disabled>
 
                                                         </div>
@@ -334,6 +334,7 @@
                                                     <div class="col col-md-4"><label for="chicun_chang"
                                                                                      class="form-control-label">尺寸（长*宽*高mm）:</label>
                                                     </div>
+                                                    <div class="col-12 col-md-1"></div>
                                                     <div class="col-12 col-md-1"><label
                                                             class="form-control-label">长：</label></div>
                                                     <div class="col-12 col-md-1"><input type="text"
@@ -577,7 +578,7 @@
                                     <div class="col col-md-3"><label for="select_status"
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control">
+                                        <select name="select_status" id="select_status" class="form-control" <%if(status.equals("审核中") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>>
                                             <option value="审核通过"
                                                     <%if (status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
                                             </option>
@@ -596,7 +597,7 @@
                                     </div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder=""
-                                                                           class="form-control"><%=content%></textarea></div>
+                                                                           class="form-control" <%if(status.equals("审核中") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>><%=content%></textarea></div>
                                 </div>
                             </form>
                             <div class="card-text text-lg-center">

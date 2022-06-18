@@ -45,14 +45,26 @@
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
+                <%if(request.getHeader("Referer").substring(request.getHeader("Referer").length() - 1, request.getHeader("Referer").length()).equals("1")){%>
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i
+                            class="menu-icon fa fa-laptop"></i>用户管理</a>
+                </li><%}else{%>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
+                <%}%>
+                <%if(request.getHeader("Referer").substring(request.getHeader("Referer").length() - 1, request.getHeader("Referer").length()).equals("2")){%>
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i
+                            class="menu-icon fa fa-glass"></i>用户审核</a>
+                </li><%}else{%>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
+                <%}%>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-tasks"></i>产品管理</a>

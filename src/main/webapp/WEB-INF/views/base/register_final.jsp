@@ -304,6 +304,7 @@
     }
     //短信验证码倒计时
     function getCode(){
+        sendCode()
         var btn = $('#getcode')
         var number = 60;
         var countdown = function(){
@@ -320,6 +321,28 @@
             setTimeout(countdown,1000);
         }
         setTimeout(countdown,1000);
+    }
+
+    function sendCode() {
+        var data = new FormData();
+        data.append("sendAddress", $('#emailAddress').val());
+        $.ajax({
+            url: "/toilet/mail/getCode",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    show("验证码发送成功！");
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
     }
 </script>
 

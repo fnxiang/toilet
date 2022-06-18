@@ -43,7 +43,7 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/professor/index" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>产品信息审核列表</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>模式审核列表</a>
                 </li>
                 <li>
@@ -393,7 +393,7 @@
                                     <div class="col col-md-3"><label for="select_status" class=" form-control-label">是否通过</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control">
+                                        <select name="select_status" id="select_status" class="form-control" <%if(status.equals("审核中") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>>
                                             <option value="审核通过"
                                                     <%if (status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
                                             </option>
@@ -411,7 +411,7 @@
                                                                      class=" form-control-label">审核意见</label></div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder=""
-                                                                           class="form-control"><%=content%></textarea>
+                                                                           class="form-control" <%if(status.equals("审核中") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>><%=content%></textarea>
                                     </div>
                                 </div>
                             </form>
