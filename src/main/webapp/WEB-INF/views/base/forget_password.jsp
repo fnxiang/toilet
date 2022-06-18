@@ -49,28 +49,21 @@
                         <div class="form-group">
                             <input id="email" type="email" class="form-control" name="email" value="" required placeholder="请输入您的邮箱地址">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="height: 40px;">
                             <input id="code" class="form-control" name="code" value="" required placeholder="请输入验证码">
                             <input type="button" id="getcode" value="发送验证码" class="btn btn-link" style="position: relative; left: 310px; top:-37px;"
                                    onclick="getCode()">
                         </div>
-
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary" onclick="resetPWD()">
-                                重置密码
-                            </button>
-                        </div>
-                    </form>
-                    <form id="second" action="#" style="display: none">
                         <div class="form-group">
                             <input id="newPWD" class="form-control" name="newPWD" value="" required placeholder="请输入新密码">
                         </div>
                         <div class="form-group">
                             <input id="rePWD" class="form-control" name="rePWD" value="" required placeholder="请再次输入密码">
                         </div>
+
                         <div class="form-group text-center">
-                            <button  class="btn btn-primary" onclick="commit()">
-                                确认修改
+                            <button class="btn btn-primary" onclick="resetPWD()">
+                                重置密码
                             </button>
                         </div>
                     </form>
@@ -131,14 +124,17 @@
         });
     }
 
-
-    var code;
     // 提交验证码
     function resetPWD() {
         var data = new FormData();
         data.append("email", $('#email').val());
         data.append("code", $('#code').val());
-        code =  $('#code').val();
+        var newPWD = $('#newPWD').val();
+        var rePWD = $('#rePWD').val();
+        if(newPWD != rePWD){
+            show("两次输入密码不一致！");
+        }
+        else{
         $.ajax({
             url: "/toilet/verifyCode",
             type: "POST",
@@ -150,46 +146,12 @@
             processData: false,
             success: function (result) {
                 if (result.success) {
-                    $('#first').get(0).style.display = "none";
-                    $('#second').get(0).style.display = "";
+                    show("成功重置密码！")
                 } else {
                     show(result.errorMessage);
                 }
             }
-        });
-    }
-    // 提交新密码
-    function commit() {
-        var data = new FormData();
-        var newPWD = $('#newPWD').val();
-        var rePWD = $('#rePWD').val();
-        if(newPWD != rePWD){
-            show("两次输入密码不一致！");
-        }
-        else{
-            data.append("email", $('#email').val());
-            data.append("PWD", newPWD);
-            data.append("code", code);
-            $.ajax({
-                url: "/toilet/changePWD",
-                type: "POST",
-                dataType: "json",
-                data: data,
-                async: false,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (result) {
-                    if (result.success) {
-                        show("修改成功！");
-                        location.href="${pageContext.request.contextPath}/toBasePage?url=login_final"
-
-                    } else {
-                        show(result.errorMessage);
-                    }
-                }
-            });
-        }
+        });}
     }
 </script>
 </body>
