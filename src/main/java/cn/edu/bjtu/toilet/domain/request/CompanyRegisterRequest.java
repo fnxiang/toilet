@@ -29,4 +29,5 @@ public class CompanyRegisterRequest {
 
     private UserRole userRole;
 
+    private String code;
 }

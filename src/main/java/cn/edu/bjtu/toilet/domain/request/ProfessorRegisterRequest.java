@@ -21,4 +21,6 @@ public class ProfessorRegisterRequest {
 
     private String confirmPassword;
 
+    private String code;
+
 }

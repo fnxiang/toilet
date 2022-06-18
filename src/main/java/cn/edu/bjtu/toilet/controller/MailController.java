@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.controller;
 
+import cn.edu.bjtu.toilet.constant.Constants;
 import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.service.MailService;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
@@ -21,12 +22,26 @@ public class MailController {
     /**
      * 获取重置密码的验证码
      */
-    @PostMapping("/getCode")
-    public CommandResponse getCode(HttpServletRequest request){
+    @PostMapping("/getForgetCode")
+    public CommandResponse getForgetCode(HttpServletRequest request){
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request);
             String mailAddress = params.get("sendAddress");
-            return mailService.getCode(mailAddress);
+            return mailService.getCode(mailAddress, Constants.FORGET_MAIL);
+        } catch (Exception e) {
+            return CommandResponse.failed(e.getMessage());
+        }
+    }
+
+    /**
+     * 获取重置密码的验证码
+     */
+    @PostMapping("/getRegisterCode")
+    public CommandResponse getRegisterCode(HttpServletRequest request){
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+            String mailAddress = params.get("sendAddress");
+            return mailService.getCode(mailAddress, Constants.REGISTER_MAIL);
         } catch (Exception e) {
             return CommandResponse.failed(e.getMessage());
         }

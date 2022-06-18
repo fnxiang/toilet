@@ -1,7 +1,10 @@
 package cn.edu.bjtu.toilet.service.impl;
 
+import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.constant.Constants;
+import cn.edu.bjtu.toilet.dao.CompanyDao;
 import cn.edu.bjtu.toilet.dao.UserDao;
+import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.helper.RedisHelper;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
@@ -24,6 +28,9 @@ public class MailServiceImpl implements MailService {
 
     @Resource
     private UserDao userDao;
+
+    @Resource
+    private CompanyDao companyDao;
 
     @Resource
     private JavaMailSender mailSender;
@@ -44,15 +51,14 @@ public class MailServiceImpl implements MailService {
      * @return
      */
     @Override
-    public CommandResponse getCode(String mailAddress) {
+    public CommandResponse getCode(String mailAddress, String operation) {
         // 非空校验
         if (null == mailAddress || "".equals(mailAddress)) return CommandResponse.failed("邮箱不能为空！");
 
         // 账号存在校验
         UserDO userDO = userDao.getUserByEmail(mailAddress);
-        if (null == userDO) return CommandResponse.success();
-        if (!userDO.getEmail().equals(mailAddress)) return CommandResponse.failed("输入邮箱和预留邮箱不一致！");
-
+        CompanyDO companyDO = companyDao.getCompanyByEmail(mailAddress);
+        if (null == userDO && companyDO == null) return CommandResponse.failed("User not found!");
 
         String verifyCode = redisHelper.getCacheObject(Constants.MAIL_CODE_KEY + mailAddress);
         if (verifyCode == null) {
@@ -64,15 +70,8 @@ public class MailServiceImpl implements MailService {
         redisHelper.setCacheObject(Constants.MAIL_CODE_KEY + mailAddress, verifyCode, overtime, TimeUnit.MINUTES);
 
         // 编写邮箱内容
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("<html><head><title></title></head><body>");
-        stringBuilder.append("您好<br/>");
-        stringBuilder.append("您的验证码是：").append(verifyCode).append("<br/>");
-        stringBuilder.append("您可以复制此验证码并返回至厕所选型系统找回密码页面，以验证您的邮箱。<br/>");
-        stringBuilder.append("此验证码只能使用一次，在");
-        stringBuilder.append("5");
-        stringBuilder.append("分钟内有效。验证成功则自动失效。<br/>");
-        stringBuilder.append("如果您没有进行上述操作，请忽略此邮件。");
+        String mailContent = Constants.getMailContent(operation);
+        mailContent = String.format(mailContent, verifyCode, overtime);
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
         // 发件配置并发送邮件
@@ -86,11 +85,21 @@ public class MailServiceImpl implements MailService {
             // 邮件的标题
             mimeMessage.setSubject("厕所选型系统-找回密码");
             // 上面所拼接的邮件内容
-            mimeMessageHelper.setText(stringBuilder.toString(), true);
+            mimeMessageHelper.setText(mailContent, true);
             mailSender.send(mimeMessage);
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return CommandResponse.success();
+    }
+
+    @Override
+    public Boolean verifyCode(String mailAddress, String code) {
+        String verifyCode = redisHelper.getCacheObject(Constants.MAIL_CODE_KEY + mailAddress);
+        if (StringUtils.isEmpty(verifyCode)) {
+            throw new ToiletBizException("verify code has expired!", -1);
+        }
+
+        return verifyCode.equals(code);
     }
 }

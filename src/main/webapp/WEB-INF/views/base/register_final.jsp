@@ -327,7 +327,7 @@
         var data = new FormData();
         data.append("sendAddress", $('#emailAddress').val());
         $.ajax({
-            url: "/toilet/mail/getCode",
+            url: "/toilet/mail/getRegisterCode",
             type: "POST",
             dataType: "json",
             data: data,

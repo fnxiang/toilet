@@ -37,6 +37,7 @@ public class UserConverter {
         registerRequest.setPassword(params.get("password"));
         registerRequest.setConfirmPassword(params.get("confirmPassword"));
         registerRequest.setEmail(params.get("emailAddress"));
+        registerRequest.setCode(params.get("code"));
         return registerRequest;
     }
 

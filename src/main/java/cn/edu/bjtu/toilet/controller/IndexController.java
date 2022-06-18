@@ -14,6 +14,7 @@ import cn.edu.bjtu.toilet.domain.request.ProfessorRegisterRequest;
 import cn.edu.bjtu.toilet.domain.response.RegisterResponse;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.service.CompanyService;
+import cn.edu.bjtu.toilet.service.MailService;
 import cn.edu.bjtu.toilet.service.UserService;
 import cn.edu.bjtu.toilet.service.request.ResetPasswordRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
@@ -57,6 +58,9 @@ public class IndexController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private MailService mailService;
 
     /**
      * page handle
@@ -165,6 +169,10 @@ public class IndexController {
                 return RegisterResponse.failed("params error!");
             }
 
+            if (!mailService.verifyCode(companyRegisterRequest.getEmail(),companyRegisterRequest.getCode())) {
+                return RegisterResponse.failed("验证码校验失败！");
+            }
+
             CompanyDO companyDO = companyService.registerCompany(companyRegisterRequest);
             if (Objects.isNull(companyDO)) {
                 return RegisterResponse.failed("register db error");
@@ -194,6 +202,11 @@ public class IndexController {
             }
 
             ProfessorRegisterRequest registerRequest = UserConverter.buildProfRequest(params);
+
+            if (!mailService.verifyCode(registerRequest.getEmail(),registerRequest.getCode())) {
+                return RegisterResponse.failed("验证码校验失败！");
+            }
+
             UserDO userDO = userService.saveProfessorUser(registerRequest);
 
             if (userDO == null) {
@@ -201,10 +214,6 @@ public class IndexController {
             }
 
             UserRole userRole = UserRole.codeOf(userDO.getRole());
-
-            if (userRole == null) {
-                return RegisterResponse.failed(String.format("role code error, code: %s", userDO.getRole()));
-            }
 
             request.getSession().setAttribute("uId", userDO.getEmail());
             request.getSession().setAttribute("role", userRole.getRole());
@@ -262,6 +271,7 @@ public class IndexController {
         companyRegisterRequest.setCompanyName(params.get("companyName"));
         companyRegisterRequest.setCreditCode(params.get("creditCode"));
         companyRegisterRequest.setEmail(params.get("email"));
+        companyRegisterRequest.setCode(params.get("code"));
         companyRegisterRequest.setWebAddress(params.get("webAddress"));
         companyRegisterRequest.setContactName(params.get("contactName"));
         companyRegisterRequest.setPhoneNumber(params.get("phoneNum"));
