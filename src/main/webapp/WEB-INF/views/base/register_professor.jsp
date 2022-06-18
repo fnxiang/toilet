@@ -178,7 +178,7 @@
     <script>
         // 校验邮箱
         function IsEmail(el) {
-            var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
             return reg.test(el);
         }
         //短信验证码倒计时
