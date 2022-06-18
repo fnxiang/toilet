@@ -55,10 +55,10 @@
                                    onclick="getCode()">
                         </div>
                         <div class="form-group">
-                            <input id="newPWD" class="form-control" name="newPWD" value="" required placeholder="请输入新密码">
+                            <input id="newPWD" type="password" class="form-control" name="newPWD" value="" required placeholder="请输入新密码">
                         </div>
                         <div class="form-group">
-                            <input id="rePWD" class="form-control" name="rePWD" value="" required placeholder="请再次输入密码">
+                            <input id="rePWD" type="password" class="form-control" name="rePWD" value="" required placeholder="请再次输入密码">
                         </div>
 
                         <div class="form-group text-center">
@@ -70,6 +70,17 @@
                     <div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="chongzhi" style="position: absolute; left: 720px; top: 400px; background: #99999975; height: 100px; display: none">
+            <!-- 弹窗遮罩层 -->
+            <div class="aclose">
+                <a class="close" href="javascript:choseClose();">&times;</a>
+            </div>
+            <div class="contain" id="dialog">
+                重置成功，
+                <a id="time">2
+                </a>s后跳转
             </div>
         </div>
     </div>
@@ -148,12 +159,34 @@
             processData: false,
             success: function (result) {
                 if (result.success) {
-                    show("成功重置密码！")
+                    // 等待2秒后跳转
+                    chose();
+                    var countdown = function(){
+                        var time = document.getElementById("time");
+                        if(time.innerHTML == 0){
+                            //等于0时清除计时
+                            window.location.href="${pageContext.request.contextPath}/toBasePage?url=login_final";
+                        }else{
+                            time.innerHTML = time.innerHTML-1;
+                        }
+                        setTimeout(countdown,1000);
+                    }
+                    setTimeout(countdown,1000);
                 } else {
                     show(result.errorMessage);
                 }
             }
         });}
+    }
+</script>
+
+<script>
+    function chose() {
+        $("#chongzhi").css("display", "block");
+    }
+
+    function choseClose() {
+        $("#chongzhi").css("display", "none");
     }
 </script>
 </body>
