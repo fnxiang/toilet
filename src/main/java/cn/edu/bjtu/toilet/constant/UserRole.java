@@ -39,4 +39,19 @@ public enum UserRole {
 
         throw new ToiletBizException("用户角色错误！", BIZ_ERROR);
     }
+
+    public static UserRole nameOf(String name) {
+
+        if (!Objects.nonNull(name)) {
+            throw new ToiletBizException("用户角色错误！", BIZ_ERROR);
+        }
+
+        for (UserRole userRole : UserRole.values()) {
+            if (Objects.equals(userRole.role, name)) {
+                return userRole;
+            }
+        }
+
+        throw new ToiletBizException("用户角色错误！", BIZ_ERROR);
+    }
 }

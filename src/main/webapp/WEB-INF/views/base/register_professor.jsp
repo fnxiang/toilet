@@ -165,8 +165,8 @@
                 contentType: false,
                 processData: false,
                 success:function(result){
-                    show("注册成功！");
                     if (result.success) {
+                        show("注册成功！");
                         window.location.href = "/toilet/login/index";
                     } else {
                         alert(result.errorMessage);
@@ -178,7 +178,7 @@
     <script>
         // 校验邮箱
         function IsEmail(el) {
-            var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+            var reg =  /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
             return reg.test(el);
         }
         //短信验证码倒计时

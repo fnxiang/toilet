@@ -14,6 +14,7 @@ import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -43,6 +44,17 @@ public class PatternServiceImpl implements PatternService {
         patternDO.setDeleted(patternDOFromDB.getDeleted());
         patternDO.setVersion(patternDOFromDB.getVersion());
 
+        patternDao.updatePatternBySource(patternDO, patternDO.getSource());
+    }
+
+    @Override
+    public void deletePattern(String patternId) {
+        if (!NumberUtils.isDigits(patternId)) {
+            throw new ToiletBizException("pattern id error!", -1);
+        }
+
+        ToiletPatternDO patternDO = patternDao.queryPatternById(Integer.valueOf(patternId));
+        patternDO.setDeleted(true);
         patternDao.updatePatternBySource(patternDO, patternDO.getSource());
     }
 

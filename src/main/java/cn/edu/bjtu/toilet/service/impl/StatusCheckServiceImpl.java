@@ -2,6 +2,8 @@ package cn.edu.bjtu.toilet.service.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.constant.AuditStatus;
+import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
+import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.StatusCheckService;
@@ -17,8 +19,9 @@ import static com.google.common.collect.Sets.newHashSet;
 @Component
 public class StatusCheckServiceImpl implements StatusCheckService {
 
-    public static final Map<AuditStatus, Set<AuditStatus>> transitionMap = Collections
+    private static final Map<AuditStatus, Set<AuditStatus>> transitionMap = Collections
             .unmodifiableMap(new HashMap<AuditStatus, Set<AuditStatus>>() {{
+                put(AuditStatus.UNKNOWN, newHashSet(AuditStatus.WAITED_ASSIGN));
                 put(AuditStatus.WAITED, newHashSet(AuditStatus.WAITED_ASSIGN));
                 put(AuditStatus.WAITED_ASSIGN, newHashSet(AuditStatus.PROCESSING));
                 put(AuditStatus.PROCESSING, newHashSet(AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
@@ -31,7 +34,7 @@ public class StatusCheckServiceImpl implements StatusCheckService {
             return Boolean.TRUE;
         }
 
-        if (transitionMap.get(now).contains(target)) {
+        if (transitionMap.get(now) != null && transitionMap.get(now).contains(target)) {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
@@ -47,9 +50,27 @@ public class StatusCheckServiceImpl implements StatusCheckService {
     }
 
     @Override
+    public void transformProductToStatus(ToiletProductDO productDO, AuditStatus target) {
+        if (isAllowedToTransform(AuditStatus.of(productDO.getStatus()), target)) {
+            productDO.setStatus(target.getCode());
+        } else {
+            throw new ToiletBizException("status can not transform!", -1);
+        }
+    }
+
+    @Override
     public void transformPatternToStatus(ToiletPatternDTO patternDTO, AuditStatus target) {
         if (isAllowedToTransform(patternDTO.getStatus(), target)) {
             patternDTO.setStatus(target);
+        } else {
+            throw new ToiletBizException("status can not transform!", -1);
+        }
+    }
+
+    @Override
+    public void transformPatternToStatus(ToiletPatternDO patternDO, AuditStatus target) {
+        if (isAllowedToTransform(AuditStatus.of(patternDO.getStatus()), target)) {
+            patternDO.setStatus(target.getCode());
         } else {
             throw new ToiletBizException("status can not transform!", -1);
         }

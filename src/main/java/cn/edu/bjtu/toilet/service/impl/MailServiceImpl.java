@@ -27,12 +27,6 @@ import java.util.concurrent.TimeUnit;
 public class MailServiceImpl implements MailService {
 
     @Resource
-    private UserDao userDao;
-
-    @Resource
-    private CompanyDao companyDao;
-
-    @Resource
     private JavaMailSender mailSender;
 
     @Resource
@@ -56,11 +50,16 @@ public class MailServiceImpl implements MailService {
         if (null == mailAddress || "".equals(mailAddress)) return CommandResponse.failed("邮箱不能为空！");
 
         String verifyCode = redisHelper.getCacheObject(Constants.MAIL_CODE_KEY + mailAddress);
+        String gapCache = redisHelper.getCacheObject(Constants.MAIL_GAP_KEY + mailAddress);
         if (verifyCode == null) {
             verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);//生成短信验证码
-        } else {
-            return CommandResponse.success();
         }
+
+        if (gapCache != null) {
+            return CommandResponse.failed("请稍后再发");
+        }
+
+
         // 验证码存入redis并设置过期时间
         redisHelper.setCacheObject(Constants.MAIL_CODE_KEY + mailAddress, verifyCode, overtime, TimeUnit.MINUTES);
 
@@ -82,6 +81,7 @@ public class MailServiceImpl implements MailService {
             // 上面所拼接的邮件内容
             mimeMessageHelper.setText(mailContent, true);
             mailSender.send(mimeMessage);
+            redisHelper.setCacheObject(Constants.MAIL_GAP_KEY + mailAddress, "one", 1, TimeUnit.MINUTES);
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }

@@ -72,10 +72,10 @@
                     <a class="close" href="javascript:choseClose();">&times;</a>
                 </div>
                 <div class="contain" id="dialog">
-                    <a href='${pageContext.request.contextPath}/toBasePage?url=register_final'
+                    <a href='${pageContext.request.contextPath}/register_company'
                              role="button">企业注册&nbsp;&nbsp;&nbsp;&nbsp;
                     </a>
-                    <a href='${pageContext.request.contextPath}/toBasePage?url=register_professor'
+                    <a href='${pageContext.request.contextPath}/register_professor'
                              role="button">专家注册
                     </a>
                 </div>

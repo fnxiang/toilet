@@ -1,5 +1,6 @@
 package cn.edu.bjtu.toilet.domain.request;
 
+import cn.edu.bjtu.toilet.constant.UserRole;
 import lombok.Data;
 
 @Data
@@ -22,5 +23,7 @@ public class ProfessorRegisterRequest {
     private String confirmPassword;
 
     private String code;
+
+    private UserRole userRole;
 
 }

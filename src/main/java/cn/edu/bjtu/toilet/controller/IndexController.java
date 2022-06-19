@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -229,6 +230,7 @@ public class IndexController {
         return RegisterResponse.success();
     }
 
+    @ExceptionHandler
     @RequestMapping("/pwd/reset")
     @ResponseBody
     public CommandResponse resetPassword(HttpServletRequest request) {

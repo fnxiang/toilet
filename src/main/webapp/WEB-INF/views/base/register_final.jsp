@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <div class="card form" id="form1">
                     <div class="card-header">
-                        <h3><a href="" target="_blank"><img src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a> 企业用户注册</h3>
+                        <h3><a href="./" target="_blank"><img src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a> 企业用户注册</h3>
                     </div>
                     <br>
                     <form>
@@ -129,7 +129,7 @@
                             </div>
                         </div>
                         <div class="form-group text-center">
-                            <button type="submit" onclick="register()" class="btn btn-general btn-blue mr-2">提交注册</button>
+                            <button onclick="register()" class="btn btn-general btn-blue mr-2" role="button">提交注册</button>
                         </div>
                     </form>
                 </div>
@@ -195,7 +195,7 @@
                     if (result.success) {
                         location.href = "/toilet/login/index";
                     } else {
-                        show(result.errorMessage);
+                        alert(result.errorMessage);
                     }
                 }
             });

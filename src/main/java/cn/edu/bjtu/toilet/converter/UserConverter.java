@@ -21,8 +21,8 @@ public class UserConverter {
         userDO.setEmail(request.getEmail());
         userDO.setPassword(Base64.getEncoder().encodeToString(request.getPassword().getBytes()));
         userDO.setPhone(request.getPhoneNum());
-        userDO.setRole(UserRole.PROFESSOR.getCode());
-        userDO.setSource(UserRole.PROFESSOR.getRole());
+        userDO.setRole(request.getUserRole().getCode());
+        userDO.setSource(request.getUserRole().getRole());
         userDO.setStatus(UserStatus.WAIT_APPROVE.getCode());
         return userDO;
     }
@@ -38,6 +38,7 @@ public class UserConverter {
         registerRequest.setConfirmPassword(params.get("confirmPassword"));
         registerRequest.setEmail(params.get("emailAddress"));
         registerRequest.setCode(params.get("code"));
+        registerRequest.setUserRole(UserRole.PROFESSOR);
         return registerRequest;
     }
 
