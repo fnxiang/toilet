@@ -166,10 +166,9 @@
                 processData: false,
                 success:function(result){
                     if (result.success) {
-                        show("注册成功！");
-                        window.location.href = "/toilet/login/index";
+                        window.location.replace('${pageContext.request.contextPath}/login/index');
                     } else {
-                        alert(result.errorMessage);
+                        show(result.errorMessage);
                     }
                 }
             });
