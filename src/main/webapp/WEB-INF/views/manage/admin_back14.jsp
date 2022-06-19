@@ -39,7 +39,7 @@
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
                 <li>
-                    <a href=".${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
@@ -197,15 +197,15 @@
         const data = new FormData();
         var myselect = document.getElementById("typeSelect");
         var selected_val = myselect.options[myselect.selectedIndex].value;
-        data.append("userType", encodeURI(selected_val));
+        data.append("role", encodeURI(selected_val));
         data.append("account", $('#zhanghao').val());
         data.append("pwd", $('#pwd').val());
-        if(!data.get("userType")){show("用户类型不能为空！")}
+        if(!data.get("role")){show("用户类型不能为空！")}
         else if(!data.get("account")){show("账号不能为空！")}
         else if(!data.get("pwd")){show("密码不能为空！")}
         else{
             $.ajax({
-                url: "/toilet/admin/assign",
+                url: "/toilet/admin/account/assign",
                 type: "POST",
                 dataType: "json",
                 data: data,

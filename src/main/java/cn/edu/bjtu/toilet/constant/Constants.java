@@ -4,6 +4,8 @@ public class Constants {
 
     public static final String MAIL_CODE_KEY = "M";
 
+    public static final String MAIL_GAP_KEY = "GAP";
+
     public static final String FORGET_MAIL = "forget_mail";
 
     public static final String REGISTER_MAIL = "register_mail";

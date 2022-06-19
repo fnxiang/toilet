@@ -10,9 +10,12 @@ import cn.edu.bjtu.toilet.converter.UserConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.*;
+import cn.edu.bjtu.toilet.domain.request.CompanyRegisterRequest;
+import cn.edu.bjtu.toilet.domain.request.ProfessorRegisterRequest;
 import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
 import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.service.*;
+import cn.edu.bjtu.toilet.service.request.AccountRequest;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
@@ -21,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -159,6 +163,45 @@ public class AdminController {
         return response;
     }
 
+    @ExceptionHandler
+    @RequestMapping(value = "/account/assign")
+    @ResponseBody
+    public CommandResponse assignAccount(HttpServletRequest request) throws Exception {
+        Map<String, String> params = ParameterUtil.resolveParams(request);
+        AccountRequest accountRequest = buildAccountReq(params);
+
+        if (accountRequest.getRole().equals(UserRole.ADMIN.getRole()) || accountRequest.getRole().equals(UserRole.PROFESSOR.getRole())) {
+            ProfessorRegisterRequest professorRegisterRequest = buildProfessorReq(accountRequest);
+            userService.saveProfessorUser(professorRegisterRequest);
+        } else if (accountRequest.getRole().equals(UserRole.COMPANY_USER.getRole())) {
+            CompanyRegisterRequest companyRegisterRequest = buildCompanyReq(accountRequest);
+            companyService.registerCompany(companyRegisterRequest);
+        } else {
+            return CommandResponse.failed("用户角色错误");
+        }
+
+        return CommandResponse.success();
+    }
+
+    private CompanyRegisterRequest buildCompanyReq(AccountRequest accountRequest) {
+        CompanyRegisterRequest companyRegisterRequest = new CompanyRegisterRequest();
+        companyRegisterRequest.setEmail(accountRequest.getAccount());
+        companyRegisterRequest.setPassword(accountRequest.getPwd());
+        companyRegisterRequest.setConfirmPassword(accountRequest.getPwd());
+        companyRegisterRequest.setCreditCode("PLS AMEND");
+        companyRegisterRequest.setUserRole(UserRole.COMPANY_USER);
+        return companyRegisterRequest;
+    }
+
+    private ProfessorRegisterRequest buildProfessorReq(AccountRequest accountRequest) {
+        ProfessorRegisterRequest professorRegisterRequest = new ProfessorRegisterRequest();
+        professorRegisterRequest.setEmail(accountRequest.getAccount());
+        professorRegisterRequest.setPassword(accountRequest.getPwd());
+        professorRegisterRequest.setConfirmPassword(accountRequest.getPwd());
+        professorRegisterRequest.setUserRole(UserRole.nameOf(accountRequest.getRole()));
+        return professorRegisterRequest;
+    }
+
     @RequestMapping(value = "/product/delete")
     @ResponseBody
     public CommandResponse deleteProduct(HttpServletRequest request) {
@@ -174,6 +217,23 @@ public class AdminController {
             return CommandResponse.failed(e.getMessage());
         }
 
+        return response;
+    }
+
+    @RequestMapping(value = "/pattern/delete")
+    @ResponseBody
+    public CommandResponse deletePattern(HttpServletRequest request) {
+        CommandResponse response = new CommandResponse();
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String productId =  params.get("patternId");
+            patternService.deletePattern(productId);
+            response.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("error happened: {}", e.getMessage());
+            return CommandResponse.failed(e.getMessage());
+        }
         return response;
     }
 
@@ -314,5 +374,13 @@ public class AdminController {
         sortRequest.setAuditStatuses(Lists.newArrayList(AuditStatus.UNKNOWN, AuditStatus.WAITED, AuditStatus.PROCESSING, AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
         sortRequest.setEmail(email);
         return sortRequest;
+    }
+
+    private AccountRequest buildAccountReq(Map<String, String> params) {
+        AccountRequest accountRequest = new AccountRequest();
+        accountRequest.setAccount(params.get("account"));
+        accountRequest.setRole(params.get("role"));
+        accountRequest.setPwd(params.get("pwd"));
+        return accountRequest;
     }
 }

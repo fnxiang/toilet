@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/mail")
@@ -55,7 +56,12 @@ public class MailController {
         try {
             Map<String, String> params = ParameterUtil.resolveParams(request);
             String mailAddress = params.get("sendAddress");
-            return mailService.getCode(mailAddress, Constants.REGISTER_MAIL);
+            UserDO userDO = userService.queryUserByEmail(mailAddress);
+            CompanyDO companyDO = companyService.queryCompanyByEmail(mailAddress);
+            if (Objects.isNull(userDO)&&Objects.isNull(companyDO)) {
+                return mailService.getCode(mailAddress, Constants.REGISTER_MAIL);
+            }
+            return CommandResponse.failed("用户已存在");
         } catch (Exception e) {
             return CommandResponse.failed(e.getMessage());
         }

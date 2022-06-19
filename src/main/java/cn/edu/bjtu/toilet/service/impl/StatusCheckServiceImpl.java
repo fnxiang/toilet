@@ -17,8 +17,9 @@ import static com.google.common.collect.Sets.newHashSet;
 @Component
 public class StatusCheckServiceImpl implements StatusCheckService {
 
-    public static final Map<AuditStatus, Set<AuditStatus>> transitionMap = Collections
+    private static final Map<AuditStatus, Set<AuditStatus>> transitionMap = Collections
             .unmodifiableMap(new HashMap<AuditStatus, Set<AuditStatus>>() {{
+                put(AuditStatus.UNKNOWN, newHashSet(AuditStatus.WAITED_ASSIGN));
                 put(AuditStatus.WAITED, newHashSet(AuditStatus.WAITED_ASSIGN));
                 put(AuditStatus.WAITED_ASSIGN, newHashSet(AuditStatus.PROCESSING));
                 put(AuditStatus.PROCESSING, newHashSet(AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
@@ -31,7 +32,7 @@ public class StatusCheckServiceImpl implements StatusCheckService {
             return Boolean.TRUE;
         }
 
-        if (transitionMap.get(now).contains(target)) {
+        if (transitionMap.get(now) != null && transitionMap.get(now).contains(target)) {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

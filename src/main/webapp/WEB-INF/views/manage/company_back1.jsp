@@ -211,6 +211,7 @@
     function submit(productId) {
         const data = new FormData();
         data.append("productId", productId);
+        data.append("statusCode", '<%=AuditStatus.WAITED_ASSIGN.getCode()%>');
 
         $.ajax({
             url: "/toilet/company/product/audit/submit",
