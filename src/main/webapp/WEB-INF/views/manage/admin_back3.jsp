@@ -51,6 +51,9 @@
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
                 <li>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back14" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-user"></i>添加用户</a>
+                </li>
+                <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>

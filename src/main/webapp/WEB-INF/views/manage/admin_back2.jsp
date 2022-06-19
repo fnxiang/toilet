@@ -53,6 +53,9 @@
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back14" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-user"></i>添加用户</a>
+                </li>
                 <li class="active">
                     <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
@@ -447,12 +450,12 @@
             if ($(this).children('div').attr('isopen') == 'false') {
                 setOpen($(this));
                 ele.innerHTML = "";
-                ele.innerHTML = "通过";
+                ele.innerHTML = "允许";
                 approveUser($(this).attr('param_email'), $(this).attr('param_role'));
             } else {
                 setClose($(this));
                 ele.innerHTML = "";
-                ele.innerHTML = "不通过";
+                ele.innerHTML = "不允许";
                 denyUser($(this).attr('param_email'), $(this).attr('param_role'));
             }
         });
