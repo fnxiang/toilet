@@ -55,6 +55,9 @@ public class AdminController {
     private PatternService patternService;
 
     @Resource
+    private StatusCheckService statusCheckService;
+
+    @Resource
     private AuditService auditService;
 
     @RequestMapping(value = "/assign")
@@ -73,12 +76,14 @@ public class AdminController {
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
                 productDTO.setProfessorId(userDO.getId());
                 productDTO.setProfessorEmail(professorEmail);
+                statusCheckService.transformProductToStatus(productDTO, AuditStatus.PROCESSING);
 
                 productService.updateProduct(productDTO);
             } else {
                 ToiletPatternDTO patternDTO = patternService.queryPatternById(patternId);
                 patternDTO.setProfessorId(userDO.getId());
                 patternDTO.setProfessorEmail(professorEmail);
+                statusCheckService.transformPatternToStatus(patternDTO, AuditStatus.PROCESSING);
 
                 patternService.updatePattern(patternDTO);
             }
@@ -181,25 +186,6 @@ public class AdminController {
         }
 
         return CommandResponse.success();
-    }
-
-    private CompanyRegisterRequest buildCompanyReq(AccountRequest accountRequest) {
-        CompanyRegisterRequest companyRegisterRequest = new CompanyRegisterRequest();
-        companyRegisterRequest.setEmail(accountRequest.getAccount());
-        companyRegisterRequest.setPassword(accountRequest.getPwd());
-        companyRegisterRequest.setConfirmPassword(accountRequest.getPwd());
-        companyRegisterRequest.setCreditCode("PLS AMEND");
-        companyRegisterRequest.setUserRole(UserRole.COMPANY_USER);
-        return companyRegisterRequest;
-    }
-
-    private ProfessorRegisterRequest buildProfessorReq(AccountRequest accountRequest) {
-        ProfessorRegisterRequest professorRegisterRequest = new ProfessorRegisterRequest();
-        professorRegisterRequest.setEmail(accountRequest.getAccount());
-        professorRegisterRequest.setPassword(accountRequest.getPwd());
-        professorRegisterRequest.setConfirmPassword(accountRequest.getPwd());
-        professorRegisterRequest.setUserRole(UserRole.nameOf(accountRequest.getRole()));
-        return professorRegisterRequest;
     }
 
     @RequestMapping(value = "/product/delete")
@@ -356,6 +342,25 @@ public class AdminController {
 
         url = MANAGE_BASE + url;
         return url;
+    }
+
+    private CompanyRegisterRequest buildCompanyReq(AccountRequest accountRequest) {
+        CompanyRegisterRequest companyRegisterRequest = new CompanyRegisterRequest();
+        companyRegisterRequest.setEmail(accountRequest.getAccount());
+        companyRegisterRequest.setPassword(accountRequest.getPwd());
+        companyRegisterRequest.setConfirmPassword(accountRequest.getPwd());
+        companyRegisterRequest.setCreditCode("PLS AMEND");
+        companyRegisterRequest.setUserRole(UserRole.COMPANY_USER);
+        return companyRegisterRequest;
+    }
+
+    private ProfessorRegisterRequest buildProfessorReq(AccountRequest accountRequest) {
+        ProfessorRegisterRequest professorRegisterRequest = new ProfessorRegisterRequest();
+        professorRegisterRequest.setEmail(accountRequest.getAccount());
+        professorRegisterRequest.setPassword(accountRequest.getPwd());
+        professorRegisterRequest.setConfirmPassword(accountRequest.getPwd());
+        professorRegisterRequest.setUserRole(UserRole.nameOf(accountRequest.getRole()));
+        return professorRegisterRequest;
     }
 
     private UserUpdateRequest buildUpdateRequest(Map<String, String> params) {

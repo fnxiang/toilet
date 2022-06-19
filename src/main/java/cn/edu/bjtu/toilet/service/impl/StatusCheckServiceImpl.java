@@ -2,6 +2,8 @@ package cn.edu.bjtu.toilet.service.impl;
 
 import cn.edu.bjtu.toilet.common.ToiletBizException;
 import cn.edu.bjtu.toilet.constant.AuditStatus;
+import cn.edu.bjtu.toilet.dao.domain.ToiletPatternDO;
+import cn.edu.bjtu.toilet.dao.domain.ToiletProductDO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.service.StatusCheckService;
@@ -48,9 +50,27 @@ public class StatusCheckServiceImpl implements StatusCheckService {
     }
 
     @Override
+    public void transformProductToStatus(ToiletProductDO productDO, AuditStatus target) {
+        if (isAllowedToTransform(AuditStatus.of(productDO.getStatus()), target)) {
+            productDO.setStatus(target.getCode());
+        } else {
+            throw new ToiletBizException("status can not transform!", -1);
+        }
+    }
+
+    @Override
     public void transformPatternToStatus(ToiletPatternDTO patternDTO, AuditStatus target) {
         if (isAllowedToTransform(patternDTO.getStatus(), target)) {
             patternDTO.setStatus(target);
+        } else {
+            throw new ToiletBizException("status can not transform!", -1);
+        }
+    }
+
+    @Override
+    public void transformPatternToStatus(ToiletPatternDO patternDO, AuditStatus target) {
+        if (isAllowedToTransform(AuditStatus.of(patternDO.getStatus()), target)) {
+            patternDO.setStatus(target.getCode());
         } else {
             throw new ToiletBizException("status can not transform!", -1);
         }

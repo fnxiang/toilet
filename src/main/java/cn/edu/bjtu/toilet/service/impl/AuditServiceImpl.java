@@ -30,6 +30,9 @@ public class AuditServiceImpl implements AuditService {
     private ToiletPatternDao patternDao;
 
     @Resource
+    private StatusCheckServiceImpl statusCheckService;
+
+    @Resource
     private TransactionTemplate transactionTemplate;
 
     @Override
@@ -38,8 +41,7 @@ public class AuditServiceImpl implements AuditService {
         ToiletProductDO productDO = productDao.queryProductById(Integer.valueOf(request.getProductId()));
         request.setProductBelongEmail(productDO.getCompanyEmail());
         ApprovalDO approvalDO = buildApproval(request);
-        productDO.setStatus(request.getStatus().getCode());
-        productDO.setDeleted(productDO.getDeleted());
+        statusCheckService.transformProductToStatus(productDO, request.getStatus());
         ApprovalDO approvalDOFromDb = approvalDao.getApprovalDOBySource(buildApprovalSource(request));
 
         transactionTemplate.execute(status -> {
@@ -62,7 +64,7 @@ public class AuditServiceImpl implements AuditService {
     public ApprovalDO updatePatternApproval(ApprovalRequest request) {
         ToiletPatternDO patternDO = patternDao.queryPatternById(Integer.valueOf(request.getPatternId()));
         ApprovalDO approvalDO = buildApproval(request);
-        patternDO.setStatus(request.getStatus().getCode());
+        statusCheckService.transformPatternToStatus(patternDO, request.getStatus());
         ApprovalDO approvalDOFromDb = approvalDao.getApprovalDOBySource(buildApprovalSource(request));
 
         transactionTemplate.execute(status -> {
