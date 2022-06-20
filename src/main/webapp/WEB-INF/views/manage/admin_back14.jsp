@@ -119,6 +119,14 @@
                                     </div>
                             </div>
                             <div class="row form-group">
+                                <div class="col col-md-3 offset-md-2"><label for="yonghuming"
+                                                                             class=" form-control-label xrequired">用户名</label>
+                                </div>
+                                <div class="col-12 col-md-6"><input type="" id="yonghuming"
+                                                                    name="yonghuming" placeholder="用户名"
+                                                                    class="form-control"></div>
+                            </div>
+                            <div class="row form-group">
                                 <div class="col col-md-3 offset-md-2"><label for="zhanghao"
                                                                              class=" form-control-label xrequired">账号</label>
                                 </div>
@@ -202,9 +210,11 @@
         data.append("role", encodeURI(selected_val));
         data.append("account", $('#zhanghao').val());
         data.append("pwd", $('#pwd').val());
+        data.append("username", encodeURI($('#yonghuming').val()));
         if(!data.get("role")){show("用户类型不能为空！")}
         else if(!data.get("account")){show("账号不能为空！")}
         else if(!data.get("pwd")){show("密码不能为空！")}
+        else if(!data.get("username")){show("用户名不能为空！")}
         else{
             $.ajax({
                 url: "/toilet/admin/account/assign",
