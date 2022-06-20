@@ -173,6 +173,7 @@
         data.append("code", $('#code').val());
         if (! data.get("companyName")){show("公司名称不能为空!");}
         else if (! data.get("creditCode")){show("统一社会信用代码不能为空!");}
+        else if (! IsCreditCode(data.get("creditCode"))){show("请输入正确社会信用代码!");}
         else if (! $('#file').val().length){show("营业执照不能为空!");}
         else if (! data.get("webAddress")){show("企业官网不能为空!");}
         else if (! data.get("contactName")){show("联系人不能为空!");}
@@ -302,6 +303,12 @@
         var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
         return reg.test(el);
     }
+
+    function IsCreditCode(code){
+        var reg = /[^_IOZSVa-zW]{2}d{6}[^_IOZSVa-zW]{10}$/g;
+        return reg.test(code)
+    }
+
     //短信验证码倒计时
     function getCode(){
         sendCode()
