@@ -222,7 +222,7 @@
                                                                                             name="phonenum"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value=<%=productDTO.getManufacturerCell()%>>
+                                                                                            value="<%=productDTO.getManufacturerCell()%>" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -233,7 +233,7 @@
                                                                                             name="address"
                                                                                             placeholder=""
                                                                                             value="<%=companyDTO.getCompanyAddress()%>"
-                                                                                            class="form-control">
+                                                                                            class="form-control" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -245,7 +245,7 @@
                                                                                             placeholder=""
                                                                                             class="form-control"
                                                                                             value="<%=productDTO.getGmtModified().toInstant()%>"
-                                                        >
+                                                        disabled>
                                                         </div>
                                                     </div>
                                                 </div>
