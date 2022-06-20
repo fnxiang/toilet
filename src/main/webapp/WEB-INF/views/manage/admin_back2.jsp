@@ -129,6 +129,7 @@
                                     <th>序号</th>
                                     <th>用户名</th>
                                     <th>提交时间</th>
+                                    <th>账号</th>
                                     <th class="text-center">是否允许登录</th>
                                     <th class="text-center">操作</th>
                                 </tr>
@@ -145,6 +146,8 @@
                                     <td><%=list.get(i).getName()%>
                                     </td>
                                     <td><%=DateUtil.toStandardFormat(list.get(i).getGmtCreate())%>
+                                    </td>
+                                    <td><%=list.get(i).getEmail()%>
                                     </td>
                                     <td class="text-center">
                                         <%--                                        fixme 如果接口失败，开关仍然保持原样--%>
@@ -206,6 +209,8 @@
                                     <td><%=companyDOS.get(j).getCompanyName()%>
                                     </td>
                                     <td><%=DateUtil.toStandardFormat(companyDOS.get(j).getGmtCreate())%>
+                                    </td>
+                                    <td><%=companyDOS.get(j).getEmail()%>
                                     </td>
                                     <td class="text-center">
                                         <%if (companyDOS.get(j).getStatus().equals(UserStatus.WAIT_APPROVE)) {%>

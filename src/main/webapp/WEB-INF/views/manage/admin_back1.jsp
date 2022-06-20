@@ -136,6 +136,7 @@
                                     <th>序号</th>
                                     <th>用户名</th>
                                     <th>类型</th>
+                                    <th>账号</th>
                                     <th class="text-center">操作</th>
                                 </tr>
                                 </thead>
@@ -150,6 +151,7 @@
                                     <td><%=list.get(i).getName()%>
                                     </td>
                                     <td>专家用户</td>
+                                    <td><%=list.get(i).getEmail()%></td>
                                     <td class="text-center">
                                         <a type="button" class="btn btn-link fa fa-edit"
                                            onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back7&email=<%=list.get(i).getEmail()%>'">
@@ -171,6 +173,7 @@
                                     <td><%=companyDOS.get(i).getCompanyName()%>
                                     </td>
                                     <td>企业用户</td>
+                                    <td><%=companyDOS.get(i).getEmail()%></td>
                                     <td class="text-center">
                                         <a type="button" class="btn btn-link fa fa-edit"
                                            onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back12&email=<%=companyDOS.get(i).getEmail()%>'">
