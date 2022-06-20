@@ -134,7 +134,7 @@
                                     <div class="col-12 col-md-9"><input type="text" id="creditCode" name="creditCode"
                                                                         placeholder="112233456"
                                                                         value="<%=companyDO.getCreditCode()%>"
-                                                                        class="form-control"></div>
+                                                                        class="form-control" disabled></div>
                                 </div>
                                 <%String filePath = companyDO.getBusinessLicenseFilePath();%>
                                 <%if (filePath.length() != 0) {%>
