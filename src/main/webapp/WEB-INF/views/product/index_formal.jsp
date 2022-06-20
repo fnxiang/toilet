@@ -49,7 +49,7 @@
         <div class="grid_12">
             <nav class="primary">
                 <ul>
-                    <li class="curent"><a href="index_formal.index_formal.jsp">首页</a></li>
+                    <li class="curent"><a href="#">首页</a></li>
                     <li>
                         <a href="#">预留</a>
                         <ul class="sub">
