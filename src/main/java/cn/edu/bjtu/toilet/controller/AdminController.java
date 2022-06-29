@@ -14,6 +14,7 @@ import cn.edu.bjtu.toilet.domain.request.CompanyRegisterRequest;
 import cn.edu.bjtu.toilet.domain.request.ProfessorRegisterRequest;
 import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
 import cn.edu.bjtu.toilet.domain.response.CommandResponse;
+import cn.edu.bjtu.toilet.domain.response.ProfessorResponse;
 import cn.edu.bjtu.toilet.service.*;
 import cn.edu.bjtu.toilet.service.request.AccountRequest;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
@@ -32,7 +33,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.MANAGE_BASE;
 
@@ -76,14 +76,14 @@ public class AdminController {
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
                 productDTO.setProfessorId(userDO.getId());
                 productDTO.setProfessorEmail(professorEmail);
-                statusCheckService.transformProductToStatus(productDTO, AuditStatus.PROCESSING);
+                statusCheckService.transformProductToStatus(productDTO, AuditStatus.WAITED_PROFESSOR);
 
                 productService.updateProduct(productDTO);
             } else {
                 ToiletPatternDTO patternDTO = patternService.queryPatternById(patternId);
                 patternDTO.setProfessorId(userDO.getId());
                 patternDTO.setProfessorEmail(professorEmail);
-                statusCheckService.transformPatternToStatus(patternDTO, AuditStatus.PROCESSING);
+                statusCheckService.transformPatternToStatus(patternDTO, AuditStatus.WAITED_PROFESSOR);
 
                 patternService.updatePattern(patternDTO);
             }
@@ -186,6 +186,61 @@ public class AdminController {
         }
 
         return CommandResponse.success();
+    }
+
+    @RequestMapping(value = "/product/audit")
+    @ResponseBody
+    public ProfessorResponse auditProduct(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+            ApprovalRequest approvalRequest = buildProductAuditRequest(params, request);
+            auditService.updateProductApproval(approvalRequest);
+        } catch (Exception e) {
+            LOG.error("ProfessorResponse error with : ", e);
+            return ProfessorResponse.failed(e.getMessage());
+        }
+        return ProfessorResponse.success();
+    }
+
+    private ApprovalRequest buildProductAuditRequest(Map<String, String> params, HttpServletRequest request) {
+        String auditStatus = params.get("auditStatus");
+        String comment = params.get("comment");
+        String productId = params.get("productId");
+        ApprovalRequest approvalRequest = new ApprovalRequest();
+        approvalRequest.setProfessorEmail(request.getSession().getAttribute("uId").toString());
+        approvalRequest.setComment(comment);
+        approvalRequest.setProductId(productId);
+        approvalRequest.setStatus(AuditStatus.ofName(auditStatus));
+        return approvalRequest;
+    }
+
+    @RequestMapping(value = "/pattern/audit")
+    @ResponseBody
+    public ProfessorResponse auditPattern(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            ApprovalRequest approvalRequest = buildPatternAuditRequest(params);
+            auditService.updatePatternApproval(approvalRequest);
+
+        } catch (Exception e) {
+            LOG.error("ProfessorResponse error with : ", e);
+            return ProfessorResponse.failed(e.getMessage());
+        }
+        return ProfessorResponse.success();
+    }
+
+    private ApprovalRequest buildPatternAuditRequest(Map<String, String> params) {
+        String auditStatus = params.get("auditStatus");
+        String comment = params.get("comment");
+        String patternId = params.get("patternId");
+        ToiletPatternDTO patternDTO = patternService.queryPatternById(patternId);
+        ApprovalRequest approvalRequest = new ApprovalRequest();
+        approvalRequest.setProfessorEmail(patternDTO.getProfessorEmail());
+        approvalRequest.setComment(comment);
+        approvalRequest.setPatternId(patternId);
+        approvalRequest.setStatus(AuditStatus.ofName(auditStatus));
+        return approvalRequest;
     }
 
     @RequestMapping(value = "/product/delete")
@@ -376,7 +431,7 @@ public class AdminController {
         sortRequest.setIsDesc(false);
         sortRequest.setSortBy("id");
         sortRequest.setPageSize(100);
-        sortRequest.setAuditStatuses(Lists.newArrayList(AuditStatus.UNKNOWN, AuditStatus.WAITED, AuditStatus.PROCESSING, AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
+        sortRequest.setAuditStatuses(Lists.newArrayList(AuditStatus.UNKNOWN, AuditStatus.WAITED, AuditStatus.WAITED_PROFESSOR, AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
         sortRequest.setEmail(email);
         return sortRequest;
     }

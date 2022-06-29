@@ -26,9 +26,9 @@
                 </a>
 
                 <div class="user-menu dropdown-menu">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=professor_back3"><i class="fa fa-user"></i>个人信息管理</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back3"><i class="fa fa-user"></i>个人信息管理</a>
 
-                    <a class="nav-link" href="${pageContext.request.contextPath}/toPage?url=professor_back4"><i class="fa fa-cog"></i>设置</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back4"><i class="fa fa-cog"></i>设置</a>
 
                     <a class="nav-link" href="${pageContext.request.contextPath}/logout"><i class="fa fa-power-off"></i>注销</a>
                 </div>

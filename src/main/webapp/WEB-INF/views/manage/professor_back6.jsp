@@ -1,5 +1,6 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %>
+<%@ page import="org.springframework.util.StringUtils" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -393,9 +394,9 @@
                                     <div class="col col-md-3"><label for="select_status" class=" form-control-label">是否通过</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control" <%if(status.equals("审核中") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>>
+                                        <select name="select_status" id="select_status" class="form-control" <%if(StringUtils.isEmpty(status) || status.equals("审核中") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>>
                                             <option value="审核通过"
-                                                    <%if (status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
+                                                    <%if (StringUtils.isEmpty(status) || status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
                                             </option>
                                             <option value="审核不通过"
                                                     <%if (status.equals("审核不通过")){%>selected="selected"<%}%>>审核不通过
@@ -411,12 +412,12 @@
                                                                      class=" form-control-label">审核意见</label></div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder=""
-                                                                           class="form-control" <%if(status.equals("审核中") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>><%=content%></textarea>
+                                                                           class="form-control" <%if(StringUtils.isEmpty(status) || status.equals("审核中") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>><%=content%></textarea>
                                     </div>
                                 </div>
                             </form>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="commit()">
+                                <button type="button" <%if (!StringUtils.isEmpty(status) && !status.equals("等待专家审核")) {%> style="display: none" <%}%> class="btn btn-outline-secondary" onclick="commit()">
                                     确认提交
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"

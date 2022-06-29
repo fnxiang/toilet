@@ -7,9 +7,11 @@ import cn.edu.bjtu.toilet.domain.response.ModeResponse;
 import cn.edu.bjtu.toilet.domain.response.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.service.AuditService;
+import cn.edu.bjtu.toilet.service.PatternService;
 import cn.edu.bjtu.toilet.service.ProductService;
 import cn.edu.bjtu.toilet.service.StatusCheckService;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
+import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
@@ -37,6 +39,9 @@ public class CompanyController {
 
     @Resource
     private ProductService productService;
+
+    @Resource
+    private PatternService patternService;
 
     @Resource
     private AuditService auditService;
@@ -191,7 +196,8 @@ public class CompanyController {
     public ModeResponse getModes(HttpServletRequest request) {
         ModeResponse response = new ModeResponse();
         try {
-            List<ToiletPatternDTO> patternDTOS = productService.queryAllPattern();
+            PatternSortRequest patternSortRequest = buildPatternQueryRequest();
+            List<ToiletPatternDTO> patternDTOS = patternService.queryPatternWithStatus(patternSortRequest);
 
             if (CollectionUtils.isEmpty(patternDTOS)) {
                 return ModeResponse.failed("pattern is empty!");
@@ -216,6 +222,15 @@ public class CompanyController {
         }
 
         return response;
+    }
+
+    private PatternSortRequest buildPatternQueryRequest() {
+        PatternSortRequest request = new PatternSortRequest();
+        request.setAuditStatuses(Lists.newArrayList(AuditStatus.APPROVAL));
+        request.setIsDesc(false);
+        request.setSortBy("comprehensive_score");
+        request.setPageSize(1000);
+        return request;
     }
 
     private void checkProduct(ToiletProductDTO productDTO) {

@@ -69,7 +69,11 @@ public class ProfessorController {
             approvalRequest.setProfessorEmail(request.getSession().getAttribute("uId").toString());
             approvalRequest.setComment(comment);
             approvalRequest.setProductId(productId);
-            approvalRequest.setStatus(AuditStatus.ofName(auditStatus));
+            if (auditStatus.equals(AuditStatus.APPROVAL.getName())) {
+                approvalRequest.setStatus(AuditStatus.WAITED_ADMIN);
+            } else {
+                approvalRequest.setStatus(AuditStatus.ofName(auditStatus));
+            }
             auditService.updateProductApproval(approvalRequest);
 
         } catch (Exception e) {
@@ -92,7 +96,11 @@ public class ProfessorController {
             approvalRequest.setProfessorEmail(request.getSession().getAttribute("uId").toString());
             approvalRequest.setComment(comment);
             approvalRequest.setPatternId(patternId);
-            approvalRequest.setStatus(AuditStatus.ofName(auditStatus));
+            if (auditStatus.equals(AuditStatus.APPROVAL.getName())) {
+                approvalRequest.setStatus(AuditStatus.WAITED_ADMIN);
+            } else {
+                approvalRequest.setStatus(AuditStatus.ofName(auditStatus));
+            }
             auditService.updatePatternApproval(approvalRequest);
 
         } catch (Exception e) {
@@ -277,7 +285,7 @@ public class ProfessorController {
         sortRequest.setIsDesc(false);
         sortRequest.setSortBy("id");
         sortRequest.setPageSize(100);
-        sortRequest.setAuditStatuses(Lists.newArrayList(AuditStatus.PROCESSING, AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
+        sortRequest.setAuditStatuses(Lists.newArrayList(AuditStatus.WAITED_PROFESSOR, AuditStatus.WAITED_ADMIN, AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
         sortRequest.setEmail(email);
         return sortRequest;
     }

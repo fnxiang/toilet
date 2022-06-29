@@ -92,7 +92,7 @@
     function product_search_action() {
         console.log("show product search");
         document.getElementById('model_search').style.display = "none";
-        if (document.getElementById('product_search').style.display == "none") {
+        if (document.getElementById('product_search').style.display === "none") {
             document.getElementById('product_search').style.display = "";
             document.getElementById('block_nav_primary').style.display = "none";
             document.getElementById('main').style.display = "none";

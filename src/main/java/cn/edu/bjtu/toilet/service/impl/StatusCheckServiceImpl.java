@@ -23,9 +23,10 @@ public class StatusCheckServiceImpl implements StatusCheckService {
             .unmodifiableMap(new HashMap<AuditStatus, Set<AuditStatus>>() {{
                 put(AuditStatus.UNKNOWN, newHashSet(AuditStatus.WAITED_ASSIGN));
                 put(AuditStatus.WAITED, newHashSet(AuditStatus.WAITED_ASSIGN));
-                put(AuditStatus.WAITED_ASSIGN, newHashSet(AuditStatus.PROCESSING));
-                put(AuditStatus.PROCESSING, newHashSet(AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
-                put(AuditStatus.WAITED_AMEND, newHashSet(AuditStatus.PROCESSING));
+                put(AuditStatus.WAITED_ASSIGN, newHashSet(AuditStatus.WAITED_PROFESSOR));
+                put(AuditStatus.WAITED_PROFESSOR, newHashSet(AuditStatus.WAITED_ADMIN, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
+                put(AuditStatus.WAITED_ADMIN, newHashSet(AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
+                put(AuditStatus.WAITED_AMEND, newHashSet(AuditStatus.WAITED_PROFESSOR));
             }});
 
     @Override

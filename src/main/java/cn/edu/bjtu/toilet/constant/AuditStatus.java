@@ -6,7 +6,8 @@ import org.springframework.util.StringUtils;
 public enum AuditStatus {
     WAITED("等待提交审核", 100),
     WAITED_ASSIGN("等待分配专家", 101),
-    PROCESSING("审核中", 110),
+    WAITED_PROFESSOR("等待专家审核", 110),
+    WAITED_ADMIN("等待管理员审核", 111),
     WAITED_AMEND("修改后重新审核", 120),
     APPROVAL("审核通过", 200),
     DENY("审核不通过", 300),

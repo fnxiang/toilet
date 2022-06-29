@@ -145,7 +145,7 @@
                                 </td>
                                 <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit"
                                                                   onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back6&productId=<%=list.get(i).getId()%>'">查看详情</a>
-									<%if (list.get(i).getStatus().equals(AuditStatus.PROCESSING) && StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
+									<%if (list.get(i).getStatus().equals(AuditStatus.WAITED_ASSIGN) && StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
 									<a type="button" class="btn btn-link fa fa-check-square"
 									   onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back9&productId=<%=list.get(i).getId()%>'">
 										分配专家</a>
@@ -186,27 +186,6 @@
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
-
-<!-- Scripts -->
-<!--
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/vendor/jquery-2.1.4.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/popper.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/jquery.matchHeight.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/main.js"></script>
-
-	
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/jszip.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/buttons.colVis.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/manage/assets/js/init/datatables-init.js"></script>
-	-->
 <!-- All Jquery -->
 <script src="${pageContext.request.contextPath}/static/manage/res/js/lib/jquery/jquery.min.js"></script>
 <!-- Bootstrap tether Core JavaScript -->
