@@ -1,7 +1,7 @@
 package cn.edu.bjtu.toilet.controller;
 
-import cn.edu.bjtu.toilet.common.ToiletBizException;
-import cn.edu.bjtu.toilet.common.ToiletSystemException;
+import cn.edu.bjtu.toilet.common.exception.ToiletBizException;
+import cn.edu.bjtu.toilet.common.exception.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.constant.UserStatus;

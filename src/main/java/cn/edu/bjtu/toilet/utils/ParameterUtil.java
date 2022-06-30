@@ -1,9 +1,8 @@
 package cn.edu.bjtu.toilet.utils;
 
-import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.common.exception.ToiletBizException;
 import com.google.common.collect.Sets;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.util.StringUtils;

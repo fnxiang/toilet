@@ -1,7 +1,7 @@
 package cn.edu.bjtu.toilet.common.aspect;
 
-import cn.edu.bjtu.toilet.common.ToiletBizException;
-import cn.edu.bjtu.toilet.common.ToiletSystemException;
+import cn.edu.bjtu.toilet.common.exception.ToiletBizException;
+import cn.edu.bjtu.toilet.common.exception.ToiletSystemException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

@@ -1,11 +1,12 @@
 package cn.edu.bjtu.toilet.controller;
 
-import cn.edu.bjtu.toilet.common.ToiletBizException;
-import cn.edu.bjtu.toilet.common.ToiletSystemException;
+import cn.edu.bjtu.toilet.common.exception.ToiletBizException;
+import cn.edu.bjtu.toilet.common.exception.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.AuditStatus;
 import cn.edu.bjtu.toilet.domain.response.ModeResponse;
 import cn.edu.bjtu.toilet.domain.response.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
+import cn.edu.bjtu.toilet.domain.vo.ResultVO;
 import cn.edu.bjtu.toilet.service.AuditService;
 import cn.edu.bjtu.toilet.service.PatternService;
 import cn.edu.bjtu.toilet.service.ProductService;
@@ -78,11 +79,10 @@ public class CompanyController {
         return ProductResponse.success();
     }
 
-    @RequestMapping(value = "/product/update")
     @ResponseBody
-    public ProductResponse updateProduct(HttpServletRequest request) {
+    @RequestMapping(value = "/product/update")
+    public ResultVO updateProduct(HttpServletRequest request) {
         try {
-
             Map<String, String> params = ParameterUtil.resolveParams(request);
 
             ToiletProductDTO productDTO = buildUpdateProductDTO(params);
@@ -94,13 +94,13 @@ public class CompanyController {
 
         } catch (ToiletBizException | ToiletSystemException e) {
             LOG.error("update product error with {}", e.getMessage());
-            return ProductResponse.failed("update product error with " + e.getMessage());
+            return ResultVO.failed("update product error with " + e.getMessage());
         } catch (Exception e) {
             LOG.error("update products failed : {}", e.getStackTrace());
-            return ProductResponse.failed("update product error with " + e.getMessage());
+            return ResultVO.failed("update product error with " + e.getMessage());
         }
 
-        return ProductResponse.success();
+        return ResultVO.success();
     }
 
     @RequestMapping(value = "/product/audit/submit", method = RequestMethod.POST)
@@ -235,6 +235,10 @@ public class CompanyController {
 
     private void checkProduct(ToiletProductDTO productDTO) {
         ToiletProductDTO productDTOFromDb = productService.queryToiletById(productDTO.getId().toString());
+
+        if (!productDTO.getCompanyEmail().equals(productDTOFromDb.getCompanyEmail())) {
+            throw new ToiletBizException("Can not update other's product!", -1);
+        }
 
         productDTO.setStatus(productDTOFromDb.getStatus());
         productDTO.setProfessorEmail(productDTOFromDb.getProfessorEmail());

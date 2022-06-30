@@ -1,7 +1,8 @@
 package cn.edu.bjtu.toilet.controller;
 
-import cn.edu.bjtu.toilet.common.ToiletBizException;
-import cn.edu.bjtu.toilet.common.ToiletSystemException;
+import cn.edu.bjtu.toilet.common.annotations.NotControllerResponseAdvice;
+import cn.edu.bjtu.toilet.common.exception.ToiletBizException;
+import cn.edu.bjtu.toilet.common.exception.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.UserRole;
 import cn.edu.bjtu.toilet.constant.UserStatus;
 import cn.edu.bjtu.toilet.converter.UserConverter;
@@ -52,7 +53,6 @@ public class IndexController {
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
     private static final String UPLOAD_DIRECTORY = "/upload/company/";
-
 
     @Resource
     private CompanyService companyService;
@@ -107,6 +107,7 @@ public class IndexController {
 
     @RequestMapping(value = "/login")
     @ResponseBody
+    @NotControllerResponseAdvice
     public LoginResponse login(HttpServletRequest request, HttpServletResponse response) {
 
         try {

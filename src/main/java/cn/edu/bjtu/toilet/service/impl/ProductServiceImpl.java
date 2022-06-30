@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.service.impl;
 
-import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.common.exception.ToiletBizException;
 import cn.edu.bjtu.toilet.constant.*;
 import cn.edu.bjtu.toilet.converter.ProductConverter;
 import cn.edu.bjtu.toilet.dao.ToiletPatternDao;

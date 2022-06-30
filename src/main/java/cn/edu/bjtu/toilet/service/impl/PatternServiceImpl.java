@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.service.impl;
 
-import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.common.exception.ToiletBizException;
 import cn.edu.bjtu.toilet.constant.*;
 import cn.edu.bjtu.toilet.converter.ProductConverter;
 import cn.edu.bjtu.toilet.dao.ToiletPatternDao;
@@ -11,7 +11,6 @@ import cn.edu.bjtu.toilet.domain.dto.*;
 import cn.edu.bjtu.toilet.domain.response.PatternQueryResponse;
 import cn.edu.bjtu.toilet.service.PatternService;
 import cn.edu.bjtu.toilet.service.request.PatternSortRequest;
-import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 

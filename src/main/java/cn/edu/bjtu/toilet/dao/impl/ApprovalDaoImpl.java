@@ -1,6 +1,6 @@
 package cn.edu.bjtu.toilet.dao.impl;
 
-import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.common.exception.ToiletBizException;
 import cn.edu.bjtu.toilet.dao.ApprovalDao;
 import cn.edu.bjtu.toilet.dao.domain.ApprovalDO;
 import cn.edu.bjtu.toilet.dao.domain.ApprovalDOSelective;

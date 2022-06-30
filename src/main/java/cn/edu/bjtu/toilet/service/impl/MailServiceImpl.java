@@ -1,11 +1,7 @@
 package cn.edu.bjtu.toilet.service.impl;
 
-import cn.edu.bjtu.toilet.common.ToiletBizException;
+import cn.edu.bjtu.toilet.common.exception.ToiletBizException;
 import cn.edu.bjtu.toilet.constant.Constants;
-import cn.edu.bjtu.toilet.dao.CompanyDao;
-import cn.edu.bjtu.toilet.dao.UserDao;
-import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
-import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.helper.RedisHelper;
 import cn.edu.bjtu.toilet.service.MailService;

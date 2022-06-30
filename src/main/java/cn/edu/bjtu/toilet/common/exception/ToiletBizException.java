@@ -1,4 +1,4 @@
-package cn.edu.bjtu.toilet.common;
+package cn.edu.bjtu.toilet.common.exception;
 
 import lombok.Data;
 
