@@ -7,11 +7,26 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>ERROR HAPPENED!!!</title>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0, user-scalable=no">
+    <title>访问失败</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/base/css/error.css">
 </head>
 <body>
-    <h1>Some Error happened :( pls try later</h1>
+<div class="center">
+    <div class="img">
+        <img src="${pageContext.request.contextPath}/static/base/img/error.jpg">
+    </div>
+</div>
 
+<div class="center">
+    <p>点此<a href="javascript:void(0);" onclick="location.replace(document.referrer);">返回</a></p>
+</div>
+<div class="footer">
+    如需帮助或反馈&nbsp;请联系邮箱：cag@cadg.cn</br>
+    Copyright © 亚太建设科技信息研究院
+</div>
 </body>
 </html>
+
