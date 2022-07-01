@@ -132,9 +132,11 @@
 										<td><%=list.get(i).getStatus().getName()%></td>
 										<td class="text-center">
 											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=<%=list.get(i).getId()%>'"> 查看详情</a>
-                                            <%AuditStatus status_now = list.get(i).getStatus();%>
                                             <%if (list.get(i).getStatus().equals(AuditStatus.WAITED_PROFESSOR) && StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
 											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=<%=list.get(i).getId()%>'"> 分配专家</a>
+                                            <%}%>
+                                            <%if (list.get(i).getStatus().equals(AuditStatus.WAITED_ADMIN)) {%>
+                                            <a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back16&patternId=<%=list.get(i).getId()%>'"> 审核模式</a>
                                             <%}%>
 											<a type="button" class="btn btn-link fa fa-trash-o" onclick="del(<%=list.get(i).getId()%>)"> 删除</a>
 										</td>
