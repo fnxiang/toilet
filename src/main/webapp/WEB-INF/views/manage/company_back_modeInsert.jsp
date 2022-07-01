@@ -81,7 +81,7 @@
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h1>模式信息录入</h1>
+                            <h1>企业后台管理系统</h1>
                         </div>
                     </div>
                 </div>
