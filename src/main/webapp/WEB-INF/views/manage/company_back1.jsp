@@ -1,6 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -42,7 +43,10 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>我的申请</a>
+                    <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>产品申请</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/toPage?url=company_back8" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-pencil"></i>模式申请</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back2"
@@ -106,8 +110,8 @@
 
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title">我的申请</strong>
+                        <div class="card-header" id="chanpinxinxi">
+                            <strong class="card-title">产品申请</strong>
                         </div>
                         <div class="card-body">
                             <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -132,7 +136,7 @@
                                     <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                     </td>
                                     <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit" id="xiugai"
-                                                                      onclick="javascript:window.location.href='/toilet/toPage?url=company_back6&productId=<%=list.get(i).getId()%>'" <%if(!list.get(i).getStatus().equals(AuditStatus.UNKNOWN)){%>  style="display: none" <%}%>>修改信息</a>
+                                                                      onclick="javascript:window.location.href='/toilet/toPage?url=company_back6&productId=<%=list.get(i).getId()%>'" <%if(list.get(i).getStatus() != AuditStatus.WAITED || list.get(i).getStatus() != AuditStatus.UNKNOWN){%>  style="display: none" <%}%>>修改信息</a>
                                         <%if (list.get(i).getStatus().equals(AuditStatus.APPROVAL)
                                                 || list.get(i).getStatus().equals(AuditStatus.DENY)
                                                 || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
@@ -140,10 +144,10 @@
                                         <%} else if (list.get(i).getStatus().equals(AuditStatus.WAITED)
                                                     ||list.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {%>
                                         <a type="button" class="btn btn-link fa fa-upload" id="shenhe"
-                                           onclick="submit('<%=list.get(i).getId()%>')" <%if(list.get(i).getStatus().getName().equals("无状态")){%><%} else{%> style="display: none"<%}%>>提交审核</a>
+                                           onclick="submit('<%=list.get(i).getId()%>')" <%if(list.get(i).getStatus() != AuditStatus.WAITED || list.get(i).getStatus() != AuditStatus.UNKNOWN){%><%} else{%> style="display: none"<%}%>>提交审核</a>
                                         <%}%>
 
-                                        <a type="button" class="btn btn-link fa fa-info-circle" id="shenhe" onclick="javascript:window.location.href='/toilet/toPage?url=company_back7&productId=<%=list.get(i).getId()%>'">产品详情</a>
+                                        <a type="button" class="btn btn-link fa fa-info-circle" onclick="javascript:window.location.href='/toilet/toPage?url=company_back7&productId=<%=list.get(i).getId()%>'">产品详情</a>
                                     </td>
                                 </tr>
                                 <%}%>
@@ -151,6 +155,7 @@
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
 
@@ -207,6 +212,21 @@
         $('#bootstrap-data-table-export').DataTable(
         );
     });
+
+
+    // 切换显示模式或者产品
+    function change(type){
+        if(type === 'chanpin'){
+            document.getElementById('chanpinxinxi').style.display = '';
+            document.getElementById('chanpin').style.display = '';
+            document.getElementById('moshixinxi').style.display = 'none';
+            document.getElementById('moshi').style.display = 'none';
+        }
+        else{
+            document.getElementById('chanpinxinxi').style.display = 'none';
+            document.getElementById('moshixinxi').style.display = '';
+        }
+    }
 
     function submit(productId) {
         const data = new FormData();
