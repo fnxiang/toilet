@@ -6,14 +6,13 @@ import cn.edu.bjtu.toilet.converter.CompanyConverter;
 import cn.edu.bjtu.toilet.dao.domain.CompanyDO;
 import cn.edu.bjtu.toilet.dao.domain.UserDO;
 import cn.edu.bjtu.toilet.domain.dto.CompanyDTO;
+import cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO;
 import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.domain.dto.EnterpriseAddressDTO;
 import cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO;
 import cn.edu.bjtu.toilet.domain.request.UserUpdateRequest;
-import cn.edu.bjtu.toilet.service.AuditService;
-import cn.edu.bjtu.toilet.service.CompanyService;
-import cn.edu.bjtu.toilet.service.ProductService;
-import cn.edu.bjtu.toilet.service.UserService;
+import cn.edu.bjtu.toilet.service.*;
+import cn.edu.bjtu.toilet.service.impl.PatternServiceImpl;
 import cn.edu.bjtu.toilet.service.request.ApprovalRequest;
 import cn.edu.bjtu.toilet.utils.ParameterUtil;
 import com.alibaba.fastjson.JSON;
@@ -46,6 +45,9 @@ public class ManagementController {
 
     @Resource
     private ProductService productService;
+
+    @Resource
+    private PatternService patternService;
 
     @Resource
     private AuditService auditService;
@@ -118,6 +120,7 @@ public class ManagementController {
         String url = request.getParameter("url");
         String email = request.getSession().getAttribute("uId").toString();
         String productId = request.getParameter("productId");
+        String patternId = request.getParameter("productId");
         switch (url){
             case "company_back1":
                 List<ToiletProductDTO> productDTOList = productService.queryAllProductList(email);
@@ -140,14 +143,19 @@ public class ManagementController {
                 request.setAttribute("product", productDTO);
                 request.setAttribute("company", CompanyConverter.toCompanyDTO(company));
                 break;
-            case "company_back3":
-                //TODO
+            case "company_pattern_apply":
+                List<ToiletPatternDTO> patternDTOS = productService.queryAllPattern(email);
+                request.setAttribute("patternList", patternDTOS);
+                break;
+            case "company_pattern_apply_detail":
+                ApprovalRequest patternApprovalRequest = new ApprovalRequest();
+                patternApprovalRequest.setPatternId(patternId);
+                request.setAttribute("pattern", patternService.queryPatternById(patternId));
+                request.setAttribute("approval", auditService.getApproval(patternApprovalRequest));
                 break;
             default:
                 break;
         }
-
-
 
         url = MANAGE_BASE + url;
         return url;

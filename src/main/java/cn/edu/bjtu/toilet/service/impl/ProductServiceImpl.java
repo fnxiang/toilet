@@ -165,8 +165,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ToiletPatternDTO> queryAllPattern() {
-        return toiletPatternDao.queryAllPattern().stream().map(ProductConverter::toDTO).filter(item -> item.getPatternType() != null).collect(Collectors.toList());
+    public List<ToiletPatternDTO> queryAllPattern(String email) {
+        return toiletPatternDao.queryAllPattern(email).stream().map(ProductConverter::toDTO).filter(item -> item.getPatternType() != null).collect(Collectors.toList());
     }
 
     @Override
@@ -276,6 +276,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ToiletPatternDTO savePattern(ToiletPatternDTO patternDTO) {
+        patternDTO.setSource(buildPatternSource(patternDTO));
         ToiletPatternDO patternDO = toiletPatternDao.savePattern(ProductConverter.toDO(patternDTO));
 
         patternDTO = ProductConverter.toDTO(patternDO);

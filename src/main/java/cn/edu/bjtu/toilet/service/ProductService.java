@@ -29,7 +29,7 @@ public interface ProductService {
 
     ToiletProductDTO queryToiletById(String id);
 
-    List<ToiletPatternDTO> queryAllPattern();
+    List<ToiletPatternDTO> queryAllPattern(String email);
 
     ToiletProductDTO updateProduct(ToiletProductDTO productDTO);
 

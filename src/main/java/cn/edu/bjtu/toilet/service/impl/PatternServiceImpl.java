@@ -86,7 +86,7 @@ public class PatternServiceImpl implements PatternService {
         List<ToiletPatternDTO> patternDTOS = patternDao.queryAllPatternByPage(patternQueryRequest).stream()
                 .map(ProductConverter::toDTO)
                 .collect(Collectors.toList());
-        Double maxSize = (double) patternDao.queryAllPattern().size();
+        Double maxSize = (double) patternDao.queryAllPattern("").size();
         response.setCurrentPage(request.getPageIndex());
         response.setMaxPage((int) Math.ceil(maxSize/request.getPageSize()));
         response.setPatternDTOList(patternDTOS);

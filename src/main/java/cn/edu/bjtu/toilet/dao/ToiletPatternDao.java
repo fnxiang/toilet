@@ -22,7 +22,7 @@ public interface ToiletPatternDao {
 
     ToiletPatternDO queryPatternById(Integer Id);
 
-    List<ToiletPatternDO> queryAllPattern();
+    List<ToiletPatternDO> queryAllPattern(String email);
 
     List<ToiletPatternDO> queryAllPatternByPage(PatternQueryRequest request);
 

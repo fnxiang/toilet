@@ -30,6 +30,8 @@ public class ToiletPatternDO implements Serializable {
 
     private String professorEmail;
 
+    private String email;
+
     private String envConditions;
 
     private String humanFactors;
@@ -144,6 +146,14 @@ public class ToiletPatternDO implements Serializable {
         this.professorEmail = professorEmail == null ? null : professorEmail.trim();
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
     public String getEnvConditions() {
         return envConditions;
     }
@@ -195,6 +205,7 @@ public class ToiletPatternDO implements Serializable {
         sb.append(", status=").append(status);
         sb.append(", professorId=").append(professorId);
         sb.append(", professorEmail=").append(professorEmail);
+        sb.append(", email=").append(email);
         sb.append(", envConditions=").append(envConditions);
         sb.append(", humanFactors=").append(humanFactors);
         sb.append(", pipNetworkConditions=").append(pipNetworkConditions);

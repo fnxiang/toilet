@@ -91,7 +91,7 @@
                     <select class="grid_2" name="sortCondition" id="sortCondition">
                         <option value="price">价格</option>
                         <option value="service_life">使用寿命</option>
-                        <option value="cleanCycle">清理周期</option>
+                        <option value="clean_cycle">清理周期</option>
                     </select>
                 </div>
                 <div class="grid_2">

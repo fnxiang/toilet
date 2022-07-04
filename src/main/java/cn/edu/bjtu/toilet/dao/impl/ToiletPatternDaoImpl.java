@@ -116,12 +116,15 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
     }
 
     @Override
-    public List<ToiletPatternDO> queryAllPattern() {
+    public List<ToiletPatternDO> queryAllPattern(String email) {
 
         ToiletPatternDOSelective toiletPatternDOSelective = new ToiletPatternDOSelective();
         ToiletPatternDOSelective.Criteria criteria = toiletPatternDOSelective.createCriteria();
 
         criteria.andDeletedNotEqualTo(true);
+        if (!StringUtils.isEmpty(email)) {
+            criteria.andEmailEqualTo(email);
+        }
 
         return patternDOMapper.selectByExampleWithBLOBs(toiletPatternDOSelective);
     }
@@ -173,7 +176,12 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
 
     @Override
     public ToiletPatternDO savePattern(ToiletPatternDO patternDO) {
-        return null;
+        ToiletPatternDO patternDOFromDb = queryPatternByName(patternDO.getPatternType());
+        if (patternDOFromDb != null) {
+            throw new ToiletBizException("改模式名称已存在！", BIZ_ERROR);
+        }
+
+        return insertPattern(patternDO);
     }
 
     private String buildSourceKey(ToiletPatternDO patternDO) {
