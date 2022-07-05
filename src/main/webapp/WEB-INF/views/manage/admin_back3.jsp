@@ -141,7 +141,6 @@
                                 <% List<ToiletProductDTO> list = (List<ToiletProductDTO>) request.getAttribute("productList");%>
                                 <tbody>
                                 <% for (int i = 0; i < list.size(); i++) {%>
-                                <tr onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back6&productId=<%=list.get(i).getId()%>'">
                                     <td style=" text-align: center"><%=i + 1%>
                                     </td>
                                     <td style="text-align: center"><%=list.get(i).getProductName()%>
@@ -155,11 +154,11 @@
                                            onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back9&productId=<%=list.get(i).getId()%>'">
                                             分配专家</a>
                                         <%}%>
-                                        <%if (list.get(i).getStatus().equals(AuditStatus.WAITED_ADMIN)) {%>
-                                        <a type="button" class="btn btn-link fa fa-check-square"
-                                           onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back15&productId=<%=list.get(i).getId()%>'">
-                                            审核产品</a>
-                                        <%}%>
+<%--                                        <%if (list.get(i).getStatus().equals(AuditStatus.WAITED_ADMIN)) {%>--%>
+<%--                                        <a type="button" class="btn btn-link fa fa-check-square"--%>
+<%--                                           onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back15&productId=<%=list.get(i).getId()%>'">--%>
+<%--                                            审核产品</a>--%>
+<%--                                        <%}%>--%>
                                         <a type="button" class="btn btn-link fa fa-trash-o"
                                            onclick="del(<%=list.get(i).getId()%>)">删除</a></td>
                                 </tr>
