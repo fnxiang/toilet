@@ -1,7 +1,9 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.google.common.collect.Lists" %>
-<%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %><%--
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %>
+<%@ page import="org.springframework.util.StringUtils" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %><%--
   Created by IntelliJ IDEA.
   User: kokorozashinao
   Date: 2022/3/5
@@ -588,8 +590,79 @@
 
                             </div>
 
+
+                            <%
+                                ApprovalDTO approvalDTO = (ApprovalDTO) request.getAttribute("approval");
+                                String content = "";
+                                String status = "";
+                                if (approvalDTO != null) {
+                                    status =approvalDTO.getStatus().getName();
+                                    content = approvalDTO.getContent();
+                                }
+                            %>
+
+                            <hr>
+                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="select_status"
+                                                                     class=" form-control-label">专家审核结果</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="select_status" id="select_status" class="form-control" disabled>
+                                            <option value="审核通过"
+                                                    <%if (StringUtils.isEmpty(status) || status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
+                                            </option>
+                                            <option value="审核不通过"
+                                                    <%if (status.equals("审核不通过")){%>selected="selected"<%}%>>审核不通过
+                                            </option>
+                                            <option value="修改后重新审核"
+                                                    <%if (status.equals("修改后重新审核")){%>selected="selected"<%}%>>修改后重新审核
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="professor_opinion"
+                                                                     class=" form-control-label">专家审核意见</label>
+                                    </div>
+                                    <div class="col-12 col-md-9"><textarea name="professor_opinion" id="professor_opinion"
+                                                                           rows="9" placeholder=""
+                                                                           class="form-control" disabled><%=content%></textarea></div>
+                                </div>
+                            </form>
+                            <hr>
+                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="row form-group" <%if(status.equals("等待管理员审核")){}else{%> style="display: none" <%}%>>
+                                    <div class="col col-md-3"><label for="select_status"
+                                                                     class=" form-control-label">是否通过</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="select_status" id="select_status" class="form-control">
+                                            <option value="审核通过">审核通过
+                                            </option>
+                                            <option value="审核不通过">审核不通过
+                                            </option>
+                                            <option value="修改后重新审核">修改后重新审核
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group" <%if(status.equals("等待管理员审核")){}else{%> style="display: none" <%}%>>
+                                    <div class="col col-md-3"><label for="opinion"
+                                                                     class=" form-control-label">审核意见</label>
+                                    </div>
+                                    <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
+                                                                           rows="9" placeholder=""
+                                                                           class="form-control"></textarea></div>
+                                </div>
+                            </form>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="location.replace(document.referrer);">返回</button>
+                                <%if(status.equals("等待管理员审核")){}else{%>
+                                <button type="button" class="btn btn-outline-secondary" onclick="commit()">
+                                    确认提交
+                                </button>
+                                <%}%>
+                                <button type="button" class="btn btn-outline-secondary offset-2"
+                                        onclick="location.replace(document.referrer);">返回
+                                </button>
                             </div>
 
                         </div>
@@ -648,10 +721,33 @@
 <script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/datatables-init.js"></script>
 
 <script type="text/javascript">
-
-
 </script>
-
+<script>
+    function commit() {
+        const data = new FormData();
+        data.append("productId", "<%=productDTO.getId()%>");
+        data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').value));
+        data.append("professorOpinion", encodeURI($('#professor_opinion').val()))
+        data.append("comment", encodeURI($('#opinion').val()));
+        $.ajax({
+            url: "/toilet/admin/product/audit",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    show("提交成功！");
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
