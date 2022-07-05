@@ -135,7 +135,7 @@
                                     <td style="text-align: center"><%=Patternlist.get(i).getStatus().getName()%>
                                     </td>
                                     <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit" id="xiugaimoshi"
-                                                                      onclick="javascript:window.location.href='/toilet/toPage?url=company_back11&patternId=<%=Patternlist.get(i).getId()%>'" <%if(Patternlist.get(i).getStatus() != AuditStatus.WAITED || Patternlist.get(i).getStatus() != AuditStatus.UNKNOWN){%>  style="display: none" <%}%>>修改信息</a>
+                                                                      onclick="javascript:window.location.href='/toilet/toPage?url=company_back11&patternId=<%=Patternlist.get(i).getId()%>'" <%if(Patternlist.get(i).getStatus() == AuditStatus.WAITED || Patternlist.get(i).getStatus() == AuditStatus.UNKNOWN){}else{%>  style="display: none" <%}%>>修改信息</a>
                                         <%if (Patternlist.get(i).getStatus().equals(AuditStatus.APPROVAL)
                                                 || Patternlist.get(i).getStatus().equals(AuditStatus.DENY)
                                                 || Patternlist.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
@@ -143,7 +143,7 @@
                                         <%} else if (Patternlist.get(i).getStatus().equals(AuditStatus.WAITED)
                                                 ||Patternlist.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {%>
                                         <a type="button" class="btn btn-link fa fa-upload" id="shenhe"
-                                           onclick="submit('<%=Patternlist.get(i).getId()%>')" <%if(Patternlist.get(i).getStatus() != AuditStatus.WAITED || Patternlist.get(i).getStatus() != AuditStatus.UNKNOWN){%><%} else{%> style="display: none"<%}%>>提交审核</a>
+                                           onclick="submit('<%=Patternlist.get(i).getId()%>')">提交审核</a>
                                         <%}%>
 
                                         <a type="button" class="btn btn-link fa fa-info-circle" onclick="javascript:window.location.href='/toilet/toPage?url=company_back9&patternId=<%=Patternlist.get(i).getId()%>'">模式详情</a>
