@@ -171,44 +171,10 @@
                                     </div>
                                 </div>
                                 <div id="many_factors">
-                                    <hr>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label class=" form-control-label">是否添加新模式</label>
-                                        </div>
-                                        <div class="col col-md-9">
-                                            <div class="form-check-inline form-check">
-                                                <label for="newmoderadios1" class="form-check-label">
-                                                    <input type="radio" id="newmoderadios1" name="newmoderadios"
-                                                           value="showNewMode" class="form-check-input" checked>是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                </label>
-                                                <label for="newmoderadios2" class="form-check-label">
-                                                    <input type="radio" id="newmoderadios2" name="newmoderadios"
-                                                           value="hideNewMode" class="form-check-input">否
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col col-md-1"><label class=" form-control-label"></label></div>
-                                        <div class="col col-md-11"><p>如果添加新模式请勾选是，并按照提示要求进行填写。新模式名称示例:洁具便器+化粪池+分散处理。</p>
-                                        </div>
-                                    </div>
 
 
                                     <!--  style="display:none;"  -->
                                     <div id="newModeAdding" style="">
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="newmodename"
-                                                                             class=" form-control-label">新模式名称
-                                                <i id="new_model_name_tips" class="fa fa-question-circle"
-                                                   data-toggle="tooltip" data-placement="top"
-                                                   title="输入注意事项"></i></label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input type="text" id="newmodename"
-                                                                                name="newmodename" placeholder="新模式名称"
-                                                                                class="form-control"></div>
-                                        </div>
 
 
                                         <div class="custom-tab">
