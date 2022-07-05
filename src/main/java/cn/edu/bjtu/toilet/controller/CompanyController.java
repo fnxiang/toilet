@@ -283,7 +283,6 @@ public class CompanyController {
 
         //管网
         PipNetworkConditionsDTO pipNetworkConditionsDTO = new PipNetworkConditionsDTO();
-        pipNetworkConditionsDTO.setHasSewageTreatment(params.get("sewageTreatment").equals("是"));
         pipNetworkConditionsDTO.setHasSewerLines(params.get("sewerLines").equals("是"));
 
         toiletPatternDTO.setPipNetworkConditions(pipNetworkConditionsDTO);

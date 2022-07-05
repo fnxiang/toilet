@@ -10,4 +10,6 @@ public class AccountRequest {
     private String account;
 
     private String pwd;
+
+    private String name;
 }

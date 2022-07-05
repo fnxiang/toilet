@@ -101,6 +101,7 @@ public class ProductServiceImpl implements ProductService {
         double matchCount = 0L;
         Integer iteratorIndex = 1;
         request.setPageIndex(iteratorIndex);
+        response.setCurrentPage(iteratorIndex);
         List<ToiletProductDTO> productDTOSFromDb;
         do {
             productDTOSFromDb = queryPageProduct(request).getProductDTOList();
@@ -111,18 +112,18 @@ public class ProductServiceImpl implements ProductService {
                 for (int i=0; i<request.getPageSize();i++) {
                     resultList.removeFirst();
                 }
+                response.setCurrentPage(response.getCurrentPage() + 1);
             }
             iteratorIndex++;
             request.setPageIndex(iteratorIndex);
         } while (!CollectionUtils.isEmpty(queryPageProduct(request).getProductDTOList()));
 
-        if (resultList.size() > 20) {
-            for (int i=20;i<resultList.size();i++) {
-                resultList.removeFirst();
+        if (resultList.size() > request.getPageSize()) {
+            for (int i=request.getPageSize();i<resultList.size();i++) {
+                resultList.removeLast();
             }
         }
         response.setMaxPage((int) Math.ceil(matchCount/request.getPageSize()));
-        response.setCurrentPage(iteratorIndex-1);
         response.setPageSize(request.getPageSize());
         response.setProductDTOList(resultList);
 

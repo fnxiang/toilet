@@ -33,6 +33,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static cn.edu.bjtu.toilet.constant.PageIndexPathConstants.MANAGE_BASE;
 
@@ -180,6 +181,10 @@ public class AdminController {
             userService.saveProfessorUser(professorRegisterRequest);
         } else if (accountRequest.getRole().equals(UserRole.COMPANY_USER.getRole())) {
             CompanyRegisterRequest companyRegisterRequest = buildCompanyReq(accountRequest);
+            CompanyDO companyDO = companyService.queryCompanyByEmail(accountRequest.getAccount());
+            if (!Objects.isNull(companyDO)) {
+                return CommandResponse.failed("用户已存在");
+            }
             companyService.registerCompany(companyRegisterRequest);
         } else {
             return CommandResponse.failed("用户角色错误");
@@ -401,16 +406,24 @@ public class AdminController {
 
     private CompanyRegisterRequest buildCompanyReq(AccountRequest accountRequest) {
         CompanyRegisterRequest companyRegisterRequest = new CompanyRegisterRequest();
+        companyRegisterRequest.setCompanyName(accountRequest.getName());
         companyRegisterRequest.setEmail(accountRequest.getAccount());
         companyRegisterRequest.setPassword(accountRequest.getPwd());
         companyRegisterRequest.setConfirmPassword(accountRequest.getPwd());
         companyRegisterRequest.setCreditCode("PLS AMEND");
+        EnterpriseAddressDTO enterpriseAddressDTO = new EnterpriseAddressDTO();
+        enterpriseAddressDTO.setCity("北京");
+        enterpriseAddressDTO.setProvince("海淀区");
+        enterpriseAddressDTO.setCountry("北京");
+        enterpriseAddressDTO.setDetailAddress("请修改地址");
+        companyRegisterRequest.setEnterpriseAddress(enterpriseAddressDTO);
         companyRegisterRequest.setUserRole(UserRole.COMPANY_USER);
         return companyRegisterRequest;
     }
 
     private ProfessorRegisterRequest buildProfessorReq(AccountRequest accountRequest) {
         ProfessorRegisterRequest professorRegisterRequest = new ProfessorRegisterRequest();
+        professorRegisterRequest.setUserName(accountRequest.getName());
         professorRegisterRequest.setEmail(accountRequest.getAccount());
         professorRegisterRequest.setPassword(accountRequest.getPwd());
         professorRegisterRequest.setConfirmPassword(accountRequest.getPwd());
@@ -431,7 +444,7 @@ public class AdminController {
         sortRequest.setIsDesc(false);
         sortRequest.setSortBy("id");
         sortRequest.setPageSize(100);
-        sortRequest.setAuditStatuses(Lists.newArrayList(AuditStatus.UNKNOWN, AuditStatus.WAITED, AuditStatus.WAITED_PROFESSOR, AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
+        sortRequest.setAuditStatuses(Lists.newArrayList(AuditStatus.UNKNOWN, AuditStatus.WAITED, AuditStatus.WAITED_ADMIN, AuditStatus.WAITED_PROFESSOR, AuditStatus.APPROVAL, AuditStatus.DENY, AuditStatus.WAITED_AMEND));
         sortRequest.setEmail(email);
         return sortRequest;
     }
@@ -439,6 +452,7 @@ public class AdminController {
     private AccountRequest buildAccountReq(Map<String, String> params) {
         AccountRequest accountRequest = new AccountRequest();
         accountRequest.setAccount(params.get("account"));
+        accountRequest.setName(params.get("username"));
         accountRequest.setRole(params.get("role"));
         accountRequest.setPwd(params.get("pwd"));
         return accountRequest;
