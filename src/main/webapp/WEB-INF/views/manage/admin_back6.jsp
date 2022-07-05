@@ -655,11 +655,11 @@
                                 </div>
                             </form>
                             <div class="card-text text-lg-center">
-                                <%if(status.equals("等待管理员审核")){}else{%>
+                                <%if(status.equals("等待管理员审核")){%>
                                 <button type="button" class="btn btn-outline-secondary" onclick="commit()">
                                     确认提交
                                 </button>
-                                <%}%>
+                                <%}else{}%>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
                                         onclick="location.replace(document.referrer);">返回
                                 </button>
