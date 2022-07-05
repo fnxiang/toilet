@@ -142,7 +142,7 @@
                                                                                  class=" form-control-label">温度条件：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="select" id="select" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="高寒" <%if (patternDTO.getEnvConditions().getTemperature().equals("高寒")) {%>
                                                                 selected="selected" <%}%>>高寒
                                                         </option>
@@ -157,7 +157,7 @@
                                                                                  class=" form-control-label">水资源条件：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="select" id="select" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="缺水"  <%if (patternDTO.getEnvConditions().getWaterResource().equals("缺水")) {%>
                                                                 selected="selected" <%}%>>缺水
                                                         </option>
