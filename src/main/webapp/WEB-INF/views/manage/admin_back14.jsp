@@ -226,12 +226,8 @@
                 contentType: false,
                 processData: false,
                 success: function (result) {
-                    if (result.success) {
-                        show("分配成功！");
-                    } else {
                         show(result.errorMessage);
                     }
-                }
             });
         }
     }
