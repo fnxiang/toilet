@@ -25,10 +25,10 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/pe-icon-7-filled.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/flag-icon.min.css"><link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/lib/datatable/dataTables.bootstrap.min.css">
-    
+
 	<link href="${pageContext.request.contextPath}/static/manage/res/css/stylenew.css" rel="stylesheet">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/manage/assets/css/style.css">
-	
+
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -111,7 +111,7 @@
                             <div class="card-header">
                                 <strong class="card-title">模式管理</strong>
                             </div>
-                            <div class="card-body">	
+                            <div class="card-body">
                                 <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 									<thead>
 										<tr>
@@ -133,10 +133,7 @@
 										<td class="text-center">
 											<a type="button" class="btn btn-link fa fa-edit" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back11&patternId=<%=list.get(i).getId()%>'"> 查看详情</a>
                                             <%if (list.get(i).getStatus().equals(AuditStatus.WAITED_PROFESSOR) && StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
-											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=<%=list.get(i).getId()%>'"> 分配专家</a>
-                                            <%}%>
-                                            <%if (list.get(i).getStatus().equals(AuditStatus.WAITED_ADMIN)) {%>
-                                            <a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back16&patternId=<%=list.get(i).getId()%>'"> 审核模式</a>
+											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=<%=list.get(i).getId()%>'">分配专家</a>
                                             <%}%>
 											<a type="button" class="btn btn-link fa fa-trash-o" onclick="del(<%=list.get(i).getId()%>)"> 删除</a>
 										</td>
@@ -144,7 +141,7 @@
 									<%}%>
 								</table>
                             </div>
-							
+
                         </div>
                     </div>
 
@@ -184,7 +181,7 @@
     <script src="${pageContext.request.contextPath}/static/manage/assets/js/jquery.matchHeight.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/manage/assets/js/main.js"></script>
 
-	
+
     <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/datatables.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/manage/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
@@ -220,7 +217,7 @@
     <script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 	<script src="${pageContext.request.contextPath}/static/manage/res/js/lib/datatables/datatables-init.js"></script>
-	
+
     <script type="text/javascript">
         // fixme 删除模式接口
         function del(pattern_id) {
@@ -244,7 +241,7 @@
                 }
             });
         }
-	  
+
   </script>
 
 </body>

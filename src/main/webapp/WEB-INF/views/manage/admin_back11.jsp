@@ -1,4 +1,6 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %>
+<%@ page import="org.springframework.util.StringUtils" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -304,6 +306,71 @@
                                                     </select>
                                                 </div>
                                             </div>
+
+                                            <%
+                                                ApprovalDTO approvalDTO = (ApprovalDTO) request.getAttribute("approval");
+                                                String content = "";
+                                                String status = "";
+                                                if (approvalDTO != null) {
+                                                    status =approvalDTO.getStatus().getName();
+                                                    content = approvalDTO.getContent();
+                                                }
+                                            %>
+
+                                            <hr>
+                                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                                <div class="row form-group">
+                                                    <div class="col col-md-3"><label for="select_status"
+                                                                                     class=" form-control-label">专家审核结果</label></div>
+                                                    <div class="col-12 col-md-9">
+                                                        <select name="select_status" id="select_status" class="form-control" disabled>
+                                                            <option value="审核通过"
+                                                                    <%if (StringUtils.isEmpty(status) || status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
+                                                            </option>
+                                                            <option value="审核不通过"
+                                                                    <%if (status.equals("审核不通过")){%>selected="selected"<%}%>>审核不通过
+                                                            </option>
+                                                            <option value="修改后重新审核"
+                                                                    <%if (status.equals("修改后重新审核")){%>selected="selected"<%}%>>修改后重新审核
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col col-md-3"><label for="professor_opinion"
+                                                                                     class=" form-control-label">专家审核意见</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9"><textarea name="professor_opinion" id="professor_opinion"
+                                                                                           rows="9" placeholder=""
+                                                                                           class="form-control" disabled><%=content%></textarea></div>
+                                                </div>
+                                            </form>
+                                            <hr>
+                                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                                <div class="row form-group" <%if(status.equals("等待管理员审核")){}else{%> style="display: none" <%}%>>
+                                                    <div class="col col-md-3"><label for="select_status"
+                                                                                     class=" form-control-label">是否通过</label></div>
+                                                    <div class="col-12 col-md-9">
+                                                        <select name="select_status" id="select_status" class="form-control">
+                                                            <option value="审核通过">审核通过
+                                                            </option>
+                                                            <option value="审核不通过">审核不通过
+                                                            </option>
+                                                            <option value="修改后重新审核">修改后重新审核
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group" <%if(status.equals("等待管理员审核")){}else{%> style="display: none" <%}%>>
+                                                    <div class="col col-md-3"><label for="opinion"
+                                                                                     class=" form-control-label">审核意见</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
+                                                                                           rows="9" placeholder=""
+                                                                                           class="form-control"></textarea></div>
+                                                </div>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -311,10 +378,12 @@
 
                             <hr>
                             <div class="card-text text-lg-center">
+                                <%if(status.equals("等待管理员审核")){%>
                                 <button type="button" class="btn btn-outline-secondary"
                                         onclick="mode_enter()">
                                     确认修改
                                 </button>
+                                <%}%>
                             </div>
 
                         </div>
