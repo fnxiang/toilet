@@ -136,7 +136,7 @@
                                     <td style="text-align: center"><%=list.get(i).getStatus().getName()%>
                                     </td>
                                     <td style="text-align: center"><a type="button" class="btn btn-link fa fa-edit" id="xiugai"
-                                                                      onclick="javascript:window.location.href='/toilet/toPage?url=company_back6&productId=<%=list.get(i).getId()%>'" <%if(list.get(i).getStatus() != AuditStatus.WAITED || list.get(i).getStatus() != AuditStatus.UNKNOWN){%>  style="display: none" <%}%>>修改信息</a>
+                                                                      onclick="javascript:window.location.href='/toilet/toPage?url=company_back6&productId=<%=list.get(i).getId()%>'" <%if(list.get(i).getStatus() == AuditStatus.WAITED || list.get(i).getStatus() == AuditStatus.UNKNOWN){}else{%>  style="display: none" <%}%>>修改信息</a>
                                         <%if (list.get(i).getStatus().equals(AuditStatus.APPROVAL)
                                                 || list.get(i).getStatus().equals(AuditStatus.DENY)
                                                 || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
@@ -144,7 +144,7 @@
                                         <%} else if (list.get(i).getStatus().equals(AuditStatus.WAITED)
                                                     ||list.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {%>
                                         <a type="button" class="btn btn-link fa fa-upload" id="shenhe"
-                                           onclick="submit('<%=list.get(i).getId()%>')" <%if(list.get(i).getStatus() != AuditStatus.WAITED || list.get(i).getStatus() != AuditStatus.UNKNOWN){%><%} else{%> style="display: none"<%}%>>提交审核</a>
+                                           onclick="submit('<%=list.get(i).getId()%>')">提交审核</a>
                                         <%}%>
 
                                         <a type="button" class="btn btn-link fa fa-info-circle" onclick="javascript:window.location.href='/toilet/toPage?url=company_back7&productId=<%=list.get(i).getId()%>'">产品详情</a>
