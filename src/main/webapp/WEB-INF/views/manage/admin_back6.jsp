@@ -3,7 +3,8 @@
 <%@ page import="com.google.common.collect.Lists" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %>
 <%@ page import="org.springframework.util.StringUtils" %>
-<%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %><%--
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %>
+<%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %><%--
   Created by IntelliJ IDEA.
   User: kokorozashinao
   Date: 2022/3/5
@@ -601,6 +602,7 @@
                                 }
                             %>
 
+                            <%if(status.equals(AuditStatus.APPROVAL.getName()) || status.equals(AuditStatus.DENY.getName()) || status.equals(AuditStatus.WAITED_AMEND.getName())){%>
                             <hr>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
@@ -629,6 +631,7 @@
                                                                            class="form-control" disabled><%=content%></textarea></div>
                                 </div>
                             </form>
+                            <%}%>
                             <hr>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group" <%if(status.equals("等待管理员审核")){}else{%> style="display: none" <%}%>>
