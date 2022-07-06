@@ -748,6 +748,7 @@
         });
     }
 
+
     function imgShow(outerdiv, innerdiv, bigimg, _this) {
         var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
         $(bigimg).attr("src", src);//设置#bigimg元素的src属性
