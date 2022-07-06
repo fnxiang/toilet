@@ -321,7 +321,7 @@
                                 String productStatus = patternDTO.getStatus().getName();
                             %>
                             <hr>
-                            <%if (!StringUtils.isEmpty(status)) {%>
+                            <%if (productStatus.equals("审核通过") || productStatus.equals("审核不通过") || productStatus.equals("等待管理员审核")) {%>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="select_status"
