@@ -4,7 +4,8 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %>
 <%@ page import="org.springframework.util.StringUtils" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %>
-<%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %><%--
+<%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
+<%@ page import="cn.edu.bjtu.toilet.utils.DateUtil" %><%--
   Created by IntelliJ IDEA.
   User: kokorozashinao
   Date: 2022/3/5
@@ -277,7 +278,7 @@
                                                                                             name="updateTime"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="<%=productDTO.getGmtModified().toInstant()%>"
+                                                                                            value="<%=DateUtil.toStandardFormat(productDTO.getGmtModified())%>"
                                                                                             disabled>
                                                         </div>
                                                     </div>
