@@ -14,7 +14,7 @@ public class ProductConverter {
         if (productDTO.getStatus() != null) {
             productDO.setStatus(productDTO.getStatus().getCode());
         } else {
-            productDO.setStatus(-1);
+            productDO.setStatus(AuditStatus.WAITED.getCode());
         }
 
         productDO.setPrice(productDTO.getProductParameters().getPrice());

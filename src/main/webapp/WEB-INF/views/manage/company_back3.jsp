@@ -869,8 +869,8 @@
             processData: false,
             success: function (result) {
                 if (result.success) {
-                    mode_content_selectMap = result.data.selectMap;
-                    mode_content_patternDTOMap = result.data.patternDTOMap;
+                    mode_content_selectMap = result.selectMap;
+                    mode_content_patternDTOMap = result.patternDTOMap;
                     //动态赋值给控件  productselect   multiple-select
                     var productSelect = document.getElementById("productselect");
                     var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
