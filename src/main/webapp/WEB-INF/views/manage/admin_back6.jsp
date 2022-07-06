@@ -592,7 +592,6 @@
 
                             </div>
 
-
                             <%
                                 ApprovalDTO approvalDTO = (ApprovalDTO) request.getAttribute("approval");
                                 String status = "";
@@ -601,23 +600,24 @@
                                     status = approvalDTO.getStatus().getName();
                                     content = approvalDTO.getContent();
                                 }
+                                String productStatus = productDTO.getStatus().getName();
                             %>
-
                             <hr>
+                            <%if (!StringUtils.isEmpty(productStatus) && (productStatus.equals("等待管理员审核")  || productStatus.equals("修改后重新审核"))) {%>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="select_status"
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control" <%if(StringUtils.isEmpty(status) || status.equals("等待管理员审核") || status.equals("修改后重新审核")){}else{%> disabled <%}%>>
+                                        <select name="select_status" id="select_status" class="form-control" <%if(productStatus.equals("等待管理员审核") || productStatus.equals("修改后重新审核")){}else{%> disabled <%}%>>
                                             <option value="审核通过"
-                                                    <%if (StringUtils.isEmpty(status) || status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
+                                                    <%if (!StringUtils.isEmpty(status) && status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
                                             </option>
                                             <option value="审核不通过"
-                                                    <%if (status.equals("审核不通过")){%>selected="selected"<%}%>>审核不通过
+                                                    <%if (!StringUtils.isEmpty(status) && status.equals("审核不通过")){%>selected="selected"<%}%>>审核不通过
                                             </option>
                                             <option value="修改后重新审核"
-                                                    <%if (status.equals("修改后重新审核")){%>selected="selected"<%}%>>修改后重新审核
+                                                    <%if (!StringUtils.isEmpty(status) && (status.equals("修改后重新审核"))){%>selected="selected"<%}%>>修改后重新审核
                                             </option>
                                         </select>
                                     </div>
@@ -628,18 +628,26 @@
                                     </div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder=""
-                                                                           class="form-control" <%if(StringUtils.isEmpty(status) ||status.equals("等待管理员审核") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>><%=content%></textarea></div>
+                                                                           class="form-control" <%if(productStatus.equals("等待管理员审核") || productStatus.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>><%=content%></textarea></div>
                                 </div>
                             </form>
+                            <%}%>
+                            <%if (!StringUtils.isEmpty(productStatus) && (productStatus.equals("等待管理员审核")  || productStatus.equals("修改后重新审核"))) {%>
                             <div class="card-text text-lg-center">
-                                <button type="button" <%if (!StringUtils.isEmpty(status) || !status.equals("等待管理员审核")) {%> style="display: none" <%}%> class="btn btn-outline-secondary" onclick="commit()">
+                                <button type="button"  class="btn btn-outline-secondary" onclick="commit()">
                                     确认提交
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
                                         onclick="location.replace(document.referrer);">返回
                                 </button>
                             </div>
-
+                            <%}else{%>
+                            <div class="card-text text-lg-center">
+                                <button type="button" class="btn btn-outline-secondary"
+                                        onclick="location.replace(document.referrer);">返回
+                                </button>
+                            </div>
+                            <%}%>
                         </div>
                     </div>
                 </div>
