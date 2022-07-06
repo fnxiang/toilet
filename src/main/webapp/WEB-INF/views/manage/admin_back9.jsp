@@ -1,6 +1,8 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.google.common.collect.Lists" %><%--
+<%@ page import="com.google.common.collect.Lists" %>
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %>
+<%@ page import="cn.edu.bjtu.toilet.utils.DateUtil" %><%--
   Created by IntelliJ IDEA.
   User: kokorozashinao
   Date: 2022/3/5
@@ -86,7 +88,8 @@
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel">
-    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");%>
+    <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");
+        CompanyDTO companyDTO = (CompanyDTO)request.getAttribute("company");%>
     <%--获取路径用于显示图片和文件--%>
     <% String path = request.getContextPath();
         String basePath = request.getScheme() + "://"
