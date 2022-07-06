@@ -135,7 +135,7 @@
                                             <%if (list.get(i).getStatus().equals(AuditStatus.WAITED_PROFESSOR) && StringUtils.isEmpty(list.get(i).getProfessorEmail())) {%>
 											<a type="button" class="btn btn-link fa fa-check-square" onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back13&patternId=<%=list.get(i).getId()%>'">分配专家</a>
                                             <%}%>
-											<a type="button" class="btn btn-link fa fa-trash-o" onclick="del(<%=list.get(i).getId()%>)"> 删除</a>
+											<a type="button" class="btn btn-link fa fa-trash-o" onclick="confirm_delete('pattern', <%=list.get(i).getId()%>)"> 删除</a>
 										</td>
 									</tr>
 									<%}%>
@@ -220,7 +220,7 @@
 
     <script type="text/javascript">
         // fixme 删除模式接口
-        function del(pattern_id) {
+        function deletePattern(pattern_id) {
             let data = new FormData();
             data.append("patternId", pattern_id)
             $.ajax({

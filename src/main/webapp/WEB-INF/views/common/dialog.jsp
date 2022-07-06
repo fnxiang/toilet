@@ -38,5 +38,19 @@
         $(".dialog").css("display","none");
         document.location.reload();
     }
+    function confirm_delete(userType, userId){
+        $(".dialog").css("display","block");
+        var dom = '确定删除？</br>';
+        if(userType === 'company'){
+            dom += '<a type="button"   onclick="deleteCompany(' + userId + ')">确定</a>';
+        }else if(userType === 'professor'){
+            dom += '<a type="button"   onclick="deleteProfessor(' + userId + ')">确定</a>';
+        }else if(userType === 'product'){
+            dom += '<a type="button"  onclick="deleteProduct(' + userId + ')">确定</a>';
+        }else if(userType === 'pattern'){
+            dom += '<a type="button"  onclick="deletePattern(' + userId + ')">确定</a>';
+        }
+        document.getElementById("dialog_text").innerHTML = dom
+    }
 </script>
 </html>

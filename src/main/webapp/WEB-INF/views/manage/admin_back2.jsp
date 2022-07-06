@@ -190,7 +190,7 @@
                                             查看详情</a>
                                         <%--												<a type="button" id="<%=list.get(i).getEmail()%>" class="btn btn-link fa fa-check-square" onclick="approveUser('<%=list.get(i).getEmail()%>', '<%=list.get(i).getRole()%>')"> 审核通过</a>--%>
                                         <a type="button" class="btn btn-link fa fa-trash-o"
-                                           onclick="deleteProfessor(<%=list.get(i).getId()%>)"> 删除</a>
+                                           onclick="confirm_delete('professor', <%=list.get(i).getId()%>)"> 删除</a>
                                     </td>
                                 </tr>
                                 <%
@@ -251,7 +251,7 @@
                                            onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back12&email=<%=companyDOS.get(j).getEmail()%>'">
                                             查看详情</a>
                                         <a type="button" class="btn btn-link fa fa-trash-o"
-                                           onclick="deleteCompany(<%=companyDOS.get(j).getId()%>)"> 删除</a>
+                                           onclick="confirm_delete('company', <%=companyDOS.get(j).getId()%>)"> 删除</a>
                                     </td>
                                 </tr>
                                 <%

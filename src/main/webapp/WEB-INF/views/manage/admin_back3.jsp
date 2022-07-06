@@ -160,7 +160,7 @@
 <%--                                            审核产品</a>--%>
 <%--                                        <%}%>--%>
                                         <a type="button" class="btn btn-link fa fa-trash-o"
-                                           onclick="del(<%=list.get(i).getId()%>)">删除</a></td>
+                                           onclick="confirm_delete('product', <%=list.get(i).getId()%>)">删除</a></td>
                                 </tr>
                                 <%}%>
                                 </tbody>
@@ -227,7 +227,7 @@
 </script>
 
 <script>
-    function del(product_id) {
+    function deleteProduct(product_id) {
         let data = new FormData();
         data.append("productId", product_id)
         $.ajax({
