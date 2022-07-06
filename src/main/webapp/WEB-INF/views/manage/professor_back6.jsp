@@ -310,12 +310,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr>
+                            <%if(StringUtils.isEmpty(status) || status.equals("等待专家审核") || status.equals("修改后重新审核")){%>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="select_status" class=" form-control-label">是否通过</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control" <%if(StringUtils.isEmpty(status) || status.equals("等待专家审核") || status.equals("修改后重新审核")){}else{%> disabled <%}%>>
+                                        <select name="select_status" id="select_status" class="form-control">
                                             <option value="审核通过"
                                                     <%if (StringUtils.isEmpty(status) || status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
                                             </option>
@@ -337,6 +339,7 @@
                                     </div>
                                 </div>
                             </form>
+                            <%}%>
                             <div class="card-text text-lg-center">
                                 <button type="button" <%if (!StringUtils.isEmpty(status) && !status.equals("等待专家审核")) {%> style="display: none" <%}%> class="btn btn-outline-secondary" onclick="commit()">
                                     确认提交
