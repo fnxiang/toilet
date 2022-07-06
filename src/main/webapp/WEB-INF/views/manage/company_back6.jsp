@@ -1,16 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kokorozashinao
-  Date: 2022/3/5
-  Time: 5:06 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="cn.edu.bjtu.toilet.domain.dto.ToiletProductDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.google.common.collect.Lists" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %>
-<%@ page import="cn.edu.bjtu.toilet.utils.DateUtil" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -84,7 +76,7 @@
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel">
-<%--    fixme productDTO为空--%>
+    <%--    fixme productDTO为空--%>
     <%ToiletProductDTO productDTO = (ToiletProductDTO) request.getAttribute("product");
         CompanyDTO companyDTO = (CompanyDTO)request.getAttribute("company");
     %>
@@ -247,8 +239,8 @@
                                                                                             name="updateTime"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="<%=DateUtil.toStandardFormat(productDTO.getGmtModified())%>"
-                                                        disabled>
+                                                                                            value="<%=productDTO.getGmtModified().toInstant()%>"
+                                                                                            disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -506,7 +498,6 @@
                                                             border: 1px solid #ececec;
                                                             position: relative;
                                                         }
-
                                                         .image-remove {
                                                             background-color: white;
                                                             font-color: #ececec;
@@ -710,19 +701,16 @@
     $(document).ready(function () {
         $('#bootstrap-data-table-export').DataTable();
     });
-
 </script>
 
-<script type="text/javascript">
+<script>
     function showbigpic(obj) {
         var _this = $(obj);//将当前的pimg元素作为_this传入函数
         imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
     }
-
     function imgShow(outerdiv, innerdiv, bigimg, _this) {
         var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
         $(bigimg).attr("src", src);//设置#bigimg元素的src属性
-
         /*获取当前点击图片的真实大小，并显示弹出层及大图*/
         $("<img/>").attr("src", src).load(function () {
             var windowW = $(window).width();//获取当前窗口宽度
@@ -731,7 +719,6 @@
             var realHeight = this.height;//获取图片真实高度
             var imgWidth, imgHeight;
             var scale = 0.9;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放
-
             if (realHeight > windowH * scale) {//判断图片高度
                 imgHeight = windowH * scale;//如大于窗口高度，图片高度进行缩放
                 imgWidth = imgHeight / realHeight * realWidth;//等比例缩放宽度
@@ -746,38 +733,32 @@
                 imgHeight = realHeight;
             }
             $(bigimg).css("width", imgWidth);//以最终的宽度对图片缩放
-
             var w = (windowW - imgWidth) / 2;//计算图片与窗口左边距
             var h = (windowH - imgHeight) / 2;//计算图片与窗口上边距
             $(innerdiv).css({"top": h, "left": w});//设置#innerdiv的top和left属性
             $(outerdiv).fadeIn("fast");//淡入显示#outerdiv及.pimg
         });
-
         $(outerdiv).click(function () {//再次点击淡出消失弹出层
             $(this).fadeOut("fast");
         });
     }
-
 </script>
 
-<script type="text/javascript">
+<script>
     function changeimg(obj) {
         var _this = $(obj);
         var src = _this.attr("src");
         $("#sampleimg").attr("src", src);
     }
-
     var pic1 = null;
     var pic2 = null;
     var pic3 = null;
     var pic4 = null;
     <%for(int j = 0; j < pathList.size(); j++){%>
-    pic<%=j + 1%> = "<%=pathList.get(j)%>";
+    pic<%=j + 1%> = "<%=pathList.get(j).replaceAll("\\\\", "/")%>"
     <%}%>
-    var introduction = "<%=productDTO.getInstructionFilePath()%>";
-    var quality = "<%=productDTO.getQualityAssuranceMaterialsFilePath()%>";
-
-
+    var introduction = "<%=productDTO.getInstructionFilePath().replaceAll("\\\\", "/")%>"
+    var quality = "<%=productDTO.getQualityAssuranceMaterialsFilePath().replaceAll("\\\\", "/")%>"
     //删除使用图片
     $('#removeImage').click(function (e) {
         var pic = document.getElementById("delete" + e.target.id);
@@ -799,7 +780,6 @@
                 break;
         }
     });
-
     //上传使用说明
     function upload_instruction() {
         var instruction = document.getElementById("instruction");
@@ -810,7 +790,6 @@
         shuruinstruction.style.cssText = "";
         introduction = null;
     }
-
     //上传质量保证材料
     function upload_qualityinsurance() {
         var qualityinsurance = document.getElementById("qualityinsurance");
@@ -821,7 +800,6 @@
         shuruqualityinsurance.style.cssText = "";
         quality = null;
     }
-
     //提交修改
     function modify() {
         let data = new FormData();
@@ -847,15 +825,11 @@
         data.append("texture", $('#jvticaizhi').val());//材质
         data.append("color", encodeURI($('#yanse').val())); //颜色
         data.append("serviceLife", encodeURI($('#shouming').val())); //使用寿命
-
         radio = document.getElementsByName("cesuoyongtu"); //厕所用途
         const toiletPurpose = getRadioValue(radio);
         data.append("toiletPurpose", encodeURI(toiletPurpose));
-
         data.append("runningCost", encodeURI($('#yunxingchengben').val())); //运行成本
         data.append("cleanupCycle", encodeURI($('#qinglizhouqi').val())); //清理周期
-
-
         // 文件上传
         if (!quality) {
             quality = $('#zhiliangbaozhang')[0].files[0];
@@ -909,7 +883,6 @@
                 texture = radio[i].value;
             }
         }
-
         if (texture === "qita") {
             texture = $('#jvticaizhi').val();
         }
