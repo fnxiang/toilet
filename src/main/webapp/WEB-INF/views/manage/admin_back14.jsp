@@ -213,6 +213,7 @@
         data.append("username", encodeURI($('#yonghuming').val()));
         if(!data.get("role")){show("用户类型不能为空！")}
         else if(!data.get("account")){show("账号不能为空！")}
+        else if (! IsEmail(data.get("account"))){show("请输入正确邮箱地址!");}
         else if(!data.get("pwd")){show("密码不能为空！")}
         else if(!data.get("username")){show("用户名不能为空！")}
         else{
@@ -230,6 +231,12 @@
                     }
             });
         }
+    }
+
+    // 校验邮箱
+    function IsEmail(el) {
+        var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+        return reg.test(el);
     }
 </script>
 
