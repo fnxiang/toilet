@@ -52,12 +52,12 @@
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i
                             class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i
-                            class="menu-icon fa fa-cogs"></i>模式审核</a>
+                            class="menu-icon fa fa-cogs"></i>模式管理</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back5"
@@ -113,11 +113,11 @@
                         <div class="card-header">
                             <strong class="card-title">模式信息修改</strong>
                         </div>
-                        <div class="card-body card-block">
+                        <div class="card-body">
                             <div id="newModeAdding" style="">
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="moshimingcheng" class=" form-control-label">新模式名称</label></div>
-                                    <div class="col-12 col-md-4"><input type="text" id="moshimingcheng" name="moshimingcheng" placeholder="" class="form-control" value="<%=patternDTO.getPatternType()%>" disabled></div>
+                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">新模式名称</label></div>
+                                    <div class="col-12 col-md-4"><input type="text" id="text-input" name="text-input" placeholder="" class="form-control" value="<%=patternDTO.getPatternType()%>" disabled></div>
                                 </div>
 
 
@@ -131,9 +131,9 @@
                                         <div class="tab-pane fade active show" id="custom-nav-nature" role="tabpanel" aria-labelledby="custom-nav-nature-tab">
 
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="wendutiaojian" class=" form-control-label">温度条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">温度条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="wendutiaojian" id="wendutiaojian" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="寒冷地区" <%if(patternDTO.getEnvConditions().getTemperature().equals("寒冷地区")){%>
                                                                 selected="selected" <%}%>>寒冷地区</option>
                                                         <option value="普通地区"  <%if(patternDTO.getEnvConditions().getTemperature().equals("普通地区")){%>
@@ -142,9 +142,9 @@
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="shuiziyuan" class=" form-control-label">水资源条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">水资源条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="shuiziyuan" id="shuiziyuan" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="缺水"  <%if(patternDTO.getEnvConditions().getWaterResource().equals("缺水")){%>
                                                                 selected="selected" <%}%>>缺水</option>
                                                         <option value="良好" <%if(patternDTO.getEnvConditions().getWaterResource().equals("良好")){%>
@@ -153,9 +153,9 @@
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="dixing" class=" form-control-label">地形条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">地形条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="dixing" id="dixing" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getEnvConditions().getTerrain().equals("平坦")){%>
                                                                 selected="selected" <%}%>>平坦</option>
                                                         <option value="1" <%if(patternDTO.getEnvConditions().getTerrain().equals("丘陵")){%>
@@ -170,9 +170,9 @@
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="diliweizhi" class=" form-control-label">地理位置条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">地理位置条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="diliweizhi" id="diliweizhi" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getEnvConditions().getGeolocation().equals("中心镇")){%>
                                                                 selected="selected" <%}%>>中心镇</option>
                                                         <option value="1" <%if(patternDTO.getEnvConditions().getGeolocation().equals("一般镇")){%>
@@ -185,9 +185,9 @@
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="shengtai" class=" form-control-label">生态限制条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">生态限制条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="shengtai" id="shengtai" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getEnvConditions().getEcotope().equals("生态保护区")){%>
                                                                 selected="selected" <%}%>>生态保护区</option>
                                                         <option value="1" <%if(patternDTO.getEnvConditions().getEcotope().equals("水源保护区")){%>
@@ -211,9 +211,9 @@
                                         <div class="tab-pane fade active show" id="custom-nav-people" role="tabpanel" aria-labelledby="custom-nav-people-tab">
 
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="renkou" class=" form-control-label">人口密集程度：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">人口密集程度：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="renkou" id="renkou" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getHumanFactors().getDensity().equals("聚集")){%>
                                                                 selected="selected" <%}%>>聚集</option>
                                                         <option value="1" <%if(patternDTO.getHumanFactors().getDensity().equals("分散")){%>
@@ -224,9 +224,9 @@
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="yetaifei" class=" form-control-label">液态肥使用习惯：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">液态肥使用习惯：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="yetaifei" id="yetaifei" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("是")){%>
                                                                 selected="selected" <%}%>>是</option>
                                                         <option value="1" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("否")){%>
@@ -249,9 +249,9 @@
                                         <div class="tab-pane fade active show" id="custom-nav-pip" role="tabpanel" aria-labelledby="custom-nav-pip-tab">
 
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="guandao" class=" form-control-label">需要具备管网条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">需要具备管网条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="guandao" id="guandao" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines().equals("是")){%>
                                                                 selected="selected" <%}%>>是</option>
                                                         <option value="1" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines().equals("否")){%>
@@ -272,9 +272,9 @@
                                         <div class="tab-pane fade active show" id="custom-nav-resource" role="tabpanel" aria-labelledby="custom-nav-resource-tab">
 
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="zhaoqi" class=" form-control-label">具有沼气利用工程：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">具有沼气利用工程：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="zhaoqi" id="zhaoqi" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization().equals("是")){%>
                                                                 selected="selected" <%}%>>是</option>
                                                         <option value="1" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization().equals("否")){%>
@@ -283,9 +283,9 @@
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="hunhe" class=" form-control-label">可以与其他生活污水混合处理：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">可以与其他生活污水混合处理：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="hunhe" id="hunhe" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("是")){%>
                                                                 selected="selected" <%}%>>是</option>
                                                         <option value="1" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("否")){%>
@@ -296,9 +296,9 @@
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="jihua" class=" form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="jihua" id="jihua" class="form-control">
+                                                    <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment().equals("是")){%>
                                                                 selected="selected" <%}%>>是</option>
                                                         <option value="1"  <%if(patternDTO.getResourceUtilization().getOtherTreatment().equals("否")){%>
@@ -306,57 +306,54 @@
                                                     </select>
                                                 </div>
                                             </div>
-
-                                            <%
-                                                ApprovalDTO approvalDTO = (ApprovalDTO) request.getAttribute("approval");
-                                                String status = "";
-                                                String content = "";
-                                                if (approvalDTO != null) {
-                                                    status = approvalDTO.getStatus().getName();
-                                                    content = approvalDTO.getContent();
-                                                }
-                                            %>
-
-                                            <hr>
-                                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="select_status"
-                                                                                     class=" form-control-label">是否通过</label></div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select_status" id="select_status" class="form-control" <%if(StringUtils.isEmpty(status) || status.equals("等待专家审核") || status.equals("修改后重新审核")){%> disabled="disabled" <%}else{}%>>
-                                                            <option value="审核通过"
-                                                                    <%if (StringUtils.isEmpty(status) || status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
-                                                            </option>
-                                                            <option value="审核不通过"
-                                                                    <%if (status.equals("审核不通过")){%>selected="selected"<%}%>>审核不通过
-                                                            </option>
-                                                            <option value="修改后重新审核"
-                                                                    <%if (status.equals("修改后重新审核")){%>selected="selected"<%}%>>修改后重新审核
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3"><label for="opinion"
-                                                                                     class=" form-control-label">审核意见</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
-                                                                                           rows="9" placeholder=""
-                                                                                           class="form-control" <%if(StringUtils.isEmpty(status) ||status.equals("等待专家审核") || status.equals("修改后重新审核")){%> disabled="disabled" <%}else{}%>><%=content%></textarea></div>
-                                                </div>
-                                            </form>
-                                            <div class="card-text text-lg-center">
-                                                <button type="button" <%if (!StringUtils.isEmpty(status) || !status.equals("等待专家审核")) {%> style="display: none" <%}%> class="btn btn-outline-secondary" onclick="commit()">
-                                                    确认提交
-                                                </button>
-                                                <button type="button" class="btn btn-outline-secondary offset-2"
-                                                        onclick="location.replace(document.referrer);">返回
-                                                </button>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <%
+                                ApprovalDTO approvalDTO = (ApprovalDTO) request.getAttribute("approval");
+                                String status = "";
+                                String content = "";
+                                if (approvalDTO != null) {
+                                    status = approvalDTO.getStatus().getName();
+                                    content = approvalDTO.getContent();
+                                }
+                            %>
+                            <hr>
+                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="select_status" class=" form-control-label">是否通过</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="select_status" id="select_status" class="form-control" <%if(StringUtils.isEmpty(status) || status.equals("等待管理员审核")){}else{%> disabled <%}%>>
+                                            <option value="审核通过"
+                                                    <%if (StringUtils.isEmpty(status) || status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
+                                            </option>
+                                            <option value="审核不通过"
+                                                    <%if (status.equals("审核不通过")){%>selected="selected"<%}%>>审核不通过
+                                            </option>
+                                            <option value="修改后重新审核"
+                                                    <%if (status.equals("修改后重新审核")){%>selected="selected"<%}%>>修改后重新审核
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="opinion"
+                                                                     class=" form-control-label">审核意见</label></div>
+                                    <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
+                                                                           rows="9" placeholder=""
+                                                                           class="form-control" <%if(StringUtils.isEmpty(status) || status.equals("等待管理员审核")){}else{%> disabled <%}%>><%=content%></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="card-text text-lg-center">
+                                <button type="button" <%if (!StringUtils.isEmpty(status) && !status.equals("等待管理员审核")) {%> style="display: none" <%}%> class="btn btn-outline-secondary" onclick="commit()">
+                                    确认提交
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary offset-2"
+                                        onclick="location.replace(document.referrer);">返回
+                                </button>
                             </div>
 
                         </div>
