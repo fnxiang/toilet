@@ -572,14 +572,15 @@
                                     content = approvalDTO.getContent();
                                 }
                             %>
-                            <%if(StringUtils.isEmpty(status) || status.equals("等待专家审核") || status.equals("修改后重新审核")){%>
+
                             <hr>
+                            <%if(StringUtils.isEmpty(status) || status.equals("等待专家审核") || status.equals("修改后重新审核")){%>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="select_status"
-                                                                     class=" form-control-label">是否通过</label></div>
+                                    <div class="col col-md-3"><label for="select_status" class=" form-control-label">是否通过</label>
+                                    </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control" <%if(StringUtils.isEmpty(status) || status.equals("等待专家审核") || status.equals("修改后重新审核")){}else{%> disabled="disabled" <%}%>>
+                                        <select name="select_status" id="select_status" class="form-control">
                                             <option value="审核通过"
                                                     <%if (StringUtils.isEmpty(status) || status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
                                             </option>
@@ -594,20 +595,18 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="opinion"
-                                                                     class=" form-control-label">审核意见</label>
-                                    </div>
+                                                                     class=" form-control-label">审核意见</label></div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder=""
-                                                                           class="form-control"><%=content%></textarea></div>
+                                                                           class="form-control" <%if(StringUtils.isEmpty(status) || status.equals("等待专家审核") || status.equals("修改后重新审核")){}else{%> disabled <%}%>><%=content%></textarea>
+                                    </div>
                                 </div>
                             </form>
-                           <%}%>
+                            <%}%>
                             <div class="card-text text-lg-center">
-                                <%if (!StringUtils.isEmpty(status) && status.equals("等待专家审核")){%>
-                                <button type="button"  class="btn btn-outline-secondary" onclick="commit()">
+                                <button type="button" <%if (!StringUtils.isEmpty(status) && !status.equals("等待专家审核")) {%> style="display: none" <%}%> class="btn btn-outline-secondary" onclick="commit()">
                                     确认提交
                                 </button>
-                                <%}%>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
                                         onclick="location.replace(document.referrer);">返回
                                 </button>
@@ -676,11 +675,9 @@
         var _this = $(obj);//将当前的pimg元素作为_this传入函数
         imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
     }
-
     function imgShow(outerdiv, innerdiv, bigimg, _this) {
         var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
         $(bigimg).attr("src", src);//设置#bigimg元素的src属性
-
         /*获取当前点击图片的真实大小，并显示弹出层及大图*/
         $("<img/>").attr("src", src).load(function () {
             var windowW = $(window).width();//获取当前窗口宽度
@@ -689,7 +686,6 @@
             var realHeight = this.height;//获取图片真实高度
             var imgWidth, imgHeight;
             var scale = 0.9;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放
-
             if (realHeight > windowH * scale) {//判断图片高度
                 imgHeight = windowH * scale;//如大于窗口高度，图片高度进行缩放
                 imgWidth = imgHeight / realHeight * realWidth;//等比例缩放宽度
@@ -704,18 +700,15 @@
                 imgHeight = realHeight;
             }
             $(bigimg).css("width", imgWidth);//以最终的宽度对图片缩放
-
             var w = (windowW - imgWidth) / 2;//计算图片与窗口左边距
             var h = (windowH - imgHeight) / 2;//计算图片与窗口上边距
             $(innerdiv).css({"top": h, "left": w});//设置#innerdiv的top和left属性
             $(outerdiv).fadeIn("fast");//淡入显示#outerdiv及.pimg
         });
-
         $(outerdiv).click(function () {//再次点击淡出消失弹出层
             $(this).fadeOut("fast");
         });
     }
-
 </script>
 
 <script type="text/javascript">
@@ -724,7 +717,6 @@
         var src = _this.attr("src");
         $("#sampleimg").attr("src", src);
     }
-
     function commit() {
         const data = new FormData();
         data.append("productId", "<%=productDTO.getId()%>");
