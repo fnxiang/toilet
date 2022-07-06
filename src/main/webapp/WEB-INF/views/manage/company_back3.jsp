@@ -1015,65 +1015,65 @@
         data.append("newmoderadios1", false); //True 为添加
         data.append("newmoderadios2", true); //True 为不添加
         //新模式参数
-        const wenducheckbox = document.getElementsByName("temperaturecondition"); //温度条件
-        let wenducheck_val = "";
-        for (let k = 0; k < wenducheckbox.length; k++) {
-            if (wenducheckbox[k].checked)
-                wenducheck_val = wenducheck_val + "," + wenducheckbox[k].value;
-        }
-        data.append("natureTemp", encodeURI(wenducheck_val));
-        const shuiziyuancheckbox = document.getElementsByName("watercondition"); //水资源条件
-        let shuiziyuancheck_val = "";
-        for (let k = 0; k < shuiziyuancheckbox.length; k++) {
-            if (shuiziyuancheckbox[k].checked)
-                shuiziyuancheck_val = shuiziyuancheck_val + "," + shuiziyuancheckbox[k].value;
-        }
-        data.append("water", encodeURI(shuiziyuancheck_val));
-        const mycheckbox = document.getElementsByName("dixing_check"); //地形条件
-        let check_val = "";
-        for (let k = 0; k < mycheckbox.length; k++) {
-            if (mycheckbox[k].checked)
-                check_val = check_val + "," + mycheckbox[k].value;
-        }
-        data.append("terrain", encodeURI(check_val));
-        const positioncheckbox = document.getElementsByName("diliweizhi_check"); //地理位置条件
-        let position_check_val = "";
-        for (let k = 0; k < positioncheckbox.length; k++) {
-            if (positioncheckbox[k].checked)
-                position_check_val = position_check_val + "," + positioncheckbox[k].value;
-        }
-        data.append("geolocation", encodeURI(position_check_val));
-        const shengtaicheckbox = document.getElementsByName("shengtai_check"); //地形条件
-        let shengtai_check_val = "";
-        for (let k = 0; k < shengtaicheckbox.length; k++) {
-            if (shengtaicheckbox[k].checked)
-                shengtai_check_val = shengtai_check_val + "," + shengtaicheckbox[k].value;
-        }
-        data.append("ecotope", encodeURI(shengtai_check_val));
-        const renkoucheckbox = document.getElementsByName("renkou_check"); //人口密集程度
-        let renkou_check_val = "";
-        for (let k = 0; k < renkoucheckbox.length; k++) {
-            if (renkoucheckbox[k].checked)
-                renkou_check_val = renkou_check_val + "," + renkoucheckbox[k].value;
-        }
-        data.append("density", encodeURI(renkou_check_val));
-        myselect = document.getElementById("yetaifei"); //液态肥使用习惯
-        index = myselect.selectedIndex;
-        data.append("usageHabits", encodeURI(myselect.options[index].text));
-        myselect = document.getElementById("wushuiguandao"); //具有污水管道
-        index = myselect.selectedIndex;
-        data.append("sewerLines", encodeURI(myselect.options[index].text));
-        myselect = document.getElementById("wushuichuli"); //具有完整城镇污水处理系统
-        index = myselect.selectedIndex;
-        data.append("sewageTreatment", encodeURI(myselect.options[index].text));
-        myselect = document.getElementById("zhaoqi"); //具有沼气利用工程
-        index = myselect.selectedIndex;
-        data.append("biogasUtilization", encodeURI(myselect.options[index].text));
-        myselect = document.getElementById("wushuihunhe"); //计划与其他生活污水混合处理
-        index = myselect.selectedIndex;
-        data.append("mixedTreatment", encodeURI(myselect.options[index].text));
-        myselect = document.getElementById("yibingchuli"); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
-        index = myselect.selectedIndex;
+        // const wenducheckbox = document.getElementsByName("temperaturecondition"); //温度条件
+        // let wenducheck_val = "";
+        // for (let k = 0; k < wenducheckbox.length; k++) {
+        //     if (wenducheckbox[k].checked)
+        //         wenducheck_val = wenducheck_val + "," + wenducheckbox[k].value;
+        // }
+        // data.append("natureTemp", encodeURI(wenducheck_val));
+        // const shuiziyuancheckbox = document.getElementsByName("watercondition"); //水资源条件
+        // let shuiziyuancheck_val = "";
+        // for (let k = 0; k < shuiziyuancheckbox.length; k++) {
+        //     if (shuiziyuancheckbox[k].checked)
+        //         shuiziyuancheck_val = shuiziyuancheck_val + "," + shuiziyuancheckbox[k].value;
+        // }
+        // data.append("water", encodeURI(shuiziyuancheck_val));
+        // const mycheckbox = document.getElementsByName("dixing_check"); //地形条件
+        // let check_val = "";
+        // for (let k = 0; k < mycheckbox.length; k++) {
+        //     if (mycheckbox[k].checked)
+        //         check_val = check_val + "," + mycheckbox[k].value;
+        // }
+        // data.append("terrain", encodeURI(check_val));
+        // const positioncheckbox = document.getElementsByName("diliweizhi_check"); //地理位置条件
+        // let position_check_val = "";
+        // for (let k = 0; k < positioncheckbox.length; k++) {
+        //     if (positioncheckbox[k].checked)
+        //         position_check_val = position_check_val + "," + positioncheckbox[k].value;
+        // }
+        // data.append("geolocation", encodeURI(position_check_val));
+        // const shengtaicheckbox = document.getElementsByName("shengtai_check"); //地形条件
+        // let shengtai_check_val = "";
+        // for (let k = 0; k < shengtaicheckbox.length; k++) {
+        //     if (shengtaicheckbox[k].checked)
+        //         shengtai_check_val = shengtai_check_val + "," + shengtaicheckbox[k].value;
+        // }
+        // data.append("ecotope", encodeURI(shengtai_check_val));
+        // const renkoucheckbox = document.getElementsByName("renkou_check"); //人口密集程度
+        // let renkou_check_val = "";
+        // for (let k = 0; k < renkoucheckbox.length; k++) {
+        //     if (renkoucheckbox[k].checked)
+        //         renkou_check_val = renkou_check_val + "," + renkoucheckbox[k].value;
+        // }
+        // data.append("density", encodeURI(renkou_check_val));
+        // myselect = document.getElementById("yetaifei"); //液态肥使用习惯
+        // index = myselect.selectedIndex;
+        // data.append("usageHabits", encodeURI(myselect.options[index].text));
+        // myselect = document.getElementById("wushuiguandao"); //具有污水管道
+        // index = myselect.selectedIndex;
+        // data.append("sewerLines", encodeURI(myselect.options[index].text));
+        // myselect = document.getElementById("wushuichuli"); //具有完整城镇污水处理系统
+        // index = myselect.selectedIndex;
+        // data.append("sewageTreatment", encodeURI(myselect.options[index].text));
+        // myselect = document.getElementById("zhaoqi"); //具有沼气利用工程
+        // index = myselect.selectedIndex;
+        // data.append("biogasUtilization", encodeURI(myselect.options[index].text));
+        // myselect = document.getElementById("wushuihunhe"); //计划与其他生活污水混合处理
+        // index = myselect.selectedIndex;
+        // data.append("mixedTreatment", encodeURI(myselect.options[index].text));
+        // myselect = document.getElementById("yibingchuli"); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
+        // index = myselect.selectedIndex;
         data.append("otherTreatment", encodeURI(myselect.options[index].text));
         data.append("province", encodeURI($('#province').val())); //适用省份
         data.append("temperature", encodeURI($('#wendufanwei').val())); //适用温度范围
