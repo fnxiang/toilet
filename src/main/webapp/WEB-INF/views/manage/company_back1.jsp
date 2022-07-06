@@ -245,12 +245,16 @@
             success: function (result) {
                 if (result.success) {
                     show("提交审核成功！");
-                    location.reload();
                 } else {
                     show(result.errorMessage);
                 }
             }
         });
+    }
+
+    function close(){
+        $(".dialog").css("display","none");
+        window.location.href="${pageContext.request.contextPath}/company/index";
     }
 </script>
 
