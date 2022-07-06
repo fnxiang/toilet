@@ -1160,6 +1160,11 @@
         }
         return texture;
     }
+
+    function close(){
+        $(".dialog").css("display","none");
+        window.location.href="${pageContext.request.contextPath}/company/index";
+    }
 </script>
 
 
