@@ -143,7 +143,7 @@ public class ManagementController {
                 request.setAttribute("product", productDTO);
                 request.setAttribute("company", CompanyConverter.toCompanyDTO(company));
                 break;
-            case "company_pattern_apply":
+            case "company_back8":
                 List<ToiletPatternDTO> patternDTOS = productService.queryAllPattern(email);
                 request.setAttribute("patternList", patternDTOS);
                 break;

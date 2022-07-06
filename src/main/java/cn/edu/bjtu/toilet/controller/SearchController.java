@@ -168,8 +168,7 @@ public class SearchController {
     }
 
     private Boolean comparePipNetworkConditions(PipNetworkConditionsDTO db, PipNetworkConditionsDTO conditions) {
-        return (conditions.getHasSewageTreatment() == null || conditions.getHasSewageTreatment().equals(db.getHasSewageTreatment()))
-            && (conditions.getHasSewerLines() == null || conditions.getHasSewerLines().equals(db.getHasSewerLines()));
+        return (conditions.getHasSewerLines() == null || conditions.getHasSewerLines().equals(db.getHasSewerLines()));
     }
 
     private Boolean compareResourceUtilization(ResourceUtilizationDTO db, ResourceUtilizationDTO conditions) {
