@@ -36,6 +36,7 @@
     }
     function close(){
         $(".dialog").css("display","none");
+        document.location.reload();
     }
 </script>
 </html>

@@ -461,7 +461,6 @@
             success: function (result) {
                 if (result.success) {
                     show("修改成功！");
-                    location.reload();
                 } else {
                     show(result.errorMessage);
                 }
