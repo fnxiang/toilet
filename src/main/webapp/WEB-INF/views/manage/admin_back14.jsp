@@ -131,7 +131,7 @@
                                                                              class=" form-control-label xrequired">账号</label>
                                 </div>
                                 <div class="col-12 col-md-6"><input type="" id="zhanghao"
-                                                                    name="zhanghao" placeholder="登录账号"
+                                                                    name="zhanghao" placeholder="登录账号(邮箱)"
                                                                     class="form-control"></div>
                             </div>
                             <div class="row form-group">
