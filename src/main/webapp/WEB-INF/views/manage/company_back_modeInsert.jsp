@@ -539,12 +539,16 @@
             success: function (result) {
                 if (result.success) {
                     show("保存成功！");
-                    location.reload();
                 } else {
                     show(result.errorMessage);
                 }
             }
         });
+    }
+
+    function close(){
+        $(".dialog").css("display","none");
+        window.location.href="${pageContext.request.contextPath}/toPage?url=company_back8";
     }
 
 </script>
