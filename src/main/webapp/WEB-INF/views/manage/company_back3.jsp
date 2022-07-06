@@ -166,15 +166,24 @@
                                            data-placement="top" title="输入注意事项"></i></label></div>
                                     <div class="col col-md-9">
                                         <div class="multiple-select">
-                                    </div>
+                                        </div>
 
                                     </div>
                                 </div>
                                 <div id="many_factors">
-
-
                                     <!--  style="display:none;"  -->
                                     <div id="newModeAdding" style="">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="newmodename"
+                                                                             class=" form-control-label">新模式名称
+                                                <i id="new_model_name_tips" class="fa fa-question-circle"
+                                                   data-toggle="tooltip" data-placement="top"
+                                                   title="输入注意事项"></i></label>
+                                            </div>
+                                            <div class="col-12 col-md-9"><input type="text" id="newmodename"
+                                                                                name="newmodename" placeholder="新模式名称"
+                                                                                class="form-control"></div>
+                                        </div>
 
 
                                         <div class="custom-tab">
@@ -821,17 +830,13 @@
 
 
 <script type="text/javascript">
-
     var mode_content_selectMap = '';
     var mode_content_patternDTOMap = '';
-
     <%--	文字提示	--%>
     $('use_for').tooltip({boundary: 'window'});
-
     $(document).ready(function () {
         $('#bootstrap-data-table-export').DataTable();
     });
-
     $(document).ready(function () {
         $('input[type=radio][name=newmoderadios]').change(function () {
             if (this.value == 'showNewMode') {
@@ -843,7 +848,6 @@
             }
         });
     });
-
     $(document).ready(function () {
         $('input[type=radio][name=caizhi]').change(function () {
             if (this.value == "qita") {
@@ -853,7 +857,6 @@
             }
         });
     });
-
     $(document).ready(function () {
         $.ajax({
             url: "/toilet/company/product/modes/get",
@@ -866,17 +869,15 @@
             processData: false,
             success: function (result) {
                 if (result.success) {
-                    mode_content_selectMap = result['selectMap'];
-                    mode_content_patternDTOMap = result['patternDTOMap'];
+                    mode_content_selectMap = result.data.selectMap;
+                    mode_content_patternDTOMap = result.data.patternDTOMap;
                     //动态赋值给控件  productselect   multiple-select
                     var productSelect = document.getElementById("productselect");
-                    var productTpyes = result['selectMap'];
                     var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
                     var product_value = productSelect.options[0].text;
                     var mode_list = mode_content_selectMap[product_value];
                     mode_selectDiv.innerHTML="";
                     var ul=document.createElement("ul");
-
                     for(var i=0;i<mode_list.length;i++){
                         var arr=mode_list[i];
                         // 加入复选框
@@ -884,18 +885,11 @@
                         checkBox.setAttribute("type","checkbox");
                         checkBox.setAttribute("name","moshileixing");
                         checkBox.setAttribute("value",arr);
-
-
                         ul.appendChild(checkBox);
                         ul.appendChild(document.createTextNode(arr));
                         ul.appendChild(document.createElement("div"))
                     }
-
-
                     mode_selectDiv.appendChild(ul);
-
-
-
                 } else {
                     var msg = confirm(result.errorMessage);
                     show(msg);
@@ -903,10 +897,7 @@
             }
         });
     });
-
-
     function productchange() { // mode_content_selectMap   mode_content_patternDTOMap
-
         var product_select = document.getElementById("productselect");
         var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
         var zhongliangdiv = $("#zhong").get(0);
@@ -983,15 +974,11 @@
             chanpincanshu.style.cssText = "";
             peculiar_canshu.style.cssText = "display:none;"
         }
-
         var product_index = product_select.selectedIndex;
         var product_value = product_select.options[product_index].text;
-
         var mode_list = mode_content_selectMap[product_value];
-
         mode_selectDiv.innerHTML="";
         var ul=document.createElement("ul");
-
         for(var i=0;i<mode_list.length;i++){
             var arr=mode_list[i];
             // 加入复选框
@@ -999,28 +986,20 @@
             checkBox.setAttribute("type","checkbox");
             checkBox.setAttribute("name","moshileixing");
             checkBox.setAttribute("value",arr);
-
-
             ul.appendChild(checkBox);
             ul.appendChild(document.createTextNode(arr));
             ul.appendChild(document.createElement("div"))
         }
-
-
         mode_selectDiv.appendChild(ul);
-
     }
-
     function entry() {
         let data = new FormData();
         data.append("productName", encodeURI($('#product_name').val())); //产品名称
         data.append("factoryName", encodeURI($('#producer_name').val())); //厂家
         data.append("factoryNum", $('#phonenum').val()); //联系方式
-
         var myselect = document.getElementById("productselect"); //产品类型
         var index = myselect.selectedIndex;
         data.append("productType", encodeURI(myselect.options[index].text));
-
         // myselect = document.getElementById("multiple-select"); //模式类型
         // index = myselect.selectedIndex;
         // data.append("patternType", encodeURI(myselect.options[index].text));
@@ -1031,15 +1010,10 @@
                 moshileixingcheck_val = moshileixingcheck_val + "," + moshileixingcheckbox[k].value;
         }
         data.append("patternType", encodeURI(moshileixingcheck_val));
-
-
-        data.append("patternName", encodeURI($('#newmodename').val())); //新模式名称
-
-        var radio = document.getElementsByName("newmoderadios"); //是否添加新模式
-        data.append("newmoderadios1", radio[0].checked); //True 为添加
-        data.append("newmoderadios2", radio[1].checked); //True 为不添加
-
-
+        // data.append("patternName", encodeURI($('#newmodename').val())); //新模式名称
+        // var radio = document.getElementsByName("newmoderadios"); //是否添加新模式
+        data.append("newmoderadios1", false); //True 为添加
+        data.append("newmoderadios2", true); //True 为不添加
         //新模式参数
         const wenducheckbox = document.getElementsByName("temperaturecondition"); //温度条件
         let wenducheck_val = "";
@@ -1048,7 +1022,6 @@
                 wenducheck_val = wenducheck_val + "," + wenducheckbox[k].value;
         }
         data.append("natureTemp", encodeURI(wenducheck_val));
-
         const shuiziyuancheckbox = document.getElementsByName("watercondition"); //水资源条件
         let shuiziyuancheck_val = "";
         for (let k = 0; k < shuiziyuancheckbox.length; k++) {
@@ -1056,7 +1029,6 @@
                 shuiziyuancheck_val = shuiziyuancheck_val + "," + shuiziyuancheckbox[k].value;
         }
         data.append("water", encodeURI(shuiziyuancheck_val));
-
         const mycheckbox = document.getElementsByName("dixing_check"); //地形条件
         let check_val = "";
         for (let k = 0; k < mycheckbox.length; k++) {
@@ -1064,7 +1036,6 @@
                 check_val = check_val + "," + mycheckbox[k].value;
         }
         data.append("terrain", encodeURI(check_val));
-
         const positioncheckbox = document.getElementsByName("diliweizhi_check"); //地理位置条件
         let position_check_val = "";
         for (let k = 0; k < positioncheckbox.length; k++) {
@@ -1072,7 +1043,6 @@
                 position_check_val = position_check_val + "," + positioncheckbox[k].value;
         }
         data.append("geolocation", encodeURI(position_check_val));
-
         const shengtaicheckbox = document.getElementsByName("shengtai_check"); //地形条件
         let shengtai_check_val = "";
         for (let k = 0; k < shengtaicheckbox.length; k++) {
@@ -1080,7 +1050,6 @@
                 shengtai_check_val = shengtai_check_val + "," + shengtaicheckbox[k].value;
         }
         data.append("ecotope", encodeURI(shengtai_check_val));
-
         const renkoucheckbox = document.getElementsByName("renkou_check"); //人口密集程度
         let renkou_check_val = "";
         for (let k = 0; k < renkoucheckbox.length; k++) {
@@ -1088,7 +1057,6 @@
                 renkou_check_val = renkou_check_val + "," + renkoucheckbox[k].value;
         }
         data.append("density", encodeURI(renkou_check_val));
-
         myselect = document.getElementById("yetaifei"); //液态肥使用习惯
         index = myselect.selectedIndex;
         data.append("usageHabits", encodeURI(myselect.options[index].text));
@@ -1107,13 +1075,11 @@
         myselect = document.getElementById("yibingchuli"); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
         index = myselect.selectedIndex;
         data.append("otherTreatment", encodeURI(myselect.options[index].text));
-
         data.append("province", encodeURI($('#province').val())); //适用省份
         data.append("temperature", encodeURI($('#wendufanwei').val())); //适用温度范围
         data.append("features", encodeURI($('#chanpingtedian').val())); //产品特点
         data.append("applicableCondition", encodeURI($('#shiyongtiaojian').val())); //适用条件
         data.append("productTheory", encodeURI($('#chanpinyuanli').val())); //产品原理及组成
-
         // 文件上传
         var quality = $('#zhiliangbaozhang')[0].files[0];
         var introduction = $('#shiyongshuoming')[0].files[0];
@@ -1127,7 +1093,6 @@
         data.append("pics2", pic2); //使用图片
         data.append("pics3", pic3); //使用图片
         data.append("pics4", pic4); //使用图片
-
         // 产品参数
         data.append("standard", encodeURI($('#guige').val())); //规格（平方米）
         data.append("weight", encodeURI($('#zhongliang').val())); //重量kg
@@ -1136,25 +1101,20 @@
         data.append("length", $('#chicun_chang').val()); //尺寸（长*宽*高mm）
         data.append("wide", $('#chicun_kuan').val());
         data.append("high", $('#chicun_gao').val());
-
         radio = document.getElementsByName("caizhi"); //材质
         const texture = getRadioValue(radio);
-
         data.append("texture", encodeURI(texture));
         data.append("color", encodeURI($('#yanse').val())); //颜色
         data.append("serviceLife", encodeURI($('#shouming').val())); //使用寿命
         data.append("price", $('#jiage').val()); //价格（元）
-
         radio = document.getElementsByName("cesuoyongtu"); //厕所用途
         const toiletPurpose = getRadioValue(radio);
         data.append("toiletPurpose", encodeURI(toiletPurpose));
-
         data.append("purpose", encodeURI($('#jvtiyongtu').val())); //具体用途
         data.append("runningCost", encodeURI($('#yunxingchengben').val())); //运行成本
         data.append("cleanupCycle", encodeURI($('#qinglizhouqi').val())); //清理周期
         data.append("specialParam", encodeURI($('#peculiar_canshu').val())); //产品参数
         data.append("otherParams", encodeURI($('#qitacanshu').val())); //其他参数
-
         //应用案例
         data.append("case", encodeURI($('#yingyonganli').val())); //应用案例
         //判断输入
@@ -1184,7 +1144,6 @@
             });
         }
     }
-
 </script>
 
 
@@ -1196,7 +1155,6 @@
                 texture = radio[i].value;
             }
         }
-
         if (texture==="qita") {
             texture = $('#jvticaizhi').val();
         }
