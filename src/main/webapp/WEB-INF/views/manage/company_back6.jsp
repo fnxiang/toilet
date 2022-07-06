@@ -10,6 +10,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.google.common.collect.Lists" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.CompanyDTO" %>
+<%@ page import="cn.edu.bjtu.toilet.utils.DateUtil" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -246,7 +247,7 @@
                                                                                             name="updateTime"
                                                                                             placeholder=""
                                                                                             class="form-control"
-                                                                                            value="<%=productDTO.getGmtModified().toInstant()%>"
+                                                                                            value="<%=DateUtil.toStandardFormat(productDTO.getGmtModified())%>"
                                                         disabled>
                                                         </div>
                                                     </div>
