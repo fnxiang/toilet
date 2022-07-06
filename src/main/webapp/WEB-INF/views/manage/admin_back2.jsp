@@ -405,6 +405,7 @@
             success: function (result) {
                 if (result.success) {
                     show("删除成功!");
+                    document.location.reload();
                 } else {
                     show(result.errorMessage);
                 }
@@ -427,6 +428,7 @@
             success: function (result) {
                 if (result.success) {
                     show("删除成功!");
+                    document.location.reload();
                 } else {
                     show(result.errorMessage);
                 }
