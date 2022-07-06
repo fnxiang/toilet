@@ -172,263 +172,263 @@
                                 </div>
                                 <div id="many_factors">
                                     <!--  style="display:none;"  -->
-                                    <div id="newModeAdding" style="">
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="newmodename"
-                                                                             class=" form-control-label">新模式名称
-                                                <i id="new_model_name_tips" class="fa fa-question-circle"
-                                                   data-toggle="tooltip" data-placement="top"
-                                                   title="输入注意事项"></i></label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input type="text" id="newmodename"
-                                                                                name="newmodename" placeholder="新模式名称"
-                                                                                class="form-control"></div>
-                                        </div>
+<%--                                    <div id="newModeAdding" style="">--%>
+<%--                                        <div class="row form-group">--%>
+<%--                                            <div class="col col-md-3"><label for="newmodename"--%>
+<%--                                                                             class=" form-control-label">新模式名称--%>
+<%--                                                <i id="new_model_name_tips" class="fa fa-question-circle"--%>
+<%--                                                   data-toggle="tooltip" data-placement="top"--%>
+<%--                                                   title="输入注意事项"></i></label>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="col-12 col-md-9"><input type="text" id="newmodename"--%>
+<%--                                                                                name="newmodename" placeholder="新模式名称"--%>
+<%--                                                                                class="form-control"></div>--%>
+<%--                                        </div>--%>
 
 
-                                        <div class="custom-tab">
-                                            <nav>
-                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                    <a class="nav-item nav-link active show" id="custom-nav-nature-tab"
-                                                       data-toggle="tab" href="#custom-nav-nature" role="tab"
-                                                       aria-controls="custom-nav-nature"
-                                                       aria-selected="true">适用条件：自然环境条件</a>
-                                                </div>
-                                            </nav>
-                                            <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                                <div class="tab-pane fade active show" id="custom-nav-nature"
-                                                     role="tabpanel" aria-labelledby="custom-nav-nature-tab">
+<%--                                        <div class="custom-tab">--%>
+<%--                                            <nav>--%>
+<%--                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">--%>
+<%--                                                    <a class="nav-item nav-link active show" id="custom-nav-nature-tab"--%>
+<%--                                                       data-toggle="tab" href="#custom-nav-nature" role="tab"--%>
+<%--                                                       aria-controls="custom-nav-nature"--%>
+<%--                                                       aria-selected="true">适用条件：自然环境条件</a>--%>
+<%--                                                </div>--%>
+<%--                                            </nav>--%>
+<%--                                            <div class="tab-content pl-3 pt-2" id="nav-tabContent">--%>
+<%--                                                <div class="tab-pane fade active show" id="custom-nav-nature"--%>
+<%--                                                     role="tabpanel" aria-labelledby="custom-nav-nature-tab">--%>
 
 
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label class="form-control-label">温度条件：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <input class="col-md-1" type="checkbox" name="temperaturecondition"
-                                                                   value="高寒"/>高寒
-                                                            <input class="col-md-1" type="checkbox" name="temperaturecondition"
-                                                                   value="无特殊"/>无特殊
-                                                        </div>
-                                                    </div>
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label class="form-control-label">温度条件：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <input class="col-md-1" type="checkbox" name="temperaturecondition"--%>
+<%--                                                                   value="高寒"/>高寒--%>
+<%--                                                            <input class="col-md-1" type="checkbox" name="temperaturecondition"--%>
+<%--                                                                   value="无特殊"/>无特殊--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
 
 
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label class="form-control-label">水资源条件：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <input class="col-md-1" type="checkbox" name="watercondition"
-                                                                   value="缺水"/>缺水
-                                                            <input class="col-md-1" type="checkbox" name="watercondition"
-                                                                   value="良好"/>良好
-                                                        </div>
-                                                    </div>
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label class="form-control-label">水资源条件：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <input class="col-md-1" type="checkbox" name="watercondition"--%>
+<%--                                                                   value="缺水"/>缺水--%>
+<%--                                                            <input class="col-md-1" type="checkbox" name="watercondition"--%>
+<%--                                                                   value="良好"/>良好--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
 
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label class="form-control-label">地形条件：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <input class="col-md-1" type="checkbox" name="dixing_check"
-                                                                   value="山区"/>山区
-                                                            <input class="col-md-1" type="checkbox" name="dixing_check"
-                                                                   value="丘陵"/>丘陵
-                                                            <input class="col-md-1" type="checkbox" name="dixing_check"
-                                                                   value="一般地区"/>一般地区
-                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label class="form-control-label">地理位置条件：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <input class="col-md-1" type="checkbox"
-                                                                   name="diliweizhi_check" value="城市近郊"/>城市近郊
-                                                            <input class="col-md-1" type="checkbox"
-                                                                   name="diliweizhi_check" value="城中村"/>城中村
-                                                            <input class="col-md-1" type="checkbox"
-                                                                   name="diliweizhi_check" value="中心城镇地区"/>中心城镇地区
-                                                            <input class="col-md-1" type="checkbox"
-                                                                   name="diliweizhi_check" value="一般地区"/>一般地区
-                                                            <%--<select name="position" id="position" class="form-control">--%>
-                                                            <%--<option value="0">城市近郊</option>--%>
-                                                            <%--<option value="1">城中村</option>--%>
-                                                            <%--<option value="2">中心城镇地区</option>--%>
-                                                            <%--<option value="3">其他</option>--%>
-                                                            <%--</select>--%>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label class="form-control-label">生态限制条件：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <input class="col-md-1" type="checkbox"
-                                                                   name="shengtai_check" value="生态保护区"/>生态保护区
-                                                            <input class="col-md-1" type="checkbox"
-                                                                   name="shengtai_check" value="水源保护区"/>水源保护区
-                                                            <input class="col-md-1" type="checkbox"
-                                                                   name="shengtai_check" value="一般地区"/>一般地区
-                                                            <%--<select name="shengtai" id="shengtai" class="form-control">--%>
-                                                            <%--<option value="0">生态保护区</option>--%>
-                                                            <%--<option value="1">水源保护区</option>--%>
-                                                            <%--<option value="2">一般地区</option>--%>
-                                                            <%--</select>--%>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label class="form-control-label">地形条件：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <input class="col-md-1" type="checkbox" name="dixing_check"--%>
+<%--                                                                   value="山区"/>山区--%>
+<%--                                                            <input class="col-md-1" type="checkbox" name="dixing_check"--%>
+<%--                                                                   value="丘陵"/>丘陵--%>
+<%--                                                            <input class="col-md-1" type="checkbox" name="dixing_check"--%>
+<%--                                                                   value="一般地区"/>一般地区--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label class="form-control-label">地理位置条件：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <input class="col-md-1" type="checkbox"--%>
+<%--                                                                   name="diliweizhi_check" value="城市近郊"/>城市近郊--%>
+<%--                                                            <input class="col-md-1" type="checkbox"--%>
+<%--                                                                   name="diliweizhi_check" value="城中村"/>城中村--%>
+<%--                                                            <input class="col-md-1" type="checkbox"--%>
+<%--                                                                   name="diliweizhi_check" value="中心城镇地区"/>中心城镇地区--%>
+<%--                                                            <input class="col-md-1" type="checkbox"--%>
+<%--                                                                   name="diliweizhi_check" value="一般地区"/>一般地区--%>
+<%--                                                            &lt;%&ndash;<select name="position" id="position" class="form-control">&ndash;%&gt;--%>
+<%--                                                            &lt;%&ndash;<option value="0">城市近郊</option>&ndash;%&gt;--%>
+<%--                                                            &lt;%&ndash;<option value="1">城中村</option>&ndash;%&gt;--%>
+<%--                                                            &lt;%&ndash;<option value="2">中心城镇地区</option>&ndash;%&gt;--%>
+<%--                                                            &lt;%&ndash;<option value="3">其他</option>&ndash;%&gt;--%>
+<%--                                                            &lt;%&ndash;</select>&ndash;%&gt;--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label class="form-control-label">生态限制条件：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <input class="col-md-1" type="checkbox"--%>
+<%--                                                                   name="shengtai_check" value="生态保护区"/>生态保护区--%>
+<%--                                                            <input class="col-md-1" type="checkbox"--%>
+<%--                                                                   name="shengtai_check" value="水源保护区"/>水源保护区--%>
+<%--                                                            <input class="col-md-1" type="checkbox"--%>
+<%--                                                                   name="shengtai_check" value="一般地区"/>一般地区--%>
+<%--                                                            &lt;%&ndash;<select name="shengtai" id="shengtai" class="form-control">&ndash;%&gt;--%>
+<%--                                                            &lt;%&ndash;<option value="0">生态保护区</option>&ndash;%&gt;--%>
+<%--                                                            &lt;%&ndash;<option value="1">水源保护区</option>&ndash;%&gt;--%>
+<%--                                                            &lt;%&ndash;<option value="2">一般地区</option>&ndash;%&gt;--%>
+<%--                                                            &lt;%&ndash;</select>&ndash;%&gt;--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
 
-                                        <div class="custom-tab">
-                                            <nav>
-                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                    <a class="nav-item nav-link active show" id="custom-nav-people-tab"
-                                                       data-toggle="tab" href="#custom-nav-people" role="tab"
-                                                       aria-controls="custom-nav-people" aria-selected="true">适用条件：人文因素
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></a>
-                                                </div>
-                                            </nav>
-                                            <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                                <div class="tab-pane fade active show" id="custom-nav-people"
-                                                     role="tabpanel" aria-labelledby="custom-nav-people-tab">
+<%--                                        <div class="custom-tab">--%>
+<%--                                            <nav>--%>
+<%--                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">--%>
+<%--                                                    <a class="nav-item nav-link active show" id="custom-nav-people-tab"--%>
+<%--                                                       data-toggle="tab" href="#custom-nav-people" role="tab"--%>
+<%--                                                       aria-controls="custom-nav-people" aria-selected="true">适用条件：人文因素--%>
+<%--                                                        <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                           data-placement="top" title="输入注意事项"></i></a>--%>
+<%--                                                </div>--%>
+<%--                                            </nav>--%>
+<%--                                            <div class="tab-content pl-3 pt-2" id="nav-tabContent">--%>
+<%--                                                <div class="tab-pane fade active show" id="custom-nav-people"--%>
+<%--                                                     role="tabpanel" aria-labelledby="custom-nav-people-tab">--%>
 
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label class="form-control-label">人口密集程度：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-
-
-                                                        <div class="col-12 col-md-9">
-                                                            <input class="col-md-1" type="checkbox" name="renkou_check"
-                                                                   value="聚集"/>聚集
-                                                            <input class="col-md-1" type="checkbox" name="renkou_check"
-                                                                   value="分散"/>分散
-                                                            <input class="col-md-1" type="checkbox" name="renkou_check"
-                                                                   value="一般"/>一般
-                                                        </div>
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label class="form-control-label">人口密集程度：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
 
 
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="yetaifei"
-                                                                                         class="form-control-label">液态肥使用习惯：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <select name="yetaifei" id="yetaifei" class="form-control">
-                                                                <option value="0">是</option>
-                                                                <option value="1">否</option>
-                                                                <option value="2">均可</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="custom-tab">
-                                            <nav>
-                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                    <a class="nav-item nav-link active show" id="custom-nav-pip-tab"
-                                                       data-toggle="tab" href="#custom-nav-pip" role="tab"
-                                                       aria-controls="custom-nav-pip" aria-selected="true">适用条件：管网条件
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></a>
-                                                </div>
-                                            </nav>
-                                            <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                                <div class="tab-pane fade active show" id="custom-nav-pip"
-                                                     role="tabpanel"
-                                                     aria-labelledby="custom-nav-pip-tab">
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <input class="col-md-1" type="checkbox" name="renkou_check"--%>
+<%--                                                                   value="聚集"/>聚集--%>
+<%--                                                            <input class="col-md-1" type="checkbox" name="renkou_check"--%>
+<%--                                                                   value="分散"/>分散--%>
+<%--                                                            <input class="col-md-1" type="checkbox" name="renkou_check"--%>
+<%--                                                                   value="一般"/>一般--%>
+<%--                                                        </div>--%>
 
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="wushuiguandao"
-                                                                                         class="form-control-label">具有污水管道：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <select name="wushuiguandao" id="wushuiguandao"
-                                                                    class="form-control">
-                                                                <option value="0">是</option>
-                                                                <option value="1">否</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="wushuichuli"
-                                                                                         class="form-control-label">具有完整城镇污水处理系统：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <select name="wushuichuli" id="wushuichuli"
-                                                                    class="form-control">
-                                                                <option value="0">是</option>
-                                                                <option value="1">否</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="custom-tab">
-                                            <nav>
-                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                    <a class="nav-item nav-link active show"
-                                                       id="custom-nav-resource-tab"
-                                                       data-toggle="tab" href="#custom-nav-resource" role="tab"
-                                                       aria-controls="custom-nav-resource" aria-selected="true">适用条件：资源化利用
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></a>
-                                                </div>
-                                            </nav>
-                                            <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                                <div class="tab-pane fade active show" id="custom-nav-resource"
-                                                     role="tabpanel" aria-labelledby="custom-nav-resource-tab">
 
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="zhaoqi"
-                                                                                         class=" form-control-label">具有沼气利用工程：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <select name="zhaoqi" id="zhaoqi" class="form-control">
-                                                                <option value="0">是</option>
-                                                                <option value="1">否</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="wushuihunhe"
-                                                                                         class="form-control-label">计划与其他生活污水混合处理：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <select name="wushuihunhe" id="wushuihunhe"
-                                                                    class="form-control">
-                                                                <option value="0">是</option>
-                                                                <option value="1">否</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col col-md-3"><label for="yibingchuli"
-                                                                                         class="form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：
-                                                            <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                               data-placement="top" title="输入注意事项"></i></label></div>
-                                                        <div class="col-12 col-md-9">
-                                                            <select name="yibingchuli" id="yibingchuli"
-                                                                    class="form-control">
-                                                                <option value="0">是</option>
-                                                                <option value="1">否</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<%--                                                    </div>--%>
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label for="yetaifei"--%>
+<%--                                                                                         class="form-control-label">液态肥使用习惯：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <select name="yetaifei" id="yetaifei" class="form-control">--%>
+<%--                                                                <option value="0">是</option>--%>
+<%--                                                                <option value="1">否</option>--%>
+<%--                                                                <option value="2">均可</option>--%>
+<%--                                                            </select>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="custom-tab">--%>
+<%--                                            <nav>--%>
+<%--                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">--%>
+<%--                                                    <a class="nav-item nav-link active show" id="custom-nav-pip-tab"--%>
+<%--                                                       data-toggle="tab" href="#custom-nav-pip" role="tab"--%>
+<%--                                                       aria-controls="custom-nav-pip" aria-selected="true">适用条件：管网条件--%>
+<%--                                                        <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                           data-placement="top" title="输入注意事项"></i></a>--%>
+<%--                                                </div>--%>
+<%--                                            </nav>--%>
+<%--                                            <div class="tab-content pl-3 pt-2" id="nav-tabContent">--%>
+<%--                                                <div class="tab-pane fade active show" id="custom-nav-pip"--%>
+<%--                                                     role="tabpanel"--%>
+<%--                                                     aria-labelledby="custom-nav-pip-tab">--%>
+
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label for="wushuiguandao"--%>
+<%--                                                                                         class="form-control-label">具有污水管道：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <select name="wushuiguandao" id="wushuiguandao"--%>
+<%--                                                                    class="form-control">--%>
+<%--                                                                <option value="0">是</option>--%>
+<%--                                                                <option value="1">否</option>--%>
+<%--                                                            </select>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label for="wushuichuli"--%>
+<%--                                                                                         class="form-control-label">具有完整城镇污水处理系统：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <select name="wushuichuli" id="wushuichuli"--%>
+<%--                                                                    class="form-control">--%>
+<%--                                                                <option value="0">是</option>--%>
+<%--                                                                <option value="1">否</option>--%>
+<%--                                                            </select>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="custom-tab">--%>
+<%--                                            <nav>--%>
+<%--                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">--%>
+<%--                                                    <a class="nav-item nav-link active show"--%>
+<%--                                                       id="custom-nav-resource-tab"--%>
+<%--                                                       data-toggle="tab" href="#custom-nav-resource" role="tab"--%>
+<%--                                                       aria-controls="custom-nav-resource" aria-selected="true">适用条件：资源化利用--%>
+<%--                                                        <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                           data-placement="top" title="输入注意事项"></i></a>--%>
+<%--                                                </div>--%>
+<%--                                            </nav>--%>
+<%--                                            <div class="tab-content pl-3 pt-2" id="nav-tabContent">--%>
+<%--                                                <div class="tab-pane fade active show" id="custom-nav-resource"--%>
+<%--                                                     role="tabpanel" aria-labelledby="custom-nav-resource-tab">--%>
+
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label for="zhaoqi"--%>
+<%--                                                                                         class=" form-control-label">具有沼气利用工程：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <select name="zhaoqi" id="zhaoqi" class="form-control">--%>
+<%--                                                                <option value="0">是</option>--%>
+<%--                                                                <option value="1">否</option>--%>
+<%--                                                            </select>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label for="wushuihunhe"--%>
+<%--                                                                                         class="form-control-label">计划与其他生活污水混合处理：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <select name="wushuihunhe" id="wushuihunhe"--%>
+<%--                                                                    class="form-control">--%>
+<%--                                                                <option value="0">是</option>--%>
+<%--                                                                <option value="1">否</option>--%>
+<%--                                                            </select>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="row form-group">--%>
+<%--                                                        <div class="col col-md-3"><label for="yibingchuli"--%>
+<%--                                                                                         class="form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：--%>
+<%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+<%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
+<%--                                                        <div class="col-12 col-md-9">--%>
+<%--                                                            <select name="yibingchuli" id="yibingchuli"--%>
+<%--                                                                    class="form-control">--%>
+<%--                                                                <option value="0">是</option>--%>
+<%--                                                                <option value="1">否</option>--%>
+<%--                                                            </select>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
                                     <hr>
 
                                     <div class="row form-group">
