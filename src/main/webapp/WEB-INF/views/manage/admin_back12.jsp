@@ -213,7 +213,7 @@
                                 <div class="row form-group">
                                     <div class="col-md-9 offset-md-3"><input type="text" id="fullAddress"
                                                                              name="fullAddress" placeholder=""
-                                                                             value="北京市海淀区上园村3号" class="form-control">
+                                                                             value="<%=companyDO.getEnterpriseAddress()%>" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -222,7 +222,7 @@
                                     <div class="col-12 col-md-9"><input type="text" id="emailAddress"
                                                                         name="emailAddress" placeholder="123@456.com"
                                                                         value="<%=companyDO.getEmail()%>"
-                                                                        class="form-control" disabled></div>
+                                                                        class="form-control"></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="webAddress"

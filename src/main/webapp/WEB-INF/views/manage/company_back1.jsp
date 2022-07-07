@@ -141,10 +141,11 @@
                                                 || list.get(i).getStatus().equals(AuditStatus.DENY)
                                                 || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
                                         <a type="button" class="btn btn-link fa fa-eye" onclick="javascript:window.location.href='/toilet/toPage?url=company_back5&productId=<%=list.get(i).getId()%>'">查看审批意见</a>
-                                        <%} else if (list.get(i).getStatus().equals(AuditStatus.WAITED)
-                                                    ||list.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {%>
+                                        <%}
+                                            if (list.get(i).getStatus().equals(AuditStatus.WAITED)
+                                                    || list.get(i).getStatus().equals(AuditStatus.UNKNOWN) || list.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
                                         <a type="button" class="btn btn-link fa fa-upload" id="shenhe"
-                                           onclick="submit('<%=list.get(i).getId()%>')">提交审核</a>
+                                           onclick="submit('<%=list.get(i).getId()%>', '<%=list.get(i).getStatus().getCode()%>')">提交审核</a>
                                         <%}%>
 
                                         <a type="button" class="btn btn-link fa fa-info-circle" onclick="javascript:window.location.href='/toilet/toPage?url=company_back7&productId=<%=list.get(i).getId()%>'">产品详情</a>
@@ -228,11 +229,14 @@
         }
     }
 
-    function submit(productId) {
+    function submit(productId, cur_status) {
         const data = new FormData();
         data.append("productId", productId);
-        data.append("statusCode", '<%=AuditStatus.WAITED_ASSIGN.getCode()%>');
-
+        if(cur_status === <%=AuditStatus.WAITED_AMEND.getCode()%>){
+            data.append("statusCode", '<%=AuditStatus.WAITED_PROFESSOR.getCode()%>');
+        }else{
+            data.append("statusCode", '<%=AuditStatus.WAITED_ASSIGN.getCode()%>');
+        }
         $.ajax({
             url: "/toilet/company/product/audit/submit",
             type: "POST",

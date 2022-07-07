@@ -616,7 +616,7 @@
                                     确认分配
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
-                                        onclick="location.replace(document.referrer);">
+                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back3'">
                                     返回
                                 </button>
                             </div>
@@ -747,7 +747,11 @@
             }
         });
     }
-
+    function close(){
+        $(".content_dialog").css("height","90px");
+        $(".dialog").css("display","none");
+        window.location.href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3";
+    }
 
     function imgShow(outerdiv, innerdiv, bigimg, _this) {
         var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
