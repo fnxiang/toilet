@@ -344,8 +344,10 @@ public class AdminController {
     @RequestMapping("/toPage")
     public String toPage(HttpServletRequest request){
         String url = request.getParameter("url");
-        String email = request.getSession().getAttribute("uId").toString();
         String productId = request.getParameter("productId");
+        String patternId;
+        ApprovalRequest approvalRequest;
+        ApprovalDTO approvalDTO;
         switch (url){
             case "admin_back1":
             case "admin_back2":
@@ -375,13 +377,21 @@ public class AdminController {
                 // TODO 新增approval
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
                 CompanyDO company = companyService.queryCompanyByEmail(productDTO.getCompanyEmail());
+                approvalRequest = new ApprovalRequest();
+                approvalRequest.setProductId(productId);
+                approvalDTO = auditService.getApproval(approvalRequest);
+                request.setAttribute("approval", approvalDTO);
                 request.setAttribute("product", productDTO);
                 request.setAttribute("company", CompanyConverter.toCompanyDTO(company));
                 break;
             case "admin_back11":
-                String  patternId = request.getParameter("patternId");
+                patternId = request.getParameter("patternId");
+                approvalRequest = new ApprovalRequest();
+                approvalRequest.setPatternId(patternId);
+                approvalDTO = auditService.getApproval(approvalRequest);
                 ToiletPatternDTO patternDTO = patternService.queryPatternById(patternId);
                 request.setAttribute("pattern", patternDTO);
+                request.setAttribute("approval", approvalDTO);
                 break;
             case "admin_back12":
                 String queryCompanyEmail = request.getParameter("email");
@@ -391,9 +401,9 @@ public class AdminController {
             case "admin_back13":
                 patternId = request.getParameter("patternId");
                 patternDTO = patternService.queryPatternById(patternId);
-                ApprovalRequest approvalRequest = new ApprovalRequest();
+                approvalRequest = new ApprovalRequest();
                 approvalRequest.setPatternId(patternId);
-                ApprovalDTO approvalDTO = auditService.getApproval(approvalRequest);
+                approvalDTO = auditService.getApproval(approvalRequest);
                 request.setAttribute("pattern", patternDTO);
                 request.setAttribute("approval", approvalDTO);
                 break;

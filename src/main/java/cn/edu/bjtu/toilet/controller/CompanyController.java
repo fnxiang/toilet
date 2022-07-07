@@ -133,6 +133,36 @@ public class CompanyController {
         return ProductResponse.success();
     }
 
+    @RequestMapping(value = "/pattern/audit/submit", method = RequestMethod.POST)
+    @ResponseBody
+    public ProductResponse submitPatternAudit(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String productId = params.get("patternId");
+            String statusCode = params.get("statusCode");
+
+            AuditStatus auditStatus = resolveStatus(statusCode);
+
+            ToiletPatternDTO patternDTO = patternService.queryPatternById(productId);
+
+            statusCheckService.transformPatternToStatus(patternDTO, auditStatus);
+
+            patternDTO.setStatus(auditStatus);
+
+            patternService.updatePattern(patternDTO);
+
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("update product error with {}", e.getMessage());
+            return ProductResponse.failed("update product error with " + e.getMessage());
+        } catch (Exception e) {
+            LOG.error("update products failed : {}", e.getMessage());
+            return ProductResponse.failed("update product error with " + e.getMessage());
+        }
+
+        return ProductResponse.success();
+    }
+
     private AuditStatus resolveStatus(String statusCode) {
         Integer code = Integer.decode(statusCode);
 
