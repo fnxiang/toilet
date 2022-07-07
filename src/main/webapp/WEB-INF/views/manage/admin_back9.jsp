@@ -747,7 +747,11 @@
             }
         });
     }
-
+    function close(){
+        $(".content_dialog").css("height","90px");
+        $(".dialog").css("display","none");
+        window.location.href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3";
+    }
 
     function imgShow(outerdiv, innerdiv, bigimg, _this) {
         var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
