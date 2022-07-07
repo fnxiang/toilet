@@ -43,7 +43,7 @@
         <div class="grid_12">
             <nav class="primary">
                 <ul>
-                    <li class="curent"><a href="index_formal.index_formal.jsp">首页</a></li>
+                    <li class="curent"><a href="${pageContext.request.contextPath}/">首页</a></li>
                     <li>
                         <a href="#">预留</a>
                         <ul class="sub">
@@ -98,11 +98,11 @@
                     <%List<String> pathList = Lists.newArrayList(productDTO.getPicsPath().split(";"));%>
                     <ul class="pagination clearfix" id="thumblist">
                         <li><a class="zoomThumbActive" href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '<%=basePath+pathList.get(0)%>',largeimage: '<%=basePath+pathList.get(0)%>'}"><img
+                               rel="{gallery: 'gal1', smallimage: '<%=basePath+pathList.get(0).replaceAll("\\\\", "/")%>',largeimage: '<%=basePath+pathList.get(0).replaceAll("\\\\", "/")%>'}"><img
                                 src='<%=basePath+pathList.get(0)%>' alt="" style="opacity: 1;"></a></li>
                         <%for (int i = 1; i < pathList.size(); i++) {%>
                         <li><a href='javascript:void(0);'
-                               rel="{gallery: 'gal1', smallimage: '<%=basePath+pathList.get(i)%>',largeimage: '<%=basePath+pathList.get(i)%>'}"><img
+                               rel="{gallery: 'gal1', smallimage: '<%=basePath+pathList.get(i).replaceAll("\\\\", "/")%>',largeimage: '<%=basePath+pathList.get(i).replaceAll("\\\\", "/")%>'}"><img
                                 src='<%=basePath+pathList.get(i)%>' alt=""></a></li>
                         <%}%>
                     </ul>
