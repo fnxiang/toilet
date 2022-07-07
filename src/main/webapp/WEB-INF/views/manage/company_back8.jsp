@@ -140,8 +140,8 @@
                                                 || Patternlist.get(i).getStatus().equals(AuditStatus.DENY)
                                                 || Patternlist.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
                                         <a type="button" class="btn btn-link fa fa-eye" onclick="javascript:window.location.href='/toilet/toPage?url=company_back10&patternId=<%=Patternlist.get(i).getId()%>'">查看审批意见</a>
-                                        <%} else if (Patternlist.get(i).getStatus().equals(AuditStatus.WAITED)
-                                                ||Patternlist.get(i).getStatus().equals(AuditStatus.UNKNOWN)) {%>
+                                        <%} if (Patternlist.get(i).getStatus().equals(AuditStatus.WAITED)
+                                                ||Patternlist.get(i).getStatus().equals(AuditStatus.UNKNOWN) || Patternlist.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
                                         <a type="button" class="btn btn-link fa fa-upload" id="shenhe"
                                            onclick="submit('<%=Patternlist.get(i).getId()%>')">提交审核</a>
                                         <%}%>
@@ -215,7 +215,11 @@
     function submit(patternId) {
         const data = new FormData();
         data.append("patternId", patternId);
-        data.append("statusCode", '<%=AuditStatus.WAITED_ASSIGN.getCode()%>');
+        if(cur_status === <%=AuditStatus.WAITED_AMEND.getCode()%>){
+            data.append("statusCode", '<%=AuditStatus.WAITED_PROFESSOR.getCode()%>');
+        }else{
+            data.append("statusCode", '<%=AuditStatus.WAITED_ASSIGN.getCode()%>');
+        }
 
         $.ajax({
             url: "/toilet/company/pattern/audit/submit",
