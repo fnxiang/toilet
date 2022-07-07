@@ -120,7 +120,7 @@ public class ManagementController {
         String url = request.getParameter("url");
         String email = request.getSession().getAttribute("uId").toString();
         String productId = request.getParameter("productId");
-        String patternId = request.getParameter("productId");
+        String patternId = request.getParameter("patternId");
         switch (url){
             case "company_back1":
                 List<ToiletProductDTO> productDTOList = productService.queryAllProductList(email);

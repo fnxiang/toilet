@@ -400,7 +400,7 @@
         data.append("otherTreatment", encodeURI(document.querySelector('#jihua option:checked').value)); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
 
         $.ajax({
-            url: "/toilet/company/pattern/modify",
+            url: "/toilet/company/pattern/entry",
             type: "POST",
             dataType: "json",
             data: data,
