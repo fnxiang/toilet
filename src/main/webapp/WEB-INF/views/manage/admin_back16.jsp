@@ -342,10 +342,13 @@
                             </div>
                             <%
                                 ApprovalDTO approvalDTO = (ApprovalDTO) request.getAttribute("approval");
+                                String status = "";
                                 String content = "";
                                 if (approvalDTO != null) {
+                                    status = approvalDTO.getStatus().getName();
                                     content = approvalDTO.getContent();
                                 }
+                                String productStatus = patternDTO.getStatus().getName();
                             %>
 
                             <hr>
@@ -474,7 +477,6 @@
         const data = new FormData();
         data.append("patternId", "<%=patternDTO.getId()%>");
         data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').value));
-        data.append("professorOpinion", encodeURI($('#professor_opinion').val()))
         data.append("comment", encodeURI($('#opinion').val()));
         $.ajax({
             url: "/toilet/admin/pattern/audit",
