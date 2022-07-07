@@ -581,7 +581,7 @@
                                     <div class="col col-md-3"><label for="select_status" class=" form-control-label">是否通过</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control" <%if(productStatus.equals("等待专家审核") || productStatus.equals("修改后重新审核")){}else{%> disabled <%}%>>
+                                        <select name="select_status" id="select_status" class="form-control" <%if(productStatus.equals("等待专家审核")){}else{%> disabled <%}%>>
                                             <option value="审核通过"
                                                     <%if (StringUtils.isEmpty(status) || status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
                                             </option>
@@ -599,12 +599,12 @@
                                                                      class=" form-control-label">审核意见</label></div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder=""
-                                                                           class="form-control" <%if(StringUtils.isEmpty(productStatus) || productStatus.equals("等待专家审核") || productStatus.equals("修改后重新审核")){}else{%> disabled <%}%>><%=content%></textarea>
+                                                                           class="form-control" <%if(StringUtils.isEmpty(productStatus) || productStatus.equals("等待专家审核")){}else{%> disabled <%}%>><%=content%></textarea>
                                     </div>
                                 </div>
                             </form>
                             <%}%>
-                            <%if(productStatus.equals("等待专家审核") || productStatus.equals("修改后重新审核")){%>
+                            <%if(productStatus.equals("等待专家审核")){%>
                             <div class="card-text text-lg-center">
                                 <button type="button" class="btn btn-outline-secondary" onclick="commit()">
                                     确认提交
