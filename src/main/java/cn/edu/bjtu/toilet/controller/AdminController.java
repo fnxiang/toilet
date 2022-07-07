@@ -374,7 +374,6 @@ public class AdminController {
                 break;
             case "admin_back6":
             case "admin_back9":
-                // TODO 新增approval
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
                 CompanyDO company = companyService.queryCompanyByEmail(productDTO.getCompanyEmail());
                 approvalRequest = new ApprovalRequest();
@@ -399,6 +398,7 @@ public class AdminController {
                 request.setAttribute("company", company);
                 break;
             case "admin_back13":
+            case "admin_back16":
                 patternId = request.getParameter("patternId");
                 patternDTO = patternService.queryPatternById(patternId);
                 approvalRequest = new ApprovalRequest();

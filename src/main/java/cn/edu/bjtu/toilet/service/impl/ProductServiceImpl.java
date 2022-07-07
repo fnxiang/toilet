@@ -278,7 +278,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ToiletPatternDTO savePattern(ToiletPatternDTO patternDTO) {
         patternDTO.setSource(buildPatternSource(patternDTO));
-        ToiletPatternDO patternDO = toiletPatternDao.savePattern(ProductConverter.toDO(patternDTO));
+        ToiletPatternDO toiletPatternDOFromDb = toiletPatternDao.queryPatternBySource(patternDTO.getSource());
+        ToiletPatternDO patternDO;
+        if (Objects.isNull(toiletPatternDOFromDb)) {
+            patternDO = toiletPatternDao.insertPattern(ProductConverter.toDO(patternDTO));
+        } else {
+            patternDO = toiletPatternDao.updatePatternBySource(ProductConverter.toDO(patternDTO), patternDTO.getSource());
+        }
 
         patternDTO = ProductConverter.toDTO(patternDO);
         return patternDTO;
