@@ -710,7 +710,6 @@
         const data = new FormData();
         data.append("productId", "<%=productDTO.getId()%>");
         data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').value));
-        data.append("professorOpinion", encodeURI($('#professor_opinion').val()))
         data.append("comment", encodeURI($('#opinion').val()));
         $.ajax({
             url: "/toilet/admin/product/audit",
