@@ -372,6 +372,7 @@ public class AdminController {
                 break;
             case "admin_back6":
             case "admin_back9":
+                // TODO 新增approval
                 ToiletProductDTO productDTO = productService.queryToiletById(productId);
                 CompanyDO company = companyService.queryCompanyByEmail(productDTO.getCompanyEmail());
                 request.setAttribute("product", productDTO);

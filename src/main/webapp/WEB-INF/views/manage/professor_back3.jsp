@@ -228,7 +228,7 @@
             processData: false,
             success: function (result) {
                 if (result.success) {
-                    show("修改成功！")
+                    show("修改成功！");
                 } else {
                     show(result.errorMessage);
                 }
