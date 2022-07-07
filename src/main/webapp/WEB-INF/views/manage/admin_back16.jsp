@@ -1,5 +1,6 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
-<%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %><%--
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %>
+<%@ page import="org.springframework.util.StringUtils" %><%--
   Created by IntelliJ IDEA.
   User: kokorozashinao
   Date: 2022/3/6
@@ -348,28 +349,21 @@
                             %>
 
                             <hr>
-                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="professor_opinion"
-                                                                     class=" form-control-label">专家审核意见</label>
-                                    </div>
-                                    <div class="col-12 col-md-9"><textarea name="professor_opinion" id="professor_opinion"
-                                                                           rows="9" placeholder=""
-                                                                           class="form-control"><%=content%></textarea></div>
-                                </div>
-                            </form>
-                            <hr>
+                            <%if (productStatus.equals("审核通过") || productStatus.equals("审核不通过") || productStatus.equals("等待管理员审核") || productStatus.equals("修改后重新审核")) {%>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="select_status"
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control">
-                                            <option value="审核通过">审核通过
+                                        <select name="select_status" id="select_status" class="form-control" <%if(productStatus.equals("等待管理员审核")){}else{%> disabled <%}%>>
+                                            <option value="审核通过"
+                                                    <%if (!StringUtils.isEmpty(status) && status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
                                             </option>
-                                            <option value="审核不通过">审核不通过
+                                            <option value="审核不通过"
+                                                    <%if (!StringUtils.isEmpty(status) && status.equals("审核不通过")){%>selected="selected"<%}%>>审核不通过
                                             </option>
-                                            <option value="修改后重新审核">修改后重新审核
+                                            <option value="修改后重新审核"
+                                                    <%if (!StringUtils.isEmpty(status) && (status.equals("修改后重新审核"))){%>selected="selected"<%}%>>修改后重新审核
                                             </option>
                                         </select>
                                     </div>
@@ -380,17 +374,26 @@
                                     </div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder=""
-                                                                           class="form-control"></textarea></div>
+                                                                           class="form-control" <%if(productStatus.equals("等待管理员审核")){}else{%> disabled="disabled" <%}%>><%=content%></textarea></div>
                                 </div>
                             </form>
+                            <%}%>
+                            <%if (!StringUtils.isEmpty(productStatus) && (productStatus.equals("等待管理员审核"))) {%>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="commit()">
+                                <button type="button"  class="btn btn-outline-secondary" onclick="commit()">
                                     确认提交
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
                                         onclick="location.replace(document.referrer);">返回
                                 </button>
                             </div>
+                            <%}else{%>
+                            <div class="card-text text-lg-center">
+                                <button type="button" class="btn btn-outline-secondary"
+                                        onclick="location.replace(document.referrer);">返回
+                                </button>
+                            </div>
+                            <%}%>
 
                         </div>
                     </div>
