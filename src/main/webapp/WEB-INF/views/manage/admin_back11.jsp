@@ -71,7 +71,7 @@
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel">
-
+    <% ToiletPatternDTO patternDTO = (ToiletPatternDTO)request.getAttribute("pattern");%>
     <header id="header" class="header">
         <jsp:include page="admin_banner.jsp"/>
     </header><!-- /header -->
@@ -353,13 +353,13 @@
                                     确认提交
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
-                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back4%>'">返回
+                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back4'">返回
                                 </button>
                             </div>
                             <%}else{%>
                             <div class="card-text text-lg-center">
                                 <button type="button" class="btn btn-outline-secondary"
-                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back4%>'">返回
+                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back4'">返回
                                 </button>
                             </div>
                             <%}%>
