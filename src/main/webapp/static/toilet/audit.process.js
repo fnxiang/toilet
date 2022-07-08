@@ -26,9 +26,9 @@ function submit(productId, statusCode) {
 }
 
 // 企业端提交状态请求
-function submitPattern(productId, statusCode) {
+function submitPattern(patternId, statusCode) {
     const data = new FormData();
-    data.append("patternId", productId);
+    data.append("patternId", patternId);
     data.append("statusCode", statusCode);
 
     $.ajax({

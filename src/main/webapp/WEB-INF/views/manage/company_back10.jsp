@@ -75,7 +75,6 @@
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel">
-  <%--    fixme productDTO为空--%>
   <%ToiletPatternDTO patternDTO = (ToiletPatternDTO) request.getAttribute("pattern");%>
 
   <!-- Header-->
@@ -146,7 +145,7 @@
                       返回修改
                     </a>
                     <a type="button" class="btn btn-link"
-                       onclick="submit('<%=patternDTO.getId()%>', '<%=AuditStatus.DISCARD.getCode()%>')">
+                       onclick="submitPattern('<%=patternDTO.getId()%>', '<%=AuditStatus.DISCARD.getCode()%>')">
                       舍弃该申请
                     </a>
 

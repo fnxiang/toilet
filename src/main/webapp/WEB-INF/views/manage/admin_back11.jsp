@@ -1,6 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %>
 <%@ page import="org.springframework.util.StringUtils" %>
+<%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -352,7 +353,7 @@
                             <%}%>
                             <%if (!StringUtils.isEmpty(productStatus) && (productStatus.equals("等待管理员审核"))) {%>
                             <div class="card-text text-lg-center">
-                                <button type="button"  class="btn btn-outline-secondary" onclick="commit()">
+                                <button type="button"  class="btn btn-outline-secondary" onclick="commit('<%=patternDTO.getId()%>')">
                                     确认提交
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
@@ -431,26 +432,14 @@
         $('#bootstrap-data-table-export').DataTable();
     });
 
-    function mode_enter() {
-
-        var data = new FormData();
-
-        data.append("patternName", encodeURI($('#moshimingcheng').val())); //模式名称
-        //新模式参数
-        data.append("natureTemp", encodeURI(document.querySelector('#wendutiaojian option:checked').value)); //温度条件
-        data.append("water", encodeURI(document.querySelector('#shuiziyuan option:checked').value)); //水资源条件
-        data.append("terrain", encodeURI(document.querySelector('#dixing option:checked').value)); //地形条件
-        data.append("geolocation", encodeURI(document.querySelector('#diliweizhi option:checked').value)); //地理位置条件
-        data.append("ecotope", encodeURI(document.querySelector('#shengtai option:checked').value)); //生态限制条件
-        data.append("density", encodeURI(document.querySelector('#renkou option:checked').value)); //人口密集程度
-        data.append("usageHabits", encodeURI(document.querySelector('#yetaifei option:checked').value)); //液态肥使用习惯
-        data.append("sewerLines", encodeURI(document.querySelector('#guandao option:checked').value)); //具有管网条件
-        data.append("biogasUtilization", encodeURI(document.querySelector('#zhaoqi option:checked').value)); //具有沼气利用工程
-        data.append("mixedTreatment", encodeURI(document.querySelector('#hunhe option:checked').value)); //计划与其他生活污水混合处理
-        data.append("otherTreatment", encodeURI(document.querySelector('#jihua option:checked').value)); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
+    function commit(productId) {
+        const data = new FormData();
+        data.append("patternId", productId);
+        data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').text));
+        data.append("comment", encodeURI($('#opinion').val()));
 
         $.ajax({
-            url: "/toilet/company/pattern/modify",
+            url: "/toilet/admin/pattern/audit",
             type: "POST",
             dataType: "json",
             data: data,
@@ -460,7 +449,8 @@
             processData: false,
             success: function (result) {
                 if (result.success) {
-                    show("修改成功！");
+                    show("提交审核成功！");
+                    //TODO 去掉对应的提交审核按钮
                 } else {
                     show(result.errorMessage);
                 }
