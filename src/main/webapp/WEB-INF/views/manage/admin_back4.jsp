@@ -3,6 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
 <%@ page import="org.apache.commons.lang3.StringUtils" %>
+<%@ page import="com.alibaba.fastjson.JSONObject" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -112,6 +114,12 @@
                                 <strong class="card-title">模式管理</strong>
                             </div>
                             <div class="card-body">
+
+                                <div class="grid_2">
+                                    <button class="grid_2" style="position: absolute;left: 30px; top: 40px;"
+                                            onclick="exportXSL()">导出模式信息
+                                    </button>
+                                </div>
                                 <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 									<thead>
 										<tr>
@@ -247,6 +255,53 @@
         }
 
   </script>
+    <%--导出--%>
+    <script>
+        //json转换为excel
+        <jsp:include page="admin_export.jsp"/>
+        //转换为json
+        function exportXSL() {
+            //获取整个产品列表
+            <%
+            List<JSONObject> data = new ArrayList<>();
+            //遍历获取到的需要导出的数据
+            for(int i = 0; i < list.size(); i++) {
+                JSONObject dataMap = new JSONObject(true);
+                ToiletPatternDTO patternDTO = list.get(i);
+                dataMap.put("序号",patternDTO.getId());
+                dataMap.put("产品类型",patternDTO.getProductType());
+                dataMap.put("模式类型",patternDTO.getPatternType());
+                dataMap.put("生态条件",patternDTO.getEnvConditions().getEcotope());
+                dataMap.put("地理位置条件",patternDTO.getEnvConditions().getGeolocation());
+                dataMap.put("温度条件",patternDTO.getEnvConditions().getTemperature());
+                dataMap.put("地形条件",patternDTO.getEnvConditions().getTerrain());
+                dataMap.put("水资源条件",patternDTO.getEnvConditions().getWaterResource());
+                dataMap.put("人口密集程度",patternDTO.getHumanFactors().getDensity());
+                dataMap.put("液态肥使用习惯",patternDTO.getHumanFactors().getUsageHabits());
+                if(patternDTO.getPipNetworkConditions().getHasSewerLines() == Boolean.TRUE){
+                     dataMap.put("具备管网条件","是");
+                }else{
+                    dataMap.put("具备管网条件","否");
+                }
+                if(patternDTO.getResourceUtilization().getIsBiogasUtilization() == Boolean.TRUE){
+                    dataMap.put("具有沼气利用工程","是");
+                }else{
+                    dataMap.put("具有沼气利用工程","否");
+                }
+                dataMap.put("可以与其他生活污水混合处理",patternDTO.getResourceUtilization().getMixedSewageTreatment());
+                if(patternDTO.getResourceUtilization().getOtherTreatment() == Boolean.TRUE){
+                    dataMap.put("计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理","是");
+                }else{
+                    dataMap.put("计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理","否");
+                }
+                data.add(dataMap);}%>
+            var dataList = new Array();
+            <%for(JSONObject x : data){%>
+            dataList.push(<%=x%>);
+            <%}%>
+            JSONToExcelConvertor(dataList,"模式详情");
+        }
+    </script>
 
 </body>
 </html>

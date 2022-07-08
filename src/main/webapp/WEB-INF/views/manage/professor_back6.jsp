@@ -347,13 +347,13 @@
                                     确认提交
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
-                                        onclick="location.replace(document.referrer);">返回
+                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back2'">返回
                                 </button>
                             </div>
                             <%}else{%>
                             <div class="card-text text-lg-center">
                                 <button type="button" class="btn btn-outline-secondary"
-                                        onclick="location.replace(document.referrer);">返回
+                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/professor/toProfessorPage?url=professor_back2'">返回
                                 </button>
                             </div>
                             <%}%>

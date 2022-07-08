@@ -43,32 +43,28 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i
-                            class="menu-icon fa fa-laptop"></i>用户管理</a>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back1" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>用户管理</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back14" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-user"></i>添加用户</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i
-                            class="menu-icon fa fa-glass"></i>用户审核</a>
+                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back2" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-glass"></i>用户审核</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back3" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-tasks"></i>产品管理</a>
                 </li>
                 <li class="active">
-                    <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back4" style="padding-top: 20px; padding-bottom: 20px;"><i
-                            class="menu-icon fa fa-cogs"></i>模式管理</a>
+                    <a href="#" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cogs"></i>模式管理</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/toPage?url=admin_back5"
                        style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-cog" aria-hidden="true"></i>修改密码</a>
                 </li>
             </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+        </div><!-- /.navbar-collapse -->
     </nav>
-</aside>
+</aside><!-- /#left-panel -->
 <!-- /#left-panel -->
 
 <!-- Left Panel -->
@@ -76,18 +72,19 @@
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel">
-
-    <!-- Header-->
-    <jsp:include page="company_header.jsp"/>
-    <!-- Header-->
     <% ToiletPatternDTO patternDTO = (ToiletPatternDTO)request.getAttribute("pattern");%>
+    <header id="header" class="header">
+        <jsp:include page="admin_banner.jsp"/>
+    </header><!-- /header -->
+    <!-- Header-->
+
     <div class="breadcrumbs">
         <div class="breadcrumbs-inner">
             <div class="row m-0">
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h1>企业后台管理系统</h1>
+                            <h1>管理员后台管理系统</h1>
                         </div>
                     </div>
                 </div>
@@ -95,8 +92,8 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="${pageContext.request.contextPath}/company/index">后台</a></li>
-                                <li class="active">我的申请</li>
+                                <li><a href="${pageContext.request.contextPath}/admin/index">后台</a></li>
+                                <li class="active">模式详情</li>
                             </ol>
                         </div>
                     </div>
@@ -112,7 +109,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">模式信息修改</strong>
+                            <strong class="card-title">模式详情</strong>
                         </div>
                         <div class="card-body">
                             <div id="newModeAdding" style="">
@@ -357,13 +354,13 @@
                                     确认提交
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
-                                        onclick="location.replace(document.referrer);">返回
+                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back4'">返回
                                 </button>
                             </div>
                             <%}else{%>
                             <div class="card-text text-lg-center">
                                 <button type="button" class="btn btn-outline-secondary"
-                                        onclick="location.replace(document.referrer);">返回
+                                        onclick="javascript:window.location.href='${pageContext.request.contextPath}/admin/toPage?url=admin_back4'">返回
                                 </button>
                             </div>
                             <%}%>
@@ -439,7 +436,7 @@
         data.append("comment", encodeURI($('#opinion').val()));
 
         $.ajax({
-            url: "/toilet/admin/pattern/audit",
+            url: "/toilet/company/pattern/modify",
             type: "POST",
             dataType: "json",
             data: data,
@@ -450,7 +447,6 @@
             success: function (result) {
                 if (result.success) {
                     show("提交审核成功！");
-                    //TODO 去掉对应的提交审核按钮
                 } else {
                     show(result.errorMessage);
                 }

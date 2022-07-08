@@ -114,7 +114,6 @@
                                     <div class="col-12 col-md-6">
                                         <select name="typeSelect" id="typeSelect" class="form-control xrequired">
                                             <option value="professor" selected="selected">专家用户</option>
-                                            <option value="company">企业用户</option>
                                         </select>
                                     </div>
                             </div>
