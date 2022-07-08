@@ -133,6 +133,36 @@ public class CompanyController {
         return ProductResponse.success();
     }
 
+    @RequestMapping(value = "/pattern/audit/submit", method = RequestMethod.POST)
+    @ResponseBody
+    public ProductResponse submitPatternAudit(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String productId = params.get("patternId");
+            String statusCode = params.get("statusCode");
+
+            AuditStatus auditStatus = resolveStatus(statusCode);
+
+            ToiletPatternDTO patternDTO = patternService.queryPatternById(productId);
+
+            statusCheckService.transformPatternToStatus(patternDTO, auditStatus);
+
+            patternDTO.setStatus(auditStatus);
+
+            patternService.updatePattern(patternDTO);
+
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("update product error with {}", e.getMessage());
+            return ProductResponse.failed("update product error with " + e.getMessage());
+        } catch (Exception e) {
+            LOG.error("update products failed : {}", e.getMessage());
+            return ProductResponse.failed("update product error with " + e.getMessage());
+        }
+
+        return ProductResponse.success();
+    }
+
     private AuditStatus resolveStatus(String statusCode) {
         Integer code = Integer.decode(statusCode);
 
@@ -189,6 +219,68 @@ public class CompanyController {
             return ModeResponse.failed("保存失败！");
         }
         return ModeResponse.success();
+    }
+
+    @RequestMapping("/pattern/modify")
+    @ResponseBody
+    public ModeResponse patternModify(HttpServletRequest request) {
+        try {
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+            if (Objects.isNull(params)) {
+                return ModeResponse.failed("resolve params error");
+            }
+
+            ToiletPatternDTO toiletPatternDTO = buildUpdatePatternDTO(params);
+            toiletPatternDTO.setStatus(AuditStatus.APPROVAL);
+            toiletPatternDTO.setEmail(request.getSession().getAttribute("uId").toString());
+            toiletPatternDTO = productService.savePattern(toiletPatternDTO);
+            if (Objects.isNull(toiletPatternDTO)) {
+                return ModeResponse.failed("save pattern failed");
+            }
+        } catch (ToiletBizException | ToiletSystemException e) {
+            LOG.error("save pattern error with {}", e.getMessage());
+            return ModeResponse.failed(e.getMessage());
+        } catch (Exception e) {
+            LOG.error("upload products failed");
+            return ModeResponse.failed("保存失败！");
+        }
+        return ModeResponse.success();
+    }
+
+    private ToiletPatternDTO buildUpdatePatternDTO(Map<String, String> params) {
+        ToiletPatternDTO toiletPatternDTO = patternService.queryPatternById(params.get("patternId"));
+
+        // 自然环境条件
+        EnvConditionsDTO envConditionsDTO = new EnvConditionsDTO();
+        envConditionsDTO.setTemperature(params.get("natureTemp").substring(1));
+        envConditionsDTO.setTerrain(params.get("terrain").substring(1));
+        envConditionsDTO.setWaterResource(params.get("water").substring(1));
+        envConditionsDTO.setGeolocation(params.get("geolocation").substring(1));
+        envConditionsDTO.setEcotope(params.get("ecotope").substring(1));
+
+        toiletPatternDTO.setEnvConditions(envConditionsDTO);
+
+        //人文因素
+        HumanFactorsDTO humanFactorsDTO = new HumanFactorsDTO();
+        humanFactorsDTO.setDensity(params.get("density").substring(1));
+        humanFactorsDTO.setUsageHabits(params.get("usageHabits"));
+
+        toiletPatternDTO.setHumanFactors(humanFactorsDTO);
+
+        //管网
+        PipNetworkConditionsDTO pipNetworkConditionsDTO = new PipNetworkConditionsDTO();
+        pipNetworkConditionsDTO.setHasSewerLines(params.get("sewerLines").equals("是"));
+
+        toiletPatternDTO.setPipNetworkConditions(pipNetworkConditionsDTO);
+
+        //资源
+        ResourceUtilizationDTO resourceUtilizationDTO = new ResourceUtilizationDTO();
+        resourceUtilizationDTO.setIsBiogasUtilization(params.get("biogasUtilization").equals("是"));
+        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment").substring(1));
+        resourceUtilizationDTO.setOtherTreatment(params.get("otherTreatment").equals("是"));
+        toiletPatternDTO.setResourceUtilization(resourceUtilizationDTO);
+
+        return toiletPatternDTO;
     }
 
     @RequestMapping(value = "/product/modes/get")

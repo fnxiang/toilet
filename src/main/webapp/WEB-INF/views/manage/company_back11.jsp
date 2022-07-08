@@ -250,9 +250,9 @@
                                                 <div class="col col-md-3"><label for="guandao" class=" form-control-label">需要具备管网条件：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="guandao" id="guandao" class="form-control">
-                                                        <option value="0" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines().equals("是")){%>
+                                                        <option value="0" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
                                                                 selected="selected" <%}%>>是</option>
-                                                        <option value="1" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines().equals("否")){%>
+                                                        <option value="1" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
                                                                 selected="selected" <%}%>>否</option>
                                                     </select>
                                                 </div>
@@ -273,9 +273,9 @@
                                                 <div class="col col-md-3"><label for="zhaoqi" class=" form-control-label">具有沼气利用工程：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="zhaoqi" id="zhaoqi" class="form-control">
-                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization().equals("是")){%>
+                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
                                                                 selected="selected" <%}%>>是</option>
-                                                        <option value="1" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization().equals("否")){%>
+                                                        <option value="1" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
                                                                 selected="selected" <%}%>>否</option>
                                                     </select>
                                                 </div>
@@ -297,9 +297,9 @@
                                                 <div class="col col-md-3"><label for="jihua" class=" form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="jihua" id="jihua" class="form-control">
-                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment().equals("是")){%>
+                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
                                                                 selected="selected" <%}%>>是</option>
-                                                        <option value="1"  <%if(patternDTO.getResourceUtilization().getOtherTreatment().equals("否")){%>
+                                                        <option value="1"  <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
                                                                 selected="selected" <%}%>>否</option>
                                                     </select>
                                                 </div>
@@ -400,7 +400,7 @@
         data.append("otherTreatment", encodeURI(document.querySelector('#jihua option:checked').value)); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
 
         $.ajax({
-            url: "/toilet/company/pattern/modify",
+            url: "/toilet/company/pattern/entry",
             type: "POST",
             dataType: "json",
             data: data,

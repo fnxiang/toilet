@@ -227,9 +227,12 @@
                 contentType: false,
                 processData: false,
                 success: function (result) {
+                    if (result.success()) {
+                        show("添加用户成功！");
+                    } else {
                         show(result.errorMessage);
                     }
-            });
+            }})
         }
     }
 

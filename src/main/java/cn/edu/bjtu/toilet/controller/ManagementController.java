@@ -120,7 +120,7 @@ public class ManagementController {
         String url = request.getParameter("url");
         String email = request.getSession().getAttribute("uId").toString();
         String productId = request.getParameter("productId");
-        String patternId = request.getParameter("productId");
+        String patternId = request.getParameter("patternId");
         switch (url){
             case "company_back1":
                 List<ToiletProductDTO> productDTOList = productService.queryAllProductList(email);
@@ -147,7 +147,9 @@ public class ManagementController {
                 List<ToiletPatternDTO> patternDTOS = productService.queryAllPattern(email);
                 request.setAttribute("patternList", patternDTOS);
                 break;
-            case "company_pattern_apply_detail":
+            case "company_back9":
+            case "company_back10":
+            case "company_back11":
                 ApprovalRequest patternApprovalRequest = new ApprovalRequest();
                 patternApprovalRequest.setPatternId(patternId);
                 request.setAttribute("pattern", patternService.queryPatternById(patternId));

@@ -1,6 +1,5 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
-<%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %>
-<%@ page import="org.springframework.util.StringUtils" %><%--
+<%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %><%--
   Created by IntelliJ IDEA.
   User: kokorozashinao
   Date: 2022/3/6
@@ -164,10 +163,10 @@
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">温度条件：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="select" id="select" class="form-control" disabled>
-                                                        <option value="寒冷地区" <%if(patternDTO.getEnvConditions().getTemperature().equals("寒冷地区")){%>
-                                                                selected="selected" <%}%>>寒冷地区</option>
-                                                        <option value="普通地区"  <%if(patternDTO.getEnvConditions().getTemperature().equals("普通地区")){%>
-                                                                selected="selected" <%}%>>普通地区</option>
+                                                        <option value="高寒" <%if(patternDTO.getEnvConditions().getTemperature().equals("高寒")){%>
+                                                                selected="selected" <%}%>>高寒</option>
+                                                        <option value="无特殊"  <%if(patternDTO.getEnvConditions().getTemperature().equals("无特殊")){%>
+                                                                selected="selected" <%}%>>无特殊</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -188,14 +187,12 @@
                                                     <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getEnvConditions().getTerrain().equals("平坦")){%>
                                                                 selected="selected" <%}%>>平坦</option>
-                                                        <option value="1" <%if(patternDTO.getEnvConditions().getTerrain().equals("丘陵")){%>
+                                                        <option value="1" <%if(patternDTO.getEnvConditions().getTerrain().equals("山区")){%>
+                                                                selected="selected" <%}%>>山区</option>
+                                                        <option value="2" <%if(patternDTO.getEnvConditions().getTerrain().equals("丘陵")){%>
                                                                 selected="selected" <%}%>>丘陵</option>
-                                                        <option value="2" <%if(patternDTO.getEnvConditions().getTerrain().equals("山地")){%>
-                                                                selected="selected" <%}%>>山地</option>
-                                                        <option value="2" <%if(patternDTO.getEnvConditions().getTerrain().equals("高原")){%>
-                                                                selected="selected" <%}%>>高原</option>
-                                                        <option value="3" <%if(patternDTO.getEnvConditions().getTerrain().equals("盆地")){%>
-                                                                selected="selected" <%}%>>盆地</option>
+                                                        <option value="3" <%if(patternDTO.getEnvConditions().getTerrain().equals("无特殊")){%>
+                                                                selected="selected" <%}%>>无特殊</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -203,14 +200,14 @@
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">地理位置条件：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="select" id="select" class="form-control" disabled>
-                                                        <option value="0" <%if(patternDTO.getEnvConditions().getGeolocation().equals("中心镇")){%>
-                                                                selected="selected" <%}%>>中心镇</option>
-                                                        <option value="1" <%if(patternDTO.getEnvConditions().getGeolocation().equals("一般镇")){%>
-                                                                selected="selected" <%}%>>一般镇</option>
-                                                        <option value="2" <%if(patternDTO.getEnvConditions().getGeolocation().equals("中心村")){%>
-                                                                selected="selected" <%}%>>中心村</option>
-                                                        <option value="3" <%if(patternDTO.getEnvConditions().getGeolocation().equals("基层村")){%>
-                                                                selected="selected" <%}%>>基层村</option>
+                                                        <option value="0" <%if(patternDTO.getEnvConditions().getGeolocation().equals("城市近郊")){%>
+                                                                selected="selected" <%}%>>城市近郊</option>
+                                                        <option value="1" <%if(patternDTO.getEnvConditions().getGeolocation().equals("城中村")){%>
+                                                                selected="selected" <%}%>>城中村</option>
+                                                        <option value="2" <%if(patternDTO.getEnvConditions().getGeolocation().equals("中心城镇地区")){%>
+                                                                selected="selected" <%}%>>中心城镇地区</option>
+                                                        <option value="3" <%if(patternDTO.getEnvConditions().getGeolocation().equals("其他")){%>
+                                                                selected="selected" <%}%>>其他</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -222,8 +219,8 @@
                                                                 selected="selected" <%}%>>生态保护区</option>
                                                         <option value="1" <%if(patternDTO.getEnvConditions().getEcotope().equals("水源保护区")){%>
                                                                 selected="selected" <%}%>>水源保护区</option>
-                                                        <option value="2" <%if(patternDTO.getEnvConditions().getEcotope().equals("普通地区")){%>
-                                                                selected="selected" <%}%>>普通地区</option>
+                                                        <option value="2" <%if(patternDTO.getEnvConditions().getEcotope().equals("一般地区")){%>
+                                                                selected="selected" <%}%>>一般地区</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -248,8 +245,8 @@
                                                                 selected="selected" <%}%>>聚集</option>
                                                         <option value="1" <%if(patternDTO.getHumanFactors().getDensity().equals("分散")){%>
                                                                 selected="selected" <%}%>>分散</option>
-                                                        <option value="2" <%if(patternDTO.getHumanFactors().getDensity().equals("普通")){%>
-                                                                selected="selected" <%}%>>普通</option>
+                                                        <option value="2" <%if(patternDTO.getHumanFactors().getDensity().equals("一般")){%>
+                                                                selected="selected" <%}%>>一般</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -279,12 +276,12 @@
                                         <div class="tab-pane fade active show" id="custom-nav-pip" role="tabpanel" aria-labelledby="custom-nav-pip-tab">
 
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="select" class=" form-control-label">需要具备管网条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">具有污水管道：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="select" id="select" class="form-control" disabled>
-                                                        <option value="0" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines().equals("是")){%>
+                                                        <option value="0" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
                                                                 selected="selected" <%}%>>是</option>
-                                                        <option value="1" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines().equals("否")){%>
+                                                        <option value="1" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
                                                                 selected="selected" <%}%>>否</option>
                                                     </select>
                                                 </div>
@@ -305,23 +302,21 @@
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">具有沼气利用工程：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="select" id="select" class="form-control" disabled>
-                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization().equals("是")){%>
+                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
                                                                 selected="selected" <%}%>>是</option>
-                                                        <option value="1" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization().equals("否")){%>
+                                                        <option value="1" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
                                                                 selected="selected" <%}%>>否</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="select" class=" form-control-label">可以与其他生活污水混合处理：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">计划与其他生活污水混合处理：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("是")){%>
                                                                 selected="selected" <%}%>>是</option>
                                                         <option value="1" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("否")){%>
                                                                 selected="selected" <%}%>>否</option>
-                                                        <option value="2" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("均可")){%>
-                                                                selected="selected" <%}%>>均可</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -329,9 +324,9 @@
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="select" id="select" class="form-control" disabled>
-                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment().equals("是")){%>
+                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
                                                                 selected="selected" <%}%>>是</option>
-                                                        <option value="1"  <%if(patternDTO.getResourceUtilization().getOtherTreatment().equals("否")){%>
+                                                        <option value="1"  <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
                                                                 selected="selected" <%}%>>否</option>
                                                     </select>
                                                 </div>
@@ -342,31 +337,35 @@
                             </div>
                             <%
                                 ApprovalDTO approvalDTO = (ApprovalDTO) request.getAttribute("approval");
-                                String status = "";
                                 String content = "";
                                 if (approvalDTO != null) {
-                                    status = approvalDTO.getStatus().getName();
                                     content = approvalDTO.getContent();
                                 }
-                                String productStatus = patternDTO.getStatus().getName();
                             %>
 
                             <hr>
-                            <%if (productStatus.equals("审核通过") || productStatus.equals("审核不通过") || productStatus.equals("等待管理员审核") || productStatus.equals("修改后重新审核")) {%>
+                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="professor_opinion"
+                                                                     class=" form-control-label">专家审核意见</label>
+                                    </div>
+                                    <div class="col-12 col-md-9"><textarea name="professor_opinion" id="professor_opinion"
+                                                                           rows="9" placeholder=""
+                                                                           class="form-control"><%=content%></textarea></div>
+                                </div>
+                            </form>
+                            <hr>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="select_status"
                                                                      class=" form-control-label">是否通过</label></div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select_status" id="select_status" class="form-control" <%if(productStatus.equals("等待管理员审核")){}else{%> disabled <%}%>>
-                                            <option value="审核通过"
-                                                    <%if (!StringUtils.isEmpty(status) && status.equals("审核通过")){%>selected="selected"<%}%>>审核通过
+                                        <select name="select_status" id="select_status" class="form-control">
+                                            <option value="审核通过">审核通过
                                             </option>
-                                            <option value="审核不通过"
-                                                    <%if (!StringUtils.isEmpty(status) && status.equals("审核不通过")){%>selected="selected"<%}%>>审核不通过
+                                            <option value="审核不通过">审核不通过
                                             </option>
-                                            <option value="修改后重新审核"
-                                                    <%if (!StringUtils.isEmpty(status) && (status.equals("修改后重新审核"))){%>selected="selected"<%}%>>修改后重新审核
+                                            <option value="修改后重新审核">修改后重新审核
                                             </option>
                                         </select>
                                     </div>
@@ -377,26 +376,17 @@
                                     </div>
                                     <div class="col-12 col-md-9"><textarea name="opinion" id="opinion"
                                                                            rows="9" placeholder=""
-                                                                           class="form-control" <%if(productStatus.equals("等待管理员审核")){}else{%> disabled="disabled" <%}%>><%=content%></textarea></div>
+                                                                           class="form-control"></textarea></div>
                                 </div>
                             </form>
-                            <%}%>
-                            <%if (!StringUtils.isEmpty(productStatus) && (productStatus.equals("等待管理员审核"))) {%>
                             <div class="card-text text-lg-center">
-                                <button type="button"  class="btn btn-outline-secondary" onclick="commit()">
+                                <button type="button" class="btn btn-outline-secondary" onclick="commit()">
                                     确认提交
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
                                         onclick="location.replace(document.referrer);">返回
                                 </button>
                             </div>
-                            <%}else{%>
-                            <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary"
-                                        onclick="location.replace(document.referrer);">返回
-                                </button>
-                            </div>
-                            <%}%>
 
                         </div>
                     </div>
@@ -477,6 +467,7 @@
         const data = new FormData();
         data.append("patternId", "<%=patternDTO.getId()%>");
         data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').value));
+        data.append("professorOpinion", encodeURI($('#professor_opinion').val()))
         data.append("comment", encodeURI($('#opinion').val()));
         $.ajax({
             url: "/toilet/admin/pattern/audit",
