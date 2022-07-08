@@ -188,6 +188,10 @@
     function choseClose() {
         $("#chongzhi").css("display", "none");
     }
+    function close(){
+        $(".content_dialog").css("height","90px");
+        $(".dialog").css("display","none");
+    }
 </script>
 </body>
 </html>

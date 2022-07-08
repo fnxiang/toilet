@@ -222,6 +222,11 @@
                 }
             });
         }
+
+        function close(){
+            $(".content_dialog").css("height","90px");
+            $(".dialog").css("display","none");
+        }
     </script>
 	
 </body>
