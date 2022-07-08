@@ -283,6 +283,10 @@ public class ProductServiceImpl implements ProductService {
         if (Objects.isNull(toiletPatternDOFromDb)) {
             patternDO = toiletPatternDao.insertPattern(ProductConverter.toDO(patternDTO));
         } else {
+            patternDTO.setId(toiletPatternDOFromDb.getId());
+            patternDTO.setGmtCreate(toiletPatternDOFromDb.getGmtCreate());
+            patternDTO.setGmtModified(toiletPatternDOFromDb.getGmtModified());
+            patternDTO.setVersion(toiletPatternDOFromDb.getVersion());
             patternDO = toiletPatternDao.updatePatternBySource(ProductConverter.toDO(patternDTO), patternDTO.getSource());
         }
 
