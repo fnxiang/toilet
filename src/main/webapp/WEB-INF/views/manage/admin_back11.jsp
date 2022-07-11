@@ -1,6 +1,7 @@
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ToiletPatternDTO" %>
 <%@ page import="cn.edu.bjtu.toilet.domain.dto.ApprovalDTO" %>
 <%@ page import="org.springframework.util.StringUtils" %>
+<%@ page import="cn.edu.bjtu.toilet.constant.AuditStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -318,7 +319,7 @@
                                 String productStatus = patternDTO.getStatus().getName();
                             %>
                             <hr>
-                            <%if (productStatus.equals("审核通过") || productStatus.equals("审核不通过") || productStatus.equals("等待管理员审核") || productStatus.equals("修改后重新审核")) {%>
+                            <%if (productStatus.equals("审核通过") || productStatus.equals("审核不通过") || productStatus.equals("等待管理员审核")) {%>
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="select_status"
@@ -349,7 +350,7 @@
                             <%}%>
                             <%if (!StringUtils.isEmpty(productStatus) && (productStatus.equals("等待管理员审核"))) {%>
                             <div class="card-text text-lg-center">
-                                <button type="button"  class="btn btn-outline-secondary" onclick="commit()">
+                                <button type="button"  class="btn btn-outline-secondary" onclick="commit('<%=patternDTO.getId()%>')">
                                     确认提交
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary offset-2"
@@ -427,13 +428,15 @@
     $(document).ready(function () {
         $('#bootstrap-data-table-export').DataTable();
     });
-    function commit() {
+
+    function commit(productId) {
         const data = new FormData();
-        data.append("patternId", "<%=patternDTO.getId()%>");
-        data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').value));
+        data.append("patternId", productId);
+        data.append("auditStatus", encodeURI(document.querySelector('#select_status option:checked').text));
         data.append("comment", encodeURI($('#opinion').val()));
+
         $.ajax({
-            url: "/toilet/admin/pattern/audit",
+            url: "/toilet/company/pattern/modify",
             type: "POST",
             dataType: "json",
             data: data,
@@ -443,7 +446,7 @@
             processData: false,
             success: function (result) {
                 if (result.success) {
-                    show("提交成功！");
+                    show("提交审核成功！");
                 } else {
                     show(result.errorMessage);
                 }

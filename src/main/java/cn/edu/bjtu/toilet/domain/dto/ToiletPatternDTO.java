@@ -34,6 +34,8 @@ public class ToiletPatternDTO {
 
     private String professorEmail;
 
+    private Integer version;
+
     private String email;
 
     private String source;

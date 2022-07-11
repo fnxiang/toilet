@@ -97,15 +97,15 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
         if (StringUtils.isEmpty(source)) {
             throw new ToiletBizException("updatePatternBySource -> source can not be null", BIZ_ERROR);
         }
-        patternDO.setGmtModified(new Date());
-        patternDO.setVersion(patternDO.getVersion() + 1);
 
         ToiletPatternDOSelective patternDOSelective = new ToiletPatternDOSelective();
         ToiletPatternDOSelective.Criteria criteria = patternDOSelective.createCriteria();
 
         criteria.andDeletedNotEqualTo(true);
         criteria.andSourceEqualTo(source);
-
+        patternDO.setGmtModified(new Date());
+        patternDO.setVersion(patternDO.getVersion() + 1);
+        patternDO.setDeleted(false);
         int count = patternDOMapper.updateByExampleWithBLOBs(patternDO, patternDOSelective);
 
         if (count != 1) {
