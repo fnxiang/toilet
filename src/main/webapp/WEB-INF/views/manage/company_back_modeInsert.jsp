@@ -114,7 +114,7 @@
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="product_type" class="form-control-label">产品类型
-                                        <i id="product_type_tips" class="fa fa-question-circle" data-toggle="tooltip"
+                                        <i id="product_type_tips" class="fa" data-toggle="tooltip"
                                            data-placement="top" title="输入产品类型注意事项"></i></label></div>
                                     <div class="col-12 col-md-9">
                                         <select name="productselect" id="productselect" class="form-control">
@@ -137,7 +137,7 @@
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="producer_mode_type"
                                                                      class="form-control-label">模式类型
-                                        <i id="producer_mode_tips" class="fa fa-question-circle" data-toggle="tooltip"
+                                        <i id="producer_mode_tips" class="fa" data-toggle="tooltip"
                                            data-placement="top" title="输入模式类型注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><input type="text" id="producer_mode_type"
                                                                         name="producer_mode_type"
@@ -149,7 +149,7 @@
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="producer_mode_info"
                                                                      class="form-control-label">模式介绍
-                                        <i id="producer_mode_info_tips" class="fa fa-question-circle"
+                                        <i id="producer_mode_info_tips" class="fa"
                                            data-toggle="tooltip"
                                            data-placement="top" title="输入模式介绍注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><textarea name="producer_mode_info"
@@ -178,7 +178,7 @@
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label class=" form-control-label">温度条件：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                           data-placement="top" title="寒冷地区主要指东北、内蒙古和新疆北部、西藏北部、青海等地区，累年最冷月平均温度≤10℃或日平均≤5℃的天数，一般在145天以上地区，以及我国北京、天津、河北、山东、山西、宁夏、山西大部、辽宁南部、甘肃中东部、新疆南部、河南、安徽、江苏北部以及西藏南部等地区。其主要指标为：最冷月平均温度0~10℃，辅助指标为：日平均温度≤5℃的天数为90~145天。"></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="temperature_check"
                                                                value="寒冷地区"/>寒冷地区
@@ -190,7 +190,7 @@
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label class=" form-control-label">水资源条件：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                           data-placement="top" title="缺水地区指年降水量＜200mm的干旱区域及人均水资源量＜600m3的缺水地区，如北京、天津、河北、山西、山东、新疆等地区。除缺水地区外，其他地区统称良好地区。"></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="water_check"
                                                                value="缺水"/>缺水
@@ -202,7 +202,12 @@
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label class="form-control-label">地形条件：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                           data-placement="top" title="平原地形是指海拔200米以下，平坦开阔的区域，一般分布在河流沿岸和沿海地区。
+丘陵指绝对高度在500米以内，相对高度不超过200米，起伏不大，坡度较缓，地面崎岖不平，由连绵不断的低矮山丘组成的地形。
+山地地形是指海拔在500米以上的高地，起伏很大，坡度陡峻，沟谷幽深，一般多呈脉状分布。分为高山、中山和低山。海拔在3500米以上为高山，海拔在1000-3500米为中山，
+海拔低于1000米为低山。
+高原地形通常是指海拔高度在1000米以上，面积广大，地形开阔，周边以明显的陡坡为界，比较完整的大面积隆起地区。
+盆地地形是指主要特征是四周高，中部低，因盆状得名的地区。"></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="dixing_check"
                                                                value="平原"/>平原
@@ -220,7 +225,10 @@
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label class="form-control-label">村庄条件：
                                                         <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                           data-placement="top" title="中心镇至县域城镇体系规划中的各分区内，在经济、社会和空间发展中发挥中心作用的镇。
+一般镇指在县域城镇体系规划中，中心镇以外的镇。
+中心村指镇域镇村体系规划中，设有兼为周围村服务的公共设施的村。
+基层村指镇域镇村体系规划中，中心村以外的村。"></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="diliweizhi_check"
                                                                value="中心镇"/>中心镇
@@ -235,8 +243,8 @@
 
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label class="form-control-label">生态限制条件：
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                        <i class="fa" data-toggle="tooltip"
+                                                           data-placement="top" title=""></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="shengtai_check"
                                                                value="生态保护区"/>生态保护区
@@ -258,7 +266,9 @@
                                                    data-toggle="tab" href="#custom-nav-people" role="tab"
                                                    aria-controls="custom-nav-people" aria-selected="true">适用条件：人文因素
                                                     <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                       data-placement="top" title="输入注意事项"></i></a>
+                                                       data-placement="top" title="聚集地区指村庄布局紧凑，人口密集，居民点集中的较集中区域。
+                                                       分散地区指村庄布局分散，且单村人口密度较小的地区。
+                                                       其他地区统称为普通地区。"></i></a>
                                             </div>
                                         </nav>
                                         <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -267,8 +277,8 @@
 
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label class="form-control-label">人口密集程度：
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                        <i class="fa" data-toggle="tooltip"
+                                                           data-placement="top" title=""></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="renkou_check"
                                                                value="聚集"/>聚集
@@ -283,8 +293,8 @@
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label for="yetaifei"
                                                                                      class="form-control-label">需要形成液态肥：
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                        <i class="fa" data-toggle="tooltip"
+                                                           data-placement="top" title=""></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <select name="yetaifei" id="yetaifei" class="form-control">
                                                             <option value="0">是</option>
@@ -302,8 +312,8 @@
                                                 <a class="nav-item nav-link active show" id="custom-nav-pip-tab"
                                                    data-toggle="tab" href="#custom-nav-pip" role="tab"
                                                    aria-controls="custom-nav-pip" aria-selected="true">适用条件：管网条件
-                                                    <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                       data-placement="top" title="输入注意事项"></i></a>
+                                                    <i class="fa" data-toggle="tooltip"
+                                                       data-placement="top" title=""></i></a>
                                             </div>
                                         </nav>
                                         <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -313,8 +323,8 @@
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label for="wangguantiaojian"
                                                                                      class="form-control-label">需要具备管网条件：
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                        <i class="fa" data-toggle="tooltip"
+                                                           data-placement="top" title=""></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <select name="wangguantiaojian" id="wangguantiaojian"
                                                                 class="form-control">
@@ -332,8 +342,8 @@
                                                 <a class="nav-item nav-link active show" id="custom-nav-resource-tab"
                                                    data-toggle="tab" href="#custom-nav-resource" role="tab"
                                                    aria-controls="custom-nav-resource" aria-selected="true">适用条件：资源化利用条件
-                                                    <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                       data-placement="top" title="输入注意事项"></i></a>
+                                                    <i class="fa" data-toggle="tooltip"
+                                                       data-placement="top" title=""></i></a>
                                             </div>
                                         </nav>
                                         <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -343,8 +353,8 @@
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label for="zhaoqi"
                                                                                      class=" form-control-label">需要具有沼气利用工程：
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                        <i class="fa" data-toggle="tooltip"
+                                                           data-placement="top" title=""></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <select name="zhaoqi" id="zhaoqi" class="form-control">
                                                             <option value="0">是</option>
@@ -355,8 +365,8 @@
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label for="wushuihunhe"
                                                                                      class="form-control-label">可以与其他生活污水混合处理：
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                        <i class="fa" data-toggle="tooltip"
+                                                           data-placement="top" title=""></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <select name="wushuihunhe" id="wushuihunhe"
                                                                 class="form-control">
@@ -369,8 +379,8 @@
                                                 <div class="row form-group">
                                                     <div class="col col-md-3"><label for="yibingchuli"
                                                                                      class="form-control-label">可以与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：
-                                                        <i class="fa fa-question-circle" data-toggle="tooltip"
-                                                           data-placement="top" title="输入注意事项"></i></label></div>
+                                                        <i class="fa" data-toggle="tooltip"
+                                                           data-placement="top" title=""></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <select name="yibingchuli" id="yibingchuli"
                                                                 class="form-control">
