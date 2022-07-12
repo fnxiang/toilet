@@ -149,6 +149,8 @@
                                         <%}%>
 
                                         <a type="button" class="btn btn-link fa fa-info-circle" onclick="javascript:window.location.href='/toilet/toPage?url=company_back7&productId=<%=list.get(i).getId()%>'">产品详情</a>
+                                        <a type="button" class="btn btn-link fa fa-trash-o"
+                                           onclick="confirm_delete('product', <%=list.get(i).getId()%>)">删除</a>
                                     </td>
                                 </tr>
                                 <%}%>
@@ -260,8 +262,35 @@
         $(".dialog").css("display","none");
         window.location.href="${pageContext.request.contextPath}/company/index";
     }
-</script>
 
+</script>
+<script>
+    function deleteProduct(product_id) {
+        let data = new FormData();
+        data.append("productId", product_id)
+        $.ajax({
+            url: "/toilet/admin/product/delete",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    show("删除成功!")
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
+    }
+    function cancalDelete(){
+        $(".content_dialog").css("height","90px");
+        $(".dialog").css("display","none");
+    }
+</script>
 
 </body>
 </html>

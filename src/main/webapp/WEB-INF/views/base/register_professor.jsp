@@ -72,7 +72,7 @@
 										<label for="emailAddress" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">邮箱：</label>
 										<input type="email" class="form-control col-sm-7" id="emailAddress" aria-describedby="emailHelp" placeholder="邮箱">
                                         <input type="button" id="getcode" value="发送验证码" class="btn btn-link"
-                                               onclick="getCode()">
+                                               onclick="sendCode()">
 									</div>
                                     <div class="form-group row">
                                         <label for="code" class="col-sm-3 align-self-center xrequired" style="margin-bottom: 0px;">验证码：</label>
@@ -182,7 +182,6 @@
         }
         //短信验证码倒计时
         function getCode(){
-            sendCode()
             var btn = $('#getcode')
             var number = 60;
             var countdown = function(){
@@ -216,6 +215,7 @@
                 success: function (result) {
                     if (result.success) {
                         show("验证码发送成功！");
+                        getCode();
                     } else {
                         show(result.errorMessage);
                     }

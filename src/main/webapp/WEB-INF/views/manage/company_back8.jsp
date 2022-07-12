@@ -143,7 +143,7 @@
                                         <%} if (Patternlist.get(i).getStatus().equals(AuditStatus.WAITED)
                                                 ||Patternlist.get(i).getStatus().equals(AuditStatus.UNKNOWN) || Patternlist.get(i).getStatus().equals(AuditStatus.WAITED_AMEND)) {%>
                                         <a type="button" class="btn btn-link fa fa-upload" id="shenhe"
-                                           onclick="submit('<%=Patternlist.get(i).getId()%>')">提交审核</a>
+                                           onclick="submit('<%=Patternlist.get(i).getId()%>', '<%=Patternlist.get(i).getStatus().getCode()%>')">提交审核</a>
                                         <%}%>
 
                                         <a type="button" class="btn btn-link fa fa-info-circle" onclick="javascript:window.location.href='/toilet/toPage?url=company_back9&patternId=<%=Patternlist.get(i).getId()%>'">模式详情</a>
@@ -212,7 +212,7 @@
         );
     });
 
-    function submit(patternId) {
+    function submit(patternId, cur_status) {
         const data = new FormData();
         data.append("patternId", patternId);
         if(cur_status === <%=AuditStatus.WAITED_AMEND.getCode()%>){
