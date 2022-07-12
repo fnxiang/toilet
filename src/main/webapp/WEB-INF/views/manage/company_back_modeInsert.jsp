@@ -116,9 +116,21 @@
                                     <div class="col col-md-3"><label for="product_type" class="form-control-label">产品类型
                                         <i id="product_type_tips" class="fa fa-question-circle" data-toggle="tooltip"
                                            data-placement="top" title="输入产品类型注意事项"></i></label></div>
-                                    <div class="col-12 col-md-9"><input type="text" id="product_type"
-                                                                        name="product_type"
-                                                                        placeholder="产品类型" class="form-control">
+                                    <div class="col-12 col-md-9">
+                                        <select name="productselect" id="productselect" class="form-control">
+                                            <option value="0">完整下水道水冲式厕所</option>
+                                            <option value="1">化粪池式厕所</option>
+                                            <option value="2">双瓮漏斗式厕所</option>
+                                            <option value="3">三联沼气池式厕所</option>
+                                            <option value="4">复合生物反应微水冲厕所</option>
+                                            <option value="5">真空负压厕所</option>
+                                            <option value="6">多级生化组合电催化氧化厕所</option>
+                                            <option value="7">膜生物反应器（MBR）厕所</option>
+                                            <option value="8">生态旱厕</option>
+                                            <option value="9">双坑交替式厕所</option>
+                                            <option value="10">粪尿分集式厕所</option>
+                                            <option value="11">泡沫封堵液</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -449,7 +461,9 @@
 
         var data = new FormData();
 
-        data.append("productType", encodeURI($('#product_type').val())); //产品类型
+        var myselect = document.getElementById("productselect"); //产品类型
+        var index = myselect.selectedIndex;
+        data.append("productType", encodeURI(myselect.options[index].text));
         data.append("patternType", encodeURI($('#producer_mode_type').val())); //模式类型
         data.append("patternInfo", encodeURI($('#producer_mode_info').val())); //模式介绍
 
