@@ -221,8 +221,8 @@
                                                         </div>
                                                         <div class="col-12 col-md-9"><input type="text" id="address"
                                                                                             name="address"
-                                                                                            value="<%=companyDTO.getCompanyAddress()%>"
                                                                                             placeholder=""
+                                                                                            value="<%=companyDTO.getCompanyAddress()%>"
                                                                                             class="form-control"
                                                                                             disabled>
                                                         </div>
@@ -273,25 +273,21 @@
                                                 <div class="col-12 col-md-9"><input type="text" id="wendufanwei"
                                                                                     name="wendufanwei" placeholder=""
                                                                                     class="form-control"
-                                                                                    value="<%=productDTO.getApplicableTemperature()%>"
-                                                                                    disabled></div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3"><label for="jvtiyongtu"
-                                                                                 class=" form-control-label">用途</label>
-                                                </div>
-                                                <div class="col-12 col-md-9"><textarea name="jvtiyongtu"
-                                                                                       id="jvtiyongtu" rows="5"
-                                                                                       placeholder=""
-                                                                                       class="form-control"
-                                                                                       disabled><%=productDTO.getPurpose()%></textarea>
-                                                </div>
+                                                                                    value="<%=productDTO.getApplicableTemperature()%>" disabled></div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row form-group" id="shiyong" style="display: none">
+                                        <div class="col col-md-3"><label for="shiyongtiaojian" class="form-control-label">适用条件
+                                            <i class="fa" data-toggle="tooltip" data-placement="top"
+                                               title="输入注意事项"></i></label></div>
+                                        <div class="col-12 col-md-9"><textarea name="shiyongtiaojian" id="shiyongtiaojian"
+                                                                               rows="9" placeholder="适用条件..."
+                                                                               class="form-control"><%=productDTO.getApplicableCondition()%></textarea></div>
+                                    </div>
                                 </div>
 
-                                <div class="custom-tab">
+                                <div class="custom-tab" id="chanpincanshu">
                                     <nav>
                                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                             <a class="nav-item nav-link active show" id="custom-nav-parameter-tab"
@@ -319,15 +315,14 @@
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="shiyongrenshu"
                                                                                  class="form-control-label">适用人数（人）
-                                                    <i class="fa fa-question-circle" data-toggle="tooltip"
+                                                    <i class="fa" data-toggle="tooltip"
                                                        data-placement="top"
                                                        title="输入注意事项"></i></label></div>
                                                 <div class="col-12 col-md-9"><input type="text" id="shiyongrenshu"
                                                                                     name="shiyongrenshu"
                                                                                     placeholder="输入适用人数"
                                                                                     class="form-control"
-                                                                                    value="<%=productDTO.getProductParameters().getApplicableNum()%>"
-                                                                                    disabled>
+                                                                                    value="<%=productDTO.getProductParameters().getApplicableNum()%>" disabled>
                                                 </div>
                                             </div>
 
@@ -336,31 +331,27 @@
                                                     <div class="col col-md-4"><label for="chicun_chang"
                                                                                      class="form-control-label">尺寸（长*宽*高mm）:</label>
                                                     </div>
-                                                    <div class="col-12 col-md-1"></div>
                                                     <div class="col-12 col-md-1"><label
                                                             class="form-control-label">长：</label></div>
                                                     <div class="col-12 col-md-1"><input type="text"
                                                                                         id="chicun_chang"
                                                                                         name="chicun_changt"
                                                                                         class="form-control"
-                                                                                        value="<%=productDTO.getProductParameters().getLength()%>"
-                                                                                        disabled>
+                                                                                        value="<%=productDTO.getProductParameters().getLength()%>" disabled>
                                                     </div>
                                                     <div class="col-12 col-md-1"><label
                                                             class="form-control-label">宽：</label></div>
                                                     <div class="col-12 col-md-1"><input type="text" id="chicun_kuan"
                                                                                         name="chicun_kuan"
                                                                                         class="form-control"
-                                                                                        value="<%=productDTO.getProductParameters().getWide()%>"
-                                                                                        disabled>
+                                                                                        value="<%=productDTO.getProductParameters().getWide()%>" disabled>
                                                     </div>
                                                     <div class="col-12 col-md-1"><label
                                                             class="form-control-label">高：</label></div>
                                                     <div class="col-12 col-md-1"><input type="text" id="chicun_gao"
                                                                                         name="chicun_gao"
                                                                                         class="form-control"
-                                                                                        value="<%=productDTO.getProductParameters().getHigh()%>"
-                                                                                        disabled>
+                                                                                        value="<%=productDTO.getProductParameters().getHigh()%>" disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -371,8 +362,7 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="bihou" name="bihou"
                                                            placeholder="壁厚" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getWallThickness()%>"
-                                                           disabled>
+                                                           value="<%=productDTO.getProductParameters().getWallThickness()%>" disabled>
                                                 </div>
                                             </div>
 
@@ -383,8 +373,7 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="zhongliang" name="zhongliang"
                                                            placeholder="重量" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getWeight()%>"
-                                                           disabled>
+                                                           value="<%=productDTO.getProductParameters().getWeight()%>" disabled>
                                                 </div>
                                             </div>
 
@@ -397,8 +386,7 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="jvticaizhi" name="jvticaizhi"
                                                            placeholder="输入材质" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getTexture()%>"
-                                                           disabled>
+                                                           value="<%=productDTO.getProductParameters().getTexture()%>" disabled>
                                                 </div>
 
                                                 <%--                                                    </div>--%>
@@ -413,8 +401,7 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="yanse" name="yanse"
                                                            placeholder="" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getColor()%>"
-                                                           disabled>
+                                                           value="<%=productDTO.getProductParameters().getColor()%>" disabled>
                                                 </div>
                                             </div>
                                             <div class="row form-group" id="shou">
@@ -424,8 +411,7 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="shouming" name="shouming"
                                                            placeholder="" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getServiceLife()%>"
-                                                           disabled>
+                                                           value="<%=productDTO.getProductParameters().getServiceLife()%>" disabled>
                                                 </div>
 
                                             </div>
@@ -454,8 +440,7 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="yunxingchengben" name="yunxingchengben"
                                                            placeholder="" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getRunCost()%>"
-                                                           disabled>
+                                                           value="<%=productDTO.getProductParameters().getRunCost()%>" disabled>
                                                 </div>
                                             </div>
 
@@ -466,24 +451,26 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="qinglizhouqi" name="qinglizhouqi"
                                                            placeholder="" class="form-control"
-                                                           value="<%=productDTO.getProductParameters().getCleanupCycle()%>"
-                                                           disabled>
+                                                           value="<%=productDTO.getProductParameters().getCleanupCycle()%>" disabled>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="custom-tab">
-                                    <nav>
-                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active show" id="custom-nav-features-tab"
-                                               data-toggle="tab" href="#custom-nav-features" role="tab"
-                                               aria-controls="custom-nav-features" aria-selected="true">产品特点</a>
-                                        </div>
-                                    </nav>
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                         <div class="tab-pane fade active show" id="custom-nav-features" role="tabpanel"
                                              aria-labelledby="custom-nav-features-tab">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="chanpingtedian"
+                                                                                 class=" form-control-label">具体用途</label>
+                                                </div>
+                                                <div class="col-12 col-md-9"><textarea name="chanpingtedian"
+                                                                                       id="chanpingtedian" rows="9"
+                                                                                       placeholder=""
+                                                                                       class="form-control" disabled><%=productDTO.getProductParameters().getParamPurpose()%></textarea>
+                                                </div>
+                                            </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="chanpingtedian"
                                                                                  class=" form-control-label">产品特点</label>
@@ -491,8 +478,46 @@
                                                 <div class="col-12 col-md-9"><textarea name="chanpingtedian"
                                                                                        id="chanpingtedian" rows="9"
                                                                                        placeholder=""
-                                                                                       class="form-control"
-                                                                                       disabled><%=productDTO.getProductFeatures()%></textarea>
+                                                                                       class="form-control" disabled><%=productDTO.getProductFeatures()%></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group" id="chanpinzucheng" style="display: none">
+                                                <div class="col col-md-3"><label for="chanpinyuanli" class="form-control-label">产品原理及组成
+                                                    <i class="fa" data-toggle="tooltip" data-placement="top"
+                                                       title="输入注意事项"></i></label></div>
+                                                <div class="col-12 col-md-9"><textarea name="chanpinyuanli" id="chanpinyuanli"
+                                                                                       rows="9" placeholder="请输入产品原理及组成..."
+                                                                                       class="form-control"><%=productDTO.getProductTheory()%></textarea></div>
+                                            </div>
+
+                                            <div class="row form-group" id="peculiar">
+                                                <div class="col col-md-3"><label for="peculiar_canshu" class="form-control-label">产品参数
+                                                    <i class="fa" data-toggle="tooltip" data-placement="top"
+                                                       title="输入注意事项"></i></label></div>
+                                                <div class="col-12 col-md-9"><textarea name="peculiar_canshu" id="peculiar_canshu"
+                                                                                       rows="9" placeholder="产品参数..."
+                                                                                       class="form-control" disabled><%=productDTO.getSpecialParam()%></textarea></div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col col-md-3"><label for="chanpingtedian"
+                                                                                 class=" form-control-label">应用案例</label>
+                                                </div>
+                                                <div class="col-12 col-md-9"><textarea name="chanpingtedian"
+                                                                                       id="chanpingtedian" rows="9"
+                                                                                       placeholder=""
+                                                                                       class="form-control" disabled><%=productDTO.getProductParameters().getApplyCase()%></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group" id="qita">
+                                                <div class="col col-md-3"><label for="qitacanshu"
+                                                                                 class="form-control-label">其他参数
+                                                </label></div>
+                                                <div class="col-12 col-md-9"><textarea type="text" id="qitacanshu"
+                                                                                       name="qitacanshu"
+                                                                                       placeholder="输入其他参数"
+                                                                                       class="form-control" disabled><%=productDTO.getProductParameters().getOtherParams()%></textarea>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -531,7 +556,7 @@
                                         </div>
                                     </nav>
                                     <%String filePath = productDTO.getQualityAssuranceMaterialsFilePath();%>
-                                    <%if (filePath.length() != 0) {%>
+                                    <%if(filePath.length() != 0){%>
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                         <div class="tab-pane fade active show" id="custom-nav-quality" role="tabpanel"
                                              aria-labelledby="custom-nav-quality-tab">
@@ -551,7 +576,7 @@
                                         </div>
                                     </nav>
                                     <%filePath = productDTO.getInstructionFilePath();%>
-                                    <%if (filePath.length() != 0) {%>
+                                    <%if(filePath.length() != 0){%>
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                         <div class="tab-pane fade active show" id="custom-nav-use" role="tabpanel"
                                              aria-labelledby="custom-nav-use-tab">
@@ -676,6 +701,80 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#bootstrap-data-table-export').DataTable();
+    });
+    $(document).ready(function () {
+        var zhongliangdiv = $("#zhong").get(0);
+        var bihoudiv = $("#hou").get(0);
+        var chanpinyuanli = $("#chanpinzucheng").get(0);
+        var qitacanshu = $("#qita").get(0);
+        var guige = $("#gui").get(0);
+        var chicun = $("#chicun").get(0);
+        var caizhi = $("#cai").get(0);
+        var yanse = $("#yan").get(0);
+        var yunxingchengben = $("#yun").get(0);
+        var qinglizhouqi = $("#qing").get(0);
+        var shiyong = $("#shiyong").get(0);
+        var chanpincanshu = $("#chanpincanshu").get(0);
+        var peculiar_canshu = $("#peculiar").get(0);
+        var productType = '<%=productDTO.getProductType()%>'
+        if (productType === '双瓮漏斗式厕所') { //双瓮漏斗式厕所
+            zhongliangdiv.style.display = "";
+            bihoudiv.style.display = "";
+            chanpinyuanli.style.cssText = "display:none;"
+            qitacanshu.style.cssText = "display:none;"
+            guige.style.cssText = "";
+            chicun.style.cssText = "";
+            caizhi.style.cssText = "";
+            yanse.style.cssText = "";
+            yunxingchengben.style.cssText = "";
+            qinglizhouqi.style.cssText = "";
+            shiyong.style.cssText = "display:none;"
+            chanpincanshu.style.cssText = "";
+            peculiar_canshu.style.cssText = "display:none;"
+        } else if (productType === '三联沼气池式厕所' || productType === '复合生物反应微水冲厕所' || productType === '多级生化组合电催化氧化厕所' || productType === '膜生物反应器（MBR）厕所' || productType === '生态旱厕' || productType === '粪尿分集式厕所') {
+            //三联沼气池式厕所;复合生物反应微水冲厕所;多级生化组合电催化氧化厕所;膜生物反应器（MBR）厕所;生态旱厕;粪尿分集式厕所
+            chanpinyuanli.style.cssText = "";
+            qitacanshu.style.cssText = "";
+            guige.style.cssText = "display:none;"
+            chicun.style.cssText = "display:none;"
+            caizhi.style.cssText = "display:none;"
+            yanse.style.cssText = "display:none;"
+            yunxingchengben.style.cssText = "display:none;"
+            qinglizhouqi.style.cssText = "display:none;"
+            zhongliangdiv.style.cssText = "display:none;"
+            bihoudiv.style.cssText = "display:none;"
+            shiyong.style.cssText = "display:none;"
+            chanpincanshu.style.cssText = "";
+            peculiar_canshu.style.cssText = "display:none;"
+        } else if (productType === '泡沫封堵液') { //泡沫封堵液
+            shiyong.style.cssText = "";
+            chanpincanshu.style.cssText = "display:none;"
+            peculiar_canshu.style.cssText = "";
+            chanpinyuanli.style.cssText = "display:none;"
+            qitacanshu.style.cssText = "display:none;"
+            guige.style.cssText = "";
+            chicun.style.cssText = "";
+            caizhi.style.cssText = "";
+            yanse.style.cssText = "";
+            yunxingchengben.style.cssText = "";
+            qinglizhouqi.style.cssText = "";
+            zhongliangdiv.style.cssText = "display:none;"
+            bihoudiv.style.cssText = "display:none;"
+        }else{
+            chanpincanshu.style.cssText = ""
+            peculiar_canshu.style.cssText = "display:none;";
+            chanpinyuanli.style.cssText = "display:none;"
+            qitacanshu.style.cssText = "display:none;"
+            guige.style.cssText = "";
+            chicun.style.cssText = "";
+            caizhi.style.cssText = "";
+            yanse.style.cssText = "";
+            yunxingchengben.style.cssText = "";
+            qinglizhouqi.style.cssText = "";
+            zhongliangdiv.style.cssText = "display:none;"
+            bihoudiv.style.cssText = "display:none;"
+            shiyong.style.cssText = "display:none;"
+        }
     });
 </script>
 
