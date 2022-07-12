@@ -102,10 +102,10 @@ public class ToiletPatternDaoImpl implements ToiletPatternDao {
         ToiletPatternDOSelective.Criteria criteria = patternDOSelective.createCriteria();
 
         criteria.andDeletedNotEqualTo(true);
+        criteria.andVersionEqualTo(patternDO.getVersion());
         criteria.andSourceEqualTo(source);
         patternDO.setGmtModified(new Date());
         patternDO.setVersion(patternDO.getVersion() + 1);
-        patternDO.setDeleted(false);
         int count = patternDOMapper.updateByExampleWithBLOBs(patternDO, patternDOSelective);
 
         if (count != 1) {

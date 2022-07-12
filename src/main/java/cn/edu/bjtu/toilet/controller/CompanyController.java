@@ -351,23 +351,22 @@ public class CompanyController {
         ToiletPatternDTO toiletPatternDTO = new ToiletPatternDTO();
 
         toiletPatternDTO.setProductType(params.get("productType"));
-        toiletPatternDTO.setPatternType(params.get("patternType").substring(1));
         toiletPatternDTO.setPatternInfo(params.get("patternInfo"));
 
         // 自然环境条件
         EnvConditionsDTO envConditionsDTO = new EnvConditionsDTO();
         // TODO 前端传过来数据有逗号
-        envConditionsDTO.setTemperature(params.get("natureTemp").substring(1));
-        envConditionsDTO.setTerrain(params.get("terrain").substring(1));
-        envConditionsDTO.setWaterResource(params.get("water").substring(1));
-        envConditionsDTO.setGeolocation(params.get("geolocation").substring(1));
-        envConditionsDTO.setEcotope(params.get("ecotope").substring(1));
+        envConditionsDTO.setTemperature(params.get("natureTemp"));
+        envConditionsDTO.setTerrain(params.get("terrain"));
+        envConditionsDTO.setWaterResource(params.get("water"));
+        envConditionsDTO.setGeolocation(params.get("geolocation"));
+        envConditionsDTO.setEcotope(params.get("ecotope"));
 
         toiletPatternDTO.setEnvConditions(envConditionsDTO);
 
         //人文因素
         HumanFactorsDTO humanFactorsDTO = new HumanFactorsDTO();
-        humanFactorsDTO.setDensity(params.get("density").substring(1));
+        humanFactorsDTO.setDensity(params.get("density"));
         humanFactorsDTO.setUsageHabits(params.get("usageHabits"));
 
         toiletPatternDTO.setHumanFactors(humanFactorsDTO);
@@ -381,7 +380,7 @@ public class CompanyController {
         //资源
         ResourceUtilizationDTO resourceUtilizationDTO = new ResourceUtilizationDTO();
         resourceUtilizationDTO.setIsBiogasUtilization(params.get("biogasUtilization").equals("是"));
-        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment").substring(1));
+        resourceUtilizationDTO.setMixedSewageTreatment(params.get("mixedTreatment"));
         resourceUtilizationDTO.setOtherTreatment(params.get("otherTreatment").equals("是"));
         toiletPatternDTO.setResourceUtilization(resourceUtilizationDTO);
 
