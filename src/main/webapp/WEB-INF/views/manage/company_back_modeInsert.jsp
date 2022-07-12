@@ -483,7 +483,11 @@
         let temperature_check_val = "";
         for (let k = 0; k < temperaturecheckbox.length; k++) {
             if (temperaturecheckbox[k].checked)
-                temperature_check_val = temperature_check_val + "," + temperaturecheckbox[k].value;
+                if(temperature_check_val === ""){
+                    temperature_check_val = temperaturecheckbox[k].value;
+                }else{
+                    temperature_check_val = temperature_check_val + "," + temperaturecheckbox[k].value;
+                }
         }
         data.append("natureTemp", encodeURI(temperature_check_val));
 
@@ -491,7 +495,12 @@
         let water_check_val = "";
         for (let k = 0; k < watercheckbox.length; k++) {
             if (watercheckbox[k].checked) {
-                water_check_val = water_check_val + "," + watercheckbox[k].value;
+                if(water_check_val === ""){
+                    water_check_val = watercheckbox[k].value;
+                }else{
+                    water_check_val = water_check_val + "," + watercheckbox[k].value;
+                }
+
             }
         }
         data.append("water", encodeURI(water_check_val));
@@ -499,32 +508,56 @@
         const dixingcheckbox = document.getElementsByName("dixing_check"); //地形条件
         let dixing_check_val = "";
         for (let k = 0; k < dixingcheckbox.length; k++) {
-            if (dixingcheckbox[k].checked)
-                dixing_check_val = dixing_check_val + "," + dixingcheckbox[k].value;
+            if (dixingcheckbox[k].checked){
+                if(dixing_check_val === ""){
+                    dixing_check_val = dixingcheckbox[k].value;
+                }else{
+                    dixing_check_val = dixing_check_val + "," + dixingcheckbox[k].value;
+                }
+            }
+
         }
         data.append("terrain", encodeURI(dixing_check_val));
 
         const positioncheckbox = document.getElementsByName("diliweizhi_check"); //地理位置条件
         let position_check_val = "";
         for (let k = 0; k < positioncheckbox.length; k++) {
-            if (positioncheckbox[k].checked)
-                position_check_val = position_check_val + "," + positioncheckbox[k].value;
+            if (positioncheckbox[k].checked){
+                if(position_check_val === ""){
+                    position_check_val = position_check_val + "," + positioncheckbox[k].value;
+                }else{
+                    position_check_val = positioncheckbox[k].value;
+                }
+            }
+
         }
         data.append("geolocation", encodeURI(position_check_val));
 
         const shengtaicheckbox = document.getElementsByName("shengtai_check"); //生态限制条件
         let shengtai_check_val = "";
         for (let k = 0; k < shengtaicheckbox.length; k++) {
-            if (shengtaicheckbox[k].checked)
-                shengtai_check_val = shengtai_check_val + "," + shengtaicheckbox[k].value;
+            if (shengtaicheckbox[k].checked){
+                if(shengtai_check_val === ""){
+                    shengtai_check_val = shengtaicheckbox[k].value;
+                }else{
+                    shengtai_check_val = shengtai_check_val + "," + shengtaicheckbox[k].value;
+                }
+            }
+
         }
         data.append("ecotope", encodeURI(shengtai_check_val));
 
         const renkoucheckbox = document.getElementsByName("renkou_check"); //人口密集程度
         let renkou_check_val = "";
         for (let k = 0; k < renkoucheckbox.length; k++) {
-            if (renkoucheckbox[k].checked)
-                renkou_check_val = renkou_check_val + "," + renkoucheckbox[k].value;
+            if (renkoucheckbox[k].checked){
+                if(renkou_check_val === ""){
+                    renkou_check_val = renkoucheckbox[k].value;
+                }else{
+                    renkou_check_val = renkou_check_val + "," + renkoucheckbox[k].value;
+                }
+            }
+
         }
         data.append("density", encodeURI(renkou_check_val));
 
@@ -548,8 +581,6 @@
         myselect = document.getElementById("yibingchuli"); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
         index = myselect.selectedIndex;
         data.append("otherTreatment", encodeURI(myselect.options[index].text));
-
-        console.log(data);
 
         $.ajax({
             url: "/toilet/company/pattern/entry",
