@@ -147,6 +147,7 @@
                                         <%}%>
 
                                         <a type="button" class="btn btn-link fa fa-info-circle" onclick="javascript:window.location.href='/toilet/toPage?url=company_back9&patternId=<%=Patternlist.get(i).getId()%>'">模式详情</a>
+                                        <a type="button" class="btn btn-link fa fa-trash-o" onclick="confirm_delete('pattern', <%=Patternlist.get(i).getId()%>)"> 删除</a>
                                     </td>
                                 </tr>
                                 <%}%>
@@ -241,7 +242,34 @@
         });
     }
 </script>
+<script type="text/javascript">
+    function deletePattern(pattern_id) {
+        let data = new FormData();
+        data.append("patternId", pattern_id)
+        $.ajax({
+            url: "/toilet/company/pattern/delete",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    show("删除成功!");
+                } else {
+                    show(result.errorMessage);
+                }
+            }
+        });
+    }
+    function cancalDelete(){
+        $(".content_dialog").css("height","90px");
+        $(".dialog").css("display","none");
+    }
 
+</script>
 
 </body>
 </html>

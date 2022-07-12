@@ -269,7 +269,7 @@
         let data = new FormData();
         data.append("productId", product_id)
         $.ajax({
-            url: "/toilet/admin/product/delete",
+            url: "/toilet/company/product/delete",
             type: "POST",
             dataType: "json",
             data: data,
