@@ -271,7 +271,7 @@
                                                            data-placement="top" title="输入注意事项"></i></label></div>
                                                     <div class="col-12 col-md-9">
                                                         <input class="col-md-1" type="checkbox" name="renkou_check"
-                                                               value="密集"/>密集
+                                                               value="聚集"/>聚集
                                                         <input class="col-md-1" type="checkbox" name="renkou_check"
                                                                value="分散"/>分散
                                                         <input class="col-md-1" type="checkbox" name="renkou_check"
