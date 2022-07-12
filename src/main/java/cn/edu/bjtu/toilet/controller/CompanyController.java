@@ -3,6 +3,7 @@ package cn.edu.bjtu.toilet.controller;
 import cn.edu.bjtu.toilet.common.exception.ToiletBizException;
 import cn.edu.bjtu.toilet.common.exception.ToiletSystemException;
 import cn.edu.bjtu.toilet.constant.AuditStatus;
+import cn.edu.bjtu.toilet.domain.response.CommandResponse;
 import cn.edu.bjtu.toilet.domain.response.ModeResponse;
 import cn.edu.bjtu.toilet.domain.response.ProductResponse;
 import cn.edu.bjtu.toilet.domain.dto.*;
@@ -161,6 +162,53 @@ public class CompanyController {
         }
 
         return ProductResponse.success();
+    }
+
+    @RequestMapping(value = "/product/delete")
+    @ResponseBody
+    public CommandResponse deleteProduct(HttpServletRequest request) {
+        CommandResponse response = new CommandResponse();
+        try {
+            String email = request.getSession().getAttribute("uId").toString();
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String productId = params.get("productId");
+            ToiletProductDTO productDTO = productService.queryToiletById(productId);
+            if (!productDTO.getCompanyEmail().equals(email)) {
+                return CommandResponse.failed("删除失败!");
+            }
+
+            productService.deleteProduct(productId);
+            response.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("error happened: {}", e.getMessage());
+            return CommandResponse.failed(e.getMessage());
+        }
+
+        return response;
+    }
+
+    @RequestMapping(value = "/pattern/delete")
+    @ResponseBody
+    public CommandResponse deletePattern(HttpServletRequest request) {
+        CommandResponse response = new CommandResponse();
+        try {
+            String email = request.getSession().getAttribute("uId").toString();
+            Map<String, String> params = ParameterUtil.resolveParams(request);
+
+            String productId = params.get("patternId");
+            ToiletPatternDTO patternDTO = patternService.queryPatternById(productId);
+
+            if (!patternDTO.getEmail().equals(email)) {
+                return CommandResponse.failed("删除失败!");
+            }
+            patternService.deletePattern(productId);
+            response.setSuccess(true);
+        } catch (Exception e) {
+            LOG.error("error happened: {}", e.getMessage());
+            return CommandResponse.failed(e.getMessage());
+        }
+        return response;
     }
 
     private AuditStatus resolveStatus(String statusCode) {
