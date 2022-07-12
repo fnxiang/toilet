@@ -493,7 +493,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="guige" name="guige"
-                                                           placeholder="规格（平方米）" class="form-control" value="0">
+                                                           placeholder="规格（平方米）" class="form-control">
                                                 </div>
                                             </div>
 
@@ -502,7 +502,7 @@
                                                     <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
                                                        title="输入注意事项"></i></label></div>
                                                 <div class="col-12 col-md-9"><input type="text" id="shiyongrenshu" name="shiyongrenshu"
-                                                                                    placeholder="输入适用人数" class="form-control" value="0">
+                                                                                    placeholder="输入适用人数" class="form-control">
                                                 </div>
                                             </div>
 
@@ -515,17 +515,17 @@
                                                             class="form-control-label">长：</label></div>
                                                     <div class="col-12 col-md-1"><input type="text" id="chicun_chang"
                                                                                         name="chicun_changt"
-                                                                                        class="form-control" value="0"></div>
+                                                                                        class="form-control"></div>
                                                     <div class="col-12 col-md-1"><label
                                                             class="form-control-label">宽：</label></div>
                                                     <div class="col-12 col-md-1"><input type="text" id="chicun_kuan"
                                                                                         name="chicun_kuan"
-                                                                                        class="form-control" value="0"></div>
+                                                                                        class="form-control"></div>
                                                     <div class="col-12 col-md-1"><label
                                                             class="form-control-label">高：</label></div>
                                                     <div class="col-12 col-md-1"><input type="text" id="chicun_gao"
                                                                                         name="chicun_gao"
-                                                                                        class="form-control" value="0"></div>
+                                                                                        class="form-control"></div>
                                                 </div>
                                             </div>
                                             <div class="row form-group" id="hou" style="display: none;">
@@ -534,7 +534,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="bihou" name="bihou"
-                                                           placeholder="壁厚" class="form-control" value="0">
+                                                           placeholder="壁厚" class="form-control">
                                                 </div>
                                             </div>
 
@@ -544,7 +544,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="zhongliang" name="zhongliang"
-                                                           placeholder="重量" class="form-control" value="0">
+                                                           placeholder="重量" class="form-control">
                                                 </div>
                                             </div>
 
@@ -598,7 +598,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="shouming" name="shouming"
-                                                           placeholder="请填写使用寿命(年)" class="form-control" value="0">
+                                                           placeholder="请填写使用寿命(年)" class="form-control">
                                                 </div>
 
                                             </div>
@@ -653,7 +653,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="yunxingchengben" name="yunxingchengben"
-                                                           placeholder="请运行成本" class="form-control" value="0">
+                                                           placeholder="请运行成本" class="form-control">
                                                 </div>
                                             </div>
 
@@ -663,7 +663,7 @@
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="qinglizhouqi" name="qinglizhouqi"
-                                                           placeholder="请提供具体清理周期(月)" class="form-control" value="0">
+                                                           placeholder="请提供具体清理周期(月)" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -1118,12 +1118,21 @@
         //应用案例
         data.append("case", encodeURI($('#yingyonganli').val())); //应用案例
         //判断输入
+        if(! data.get("cleanupCycle")){data.set("cleanupCycle","0");}
+        if(! data.get("runningCost")){data.set("runningCost","0");}
+        if(! data.get("serviceLife")){data.set("serviceLife","0");}
+        if(! data.get("thickness")){data.set("thickness","0");}
+        if(! data.get("weight")){data.set("weight","0");}
+        if(! data.get("applicableNum")){data.set("applicableNum","0");}
+        if(! data.get("length")){data.set("length","0");}
+        if(! data.get("wide")){data.set("wide","0");}
+        if(! data.get("high")){data.set("high","0");}
+        if(! data.get("standard")){data.set("standard","0");}
         if (! data.get("productName")){show("产品名称不能为空!");}
         else if (! data.get("factoryName")){show("厂家不能为空!");}
-        else if (! data.get("patternType")){show("模式类型不能为空!");}
+        else if (! data.get("patternType")){show("模式类型不能为空!")}
         else if (! data.get("standard")){show("产品规格不能为空!");}
         else if (! data.get("price")){show("价格不能为空!");}
-        // else if (! data.get("applicableNum")){data["applicableNum"] = "0"}
         else{
             $.ajax({
                 url: "/toilet/company/product/entry",
@@ -1162,7 +1171,6 @@
     }
     function close(){
         $(".dialog").css("display","none");
-        document.location.reload();
     }
 </script>
 
