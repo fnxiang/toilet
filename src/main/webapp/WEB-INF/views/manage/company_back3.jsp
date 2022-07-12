@@ -594,7 +594,7 @@
                                             </div>
                                             <div class="row form-group" id="shou" >
                                                 <div class="col col-md-3"><label for="shouming"
-                                                                                 class=" form-control-label">使用寿命：</label>
+                                                                                 class=" form-control-label">使用寿命(年)：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="shouming" name="shouming"
@@ -649,7 +649,7 @@
 
                                             <div class="row form-group" id="yun">
                                                 <div class="col col-md-3"><label for="yunxingchengben"
-                                                                                 class=" form-control-label">运行成本：</label>
+                                                                                 class=" form-control-label">运行成本(/人·天)：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="yunxingchengben" name="yunxingchengben"
@@ -659,7 +659,7 @@
 
                                             <div class="row form-group" id="qing" >
                                                 <div class="col col-md-3"><label for="qinglizhouqi"
-                                                                                 class=" form-control-label">清理周期：</label>
+                                                                                 class=" form-control-label">清理周期(月)：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="qinglizhouqi" name="qinglizhouqi"
