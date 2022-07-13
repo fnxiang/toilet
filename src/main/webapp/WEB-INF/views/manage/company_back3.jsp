@@ -1074,7 +1074,7 @@
         // data.append("mixedTreatment", encodeURI(myselect.options[index].text));
         // myselect = document.getElementById("yibingchuli"); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
         // index = myselect.selectedIndex;
-        data.append("otherTreatment", encodeURI(myselect.options[index].text));
+        // data.append("otherTreatment", encodeURI(myselect.options[index].text));
         data.append("province", encodeURI($('#province').val())); //适用省份
         data.append("temperature", encodeURI($('#wendufanwei').val())); //适用温度范围
         data.append("features", encodeURI($('#chanpingtedian').val())); //产品特点
