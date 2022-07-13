@@ -140,52 +140,110 @@
     </header>
     <!-- #branding -->
     <div id="product_search" class="grid_12" style="margin-bottom: 20px;  border:1px solid #59b7c2; display: none">
-        <form class="search">
+        <form action="${pageContext.request.contextPath}/search/product/results" enctype="multipart/form-data" method="post"
+              accept-charset="UTF-8" class="search">
             <div class="grid_12">
-                <label class="search_grid_4"> 规格:
+                <label class="search_grid_4"> 产品类型:
+                    <select name="type_select" id="type_select" class="form-control" onclick="change()">
+                        <option value="完整下水道水冲式厕所">完整下水道水冲式厕所</option>
+                        <option value="化粪池式厕所">化粪池式厕所</option>
+                        <option value="双瓮漏斗式厕所">双瓮漏斗式厕所</option>
+                        <option value="三联沼气池式厕所">三联沼气池式厕所</option>
+                        <option value="复合生物反应微水冲厕所">复合生物反应微水冲厕所</option>
+                        <option value="真空负压厕所">真空负压厕所</option>
+                        <option value="多级生化组合电催化氧化厕所">多级生化组合电催化氧化厕所</option>
+                        <option value="膜生物反应器（MBR）厕所">膜生物反应器（MBR）厕所</option>
+                        <option value="生态旱厕">生态旱厕</option>
+                        <option value="双坑交替式厕所">双坑交替式厕所</option>
+                        <option value="粪尿分集式厕所">粪尿分集式厕所</option>
+                        <option value="泡沫封堵液">泡沫封堵液</option>
+                    </select>
+                </label>
+                <label class="search_grid_4" id="guige" style="display: none"> 规格:
                     <select name="guige_select" id="guige_select" class="form-control">
-                        <option value="0">A.≤0.5</option>
-                        <option value="1">B.0.6~10</option>
-                        <option value="2">C.11~25</option>
-                        <option value="3">D.26~50</option>
-                        <option value="4">E.51~100</option>
-                        <option value="5">F.100以上</option>
+                        <option value="≤0.5">≤0.5</option>
+                        <option value="0.6~10">0.6~10</option>
+                        <option value="11~25">11~25</option>
+                        <option value="26~50">26~50</option>
+                        <option value="51~100">51~100</option>
+                        <option value="100以上">100以上</option>
                     </select>
                 </label>
-                <label class="search_grid_4">材质:
-                    <select name="caizhi_select" id="caizhi_select" class="form-control">
-                        <option value="0">A.玻璃钢</option>
-                        <option value="1">B.PP</option>
-                        <option value="2">C.PE</option>
-                        <option value="3">D.预制钢筋混凝土</option>
-                        <option value="4">E.其他</option>
-                    </select></label>
-                <label class="search_grid_4">使用寿命:
-                    <select name="life_select" id="life_select" class="form-control">
-                        <option value="0">A.50年以内</option>
-                        <option value="1">B.50年及以上</option>
-                    </select></label>
-            </div>
-            <div class="grid_12" style="margin-top: 10px;">
-                <label class="search_grid_4">价格（万元）:
-                    <select name="price_select" id="price_select" class="form-control">
-                        <option value="0">A.0.5以内</option>
-                        <option value="1">B.0.5~1</option>
-                        <option value="2">C.1~1.5</option>
-                        <option value="3">D.1.5~2</option>
-                        <option value="4">E.2以上</option>
+                <label class="search_grid_4" id="guanti" style="display: none"> 罐体容积(立方米):
+                    <select name="guanti_select" id="guanti_select" class="form-control">
+                        <option value="≤0.5">≤0.5</option>
+                        <option value="0.6~1">0.6~1</option>
+                        <option value="1~2">1~2</option>
+                        <option value="2以上">2以上</option>
                     </select>
                 </label>
-                <label class="search_grid_4">清理周期:
+                <label class="search_grid_4" id="shiyong" style="display: none"> 适用人数(人):
+                    <select name="shiyong_select" id="shiyong_select" class="form-control">
+                        <option value="1-5人">1-5人</option>
+                        <option value="5-10人">5-10人</option>
+                        <option value="10人以上">10人以上</option>
+                    </select>
+                </label>
+                <label class="search_grid_4" id="caizhi1" style="display: none">材质:
+                    <select name="caizhi1_select" id="caizhi1_select" class="form-control">
+                        <option value="玻璃钢">玻璃钢</option>
+                        <option value="PP">PP</option>
+                        <option value="PE">PE</option>
+                        <option value="预制钢筋混凝土">预制钢筋混凝土</option>
+                        <option value="其他">其他</option>
+                    </select></label>
+                <label class="search_grid_4" id="caizhi2" style="display: none">材质:
+                    <select name="caizhi2_select" id="caizhi2_select" class="form-control">
+                        <option value="玻璃钢">玻璃钢</option>
+                        <option value="PP">PP</option>
+                        <option value="PE">PE</option>
+                        <option value="预制钢筋混凝土">预制钢筋混凝土</option>
+                        <option value="不锈钢">不锈钢</option>
+                    </select></label>
+                <label class="search_grid_4" id="shouming1" style="display: none">使用寿命:
+                    <select name="life1_select" id="life1_select" class="form-control">
+                        <option value="50年以内">50年以内</option>
+                        <option value="50年及以上">50年及以上</option>
+                    </select></label>
+                <label class="search_grid_4" id="shouming2" style="display: none">使用寿命:
+                    <select name="life2_select" id="life2_select" class="form-control">
+                        <option value="20年以内">20年以内</option>
+                        <option value="20年及以上">20年及以上</option>
+                    </select></label>
+
+                <label class="search_grid_4" id="jiage1" style="display: none">价格（万元）:
+                    <select name="price1_select" id="price1_select" class="form-control">
+                        <option value="0.5以内">0.5以内</option>
+                        <option value="0.5~1">0.5~1</option>
+                        <option value="1~1.5">1~1.5</option>
+                        <option value="1.5~2">1.5~2</option>
+                        <option value="2以上">2以上</option>
+                    </select>
+                </label>
+                <label class="search_grid_4" id="jiage2" style="display: none">价格（万元）:
+                    <select name="price2_select" id="price2_select" class="form-control">
+                        <option value="0.5以内">0.5以内</option>
+                        <option value="0.5~1">0.5~1</option>
+                        <option value="1~1.5">1~1.5</option>
+                        <option value="1.5~2">1.5~2</option>
+                    </select>
+                </label>
+                <label class="search_grid_4" id="qingli" style="display: none">清理周期:
                     <select name="clean_select" id="clean_select" class="form-control">
-                        <option value="0">A.≤3个月</option>
-                        <option value="1">B.4~6个月</option>
-                        <option value="2">C.7~12个月</option>
-                        <option value="3">D.12个月及以上</option>
+                        <option value="≤3个月">≤3个月</option>
+                        <option value="4~6个月">4~6个月</option>
+                        <option value="7~12个月">7~12个月</option>
+                        <option value="12个月及以上">12个月及以上</option>
+                    </select></label>
+                <label class="search_grid_4" id="yongtu" style="display: none">用途:
+                    <select name="clean_select" id="yongtu_select" class="form-control">
+                        <option value="户厕">户厕</option>
+                        <option value="公厕">公厕</option>
+                        <option value="均可">均可</option>
                     </select></label>
             </div>
-            <div class="grid_12" align="center" style="margin-top: 10px;">
-                <button type="button" style="width: 300px; margin-bottom: 5px" onclick="productSearch()">搜索</button>
+            <div class="grid_12" align="center" style="">
+                <button type="submit" style="width: 300px; margin-bottom: 5px" onclick="productSearch()">搜索</button>
             </div>
         </form>
     </div>
@@ -609,26 +667,65 @@
 
         var data = new FormData();
 
-        var myselect = document.getElementById("guige_select"); //规格
+        var myselect = document.getElementById("type_select"); //产品类型
         var index = myselect.selectedIndex;
-        data.append("guige_select", myselect.options[index].text);
+        data.append("type_select", myselect.options[index].text);
 
-        //myselect.options[index].value;
-        myselect = document.getElementById("caizhi_select"); //材质
-        index = myselect.selectedIndex;
-        data.append("caizhi_select", myselect.options[index].text);
+        if(data.get("type_select") === '化粪池式厕所' || data.get("type_select") === '双瓮漏斗式厕所'){
+            myselect = document.getElementById("guige_select"); //规格
+            index = myselect.selectedIndex;
+            data.append("guige_select", myselect.options[index].text);
 
-        myselect = document.getElementById("life_select"); //使用寿命
-        index = myselect.selectedIndex;
-        data.append("life_select", myselect.options[index].text);
+            //myselect.options[index].value;
+            myselect = document.getElementById("caizhi1_select"); //材质
+            index = myselect.selectedIndex;
+            data.append("caizhi_select", myselect.options[index].text);
 
-        myselect = document.getElementById("price_select"); //价格（万元）
-        index = myselect.selectedIndex;
-        data.append("price_select", myselect.options[index].text);
+            myselect = document.getElementById("life1_select"); //使用寿命
+            index = myselect.selectedIndex;
+            data.append("life_select", myselect.options[index].text);
 
-        myselect = document.getElementById("clean_select"); //清理周期
-        index = myselect.selectedIndex;
-        data.append("clean_select", myselect.options[index].text);
+            myselect = document.getElementById("price1_select"); //价格（万元）
+            index = myselect.selectedIndex;
+            data.append("price_select", myselect.options[index].text);
+
+            myselect = document.getElementById("clean_select"); //清理周期
+            index = myselect.selectedIndex;
+            data.append("clean_select", myselect.options[index].text);
+
+            myselect = document.getElementById("yongtu_select"); //清理周期
+            index = myselect.selectedIndex;
+            data.append("propose_select", myselect.options[index].text);
+        }else if(data.get("type_select") === '双坑交替式厕所'){
+            myselect = document.getElementById("guanti_select"); //罐体容积
+            index = myselect.selectedIndex;
+            data.append("volume_select", myselect.options[index].text);
+
+            myselect = document.getElementById("caizhi2_select"); //材质
+            index = myselect.selectedIndex;
+            data.append("caizhi_select", myselect.options[index].text);
+
+            myselect = document.getElementById("life2_select"); //使用寿命
+            index = myselect.selectedIndex;
+            data.append("life_select", myselect.options[index].text);
+
+            myselect = document.getElementById("price2_select"); //价格（万元）
+            index = myselect.selectedIndex;
+            data.append("price_select", myselect.options[index].text);
+
+            myselect = document.getElementById("clean_select"); //清理周期
+            index = myselect.selectedIndex;
+            data.append("clean_select", myselect.options[index].text);
+
+            myselect = document.getElementById("yongtu_select"); //清理周期
+            index = myselect.selectedIndex;
+            data.append("yongtu_select", myselect.options[index].text);
+
+            myselect = document.getElementById("shiyong_select"); //适用人数
+            index = myselect.selectedIndex;
+            data.append("shiyong_select", myselect.options[index].text);
+        }
+
 
         $.ajax({
             url: "",

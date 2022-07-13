@@ -324,27 +324,65 @@
     function productSearch() {
 
         var data = new FormData();
-
-        var myselect = document.getElementById("guige_select"); //规格
+        var myselect = document.getElementById("type_select"); //产品类型
         var index = myselect.selectedIndex;
-        data.append("guige_select", myselect.options[index].text);
+        data.append("type_select", myselect.options[index].text);
 
-        //myselect.options[index].value;
-        myselect = document.getElementById("caizhi_select"); //材质
-        index = myselect.selectedIndex;
-        data.append("caizhi_select", myselect.options[index].text);
+        if(data.get("type_select") === '化粪池式厕所' || data.get("type_select") === '双瓮漏斗式厕所'){
+            myselect = document.getElementById("guige_select"); //规格
+            index = myselect.selectedIndex;
+            data.append("guige_select", myselect.options[index].text);
 
-        myselect = document.getElementById("life_select"); //使用寿命
-        index = myselect.selectedIndex;
-        data.append("life_select", myselect.options[index].text);
+            //myselect.options[index].value;
+            myselect = document.getElementById("caizhi1_select"); //材质
+            index = myselect.selectedIndex;
+            data.append("caizhi_select", myselect.options[index].text);
 
-        myselect = document.getElementById("price_select"); //价格（万元）
-        index = myselect.selectedIndex;
-        data.append("price_select", myselect.options[index].text);
+            myselect = document.getElementById("life1_select"); //使用寿命
+            index = myselect.selectedIndex;
+            data.append("life_select", myselect.options[index].text);
 
-        myselect = document.getElementById("clean_select"); //清理周期
-        index = myselect.selectedIndex;
-        data.append("clean_select", myselect.options[index].text);
+            myselect = document.getElementById("price1_select"); //价格（万元）
+            index = myselect.selectedIndex;
+            data.append("price_select", myselect.options[index].text);
+
+            myselect = document.getElementById("clean_select"); //清理周期
+            index = myselect.selectedIndex;
+            data.append("clean_select", myselect.options[index].text);
+
+            myselect = document.getElementById("yongtu_select"); //清理周期
+            index = myselect.selectedIndex;
+            data.append("propose_select", myselect.options[index].text);
+        }else if(data.get("type_select") === '双坑交替式厕所'){
+            myselect = document.getElementById("guanti_select"); //罐体容积
+            index = myselect.selectedIndex;
+            data.append("volume_select", myselect.options[index].text);
+
+            myselect = document.getElementById("caizhi2_select"); //材质
+            index = myselect.selectedIndex;
+            data.append("caizhi_select", myselect.options[index].text);
+
+            myselect = document.getElementById("life2_select"); //使用寿命
+            index = myselect.selectedIndex;
+            data.append("life_select", myselect.options[index].text);
+
+            myselect = document.getElementById("price2_select"); //价格（万元）
+            index = myselect.selectedIndex;
+            data.append("price_select", myselect.options[index].text);
+
+            myselect = document.getElementById("clean_select"); //清理周期
+            index = myselect.selectedIndex;
+            data.append("clean_select", myselect.options[index].text);
+
+            myselect = document.getElementById("yongtu_select"); //清理周期
+            index = myselect.selectedIndex;
+            data.append("yongtu_select", myselect.options[index].text);
+
+            myselect = document.getElementById("shiyong_select"); //适用人数
+            index = myselect.selectedIndex;
+            data.append("shiyong_select", myselect.options[index].text);
+        }
+
 
         $.ajax({
             url: "",
