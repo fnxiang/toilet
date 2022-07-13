@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="multiple-select" class=" form-control-label">模式类型
-                                        <i id="model_type_tips" class="fa " data-toggle="tooltip"
+                                        <i id="model_type_tips" class="fa" data-toggle="tooltip"
                                            data-placement="top" title="输入注意事项"></i></label></div>
                                     <div class="col col-md-9">
                                         <div class="multiple-select">
@@ -1128,11 +1128,15 @@
         if(! data.get("wide")){data.set("wide","0");}
         if(! data.get("high")){data.set("high","0");}
         if(! data.get("standard")){data.set("standard","0");}
-        if (! data.get("productName")){show("产品名称不能为空!");}
-        else if (! data.get("factoryName")){show("厂家不能为空!");}
-        else if (! data.get("patternType")){show("模式类型不能为空!")}
-        else if (! data.get("standard")){show("产品规格不能为空!");}
-        else if (! data.get("price")){show("价格不能为空!");}
+        var msg = "";
+        if (! data.get("productName")){msg += "产品为空! ";}
+        if (! data.get("factoryName")){msg += "厂家为空! ";}
+        if (! data.get("patternType")){msg += "模式类型为空! ";}
+        if (! data.get("standard")){msg += "产品为空! ";}
+        if (! data.get("price")){msg += "价格为空!";}
+        if(msg !== ""){
+            show(msg);
+        }
         else{
             $.ajax({
                 url: "/toilet/company/product/entry",
