@@ -114,7 +114,7 @@
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="product_name" class="form-control-label">产品名称
-                                        <i id="product_name_tips" class="fa fa-question-circle" data-toggle="tooltip"
+                                        <i id="product_name_tips" class="fa " data-toggle="tooltip"
                                            data-placement="top" title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><input type="text" id="product_name"
                                                                         name="product_name"
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="producer_name" class="form-control-label">厂家
-                                        <i id="producer_name_tips" class="fa fa-question-circle" data-toggle="tooltip"
+                                        <i id="producer_name_tips" class="fa " data-toggle="tooltip"
                                            data-placement="top" title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><input type="text" id="producer_name"
                                                                         name="producer_name"
@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="phonenum" class="form-control-label">联系方式
-                                        <i id="contact_name_tips" class="fa fa-question-circle" data-toggle="tooltip"
+                                        <i id="contact_name_tips" class="fa " data-toggle="tooltip"
                                            data-placement="top" title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><input type="text" id="phonenum" name="phonenum"
                                                                         placeholder="请输入正确的联系方式" class="form-control">
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="productselect" class="form-control-label">产品类型
-                                        <i id="product_type_tips" class="fa fa-question-circle" data-toggle="tooltip"
+                                        <i id="product_type_tips" class="fa " data-toggle="tooltip"
                                            data-placement="top" title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9">
                                         <select name="productselect" id="productselect" class="form-control"
@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="multiple-select" class=" form-control-label">模式类型
-                                        <i id="model_type_tips" class="fa fa-question-circle" data-toggle="tooltip"
+                                        <i id="model_type_tips" class="fa " data-toggle="tooltip"
                                            data-placement="top" title="输入注意事项"></i></label></div>
                                     <div class="col col-md-9">
                                         <div class="multiple-select">
@@ -176,7 +176,7 @@
                                     <%--                                        <div class="row form-group">--%>
                                     <%--                                            <div class="col col-md-3"><label for="newmodename"--%>
                                     <%--                                                                             class=" form-control-label">新模式名称--%>
-                                    <%--                                                <i id="new_model_name_tips" class="fa fa-question-circle"--%>
+                                    <%--                                                <i id="new_model_name_tips" class="fa "--%>
                                     <%--                                                   data-toggle="tooltip" data-placement="top"--%>
                                     <%--                                                   title="输入注意事项"></i></label>--%>
                                     <%--                                            </div>--%>
@@ -202,7 +202,7 @@
 
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label class="form-control-label">温度条件：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <input class="col-md-1" type="checkbox" name="temperaturecondition"--%>
@@ -215,7 +215,7 @@
 
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label class="form-control-label">水资源条件：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <input class="col-md-1" type="checkbox" name="watercondition"--%>
@@ -227,7 +227,7 @@
 
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label class="form-control-label">地形条件：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <input class="col-md-1" type="checkbox" name="dixing_check"--%>
@@ -240,7 +240,7 @@
                                     <%--                                                    </div>--%>
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label class="form-control-label">地理位置条件：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <input class="col-md-1" type="checkbox"--%>
@@ -261,7 +261,7 @@
                                     <%--                                                    </div>--%>
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label class="form-control-label">生态限制条件：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <input class="col-md-1" type="checkbox"--%>
@@ -287,7 +287,7 @@
                                     <%--                                                    <a class="nav-item nav-link active show" id="custom-nav-people-tab"--%>
                                     <%--                                                       data-toggle="tab" href="#custom-nav-people" role="tab"--%>
                                     <%--                                                       aria-controls="custom-nav-people" aria-selected="true">适用条件：人文因素--%>
-                                    <%--                                                        <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                        <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                           data-placement="top" title="输入注意事项"></i></a>--%>
                                     <%--                                                </div>--%>
                                     <%--                                            </nav>--%>
@@ -297,7 +297,7 @@
 
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label class="form-control-label">人口密集程度：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
 
 
@@ -315,7 +315,7 @@
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label for="yetaifei"--%>
                                     <%--                                                                                         class="form-control-label">液态肥使用习惯：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <select name="yetaifei" id="yetaifei" class="form-control">--%>
@@ -334,7 +334,7 @@
                                     <%--                                                    <a class="nav-item nav-link active show" id="custom-nav-pip-tab"--%>
                                     <%--                                                       data-toggle="tab" href="#custom-nav-pip" role="tab"--%>
                                     <%--                                                       aria-controls="custom-nav-pip" aria-selected="true">适用条件：管网条件--%>
-                                    <%--                                                        <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                        <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                           data-placement="top" title="输入注意事项"></i></a>--%>
                                     <%--                                                </div>--%>
                                     <%--                                            </nav>--%>
@@ -346,7 +346,7 @@
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label for="wushuiguandao"--%>
                                     <%--                                                                                         class="form-control-label">具有污水管道：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <select name="wushuiguandao" id="wushuiguandao"--%>
@@ -359,7 +359,7 @@
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label for="wushuichuli"--%>
                                     <%--                                                                                         class="form-control-label">具有完整城镇污水处理系统：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <select name="wushuichuli" id="wushuichuli"--%>
@@ -379,7 +379,7 @@
                                     <%--                                                       id="custom-nav-resource-tab"--%>
                                     <%--                                                       data-toggle="tab" href="#custom-nav-resource" role="tab"--%>
                                     <%--                                                       aria-controls="custom-nav-resource" aria-selected="true">适用条件：资源化利用--%>
-                                    <%--                                                        <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                        <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                           data-placement="top" title="输入注意事项"></i></a>--%>
                                     <%--                                                </div>--%>
                                     <%--                                            </nav>--%>
@@ -390,7 +390,7 @@
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label for="zhaoqi"--%>
                                     <%--                                                                                         class=" form-control-label">具有沼气利用工程：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <select name="zhaoqi" id="zhaoqi" class="form-control">--%>
@@ -402,7 +402,7 @@
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label for="wushuihunhe"--%>
                                     <%--                                                                                         class="form-control-label">计划与其他生活污水混合处理：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <select name="wushuihunhe" id="wushuihunhe"--%>
@@ -415,7 +415,7 @@
                                     <%--                                                    <div class="row form-group">--%>
                                     <%--                                                        <div class="col col-md-3"><label for="yibingchuli"--%>
                                     <%--                                                                                         class="form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：--%>
-                                    <%--                                                            <i class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                    <%--                                                            <i class="fa " data-toggle="tooltip"--%>
                                     <%--                                                               data-placement="top" title="输入注意事项"></i></label></div>--%>
                                     <%--                                                        <div class="col-12 col-md-9">--%>
                                     <%--                                                            <select name="yibingchuli" id="yibingchuli"--%>
@@ -433,7 +433,7 @@
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="province" class="form-control-label">适用省份
-                                            <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                            <i class="fa " data-toggle="tooltip" data-placement="top"
                                                title="输入注意事项"></i></label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="province" name="province"
                                                                             placeholder="输入省份名称" class="form-control">
@@ -442,7 +442,7 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="wendufanwei" class="form-control-label">适用温度范围
-                                            <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                            <i class="fa " data-toggle="tooltip" data-placement="top"
                                                title="输入注意事项"></i></label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="wendufanwei"
                                                                             name="wendufanwei"
@@ -451,7 +451,7 @@
                                     </div>
                                     <div class="row form-group" id="chanpinzucheng" style="display: none">
                                         <div class="col col-md-3"><label for="chanpinyuanli" class="form-control-label">产品原理及组成
-                                            <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                            <i class="fa " data-toggle="tooltip" data-placement="top"
                                                title="输入注意事项"></i></label></div>
                                         <div class="col-12 col-md-9"><textarea name="chanpinyuanli" id="chanpinyuanli"
                                                                                rows="9" placeholder="请输入产品原理及组成..."
@@ -460,7 +460,7 @@
                                 </div>
                                 <div class="row form-group" id="shiyong" style="display: none">
                                     <div class="col col-md-3"><label for="shiyongtiaojian" class="form-control-label">适用条件
-                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><textarea name="shiyongtiaojian" id="shiyongtiaojian"
                                                                            rows="9" placeholder="适用条件..."
@@ -469,7 +469,7 @@
 
                                 <%--                                <div class="row form-group">--%>
                                 <%--                                    <div class="col col-md-3"><label for="yongtu" class="form-control-label">用途--%>
-                                <%--                                        <i id="use_for" class="fa fa-question-circle" data-toggle="tooltip"--%>
+                                <%--                                        <i id="use_for" class="fa " data-toggle="tooltip"--%>
                                 <%--                                           data-placement="top" title="输入用途的注意事项"></i></label></div>--%>
                                 <%--                                    <div class="col-12 col-md-9"><textarea name="yongtu" id="yongtu"--%>
                                 <%--                                                                           rows="5" placeholder="用途..."--%>
@@ -499,7 +499,7 @@
 
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="shiyongrenshu" class="form-control-label">适用人数（人）
-                                                    <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                                    <i class="fa " data-toggle="tooltip" data-placement="top"
                                                        title="输入注意事项"></i></label></div>
                                                 <div class="col-12 col-md-9"><input type="text" id="shiyongrenshu" name="shiyongrenshu"
                                                                                     placeholder="输入适用人数" class="form-control">
@@ -672,7 +672,7 @@
 
                                 <div class="row form-group" id="peculiar" style="display: none">
                                     <div class="col col-md-3"><label for="peculiar_canshu" class="form-control-label">产品参数
-                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><textarea name="peculiar_canshu" id="peculiar_canshu"
                                                                            rows="9" placeholder="产品参数..."
@@ -681,7 +681,7 @@
 
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="zhiliangbaozhang" class="form-control-label">质量保障材料
-                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i> </label></div>
                                     <div class="col-12 col-md-9"><input type="file" id="zhiliangbaozhang"
                                                                         name="zhiliangbaozhang"
@@ -691,7 +691,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="shiyongshuoming" class=" form-control-label">使用说明
-                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><input type="file" id="shiyongshuoming"
                                                                         name="shiyongshuoming"
@@ -701,7 +701,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="chanpingtedian" class="form-control-label">产品特点
-                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><textarea name="chanpingtedian" id="chanpingtedian"
                                                                            rows="9" placeholder="产品特点..."
@@ -710,7 +710,7 @@
 
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="picturefile1" class=" form-control-label">使用图片1
-                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><input type="file" id="picturefile1"
                                                                         name="picturefile1"
@@ -721,7 +721,7 @@
 
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="picturefile2" class=" form-control-label">使用图片2
-                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><input type="file" id="picturefile2"
                                                                         name="picturefile2"
@@ -732,7 +732,7 @@
 
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="picturefile3" class=" form-control-label">使用图片3
-                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><input type="file" id="picturefile3"
                                                                         name="picturefile3"
@@ -743,7 +743,7 @@
 
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="picturefile4" class=" form-control-label">使用图片4
-                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><input type="file" id="picturefile4"
                                                                         name="picturefile4"
@@ -754,7 +754,7 @@
 
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="yingyonganli" class="form-control-label">应用案例
-                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><textarea name="yingyonganli" id="yingyonganli"
                                                                            rows="9" placeholder="应用案例..."
