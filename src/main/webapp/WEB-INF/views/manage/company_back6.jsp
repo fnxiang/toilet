@@ -920,7 +920,7 @@
     //提交修改
     function modify() {
         let data = new FormData();
-        data.append("productId", <%=productDTO.getId()%>); //产品编号
+        data.append("productId", "<%=productDTO.getId()%>"); //产品编号
         data.append("productName", encodeURI($('#product_name').val())); //产品名称
         data.append("factoryName", encodeURI($('#producer_name').val())); //厂家
         data.append("factoryNum", $('#phonenum').val()); //联系方式
@@ -941,7 +941,7 @@
         data.append("texture", encodeURI('#jvticaizhi'));
         data.append("color", encodeURI($('#yanse').val())); //颜色
         data.append("serviceLife", encodeURI($('#shouming').val())); //使用寿命
-        data.append("price", $('#jiage').val()); //价格（元）
+        data.append("price", $('#price').val()); //价格（元）
         radio = document.getElementsByName("cesuoyongtu"); //厕所用途
         const toiletPurpose = getRadioValue(radio);
         data.append("toiletPurpose", encodeURI(toiletPurpose));
