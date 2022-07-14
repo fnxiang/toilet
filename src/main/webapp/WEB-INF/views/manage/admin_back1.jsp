@@ -285,11 +285,31 @@
         for(int i = 0; i < list.size(); i++) {
             JSONObject dataMap = new JSONObject(true);
             UserDO userDO = list.get(i);
-            dataMap.put("姓名",userDO.getName());
-            dataMap.put("单位",userDO.getWorkCompany());
-            dataMap.put("职务",userDO.getPosition());
-            dataMap.put("职称",userDO.getTitle());
-            dataMap.put("电话",userDO.getPhone());
+            if(userDO.getName() != null){
+                dataMap.put("姓名",userDO.getName());
+            }else{
+                dataMap.put("姓名","无");
+            }
+            if(userDO.getWorkCompany() != null){
+                dataMap.put("单位",userDO.getWorkCompany());
+            }else{
+                dataMap.put("单位","无");
+            }
+            if(userDO.getPosition() != null){
+                dataMap.put("职务",userDO.getPosition());
+            }else{
+                dataMap.put("职务","无");
+            }
+            if(userDO.getTitle() != null){
+                dataMap.put("职称",userDO.getTitle());
+            }else{
+                dataMap.put("职称","无");
+            }
+            if(userDO.getPhone() != null){
+                dataMap.put("电话",userDO.getPhone());
+            }else{
+                dataMap.put("电话","无");
+            }
             dataMap.put("电子邮箱",userDO.getEmail());
             professor_data.add(dataMap);}%>
         var dataList = new Array();
