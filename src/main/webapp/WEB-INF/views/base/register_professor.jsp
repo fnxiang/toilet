@@ -112,8 +112,16 @@
                 </div>    
             
 			
-			</div> 
-
+			</div>
+            <div id="chenggong" style="position: absolute; left: 720px; top: 400px; background: #99999975; height: 100px; display: none">
+                <!-- 弹窗遮罩层 -->
+                <div class="aclose">
+                    <a class="close" href="javascript:choseClose();">&times;</a>
+                </div>
+                <div class="contain" id="dialog">
+                    注册成功！
+                </div>
+            </div>
         </div>
 
         <%--弹窗--%>
@@ -167,7 +175,7 @@
                 processData: false,
                 success:function(result){
                     if (result.success) {
-                        show("注册成功!")
+                        $('#chenggong').css("display", "block");
                     } else {
                         show(result.errorMessage);
                     }
@@ -228,7 +236,10 @@
             $(".content_dialog").css("height","90px");
             $(".dialog").css("display","none");
         }
-
+        function choseClose() {
+            $("#chenggong").css("display", "none");
+            window.location.href="${pageContext.request.contextPath}/toBasePage?url=login_final";
+        }
     </script>
 	
 </body>
