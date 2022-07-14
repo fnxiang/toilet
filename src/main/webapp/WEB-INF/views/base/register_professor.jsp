@@ -30,6 +30,11 @@
 			color: red;
 		}
 	</style>
+    <style>
+        iframe{
+            display: none;
+        }
+    </style>
 </head>
 
 <body> 
@@ -45,7 +50,8 @@
                             <h3><a href="" target="_blank"><img src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a> 专家用户注册</h3>
                         </div>
                         <br>
-                        <form>
+                        <iframe src="" frameborder="0" name="iframeName"></iframe>
+                        <form action=" " target="iframeName">
                             <div class="row">
 								<div class="col-md-12">
 									<div class="form-group row">
@@ -93,7 +99,7 @@
                                         <label class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" required id="yonghuxieyi">
                                             <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">我已阅读并同意 <a href="" target="_blank">用户协议</a></span>
+                                            <span class="custom-control-description">我已阅读并同意 <a href="javascript:agree();">用户协议</a></span>
                                         </label> 
                                     </div>
                                 </div>
@@ -166,7 +172,7 @@
                 processData: false,
                 success:function(result){
                     if (result.success) {
-                        window.location.replace('${pageContext.request.contextPath}/login/index');
+                        show("注册成功!")
                     } else {
                         show(result.errorMessage);
                     }
@@ -227,6 +233,7 @@
             $(".content_dialog").css("height","90px");
             $(".dialog").css("display","none");
         }
+
     </script>
 	
 </body>
