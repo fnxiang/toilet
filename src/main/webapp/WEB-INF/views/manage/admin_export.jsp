@@ -21,7 +21,7 @@
         for (var i = 0; i < arrData.length; i++) {
             var row = "<tr>";
             for (var index in arrData[i]) {
-                row += '<td style="text-align: left">' + arrData[i][index] + '</td>';
+                row += '<td style="text-align: left" x:str>' + arrData[i][index] + '</td>';
             }
             excel += row + "</tr>";
         }
