@@ -30,11 +30,6 @@
 			color: red;
 		}
 	</style>
-    <style>
-        iframe{
-            display: none;
-        }
-    </style>
 </head>
 
 <body> 
@@ -50,7 +45,7 @@
                             <h3><a href="" target="_blank"><img src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a> 专家用户注册</h3>
                         </div>
                         <br>
-                        <iframe src="" frameborder="0" name="iframeName"></iframe>
+                        <iframe src="" frameborder="0" name="iframeName" style="display: none"></iframe>
                         <form action=" " target="iframeName">
                             <div class="row">
 								<div class="col-md-12">

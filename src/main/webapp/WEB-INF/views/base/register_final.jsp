@@ -31,11 +31,6 @@
         }
     </style>
 </head>
-<style>
-    iframe{
-        display: none;
-    }
-</style>
 <body>
 <section>
     <div class="overlay"></div>
@@ -49,7 +44,7 @@
                         <h3><a href="./" target="_blank"><img src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a> 企业用户注册</h3>
                     </div>
                     <br>
-                    <iframe src="" frameborder="0" name="iframeName"></iframe>
+                    <iframe src="" frameborder="0" name="iframeName" style="display: none"></iframe>
                     <form action=" " target="iframeName">
                         <div class="row">
                             <div class="col-md-12">
@@ -134,7 +129,7 @@
                             </div>
                         </div>
                         <div class="form-group text-center">
-                            <button onclick="register()" class="btn btn-general btn-blue">提交注册</button>
+                            <button onclick="register()" class="btn btn-general btn-blue" type="button">提交注册</button>
                         </div>
                     </form>
                 </div>

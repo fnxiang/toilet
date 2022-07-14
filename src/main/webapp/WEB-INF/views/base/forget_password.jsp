@@ -45,7 +45,8 @@
                             src="${pageContext.request.contextPath}/static/base/res/logo.png" class="img-fluid" alt=""></a>
                     </h3><br>
                     <h4 class="card-title">找回密码</h4>
-                    <form action="#" id="first">
+                    <iframe src=""  name="iframeName" style="display: none"></iframe>
+                    <form action="" target="iframeName">
                         <div class="form-group">
                             <input id="email" type="email" class="form-control" name="email" value="" required placeholder="请输入您的邮箱地址">
                         </div>
@@ -62,7 +63,7 @@
                         </div>
 
                         <div class="form-group text-center">
-                            <button class="btn btn-primary" onclick="resetPWD()">
+                            <button type="button" class="btn btn-primary" onclick="resetPWD()">
                                 重置密码
                             </button>
                         </div>
@@ -188,6 +189,7 @@
     function choseClose() {
         $("#chongzhi").css("display", "none");
     }
+
     function close(){
         $(".content_dialog").css("height","90px");
         $(".dialog").css("display","none");
