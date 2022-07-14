@@ -891,8 +891,7 @@
                     }
                     mode_selectDiv.appendChild(ul);
                 } else {
-                    var msg = confirm(result.errorMessage);
-                    show(msg);
+                    show(result.errorMessage);
                 }
             }
         });
