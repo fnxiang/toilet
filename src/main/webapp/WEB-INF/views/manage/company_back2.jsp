@@ -188,7 +188,7 @@
                                 <div class="row form-group">
                                     <div class="col-md-9 offset-md-3"><input type="text" id="fullAddress"
                                                                              name="fullAddress" placeholder=""
-                                                                             value="北京市海淀区上园村3号" class="form-control">
+                                                                             value="<%=enterpriseAddressDTO.getDetailAddress()%>" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -402,7 +402,7 @@
             var opt = document.createElement("option");
             opt.value = provinceArr[i];         // 设置value-提交给服务器用
             <%String province = enterpriseAddressDTO.getProvince();%>
-            if (provinceArr[i] === "<%=province.substring(0, province.length() - 1)%>") {
+            if (provinceArr[i] === "<%=province%>") {
                 opt.selected = "selected"
             }
             opt.innerHTML = provinceArr[i];     // 设置option文本显示内容
