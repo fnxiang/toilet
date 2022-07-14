@@ -67,6 +67,11 @@
                                 重置密码
                             </button>
                         </div>
+                        <div class="form-group text-center">
+                            <button type="button" class="btn btn-primary" onclick="javascript:window.location.href='${pageContext.request.contextPath}/toBasePage?url=login_final'">
+                                返回登录
+                            </button>
+                        </div>
                     </form>
                     <div>
                     </div>
