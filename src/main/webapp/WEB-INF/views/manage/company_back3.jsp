@@ -482,7 +482,8 @@
                                                aria-controls="custom-nav-nature" aria-selected="true">产品参数</a>
                                         </div>
                                     </nav>
-
+                                    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                                    </div>
                                             <div class="row form-group" id="gui">
                                                 <div class="col col-md-3" style="margin-top: 5px"><label for="guige" class="form-control-label">规格(平方米):</label>
                                                 </div>
@@ -577,7 +578,7 @@
                                                            value="qita">其他
                                                 </div>
                                                 <div class="col col-md-2">
-                                                    <input type="text" id="jvticaizhi" name="jvticaizhi"
+                                                    <input type="text" id="jvticaizhi" name="caizhi"
                                                            placeholder="输入材质" disabled>
                                                 </div>
 
