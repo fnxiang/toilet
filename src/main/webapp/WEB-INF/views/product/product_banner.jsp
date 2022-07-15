@@ -126,6 +126,9 @@
         var myselect = document.getElementById("type_select"); //产品类型
         var index = myselect.selectedIndex;
         data.append("type_select", myselect.options[index].text);
+        data["sortBy"] = $('#sortCondition').val();
+        data["isDesc"] = $('#sortWay').val();
+        data["pageIndex"] = pageNow - 1;
 
         if(data.get("type_select") === '化粪池式厕所' || data.get("type_select") === '双瓮漏斗式厕所'){
             myselect = document.getElementById("guige_select"); //规格
@@ -155,7 +158,7 @@
         }else if(data.get("type_select") === '双坑交替式厕所'){
             myselect = document.getElementById("guanti_select"); //罐体容积
             index = myselect.selectedIndex;
-            data.append("volume_select", myselect.options[index].text);
+            data.append("guige_select", myselect.options[index].text);
 
             myselect = document.getElementById("caizhi2_select"); //材质
             index = myselect.selectedIndex;
@@ -183,7 +186,7 @@
         }
 
         $.ajax({
-            url: "",
+            url: "/toilet/search/product",
             type: "POST",
             dataType: "json",
             data: data,

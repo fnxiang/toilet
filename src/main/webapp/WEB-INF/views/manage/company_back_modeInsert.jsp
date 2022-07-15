@@ -524,9 +524,9 @@
         for (let k = 0; k < positioncheckbox.length; k++) {
             if (positioncheckbox[k].checked){
                 if(position_check_val === ""){
-                    position_check_val = position_check_val + "," + positioncheckbox[k].value;
-                }else{
                     position_check_val = positioncheckbox[k].value;
+                }else{
+                    position_check_val = position_check_val + "," + positioncheckbox[k].value;
                 }
             }
 
