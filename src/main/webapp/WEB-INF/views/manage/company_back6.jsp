@@ -322,7 +322,7 @@
 
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="shiyongrenshu"
-                                                                                 class="form-control-label">适用人数（人）
+                                                                                 class="form-control-label">适用人数（人）：
                                                     <i class="fa" data-toggle="tooltip"
                                                        data-placement="top"
                                                        title="输入注意事项"></i></label></div>
@@ -335,33 +335,29 @@
                                             </div>
 
                                             <div class="row form-group" id="chicun">
-                                                <div class="row">
-                                                    <div class="col col-md-4"><label for="chicun_chang"
-                                                                                     class="form-control-label">尺寸（长*宽*高mm）:</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-1"><label
-                                                            class="form-control-label">长：</label></div>
-                                                    <div class="col-12 col-md-1"><input type="text"
-                                                                                        id="chicun_chang"
-                                                                                        name="chicun_changt"
-                                                                                        class="form-control"
-                                                                                        value="<%=productDTO.getProductParameters().getLength()%>" >
-                                                    </div>
-                                                    <div class="col-12 col-md-1"><label
-                                                            class="form-control-label">宽：</label></div>
-                                                    <div class="col-12 col-md-1"><input type="text" id="chicun_kuan"
-                                                                                        name="chicun_kuan"
-                                                                                        class="form-control"
-                                                                                        value="<%=productDTO.getProductParameters().getWide()%>" >
-                                                    </div>
-                                                    <div class="col-12 col-md-1"><label
-                                                            class="form-control-label">高：</label></div>
-                                                    <div class="col-12 col-md-1"><input type="text" id="chicun_gao"
-                                                                                        name="chicun_gao"
-                                                                                        class="form-control"
-                                                                                        value="<%=productDTO.getProductParameters().getHigh()%>" >
-                                                    </div>
+                                                <div class="col col-md-3"><label for="chicun_chang"
+                                                                                 class="form-control-label">尺寸(mm):</label>
                                                 </div>
+                                                <label
+                                                        class="form-control-label">长：</label>
+                                                <div class="col col-md-1"><input type="text" id="chicun_chang"
+                                                                                 name="chicun_chang"
+                                                                                 class="form-control"></div>
+                                                <label class="form-control-label">mm</label>
+                                                <div class="col col-1"><div class="text-center">x</div></div>
+                                                <label
+                                                        class="form-control-label">宽：</label>
+                                                <div class="col col-md-1"><input type="text" id="chicun_kuan"
+                                                                                 name="chicun_kuan"
+                                                                                 class="form-control"></div>
+                                                <label class="form-control-label">mm</label>
+                                                <div class="col col-1"><div class="text-center">x</div></div>
+                                                <label
+                                                        class="form-control-label">高：</label>
+                                                <div class="col col-md-1"><input type="text" id="chicun_gao"
+                                                                                 name="chicun_gao"
+                                                                                 class="form-control"></div>
+                                                <label class="form-control-label">mm</label>
                                             </div>
                                             <div class="row form-group" id="hou">
                                                 <div class="col col-md-3"><label for="bihou"
@@ -443,7 +439,7 @@
 
                                             <div class="row form-group" id="yun">
                                                 <div class="col col-md-3"><label for="yunxingchengben"
-                                                                                 class=" form-control-label">运行成本：</label>
+                                                                                 class=" form-control-label">运行成本（元/人·天）：</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="yunxingchengben" name="yunxingchengben"

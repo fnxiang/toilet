@@ -653,7 +653,7 @@
 
                                             <div class="row form-group" id="yun">
                                                 <div class="col col-md-3"><label for="yunxingchengben"
-                                                                                 class=" form-control-label">运行成本(/人·天):</label>
+                                                                                 class=" form-control-label">运行成本(元/人·天):</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="yunxingchengben" name="yunxingchengben"
