@@ -28,7 +28,7 @@
     </div>
 
     <div id='myAlertBox' style='position: absolute; left: 0px; top: 0px; width: 100%; z-index: 9999; height: 568px;display: none'>
-        <div style="position: absolute; left: 0px; top: 0px; width: 100%; background: rgba(0, 0, 0,1); opacity: 0.5; z-index: 9999; height: 900px;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 100%; background: rgba(0, 0, 0,1); opacity: 0.5; z-index: 9999; height: 1000px;"></div>
         <div style="position: absolute; width: 400px; height: 500px;background: #fff; border-radius: 20px;overflow: hidden;z-index: 10000; left: 50%; top: 50%; transform: translate(-50%, -50%);padding:25px">
             <div style='width:100%;height: 20px;font-size: 20px;color: #282828;text-align:center;'>服务协议与隐私政策</div>
             <div style='width:100%;height: 370px;font-size: 13px;color: #282828;text-align:left;margin-top:18px; overflow-y: auto;'>&nbsp;&nbsp;&nbsp;&nbsp;欢迎使用厕所选型系统,收集您的信息是为了向您提供服务及提升服务质量，为了实现这一目的，我们会把您的信息用于下列用途：</br>
