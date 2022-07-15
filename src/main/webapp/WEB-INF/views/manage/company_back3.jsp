@@ -39,10 +39,12 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="${pageContext.request.contextPath}/company/index" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>产品申请</a>
+                    <a href="${pageContext.request.contextPath}/company/index"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-laptop"></i>产品申请</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/toPage?url=company_back8" style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-pencil"></i>模式申请</a>
+                    <a href="${pageContext.request.contextPath}/toPage?url=company_back8"
+                       style="padding-top: 20px; padding-bottom: 20px;"><i class="menu-icon fa fa-pencil"></i>模式申请</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/toPage?url=company_back2"
@@ -135,7 +137,8 @@
                                         <i id="contact_name_tips" class="fa " data-toggle="tooltip"
                                            data-placement="top" title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><input type="text" id="phonenum" name="phonenum"
-                                                                        placeholder="请输入正确的联系方式" class="form-control">
+                                                                        placeholder="请填写联系方式" class="form-control">
+                                        <small class="form-text text-muted">填写多个联系方式，以逗号间隔</small>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -145,6 +148,7 @@
                                     <div class="col-12 col-md-9">
                                         <select name="productselect" id="productselect" class="form-control"
                                                 onChange="productchange()">
+                                            <option value="" disabled selected hidden>请选择产品类型</option>
                                             <option value="0">完整下水道水冲式厕所</option>
                                             <option value="1">化粪池式厕所</option>
                                             <option value="2">双瓮漏斗式厕所</option>
@@ -158,6 +162,7 @@
                                             <option value="10">粪尿分集式厕所</option>
                                             <option value="11">泡沫封堵液</option>
                                         </select>
+                                        <small class="form-text text-muted">请选择产品适用的模式类型，可多选</small>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -167,7 +172,6 @@
                                     <div class="col col-md-9">
                                         <div class="multiple-select">
                                         </div>
-
                                     </div>
                                 </div>
                                 <div id="many_factors">
@@ -436,8 +440,9 @@
                                             <i class="fa " data-toggle="tooltip" data-placement="top"
                                                title="输入注意事项"></i></label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="province" name="province"
-                                                                            placeholder="输入省份名称" class="form-control">
-                                            <small class="form-text text-muted">输入省份名称，以逗号间隔</small>
+                                                                            placeholder="请填写适用省份名称"
+                                                                            class="form-control">
+                                            <small class="form-text text-muted">填写多个省份名称，以逗号间隔，例如：黑龙江省，江苏省，河北省</small>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -446,7 +451,9 @@
                                                title="输入注意事项"></i></label></div>
                                         <div class="col-12 col-md-9"><input type="text" id="wendufanwei"
                                                                             name="wendufanwei"
-                                                                            placeholder="输入适用温度范围" class="form-control">
+                                                                            placeholder="请填写适用温度范围"
+                                                                            class="form-control">
+                                            <small class="form-text text-muted">例如：-15℃—30℃</small>
                                         </div>
                                     </div>
                                 </div>
@@ -475,87 +482,90 @@
                                                aria-controls="custom-nav-nature" aria-selected="true">产品参数</a>
                                         </div>
                                     </nav>
-                                    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                        <div class="tab-pane fade active show" id="custom-nav-nature" role="tabpanel"
-                                             aria-labelledby="custom-nav-nature-tab">
 
                                             <div class="row form-group" id="gui">
-                                                <div class="col col-md-3"  style="margin-top: 5px"><label for="guige"
-                                                                                                          class="form-control-label">规格（平方米）：</label>
+                                                <div class="col col-md-3" style="margin-top: 5px"><label for="guige" class="form-control-label">规格(平方米):</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="guige" name="guige"
-                                                           placeholder="规格（平方米）" class="form-control">
+                                                           placeholder="请填写产品规格" class="form-control">
+                                                    <small class="form-text text-muted">请填写具体规格参数，例如：0.5。请勿填写规格范围。</small>
                                                 </div>
                                             </div>
 
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="shiyongrenshu" class="form-control-label">适用人数（人）
+                                                <div class="col col-md-3"><label for="shiyongrenshu"
+                                                                                 class="form-control-label">适用人数(人):
                                                     <i class="fa " data-toggle="tooltip" data-placement="top"
                                                        title="输入注意事项"></i></label></div>
-                                                <div class="col-12 col-md-9"><input type="text" id="shiyongrenshu" name="shiyongrenshu"
-                                                                                    placeholder="输入适用人数" class="form-control">
+                                                <div class="col-12 col-md-9"><input type="text" id="shiyongrenshu"
+                                                                                    name="shiyongrenshu"
+                                                                                    placeholder="请填写产品适用人数"
+                                                                                    class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="row form-group" id="chicun" >
-                                                <div class="row">
-                                                    <div class="col col-md-4"><label for="chicun_chang"
-                                                                                     class="form-control-label">尺寸（长*宽*高mm）:</label>
+                                            <div class="row form-group" id="chicun">
+                                                    <div class="col col-md-3"><label for="chicun_chang"
+                                                                                     class="form-control-label">尺寸(mm):</label>
                                                     </div>
-                                                    <div class="col-12 col-md-1"><label
-                                                            class="form-control-label">长：</label></div>
-                                                    <div class="col-12 col-md-1"><input type="text" id="chicun_chang"
-                                                                                        name="chicun_changt"
+                                                    <label
+                                                            class="form-control-label">长：</label>
+                                                    <div class="col col-md-1"><input type="text" id="chicun_chang"
+                                                                                        name="chicun_chang"
                                                                                         class="form-control"></div>
-                                                    <div class="col-12 col-md-1"><label
-                                                            class="form-control-label">宽：</label></div>
-                                                    <div class="col-12 col-md-1"><input type="text" id="chicun_kuan"
+                                                    <label class="form-control-label">mm</label>
+                                                <div class="col col-1"><div class="text-center">x</div></div>
+                                                    <label
+                                                            class="form-control-label">宽：</label>
+                                                    <div class="col col-md-1"><input type="text" id="chicun_kuan"
                                                                                         name="chicun_kuan"
                                                                                         class="form-control"></div>
-                                                    <div class="col-12 col-md-1"><label
-                                                            class="form-control-label">高：</label></div>
-                                                    <div class="col-12 col-md-1"><input type="text" id="chicun_gao"
+                                                    <label class="form-control-label">mm</label>
+                                                <div class="col col-1"><div class="text-center">x</div></div>
+                                                    <label
+                                                            class="form-control-label">高：</label>
+                                                    <div class="col col-md-1"><input type="text" id="chicun_gao"
                                                                                         name="chicun_gao"
                                                                                         class="form-control"></div>
-                                                </div>
+                                                    <label class="form-control-label">mm</label>
                                             </div>
                                             <div class="row form-group" id="hou" style="display: none;">
                                                 <div class="col col-md-3"><label for="bihou"
-                                                                                 class=" form-control-label">壁厚（mm）：</label>
+                                                                                 class=" form-control-label">壁厚(mm):</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="bihou" name="bihou"
-                                                           placeholder="壁厚" class="form-control">
+                                                           placeholder="请填写产品壁厚" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="row form-group" id="zhong" style="display: none;">
                                                 <div class="col col-md-3"><label for="zhongliang"
-                                                                                 class=" form-control-label">重量（kg）：</label>
+                                                                                 class=" form-control-label">重量(kg):</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="zhongliang" name="zhongliang"
-                                                           placeholder="重量" class="form-control">
+                                                           placeholder="请填写产品重量" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="row form-group" id="cai">
                                                 <div class="col col-md-3"><label for="caizhi"
-                                                                                 class=" form-control-label">材质：</label>
+                                                                                 class=" form-control-label">材质:</label>
                                                 </div>
 
                                                 <%--                                                    <div class="form-check-inline form-check">--%>
                                                 <div class="col col-md-1" id="hidden_caizhi1">
-                                                    <input  type="radio" name="caizhi"
-                                                            value="玻璃钢">玻璃钢
+                                                    <input type="radio" name="caizhi"
+                                                           value="玻璃钢">玻璃钢
                                                 </div>
                                                 <div class="col col-md-2" id="hidden_caizhi2">
                                                     <input type="radio" name="caizhi"
                                                            value="预制钢筋混凝土">预制钢筋混凝土
                                                 </div>
                                                 <div class="col col-md-1" id="hidden_caizhi3">
-                                                    <input type="radio"  name="caizhi"
+                                                    <input type="radio" name="caizhi"
                                                            value="PP">PP
                                                 </div>
                                                 <div class="col col-md-1" id="hidden_caizhi4">
@@ -567,7 +577,8 @@
                                                            value="qita">其他
                                                 </div>
                                                 <div class="col col-md-2">
-                                                    <input  type="text" id="jvticaizhi" name="jvticaizhi" placeholder="输入材质" disabled>
+                                                    <input type="text" id="jvticaizhi" name="jvticaizhi"
+                                                           placeholder="输入材质" disabled>
                                                 </div>
 
                                                 <%--                                                    </div>--%>
@@ -577,20 +588,21 @@
 
                                             <div class="row form-group" id="yan">
                                                 <div class="col col-md-3"><label for="yanse"
-                                                                                 class=" form-control-label">颜色：</label>
+                                                                                 class=" form-control-label">颜色:</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="yanse" name="yanse"
-                                                           placeholder="请填写颜色。例：白色、蓝色" class="form-control">
+                                                           placeholder="请填写产品颜色" class="form-control">
+                                                    <small class="form-text text-muted">例如：白色、蓝色</small>
                                                 </div>
                                             </div>
-                                            <div class="row form-group" id="shou" >
+                                            <div class="row form-group" id="shou">
                                                 <div class="col col-md-3"><label for="shouming"
-                                                                                 class=" form-control-label">使用寿命(年)：</label>
+                                                                                 class=" form-control-label">使用寿命(年):</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="shouming" name="shouming"
-                                                           placeholder="请填写使用寿命(年)" class="form-control">
+                                                           placeholder="请填写产品使用寿命" class="form-control">
                                                 </div>
 
                                             </div>
@@ -602,23 +614,23 @@
                                                 </label></div>
                                                 <div class="col-12 col-md-9"><input type="text" id="qitacanshu"
                                                                                     name="qitacanshu"
-                                                                                    placeholder="输入其他参数"
+                                                                                    placeholder="请填写产品其他参数"
                                                                                     class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="row form-group" id="jia">
                                                 <div class="col col-md-3"><label for="jiage"
-                                                                                 class=" form-control-label">价格（元）：</label>
+                                                                                 class=" form-control-label">价格(元):</label>
                                                 </div>
                                                 <div class="col col-md-9">
                                                     <input type="text" id="jiage" name="jiage"
-                                                           placeholder="请输入价格" class="form-control">
+                                                           placeholder="请填写产品价格" class="form-control">
                                                 </div>
 
                                             </div>
                                             <div class="row form-group" id="yong">
-                                                <div class="col col-md-3"><label class="form-control-label">用途：
+                                                <div class="col col-md-3"><label class="form-control-label">用途:
                                                 </label></div>
                                                 <div class="col-12 col-md-9">
                                                     <input class="col-md-1" type="radio" name="cesuoyongtu"
@@ -629,37 +641,36 @@
                                                            value="均可"/>均可
                                                 </div>
                                             </div>
-                                            <div class="row form-group" id="yong1" >
+                                            <div class="row form-group" id="yong1">
                                                 <div class="col col-md-3"><label for="jvtiyongtu"
                                                                                  class="form-control-label">
                                                 </label></div>
                                                 <div class="col-12 col-md-9"><textarea name="jvtiyongtu" id="jvtiyongtu"
-                                                                                       rows="9" placeholder="请输入具体用途..."
+                                                                                       rows="9" placeholder="请填写产品用途"
                                                                                        class="form-control"></textarea>
                                                 </div>
                                             </div>
 
                                             <div class="row form-group" id="yun">
                                                 <div class="col col-md-3"><label for="yunxingchengben"
-                                                                                 class=" form-control-label">运行成本(/人·天)：</label>
+                                                                                 class=" form-control-label">运行成本(/人·天):</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="yunxingchengben" name="yunxingchengben"
-                                                           placeholder="请运行成本" class="form-control">
+                                                           placeholder="请填写产品运行成本" class="form-control">
+                                                    <small class="form-text text-muted">请填写具体运行成本数值，请勿填写运行成本范围</small>
                                                 </div>
                                             </div>
 
-                                            <div class="row form-group" id="qing" >
+                                            <div class="row form-group" id="qing">
                                                 <div class="col col-md-3"><label for="qinglizhouqi"
-                                                                                 class=" form-control-label">清理周期(月)：</label>
+                                                                                 class=" form-control-label">清理周期(月):</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="qinglizhouqi" name="qinglizhouqi"
-                                                           placeholder="请提供具体清理周期(月)" class="form-control">
+                                                           placeholder="请填写产品清理周期" class="form-control">
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="row form-group" id="peculiar" style="display: none">
@@ -675,7 +686,7 @@
                                         <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><textarea name="chanpinyuanli" id="chanpinyuanli"
-                                                                           rows="9" placeholder="请输入产品原理及组成..."
+                                                                           rows="9" placeholder="请填写产品原理及组成"
                                                                            class="form-control"></textarea></div>
                                 </div>
 
@@ -704,7 +715,7 @@
                                         <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><textarea name="chanpingtedian" id="chanpingtedian"
-                                                                           rows="9" placeholder="产品特点..."
+                                                                           rows="9" placeholder="请填写产品特点"
                                                                            class="form-control"></textarea></div>
                                 </div>
 
@@ -757,7 +768,7 @@
                                         <i class="fa " data-toggle="tooltip" data-placement="top"
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><textarea name="yingyonganli" id="yingyonganli"
-                                                                           rows="9" placeholder="应用案例..."
+                                                                           rows="9" placeholder="请填写产品应用案例"
                                                                            class="form-control"></textarea></div>
                                 </div>
                                 <!--
@@ -853,7 +864,7 @@
             if (this.value == "qita") {
                 $("#jvticaizhi").removeAttr("disabled");//将输入可用
             } else {
-                $("#jvticaizhi").attr({"disabled":"disabled"});
+                $("#jvticaizhi").attr({"disabled": "disabled"});
             }
         });
     });
@@ -871,24 +882,24 @@
                 if (result.success) {
                     mode_content_selectMap = result.selectMap;
                     mode_content_patternDTOMap = result.patternDTOMap;
-                    //动态赋值给控件  productselect   multiple-select
-                    var productSelect = document.getElementById("productselect");
-                    var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
-                    var product_value = productSelect.options[0].text;
-                    var mode_list = mode_content_selectMap[product_value];
-                    mode_selectDiv.innerHTML="";
-                    var ul=document.createElement("ul");
-                    for(var i=0;i<mode_list.length;i++){
-                        var arr=mode_list[i];
-                        // 加入复选框
-                        var checkBox=document.createElement("input");
-                        checkBox.setAttribute("type","checkbox");
-                        checkBox.setAttribute("name","moshileixing");
-                        checkBox.setAttribute("value",arr);
-                        ul.appendChild(checkBox);
-                        ul.appendChild(document.createTextNode(arr));
-                        ul.appendChild(document.createElement("div"))
-                    }
+                    // //动态赋值给控件  productselect   multiple-select
+                    // var productSelect = document.getElementById("productselect");
+                    // var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
+                    // var product_value = productSelect.options[0].text;
+                    // var mode_list = mode_content_selectMap[product_value];
+                    // mode_selectDiv.innerHTML="";
+                    // var ul=document.createElement("ul");
+                    // for(var i=0;i<mode_list.length;i++){
+                    //     var arr=mode_list[i];
+                    //     // 加入复选框
+                    //     var checkBox=document.createElement("input");
+                    //     checkBox.setAttribute("type","checkbox");
+                    //     checkBox.setAttribute("name","moshileixing");
+                    //     checkBox.setAttribute("value",arr);
+                    //     ul.appendChild(checkBox);
+                    //     ul.appendChild(document.createTextNode(arr));
+                    //     ul.appendChild(document.createElement("div"))
+                    // }
                     mode_selectDiv.appendChild(ul);
                 } else {
                     show(result.errorMessage);
@@ -896,6 +907,7 @@
             }
         });
     });
+
     function productchange() { // mode_content_selectMap   mode_content_patternDTOMap
         var product_select = document.getElementById("productselect");
         var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
@@ -944,19 +956,17 @@
             yunxingchengben.style.cssText = "";
             qinglizhouqi.style.cssText = "";
         }
-        if (product_select.value == 2){ //双瓮漏斗式厕所
+        if (product_select.value == 2) { //双瓮漏斗式厕所
             hidden_caizhi1.style.cssText = "";
             hidden_caizhi2.style.cssText = "";
             hidden_caizhi3.style.cssText = "";
             hidden_caizhi4.style.cssText = "";
-        }
-        else if (product_select.value == 5){//真空负压厕所
+        } else if (product_select.value == 5) {//真空负压厕所
             hidden_caizhi1.style.cssText = "display:none;";
             hidden_caizhi2.style.cssText = "display:none;";
             hidden_caizhi3.style.cssText = "display:none;";
             hidden_caizhi4.style.cssText = "display:none;";
-        }
-        else if (product_select.value == 9){//双坑交替式厕所
+        } else if (product_select.value == 9) {//双坑交替式厕所
             hidden_caizhi3.style.cssText = "display:none;";
             hidden_caizhi4.style.cssText = "display:none;";
             hidden_caizhi1.style.cssText = "";
@@ -976,21 +986,22 @@
         var product_index = product_select.selectedIndex;
         var product_value = product_select.options[product_index].text;
         var mode_list = mode_content_selectMap[product_value];
-        mode_selectDiv.innerHTML="";
-        var ul=document.createElement("ul");
-        for(var i=0;i<mode_list.length;i++){
-            var arr=mode_list[i];
+        mode_selectDiv.innerHTML = "";
+        var ul = document.createElement("ul");
+        for (var i = 0; i < mode_list.length; i++) {
+            var arr = mode_list[i];
             // 加入复选框
-            var checkBox=document.createElement("input");
-            checkBox.setAttribute("type","checkbox");
-            checkBox.setAttribute("name","moshileixing");
-            checkBox.setAttribute("value",arr);
+            var checkBox = document.createElement("input");
+            checkBox.setAttribute("type", "checkbox");
+            checkBox.setAttribute("name", "moshileixing");
+            checkBox.setAttribute("value", arr);
             ul.appendChild(checkBox);
             ul.appendChild(document.createTextNode(arr));
             ul.appendChild(document.createElement("div"))
         }
         mode_selectDiv.appendChild(ul);
     }
+
     function entry() {
         let data = new FormData();
         data.append("productName", encodeURI($('#product_name').val())); //产品名称
@@ -1117,26 +1128,55 @@
         //应用案例
         data.append("case", encodeURI($('#yingyonganli').val())); //应用案例
         //判断输入
-        if(! data.get("cleanupCycle")){data.set("cleanupCycle","0");}
-        if(! data.get("runningCost")){data.set("runningCost","0");}
-        if(! data.get("serviceLife")){data.set("serviceLife","0");}
-        if(! data.get("thickness")){data.set("thickness","0");}
-        if(! data.get("weight")){data.set("weight","0");}
-        if(! data.get("applicableNum")){data.set("applicableNum","0");}
-        if(! data.get("length")){data.set("length","0");}
-        if(! data.get("wide")){data.set("wide","0");}
-        if(! data.get("high")){data.set("high","0");}
-        if(! data.get("standard")){data.set("standard","0");}
-        var msg = "";
-        if (! data.get("productName")){msg += "产品为空! ";}
-        if (! data.get("factoryName")){msg += "厂家为空! ";}
-        if (! data.get("patternType")){msg += "模式类型为空! ";}
-        if (! data.get("standard")){msg += "产品为空! ";}
-        if (! data.get("price")){msg += "价格为空!";}
-        if(msg !== ""){
-            show(msg);
+        if (!data.get("cleanupCycle")) {
+            data.set("cleanupCycle", "0");
         }
-        else{
+        if (!data.get("runningCost")) {
+            data.set("runningCost", "0");
+        }
+        if (!data.get("serviceLife")) {
+            data.set("serviceLife", "0");
+        }
+        if (!data.get("thickness")) {
+            data.set("thickness", "0");
+        }
+        if (!data.get("weight")) {
+            data.set("weight", "0");
+        }
+        if (!data.get("applicableNum")) {
+            data.set("applicableNum", "0");
+        }
+        if (!data.get("length")) {
+            data.set("length", "0");
+        }
+        if (!data.get("wide")) {
+            data.set("wide", "0");
+        }
+        if (!data.get("high")) {
+            data.set("high", "0");
+        }
+        if (!data.get("standard")) {
+            data.set("standard", "0");
+        }
+        var msg = "";
+        if (!data.get("productName")) {
+            msg += "产品为空! ";
+        }
+        if (!data.get("factoryName")) {
+            msg += "厂家为空! ";
+        }
+        if (!data.get("patternType")) {
+            msg += "模式类型为空! ";
+        }
+        if (!data.get("standard")) {
+            msg += "产品为空! ";
+        }
+        if (!data.get("price")) {
+            msg += "价格为空!";
+        }
+        if (msg !== "") {
+            show(msg);
+        } else {
             $.ajax({
                 url: "/toilet/company/product/entry",
                 type: "POST",
@@ -1162,18 +1202,19 @@
 <script>
     function getRadioValue(radio) {
         let texture = "";
-        for (let i=0;i<radio.length;i++) {
+        for (let i = 0; i < radio.length; i++) {
             if (radio[i].checked) {
                 texture = radio[i].value;
             }
         }
-        if (texture==="qita") {
+        if (texture === "qita") {
             texture = $('#jvticaizhi').val();
         }
         return texture;
     }
-    function close(){
-        $(".dialog").css("display","none");
+
+    function close() {
+        $(".dialog").css("display", "none");
     }
 </script>
 
