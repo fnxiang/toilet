@@ -173,6 +173,85 @@
                             </ul>
 
                             <table>
+                                <%if (productDTO.getProductType().equals("双瓮漏斗式厕所")) {%>
+                                <tr>
+                                    <th class="bg" width="15%">规格</th>
+                                    <th width="35%"><%=productDTO.getProductParameters().getStandard()%>立方米
+                                    </th>
+                                    <th class="bg" width="15%">适用人数（人）</th>
+                                    <th width="35%"><%=productDTO.getProductParameters().getApplicableNum()%>人
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td class="bg">尺寸（长*宽*高 mm）</td>
+                                    <td><%=productDTO.getProductParameters().getLength()%>mm
+                                        *<%=productDTO.getProductParameters().getWide()%>mm
+                                        *<%=productDTO.getProductParameters().getHigh()%>mm
+                                    </td>
+                                    <td class="bg">材质</td>
+                                    <td><%=productDTO.getProductParameters().getTexture()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bg">重量</td>
+                                    <td><%=productDTO.getProductParameters().getWeight()%>kg
+                                    </td>
+                                    <td class="bg">壁厚</td>
+                                    <td><%=productDTO.getProductParameters().getWallThickness()%>mm
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bg">颜色</td>
+                                    <td><%=productDTO.getProductParameters().getColor()%>
+                                    </td>
+                                    <td class="bg">使用寿命(年)</td>
+                                    <td><%=productDTO.getProductParameters().getServiceLife()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bg">厕所用途</td>
+                                    <td><%=productDTO.getPurpose()%>
+                                    </td>
+                                    <td class="bg">清理周期(月)</td>
+                                    <td><%=productDTO.getProductParameters().getCleanupCycle()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bg">具体用途</td>
+                                    <td><%=productDTO.getProductParameters().getParamPurpose()%>
+                                    </td>
+                                    <td class="bg">运行成本(元/人·天)</td>
+                                    <td><%=productDTO.getProductParameters().getRunCost()%>
+                                    </td>
+                                </tr>
+                                <%} else if (productDTO.getProductType().equals("三联沼气池式厕所") || productDTO.getProductType().equals("复合生物反应微水冲厕所") || productDTO.getProductType().equals("多级生化组合电催化氧化厕所") || productDTO.getProductType().equals("膜生物反应器（MBR）厕所") || productDTO.getProductType().equals("生态旱厕") || productDTO.getProductType().equals("粪尿分集式厕所")) {%>
+                                <tr>
+                                    <th class="bg" width="15%">适用人数（人）</th>
+                                    <th width="35%"><%=productDTO.getProductParameters().getApplicableNum()%>人
+                                    </th>
+                                    <td class="bg">使用寿命(年)</td>
+                                    <td><%=productDTO.getProductParameters().getServiceLife()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bg">产品原理及组成</td>
+                                    <td>
+                                        <%=productDTO.getProductTheory()%>
+                                    </td>
+                                    <td class="bg">其他参数</td>
+                                    <td><%=productDTO.getProductParameters().getOtherParams()%>
+                                    </td>
+                                </tr>
+                                <%}else if (productDTO.getProductType().equals("泡沫封堵液")) {%>
+                                <tr>
+                                    <td class="bg">适用条件</td>
+                                    <td><%=productDTO.getApplicableCondition()%>
+                                    </td>
+                                    <td class="bg">产品参数</td>
+                                    <td><%=productDTO.getSpecialParam()%>
+                                    </td>
+                                </tr>
+                                <%} else{%>
                                 <tr>
                                     <th class="bg" width="15%">规格</th>
                                     <th width="35%"><%=productDTO.getProductParameters().getStandard()%>立方米
@@ -195,80 +274,35 @@
                                     <td class="bg">颜色</td>
                                     <td><%=productDTO.getProductParameters().getColor()%>
                                     </td>
-                                    <td class="bg">使用寿命</td>
-                                    <td><%=productDTO.getProductParameters().getServiceLife()%>年
+                                    <td class="bg">使用寿命(年)</td>
+                                    <td><%=productDTO.getProductParameters().getServiceLife()%>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td class="bg">产品特点</td>
-                                    <td><%=productDTO.getProductFeatures()%>
-                                    </td>
-                                    <td class="bg">清理周期</td>
-                                    <td><%=productDTO.getProductParameters().getCleanupCycle()%>月
-                                    </td>
-                                </tr>
-                                <%if (productDTO.getProductType().equals("双瓮漏斗式厕所")) {%>
-                                <tr>
-                                    <td class="bg">重量</td>
-                                    <td><%=productDTO.getProductParameters().getWeight()%>kg
-                                    </td>
-                                    <td class="bg">壁厚</td>
-                                    <td><%=productDTO.getProductParameters().getWallThickness()%>mm
-                                    </td>
-                                </tr>
-                                <%
-                                    } else {
-                                    }
-                                %>
-                                <%if (productDTO.getProductType().equals("三联沼气池式厕所") || productDTO.getProductType().equals("复合生物反应微水冲厕所") || productDTO.getProductType().equals("多级生化组合电催化氧化厕所") || productDTO.getProductType().equals("膜生物反应器（MBR）厕所") || productDTO.getProductType().equals("生态旱厕") || productDTO.getProductType().equals("粪尿分集式厕所")) {%>
-                                <tr>
-                                    <td class="bg">其他参数</td>
-                                    <td><%=productDTO.getProductParameters().getOtherParams()%>
-                                    </td>
-                                    <td class="bg"></td>
-                                    <td></td>
-                                    <%
-                                        } else {
-                                        }
-                                    %>
                                 </tr>
                                 <tr>
                                     <td class="bg">厕所用途</td>
                                     <td><%=productDTO.getPurpose()%>
                                     </td>
+                                    <td class="bg">清理周期(月)</td>
+                                    <td><%=productDTO.getProductParameters().getCleanupCycle()%>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="bg">具体用途</td>
                                     <td><%=productDTO.getProductParameters().getParamPurpose()%>
                                     </td>
+                                    <td class="bg">运行成本(元/人·天)</td>
+                                    <td><%=productDTO.getProductParameters().getRunCost()%>
+                                    </td>
                                 </tr>
+                                <%}%>
                                 <tr>
+                                    <td class="bg">产品特点</td>
+                                    <td><%=productDTO.getProductFeatures()%>
+                                    </td>
                                     <td class="bg">应用案例</td>
                                     <td><%=productDTO.getProductParameters().getApplyCase()%>
                                     </td>
-                                    <%if (productDTO.getProductType().equals("三联沼气池式厕所") || productDTO.getProductType().equals("复合生物反应微水冲厕所") || productDTO.getProductType().equals("多级生化组合电催化氧化厕所") || productDTO.getProductType().equals("膜生物反应器（MBR）厕所") || productDTO.getProductType().equals("生态旱厕") || productDTO.getProductType().equals("粪尿分集式厕所")) {%>
-                                    <td class="bg">产品原理及组成</td>
-                                    <td>
-                                        <%=productDTO.getProductTheory()%>
-                                    </td>
-                                    <%} else {%>
-                                    <td class="bg"></td>
-                                    <td>
-                                    </td>
-                                    <%}%>
                                 </tr>
-
-                                <%if (productDTO.getProductType().equals("泡沫封堵液")) {%>
-                                <tr>
-                                    <td class="bg">适用条件</td>
-                                    <td><%=productDTO.getApplicableCondition()%>
-                                    </td>
-                                    <td class="bg">产品参数</td>
-                                    <td><%=productDTO.getSpecialParam()%>
-                                    </td>
-                                </tr>
-                                <%
-                                    } else {
-                                    }
-                                %>
 
                             </table>
                             <div class="clear"></div>
