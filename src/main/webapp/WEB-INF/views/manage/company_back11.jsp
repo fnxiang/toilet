@@ -114,8 +114,8 @@
                         <div class="card-body card-block">
                             <div id="newModeAdding" style="">
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="moshimingcheng" class=" form-control-label">新模式名称</label></div>
-                                    <div class="col-12 col-md-4"><input type="text" id="moshimingcheng" name="moshimingcheng" placeholder="" class="form-control" value="<%=patternDTO.getPatternType()%>" disabled></div>
+                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">新模式名称</label></div>
+                                    <div class="col-12 col-md-4"><input type="text" id="text-input" name="text-input" placeholder="" class="form-control" value="<%=patternDTO.getPatternType()%>" disabled></div>
                                 </div>
 
 
@@ -127,72 +127,67 @@
                                     </nav>
                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                         <div class="tab-pane fade active show" id="custom-nav-nature" role="tabpanel" aria-labelledby="custom-nav-nature-tab">
-
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="wendutiaojian" class=" form-control-label">温度条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">温度条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="wendutiaojian" id="wendutiaojian" class="form-control">
-                                                        <option value="寒冷地区" <%if(patternDTO.getEnvConditions().getTemperature().equals("寒冷地区")){%>
-                                                                selected="selected" <%}%>>寒冷地区</option>
-                                                        <option value="普通地区"  <%if(patternDTO.getEnvConditions().getTemperature().equals("普通地区")){%>
-                                                                selected="selected" <%}%>>普通地区</option>
-                                                    </select>
+                                                    <%String[] strArray = null;
+                                                        strArray = patternDTO.getEnvConditions().getTemperature().split(",");%>
+                                                    <input class="col-md-1" name="temperature_check" type="checkbox" value="寒冷地区" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("寒冷地区")){%>
+                                                           checked="checked" <%}}%>>寒冷地区</input>
+                                                    <input class="col-md-1" name="temperature_check" type="checkbox"  value="普通地区"  <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("普通地区")){%>
+                                                           checked="checked" <%}}%>>普通地区</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="shuiziyuan" class=" form-control-label">水资源条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">水资源条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="shuiziyuan" id="shuiziyuan" class="form-control">
-                                                        <option value="缺水"  <%if(patternDTO.getEnvConditions().getWaterResource().equals("缺水")){%>
-                                                                selected="selected" <%}%>>缺水</option>
-                                                        <option value="良好" <%if(patternDTO.getEnvConditions().getWaterResource().equals("良好")){%>
-                                                                selected="selected" <%}%>>良好</option>
-                                                    </select>
+                                                    <%strArray = patternDTO.getEnvConditions().getWaterResource().split(",");%>
+                                                    <input class="col-md-1" type="checkbox" name="water_check" value="缺水"  <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("缺水")){%>
+                                                           checked="checked" <%}}%>>缺水</input>
+                                                    <input class="col-md-1" type="checkbox" name="water_check" value="良好" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("良好")){%>
+                                                           checked="checked" <%}}%>>良好</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="dixing" class=" form-control-label">地形条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">地形条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="dixing" id="dixing" class="form-control">
-                                                        <option value="平坦" <%if(patternDTO.getEnvConditions().getTerrain().equals("平坦")){%>
-                                                                selected="selected" <%}%>>平坦</option>
-                                                        <option value="丘陵" <%if(patternDTO.getEnvConditions().getTerrain().equals("丘陵")){%>
-                                                                selected="selected" <%}%>>丘陵</option>
-                                                        <option value="山地" <%if(patternDTO.getEnvConditions().getTerrain().equals("山地")){%>
-                                                                selected="selected" <%}%>>山地</option>
-                                                        <option value="高原" <%if(patternDTO.getEnvConditions().getTerrain().equals("高原")){%>
-                                                                selected="selected" <%}%>>高原</option>
-                                                        <option value="盆地" <%if(patternDTO.getEnvConditions().getTerrain().equals("盆地")){%>
-                                                                selected="selected" <%}%>>盆地</option>
-                                                    </select>
+                                                    <%strArray = patternDTO.getEnvConditions().getTerrain().split(",");%>
+                                                    <input class="col-md-1" type="checkbox" name="dixing_check" value="平原" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("平坦")){%>
+                                                           checked="checked" <%}}%>>平原</input>
+                                                    <input class="col-md-1" type="checkbox" name="dixing_check" value="丘陵" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("丘陵")){%>
+                                                           checked="checked" <%}}%>>丘陵</input>
+                                                    <input class="col-md-1" type="checkbox" name="dixing_check" value="山地" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("山地")){%>
+                                                           checked="checked" <%}}%>>山地</input>
+                                                    <input class="col-md-1" type="checkbox" name="dixing_check" value="高原" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("高原")){%>
+                                                           checked="checked" <%}}%>>高原</input>
+                                                    <input class="col-md-1" type="checkbox" name="dixing_check" value="盆地" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("盆地")){%>
+                                                           checked="checked" <%}}%>>盆地</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="diliweizhi" class=" form-control-label">地理位置条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">地理位置条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="diliweizhi" id="diliweizhi" class="form-control">
-                                                        <option value="中心镇" <%if(patternDTO.getEnvConditions().getGeolocation().equals("中心镇")){%>
-                                                                selected="selected" <%}%>>中心镇</option>
-                                                        <option value="一般镇" <%if(patternDTO.getEnvConditions().getGeolocation().equals("一般镇")){%>
-                                                                selected="selected" <%}%>>一般镇</option>
-                                                        <option value="中心村" <%if(patternDTO.getEnvConditions().getGeolocation().equals("中心村")){%>
-                                                                selected="selected" <%}%>>中心村</option>
-                                                        <option value="基层村" <%if(patternDTO.getEnvConditions().getGeolocation().equals("基层村")){%>
-                                                                selected="selected" <%}%>>基层村</option>
-                                                    </select>
+                                                    <%strArray = patternDTO.getEnvConditions().getGeolocation().split(",");%>
+                                                    <input  class="col-md-1" type="checkbox" name="diliweizhi_check" value="中心镇" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("中心镇")){%>
+                                                            checked="checked" <%}}%>>中心镇</input>
+                                                    <input  class="col-md-1" type="checkbox" name="diliweizhi_check" value="一般镇" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("一般镇")){%>
+                                                            checked="checked" <%}}%>>一般镇</input>
+                                                    <input  class="col-md-1" type="checkbox" name="diliweizhi_check" value="中心村" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("中心村")){%>
+                                                            checked="checked" <%}}%>>中心村</input>
+                                                    <input  class="col-md-1" type="checkbox" name="diliweizhi_check" value="基层村" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("基层村")){%>
+                                                            checked="checked" <%}}%>>基层村</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="shengtai" class=" form-control-label">生态限制条件：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">生态限制条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="shengtai" id="shengtai" class="form-control">
-                                                        <option value="生态保护区" <%if(patternDTO.getEnvConditions().getEcotope().equals("生态保护区")){%>
-                                                                selected="selected" <%}%>>生态保护区</option>
-                                                        <option value="水资源保护区" <%if(patternDTO.getEnvConditions().getEcotope().equals("水源保护区")){%>
-                                                                selected="selected" <%}%>>水源保护区</option>
-                                                        <option value="普通地区" <%if(patternDTO.getEnvConditions().getEcotope().equals("普通地区")){%>
-                                                                selected="selected" <%}%>>普通地区</option>
-                                                    </select>
+                                                    <%strArray = patternDTO.getEnvConditions().getEcotope().split(",");%>
+                                                    <input class="col-md-1" type="checkbox" name="shengtai_check" value="生态保护区" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("生态保护区")){%>
+                                                           checked="checked" <%}}%>>生态保护区</input>
+                                                    <input class="col-md-1" type="checkbox" name="shengtai_check" value="水源保护区" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("水源保护区")){%>
+                                                           checked="checked" <%}}%>>水源保护区</input>
+                                                    <input class="col-md-1" type="checkbox" name="shengtai_check" value="普通地区" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("普通地区")){%>
+                                                           checked="checked" <%}}%>>普通地区</input>
                                                 </div>
                                             </div>
                                         </div>
@@ -209,29 +204,27 @@
                                         <div class="tab-pane fade active show" id="custom-nav-people" role="tabpanel" aria-labelledby="custom-nav-people-tab">
 
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="renkou" class=" form-control-label">人口密集程度：</label></div>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">人口密集程度：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="renkou" id="renkou" class="form-control">
-                                                        <option value="聚集" <%if(patternDTO.getHumanFactors().getDensity().equals("聚集")){%>
-                                                                selected="selected" <%}%>>聚集</option>
-                                                        <option value="分散" <%if(patternDTO.getHumanFactors().getDensity().equals("分散")){%>
-                                                                selected="selected" <%}%>>分散</option>
-                                                        <option value="普通" <%if(patternDTO.getHumanFactors().getDensity().equals("普通")){%>
-                                                                selected="selected" <%}%>>普通</option>
-                                                    </select>
+                                                    <%strArray = patternDTO.getHumanFactors().getDensity().split(",");%>
+                                                    <input class="col-md-1" type="checkbox" name="renkou_check" value="聚集" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("聚集")){%>
+                                                           checked="checked" <%}}%>>聚集</input>
+                                                    <input class="col-md-1" type="checkbox" name="renkou_check" value="分散" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("分散")){%>
+                                                           checked="checked" <%}}%>>分散</input>
+                                                    <input class="col-md-1" type="checkbox" name="renkou_check" value="普通" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("普通")){%>
+                                                           checked="checked" <%}}%>>普通</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="yetaifei" class=" form-control-label">液态肥使用习惯：</label></div>
-                                                <div class="col-12 col-md-9">
-                                                    <select name="yetaifei" id="yetaifei" class="form-control">
-                                                        <option value="是" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("是")){%>
-                                                                selected="selected" <%}%>>是</option>
-                                                        <option value="否" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("否")){%>
-                                                                selected="selected" <%}%>>否</option>
-                                                        <option value="均可" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("均可")){%>
-                                                                selected="selected" <%}%>>均可</option>
-                                                    </select>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">液态肥使用习惯：</label></div>
+                                                <div class="col-12 col-md-9 radio" id="yetaifei">
+                                                    <%strArray = patternDTO.getHumanFactors().getUsageHabits().split(",");%>
+                                                    <input class="col-md-1" type="radio" value="是" name="yetaifei" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("是")){%>
+                                                           checked="checked" <%}}%>>是</input>
+                                                    <input class="col-md-1" type="radio" value="否" name="yetaifei" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("否")){%>
+                                                           checked="checked" <%}}%>>否</input>
+                                                    <input class="col-md-1" type="radio" value="均可" name="yetaifei" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("均可")){%>
+                                                           checked="checked" <%}}%>>均可</input>
                                                 </div>
                                             </div>
                                         </div>
@@ -247,14 +240,12 @@
                                         <div class="tab-pane fade active show" id="custom-nav-pip" role="tabpanel" aria-labelledby="custom-nav-pip-tab">
 
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="guandao" class=" form-control-label">需要具备管网条件：</label></div>
-                                                <div class="col-12 col-md-9">
-                                                    <select name="guandao" id="guandao" class="form-control">
-                                                        <option value="true" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
-                                                                selected="selected" <%}%>>是</option>
-                                                        <option value="false" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
-                                                                selected="selected" <%}%>>否</option>
-                                                    </select>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">需要具备管网条件：</label></div>
+                                                <div class="col-12 col-md-9 radio" id="wangguantiaojian">
+                                                    <input class="col-md-1" type="radio" value="是" name="wangguantiaojian" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
+                                                           checked="checked" <%}%>>是</input>
+                                                    <input class="col-md-1" type="radio" value="否" name="wangguantiaojian" <%if(!patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
+                                                           checked="checked" <%}%>>否</input>
                                                 </div>
                                             </div>
                                         </div>
@@ -270,38 +261,33 @@
                                         <div class="tab-pane fade active show" id="custom-nav-resource" role="tabpanel" aria-labelledby="custom-nav-resource-tab">
 
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="zhaoqi" class=" form-control-label">具有沼气利用工程：</label></div>
-                                                <div class="col-12 col-md-9">
-                                                    <select name="zhaoqi" id="zhaoqi" class="form-control">
-                                                        <option value="true" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
-                                                                selected="selected" <%}%>>是</option>
-                                                        <option value="false" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
-                                                                selected="selected" <%}%>>否</option>
-                                                    </select>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">具有沼气利用工程：</label></div>
+                                                <div class="col-12 col-md-9 radio" id="zhaoqi">
+                                                    <input class="col-md-1" type="radio" value="是" name="zhaoqi" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
+                                                           checked="checked" <%}%>>是</input>
+                                                    <input class="col-md-1" type="radio" value="否" name="zhaoqi" <%if(!patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
+                                                           checked="checked" <%}%>>否</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="hunhe" class=" form-control-label">可以与其他生活污水混合处理：</label></div>
-                                                <div class="col-12 col-md-9">
-                                                    <select name="hunhe" id="hunhe" class="form-control">
-                                                        <option value="是" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("是")){%>
-                                                                selected="selected" <%}%>>是</option>
-                                                        <option value="否" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("否")){%>
-                                                                selected="selected" <%}%>>否</option>
-                                                        <option value="均可" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("均可")){%>
-                                                                selected="selected" <%}%>>均可</option>
-                                                    </select>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">可以与其他生活污水混合处理：</label></div>
+                                                <div class="col-12 col-md-9 radio" id="wushuihunhe">
+                                                    <%strArray = patternDTO.getResourceUtilization().getMixedSewageTreatment().split(",");%>
+                                                    <input class="col-md-1" type="radio" value="是" name="wushuihunhe" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("是")){%>
+                                                           checked="checked" <%}}%>>是</input>
+                                                    <input class="col-md-1" type="radio" value="否" name="wushuihunhe" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("否")){%>
+                                                           checked="checked" <%}}%>>否</input>
+                                                    <input class="col-md-1" type="radio" value="均可" name="wushuihunhe" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("均可")){%>
+                                                           checked="checked" <%}}%>>均可</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="jihua" class=" form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：</label></div>
-                                                <div class="col-12 col-md-9">
-                                                    <select name="jihua" id="jihua" class="form-control">
-                                                        <option value="true" <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
-                                                                selected="selected" <%}%>>是</option>
-                                                        <option value="false"  <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
-                                                                selected="selected" <%}%>>否</option>
-                                                    </select>
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：</label></div>
+                                                <div class="col-12 col-md-9 radio" id="yibingchuli">
+                                                    <input class="col-md-1" type="radio" name="yibingchuli" value="是" <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
+                                                           checked="checked" <%}%>>是</input>
+                                                    <input class="col-md-1" type="radio" name="yibingchuli" value="否"  <%if(!patternDTO.getResourceUtilization().getOtherTreatment()){%>
+                                                           checked="checked" <%}%>>否</input>
                                                 </div>
                                             </div>
                                         </div>
@@ -380,26 +366,118 @@
     $(document).ready(function () {
         $('#bootstrap-data-table-export').DataTable();
     });
-
+</script>
+<script>
     function mode_enter(patternId) {
 
         var data = new FormData();
+        data.append("patternId", patternId);
+        data.append("productType", '<%=patternDTO.getProductType()%>');
+        data.append("patternType", '<%=patternDTO.getPatternType()%>'); //模式类型
+        data.append("patternInfo", '<%=patternDTO.getPatternInfo()%>'); //模式介绍
 
-        data.append("patternName", encodeURI($('#moshimingcheng').val())); //模式名称
-        data.append("patternId", patternId); //模式名称
+
         //新模式参数
-        data.append("natureTemp", encodeURI(document.querySelector('#wendutiaojian option:checked').value)); //温度条件
-        data.append("water", encodeURI(document.querySelector('#shuiziyuan option:checked').value)); //水资源条件
-        data.append("terrain", encodeURI(document.querySelector('#dixing option:checked').value)); //地形条件
-        data.append("geolocation", encodeURI(document.querySelector('#diliweizhi option:checked').value)); //地理位置条件
-        data.append("ecotope", encodeURI(document.querySelector('#shengtai option:checked').value)); //生态限制条件
-        data.append("density", encodeURI(document.querySelector('#renkou option:checked').value)); //人口密集程度
-        data.append("usageHabits", encodeURI(document.querySelector('#yetaifei option:checked').value)); //液态肥使用习惯
-        data.append("sewerLines", encodeURI(document.querySelector('#guandao option:checked').value)); //具有管网条件
-        data.append("biogasUtilization", encodeURI(document.querySelector('#zhaoqi option:checked').value)); //具有沼气利用工程
-        data.append("mixedTreatment", encodeURI(document.querySelector('#hunhe option:checked').value)); //计划与其他生活污水混合处理
-        data.append("otherTreatment", encodeURI(document.querySelector('#jihua option:checked').value)); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
+        const temperaturecheckbox = document.getElementsByName("temperature_check"); //温度条件
+        let temperature_check_val = "";
+        for (let k = 0; k < temperaturecheckbox.length; k++) {
+            if (temperaturecheckbox[k].checked)
+                if(temperature_check_val === ""){
+                    temperature_check_val = temperaturecheckbox[k].value;
+                }else{
+                    temperature_check_val = temperature_check_val + "," + temperaturecheckbox[k].value;
+                }
+        }
+        data.append("natureTemp", encodeURI(temperature_check_val));
 
+        const watercheckbox = document.getElementsByName("water_check"); //水资源条件
+        let water_check_val = "";
+        for (let k = 0; k < watercheckbox.length; k++) {
+            if (watercheckbox[k].checked) {
+                if(water_check_val === ""){
+                    water_check_val = watercheckbox[k].value;
+                }else{
+                    water_check_val = water_check_val + "," + watercheckbox[k].value;
+                }
+
+            }
+        }
+        data.append("water", encodeURI(water_check_val));
+
+        const dixingcheckbox = document.getElementsByName("dixing_check"); //地形条件
+        let dixing_check_val = "";
+        for (let k = 0; k < dixingcheckbox.length; k++) {
+            if (dixingcheckbox[k].checked){
+                if(dixing_check_val === ""){
+                    dixing_check_val = dixingcheckbox[k].value;
+                }else{
+                    dixing_check_val = dixing_check_val + "," + dixingcheckbox[k].value;
+                }
+            }
+
+        }
+        data.append("terrain", encodeURI(dixing_check_val));
+
+        const positioncheckbox = document.getElementsByName("diliweizhi_check"); //地理位置条件
+        let position_check_val = "";
+        for (let k = 0; k < positioncheckbox.length; k++) {
+            if (positioncheckbox[k].checked){
+                if(position_check_val === ""){
+                    position_check_val = positioncheckbox[k].value;
+                }else{
+                    position_check_val = position_check_val + "," + positioncheckbox[k].value;
+                }
+            }
+
+        }
+        data.append("geolocation", encodeURI(position_check_val));
+
+        const shengtaicheckbox = document.getElementsByName("shengtai_check"); //生态限制条件
+        let shengtai_check_val = "";
+        for (let k = 0; k < shengtaicheckbox.length; k++) {
+            if (shengtaicheckbox[k].checked){
+                if(shengtai_check_val === ""){
+                    shengtai_check_val = shengtaicheckbox[k].value;
+                }else{
+                    shengtai_check_val = shengtai_check_val + "," + shengtaicheckbox[k].value;
+                }
+            }
+
+        }
+        data.append("ecotope", encodeURI(shengtai_check_val));
+
+        const renkoucheckbox = document.getElementsByName("renkou_check"); //人口密集程度
+        let renkou_check_val = "";
+        for (let k = 0; k < renkoucheckbox.length; k++) {
+            if (renkoucheckbox[k].checked){
+                if(renkou_check_val === ""){
+                    renkou_check_val = renkoucheckbox[k].value;
+                }else{
+                    renkou_check_val = renkou_check_val + "," + renkoucheckbox[k].value;
+                }
+            }
+
+        }
+        data.append("density", encodeURI(renkou_check_val));
+
+         //液态肥使用习惯
+        data.append("usageHabits", encodeURI($("input[name='yetaifei']:checked").val()));
+
+        myselect = document.getElementById("wangguantiaojian"); //具有管网条件
+        data.append("sewerLines", encodeURI($("input[name='wangguantiaojian']:checked").val()));
+
+
+        myselect = document.getElementById("zhaoqi"); //具有沼气利用工程
+        data.append("biogasUtilization", encodeURI($("input[name='zhaoqi']:checked").val()));
+
+        myselect = document.getElementById("wushuihunhe"); //计划与其他生活污水混合处理
+        data.append("mixedTreatment", encodeURI($("input[name='wushuihunhe']:checked").val()));
+
+        myselect = document.getElementById("yibingchuli"); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
+        data.append("otherTreatment", encodeURI($("input[name='yibingchuli']:checked").val()));
+        for(var key in data.keys()){
+            console.log(data.get(key))
+        }
         $.ajax({
             url: "/toilet/company/pattern/modify",
             type: "POST",
