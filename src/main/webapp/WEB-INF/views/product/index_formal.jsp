@@ -33,11 +33,15 @@
 <%
     String sort_condition = "price";
     String sort_way = "false";
+    String productType = "完整下水道水冲式厕所";
     if (request.getAttribute("sort_condition") != null) {
         sort_condition = request.getAttribute("sort_condition").toString();
     }
     if (request.getAttribute("sort_way") != null) {
         sort_way = request.getAttribute("sort_way").toString();
+    }
+    if (request.getAttribute("productType") != null) {
+        productType = request.getAttribute("productType").toString();
     }
 %>
 <!-- .container_12 -->
@@ -86,6 +90,23 @@
             <div class="c_header">
                 <div class="grid_6">
                     <h2>产品展示</h2>
+                </div>
+                <div class="grid_5">
+                    <select name="productselect" id="productselect">
+                        <option value="" disabled selected hidden>请选择产品类型</option>
+                        <option value="0">完整下水道水冲式厕所</option>
+                        <option value="1">化粪池式厕所</option>
+                        <option value="2">双瓮漏斗式厕所</option>
+                        <option value="3">三联沼气池式厕所</option>
+                        <option value="4">复合生物反应微水冲厕所</option>
+                        <option value="5">真空负压厕所</option>
+                        <option value="6">多级生化组合电催化氧化厕所</option>
+                        <option value="7">膜生物反应器（MBR）厕所</option>
+                        <option value="8">生态旱厕</option>
+                        <option value="9">双坑交替式厕所</option>
+                        <option value="10">粪尿分集式厕所</option>
+                        <option value="11">泡沫封堵液</option>
+                    </select>
                 </div>
                 <div class="grid_2">
                     <select class="grid_2" name="sortCondition" id="sortCondition">
@@ -251,6 +272,7 @@
     $(document).ready(function () {
         $('#sortCondition').val('<%=sort_condition%>');
         $('#sortWay').val('<%=sort_way%>');
+        $('#productselect').val('<%=productType%>');
     });
 </script>
 <script>
@@ -275,28 +297,27 @@
     }
     pageSet(total, pageNow);
     let data = {};
-
     function getprepage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow - 1;
+        data["productSelect"] = $('#productselect').val();
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
-
     function findpage(pageindex) {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageindex;
+        data["productSelect"] = $('#productselect').val();
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
-
     function getnextpage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow + 1;
+        data["productSelect"] = $('#productselect').val();
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
-
     $page.on("click", 'label', function (e) {
         let sign = e.target.innerText;
         console.log(e, sign, sign === '...');
@@ -324,7 +345,6 @@
             }
         }
     });
-
     function pageSet(total, pageNow) {
         let i = 1, dom = '';
         let firstDisabled;
@@ -344,7 +364,6 @@
         } else {
             dom = '<span id="up" class="text">上一页</span>';
         }
-
         if (total < 10) {
             while (i <= total || i === 1) {
                 let active = pageNow === i ? 'active' : '';
@@ -380,7 +399,6 @@
             }
         }
         if (endDisabled === 'none') {
-
             dom += '<span id="down" class="text" style="display: none">下一页</span>';
         } else {
             dom += '<span id="down" class="text">下一页</span>';
@@ -396,6 +414,7 @@
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["product_search_condition"] = '<%=(String) request.getAttribute("product_search_condition")%>';
+        data["productSelect"] = $('#productselect').val();
         Post("${pageContext.request.contextPath}/product/sort", data);
     }
 </script>
