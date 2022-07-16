@@ -465,6 +465,14 @@
                                                                            rows="9" placeholder="适用条件..."
                                                                            class="form-control"></textarea></div>
                                 </div>
+                                <div class="row form-group" id="chanpinzucheng" style="display: none">
+                                    <div class="col col-md-3"><label for="chanpinyuanli" class="form-control-label">产品原理及组成
+                                        <i class="fa " data-toggle="tooltip" data-placement="top"
+                                           title="输入注意事项"></i></label></div>
+                                    <div class="col-12 col-md-9"><textarea name="chanpinyuanli" id="chanpinyuanli"
+                                                                           rows="9" placeholder="请填写产品原理及组成"
+                                                                           class="form-control"></textarea></div>
+                                </div>
 
                                 <%--                                <div class="row form-group">--%>
                                 <%--                                    <div class="col col-md-3"><label for="yongtu" class="form-control-label">用途--%>
@@ -680,14 +688,6 @@
                                            title="输入注意事项"></i></label></div>
                                     <div class="col-12 col-md-9"><textarea name="peculiar_canshu" id="peculiar_canshu"
                                                                            rows="9" placeholder="产品参数..."
-                                                                           class="form-control"></textarea></div>
-                                </div>
-                                <div class="row form-group" id="chanpinzucheng" style="display: none">
-                                    <div class="col col-md-3"><label for="chanpinyuanli" class="form-control-label">产品原理及组成
-                                        <i class="fa " data-toggle="tooltip" data-placement="top"
-                                           title="输入注意事项"></i></label></div>
-                                    <div class="col-12 col-md-9"><textarea name="chanpinyuanli" id="chanpinyuanli"
-                                                                           rows="9" placeholder="请填写产品原理及组成"
                                                                            class="form-control"></textarea></div>
                                 </div>
 
