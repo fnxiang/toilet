@@ -136,9 +136,9 @@
                                                     <%String[] strArray = null;
                                                         strArray = patternDTO.getEnvConditions().getTemperature().split(",");%>
                                                     <input class="col-md-1" type="checkbox" value="寒冷地区" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("寒冷地区")){%>
-                                                           checked="checked" <%}}%>>寒冷地区</input>
+                                                           checked="checked" <%}}%> disabled>寒冷地区</input>
                                                     <input class="col-md-1" type="checkbox"  value="普通地区"  <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("普通地区")){%>
-                                                           checked="checked" <%}}%>>普通地区</input>
+                                                           checked="checked" <%}}%> disabled>普通地区</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -146,9 +146,9 @@
                                                 <div class="col-12 col-md-9">
                                                     <%strArray = patternDTO.getEnvConditions().getWaterResource().split(",");%>
                                                     <input class="col-md-1" type="checkbox"  value="缺水"  <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("缺水")){%>
-                                                           checked="checked" <%}}%>>缺水</input>
+                                                           checked="checked" <%}}%> disabled>缺水</input>
                                                     <input class="col-md-1" type="checkbox"  value="良好" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("良好")){%>
-                                                           checked="checked" <%}}%>>良好</input>
+                                                           checked="checked" <%}}%> disabled>良好</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -156,15 +156,15 @@
                                                 <div class="col-12 col-md-9">
                                                     <%strArray = patternDTO.getEnvConditions().getTerrain().split(",");%>
                                                     <input class="col-md-1" type="checkbox"  value="平原" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("平坦")){%>
-                                                           checked="checked" <%}}%>>平原</input>
+                                                           checked="checked" <%}}%> disabled>平原</input>
                                                     <input class="col-md-1" type="checkbox"  value="丘陵" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("丘陵")){%>
-                                                           checked="checked" <%}}%>>丘陵</input>
+                                                           checked="checked" <%}}%> disabled>丘陵</input>
                                                     <input class="col-md-1" type="checkbox"  value="山地" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("山地")){%>
-                                                           checked="checked" <%}}%>>山地</input>
+                                                           checked="checked" <%}}%> disabled>山地</input>
                                                     <input class="col-md-1" type="checkbox"  value="高原" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("高原")){%>
-                                                           checked="checked" <%}}%>>高原</input>
+                                                           checked="checked" <%}}%>disabled>高原</input>
                                                     <input class="col-md-1" type="checkbox"  value="盆地" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("盆地")){%>
-                                                           checked="checked" <%}}%>>盆地</input>
+                                                           checked="checked" <%}}%>disabled>盆地</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -172,13 +172,13 @@
                                                 <div class="col-12 col-md-9">
                                                     <%strArray = patternDTO.getEnvConditions().getGeolocation().split(",");%>
                                                     <input  class="col-md-1" type="checkbox"  value="中心镇" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("中心镇")){%>
-                                                            checked="checked" <%}}%>>中心镇</input>
+                                                            checked="checked" <%}}%>disabled>中心镇</input>
                                                     <input  class="col-md-1" type="checkbox"  value="一般镇" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("一般镇")){%>
-                                                            checked="checked" <%}}%>>一般镇</input>
+                                                            checked="checked" <%}}%>disabled>一般镇</input>
                                                     <input  class="col-md-1" type="checkbox"  value="中心村" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("中心村")){%>
-                                                            checked="checked" <%}}%>>中心村</input>
+                                                            checked="checked" <%}}%>disabled>中心村</input>
                                                     <input  class="col-md-1" type="checkbox"  value="基层村" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("基层村")){%>
-                                                            checked="checked" <%}}%>>基层村</input>
+                                                            checked="checked" <%}}%>disabled>基层村</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -186,11 +186,11 @@
                                                 <div class="col-12 col-md-9">
                                                     <%strArray = patternDTO.getEnvConditions().getEcotope().split(",");%>
                                                     <input class="col-md-1" type="checkbox"  value="生态保护区" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("生态保护区")){%>
-                                                           checked="checked" <%}}%>>生态保护区</input>
+                                                           checked="checked" <%}}%>disabled>生态保护区</input>
                                                     <input class="col-md-1" type="checkbox" value="水源保护区" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("水源保护区")){%>
-                                                           checked="checked" <%}}%>>水源保护区</input>
+                                                           checked="checked" <%}}%>disabled>水源保护区</input>
                                                     <input class="col-md-1" type="checkbox" value="普通地区" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("普通地区")){%>
-                                                           checked="checked" <%}}%>>普通地区</input>
+                                                           checked="checked" <%}}%>disabled>普通地区</input>
                                                 </div>
                                             </div>
                                         </div>
@@ -211,23 +211,23 @@
                                                 <div class="col-12 col-md-9">
                                                     <%strArray = patternDTO.getHumanFactors().getDensity().split(",");%>
                                                     <input class="col-md-1" type="checkbox" value="聚集" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("聚集")){%>
-                                                           checked="checked" <%}}%>>聚集</input>
+                                                           checked="checked" <%}}%> disabled>聚集</input>
                                                     <input class="col-md-1" type="checkbox" value="分散" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("分散")){%>
-                                                           checked="checked" <%}}%>>分散</input>
+                                                           checked="checked" <%}}%> disabled>分散</input>
                                                     <input class="col-md-1" type="checkbox" value="普通" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("普通")){%>
-                                                           checked="checked" <%}}%>>普通</input>
+                                                           checked="checked" <%}}%> disabled>普通</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">液态肥使用习惯：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <%strArray = patternDTO.getHumanFactors().getUsageHabits().split(",");%>
-                                                    <input class="col-md-1" type="checkbox" value="是" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("是")){%>
-                                                           checked="checked" <%}}%>>是</input>
-                                                    <input class="col-md-1" type="checkbox" value="否" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("否")){%>
-                                                           checked="checked" <%}}%>>否</input>
-                                                    <input class="col-md-1" type="checkbox" value="均可" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("均可")){%>
-                                                           checked="checked" <%}}%>>均可</input>
+                                                    <input class="col-md-1" type="radio" value="是" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("是")){%>
+                                                           checked="checked" <%}}%> disabled>是</input>
+                                                    <input class="col-md-1" type="radio" value="否" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("否")){%>
+                                                           checked="checked" <%}}%> disabled>否</input>
+                                                    <input class="col-md-1" type="radio" value="均可" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("均可")){%>
+                                                           checked="checked" <%}}%> disabled>均可</input>
                                                 </div>
                                             </div>
                                         </div>
@@ -245,10 +245,10 @@
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">需要具备管网条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <input class="col-md-1" type="checkbox" value="是" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
-                                                           checked="checked" <%}%>>是</input>
-                                                    <input class="col-md-1" type="checkbox" value="否" <%if(!patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
-                                                           checked="checked" <%}%>>否</input>
+                                                    <input class="col-md-1" type="radio" value="是" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
+                                                           checked="checked" <%}%> disabled>是</input>
+                                                    <input class="col-md-1" type="radio" value="否" <%if(!patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
+                                                           checked="checked" <%}%> disabled>否</input>
                                                 </div>
                                             </div>
                                         </div>
@@ -266,31 +266,31 @@
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">具有沼气利用工程：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <input class="col-md-1" type="checkbox" value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
-                                                           checked="checked" <%}%>>是</input>
-                                                    <input class="col-md-1" type="checkbox" value="1" <%if(!patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
-                                                           checked="checked" <%}%>>否</input>
+                                                    <input class="col-md-1" type="radio" value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
+                                                           checked="checked" <%}%> disabled>是</input>
+                                                    <input class="col-md-1" type="radio" value="1" <%if(!patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
+                                                           checked="checked" <%}%> disabled>否</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">可以与其他生活污水混合处理：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <%strArray = patternDTO.getResourceUtilization().getMixedSewageTreatment().split(",");%>
-                                                    <input class="col-md-1" type="checkbox" value="0" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("是")){%>
-                                                           checked="checked" <%}}%>>是</input>
-                                                    <input class="col-md-1" type="checkbox" value="1" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("否")){%>
-                                                           checked="checked" <%}}%>>否</input>
-                                                    <input class="col-md-1" type="checkbox" value="2" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("均可")){%>
-                                                           checked="checked" <%}}%>>均可</input>
+                                                    <input class="col-md-1" type="radio" value="0" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("是")){%>
+                                                           checked="checked" <%}}%> disabled>是</input>
+                                                    <input class="col-md-1" type="radio" value="1" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("否")){%>
+                                                           checked="checked" <%}}%> disabled>否</input>
+                                                    <input class="col-md-1" type="radio" value="2" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("均可")){%>
+                                                           checked="checked" <%}}%> disabled>均可</input>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <input class="col-md-1" type="checkbox" value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
-                                                           checked="checked" <%}%>>是</input>
-                                                    <input class="col-md-1" type="checkbox" value="1"  <%if(!patternDTO.getResourceUtilization().getOtherTreatment()){%>
-                                                           checked="checked" <%}%>>否</input>
+                                                    <input class="col-md-1" type="radio" value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
+                                                           checked="checked" <%}%> disabled>是</input>
+                                                    <input class="col-md-1" type="radio" value="1"  <%if(!patternDTO.getResourceUtilization().getOtherTreatment()){%>
+                                                           checked="checked" <%}%> disabled>否</input>
                                                 </div>
                                             </div>
                                         </div>
