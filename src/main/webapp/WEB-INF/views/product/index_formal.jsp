@@ -91,12 +91,12 @@
                 <div class="grid_6">
                     <h2>产品展示</h2>
                 </div>
-                <div class="grid_5">
-                    <select name="productselect" id="productselect">
-                        <option value="" disabled selected hidden>请选择产品类型</option>
-                        <option value="0">完整下水道水冲式厕所</option>
+                <div class="grid_2">
+
+                    <select name="productselect" class="grid_2" id="productselect">
+                        <option value="0">双瓮漏斗式厕所</option>
                         <option value="1">化粪池式厕所</option>
-                        <option value="2">双瓮漏斗式厕所</option>
+                        <option value="2">完整下水道水冲式厕所</option>
                         <option value="3">三联沼气池式厕所</option>
                         <option value="4">复合生物反应微水冲厕所</option>
                         <option value="5">真空负压厕所</option>
@@ -108,21 +108,21 @@
                         <option value="11">泡沫封堵液</option>
                     </select>
                 </div>
-                <div class="grid_2">
-                    <select class="grid_2" name="sortCondition" id="sortCondition">
+                <div class="grid_1">
+                    <select class="grid_1" name="sortCondition" id="sortCondition">
                         <option value="price">价格</option>
                         <option value="service_life">使用寿命</option>
                         <option value="clean_cycle">清理周期</option>
                     </select>
                 </div>
-                <div class="grid_2">
-                    <select class="grid_2" name="sortWay" id="sortWay">
+                <div class="grid_1">
+                    <select class="grid_1" name="sortWay" id="sortWay">
                         <option value="false">升序</option>
                         <option value="true">降序</option>
                     </select>
                 </div>
-                <div class="grid_2">
-                    <button class="grid_2" onclick="sort()">应用</button>
+                <div class="grid_1">
+                    <button class="grid_1" onclick="sort()">应用</button>
                 </div>
                 <!-- .grid_10 -->
 
