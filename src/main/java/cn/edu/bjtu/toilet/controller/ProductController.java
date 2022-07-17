@@ -129,6 +129,7 @@ public class ProductController {
         request.setAttribute("product_search_condition", JSON.toJSONString(sortRequest.getSearchCondition()));
         request.setAttribute("sort_condition", sortRequest.getSortBy());
         request.setAttribute("sort_way", sortRequest.getIsDesc().toString());
+        request.setAttribute("productType", sortRequest.getProductType());
         request.setAttribute("pageResponse", response);
 
         request.setAttribute("productList", response.getProductDTOList());
@@ -140,6 +141,7 @@ public class ProductController {
         ProductSortRequest sortRequest = new ProductSortRequest();
 
         if (params.size() != 0) {
+            sortRequest.setProductType(params.get("productSelect"));
             sortRequest.setIsDesc(params.get("isDesc").equals("true"));
             sortRequest.setSortBy(params.get("sortBy"));
         } else {
