@@ -179,7 +179,7 @@
                                     <th width="35%"><%=productDTO.getProductParameters().getStandard()%>立方米
                                     </th>
                                     <th class="bg" width="15%">适用人数（人）</th>
-                                    <th width="35%"><%=productDTO.getProductParameters().getApplicableNum()%>人
+                                    <th width="35%"><%=productDTO.getProductParameters().getApplicableNum()%>
                                     </th>
                                 </tr>
                                 <tr>
@@ -227,7 +227,7 @@
                                 <%} else if (productDTO.getProductType().equals("三联沼气池式厕所") || productDTO.getProductType().equals("复合生物反应微水冲厕所") || productDTO.getProductType().equals("多级生化组合电催化氧化厕所") || productDTO.getProductType().equals("膜生物反应器（MBR）厕所") || productDTO.getProductType().equals("生态旱厕") || productDTO.getProductType().equals("粪尿分集式厕所")) {%>
                                 <tr>
                                     <th class="bg" width="15%">适用人数（人）</th>
-                                    <th width="35%"><%=productDTO.getProductParameters().getApplicableNum()%>人
+                                    <th width="35%"><%=productDTO.getProductParameters().getApplicableNum()%>
                                     </th>
                                     <td class="bg">使用寿命(年)</td>
                                     <td><%=productDTO.getProductParameters().getServiceLife()%>
@@ -257,7 +257,7 @@
                                     <th width="35%"><%=productDTO.getProductParameters().getStandard()%>立方米
                                     </th>
                                     <th class="bg" width="15%">适用人数（人）</th>
-                                    <th width="35%"><%=productDTO.getProductParameters().getApplicableNum()%>人
+                                    <th width="35%"><%=productDTO.getProductParameters().getApplicableNum()%>
                                     </th>
                                 </tr>
                                 <tr>
