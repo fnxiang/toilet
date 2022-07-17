@@ -248,13 +248,14 @@
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">液态肥使用习惯：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <%strArray = patternDTO.getHumanFactors().getUsageHabits().split(",");%>
-                                                    <input class="col-md-1" type="radio" value="是" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("是")){%>
-                                                           checked="checked" <%}}%> disabled>是</input>
-                                                    <input class="col-md-1" type="radio" value="否" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("否")){%>
-                                                           checked="checked" <%}}%> disabled>否</input>
-                                                    <input class="col-md-1" type="radio" value="均可" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("均可")){%>
-                                                           checked="checked" <%}}%> disabled>均可</input>
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                        <option value="2" <%if(patternDTO.getHumanFactors().getUsageHabits().equals("均可")){%>
+                                                                selected="selected" <%}%>>均可</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -272,10 +273,12 @@
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">需要具备管网条件：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <input class="col-md-1" type="radio" value="是" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
-                                                           checked="checked" <%}%> disabled>是</input>
-                                                    <input class="col-md-1" type="radio" value="否" <%if(!patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
-                                                           checked="checked" <%}%> disabled>否</input>
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -293,31 +296,36 @@
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">具有沼气利用工程：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <input class="col-md-1" type="radio" value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
-                                                           checked="checked" <%}%> disabled>是</input>
-                                                    <input class="col-md-1" type="radio" value="1" <%if(!patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
-                                                           checked="checked" <%}%> disabled>否</input>
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">可以与其他生活污水混合处理：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <%strArray = patternDTO.getResourceUtilization().getMixedSewageTreatment().split(",");%>
-                                                    <input class="col-md-1" type="radio" value="0" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("是")){%>
-                                                           checked="checked" <%}}%> disabled>是</input>
-                                                    <input class="col-md-1" type="radio" value="1" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("否")){%>
-                                                           checked="checked" <%}}%> disabled>否</input>
-                                                    <input class="col-md-1" type="radio" value="2" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("均可")){%>
-                                                           checked="checked" <%}}%> disabled>均可</input>
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                        <option value="2" <%if(patternDTO.getResourceUtilization().getMixedSewageTreatment().equals("均可")){%>
+                                                                selected="selected" <%}%>>均可</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理：</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <input class="col-md-1" type="radio" value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
-                                                           checked="checked" <%}%> disabled>是</input>
-                                                    <input class="col-md-1" type="radio" value="1"  <%if(!patternDTO.getResourceUtilization().getOtherTreatment()){%>
-                                                           checked="checked" <%}%> disabled>否</input>
+                                                    <select name="select" id="select" class="form-control" disabled>
+                                                        <option value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment().equals("是")){%>
+                                                                selected="selected" <%}%>>是</option>
+                                                        <option value="1"  <%if(patternDTO.getResourceUtilization().getOtherTreatment().equals("否")){%>
+                                                                selected="selected" <%}%>>否</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>

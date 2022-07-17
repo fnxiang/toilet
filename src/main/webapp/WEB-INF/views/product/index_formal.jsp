@@ -33,11 +33,15 @@
 <%
     String sort_condition = "price";
     String sort_way = "false";
+    String productType = "完整下水道水冲式厕所";
     if (request.getAttribute("sort_condition") != null) {
         sort_condition = request.getAttribute("sort_condition").toString();
     }
     if (request.getAttribute("sort_way") != null) {
         sort_way = request.getAttribute("sort_way").toString();
+    }
+    if (request.getAttribute("productType") != null) {
+        productType = request.getAttribute("productType").toString();
     }
 %>
 <!-- .container_12 -->
@@ -88,20 +92,37 @@
                     <h2>产品展示</h2>
                 </div>
                 <div class="grid_2">
-                    <select class="grid_2" name="sortCondition" id="sortCondition">
+
+                    <select name="productselect" class="grid_2" id="productselect">
+                        <option value="0">双瓮漏斗式厕所</option>
+                        <option value="1">化粪池式厕所</option>
+                        <option value="2">完整下水道水冲式厕所</option>
+                        <option value="3">三联沼气池式厕所</option>
+                        <option value="4">复合生物反应微水冲厕所</option>
+                        <option value="5">真空负压厕所</option>
+                        <option value="6">多级生化组合电催化氧化厕所</option>
+                        <option value="7">膜生物反应器（MBR）厕所</option>
+                        <option value="8">生态旱厕</option>
+                        <option value="9">双坑交替式厕所</option>
+                        <option value="10">粪尿分集式厕所</option>
+                        <option value="11">泡沫封堵液</option>
+                    </select>
+                </div>
+                <div class="grid_1">
+                    <select class="grid_1" name="sortCondition" id="sortCondition">
                         <option value="price">价格</option>
                         <option value="service_life">使用寿命</option>
                         <option value="clean_cycle">清理周期</option>
                     </select>
                 </div>
-                <div class="grid_2">
-                    <select class="grid_2" name="sortWay" id="sortWay">
+                <div class="grid_1">
+                    <select class="grid_1" name="sortWay" id="sortWay">
                         <option value="false">升序</option>
                         <option value="true">降序</option>
                     </select>
                 </div>
-                <div class="grid_2">
-                    <button class="grid_2" onclick="sort()">应用</button>
+                <div class="grid_1">
+                    <button class="grid_1" onclick="sort()">应用</button>
                 </div>
                 <!-- .grid_10 -->
 
@@ -251,6 +272,7 @@
     $(document).ready(function () {
         $('#sortCondition').val('<%=sort_condition%>');
         $('#sortWay').val('<%=sort_way%>');
+        $('#productselect').val('<%=productType%>');
     });
 </script>
 <script>
@@ -275,28 +297,27 @@
     }
     pageSet(total, pageNow);
     let data = {};
-
     function getprepage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow - 1;
+        data["productSelect"] = $('#productselect').val();
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
-
     function findpage(pageindex) {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageindex;
+        data["productSelect"] = $('#productselect').val();
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
-
     function getnextpage() {
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["pageIndex"] = pageNow + 1;
+        data["productSelect"] = $('#productselect').val();
         Post("${pageContext.request.contextPath}/toProductPage?url=next", data);
     }
-
     $page.on("click", 'label', function (e) {
         let sign = e.target.innerText;
         console.log(e, sign, sign === '...');
@@ -324,7 +345,6 @@
             }
         }
     });
-
     function pageSet(total, pageNow) {
         let i = 1, dom = '';
         let firstDisabled;
@@ -344,7 +364,6 @@
         } else {
             dom = '<span id="up" class="text">上一页</span>';
         }
-
         if (total < 10) {
             while (i <= total || i === 1) {
                 let active = pageNow === i ? 'active' : '';
@@ -380,7 +399,6 @@
             }
         }
         if (endDisabled === 'none') {
-
             dom += '<span id="down" class="text" style="display: none">下一页</span>';
         } else {
             dom += '<span id="down" class="text">下一页</span>';
@@ -396,6 +414,7 @@
         data["sortBy"] = $('#sortCondition').val();
         data["isDesc"] = $('#sortWay').val();
         data["product_search_condition"] = '<%=(String) request.getAttribute("product_search_condition")%>';
+        data["productSelect"] = $('#productselect').val();
         Post("${pageContext.request.contextPath}/product/sort", data);
     }
 </script>

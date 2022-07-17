@@ -176,9 +176,9 @@
             index = myselect.selectedIndex;
             data.append("clean_select", myselect.options[index].text);
 
-            myselect = document.getElementById("yongtu_select"); //清理周期
+            myselect = document.getElementById("yongtu_select"); //厕所用途
             index = myselect.selectedIndex;
-            data.append("yongtu_select", myselect.options[index].text);
+            data.append("propose_select", myselect.options[index].text);
 
             myselect = document.getElementById("shiyong_select"); //适用人数
             index = myselect.selectedIndex;

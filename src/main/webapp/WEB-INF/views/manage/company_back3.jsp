@@ -782,7 +782,7 @@
 
                             <hr>
                             <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="entry()">
+                                <button type="button" class="btn btn-outline-secondary" onclick="entry()" id="tijiao">
                                     确认提交
                                 </button>
                             </div>
@@ -987,6 +987,10 @@
         var mode_list = mode_content_selectMap[product_value];
         mode_selectDiv.innerHTML = "";
         var ul = document.createElement("ul");
+        if(!mode_list || mode_list.length === 0){
+            $('#tijiao').css("display", "none");
+            show("暂无对应模式信息！");
+        }
         for (var i = 0; i < mode_list.length; i++) {
             var arr = mode_list[i];
             // 加入复选框
