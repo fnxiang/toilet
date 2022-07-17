@@ -3,6 +3,8 @@ package cn.edu.bjtu.toilet.constant;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
 
+import java.util.Objects;
+
 public enum ProductPriceType {
 
     PRICE_LEVEL1("0.5以内"),
@@ -33,6 +35,10 @@ public enum ProductPriceType {
     }
 
     public static ProductPriceType of(Double standard) {
+        if (Objects.isNull(standard)) {
+            return null;
+        }
+
         standard = standard/10000.0;
         if (standard < 0.5) {
             return PRICE_LEVEL1;

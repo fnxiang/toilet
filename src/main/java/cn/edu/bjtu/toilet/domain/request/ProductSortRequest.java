@@ -14,4 +14,6 @@ public class ProductSortRequest extends PageRequest {
     private ProductSearchConditionsDTO searchCondition;
 
     private AuditStatus auditStatus;
+
+    private String productType;
 }

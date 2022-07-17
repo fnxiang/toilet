@@ -131,6 +131,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private List<ToiletProductDTO> matchConditions(List<ToiletProductDTO> productDTOS, ProductSearchConditionsDTO searchConditions) {
+
+        if (Objects.isNull(searchConditions.getPriceType())) {
+            return productDTOS;
+        }
+
         return productDTOS.stream().map(productDTO -> {
             ProductParamsDTO productParamsDTO = productDTO.getProductParameters();
             if (ProductStandardType.of(productParamsDTO.getStandard()).equals(searchConditions.getStandardType())

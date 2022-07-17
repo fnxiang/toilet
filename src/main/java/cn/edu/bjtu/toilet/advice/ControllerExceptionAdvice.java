@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@ControllerAdvice(basePackages = "cn.edu.bjtu.toilet")
 public class ControllerExceptionAdvice {
 
     @ExceptionHandler({Exception.class, BindException.class})

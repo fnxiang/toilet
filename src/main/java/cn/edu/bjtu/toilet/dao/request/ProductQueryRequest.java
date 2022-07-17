@@ -13,4 +13,6 @@ public class ProductQueryRequest extends PageRequest {
 
     private AuditStatus auditStatus;
 
+    private String productType;
+
 }

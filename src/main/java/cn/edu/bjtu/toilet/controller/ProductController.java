@@ -55,6 +55,7 @@ public class ProductController {
         return INDEX;
     }
 
+    @Deprecated
     @RequestMapping(value = "/product/next")
     public String toNextPage(HttpServletRequest request) {
         try {
