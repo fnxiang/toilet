@@ -94,18 +94,18 @@
                 <div class="grid_2">
 
                     <select name="productselect" class="grid_2" id="productselect">
-                        <option value="0">双瓮漏斗式厕所</option>
-                        <option value="1">化粪池式厕所</option>
-                        <option value="2">完整下水道水冲式厕所</option>
-                        <option value="3">三联沼气池式厕所</option>
-                        <option value="4">复合生物反应微水冲厕所</option>
-                        <option value="5">真空负压厕所</option>
-                        <option value="6">多级生化组合电催化氧化厕所</option>
-                        <option value="7">膜生物反应器（MBR）厕所</option>
-                        <option value="8">生态旱厕</option>
-                        <option value="9">双坑交替式厕所</option>
-                        <option value="10">粪尿分集式厕所</option>
-                        <option value="11">泡沫封堵液</option>
+                        <option value="双瓮漏斗式厕所">双瓮漏斗式厕所</option>
+                        <option value="化粪池式厕所">化粪池式厕所</option>
+                        <option value="完整下水道水冲式厕所">完整下水道水冲式厕所</option>
+                        <option value="三联沼气池式厕所">三联沼气池式厕所</option>
+                        <option value="复合生物反应微水冲厕所">复合生物反应微水冲厕所</option>
+                        <option value="真空负压厕所">真空负压厕所</option>
+                        <option value="多级生化组合电催化氧化厕所">多级生化组合电催化氧化厕所</option>
+                        <option value="膜生物反应器（MBR）厕所">膜生物反应器（MBR）厕所</option>
+                        <option value="生态旱厕">生态旱厕</option>
+                        <option value="双坑交替式厕所">双坑交替式厕所</option>
+                        <option value="粪尿分集式厕所">粪尿分集式厕所</option>
+                        <option value="泡沫封堵液">泡沫封堵液</option>
                     </select>
                 </div>
                 <div class="grid_1">
@@ -286,7 +286,6 @@
     });
 </script>
 
-<%--fixme 换页时upload products failed : null--%>
 <%--分页--%>
 <script>
     let $page = $('#page');

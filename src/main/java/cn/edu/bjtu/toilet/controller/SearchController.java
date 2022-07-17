@@ -73,6 +73,7 @@ public class SearchController {
 
             request.setAttribute("product_search_condition", JSON.toJSONString(productSortRequest.getSearchCondition()));
             request.setAttribute("pageResponse", productQueryResponse);
+            request.setAttribute("productType", productSortRequest.getProductType());
             request.setAttribute("productList", productQueryResponse.getProductDTOList());
 
         } catch (Exception e) {
@@ -88,6 +89,7 @@ public class SearchController {
         productSortRequest.setSearchCondition(buildSearchConditions(params));
         productSortRequest.setIsDesc(false);
         productSortRequest.setSortBy("price");
+        productSortRequest.setProductType(params.get("type_select"));
         return productSortRequest;
     }
 
