@@ -123,19 +123,6 @@ public class SearchController {
         return "/product/mode_list";
     }
 
-    private List<ToiletProductDTO> matchProductConditions(List<ToiletProductDTO> productDTOS, ToiletPatternDTO searchDTO) {
-
-        return productDTOS.stream().map(productDTO -> {
-            ToiletPatternDTO patternDTO = productDTO.getToiletPatternDTO();
-            if (patternCompare(patternDTO, searchDTO)) {
-                return productDTO;
-            }
-
-            return null;
-        }).filter(Objects::nonNull)
-                .collect(Collectors.toList());
-    }
-
     private List<ToiletPatternDTO> matchPatternConditions(List<ToiletPatternDTO> patternDTOS, ToiletPatternDTO searchDTO) {
 
         return patternDTOS.stream().map(item -> {
@@ -243,6 +230,7 @@ public class SearchController {
 
     private ProductSearchConditionsDTO buildSearchConditions(Map<String, String> params) {
         return ProductSearchConditionsDTO.builder()
+                .productType(params.get("type_select"))
                 .standardType(ProductStandardType.typeOf(params.get("guige_select")))
                 .textureType(ProductTextureType.typeOf(params.get("caizhi_select")))
                 .lifeCycleType(ProductLifeCycleType.typeOf(params.get("life_select")))

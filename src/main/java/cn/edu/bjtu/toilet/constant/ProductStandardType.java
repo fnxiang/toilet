@@ -3,6 +3,8 @@ package cn.edu.bjtu.toilet.constant;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
 
+import java.util.Objects;
+
 public enum ProductStandardType {
 
     LEVEL1("≤0.5"),
@@ -34,6 +36,11 @@ public enum ProductStandardType {
     }
 
     public static ProductStandardType of(Double standard) {
+
+        if (Objects.isNull(standard)) {
+            return null;
+        }
+
         if (standard <= 0.5) {
             return LEVEL1;
         } else if (standard <= 10) {

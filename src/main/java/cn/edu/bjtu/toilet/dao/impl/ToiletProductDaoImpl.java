@@ -77,6 +77,10 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
             criteria.andProfessorEmailEqualTo(request.getProfessorEmail());
         }
 
+        if (!StringUtils.isEmpty(request.getProductType())) {
+            criteria.andProductTypeEqualTo(request.getProductType());
+        }
+
         criteria.andDeletedNotEqualTo(true);
 
         return productDOMapper.selectByExampleWithBLOBs(toiletProductDOSelective);
@@ -106,15 +110,16 @@ public class ToiletProductDaoImpl implements ToiletProductDao {
     @Override
     public ToiletProductDO updateProductBySource(ToiletProductDO productDO) {
         ToiletProductDO productDOFromDb = queryProductBySource(productDO.getSource());
-        productDO.setGmtModified(new Date());
-        productDO.setVersion(productDOFromDb.getVersion() + 1);
+
 
         ToiletProductDOSelective productDOSelective = new ToiletProductDOSelective();
         ToiletProductDOSelective.Criteria criteria = productDOSelective.createCriteria();
 
         criteria.andSourceEqualTo(productDO.getSource());
         criteria.andDeletedNotEqualTo(true);
-
+        criteria.andVersionEqualTo(productDO.getVersion());
+        productDO.setGmtModified(new Date());
+        productDO.setVersion(productDOFromDb.getVersion() + 1);
         int c = productDOMapper.updateByExampleSelective(productDO, productDOSelective);
 
         if (c != 1) {

@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductSearchConditionsDTO {
 
+    private String productType;
+
     private ProductStandardType standardType;
 
     private ProductTextureType textureType;

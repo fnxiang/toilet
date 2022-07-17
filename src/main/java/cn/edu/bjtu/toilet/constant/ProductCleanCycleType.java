@@ -3,6 +3,8 @@ package cn.edu.bjtu.toilet.constant;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
 
+import java.util.Objects;
+
 public enum ProductCleanCycleType {
     CLEAN_LEVEL1("≤3个月"),
     CLEAN_LEVEL2("4～6个月"),
@@ -31,6 +33,11 @@ public enum ProductCleanCycleType {
     }
 
     public static ProductCleanCycleType of(Integer num) {
+
+        if (Objects.isNull(num)) {
+            return null;
+        }
+
         if (num <= 3) {
             return CLEAN_LEVEL1;
         } else if (num < 6) {

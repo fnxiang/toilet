@@ -351,10 +351,8 @@ public class CompanyController {
                     selectMap.get(item.getProductType()).add(item.getPatternType());
                 }
             });
-            Map<String, ToiletPatternDTO> patternDTOMap = patternDTOS.stream().collect(Collectors.toMap(ToiletPatternDTO::getPatternType, e -> e));
             response.setSuccess(true);
             response.setSelectMap(selectMap);
-            response.setPatternDTOMap(patternDTOMap);
         } catch (ToiletBizException | ToiletSystemException e) {
             LOG.error("get modes error with {}", e.getMessage());
             return ModeResponse.failed(e.getMessage());
@@ -399,11 +397,11 @@ public class CompanyController {
         ToiletPatternDTO toiletPatternDTO = new ToiletPatternDTO();
 
         toiletPatternDTO.setProductType(params.get("productType"));
+        toiletPatternDTO.setPatternType(params.get("patternType"));
         toiletPatternDTO.setPatternInfo(params.get("patternInfo"));
 
         // 自然环境条件
         EnvConditionsDTO envConditionsDTO = new EnvConditionsDTO();
-        // TODO 前端传过来数据有逗号
         envConditionsDTO.setTemperature(params.get("natureTemp"));
         envConditionsDTO.setTerrain(params.get("terrain"));
         envConditionsDTO.setWaterResource(params.get("water"));

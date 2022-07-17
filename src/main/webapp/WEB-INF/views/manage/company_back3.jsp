@@ -843,7 +843,6 @@
 
 <script type="text/javascript">
     var mode_content_selectMap = '';
-    var mode_content_patternDTOMap = '';
     <%--	文字提示	--%>
     $('use_for').tooltip({boundary: 'window'});
     $(document).ready(function () {
@@ -882,7 +881,6 @@
             success: function (result) {
                 if (result.success) {
                     mode_content_selectMap = result.selectMap;
-                    mode_content_patternDTOMap = result.patternDTOMap;
                     // //动态赋值给控件  productselect   multiple-select
                     // var productSelect = document.getElementById("productselect");
                     // var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
@@ -909,7 +907,7 @@
         });
     });
 
-    function productchange() { // mode_content_selectMap   mode_content_patternDTOMap
+    function productchange() { // mode_content_selectMap
         var product_select = document.getElementById("productselect");
         var mode_selectDiv = document.getElementsByClassName("multiple-select")[0];
         var zhongliangdiv = $("#zhong").get(0);
