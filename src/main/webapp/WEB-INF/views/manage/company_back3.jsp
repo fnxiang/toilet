@@ -990,6 +990,8 @@
         if(!mode_list || mode_list.length === 0){
             $('#tijiao').css("display", "none");
             show("暂无对应模式信息！");
+        }else{
+            $('#tijiao').css("display", "block");
         }
         for (var i = 0; i < mode_list.length; i++) {
             var arr = mode_list[i];
