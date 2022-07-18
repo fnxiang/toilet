@@ -781,8 +781,8 @@
                             </form>
 
                             <hr>
-                            <div class="card-text text-lg-center">
-                                <button type="button" class="btn btn-outline-secondary" onclick="entry()" id="tijiao">
+                            <div class="card-text text-lg-center" id="tijiao">
+                                <button type="button" class="btn btn-outline-secondary" onclick="entry()">
                                     确认提交
                                 </button>
                             </div>
