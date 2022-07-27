@@ -155,7 +155,7 @@
                                                 <div class="col col-md-3"><label for="select" class=" form-control-label">地形条件：</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <%strArray = patternDTO.getEnvConditions().getTerrain().split(",");%>
-                                                    <input class="col-md-1" type="checkbox"  value="平原" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("平坦")){%>
+                                                    <input class="col-md-1" type="checkbox"  value="平原" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("平原")){%>
                                                            checked="checked" <%}}%> disabled>平原</input>
                                                     <input class="col-md-1" type="checkbox"  value="丘陵" <%for(int i = 0; i < strArray.length; i++){if(strArray[i].equals("丘陵")){%>
                                                            checked="checked" <%}}%> disabled>丘陵</input>
