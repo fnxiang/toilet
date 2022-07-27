@@ -281,7 +281,7 @@
                                                     <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
                                                                 selected="selected" <%}%>>是</option>
-                                                        <option value="1" <%if(patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
+                                                        <option value="1" <%if(!patternDTO.getPipNetworkConditions().getHasSewerLines()){%>
                                                                 selected="selected" <%}%>>否</option>
                                                     </select>
                                                 </div>
@@ -304,7 +304,7 @@
                                                     <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
                                                                 selected="selected" <%}%>>是</option>
-                                                        <option value="1" <%if(patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
+                                                        <option value="1" <%if(!patternDTO.getResourceUtilization().getIsBiogasUtilization()){%>
                                                                 selected="selected" <%}%>>否</option>
                                                     </select>
                                                 </div>
@@ -326,7 +326,7 @@
                                                     <select name="select" id="select" class="form-control" disabled>
                                                         <option value="0" <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
                                                                 selected="selected" <%}%>>是</option>
-                                                        <option value="1"  <%if(patternDTO.getResourceUtilization().getOtherTreatment()){%>
+                                                        <option value="1"  <%if(!patternDTO.getResourceUtilization().getOtherTreatment()){%>
                                                                 selected="selected" <%}%>>否</option>
                                                     </select>
                                                 </div>
