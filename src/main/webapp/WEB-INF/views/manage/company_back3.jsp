@@ -434,7 +434,35 @@
                                     <%--                                        </div>--%>
                                     <%--                                    </div>--%>
                                     <hr>
-
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="province" class="form-control-label">适用地区
+                                            <i class="fa " data-toggle="tooltip" data-placement="top"
+                                               title="输入注意事项"></i></label></div>
+                                        <div class="col-12 col-md-9">
+                                            <input class="col-md-1" type="checkbox" name="diqu_check"
+                                                   value="东北地区"/>东北地区
+                                            <input class="col-md-1" type="checkbox" name="diqu_check"
+                                                   value="华东地区"/>华东地区
+                                            <input class="col-md-1" type="checkbox" name="diqu_check"
+                                                   value="华北地区"/>华北地区
+                                            <input class="col-md-1" type="checkbox" name="diqu_check"
+                                                   value="华中地区"/>华中地区
+                                            <input class="col-md-1" type="checkbox" name="diqu_check"
+                                                   value="华南地区"/>华南地区
+                                            <input class="col-md-1" type="checkbox" name="diqu_check"
+                                                   value="西南地区"/>西南地区
+                                            <input class="col-md-1" type="checkbox" name="diqu_check"
+                                                   value="西北地区"/>西北地区
+                                            <small class="form-text text-muted">东北地区：黑龙江省、吉林省、辽宁省、内蒙古东部</br>
+                                                华东地区：上海市、江苏省、浙江省、安徽省、江西省、山东省、福建省、台湾省</br>
+                                                华北地区：北京市、天津市、山西省、河北省、内蒙古自治区中部</br>
+                                                华中地区：河南省、湖北省、湖南省</br>
+                                                华南地区：广东省、广西壮族自治区、海南省、香港特别行政区、澳门特别行政区</br>
+                                                西南地区：重庆市、四川省、贵州省、云南省、西藏自治区</br>
+                                                西北地区：陕西省、甘肃省、青海省、宁夏回族自治区、新疆维吾尔族自治区、内蒙古自治区西部阿拉善盟
+                                            </small>
+                                        </div>
+                                    </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="province" class="form-control-label">适用省份
                                             <i class="fa " data-toggle="tooltip" data-placement="top"
@@ -1090,6 +1118,19 @@
         // myselect = document.getElementById("yibingchuli"); //计划与畜禽粪污、餐厨垃圾、农作物秸秆、尾菜等一并处理
         // index = myselect.selectedIndex;
         // data.append("otherTreatment", encodeURI(myselect.options[index].text));
+        const diquckbox = document.getElementsByName("diqu_check");
+        let diquckbox_val = "";
+        for (let k = 0; k < diquckbox.length; k++) {
+            if (diquckbox[k].checked){
+                if(diquckbox_val === ""){
+                    diquckbox_val = diquckbox[k].value;
+                }else{
+                    diquckbox_val = diquckbox_val + "," + diquckbox[k].value;
+                }
+            }
+
+        }
+        data.append("region", encodeURI(diquckbox_val));//使用地区
         data.append("province", encodeURI($('#province').val())); //适用省份
         data.append("temperature", encodeURI($('#wendufanwei').val())); //适用温度范围
         data.append("features", encodeURI($('#chanpingtedian').val())); //产品特点

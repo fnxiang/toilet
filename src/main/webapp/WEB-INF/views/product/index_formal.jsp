@@ -53,7 +53,16 @@
         <div class="grid_12">
             <nav class="primary">
                 <ul>
-                    <li class="curent"><a href="#">首页</a></li>
+                    <li>
+                    <a href="#" id="tongjitubiao">统计图表</a>
+                    <ul class="sub">
+                    <li class="curent" id="l1"><a href="javascript:void(0)" onclick="xianshi1()">产品数量分布统计图</a></li>
+                    <li id="l2"><a href="javascript:void(0)" onclick="xianshi2()">产品录入数量地区分布统计图</a></li>
+                    <li id="l3"><a href="javascript:void(0)" onclick="xianshi3()">普通用户分布省份统计图</a></li>
+                    <li id="l4"><a href="javascript:void(0)" onclick="xianshi4()">企业注册地区分布统计图</a></li>
+                    </ul>
+                    </li>
+                    <li id="l5"><a href="javascript:void(0)" onclick="chanpin()">产品列表</a></li>
                     <li>
                         <a href="#">预留</a>
                         <ul class="sub">
@@ -86,7 +95,7 @@
     <div class="container_12">
         <div class="clear"></div>
 
-        <div class="carousel">
+        <div class="carousel" style="display: none" id="chanpinzhanshi">
             <div class="c_header">
                 <div class="grid_6">
                     <h2>产品展示</h2>
@@ -234,6 +243,17 @@
             </div>
 
         </div>
+        <div class="carousel" id="tubiaozhanshi">
+
+        <div class="list_carousel">
+            <div style="width: 100%;height: 100%; margin: auto">
+                <div id="map1" style="width: 100vh;height: 100vh;  margin: auto"></div>
+                <div id="map2" style="width: 150vh;height: 100vh; margin: auto; display: none; "></div>
+                <div id="map3" style="width: 100vh;height: 200vh; margin: auto; display: none; "></div>
+                <div id="map4" style="width: 100vh;height: 150vh; margin: auto; display: none; "></div>
+            </div>
+        </div>
+        </div>
     </div>
 
 </section>
@@ -248,11 +268,13 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
 <!-- /Added by HTTrack -->
 
-<script src="${pageContext.request.contextPath}/static/product/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/product/js/jquery-1.7.2.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/product/js/html5.js"></script>
 <script src="${pageContext.request.contextPath}/static/product/js/jflow.plus.js"></script>
 <script src="${pageContext.request.contextPath}/static/product/js/jquery.carouFredSel-5.2.2-packed.js"></script>
-<script src="${pageContext.request.contextPath}/static/product/js/jquery.pagination.js"></script>
+<script src="${pageContext.request.contextPath}/static/product/chart/js/echarts.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/product/chart/map/js/china.js"></script>
+
 
 <script>
     $(document).ready(function () {
@@ -285,7 +307,669 @@
         $(window).resize();
     });
 </script>
+<%--产品数量图表--%>
+<script>
+    function randomData() {
+        return Math.round(Math.random()*500);
+    }
+    var mydata = [
+        {name: '北京',value: '100' },{name: '天津',value: randomData() },
+        {name: '上海',value: randomData() },{name: '重庆',value: randomData() },
+        {name: '河北',value: randomData() },{name: '河南',value: randomData() },
+        {name: '云南',value: randomData() },{name: '辽宁',value: randomData() },
+        {name: '黑龙江',value: randomData() },{name: '湖南',value: randomData() },
+        {name: '安徽',value: randomData() },{name: '山东',value: randomData() },
+        {name: '新疆',value: randomData() },{name: '江苏',value: randomData() },
+        {name: '浙江',value: randomData() },{name: '江西',value: randomData() },
+        {name: '湖北',value: randomData() },{name: '广西',value: randomData() },
+        {name: '甘肃',value: randomData() },{name: '山西',value: randomData() },
+        {name: '内蒙古',value: randomData() },{name: '陕西',value: randomData() },
+        {name: '吉林',value: randomData() },{name: '福建',value: randomData() },
+        {name: '贵州',value: randomData() },{name: '广东',value: randomData() },
+        {name: '青海',value: randomData() },{name: '西藏',value: randomData() },
+        {name: '四川',value: randomData() },{name: '宁夏',value: randomData() },
+        {name: '海南',value: randomData() },{name: '台湾',value: randomData() },
+        {name: '香港',value: randomData() },{name: '澳门',value: randomData() }
+    ];
+    var optionMap = {
+        title: {
+            text: '产品数量分布统计图',
+            subtext: '',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item'
+        },
 
+        //左侧小导航图标
+        visualMap: {
+            show : true,
+            x: 'left',
+            y: 'center',
+            pieces: [
+                {min: 500, max:600},{min: 400, max: 500},
+                {min: 300, max: 400},{min: 200, max: 300},
+                {min: 100, max: 200},{min: 0, max: 100},
+            ],
+            color: ['#5475f5', '#9feaa5', '#85daef','#74e2ca', '#e6ac53', '#9fb5ea']
+        },
+
+        //配置属性
+        series: [{
+            name: '数据',
+            type: 'map',
+            mapType: 'china',
+            roam: true,
+            label: {
+                normal: {
+                    show: true  //省份名称
+                },
+                emphasis: {
+                    show: false
+                }
+            },
+            data:mydata  //数据
+        }]
+    };
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('map1'));
+
+    //使用制定的配置项和数据显示图表
+    myChart.setOption(optionMap);
+</script>
+
+<%--柱状图--%>
+<script>
+    var myChart2 = echarts.init(document.getElementById('map2'));
+    var option2;
+
+    option2 = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                // Use axis to trigger tooltip
+                type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+            }
+        },
+        legend: {},
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value'
+        },
+        yAxis: {
+            type: 'category',
+            data: ['东北地区',
+                '华东地区',
+                '华北地区',
+                '华中地区',
+                '华南地区',
+                '西南地区',
+                '西北地区']
+        },
+        series: [
+            {
+                name: '双瓮漏斗式厕所',
+                type: 'bar',
+                stack: 'total',
+                label: {
+                    show: true
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [320, 302, 301, 334, 390, 330, 320]
+            },
+            {
+                name: '化粪池式厕所',
+                type: 'bar',
+                stack: 'total',
+                label: {
+                    show: true
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                name: '完整下水道水冲式厕所',
+                type: 'bar',
+                stack: 'total',
+                label: {
+                    show: true
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [220, 182, 191, 234, 290, 330, 310]
+            },
+            {
+                name: '三联沼气池式厕所',
+                type: 'bar',
+                stack: 'total',
+                label: {
+                    show: true
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [150, 212, 201, 154, 190, 330, 410]
+            },
+            {
+                name: '复合生物反应微水冲厕所',
+                type: 'bar',
+                stack: 'total',
+                label: {
+                    show: true
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [820, 832, 901, 934, 1290, 1330, 1320]
+            }, {
+                    name: '真空负压厕所',
+                        type: 'bar',
+                    stack: 'total',
+                    label: {
+                    show: true
+                },
+            emphasis: {
+                focus: 'series'
+            },
+            data: [820, 832, 901, 934, 1290, 1330, 1320]
+        },
+    {
+        name: '多级生化组合电催化氧化厕所',
+            type: 'bar',
+        stack: 'total',
+        label: {
+        show: true
+    },
+        emphasis: {
+            focus: 'series'
+        },
+        data: [820, 832, 901, 934, 1290, 1330, 1320]
+    },
+    {
+        name: '膜生物反应器（MBR）厕所',
+            type: 'bar',
+        stack: 'total',
+        label: {
+        show: true
+    },
+        emphasis: {
+            focus: 'series'
+        },
+        data: [820, 832, 901, 934, 1290, 1330, 1320]
+    },
+    {
+        name: '生态旱厕',
+            type: 'bar',
+        stack: 'total',
+        label: {
+        show: true
+    },
+        emphasis: {
+            focus: 'series'
+        },
+        data: [820, 832, 901, 934, 1290, 1330, 1320]
+    },
+    {
+        name: '双坑交替式厕所',
+            type: 'bar',
+        stack: 'total',
+        label: {
+        show: true
+    },
+        emphasis: {
+            focus: 'series'
+        },
+        data: [820, 832, 901, 934, 1290, 1330, 1320]
+    },
+    {
+        name: '粪尿分集式厕所',
+            type: 'bar',
+        stack: 'total',
+        label: {
+        show: true
+    },
+        emphasis: {
+            focus: 'series'
+        },
+        data: [820, 832, 901, 934, 1290, 1330, 1320]
+    },
+    {
+        name: '泡沫封堵液',
+            type: 'bar',
+        stack: 'total',
+        label: {
+        show: true
+    },
+        emphasis: {
+            focus: 'series'
+        },
+        data: [820, 832, 901, 934, 1290, 1330, 1320]
+    }
+        ]
+    };
+
+    option2 && myChart2.setOption(option2);
+</script>
+
+<%--柱状图--%>
+<script>
+        //初始化图标
+        var myChart3 = echarts.init(document.getElementById('map3'));
+        //Y轴的数据，和数据值位置一一对应
+        var cate = [
+           '北京','天津','上海','重庆',
+            '河北','河南','云南','辽宁',
+            '黑龙江','湖南','安徽','山东',
+            '新疆','江苏','浙江','江西',
+            '湖北','广西','甘肃','山西',
+            '内蒙古','陕西','吉林','福建',
+            '贵州','广东','青海','西藏',
+            '四川','宁夏','海南','台湾',
+            '香港','澳门',
+        ];
+        //数据值，顺序和Y轴的名字一一对应
+        var barData = [
+            randomData(),randomData(),randomData(),randomData(),
+            randomData(),randomData(),randomData(),randomData(),
+            randomData(),randomData(),randomData(),randomData(),
+            randomData(),randomData(),randomData(),randomData(),
+            randomData(),randomData(),randomData(),randomData(),
+            randomData(),randomData(),randomData(),randomData(),
+            randomData(),randomData(),randomData(),randomData(),
+            randomData(),randomData(),randomData(),randomData(),
+            randomData(),randomData(),
+
+        ];
+        var option3 = {
+
+            title: {
+                text: '普通用户分布省份统计图',
+                subtext: '',
+                x:'center'
+            },
+            tooltip: {
+
+                trigger: "axis",
+                axisPointer: {
+
+                    type: "shadow",
+                },
+            },
+            //图表位置
+            grid: {
+
+                left: "3%",
+                right: "4%",
+                bottom: "3%",
+                containLabel: true,
+            },
+            //X轴
+            xAxis: {
+
+                type: "value",
+                axisLine: {
+
+                    show: false,
+                },
+                axisTick: {
+
+                    show: false,
+                },
+                //不显示X轴刻度线和数字
+                splitLine: {
+                    show: false },
+                axisLabel: {
+                    show: false },
+            },
+            yAxis: {
+
+                type: "category",
+                data: cate,
+                //升序
+                inverse: true,
+                splitLine: {
+                    show: false },
+                axisLine: {
+
+                    show: false,
+                },
+                axisTick: {
+
+                    show: false,
+                },
+                //key和图间距
+                offset: 10,
+                //动画部分
+                animationDuration: 300,
+                animationDurationUpdate: 300,
+                //key文字大小
+                nameTextStyle: {
+
+                    fontSize: 5,
+                },
+            },
+            series: [
+                {
+
+                    //柱状图自动排序，排序自动让Y轴名字跟着数据动
+                    realtimeSort: true,
+                    name: "数量",
+                    type: "bar",
+                    data: barData,
+                    barWidth: 14,
+                    barGap: 10,
+                    smooth: true,
+                    valueAnimation: true,
+                    //Y轴数字显示部分
+                    label: {
+
+                        normal: {
+
+                            show: true,
+                            position: "right",
+                            valueAnimation: true,
+                            offset: [5, -2],
+                            textStyle: {
+
+                                color: "#333",
+                                fontSize: 13,
+                            },
+                        },
+                    },
+                    itemStyle: {
+
+                        emphasis: {
+
+                            barBorderRadius: 7,
+                        },
+                        //颜色样式部分
+                        normal: {
+
+                            barBorderRadius: 7,
+                            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                {
+                                    offset: 0, color: "#3977E6" },
+                                {
+                                    offset: 1, color: "#37BBF8" },
+                            ]),
+                        },
+                    },
+                },
+            ],
+            //动画部分
+
+            animationDuration: 0,
+            animationDurationUpdate: 3000,
+            animationEasing: "linear",
+            animationEasingUpdate: "linear",
+        };
+        myChart3.setOption(option3);
+        //图表大小变动从新渲染，动态自适应
+        window.addEventListener("resize", function () {
+
+            myChart3.resize();
+        });
+</script>
+<%--饼图--%>
+<script>
+    var chartDom = document.getElementById('map4');
+    var myChart4 = echarts.init(chartDom);
+    var option4;
+
+    setTimeout(function () {
+        option4 = {
+            legend: {},
+            tooltip: {
+                trigger: 'axis',
+                showContent: false
+            },
+            dataset: {
+                source: [
+                    [
+                        'terrian',
+                        '东北地区',
+                        '华东地区',
+                        '华北地区',
+                        '华中地区',
+                        '华南地区',
+                        '西南地区',
+                        '西北地区'
+                    ],
+                    [
+                        '化粪池式厕所',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ],
+                    [
+                        '完整下水道水冲式厕所',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ],
+                    [
+                        '三联沼气池式厕所',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ],
+                    [
+                        '复合生物反应微水冲厕所',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ],
+                    [
+                        '真空负压厕所',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ],
+                    [
+                        '多级生化组合电催化氧化厕所',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ],
+                    [
+                        '膜生物反应器（MBR）厕所',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ],
+                    [
+                        '生态旱厕',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ],
+                    [
+                        '双坑交替式厕所',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ],
+                    [
+                        '粪尿分集式厕所',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ],
+                    [
+                        '泡沫封堵液',
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData(),
+                        randomData()
+                    ]
+                ]
+            },
+            xAxis: { type: 'category' },
+            yAxis: { gridIndex: 0 },
+            grid: { top: '55%' },
+            series: [
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'line',
+                    smooth: true,
+                    seriesLayoutBy: 'row',
+                    emphasis: { focus: 'series' }
+                },
+                {
+                    type: 'pie',
+                    id: 'pie',
+                    radius: '30%',
+                    center: ['50%', '25%'],
+                    emphasis: {
+                        focus: 'self'
+                    },
+                    label: {
+                        formatter: '{b}: {@东北地区} ({d}%)'
+                    },
+                    encode: {
+                        itemName: 'terrian',
+                        value: '东北地区',
+                        tooltip: '东北地区'
+                    }
+                }
+            ]
+        };
+        myChart4.on('updateAxisPointer', function (event) {
+            const xAxisInfo = event.axesInfo[0];
+            if (xAxisInfo) {
+                const dimension = xAxisInfo.value + 1;
+                myChart4.setOption({
+                    series: {
+                        id: 'pie',
+                        label: {
+                            formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                        },
+                        encode: {
+                            value: dimension,
+                            tooltip: dimension
+                        }
+                    }
+                });
+            }
+        });
+        myChart4.setOption(option4);
+    });
+
+    option4 && myChart4.setOption(option4);
+
+</script>
 <%--分页--%>
 <script>
     let $page = $('#page');
@@ -418,4 +1102,54 @@
     }
 </script>
 
+<%--切换显示图表--%>
+<script>
+    function xianshi1(){
+        document.getElementById('tongjitubiao').className = 'curent';
+        document.getElementById('l5').className = '';
+        $('#chanpinzhanshi').css("display","none");
+        $('#tubiaozhanshi').css("display","block");
+        $('#map1').css("display","block");
+        $('#map2').css("display","none");
+        $('#map3').css("display","none");
+        $('#map4').css("display","none");
+    }
+    function xianshi2(){
+        document.getElementById('tongjitubiao').className = 'curent';
+        document.getElementById('l5').className = '';
+        $('#chanpinzhanshi').css("display","none");
+        $('#tubiaozhanshi').css("display","block");
+        $('#map1').css("display","none");
+        $('#map2').css("display","block");
+        $('#map3').css("display","none");
+        $('#map4').css("display","none");
+    }
+    function xianshi3(){
+        document.getElementById('tongjitubiao').className = 'curent';
+        document.getElementById('l5').className = '';
+        $('#chanpinzhanshi').css("display","none");
+        $('#tubiaozhanshi').css("display","block");
+        $('#map1').css("display","none");
+        $('#map2').css("display","none");
+        $('#map3').css("display","block");
+        $('#map4').css("display","none");
+    }
+    function xianshi4(){
+        document.getElementById('tongjitubiao').className = 'curent';
+        document.getElementById('l5').className = '';
+        $('#chanpinzhanshi').css("display","none");
+        $('#tubiaozhanshi').css("display","block");
+        $('#map1').css("display","none");
+        $('#map2').css("display","none");
+        $('#map3').css("display","none");
+        $('#map4').css("display","block");
+    }
+    function chanpin(){
+        document.getElementById('tongjitubiao').className = '';
+        document.getElementById('l5').className = 'curent';
+        $('#chanpinzhanshi').css("display","block");
+        $('#tubiaozhanshi').css("display","none");
+    }
+
+</script>
 </html>
