@@ -53,8 +53,8 @@
         <div class="grid_12">
             <nav class="primary">
                 <ul>
-                    <li>
-                    <a href="#" id="tongjitubiao">统计图表</a>
+                    <li id="tongjitubiao" class="curent">
+                    <a href="#" >统计图表</a>
                     <ul class="sub">
                     <li class="curent" id="l1"><a href="javascript:void(0)" onclick="xianshi1()">产品数量分布统计图</a></li>
                     <li id="l2"><a href="javascript:void(0)" onclick="xianshi2()">产品录入数量地区分布统计图</a></li>
@@ -248,7 +248,7 @@
         <div class="list_carousel">
             <div style="width: 100%;height: 100%; margin: auto">
                 <div id="map1" style="width: 100vh;height: 100vh;  margin: auto"></div>
-                <div id="map2" style="width: 150vh;height: 100vh; margin: auto; display: none; "></div>
+                <div id="map2" style="width: 150vh;height: 70vh; margin: auto; display: none; "></div>
                 <div id="map3" style="width: 100vh;height: 200vh; margin: auto; display: none; "></div>
                 <div id="map4" style="width: 100vh;height: 150vh; margin: auto; display: none; "></div>
             </div>
